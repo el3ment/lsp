@@ -1,0 +1,26 @@
+@import "settings";
+@import "functions";
+
+*[class*="image-"]{
+    background-color: red;
+    display: block;
+    text-indent: -$hideDistance;
+    overflow: hidden;
+}
+
+.image-logoCircle{
+    width: 128px;
+    height: 128px;
+}
+.image-logoRect{
+    width: 241px;
+    height: 115px;
+}
+.image-mcafee{
+    width: 120px;
+    height: 50px;
+}
+.image-creditCards{
+    width: 125px;
+    height: 50px;
+}

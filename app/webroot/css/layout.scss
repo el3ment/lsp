@@ -1,0 +1,2272 @@
+@import "settings";
+@import "functions";
+
+/* Application Wide Styles */
+html{
+    
+    font-size: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    
+
+    body{ 
+        font-family: 'Open Sans', sans-serif;
+        color: $black;
+        font-size: 13px;
+        line-height: px(22px);
+    }
+    
+    /* Content Container */
+    div[class|="page"]{
+        margin: auto;
+        max-width: px(940px);
+        clear: both;
+    }
+    
+    /* Page Title */
+    h1, .h1, h2, .h2{
+        margin-top: px($paddingUnit);
+        line-height: 1em;
+        font-size: 2.9em;
+        font-family: 'League Gothic', sans-serif;
+        text-transform: uppercase;
+        color: $black; 
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Section Headings */
+    h2, .h2{ font-size: px($h2FontSize);}
+    
+    /* Captialized, Bigger, Bold */
+    h3, .h3, h4, .h4{ 
+        font-size: 1em; 
+        text-transform:uppercase;
+        font-weight: bold;
+    }
+    
+    /* Captialized, Bold */
+    h4, .h4{ text-transform: none; }
+    
+    /* Lowercase, Bold */
+    h5, .h5{ font-weight: bold; }
+    
+    /* Text */
+    h6, .h6{ color: $grey; }
+    
+    /* Links */
+    a, .b5{
+        color: $grey;
+        &:hover{ text-decoration: none; }
+    }
+    
+    p{
+        margin-bottom: px(2 * $paddingUnit);
+    }
+    
+    em{
+        font-style: italic;
+    }
+    
+    /* General Tags */
+    /* Normally the UL and LI tags are style-less - but in product descriptions we want them to have the bullets */
+    .productDescription ul{
+        margin: px($paddingUnit) 0 px($paddingUnit) px(3 * $paddingUnit);
+    }
+    ul.list li,
+    .productDescription ul li{
+        list-style: square inside;
+    }
+    
+    /* Panels */
+    /* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
+    .panel, a .panel{
+        @include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
+        background-color: $white;
+        display: inline-block;
+        position: relative;
+        border: 1px solid $lightGrey;
+        @include border-radius(px($borderRadius));
+        padding: px($paddingUnit) px($paddingUnit * 2) 0;
+        margin-bottom: px($paddingUnit * 2);
+        color: $black;
+    }
+    
+    /* A section is a broken division within a panel, generally titled by a header tag, it basically adds a line break and some margins */
+    .section{
+        clear: both;
+        &:last-child{ border-bottom: 0; }
+        h2{
+            margin-bottom: px($paddingUnit);
+        }
+    }
+    
+    /* An engaged panel has a yellow highlight on top */
+    .panel.engaged{
+        border-top: px($paddingUnit) solid $yellow;
+    }
+    
+    /* Disengaged panels are grey */
+    .panel.disengaged{
+        background-color: $superLightGrey;
+        padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
+    }
+    
+    /* Common Properties */
+    /* Details are subtext */
+    .details{ color: $grey; }
+    
+    /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
+    .productAvailability .status,
+    .relatedItems .currentItem:after{
+        font-size: px($boldAllCapsH4);
+        font-weight: 800;
+        text-transform: uppercase;
+        @include border-radius(px(5px));
+        padding: px(3px) px($paddingUnit);
+    }
+    .productAvailability[data-method="seperately"] .status{
+        background-color: $superLightGrey;
+        color: $grey;
+    }
+    .productAvailability[data-method="today"] .status{
+        background-color: $grey;
+        color: $white;
+    }
+    
+    /* The add-to-cart panel can be seen on the product-detail page and list-view search results */
+    .addToCart{
+        
+        width: 100%;
+        padding: 0;
+        
+        li{
+            
+            padding: px($paddingUnit) px($paddingUnit * 2);
+            border-bottom:1px solid $lightGrey;
+            border-top: 1px solid white;
+            background-color: $superLightGrey;
+            
+            &:first-child{
+                @include border-radius(px($borderRadius) px($borderRadius) 0 0);
+            }
+            &.action{ /* Handle the bottom border */
+                @include border-radius(0 0 px($borderRadius) px($borderRadius));
+                border-bottom: 0;
+            }
+            label{
+                margin: px($paddingUnit) px($paddingUnit) 0 0;
+                display: inline; /* IE */
+                display: inline-block;
+            }
+            input, select{ 
+                float: none;
+                display: inline;
+                display: inline-block;
+            }
+            @include clearfix;
+        }
+        .productPrice{ 
+            font-size: px(30px);
+            line-height: 1em;
+            font-weight: bold;
+        }
+        .productMsrp{ text-decoration: line-through; }
+        .productDiscount{ font-weight: bold; }
+        .productAvailability{
+            .status{
+                font-weight: bold;
+                color: black;
+                background-color: transparent;
+                padding-left: 0;
+            }
+            .shortStatus{
+                display: none;
+            }
+            .details{
+                
+                font-style: italic;
+                
+                .method{    
+                    &:before{
+                        content: '(';
+                    }
+                    &:after{
+                        content: ')';
+                    }
+                }
+            }
+        }
+        .price{ 
+            background-color: white;
+            .productGrouping{ color: $grey; }
+            .details{ display: block; }
+        }
+        .quantity{
+            input{ float: none; }
+        }
+        .productAvailability{ background-color: white; }
+        .action{
+            .b1{ 
+                margin-bottom: px($paddingUnit);
+                margin-left: 0;
+            }
+            a{ display:block; }
+        }
+    }
+    
+    
+    /* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
+     * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
+    .notice{ 
+        
+        color: $black;
+        font-weight: bold;
+        position: relative;
+        padding-left: px(16 + 5px);
+    
+        .details{
+            font-weight: normal;
+            display: block;
+            clear: both;
+        }
+        &:before{
+            background-color: red;
+            content: ' ';
+            display: block;
+            position: absolute;
+            top: px(2px);
+            left: 0;
+            width: px(16px);
+            height: px(16px);
+        }
+    }
+    
+ 
+    /* Related items are the things-you-might need, hand selected products seen on product detail pages 
+     * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page
+     * 
+     * There is a little fancy-css happening which changes the look of the list based on how many items are listed */
+    .relatedItems{
+        
+        display: inline-block;
+        position: relative;
+        
+        
+        .productPrice{ font-weight: bold; font-size: px(12px); }
+        .productName{ display:block; font-size: px(12px); }
+        img{ 
+            margin-bottom: px($paddingUnit);
+            border: 1px solid $lightGrey;
+        }
+
+        .currentItem{ 
+             
+            position: absolute;
+            top:0;
+            left:0;
+            padding: px($gutterWidth / 2);
+            padding-top: px($gutterWidth + $gutterWidth / 2);
+            width: px(columns(2) - $gutterWidth);
+            
+            .productName:before{ /* Because we can't display the overlay, add it to the name */
+                content : 'This Item: ';
+                font-weight: bold;
+            }
+            .productName::before{ /* Hide it from everything except IE8 */
+                display: none;
+            }
+            .productName{  }
+            
+            &::after{ /* Double colon to hide from IE8 - which renders the background color behind the image */
+                display: block;
+                content: 'This Item';
+                font-size: px(13px);
+                position: absolute;
+                top: px(60px);
+                background-color: $grey;
+                left: 50%;
+                color: white;
+                width: px(70px);
+                text-align: center;
+                margin-left: px(-35px, 13px);
+                
+            }
+            &:before{
+                content: '+';
+                text-align: right;
+                vertical-align: middle;
+                font-size: px(30px);
+                font-weight: bold;
+                position: absolute;
+                top: px(60px, 30px);
+                right: px(-5px, 30px);
+                
+               
+            }
+            img{ 
+                border: 0;
+                margin: 0 px($gutterWidth);
+                @include opacity(.5);
+            }
+        }
+            
+        ul{ 
+            display:inline-block;
+            background-color: $superLightGrey;
+            margin-left: px(columns(2) + $gutterWidth);
+            float:left;
+            li{
+                background-color: $superLightGrey;
+                display:inline-block;
+                float:left;
+                width: px(columns(2) - $gutterWidth);
+                height: 100%;
+                border: px($gutterWidth / 2) solid $superLightGrey;
+                border-top-width: px($gutterWidth);
+                
+                &:nth-child(odd){ clear:both; border-left-width: px($gutterWidth); } 
+                &:nth-child(even), &:last-child{ 
+                    border-right-width: px($gutterWidth);
+                    clear: none;
+                }
+                &:nth-child(1){ /* nth child instead of first-child for ie */ border-left-width: px($gutterWidth); }
+                &:last-child{ border-right-width: px($gutterWidth); }
+            }
+            li.disengaged{
+                padding-top: 0;
+                .productPrice, .productName, img{ @include opacity(.4); }
+            }
+            
+            /* When there are 3 or more items, then display it as a list */
+            li:first-child:nth-last-child(n + 3),
+            li:first-child:nth-last-child(n + 3) ~ li{
+                clear:both;
+                width: px(columns(4) - $gutterWidth * 2);
+                border-width: px($gutterWidth);
+                border-bottom-width: 0;
+                position: relative;
+                img{
+                    margin-left: px($gutterWidth + $paddingUnit);
+                    margin-right: px($paddingUnit * 2);
+                    float: left;
+                    max-width: px(80px);
+                    max-height: px(80px);
+                }
+                input[type="checkbox"]{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                .productPrice{
+                    float: left;
+                    display: block;
+                    width: px(columns(2));
+                }
+                .productName{
+                    float: left;
+                    max-width: columns(2);
+                }
+                &:last-child{
+                    border-bottom-width: px($gutterWidth);
+                }
+            }
+                
+        }
+        .addToCart{
+            
+            display: inline-block;
+            float: left;
+            clear: both;
+            
+            .subtotal{
+                display: inline-block;
+                font-weight: bold;
+                text-align: right;
+                float: right;
+                margin-right: px($paddingUnit);
+                .details{
+                    display:block;
+                    font-weight: normal;
+                }
+            }
+            button{
+                display: block;
+                float: right;
+                position: relative;
+                margin-right: px($paddingUnit);
+            }
+            .subtotal, button{ margin-top: $paddingUnit; }
+        }
+    }
+    
+    /* Dynamic Item Suggestions are the horizontal lists of items that are populated by easyask and list products
+     * like "People who bought this also bought" or "Similar items" */
+    .dynamicItemSuggestions{
+        
+        
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border: 1px solid $lightGrey;
+        border-width: 1px 0 3px 0;
+        
+        .productScope{
+            
+            border: 1px solid $lightGrey;
+            border-bottom-width: 0;
+            border-top-width: 0;
+            border-right-color: transparent;
+            float: left;
+            width: 16.4%;
+            position: relative;
+            display: block;
+            padding-bottom: px(2 * $paddingUnit);
+            
+            a{
+                width: 100%;
+                height: 100%;
+                display: block;
+                text-decoration: none;
+            }
+            
+            &:nth-child(1){
+                border-left-color: transparent;
+            }
+            &:last-child{
+                border-right-color: transparent;
+            }
+            img{ margin: px($paddingUnit + 2);}
+            
+            .productPrice{ 
+                font-weight: bold;
+                padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
+                text-decoration: none;
+                color: $black;
+            }
+            .productName{ 
+                display: block; 
+                padding: 0 px($paddingUnit + 2);
+                color: $black;
+            }
+            &:hover{
+                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+                border: 1px solid $darkYellow;
+                border-bottom-width: 0;
+                border-top-width: 0;
+            }
+        }
+        
+        @include clearfix;
+        
+    }
+    
+    
+    /* Definitions are marked with the attribute "data-definitions-hasDefinition" - any text with this attribute
+     * will be populated with the definition data, and get a little lightning bolt icon */
+    *[data-definitions-hasDefinition]{
+        position: relative;
+        display:inline-block;
+        margin-right: px(2px);
+        dl{ 
+            display: none; 
+            position: absolute;
+            left: px(-1* (columns(2) + 16 * 2 + 2));
+            top: px(-2px);
+            width: px(columns(2));
+            border-left: px($paddingUnit) solid $yellow;
+            .details{
+                display: block;
+                margin: px($paddingUnit) 0;
+                float:right;
+            }
+            @include panel-arrow(6px, 'right', $white, 20px);
+        }
+        &:after{
+            content: '';
+            width: px(16px);
+            height: px(16px);
+            display:inline-block;
+            margin: 0 px(2px) 0 px(3px);
+            background-color: red; /* $lightGrey */
+            @include border-radius(px($borderRadius));
+            position:relative;
+            top: px(4px);
+
+        }
+        &:hover:after{
+            background-color:$yellow;
+        }
+        &:hover{
+            dl{
+                display:block;
+            }
+        }
+    }
+    
+    /* Aggregate reviews are basically just the 5 star rating, it uses the old-school sliding doors method */
+    .aggregateReviews{
+        
+        width: px(200px);
+        background-color: $superLightGrey;
+        display: inline-block;
+        
+        .reviewAggregateRating{ background-color: red; display: inline-block; }
+        .reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); }
+        .reviewCount{
+            &:before{ content: '('; }
+            &:after{ content: ')'; }
+        }
+    }
+
+
+
+}
+
+
+/* Header */
+.header {
+    
+    /* Layout */
+    width: px($pageWidth);
+    margin:0 auto px(20px);
+    @include clearfix;
+    
+    background-color: #33281E;
+    
+    .logo{
+        float: left; 
+    }
+    
+    .b3{ 
+        /* Other darker buttons like Wish List and Your Cart */
+        /* These are the color-specific declarations, the main styling is in form.scss under highlight-icon property */
+        
+        text-shadow: -1px -1px #000000;
+        color: #fff;
+        border-color: $darkBrownBorder;
+        @include gradient($brown, $darkBrown);
+        @include box-shadow-multiple(0 1px 0px #7b6d62 inset, 
+                                     0 2px 3px #000); /* Top Highlight, Drop shadow */  
+        
+        &:hover{
+            @include gradient(#574c41, $darkBrown); /* Hover light brown */
+        }
+        
+        &:before{
+            background-color: #3F362F;
+            @include box-shadow-multiple(0 -1px 0 #52483d inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #312a24 inset);
+        }
+    }
+    
+    .well{
+        
+        $_taglineMarginTop : 80px;
+        /* This is the section between the nav bar and the shop bar */
+       
+        position: relative;
+        clear: both;
+        color: #ffffff;
+        text-transform: uppercase;
+        
+        font-size: 110%;
+        
+        .logo {
+            float: left;
+        }
+        
+        .established{
+            
+            float: left;
+            margin: px($_taglineMarginTop) px(10px) px(10px); /* Should be same as margin-top on .tagline */
+            
+            .year:before{
+                
+            }
+        }
+        
+        .tagline{
+            float: right;
+            margin: px($_taglineMarginTop) px(10px) px(10px);
+        }
+    }
+    
+    .navbar {
+        
+        /* The list of actions at the top of the page */
+        
+        float: right;
+        width:100%;
+        background-color: black;
+        
+        li {    
+            display: inline-block;
+            margin: 0;
+            float:right;
+            
+        }
+        
+        .b5{
+            text-transform: uppercase;
+            text-decoration: none;
+            margin: 0;
+            color: #fff;
+            font-weight: bold;
+            display: block;
+            font-size: px(12px);
+            
+            /* How far apart items are from one another, don't forget space for the icon */
+            padding: px(10px, 12px) px(15px, 12px) px(10px, 12px) px(45px, 12px); 
+            
+            &:after{
+                left: px(10px);
+            }
+            &:hover{
+                background-color: #322c28;
+            }
+        }
+    }  
+    
+    .shopbar {
+        
+        /* Includes the Shop by Department, Search bar, and other darker buttons */
+        
+        clear:both;
+        height: px(60px); /* We have to give it a height because the inner li's are float:left */
+        padding-top: px(10px); /* Push it down a little from the logo */
+        line-height: px(41px);
+        
+        li {
+            float: left;
+            position: relative;
+            margin-left: px($paddingUnit);
+        }
+        .b1{
+            padding-top: px(8px, 14px);
+            padding-bottom: px(8px, 14px);
+        }
+        .b2, .b3, .b4{
+            padding-top: px(8px, 13px);
+            padding-bottom: px(8px, 13px);            
+        }
+        .b1{
+            width: px(110px, $b1FontSize); /* Shop By Department */
+            margin-left: 0;
+            
+            strong:after{ /* We need .b1:after for the icon, so we'll use .b1 strong:after for the little down arrow */
+              border-color: black transparent transparent transparent;
+              border-style:solid;
+              border-width: px(5px);
+              width:0;
+              height:0;
+              content: '';
+              position: absolute;
+              top: px(23px);
+              right: px(10px);
+            }
+            
+        }
+        .wishlist .b3{
+            width: px(35px);
+        }
+        .departments{
+            margin-left: 0;   
+        }
+        .cart .b3{
+            width: px(50px);
+            padding-right: px(35px); /* Only if we are going to use the count */
+            margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
+            margin-right: 0;
+            
+            .count{
+                background-color: $yellow;
+                color: black;
+                padding: px(3px);
+                position: absolute;
+                font-weight: bold;
+                padding: px(3px) px(7px);
+                right: px(22px);
+                top: px(13px);
+                @include border-radius(px(3px));
+                text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
+                
+                &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
+                  border-color: white transparent transparent transparent;
+                  border-style:solid;
+                  border-width: px(5px);
+                  width:0;
+                  height:0;
+                  content: '';
+                  position: absolute;
+                  top: px(9px);
+                  right: px(-15px);
+                }
+                @include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
+                @include gradient($lightYellow, $yellow);
+            }
+        }
+        input.search { /* Main Search bar */
+            
+            width: px(500px, $largeInputFontSize);
+            display: inline-block;
+            margin-right: 0;
+            font-size: px($largeInputFontSize);
+            padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+        }
+
+        .search button { /* Magnifying glass button */
+            width: px(44px);
+            height: px(44px);
+            position: absolute;
+            right: px(3px);
+            top: px(3px);
+            margin: 0;
+            text-indent: -$hideDistance;
+            overflow: hidden;
+            &:after{ /* Icon! */
+                left: 50%;
+                margin-left: px(-12px);
+            }
+        }
+    }
+    
+    .breadcrumbs{
+      
+        /* The list of breadcrumbs below the shopbar */
+        
+        background-color: $superLightGrey;
+        padding: px($paddingUnit) 0;
+        width: 100%;
+        float: left;
+        
+        li{ 
+          
+            /* Each item contains an A tag which contains the text of the category */
+            
+            float: left;
+            
+            &:after{
+                content: '→';
+                padding:0 px(5px);
+            }
+            &:last-child:after{
+                content: '';
+            }
+            
+            &:last-child a{
+                text-decoration: none; 
+                color: $black;
+            }
+        }
+    }
+}
+
+/* Footer */
+
+.footer{
+    
+    $_bottomPadding : 20px;
+    
+    width: px($pageWidth);
+    margin: auto;
+    color: #5b4e44; /* Light brown */
+    
+    
+    .banner{
+       
+        /* The banner contains the picture and testimonial quote, as well as the mcafee and credit card security icons */
+       
+        background-color: #f5f4f0;
+        position: relative;
+        padding: px($_bottomPadding) 0;
+        float:left;
+        width: 100%;
+        /* overflow: hidden; /* Stylistic decision */
+        margin-top: px(30px); /* 20px + 10 for the top of the profile image */
+        
+        .profile{
+            position: absolute;
+            height: px(135px);
+            width: px(140px);
+            top: px(-20px); 
+            img{ @include border-radius(px(150px)); }
+        }
+        .content{
+            font-size: px(16px);
+            font-style: italic;
+            color: $darkGrey;
+            margin-left: px(160px, 16px);
+            float: left;
+            width: px(460px, 16px);
+            line-height: 1.4em;
+            
+            strong{
+                color: black;
+            }
+        }
+        .security{
+            
+            margin: px(20px) px(20px) 0 0;
+            float:right;
+            
+            li{
+                float: right;
+                margin-left: px(10px);
+            }
+        }
+    }
+    
+    .well{
+       
+        /* The space below the banner */
+       
+        width: 100%;
+        float: left;
+        background-color: #1d1712;
+        padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
+        clear: both;
+        
+        h2, strong, em{
+            color: white;
+        }
+        h3{ /* h3 tags title each column of links */
+            font-weight: normal;
+            color: white;
+            margin-top: px(5px);
+            
+            strong{ font-weight: bold; }
+        }
+        a{
+            
+            text-decoration: none;
+            
+            &:hover{
+                color: $yellow;
+            }
+        }
+        
+        .static{
+           
+            /* The static block contains the newsletter sign up and company hours */
+           
+            float: right;
+            width: columns(4);
+            .newsletter{
+                .email{
+                    
+                    position: relative;
+                    
+                    h3{ margin: 0 0 px(20px); }
+                    
+                    input{
+                        font-size: px($largeInputFontSize);
+                        padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+                        width: px(280px, $largeInputFontSize);
+                    }
+                    
+                    .b1{
+                        position: absolute;
+                        right: px(-3px);
+                        top: px(2px);
+                    }
+                }
+            }
+            .contact{
+                background-color: #1f150d;
+                @include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
+                margin-top: px(20px);
+                padding: px(10px);
+                @include border-radius($borderRadius);
+                
+                em{
+                    font-style: normal;
+                }
+                
+                > li{
+                    margin: px(10px);
+                }
+                .hours {
+                    text-transform: uppercase;
+                }
+                *[class*="icon-"]:after{ /* Icons */
+                    top:0;
+                    margin-top:0;
+                }
+            }
+        }
+        
+        .sitemap-lists{
+           
+            /* The list of links titled by a header tag */
+           
+            li{
+                
+                width: columns(2);
+                margin-right: $gutterWidth;
+                float: left;
+                
+                ul{
+                    li{
+                    }
+                }
+            }
+        }
+        
+        .logo{
+          
+            clear: both;
+            margin: auto;
+            text-align:center; /* It's just an img */
+            margin-top: px(40px);
+            float:left;
+            width: 100%;
+            *[class*='image']{
+                margin: auto;   
+            }
+        }
+        
+        .copyright{
+          
+            margin: px(20px) 0;
+            clear: both;
+            text-align: center;
+            float: left;
+            width: 100%;
+        }
+    }
+    
+}
+
+
+
+
+
+
+/* Shopping Cart */
+.page-cart{
+    .head{ 
+       
+        /* Contains the contact us link, Proceed To Checkout button, and main title */
+       
+        min-height: px(100px);
+        width: px($pageWidth);
+        float: left;
+        position: relative;
+        
+        h1{ 
+            display: inline-block;
+            float: left;
+            clear: both;
+        }
+        .b1{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .ad-contact{ 
+            
+            text-align: right;
+            color: $grey;
+            float: right;
+            padding: px(10px) 0;
+            
+            a{ 
+                display:block; 
+            }
+        }
+    }
+    
+    .warning{
+        /* The warning is a speech bubble that tells the user something about their cart -- this is likely to be the explanation
+         * about backordered items
+         */
+        margin: 0 0 px(15px);
+        background-color: $superLightGrey;
+        border: 1px solid $lightGrey;
+        padding: px(5px) px(20px) px(5px) px(10px);
+        @include border-radius(px($borderRadius));
+        float: left;
+        clear: both;
+        position: relative;
+        
+        .details{}
+        .message{ 
+            font-size: px(20px);
+            font-weight: 600;
+            @include panel-arrow(6px, 'left', $superLightGrey);
+        }
+    }
+    .b1{ /* Proceed to Checkout */
+        float: right;
+        clear: right;
+        margin: 0 0 px(20px);
+        width: px(220px);
+    }
+    
+    table.cart{
+        
+        margin: px(10px) 0 0 0;
+        clear: both;
+        width: 100%;
+        
+        thead{
+            text-align: center;
+            tr td{ 
+                padding: px(10px) 0;
+                border: 1px solid $lightGrey;
+                border-right: 0;
+                text-align: center;
+            }
+            tr td:first-child{ 
+                border-left: 0;
+                text-align: left;
+            }
+            .product{ 
+                text-align: left;
+            }
+            .unitPrice, .quantity, .extendedPrice{ 
+                width: px(130px);
+            }
+        }
+        tbody{
+            td{ 
+                padding: px(15px) 0;
+                border-bottom: 1px solid $lightGrey;
+            }
+            
+            .productImage{
+                float: left;
+                img{ 
+                    max-width: px(64px);
+                    max-height: px(64px);
+                }
+            }
+            .properties{
+                float: left;
+                margin-left: px(10px);
+                .productName{
+                    margin-top: px(-5px);
+                    font-size: px(15px);
+                    font-weight: 600;
+                }
+                
+                .productOptions{
+                    color: $grey;
+                    display: block;
+                }
+                .productAvailability, .details{ 
+                    margin-bottom: px(8px); /* Distance between detail groups */
+                } 
+            }
+            
+            .unitPrice{
+                font-size: px(15px);
+                text-align: center;
+                vertical-align: top;
+                .productPrice{ }
+            }
+            .quantity{
+                text-align: center;
+                vertical-align: top;
+                .scroller{ 
+                    display: block;
+                    margin: auto;
+                }
+                *[data-action='remove']{
+                    margin: auto;
+                }
+            }
+            .extendedPrice{
+                vertical-align: top;
+                text-align: right;
+                .productExtendedPrice{
+                    font-size: px(24px);
+                    font-weight: 600;
+                }
+            }
+        }
+        tfoot{
+            td { 
+                text-align: right;
+                vertical-align: center;
+            }
+            
+            label span { display: block; }
+            input, select, label{ display:inline-block; }
+            .value{ font-weight: 600; }
+            
+            .merchandiseTotal{
+                td{ padding: px(15px) 0 0; }
+            }
+            .taxTotal{
+                td{ padding: 0 0 px(15px); }
+            }
+            .shippingTotal{
+                label{ margin-right: px(5px); }
+                input, select{ 
+                    position: relative;
+                    top: px(-6px);
+                }
+            }
+            .orderTotal{
+                td{ 
+                    border-top: 1px solid $lightGrey;
+                    padding: px(15px) 0;
+                }
+                .value{  
+                    font-size: px(24px);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+/* Checkout */
+.page-checkout{
+    .steps{
+        
+        /* The fancy timeline at the top of the cart 
+         * The original plan was to build this entirely in CSS
+         * */
+        
+        float: left;
+        clear: both;
+        margin: px(50px) 0;
+        width: 100%;
+        left: px(-$spaceBetweenSteps / 5);
+        position: relative;
+        
+        ul{
+            margin-left: 50%;
+            left: px(-(($spaceBetweenSteps * $numberOfSteps) / 2));
+            position: relative;
+            width: px($spaceBetweenSteps * $numberOfSteps);
+            
+            /* Circles */
+            li{
+                width: px($spaceBetweenSteps);
+                vertical-align: bottom;
+                display: block;
+                float: left;
+                position: relative;
+                text-align: center;
+            }
+            
+            /* Step Indicator (Background Circle) */
+            li:before, li.completed:after{
+                content: ' ';
+                display: block;
+                overflow: hidden;
+                width: px($mediumCircleDiameter);
+                height: px($mediumCircleDiameter);
+                @include border-radius(px($mediumCircleDiameter));
+                position: absolute;
+                top: px(-$mediumCircleDiameter - $smallCircleDiameter);
+                left: px(-$smallCircleDiameter);
+                margin-left: 50%;
+                background-color: $superLightGrey;
+                z-index: 1;
+            }
+            
+            /* Indicator for Completed Steps (Small Black Inner circle) */
+            li.completed:after, ul:after{
+                background-color: $black;
+                width: px($smallCircleDiameter);
+                height: px($smallCircleDiameter);
+                @include border-radius(px($smallCircleDiameter));
+                top: px(-($mediumCircleDiameter - $smallCircleDiameter/2px) - $smallCircleDiameter);
+                left: px($smallCircleDiameter/2 - $mediumCircleDiameter/2);
+                z-index: 2;
+            }
+            
+            /* Indicator for Active Step (Big Black Dot) */
+            li.active:before{
+                background-color: $black;
+                width: px($largeCircleDiameter);
+                height: px($largeCircleDiameter);
+                @include border-radius(px($largeCircleDiameter));
+                top: px(-($largeCircleDiameter/2 + $mediumCircleDiameter/2) - $smallCircleDiameter);
+                left: px(-($largeCircleDiameter/2));
+                z-index: 2;
+                /*background-image: url();*/
+            }
+            
+            li.active:after, li.start:after{
+                content: ' ';
+                position: absolute;
+                top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter);
+                background-color: $black;
+                height: px($smallCircleDiameter/4);
+                display: block;
+                width: 0;
+                @include border-radius(0);
+                margin-left: 0;
+            }
+            
+            /* Use the review to draw the grey progress bar */
+            li.start:after{
+                background-color:$superLightGrey;
+                z-index:1;
+                width: px($spaceBetweenSteps * ($numberOfSteps - 1));
+                left: px($spaceBetweenSteps / 2);
+            }
+            
+            /* Active Icons */
+            li.active.start:before{ background-position: 0 0; }
+            li.active.shipping:before{ background-position: 0 0; }
+            li.active.payment:before{ background-position: 0 0; }
+            li.active.review:before{ background-position: 0 0; }
+
+            /* Progress Bar */
+            li.active.start:after{ width: 0; }
+            li.active.shipping:after{
+                width: px($spaceBetweenSteps);
+                left: px(-$spaceBetweenSteps + ($spaceBetweenSteps / 2));
+            }
+            li.active.payment:after{ 
+                width: px($spaceBetweenSteps * 2);
+                left: px(-$spaceBetweenSteps * 2 + ($spaceBetweenSteps / 2)); 
+            }
+        }
+    }
+    
+    /* The checkout process is divided into three "pages", the bulk of the content happening on the second "page"
+     * Page 1 - Login... contains two panels with guest checkout or login credentials
+     * Page 2 - Process... contains the giant form, order summary, etc for checkout
+     *          It's important to realize that the cart summary, and process container are siblings in the HTML right now
+     * Page 3 - Complete... contains the copy of the cart, a friendly graphic, etc
+     */
+    
+    .login{  /* Page 1 */
+        
+        margin: auto;
+        width: px((2 * $summaryWidth) + (16 * $paddingUnit));
+        
+        .panel{
+            
+            float: left;
+            width: px($summaryWidth);
+            height: px($summaryWidth / 2);
+            
+            &.guest{
+                
+                text-align: center;
+                
+                h2{ text-align: left; }
+            }
+            &.returning{
+                margin-left: px(4 * $paddingUnit); 
+                fieldset{
+                    
+                    width: px($emailInputLength + 4 * $paddingUnit);
+                    display: block;
+                    margin: px(2 * $paddingUnit) auto;
+                    
+                    .field{ margin-bottom: px($paddingUnit); }
+                    label{ display: none; }
+                    
+                    input{
+                        width: px($emailInputLength - (4 * $paddingUnit));
+                    }
+                    .b1{
+                        float: right;
+                    }
+                }
+            }
+        }
+    }
+    
+    .process{ /* Page 2 */
+        
+        @include border-radius($borderRadius);
+        width: px($pageWidth - $summaryWidth - (4 * $paddingUnit));
+        float: left;
+        
+        > .b1{ float: right; } /* Main Continue Button */
+        .notice{ float: left; }
+        
+        .panel{
+            width: px(520px);
+        }
+        
+        fieldset{
+            border-bottom: 1px solid $lightGrey; 
+            margin-bottom: px(15px);
+            padding-bottom: px(10px);
+        }
+        fieldset:last-child{
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .shipping {
+            .shippingMethod{
+                label{ }
+                .details{ }
+                .cost{ font-weight: bold; }
+            }
+        }
+        .billing{
+            .payment ul{
+                background-color: $superLightGrey;
+                float: left;
+                width: px(495px);
+            }
+        }
+        .disengaged{
+            
+            float: left;
+            
+            label{ color: $grey; }
+            
+            h2{
+                padding-left: 1.2em;
+                position: relative;
+            }
+            h2:before{
+                content: ' ';
+                display: block;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                margin-top: -.5em;
+                left: 0;
+                width: 1em;
+                height: 1em;
+                background-color: red;
+            }
+            
+            li{
+                float: left;
+                margin-bottom: px(20px);
+                width: px(250px);
+            }
+            
+            .value{
+                
+                font-weight: bold;
+                
+                .details{
+                    font-weight: normal;
+                    display: block;
+                    float: left;
+                    clear: both;
+                }
+            }
+            
+            .value.city, .value.state, .value.creditCardExpirationMonth{ 
+                margin-right: px(5px);
+                float: left;
+            }
+            .value.state:after{ content: ','; }
+            .value.phone{ margin-top: px(20px); }
+            .b5{ /* Edit link */
+                position: absolute;
+                top: px(10px);
+                right: px(10px);
+            }
+        }   
+        #checkout-insertPromoCode, #checkout-insertGiftCard{ 
+            
+            clear: both;
+            width: px(300px);
+            margin: px(10px) px(20px);
+           
+           label{ display: none; }
+            input{ float: left; width: px(150px); }
+            a{ 
+                clear: both;
+                display: inline-block;
+            }
+        }
+    }
+    
+    
+    .summary{ /* The cart summary */
+        
+        border: 0;
+        width: px(380px);
+        margin-left: px(20px);
+        float: left;
+        
+        .cart{
+            /* width: 100%; */
+            padding: 0;
+            
+        }
+        
+        thead{
+            td{ padding: px(10px) 0 0 px(10px); }
+        }
+        
+        tbody{
+            
+            td{ 
+                padding: px(10px);
+                border-bottom: 1px solid $lightGrey;
+                vertical-align: top;
+            }
+            
+            tr:first-child td{ padding-top: 0px; }
+          
+            .productAvailability{ 
+                margin-left: px(20px);
+                float: left;
+            }
+            
+            .quantity{ 
+                
+                float: left;
+                
+                .productQuantity{
+                    font-weight: bold;
+                }
+            }
+            
+            .properties{ float: left; }
+            
+            .quantity{
+                .scroller{ display: block; }
+            }
+            
+            .productAvailability, .quantity{ margin-top: px(5px); } /* space between detail groups */
+            
+            .extendedPrice{
+                
+                text-align: right;
+                
+                .productExtendedPrice{
+                    font-weight: bold;    
+                }
+            }
+        }
+        tfoot{
+            
+            td{
+                padding: px(10px) px(10px) 0 px(10px);
+                text-align: right;
+            }
+            
+            .taxTotal td, .orderTotal td{
+                padding-bottom: px(10px);
+            }
+            
+            label{ color: $grey; }
+            
+            .value{ font-weight: bold;}
+            
+            .merchandiseTotal{
+                label{}
+                .value{}
+            }
+            
+            .shippingTotal{
+                label{ }
+                .value{  }
+            }
+            
+            .taxTotal{
+                label{}
+                .value{}
+            }
+            
+            .orderTotal{
+                
+                background-color: $superLightGrey;
+                
+                td{ padding-top: px(10px); }
+                .value{}
+            }
+        }
+    }
+}
+
+/* Product Detail Page */
+.page-productDetail{
+    .head{}
+    .b3{
+        float: left;
+    }
+    
+    .byline{
+        float:right;
+        display: block;
+        color: $grey;
+        text-transform: uppercase;
+        text-align: right;
+        padding-right: px(columns(1) + $gutterWidth);
+        position: relative;
+        font-size: px(11px);
+        margin: px($gutterWidth);
+        margin-right: 0;
+        line-height: 1.5em;
+        .author{
+            font-size: px(13px, 11px);
+            text-transform: none;
+            color: $black;
+            font-weight: bold;
+            display: block;
+            &:after{
+                @include border-radius(px(columns(1)));
+                background-color: red;
+                content: ' ';
+                display: block;
+                position: absolute;
+                top: px(-$gutterWidth/2);
+                right: 0;
+                width: px(columns(1));
+                height: px(columns(1));
+            }
+            &[data-author="michael"]{ background-position: 0 0; }
+        }
+    }
+    
+    .media{ 
+      
+      /* The left hand side containing giant picture, video and audio links */
+        
+        width: px(columns(6));
+        float:left;
+        
+        li{ 
+            display: block;
+            clear:both;
+            margin-top: px(2 * $paddingUnit);
+            @include clearfix;
+        }
+        .videos{
+            label{ 
+                display: inline-block;
+                position:relative; 
+                margin-left: px($paddingUnit);
+                left: px(32px + 2 * $paddingUnit);
+            }
+            label:before{
+                background-color: red;
+                content: '';
+                display: inline-block;
+                position: absolute;
+                left: px(-(32px + ($paddingUnit * 2)));
+                top: px($paddingUnit);
+                width: px(32px);
+                height: px(32px);
+            }
+            .video{
+                width: px(columns(6) - $gutterWidth);
+                padding: px(2* $paddingUnit);
+                border: 1px solid $lightGrey;
+                background-color: $superLightGrey;
+                label{ margin-top: px($paddingUnit); }
+                iframe{ width: 100%; }
+            }
+        }
+        .images{
+            .zoom-mainImage{
+                display:inline-block;
+            }
+            .zoom-thumbnails{
+                &:before{
+                    content : 'Hover over image to zoom';
+                    font-style: italic;
+                    display: block;
+                    margin: px($paddingUnit) 0;
+                    color: $lightGrey;
+                }
+                a img{
+                    border: 1px solid $lightGrey;
+                    &:hover{
+                        @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
+                        border-color: $darkYellow;   
+                    }
+                }
+                li{ 
+                    display:inline-block;  
+                    margin-right: $gutterWidth;
+                    clear: none;
+                    float:left;
+                }
+                @include clearfix;
+            }
+        }
+        
+    }
+   
+    .media .section,
+    .information .section{
+        
+        padding-bottom: px(2 * $paddingUnit);
+        border-bottom: 1px solid $lightGrey;
+        &:last-child{ border-bottom-width: 0; }
+        
+        > .b3[data-reveal-children]{ /* The plus/minus toggle button */
+            margin-top: px(2 * $paddingUnit + 2);
+            margin-right: px(2 * $paddingUnit);
+            text-indent: px(1000px);
+            float:left;
+            text-indent: px(-$hideDistance);
+            width: px(25px);
+            height: px(25px);
+            border-color: $taintedGrey;
+            overflow: hidden;
+            padding:0;
+            @include gradient($lightGreyGradientTop, $lightGreyGradientBottom);
+        }
+        > h2{  /* Section headers */
+            float: left;
+            line-height: 1em;
+            margin-bottom: $paddingUnit;
+        }
+        label{ 
+            display: block;
+            float: left;
+            .details{ display: block; }
+            
+        }
+        .content{ 
+            clear: both;
+            float: left;
+            width: 100%;
+        }
+        
+        @include clearfix;
+        
+    }
+    .information{
+        
+        width: px(columns(6));
+        margin-left: $gutterWidth;
+        float: right;
+        
+        .addToCart{}
+        .addRelatedItems{}
+        
+    }
+    .description{
+        @include clearfix;
+    }
+    .reviews{
+        
+        padding-top: px(10px);
+        
+        h2{
+            margin: px(6px, $h2FontSize) 0 px(15px, $h2FontSize);
+            float:left;
+        }
+        
+        .aggregateReviews{
+            
+            float: left; 
+            position: relative;
+            margin: px(10px) 0 0 px(30px);
+            
+            label{
+                position: absolute;
+                left: 100%;
+                width: px(200px);
+                font-style: italic;
+            }
+        }
+        .b1{
+            float: right;
+        }
+        .add{
+            
+            display: block;
+            clear: both;
+            border-top: 1px solid $lightGrey;
+            padding: 1em 0 0 0;
+            .panel{ margin-bottom: 0; }
+            .review{
+                float: left;
+                margin-bottom: 1em;
+                .field{ float: none;
+                    input{ width: columns(6) - $gutterWidth; }
+                }
+                textarea{ width: px(columns(5) + $gutterWidth + 10); }
+            }
+            .author{
+                float: left;
+                clear: none;
+                width: px(columns(5));
+                margin-left: px($gutterWidth);
+                margin-bottom: 1em;
+                .firstName{
+                    float: left;
+                    label, input{ width: px(200px); }
+                }
+                .lastInitial{
+                    float: left;
+                    clear: none;
+                    margin-left: px($paddingUnit);
+                    input{ width: px(100px); }
+                }
+                .city{
+                    float: left;
+                    input{ width: px(200px); }
+                }
+                .state{
+                    margin-left: px($paddingUnit);
+                    clear: none;
+                    select{ width: px(100px); }
+                }
+                .experience{
+                    /* IE7 */
+                    width: 100%; ul{ width: 100%; li{ width: 100%; }}
+                        
+                    .field{
+                        
+                        
+                        position: relative;
+                        margin-top: px($paddingUnit);
+                        height: px(36px);                        
+                        
+                        .yearsPlaying{
+                            
+                            position:absolute;
+                            top:0;
+                            left: px(100px);
+                            float: left;
+                            width: px(300px);
+                            
+                            label{ 
+                                float: left;
+                                margin-top: px($paddingUnit);
+                                margin-left: px($paddingUnit);
+                            }
+                            input[type="text"]{ 
+                                width: px(75px);
+                                float: left;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .submit{
+                
+                border-top: 1px solid $lightGrey;
+                clear: both;
+                
+                .details{
+                    margin: 1em; /* matches button */
+                    position: relative;
+                    top: px(3px);
+                    float: right;
+                }
+            }
+            @include clearfix;
+            
+        }
+        .entries{
+            
+            clear: both;
+            border-top: 1px solid $lightGrey;
+                
+            .entry{
+                
+                padding: px($gutterWidth / 2) 0;
+                border-bottom: 1px solid $lightGrey;
+                float: left;
+                position: relative;
+                overflow: hidden;
+                clear: both;
+                width: 100%;
+                
+                &.preview{
+                    &:before{ /* Two colons to hide from IE8 */
+
+                        overflow: hidden;
+                        padding: px($paddingUnit * 2) 0;
+                        width: 100%;
+                        display: block;
+                        top: px(-$paddingUnit);
+                        font-weight: 800;
+                        text-align: center;
+                        content: 'Preview';
+                        color: $superDarkGrey;
+                        letter-spacing: px(1px);
+                        text-transform: uppercase;
+                        text-shadow : 0 1px $saturatedHighlightGrey;
+                        border : 1px solid $grey;
+                        border-width: 1px 0;
+                        margin: 0 0 px($gutterWidth / 2) 0;
+                        
+                        @include gradient($buttonLightGrey, $buttonDarkGrey); 
+                    }
+                    &::before{ /* Only rotate for IE9 */
+                        position: absolute;
+                        top: px(10px);
+                        left: px(-40px);
+                        width: px(150px);
+                        @include rotate(-45);
+                    }
+                    .points .actions button[data-action="voteDown"],
+                    .points .actions button[data-action="voteUp"],
+                    .reviewInteractionCount{ display: none; }
+                }
+                
+                button[data-action="voteUp"],
+                button[data-action="voteDown"],
+                .reviewInteractionCount{
+                    position: absolute;
+                    top: 0;
+                    left: px($gutterWidth);
+                }
+                button[data-action="voteUp"],
+                button[data-action="voteDown"]{ 
+                    top: px(20px);
+                    width: px(32px);
+                    height: px(32px);
+                    @include border-radius(px(32px));
+                    background-color: $lightGrey;
+                    text-indent: px(-1000px);
+                    &:hover{
+                        background-color: $yellow;
+                    }
+                }
+                .reviewInteractionCount{ 
+                    
+                    top: px(60px, 14px);
+                    border: 1px solid $lightGrey;
+                    font-weight: bold;
+                    font-style: italic;
+                    font-size: px(14px);
+                    padding: 0 px($paddingUnit);
+                    color: $grey;
+                    background-color: $superLightGrey;
+                    
+                    @include box-shadow-multiple(0 0 px(2px) 0 $lightGrey inset);
+                    
+                }
+                button[data-action="voteDown"]{ top: px(90px); }
+                
+                .author{
+                    
+                    float:left;
+                    margin-left: px(columns(1) + $gutterWidth);
+                    width: px(columns(2));
+                    
+                    .reviewAuthorPhoto"]{ @include border-radius(px(32px)); }
+                    .reviewAuthor"]{font-weight:bold;}
+                    .reviewLocation"]{text-transform: uppercase;}
+                    .reviewProfile"]{font-style:italic; color: $grey;}
+                }
+                
+                .review{
+                    
+                    float: left;
+                    margin-left: px($gutterWidth);
+                    
+                    .reviewItemReviewed{
+                        display: none; /* We don't need to show this to users, but we need it for microdata */
+                    }
+                    .reviewReviewRating,
+                    .reviewTitle,
+                    .reviewDatePublished,
+                    .reviewReviewBody{
+                        width: px(columns(7));
+                        float: left;
+                        clear: left;
+                    }
+                    .reviewDatePublished{color: $grey; font-style: italic; } 
+                    .reviewTitle{
+                        
+                        font-weight:bold;
+                        &:after, &:before{ content: '"'; }
+                    
+                    }
+                }
+                
+                .points{
+                    float:left;
+                    width: px(columns(2));
+                    margin-left: px($gutterWidth);
+                    .cons{
+                        margin-top: $paddingUnit * 2;
+                    }
+                }
+            }
+        }
+    } /* End Reviews */
+}
+
+
+/* Search Results */
+.page-search{
+    
+    .head, .searchResults{
+        strong{ color: $black; }
+    }
+    
+    
+    .refinements{
+      
+        /* Left hand refinements panels */
+        
+        float: left;
+        
+        .panel{
+            float: left;
+            display: block;
+            clear: both;
+            width: px(columns(3) - $gutterWidth);
+        }
+        .section{
+            
+            margin-top: px($gutterWidth);
+            margin-bottom: px($paddingUnit);
+            border-top: 1px solid $lightGrey;
+            float: left;
+            width: 100%; 
+            position: relative;
+            
+            h4{ 
+                float: left;
+                position:absolute;
+                top: px(-11px);
+                left: 0;
+                background-color: $superLightGrey;
+                padding-right: px(6px);
+                
+            }
+            button[data-action='hideRefinements']{
+                position:absolute;
+                top: px(-11px);
+                right: 0;
+                float: right;
+                width: px(20px);
+                height: px(20px);
+                padding: 0;
+                text-indent: -$hideDistance;
+                overflow: hidden;
+
+                &:before{
+                    content: ' ';
+                    height: px(25px);
+                    width: px($paddingUnit);
+                    background-color: $superLightGrey;
+                    position: absolute;
+                    top:0;
+                }
+                &:before{
+                    left:px(-($paddingUnit + 2));
+                }
+            }
+            ul{ 
+                
+                display: block;
+                border-top: 1px solid white;
+                padding-top: px($paddingUnit);
+                width: 100%;
+                
+                .field{ 
+                    clear: both;
+                    margin-left: px($paddingUnit);
+                    width: 100%;
+                    
+                    label{ 
+                        width: px(170px); 
+                        &:hover{
+                            pointer: hand;
+                        }
+                    }
+                    &:first-child{
+                        margin-top: px($paddingUnit);
+                    }
+                }
+            }
+            .loadMore{
+                clear: both;
+                float: left;
+                position: relative;
+                left: px(25px);
+                top: px(-5px);
+            }
+        }
+        .selectedFilters{
+            
+            @include clearfix;
+            
+            li{ clear: both; }
+            
+            button[data-action='removeFilter']{ 
+                float: left;
+                margin: px(2px) 0 px(5px);
+                overflow: hidden;
+                text-decoration: none;
+                color: $black;
+                &:hover{
+                    text-decoration: underline;
+                }
+                &:after{
+                    left:0; /* Icon */
+                }
+            }
+            
+            button[data-action='clearAllRefinements']{
+                float: right;
+                margin-top: px(5px);
+                margin-bottom: px(5px);
+            }
+            
+            .section{
+                margin-top: px($paddingUnit);
+                border-top: none;
+            }
+        }
+    }
+    
+    .results{
+        
+        clear: none;
+        float: left;
+        margin-left: $gutterWidth;
+        width: px(columns(9)-$paddingUnit);
+        
+        .tabs{
+            margin-top: -1em;
+            margin-right: px($paddingUnit);
+            
+            li{
+                float: right;
+                position:relative;
+            }
+            .b1, .b2, .b3, .b4, .b5, a{
+                
+                border: 1px solid $lightGrey;
+                @include border-radius(px($borderRadius) px($borderRadius) 0 0);
+                background-color: $white;
+                padding: px(2*$paddingUnit) px(4 * $paddingUnit) px(2*$paddingUnit) px(40px);
+                text-decoration: none;
+                
+                &:after{
+                    left: px(10px);
+                }
+                
+            }
+            button[data-action="showCompact"]{
+                margin-left: -1px;
+            }
+        }
+        
+        .controls{
+            
+            border: 1px solid $lightGrey;
+            background-color: $superLightGrey;
+            border-width: 1px 0;
+            float: left;
+            width: 100%;
+            padding: px(2 * $paddingUnit) 0;
+            
+            
+            li{
+                float: right;
+                margin-right: px($gutterWidth);
+                
+                &:first-child{
+                    float: left;
+                }
+                &.pagination{
+                    margin-right: px($paddingUnit);
+                }
+                
+            }
+            label{
+                float: left;
+                clear: none;
+                margin-top: .5em;
+                margin-right: px($paddingUnit);
+            }
+            select{
+                float: left;
+                clear: none;
+                font-weight: normal;
+                font-size: px(13px, $inputFontSize);
+                margin-top: px(1px);
+                height: px(35px);
+                
+            }
+            button[data-action='previousPage'], button[data-action='nextPage']{
+                
+                @include border-radius(px(32px));
+                
+                margin-top: px(2px);   
+                height: px(32px);
+                width: px(32px);
+                text-indent: px(-$hideDistance);
+                overflow: hidden;
+                padding:0;
+                
+            }
+            .pageCount{
+                font-style: italic;
+                color: $grey;
+            }
+            button[data-action='compare']{
+                margin-top: px(-1px);
+                .count{
+                    font-weight: normal;
+                }
+            }
+        }
+        .foot .controls{
+            margin-top: -1px;
+        }
+        
+        .searchResults{
+            
+            .entry{
+                position: relative;
+                
+                display: block;
+                padding-top: px($gutterWidth);
+                padding-bottom: px($gutterWidth);
+                border-bottom: 1px solid $lightGrey;
+                float:left;
+            }
+            .productPrice{ font-size: px(19px); }
+            .productName{ 
+                font-size: px(15px);
+            }
+        }
+    }
+
+    .listView{
+        
+        .listScope{
+            clear: both;
+            display: block;
+            float: left;
+        }
+        
+        .entry{
+            padding-left: px(columns(2));
+            float: left; 
+            &:last-child{
+                border-bottom: none;   
+            }
+        }
+        .model{
+            display:block;
+            margin-bottom: px($paddingUnit * 2);
+        }
+        .aggregateReviews{
+            margin-bottom: px($paddingUnit * 2);
+        }
+        img{ 
+            float: left;
+            margin-right: px($paddingUnit);
+            position: absolute;
+            top: 1px;
+            left: 0;
+            width: px(140px);
+            height: px(140px);
+        }
+        .compare{
+            position: absolute;
+            top: px(150px);
+            left: px(10px);
+        }
+        .addToCart{
+            
+            float: right;
+            width: inherit;
+            width: px(columns(3));
+            margin-left: px($paddingUnit);
+            margin-bottom: 0;
+            
+            .status{ display: inline; }
+            .method{ display: block; }
+            .option, .quantity, .action{ text-align:right; }
+        }
+    }
+    .gridView{
+        
+        $_topOfPrice : 360px;
+        
+        .listScope{
+            clear: both;
+            display: block;
+            float: left;
+        }
+        
+        .entry{
+            clear:none;
+            padding: 0 px(7px);
+            width: px(columns(3) - 5);
+            height: px(500px);
+            border: 1px solid $lightGrey;
+            border-top: none;
+            border-left: none;
+            margin-bottom: 0;
+            left: -1px;
+            
+            &:nth-child(3n - 2){
+                border-left-color: transparent;
+            }
+            &:nth-child(3n + 3){
+                border-right-color: transparent;
+            }
+        }
+        .compare{
+            float: none;
+        }
+        .aggregateReviews{
+            position: absolute;
+            top: px($_topOfPrice + 50px);
+            left: $paddingUnit;
+        }
+        .productName{
+            height: 6em;
+            text-overflow: ellipsis;
+        }
+        .model, .features{
+            display: none;
+        }
+        .addToCart{
+            
+            position: absolute; 
+            top: 0;
+            left: -$hideDistance;
+            margin:0;
+            
+            .productPrice{
+                font-size: px(17px);
+                position: absolute;
+                top: px($_topOfPrice, 17px);
+                left: $hideDistance + $paddingUnit + 2px;
+            }
+            .shortStatus{
+                display: block;
+                font-size: px(13px);
+                position: absolute;
+                top: px($_topOfPrice + 18px);
+                left: ($hideDistance + $paddingUnit + 2);
+                width: px(columns(3));
+                color: $grey;
+            }
+            .scroller{
+                position: absolute;
+                top: px($_topOfPrice + 90px, $inputFontSize);
+                left: px($hideDistance + $paddingUnit + 17px, $inputFontSize);
+            }
+            .b1{
+                position: absolute;
+                top: px($_topOfPrice + 90px, $boldAllCapsH4);
+                left: px($hideDistance + $paddingUnit + 50px + 17px, $b1FontSize);
+                width: px(125px, $b1FontSize);
+            }
+        }
+        
+    }
+    
+    .gridView .tabs button[data-action="showCompact"],
+    .listView .tabs button[data-action="showDetails"]{
+            border-bottom: 1px solid $superLightGrey;
+            background-color: $superLightGrey;
+    }
+}
