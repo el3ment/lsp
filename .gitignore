@@ -1,4 +1,4 @@
 app/tmp/sessions/ses*
 !empty
-.project
+.project/
 dummy
