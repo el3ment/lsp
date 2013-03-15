@@ -15,7 +15,7 @@
 	Use the `build` task to create a pear package based on the current working copy.
 	Use the `clean` task to clean up packaging artifacts.
     
-	This is clean!! Horray!
+	This is clean Horray!!!
 
 	<taskdef classname="phing.tasks.ext.d51PearPkg2Task" name="d51pearpkg2" />
 	<property file="build.properties" />
