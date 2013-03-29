@@ -22,7 +22,7 @@
             },
             assets : {
             	inventoryOptions : _assets.inventoryOptions(_parentController, 'inventoryOptions'),
-            	zoom : _assets.mouseoverZoom(_parentController, 'zoom'),
+            	zoom : _assets.zoom(_parentController, 'zoom'),
             	reviews : _assets.reviews(_parentController, 'reviews')
             },
             getSpecifications : function(id){
