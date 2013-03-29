@@ -1,0 +1,15 @@
+.validation-required,
+.validation-alphaOnly,
+.validation-numericOnly,
+.validation-alphaNumeric,
+.validation-emailAddress,
+.validation-creditCardNumber{
+	border: 1px solid blue;
+}
+
+.validation-invalid{
+	border:1px solid red;
+}
+.validation-valid{
+	border: 1px solid green;
+}

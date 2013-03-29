@@ -1,0 +1,23 @@
+.compare-showWhenDownloadWaiting,
+.compare-showWhenDownloadSuccess,
+.compare-showWhenDownloadFailure{
+    display: none;
+}
+.compare-downloadWaiting .compare-showWhenDownloadWaiting{
+    display: block;
+    background-color:yellow;
+}
+.compare-downloadSuccess .compare-showWhenDownloadSuccess{
+    display:block;
+    background-color:green;
+}
+.compare-downloadFailure .compare-showWhenDownloadFailure{
+    display: block;
+    background-color:red;
+}
+.compare-table tr:nth-child(even) {
+   background-color: #ccc;
+}
+.compare-table .compare-similar{
+	color: grey;
+}

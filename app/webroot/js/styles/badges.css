@@ -1,0 +1,23 @@
+.badges-productImage{
+    position:relative;
+    display:inline-block;
+    zoom:1;
+    *display:inline; /* IE7 inline-block Fix */
+} 
+.badges-badge{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Individual Badges */
+.badge-badgeNameHere{
+    background: blue url() no-repeat top right;
+    width:20px;
+    height:20px;
+}
+.badge-new{
+    background: blue url() no-repeat top right;
+    width:28px;
+    height:17px;
+}

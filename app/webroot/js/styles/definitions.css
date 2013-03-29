@@ -1,0 +1,27 @@
+.definitions-showWhenDownloadWaiting,
+.definitions-showWhenDownloadSuccess,
+.definitions-showWhenDownloadFailure{
+    display: none;
+}
+.definitions-downloadWaiting .definitions-showWhenDownloadWaiting{
+    display: block;
+    background-color:yellow;
+}
+.definitions-downloadSuccess .definitions-showWhenDownloadSuccess{
+    display:block;
+    background-color:green;
+}
+.definitions-downloadFailure .definitions-showWhenDownloadFailure{
+    display: block;
+    background-color:red;
+}
+
+
+.definitions-hasDefinition[data-definitions-definition] {
+    border: 1px solid red;
+}
+
+.definitions-hasDefinition[data-definitions-definition]:hover:before{
+    content : attr(data-definitions-word) attr(data-definitions-definition) attr(data-definitions-url);
+    border:1px solid blue;
+}
