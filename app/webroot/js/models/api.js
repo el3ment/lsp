@@ -2,11 +2,11 @@
     
     var _util = window.LSP.utilities;
     
-    var lspapi = function(){
-        var _parentModel = {};
+    var api = function(){
+        var _this = {};
         var _lsp = window.LSP;
         
-        _parentModel =  {
+        _this =  {
             events : {},
             assets : {},
             buildRequestURL : function(method){
@@ -17,8 +17,8 @@
             },
             request : function(controller, eventName, method, data){
                 
-               //https://system.sandbox.netsuite.com/app/site/hosting/scriptlet.nl?script=customscript_lspapi
-               //    &deploy=customdeploy_lspapi&method=getTrackingNumber&salesOrderNumber=1234
+               //https://system.sandbox.netsuite.com/app/site/hosting/scriptlet.nl?script=customscript_api
+               //    &deploy=customdeploy_api&method=getTrackingNumber&salesOrderNumber=1234
                 var result = $.Deferred();
                 var eventData = {};
                 eventData.xhrData = {
@@ -26,8 +26,8 @@
                     url: _parentModel.buildRequestURL(method),
                     data: {
                         method : method,
-                        deploy : 'customdeploy_lspapi',
-                        script : 'customscript_lspapi'
+                        deploy : 'customdeploy_api',
+                        script : 'customscript_api'
                         //random : Math.floor(Math.random() * 10000) // For Caching
                     }
                 };
@@ -99,9 +99,9 @@
             }
         };
 
-        return _parentModel;
+        return _this;
     }();
     
-    _util.register('model', 'lspapi', lspapi);
+    _util.register('model', 'api', api);
     
 })();

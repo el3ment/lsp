@@ -5,7 +5,7 @@
     var shipping = function(){
         var _this = {};
         var _lsp = window.LSP;
-        var _api = _lsp.models.lspapi;
+        var _api = _lsp.models.api;
         var _settings = {
         	bodyNoTrackingNumbersFoundClass : 'shipping-noTrackingNumbersFound',
         	trackingNumberSelector : '.testOnly-trackingNumbers'
