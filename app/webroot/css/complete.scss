@@ -1,16 +1,17 @@
-@import "settings";
-@import "functions";
+@import "utilities/settings";
+@import "utilities/functions";
 
-@import "reset";
+@import "utilities/reset";
 
-@import "form";
-@import "icons";
-@import "images";
+@import "components/form";
+@import "components/icons";
+@import "components/images";
 
-@import "global";
-@import "header";
-@import "footer";
-@import "cart";
-@import "checkout";
-@import "product";
-@import "search";
+@import "components/global";
+@import "components/header";
+@import "components/footer";
+
+@import "pages/cart";
+@import "pages/checkout";
+@import "pages/product";
+@import "pages/search";
