@@ -1,0 +1,22 @@
+.trackOrder-showWhenDownloadWaiting,
+.trackOrder-showWhenDownloadSuccess,
+.trackOrder-showWhenDownloadFailure,
+.trackOrder-showWhenNoTrackingNumbersFound{
+    display: none;
+}
+.trackOrder-downloadWaiting .trackOrder-showWhenDownloadWaiting{
+    display: block;
+    background-color:yellow;
+}
+.trackOrder-downloadSuccess .trackOrder-showWhenDownloadSuccess{
+    display:block;
+    background-color:green;
+}
+.trackOrder-downloadFailure .trackOrder-showWhenDownloadFailure{
+    display: block;
+    background-color:red;
+}
+.trackOrder-noTrackingNumbersFound .trackOrder-showWhenNoTrackingNumbersFound{
+	display: block;
+	background-color:purple;
+}
