@@ -3,7 +3,7 @@
     var _util = window.LSP.utilities;
     
     var reviews = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _api = _lsp.models.lspapi;
         var _settings = {
@@ -12,7 +12,7 @@
             profileTitleSelector : 'form#reviews-inputForm input[data-childid]'
         };
         
-        _parentAsset =  {
+        _this =  {
         	name : 'reviews',
             events : {
                 application : {
@@ -23,7 +23,7 @@
                         	e.preventDefault();
                         	return false;
                         }).bind('afterValidation', function(e){
-                            _parentAsset.save(this);
+                            _this.save(this);
                             e.preventDefault();
                             return false;
                         });
@@ -47,10 +47,10 @@
             // Send the form, and replace the form with the result from the 
             // server.
             save : function(formElement){
-                var data = _parentAsset.parseForm(formElement); // We have to parse the form before we disable the elements
+                var data = _this.parseForm(formElement); // We have to parse the form before we disable the elements
                 $(':input', formElement).attr('disabled', true);
                 
-                var result = $.when(_api.request(_parentAsset, 'save', 'saveReview', data))
+                var result = $.when(_api.request(_this, 'save', 'saveReview', data))
                 .done(function(data){
                 	// don't forget to _util.attachEvents with the new HTML!
                     $(_settings.formSelector).replaceWith(JSON.stringify(data));
@@ -80,7 +80,7 @@
             }
         };
 
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'reviews', reviews);

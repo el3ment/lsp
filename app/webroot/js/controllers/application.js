@@ -3,11 +3,11 @@
     var _util = window.LSP.utilities;
     
     var application = function(){
-        var _parentController = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _assets = _lsp.assets;
         
-        _parentController =  {
+        _this =  {
             events : {
                 application : {
                 	onAttachEvents : function(e, data){
@@ -50,11 +50,11 @@
                 }
             },
             assets : {
-            	definitions : _assets.definitions(_parentController, 'definitions'),
-            	history : _assets.history(_parentController, 'history'),
-            	badges : _assets.badges(_parentController, 'badges'),
-            	validation : _assets.validation(_parentController, 'validation'),
-            	reveal : _assets.reveal(_parentController, 'reveal')
+            	definitions : _assets.definitions(_this, 'definitions'),
+            	history : _assets.history(_this, 'history'),
+            	badges : _assets.badges(_this, 'badges'),
+            	validation : _assets.validation(_this, 'validation'),
+            	reveal : _assets.reveal(_this, 'reveal')
             },
             getCurrentCustomerId : function(){
             	return 8989;
@@ -121,13 +121,13 @@
                 }
                 
                 $(document).ready(function(){ 
-                    $(_parentController).triggerHandler('onReady');
+                    $(_this).triggerHandler('onReady');
                 });
             }
 
         };
         
-        return _parentController;
+        return _this;
     }();
     
     _util.register('controller', 'application', application);

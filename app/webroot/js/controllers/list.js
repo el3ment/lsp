@@ -3,7 +3,7 @@
     var _util = window.LSP.utilities;
     
     var list = function(){
-        var _parentController = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _assets = _lsp.assets;
         var _api = _lsp.models.lspapi;
@@ -21,11 +21,11 @@
         	shareCartParentId : 'list-parent'
         };
         
-        _parentController =  {
+        _this =  {
             events : {
             	list : {
             		onRemoveWishlistItem : function(e, data){
-            			_parentController.removeItemFromWishlist({
+            			_this.removeItemFromWishlist({
                     		itemId : data.selector.data('itemid'),
                     		customerId : _lsp.controllers.application.getCurrentCustomerId(),
                     		options : data.selector.data('itemoptions')});
@@ -34,7 +34,7 @@
             			
             			var formValues = _util.formToObject(data.selector.parents('form').get(0), null, false);
             			
-                    	_parentController.addItemToWishlist({
+                    	_this.addItemToWishlist({
                     		itemId : formValues.itemId,
                     		customerId : _lsp.controllers.application.getCurrentCustomerId(),
                     		quantity : formValues.quantity,
@@ -49,11 +49,11 @@
                     	
                     	var urlParameters = _util.getURLParameters();
                     	if(urlParameters.p){
-                    		_parentController.renderShareCart(_parentController.assets.listEncoder.decode(urlParameters.p));
+                    		_this.renderShareCart(_this.assets.listEncoder.decode(urlParameters.p));
                     	}
 
                     	if(urlParameters.wishlistId){
-                    		_parentController.renderWishlist(urlParameters.wishlistId);
+                    		_this.renderWishlist(urlParameters.wishlistId);
                     	}
                     	
 
@@ -66,13 +66,13 @@
                             e.preventDefault();
                             return false;
                         }).bind('afterValidation', function(e){
-                        	_parentController.submitWishlistSearch(_util.formToObject(this, null, false));
+                        	_this.submitWishlistSearch(_util.formToObject(this, null, false));
                         });
                     }
                 }
             },
             assets : {
-            	listEncoder : new _assets.listEncoder(_parentController, 'listEncoder')
+            	listEncoder : new _assets.listEncoder(_this, 'listEncoder')
             },
             renderShareCart : function(idsAndQuantities){
             	var ids = [];
@@ -80,7 +80,7 @@
             	for(var i = 0; i < idsAndQuantities.length; i++){
             		ids.push(idsAndQuantities[i].id);
             	}
-            	$.when(_parentController.getItems(ids)).done(function(response){
+            	$.when(_this.getItems(ids)).done(function(response){
             		if(response.response.data){
             			
             			var items = response.response.data;
@@ -93,7 +93,7 @@
                     			}
                     		}
                     	}
-                    	_parentController.renderItems(_settings.shareCartParentId, _settings.shareCartListElementId, items);
+                    	_this.renderItems(_settings.shareCartParentId, _settings.shareCartListElementId, items);
             		}
             	});
             	
@@ -111,54 +111,54 @@
             
             getItems : function(ids){
             	ids = (typeof ids === 'string' ? [ids] : ids);
-            	return _api.request(_parentController, 'getItems', 'getItems', {ids : JSON.stringify(ids)});
+            	return _api.request(_this, 'getItems', 'getItems', {ids : JSON.stringify(ids)});
             },
             
             addItemToWishlist : function(requestParameters){ // {itemId : itemId, customerId : 123, quantity : 12, options : options, comments : 'hey'}
             	requestParameters.site = window.location.hostname;
-            	return _api.request(_parentController, 'add', 'addItemToWishlist', requestParameters);
+            	return _api.request(_this, 'add', 'addItemToWishlist', requestParameters);
             },
 
             removeItemFromWishlist : function(requestParameters){ // {customerId : customer, options : options, itemId : itemId}
-            	return _api.request(_parentController, 'remove', 'removeItemFromWishlist', requestParameters);
+            	return _api.request(_this, 'remove', 'removeItemFromWishlist', requestParameters);
             },
 
             updateItemOnWishlist : function(requesParameters){ //{itemId : itemId, customerId : customerId, options : options, value : value, field : field}
             	requestParameters.site = window.location.hostname;
-            	return _api.request(_parentController, 'update', 'updateItemOnWishlist', requestParameters);
+            	return _api.request(_this, 'update', 'updateItemOnWishlist', requestParameters);
             },
 
             getWishlistItems : function(id){ // {customerId : customerId}
-            	return _api.request(_parentController, 'get', 'getWishlistItems', {customerId : id});
+            	return _api.request(_this, 'get', 'getWishlistItems', {customerId : id});
             },
             searchWishlists : function(searchValue){ // {searchValue : 'hey!'}
-            	return _api.request(_parentController, 'search', 'searchWishlists', {searchValue : searchValue});
+            	return _api.request(_this, 'search', 'searchWishlists', {searchValue : searchValue});
             },
             submitWishlistSearch : function(formValues){
             	$('body').removeClass('list-noWishlistsFound');
-            	$.when(_parentController.searchWishlists(formValues.searchValue))
+            	$.when(_this.searchWishlists(formValues.searchValue))
             	.done(function(response){
-            		_parentController.renderWishlistSearch(response.response.data);
+            		_this.renderWishlistSearch(response.response.data);
             	});
             },
             renderWishlistSearch : function(wishlists){
             	if(wishlists.length > 0){
-            		_parentController.renderItems(_settings.wishlistParentId, _settings.wishlistListElementId, wishlists);
+            		_this.renderItems(_settings.wishlistParentId, _settings.wishlistListElementId, wishlists);
             	}else{
             		$('body').addClass('list-noWishlistsFound');
             	}
             },
             
             renderWishlist : function(id){
-            	$.when(_parentController.getWishlistItems(id))
+            	$.when(_this.getWishlistItems(id))
             	.done(function(response){
             		var items = response.response.data;
-            		_parentController.renderItems(_settings.wishlistParentId, _settings.wishlistListElementId, items);
+            		_this.renderItems(_settings.wishlistParentId, _settings.wishlistListElementId, items);
             	});
             }
         };
         
-        return _parentController;
+        return _this;
     }();
     
     _util.register('controller', 'list', list);

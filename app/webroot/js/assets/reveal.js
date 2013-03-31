@@ -3,24 +3,24 @@
     var _util = window.LSP.utilities;
     
     var reveal = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         
-        _parentAsset =  {
+        _this =  {
         	name : 'reveal',
             events : {
                 application : {
                     onAttachEvents : function(e, data){
                         $('*[data-reveal-children]', data.selector).bind('click', function(e){
-                        	_parentAsset.toggleClick(this, $(_parentAsset.buildChildrenSelector(this)));
+                        	_this.toggleClick(this, $(_this.buildChildrenSelector(this)));
                         	e.stopPropagation();
                         	return false;
                         }).bind('mouseover', function(e){
-                        	_parentAsset.onMouseover(this, $(_parentAsset.buildChildrenSelector(this)));
+                        	_this.onMouseover(this, $(_this.buildChildrenSelector(this)));
                         }).bind('mouseout', function(e){
-                        	_parentAsset.onMouseout(this, $(_parentAsset.buildChildrenSelector(this)));
+                        	_this.onMouseout(this, $(_this.buildChildrenSelector(this)));
                         }).each(function(index, element){
-                        	$(_parentAsset.buildChildrenSelector(this)).addClass('reveal-child');
+                        	$(_this.buildChildrenSelector(this)).addClass('reveal-child');
                         }).addClass('reveal-parent');
                     }
                 }
@@ -54,7 +54,7 @@
             }
         };
 
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'reveal', reveal);

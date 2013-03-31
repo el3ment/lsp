@@ -3,7 +3,7 @@
     var _util = window.LSP.utilities;
     
     var trackOrder = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _api = _lsp.models.lspapi;
         var _settings = {
@@ -11,7 +11,7 @@
         	trackingNumberSelector : '.testOnly-trackingNumbers'
         };
         
-        _parentAsset = {
+        _this = {
         	name : 'trackOrder',
             events : {
                 application : {
@@ -20,7 +20,7 @@
                             e.preventDefault();
                             return false;
                         }).bind('afterValidation', function(e){
-                        	_parentAsset.submit(_util.formToObject(this, null, false));
+                        	_this.submit(_util.formToObject(this, null, false));
                         });
                     }
                 }
@@ -28,13 +28,13 @@
             assets : {},
             submit : function(formObject){
                 if(formObject.search.substr(0, 2).toUpperCase() == '1Z'){
-                    _parentAsset.redirectToUPS(formObject.search);
+                    _this.redirectToUPS(formObject.search);
                 }else{
                     // Probably a Sales Order
-                	_parentAsset.clearTrackingNumbers();
-                    $.when(_parentAsset.requestTrackingNumber(formObject.search, formObject.emailAddress))
+                	_this.clearTrackingNumbers();
+                    $.when(_this.requestTrackingNumber(formObject.search, formObject.emailAddress))
                     .done(function(response){
-                    	_parentAsset.getTrackingData(((response.response.data || {}).trackingnumbers || "").toUpperCase());
+                    	_this.getTrackingData(((response.response.data || {}).trackingnumbers || "").toUpperCase());
                     });
                 }
             },
@@ -43,9 +43,9 @@
             	if(trackingNumbers.length !== 0){
             		var trackingNumbersArray = trackingNumbers.split(' ');
             		for(var i = 0; i < trackingNumbersArray.length; i++){
-            			$.when(_parentAsset.requestTrackingData(trackingNumbersArray[i]))
+            			$.when(_this.requestTrackingData(trackingNumbersArray[i]))
             			.done(function(response){
-            				_parentAsset.displayTrackingData(response.response.data);
+            				_this.displayTrackingData(response.response.data);
             			}).fail(function(response){
             				$('body').addClass(_settings.bodyNoTrackingNumbersFoundClass);
             			});
@@ -66,15 +66,15 @@
             },
             
             requestTrackingNumber : function(salesOrderNumber, emailAddress){
-                return _api.request(_parentAsset, 'getTrackingNumber', 'getTrackingNumber', {salesOrderNumber : salesOrderNumber.replace(/[^0-9]+/, ''), emailAddress : $.trim(emailAddress)});
+                return _api.request(_this, 'getTrackingNumber', 'getTrackingNumber', {salesOrderNumber : salesOrderNumber.replace(/[^0-9]+/, ''), emailAddress : $.trim(emailAddress)});
             },
             
             requestTrackingData : function(trackingNumber){
-            	return _api.request(_parentAsset, 'getUPSTrackingData', 'getUPSTrackingData', {trackingNumber : trackingNumber});
+            	return _api.request(_this, 'getUPSTrackingData', 'getUPSTrackingData', {trackingNumber : trackingNumber});
             }
         };
 
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'trackOrder', trackOrder);

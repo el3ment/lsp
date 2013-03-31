@@ -3,7 +3,7 @@
     var _util = window.LSP.utilities;
     
     var listEncoder = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _util = _lsp.utilities;
         var _settings = {
@@ -11,7 +11,7 @@
             	propertySeperator : '-'
             };
         
-        _parentAsset =  {
+        _this =  {
         	name : 'listEncoder',
             // Encode quantity, and id in base64, stringify them by using unique seperators
             // decode them by spliting it up, and re-encoding to base 10;
@@ -39,7 +39,7 @@
             }
         };
         
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'listEncoder', listEncoder);

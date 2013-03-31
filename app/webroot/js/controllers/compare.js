@@ -3,20 +3,20 @@
     var _util = window.LSP.utilities;
     
     var compare = function(){
-        var _parentController = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _assets = _lsp.assets;
         var _api = _lsp.models.lspapi;
         var _requestedItemIds = [];
         
-        _parentController =  {
+        _this =  {
             events : {
                 application : {
                     onReady : function(e, data){
                     	if(_requestedItemIds.length > 0){
-	                    	$.when(_parentController.getItems(_requestedItemIds)).done(function(response){
-	                    		var sortedData = _parentController.sort(response.response.data);
-	                    		var tableHTML = _util.parseMicroTemplate('templates-compare-table', _parentController.diff(_util.tablify(sortedData)));
+	                    	$.when(_this.getItems(_requestedItemIds)).done(function(response){
+	                    		var sortedData = _this.sort(response.response.data);
+	                    		var tableHTML = _util.parseMicroTemplate('templates-compare-table', _this.diff(_util.tablify(sortedData)));
 	                    		$('#templates-compare-table').replaceWith(tableHTML);
 	                    	});
                     	}// else there is no 'ids' parameter
@@ -32,7 +32,7 @@
             assets : {},
             getItems : function(ids){
             	ids = (typeof ids === 'string' ? [ids] : ids);
-            	return _api.request(_parentController, 'getItems', 'getItems', {ids : JSON.stringify(ids)});
+            	return _api.request(_this, 'getItems', 'getItems', {ids : JSON.stringify(ids)});
             },
             sort : function(responseData){
             	// Put things in the order they were requested in
@@ -62,7 +62,7 @@
             }
         };
         
-        return _parentController;
+        return _this;
     }();
     
     _util.register('controller', 'compare', compare);

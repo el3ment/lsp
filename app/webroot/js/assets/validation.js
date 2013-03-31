@@ -3,7 +3,7 @@
     var _util = window.LSP.utilities;
     
     var validation = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _api = _lsp.models.lspapi;
         var _settings = {
@@ -36,7 +36,7 @@
         	}
         };
         
-        _parentAsset =  {
+        _this =  {
         	name : 'validation',
             events : {
                 application : {
@@ -44,16 +44,16 @@
              
                     	$(_settings.validationInputs, data.selector).each(function(index, element){
             				$(element).bind('keyup', function(e){
-                				_parentAsset.validate(element);
+                				_this.validate(element);
             				});
-            				_parentAsset.validate(element); // Not sure if we want to validate on page load or not yet.
+            				_this.validate(element); // Not sure if we want to validate on page load or not yet.
                     	});
                     	
                     	$('form', data.selector).bind('submit', function(e){
                     		var stop = false;
                     		var inputs = $(_settings.validationInputs, this);
                     		for(var i = 0; i < inputs.length; i++){
-                    			if(!_parentAsset.validate(inputs[i])){
+                    			if(!_this.validate(inputs[i])){
                     				stop = true;
                     			}
                     		}
@@ -81,13 +81,13 @@
             
             // Parse, then display any validating messages
             validate : function(element){
-            	var invalidTypes = _parentAsset.parseInvalid($(element).val(), $(element).attr('class').split(/\s+/));
+            	var invalidTypes = _this.parseInvalid($(element).val(), $(element).attr('class').split(/\s+/));
             	if(invalidTypes.length > 0){
-            		_parentAsset.displayInvalid(element, invalidTypes);
+            		_this.displayInvalid(element, invalidTypes);
             		return false;
             	}
             	
-            	_parentAsset.displayValid(element);
+            	_this.displayValid(element);
             	return true;
             },
             
@@ -115,7 +115,7 @@
             	$(element).addClass('validation-invalid');
             	
             	for(var i = 0; i < invalidTypes.length; i++){
-            		console.log(_parentAsset.getValidationMessage(element, invalidTypes[i]));
+            		console.log(_this.getValidationMessage(element, invalidTypes[i]));
             	}
             },
             displayValid : function(element){
@@ -125,7 +125,7 @@
             }
         };
 
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'validation', validation);

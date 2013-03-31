@@ -3,19 +3,19 @@
     var _util = window.LSP.utilities;
     
     var history = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         
-        _parentAsset =  {
+        _this =  {
         	name : 'history',
             events : {
                 application : {
                     onAttachEvents : function(e, data){
-                        $('#testOnly-previouslyViewedTest', data.selector).html(JSON.stringify(_parentAsset.getProductHistory()));
+                        $('#testOnly-previouslyViewedTest', data.selector).html(JSON.stringify(_this.getProductHistory()));
                     },
                     onReady : function(e, data){
                         $('*[data-pagetype="product"]:first').each(function(){
-                            _parentAsset.addProductToHistory(document.location.href, _parentAsset.readProductDataFromPage($(document.html)));
+                            _this.addProductToHistory(document.location.href, _this.readProductDataFromPage($(document.html)));
                         });   
                     }
                 }
@@ -31,7 +31,7 @@
             
             addProductToHistory : function(url, productData){
                 
-                var productHistory = _parentAsset.getProductHistory() || [];
+                var productHistory = _this.getProductHistory() || [];
                 
                 //If you refresh the page, don't make a new entry
                 if(((productHistory[productHistory.length - 1] || {}).product || {}).id == productData.id){
@@ -49,7 +49,7 @@
             }
         };
 
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'history', history);

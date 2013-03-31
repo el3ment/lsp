@@ -3,7 +3,7 @@
     var _util = window.LSP.utilities;
     
     var definitions = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         var _api = _lsp.models.lspapi;
         var _settings = {
@@ -12,7 +12,7 @@
         		parsedSelector : '.definitions-hasDefinition[data-definitions-definition]'
         };
         
-        _parentAsset =  {
+        _this =  {
         	name : 'definitions',
             events : {
                 application : {
@@ -24,15 +24,15 @@
                             // Add slug to all definitions that don't already have it
                             // we will attach the definition to them after they return
                             // from the server
-                            $(this).attr('data-definitions-slug',  _parentAsset.makeSlug($(this).html()));
+                            $(this).attr('data-definitions-slug',  _this.makeSlug($(this).html()));
                             
                             slugs.push($(this).data('definitions-slug'));
                         });
                         
                         // Request them, and set up the parser for when they return
-                        $.when(_parentAsset.getDefinitions(slugs)).done(function(response){
+                        $.when(_this.getDefinitions(slugs)).done(function(response){
                         	if(response.response.data){
-                        		_parentAsset.parseDefinitions(response.response.data, data.selector);
+                        		_this.parseDefinitions(response.response.data, data.selector);
                         	}
                         });
                     }
@@ -40,7 +40,7 @@
             },
             assets : {},
             getDefinitions : function(slugs){
-                 return _api.request(_parentAsset, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
+                 return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
             },
             parseDefinitions : function(definitions, selector){
             	$(_settings.definitionlessSelector, selector).each(function(index, element){
@@ -54,9 +54,9 @@
             				selector.attr('data-definitions-url', definitions[i].custrecordurl);
                             
             				selector.bind('mouseover', function(){
-                                _parentAsset.showDefinition(this); 
+                                _this.showDefinition(this); 
                             }).bind('mouseout', function(){
-                                 _parentAsset.hideDefinition(this);
+                                 _this.hideDefinition(this);
                             });
             			}
             		}
@@ -73,7 +73,7 @@
             }
         };
 
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'definitions', definitions);

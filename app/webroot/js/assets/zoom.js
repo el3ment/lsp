@@ -3,10 +3,10 @@
     var _util = window.LSP.utilities;
     
     var zoom = function(controllerName, assetName, config){
-        var _parentAsset = {};
+        var _this = {};
         var _lsp = window.LSP;
         
-        _parentAsset =  {
+        _this =  {
         	name : 'zoom',
             events : {
                 application : {
@@ -27,7 +27,7 @@
             assets : {}
         };
         
-        return _parentAsset;
+        return _this;
     };
     
     _util.register('asset', 'zoom', zoom);
