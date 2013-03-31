@@ -5,7 +5,6 @@
     var shipping = function(){
         var _this = {};
         var _app = window.LSP;
-        var _app = _app.controllers.app;
         var _api = _app.models.api;
         var _settings = {
         	bodyNoTrackingNumbersFoundClass : 'shipping-noTrackingNumbersFound',

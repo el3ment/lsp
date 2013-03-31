@@ -16,7 +16,8 @@
                     	// For Testing Only
                     	$.when(_this.getSpecifications('2217')).done(function(response){
                     		var tableHTML = _util.parseMicroTemplate('templates-specifications-table', _util.tablify(response.response.data));
-                    		$('#templates-specifications-table').replaceWith(tableHTML);
+                    		var specsTable = $('#templates-specifications-table').replaceWith(tableHTML);
+							_app.controllers.application.attachEvents(specsTable);
                     	});
                     	
                     	// For Testing Only

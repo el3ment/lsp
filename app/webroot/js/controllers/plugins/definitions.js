@@ -5,7 +5,7 @@
     var definitions = function(){
         var _this = {};
         var _lsp = window.LSP;
-        var _api = _lsp.models.lspapi;
+        var _api = _lsp.models.api;
         var _settings = {
         		sluglessSelector : '.definitions-hasDefinition:not([data-definitions-slug]):not([data-definitions-definition])',
         		definitionlessSelector : '.definitions-hasDefinition[data-definitions-slug]:not([data-definitions-definition])',

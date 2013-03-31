@@ -23,7 +23,7 @@
                 var eventData = {};
                 eventData.xhrData = {
                     type: 'GET',
-                    url: _parentModel.buildRequestURL(method),
+                    url: _this.buildRequestURL(method),
                     data: {
                         method : method,
                         deploy : 'customdeploy_api',

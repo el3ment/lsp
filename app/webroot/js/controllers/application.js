@@ -40,7 +40,7 @@
                         });
                     },
                     onReady : function(e, data){
-                        _app._appapplication.attachEvents($('html'));
+                        _this.attachEvents($('html'));
                         
                         
                         // Add pagetype to the body tag for CSS styling
@@ -53,7 +53,7 @@
             assets : {},
             
             // Fire all attach events event
-            _app : function(selector){
+            attachEvents : function(selector){
                 $(_this).triggerHandler('onAttachEvents', {selector : selector});
             },
            
