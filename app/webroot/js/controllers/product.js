@@ -12,21 +12,34 @@
             events : {
                 application : {
                     onReady : function(e, data){
+                    	
+                    	// For Testing Only
                     	$.when(_this.getSpecifications('2217')).done(function(response){
                     		var tableHTML = _util.parseMicroTemplate('templates-specifications-table', _util.tablify(response.response.data));
                     		$('#templates-specifications-table').replaceWith(tableHTML);
                     	});
+                    	
+                    	// For Testing Only
+                    	$.when(_this.getMatrixOptions(34103))
+                    	.done(function(response){
+                    		$('#testOnly-inventoryOptionsTest').html(JSON.stringify(response.response.data));
+                    	});
+                    	
                     },
                     onInit : function(e, data){}
                 }
             },
-            assets : {
-            	inventoryOptions : _assets.inventoryOptions(_this, 'inventoryOptions'),
-            	zoom : _assets.zoom(_this, 'zoom'),
-            	reviews : _assets.reviews(_this, 'reviews')
-            },
+            
+            assets : {},
+            
+            // Returns product specs
             getSpecifications : function(id){
             	 return _api.request(_this, 'getSpecifications', 'getSpecifications', {id : id});
+            },
+            
+            // Returns an object of options
+            getMatrixOptions : function(matrixParentId){
+            	return _api.request(_this, 'get', 'getMatrixOptions', {parentId : matrixParentId});
             }
         };
         

@@ -27,7 +27,7 @@
             		onRemoveWishlistItem : function(e, data){
             			_this.removeItemFromWishlist({
                     		itemId : data.selector.data('itemid'),
-                    		customerId : _lsp.controllers.application.getCurrentCustomerId(),
+                    		customerId : _lsp.controllers.account.getCurrentCustomerId(),
                     		options : data.selector.data('itemoptions')});
             		},
             		onAddItemToWishlist : function(e, data){
@@ -36,7 +36,7 @@
             			
                     	_this.addItemToWishlist({
                     		itemId : formValues.itemId,
-                    		customerId : _lsp.controllers.application.getCurrentCustomerId(),
+                    		customerId : _lsp.controllers.account.getCurrentCustomerId(),
                     		quantity : formValues.quantity,
                     		options : formValues.itemOptions,
                     		comments : formValues.wishlistItemComment});

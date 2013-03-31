@@ -12,30 +12,35 @@
     
     <script type='text/javascript' src='js/models/api.js'></script>
         
-    <script type='text/javascript' src='js/assets/badges.js'></script>
-    <script type='text/javascript' src='js/assets/zoom.js'></script>
-    <script type='text/javascript' src='js/assets/reviews.js'></script>
-    <script type='text/javascript' src='js/assets/trackOrder.js'></script>
-    <script type='text/javascript' src='js/assets/definitions.js'></script>
+        
     <script type='text/javascript' src='js/assets/history.js'></script>
-    <script type='text/javascript' src='js/assets/inventoryOptions.js'></script>
-    <script type='text/javascript' src='js/assets/validation.js'></script>
-    <script type='text/javascript' src='js/assets/reveal.js'></script>
     <script type='text/javascript' src='js/assets/listEncoder.js'></script>
+        
+        
+    <script type='text/javascript' src='js/controllers/plugins/badges.js'></script>
+    <script type='text/javascript' src='js/controllers/plugins/compare.js'></script>
+    <script type='text/javascript' src='js/controllers/plugins/definitions.js'></script>
+    <script type='text/javascript' src='js/controllers/plugins/reveal.js'></script>
+    <script type='text/javascript' src='js/controllers/plugins/validation.js'></script>
+    <script type='text/javascript' src='js/controllers/plugins/zoom.js'></script>
     
+    
+    <script type='text/javascript' src='js/controllers/reviews.js'></script>
+    <script type='text/javascript' src='js/controllers/shipping.js'></script>
     <script type='text/javascript' src='js/controllers/account.js'></script>
     <script type='text/javascript' src='js/controllers/product.js'></script>
-    <script type='text/javascript' src='js/controllers/compare.js'></script>
     <script type='text/javascript' src='js/controllers/cart.js'></script>
     <script type='text/javascript' src='js/controllers/list.js'></script>
     <script type='text/javascript' src='js/controllers/application.js'></script>
+    
+    
     
     <link rel='stylesheet' type='text/css' href='js/vendors/jqzoom/jqzoom.css'> 
     <link rel='stylesheet' type='text/css' href='js/styles/application.css'>
     <link rel='stylesheet' type='text/css' href='js/styles/badges.css'> 
     <link rel='stylesheet' type='text/css' href='js/styles/reviews.css'> 
     <link rel='stylesheet' type='text/css' href='js/styles/definitions.css'>
-    <link rel='stylesheet' type='text/css' href='js/styles/trackOrder.css'>
+    <link rel='stylesheet' type='text/css' href='js/styles/shipping.css'>
     <link rel='stylesheet' type='text/css' href='js/styles/validation.css'>
     <link rel='stylesheet' type='text/css' href='js/styles/reveal.css'>
     <link rel='stylesheet' type='text/css' href='js/styles/compare.css'>
@@ -137,7 +142,6 @@
     <h1>Reveal</h1>
     <!-- Add childIds seperated by spaces, and the reveal widget will handle toggling the css classes -->
     <div data-reveal-children='productSpecs'>
-    	<img src='plussign.jpg' />
     	Product Specs
     	
         <div id='productSpecs'>Specs!!</div>
@@ -195,7 +199,7 @@
     </ul>
     
     <h1>Badges</h1>
-    <div class='badges-productImage' data-badge=''>
+    <div class='badges-productImage' data-badge='new'>
         <!-- A new element will be added here with class 'badge' and 'badge-badgeNameHere' -->
         <img src='https://images.google.com/intl/en_ALL/images/logos/images_logo_lg.gif'>
     </div>
@@ -289,12 +293,12 @@
         <custrecordreviewerprofile>
     as data-->
     <h1>Track Order</h1>
-    <div class='trackOrder-showWhenDownloadWaiting'>Loading!</div>
-    <div class='trackOrder-showWhenDownloadSuccess'>Success Message</div>
-    <div class='trackOrder-showWhenDownloadFailure'>Failure Message</div>
-    <div class='trackOrder-showWhenNoTrackingNumbersFound'>No dice my friend, we couldn't find a tracking number</div>
+    <div class='shipping-showWhenDownloadWaiting'>Loading!</div>
+    <div class='shipping-showWhenDownloadSuccess'>Success Message</div>
+    <div class='shipping-showWhenDownloadFailure'>Failure Message</div>
+    <div class='shipping-showWhenNoTrackingNumbersFound'>No dice my friend, we couldn't find a tracking number</div>
     <div class='testOnly-trackingNumbers'></div>
-    <form id='trackOrder-inputForm'>
+    <form id='shipping-inputForm'>
         Sales # / Tracking Number : <input type='text' name='search' value='93614'>
         Email Address : <input type='text' name='emailAddress' class='validation-emailAddress' value=''>
         <input type='submit' name='submit'>

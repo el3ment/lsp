@@ -49,16 +49,10 @@
                     onInit : function(e, data){}
                 }
             },
-            assets : {
-            	definitions : _assets.definitions(_this, 'definitions'),
-            	history : _assets.history(_this, 'history'),
-            	badges : _assets.badges(_this, 'badges'),
-            	validation : _assets.validation(_this, 'validation'),
-            	reveal : _assets.reveal(_this, 'reveal')
-            },
-            getCurrentCustomerId : function(){
-            	return 8989;
-            },
+            
+            assets : {},
+            
+           
             init : function(){
                 
                 console.log('Application Init');

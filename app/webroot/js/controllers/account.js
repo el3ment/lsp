@@ -8,15 +8,19 @@
         var _assets = _lsp.assets;
         
         _this =  {
+        	
             events : {
                 application : {
                     onReady : function(e, data){},
                     onInit : function(e, data){}
                 }
             },
-            assets : {
-            	trackOrder : _assets.trackOrder(_this, 'trackOrder')
-            }
+            
+            assets : {},
+            
+            getCurrentCustomerId : function(){
+            	return 8989;
+            },
         };
         
         return _this;

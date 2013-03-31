@@ -2,7 +2,7 @@
     
     var _util = window.LSP.utilities;
     
-    var reviews = function(controllerName, assetName, config){
+    var reviews = function(){
         var _this = {};
         var _lsp = window.LSP;
         var _api = _lsp.models.lspapi;
@@ -83,6 +83,6 @@
         return _this;
     };
     
-    _util.register('asset', 'reviews', reviews);
+    _util.register('controller', 'reviews', reviews);
     
 })();

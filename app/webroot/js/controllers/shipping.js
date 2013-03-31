@@ -2,21 +2,21 @@
     
     var _util = window.LSP.utilities;
     
-    var trackOrder = function(controllerName, assetName, config){
+    var shipping = function(){
         var _this = {};
         var _lsp = window.LSP;
         var _api = _lsp.models.lspapi;
         var _settings = {
-        	bodyNoTrackingNumbersFoundClass : 'trackOrder-noTrackingNumbersFound',
+        	bodyNoTrackingNumbersFoundClass : 'shipping-noTrackingNumbersFound',
         	trackingNumberSelector : '.testOnly-trackingNumbers'
         };
         
         _this = {
-        	name : 'trackOrder',
+        	name : 'shipping',
             events : {
                 application : {
                     onAttachEvents : function(e, data){
-                        $('form#trackOrder-inputForm').bind('submit', function(e){
+                        $('form#shipping-inputForm').bind('submit', function(e){
                             e.preventDefault();
                             return false;
                         }).bind('afterValidation', function(e){
@@ -75,8 +75,8 @@
         };
 
         return _this;
-    };
+    }();
     
-    _util.register('asset', 'trackOrder', trackOrder);
+    _util.register('controller', 'shipping', shipping);
     
 })();
