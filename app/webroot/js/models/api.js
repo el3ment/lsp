@@ -4,7 +4,7 @@
     
     var api = function(){
         var _this = {};
-        var _lsp = window.LSP;
+        var _app = window.LSP;
         
         _this =  {
             events : {},
@@ -75,7 +75,7 @@
                 	
                     // Fire onAfterMethodSuccess event
                     // Fire mb.controllers.application's onAfterAPICallSuccess
-                    $(_lsp.controllers.application).triggerHandler('onAfterAPICallSuccess', responseData);
+                    $(_app.controllers.application).triggerHandler('onAfterAPICallSuccess', responseData);
                     $(controller).triggerHandler(_util.camelCase('on-after-API-'+eventName+'-success'), responseData);
                     $('body').addClass(controller.name + '-downloadSuccess');
                     
@@ -83,13 +83,13 @@
                 	
                     // Fire onAfterMethodFailure event
                     // Fire mb.controllers.application's onAfterAPICallFailure
-                    $(_lsp.controllers.application).triggerHandler('onAfterAPICallFailure', responseData);
+                    $(_app.controllers.application).triggerHandler('onAfterAPICallFailure', responseData);
                     $(controller).triggerHandler(_util.camelCase('on-after-API-'+eventName+'-failure'), responseData);
                     $('body').addClass(controller.name + '-downloadFailure');
                     
                 }).always(function(responseData){
                 	
-                    $(_lsp.controllers.application).triggerHandler('onAfterAPICall', responseData);
+                    $(_app.controllers.application).triggerHandler('onAfterAPICall', responseData);
                     $(controller).triggerHandler(_util.camelCase('on-after-API-'+eventName), responseData);
                     $('body').removeClass(controller.name + '-downloadWaiting');
                     

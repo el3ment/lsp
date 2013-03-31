@@ -4,7 +4,7 @@
     
     var history = function(controllerName, assetName, config){
         var _this = {};
-        var _lsp = window.LSP;
+        var _app = window.LSP;
         
         _this =  {
         	name : 'history',

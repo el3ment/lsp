@@ -5,7 +5,7 @@
     window.LSP.utilities = function(){
         
         var _util = {};
-        var _lsp = window.LSP;
+        var _app = window.LSP;
 
         _util = {
             

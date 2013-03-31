@@ -4,10 +4,10 @@
     
     var list = function(){
         var _this = {};
-        var _lsp = window.LSP;
-        var _assets = _lsp.assets;
-        var _api = _lsp.models.api;
-        var _util = _lsp.utilities;
+        var _app = window.LSP;
+        var _assets = _app.assets;
+        var _api = _app.models.api;
+        var _util = _app.utilities;
         var _settings = {
         	wishlistSearchParentId : 'list-wishlist-searchParent',
         	wishlistSearchListElementId : 'templates-wishlist-searchItem',
@@ -27,7 +27,7 @@
             		onRemoveWishlistItem : function(e, data){
             			_this.removeItemFromWishlist({
                     		itemId : data.selector.data('itemid'),
-                    		customerId : _lsp.controllers.account.getCurrentCustomerId(),
+                    		customerId : _app.controllers.account.getCurrentCustomerId(),
                     		options : data.selector.data('itemoptions')});
             		},
             		onAddItemToWishlist : function(e, data){
@@ -36,7 +36,7 @@
             			
                     	_this.addItemToWishlist({
                     		itemId : formValues.itemId,
-                    		customerId : _lsp.controllers.account.getCurrentCustomerId(),
+                    		customerId : _app.controllers.account.getCurrentCustomerId(),
                     		quantity : formValues.quantity,
                     		options : formValues.itemOptions,
                     		comments : formValues.wishlistItemComment});
@@ -106,7 +106,7 @@
             		html += _util.parseMicroTemplate(listElementId, items[i]);
             	}
             	
-            	_lsp.controllers.application.attachEvents($('#'+parentElementId).html(html));
+            	_app.controllers.application.attachEvents($('#'+parentElementId).html(html));
             },
             
             getItems : function(ids){

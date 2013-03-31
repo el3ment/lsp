@@ -4,8 +4,8 @@
     
     var listEncoder = function(controllerName, assetName, config){
         var _this = {};
-        var _lsp = window.LSP;
-        var _util = _lsp.utilities;
+        var _app = window.LSP;
+        var _util = _app.utilities;
         var _settings = {
             	itemSeperator : '/',
             	propertySeperator : '-'

@@ -4,8 +4,8 @@
     
     var application = function(){
         var _this = {};
-        var _lsp = window.LSP;
-        var _assets = _lsp.assets;
+        var _app = window.LSP;
+        var _assets = _app.assets;
         
         _this =  {
             events : {
@@ -26,13 +26,13 @@
                                     
                                     //console.log('Click registered');
                                     
-                                    $(_lsp.controllers[controller]).
+                                    $(_app.controllers[controller]).
                                         triggerHandler(_util.camelCase('on-'+action), 
                                             {selector : button});
                                 });
                             }else if(controller && action && asset){
                                 button.bind('click', function(e){  
-                                    $(_lsp.controllers[controller].assets[asset]).
+                                    $(_app.controllers[controller].assets[asset]).
                                         triggerHandler(_util.camelCase('on-'+action), 
                                             {selector : button});
                                 });
@@ -40,7 +40,7 @@
                         });
                     },
                     onReady : function(e, data){
-                        _lsp.controllers.application.attachEvents($('html'));
+                        _app._appapplication.attachEvents($('html'));
                         
                         
                         // Add pagetype to the body tag for CSS styling
@@ -53,7 +53,7 @@
             assets : {},
             
             // Fire all attach events event
-            attachEvents : function(selector){
+            _app : function(selector){
                 $(_this).triggerHandler('onAttachEvents', {selector : selector});
             },
            
@@ -63,16 +63,16 @@
                 
                 var controller, subController, event, asset, controllerObj, subControllerObj;
                 
-                for (controller in _lsp.controllers) {
+                for (controller in _app.controllers) {
                     
-                    controllerObj = _lsp.controllers[controller]; // Convience
+                    controllerObj = _app.controllers[controller]; // Convience
                     
                     // Bind Events
                     // This binds all of the callbacks (eg. controller.events.onAfterLoginSuccess)
                     // to the event controller.onAfterLoginSuccess which is called by the API model object
                     for(subController in controllerObj.events){
                         
-                        subControllerObj = _lsp.controllers[subController]; // Convience
+                        subControllerObj = _app.controllers[subController]; // Convience
                         
                             for(event in controllerObj.events[subController]){
                                 if(event === 'assets'){
@@ -94,7 +94,7 @@
                     for(asset in controllerObj.assets){
                         for(subController in controllerObj.assets[asset].events){
                             
-                            subControllerObj = _lsp.controllers[subController]; // Convience
+                            subControllerObj = _app.controllers[subController]; // Convience
                             
                             for(event in controllerObj.assets[asset].events[subController]){
                                 if(subController === 'self'){

@@ -4,8 +4,8 @@
     
     var account = function(){
         var _this = {};
-        var _lsp = window.LSP;
-        var _assets = _lsp.assets;
+        var _app = window.LSP;
+        var _assets = _app.assets;
         
         _this =  {
         	

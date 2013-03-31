@@ -4,9 +4,9 @@
     
     var product = function(){
         var _this = {};
-        var _lsp = window.LSP;
-        var _assets = _lsp.assets;
-        var _api = _lsp.models.api;
+        var _app = window.LSP;
+        var _assets = _app.assets;
+        var _api = _app.models.api;
         
         _this =  {
             events : {
