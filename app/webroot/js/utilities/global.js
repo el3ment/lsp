@@ -9,11 +9,6 @@
 
         _util = {
             
-            // Fire all attach events event
-            attachEvents : function(selector){
-                $(_lsp.controllers.application).triggerHandler('onAttachEvents', {selector : selector});
-            },
-            
             // Pulled from jQuery as it's not in the public API
             // identical to jQuery.camelCase();
             camelCase : function(string){

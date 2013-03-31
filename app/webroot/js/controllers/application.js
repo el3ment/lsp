@@ -40,7 +40,7 @@
                         });
                     },
                     onReady : function(e, data){
-                        _util.attachEvents($('html'));
+                        _lsp.controllers.application.attachEvents($('html'));
                         
                         
                         // Add pagetype to the body tag for CSS styling
@@ -52,6 +52,10 @@
             
             assets : {},
             
+            // Fire all attach events event
+            attachEvents : function(selector){
+                $(_this).triggerHandler('onAttachEvents', {selector : selector});
+            },
            
             init : function(){
                 
