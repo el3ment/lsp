@@ -9,7 +9,7 @@
 		echo $this->Html->meta('icon');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
-        echo $this->Html->css(array('reset', 'layout', 'form', 'icons', 'images'));
+        echo $this->Html->css(array('complete'));
 	?>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css' />
 

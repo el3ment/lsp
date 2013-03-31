@@ -1,0 +1,361 @@
+/* Checkout */
+.page-checkout{
+    .steps{
+        
+        /* The fancy timeline at the top of the cart 
+         * The original plan was to build this entirely in CSS
+         * */
+        
+        float: left;
+        clear: both;
+        margin: px(50px) 0;
+        width: 100%;
+        left: px(-$spaceBetweenSteps / 5);
+        position: relative;
+        
+        ul{
+            margin-left: 50%;
+            left: px(-(($spaceBetweenSteps * $numberOfSteps) / 2));
+            position: relative;
+            width: px($spaceBetweenSteps * $numberOfSteps);
+            
+            /* Circles */
+            li{
+                width: px($spaceBetweenSteps);
+                vertical-align: bottom;
+                display: block;
+                float: left;
+                position: relative;
+                text-align: center;
+            }
+            
+            /* Step Indicator (Background Circle) */
+            li:before, li.completed:after{
+                content: ' ';
+                display: block;
+                overflow: hidden;
+                width: px($mediumCircleDiameter);
+                height: px($mediumCircleDiameter);
+                @include border-radius(px($mediumCircleDiameter));
+                position: absolute;
+                top: px(-$mediumCircleDiameter - $smallCircleDiameter);
+                left: px(-$smallCircleDiameter);
+                margin-left: 50%;
+                background-color: $superLightGrey;
+                z-index: 1;
+            }
+            
+            /* Indicator for Completed Steps (Small Black Inner circle) */
+            li.completed:after, ul:after{
+                background-color: $black;
+                width: px($smallCircleDiameter);
+                height: px($smallCircleDiameter);
+                @include border-radius(px($smallCircleDiameter));
+                top: px(-($mediumCircleDiameter - $smallCircleDiameter/2px) - $smallCircleDiameter);
+                left: px($smallCircleDiameter/2 - $mediumCircleDiameter/2);
+                z-index: 2;
+            }
+            
+            /* Indicator for Active Step (Big Black Dot) */
+            li.active:before{
+                background-color: $black;
+                width: px($largeCircleDiameter);
+                height: px($largeCircleDiameter);
+                @include border-radius(px($largeCircleDiameter));
+                top: px(-($largeCircleDiameter/2 + $mediumCircleDiameter/2) - $smallCircleDiameter);
+                left: px(-($largeCircleDiameter/2));
+                z-index: 2;
+                /*background-image: url();*/
+            }
+            
+            li.active:after, li.start:after{
+                content: ' ';
+                position: absolute;
+                top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter);
+                background-color: $black;
+                height: px($smallCircleDiameter/4);
+                display: block;
+                width: 0;
+                @include border-radius(0);
+                margin-left: 0;
+            }
+            
+            /* Use the review to draw the grey progress bar */
+            li.start:after{
+                background-color:$superLightGrey;
+                z-index:1;
+                width: px($spaceBetweenSteps * ($numberOfSteps - 1));
+                left: px($spaceBetweenSteps / 2);
+            }
+            
+            /* Active Icons */
+            li.active.start:before{ background-position: 0 0; }
+            li.active.shipping:before{ background-position: 0 0; }
+            li.active.payment:before{ background-position: 0 0; }
+            li.active.review:before{ background-position: 0 0; }
+
+            /* Progress Bar */
+            li.active.start:after{ width: 0; }
+            li.active.shipping:after{
+                width: px($spaceBetweenSteps);
+                left: px(-$spaceBetweenSteps + ($spaceBetweenSteps / 2));
+            }
+            li.active.payment:after{ 
+                width: px($spaceBetweenSteps * 2);
+                left: px(-$spaceBetweenSteps * 2 + ($spaceBetweenSteps / 2)); 
+            }
+        }
+    }
+    
+    /* The checkout process is divided into three "pages", the bulk of the content happening on the second "page"
+     * Page 1 - Login... contains two panels with guest checkout or login credentials
+     * Page 2 - Process... contains the giant form, order summary, etc for checkout
+     *          It's important to realize that the cart summary, and process container are siblings in the HTML right now
+     * Page 3 - Complete... contains the copy of the cart, a friendly graphic, etc
+     */
+    
+    .login{  /* Page 1 */
+        
+        margin: auto;
+        width: px((2 * $summaryWidth) + (16 * $paddingUnit));
+        
+        .panel{
+            
+            float: left;
+            width: px($summaryWidth);
+            height: px($summaryWidth / 2);
+            
+            &.guest{
+                
+                text-align: center;
+                
+                h2{ text-align: left; }
+            }
+            &.returning{
+                margin-left: px(4 * $paddingUnit); 
+                fieldset{
+                    
+                    width: px($emailInputLength + 4 * $paddingUnit);
+                    display: block;
+                    margin: px(2 * $paddingUnit) auto;
+                    
+                    .field{ margin-bottom: px($paddingUnit); }
+                    label{ display: none; }
+                    
+                    input{
+                        width: px($emailInputLength - (4 * $paddingUnit));
+                    }
+                    .b1{
+                        float: right;
+                    }
+                }
+            }
+        }
+    }
+    
+    .process{ /* Page 2 */
+        
+        @include border-radius($borderRadius);
+        width: px($pageWidth - $summaryWidth - (4 * $paddingUnit));
+        float: left;
+        
+        > .b1{ float: right; } /* Main Continue Button */
+        .notice{ float: left; }
+        
+        .panel{
+            width: px(520px);
+        }
+        
+        fieldset{
+            border-bottom: 1px solid $lightGrey; 
+            margin-bottom: px(15px);
+            padding-bottom: px(10px);
+        }
+        fieldset:last-child{
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .shipping {
+            .shippingMethod{
+                label{ }
+                .details{ }
+                .cost{ font-weight: bold; }
+            }
+        }
+        .billing{
+            .payment ul{
+                background-color: $superLightGrey;
+                float: left;
+                width: px(495px);
+            }
+        }
+        .disengaged{
+            
+            float: left;
+            
+            label{ color: $grey; }
+            
+            h2{
+                padding-left: 1.2em;
+                position: relative;
+            }
+            h2:before{
+                content: ' ';
+                display: block;
+                overflow: hidden;
+                position: absolute;
+                top: 50%;
+                margin-top: -.5em;
+                left: 0;
+                width: 1em;
+                height: 1em;
+                background-color: red;
+            }
+            
+            li{
+                float: left;
+                margin-bottom: px(20px);
+                width: px(250px);
+            }
+            
+            .value{
+                
+                font-weight: bold;
+                
+                .details{
+                    font-weight: normal;
+                    display: block;
+                    float: left;
+                    clear: both;
+                }
+            }
+            
+            .value.city, .value.state, .value.creditCardExpirationMonth{ 
+                margin-right: px(5px);
+                float: left;
+            }
+            .value.state:after{ content: ','; }
+            .value.phone{ margin-top: px(20px); }
+            .b5{ /* Edit link */
+                position: absolute;
+                top: px(10px);
+                right: px(10px);
+            }
+        }   
+        #checkout-insertPromoCode, #checkout-insertGiftCard{ 
+            
+            clear: both;
+            width: px(300px);
+            margin: px(10px) px(20px);
+           
+           label{ display: none; }
+            input{ float: left; width: px(150px); }
+            a{ 
+                clear: both;
+                display: inline-block;
+            }
+        }
+    }
+    
+    
+    .summary{ /* The cart summary */
+        
+        border: 0;
+        width: px(380px);
+        margin-left: px(20px);
+        float: left;
+        
+        .cart{
+            /* width: 100%; */
+            padding: 0;
+            
+        }
+        
+        thead{
+            td{ padding: px(10px) 0 0 px(10px); }
+        }
+        
+        tbody{
+            
+            td{ 
+                padding: px(10px);
+                border-bottom: 1px solid $lightGrey;
+                vertical-align: top;
+            }
+            
+            tr:first-child td{ padding-top: 0px; }
+          
+            .productAvailability{ 
+                margin-left: px(20px);
+                float: left;
+            }
+            
+            .quantity{ 
+                
+                float: left;
+                
+                .productQuantity{
+                    font-weight: bold;
+                }
+            }
+            
+            .properties{ float: left; }
+            
+            .quantity{
+                .scroller{ display: block; }
+            }
+            
+            .productAvailability, .quantity{ margin-top: px(5px); } /* space between detail groups */
+            
+            .extendedPrice{
+                
+                text-align: right;
+                
+                .productExtendedPrice{
+                    font-weight: bold;    
+                }
+            }
+        }
+        tfoot{
+            
+            td{
+                padding: px(10px) px(10px) 0 px(10px);
+                text-align: right;
+            }
+            
+            .taxTotal td, .orderTotal td{
+                padding-bottom: px(10px);
+            }
+            
+            label{ color: $grey; }
+            
+            .value{ font-weight: bold;}
+            
+            .merchandiseTotal{
+                label{}
+                .value{}
+            }
+            
+            .shippingTotal{
+                label{ }
+                .value{  }
+            }
+            
+            .taxTotal{
+                label{}
+                .value{}
+            }
+            
+            .orderTotal{
+                
+                background-color: $superLightGrey;
+                
+                td{ padding-top: px(10px); }
+                .value{}
+            }
+        }
+    }
+}
+

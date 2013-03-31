@@ -1,0 +1,375 @@
+/* Search Results */
+.page-search{
+    
+    .head, .searchResults{
+        strong{ color: $black; }
+    }
+    
+    
+    .refinements{
+      
+        /* Left hand refinements panels */
+        
+        float: left;
+        
+        .panel{
+            float: left;
+            display: block;
+            clear: both;
+            width: px(columns(3) - $gutterWidth);
+        }
+        .section{
+            
+            margin-top: px($gutterWidth);
+            margin-bottom: px($paddingUnit);
+            border-top: 1px solid $lightGrey;
+            float: left;
+            width: 100%; 
+            position: relative;
+            
+            h4{ 
+                float: left;
+                position:absolute;
+                top: px(-11px);
+                left: 0;
+                background-color: $superLightGrey;
+                padding-right: px(6px);
+                
+            }
+            button[data-action='hideRefinements']{
+                position:absolute;
+                top: px(-11px);
+                right: 0;
+                float: right;
+                width: px(20px);
+                height: px(20px);
+                padding: 0;
+                text-indent: -$hideDistance;
+                overflow: hidden;
+
+                &:before{
+                    content: ' ';
+                    height: px(25px);
+                    width: px($paddingUnit);
+                    background-color: $superLightGrey;
+                    position: absolute;
+                    top:0;
+                }
+                &:before{
+                    left:px(-($paddingUnit + 2));
+                }
+            }
+            ul{ 
+                
+                display: block;
+                border-top: 1px solid white;
+                padding-top: px($paddingUnit);
+                width: 100%;
+                
+                .field{ 
+                    clear: both;
+                    margin-left: px($paddingUnit);
+                    width: 100%;
+                    
+                    label{ 
+                        width: px(170px); 
+                        &:hover{
+                            pointer: hand;
+                        }
+                    }
+                    &:first-child{
+                        margin-top: px($paddingUnit);
+                    }
+                }
+            }
+            .loadMore{
+                clear: both;
+                float: left;
+                position: relative;
+                left: px(25px);
+                top: px(-5px);
+            }
+        }
+        .selectedFilters{
+            
+            @include clearfix;
+            
+            li{ clear: both; }
+            
+            button[data-action='removeFilter']{ 
+                float: left;
+                margin: px(2px) 0 px(5px);
+                overflow: hidden;
+                text-decoration: none;
+                color: $black;
+                &:hover{
+                    text-decoration: underline;
+                }
+                &:after{
+                    left:0; /* Icon */
+                }
+            }
+            
+            button[data-action='clearAllRefinements']{
+                float: right;
+                margin-top: px(5px);
+                margin-bottom: px(5px);
+            }
+            
+            .section{
+                margin-top: px($paddingUnit);
+                border-top: none;
+            }
+        }
+    }
+    
+    .results{
+        
+        clear: none;
+        float: left;
+        margin-left: $gutterWidth;
+        width: px(columns(9)-$paddingUnit);
+        
+        .tabs{
+            margin-top: -1em;
+            margin-right: px($paddingUnit);
+            
+            li{
+                float: right;
+                position:relative;
+            }
+            .b1, .b2, .b3, .b4, .b5, a{
+                
+                border: 1px solid $lightGrey;
+                @include border-radius(px($borderRadius) px($borderRadius) 0 0);
+                background-color: $white;
+                padding: px(2*$paddingUnit) px(4 * $paddingUnit) px(2*$paddingUnit) px(40px);
+                text-decoration: none;
+                
+                &:after{
+                    left: px(10px);
+                }
+                
+            }
+            button[data-action="showCompact"]{
+                margin-left: -1px;
+            }
+        }
+        
+        .controls{
+            
+            border: 1px solid $lightGrey;
+            background-color: $superLightGrey;
+            border-width: 1px 0;
+            float: left;
+            width: 100%;
+            padding: px(2 * $paddingUnit) 0;
+            
+            
+            li{
+                float: right;
+                margin-right: px($gutterWidth);
+                
+                &:first-child{
+                    float: left;
+                }
+                &.pagination{
+                    margin-right: px($paddingUnit);
+                }
+                
+            }
+            label{
+                float: left;
+                clear: none;
+                margin-top: .5em;
+                margin-right: px($paddingUnit);
+            }
+            select{
+                float: left;
+                clear: none;
+                font-weight: normal;
+                font-size: px(13px, $inputFontSize);
+                margin-top: px(1px);
+                height: px(35px);
+                
+            }
+            button[data-action='previousPage'], button[data-action='nextPage']{
+                
+                @include border-radius(px(32px));
+                
+                margin-top: px(2px);   
+                height: px(32px);
+                width: px(32px);
+                text-indent: px(-$hideDistance);
+                overflow: hidden;
+                padding:0;
+                
+            }
+            .pageCount{
+                font-style: italic;
+                color: $grey;
+            }
+            button[data-action='compare']{
+                margin-top: px(-1px);
+                .count{
+                    font-weight: normal;
+                }
+            }
+        }
+        .foot .controls{
+            margin-top: -1px;
+        }
+        
+        .searchResults{
+            
+            .entry{
+                position: relative;
+                
+                display: block;
+                padding-top: px($gutterWidth);
+                padding-bottom: px($gutterWidth);
+                border-bottom: 1px solid $lightGrey;
+                float:left;
+            }
+            .productPrice{ font-size: px(19px); }
+            .productName{ 
+                font-size: px(15px);
+            }
+        }
+    }
+
+    .listView{
+        
+        .listScope{
+            clear: both;
+            display: block;
+            float: left;
+        }
+        
+        .entry{
+            padding-left: px(columns(2));
+            float: left; 
+            &:last-child{
+                border-bottom: none;   
+            }
+        }
+        .model{
+            display:block;
+            margin-bottom: px($paddingUnit * 2);
+        }
+        .aggregateReviews{
+            margin-bottom: px($paddingUnit * 2);
+        }
+        img{ 
+            float: left;
+            margin-right: px($paddingUnit);
+            position: absolute;
+            top: 1px;
+            left: 0;
+            width: px(140px);
+            height: px(140px);
+        }
+        .compare{
+            position: absolute;
+            top: px(150px);
+            left: px(10px);
+        }
+        .addToCart{
+            
+            float: right;
+            width: inherit;
+            width: px(columns(3));
+            margin-left: px($paddingUnit);
+            margin-bottom: 0;
+            
+            .status{ display: inline; }
+            .method{ display: block; }
+            .option, .quantity, .action{ text-align:right; }
+        }
+    }
+    .gridView{
+        
+        $_topOfPrice : 360px;
+        
+        .listScope{
+            clear: both;
+            display: block;
+            float: left;
+        }
+        
+        .entry{
+            clear:none;
+            padding: 0 px(7px);
+            width: px(columns(3) - 5);
+            height: px(500px);
+            border: 1px solid $lightGrey;
+            border-top: none;
+            border-left: none;
+            margin-bottom: 0;
+            left: -1px;
+            
+            &:nth-child(3n - 2){
+                border-left-color: transparent;
+            }
+            &:nth-child(3n + 3){
+                border-right-color: transparent;
+            }
+        }
+        .compare{
+            float: none;
+        }
+        .aggregateReviews{
+            position: absolute;
+            top: px($_topOfPrice + 50px);
+            left: $paddingUnit;
+        }
+        .productName{
+            height: 6em;
+            text-overflow: ellipsis;
+        }
+        .model, .features{
+            display: none;
+        }
+        .addToCart{
+            
+            position: absolute; 
+            top: 0;
+            left: -$hideDistance;
+            margin:0;
+            
+            .productPrice{
+                font-size: px(17px);
+                position: absolute;
+                top: px($_topOfPrice, 17px);
+                left: $hideDistance + $paddingUnit + 2px;
+            }
+            .shortStatus{
+                display: block;
+                font-size: px(13px);
+                position: absolute;
+                top: px($_topOfPrice + 18px);
+                left: ($hideDistance + $paddingUnit + 2);
+                width: px(columns(3));
+                color: $grey;
+            }
+            .scroller{
+                position: absolute;
+                top: px($_topOfPrice + 90px, $inputFontSize);
+                left: px($hideDistance + $paddingUnit + 17px, $inputFontSize);
+            }
+            .b1{
+                position: absolute;
+                top: px($_topOfPrice + 90px, $boldAllCapsH4);
+                left: px($hideDistance + $paddingUnit + 50px + 17px, $b1FontSize);
+                width: px(125px, $b1FontSize);
+            }
+        }
+        
+    }
+    
+    .gridView .tabs button[data-action="showCompact"],
+    .listView .tabs button[data-action="showDetails"]{
+            border-bottom: 1px solid $superLightGrey;
+            background-color: $superLightGrey;
+    }
+}

@@ -1,0 +1,174 @@
+/* Footer */
+.footer{
+    
+    $_bottomPadding : 20px;
+    
+    width: px($pageWidth);
+    margin: auto;
+    color: #5b4e44; /* Light brown */
+    
+    
+    .banner{
+       
+        /* The banner contains the picture and testimonial quote, as well as the mcafee and credit card security icons */
+       
+        background-color: #f5f4f0;
+        position: relative;
+        padding: px($_bottomPadding) 0;
+        float:left;
+        width: 100%;
+        /* overflow: hidden; /* Stylistic decision */
+        margin-top: px(30px); /* 20px + 10 for the top of the profile image */
+        
+        .profile{
+            position: absolute;
+            height: px(135px);
+            width: px(140px);
+            top: px(-20px); 
+            img{ @include border-radius(px(150px)); }
+        }
+        .content{
+            font-size: px(16px);
+            font-style: italic;
+            color: $darkGrey;
+            margin-left: px(160px, 16px);
+            float: left;
+            width: px(460px, 16px);
+            line-height: 1.4em;
+            
+            strong{
+                color: black;
+            }
+        }
+        .security{
+            
+            margin: px(20px) px(20px) 0 0;
+            float:right;
+            
+            li{
+                float: right;
+                margin-left: px(10px);
+            }
+        }
+    }
+    
+    .well{
+       
+        /* The space below the banner */
+       
+        width: 100%;
+        float: left;
+        background-color: #1d1712;
+        padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
+        clear: both;
+        
+        h2, strong, em{
+            color: white;
+        }
+        h3{ /* h3 tags title each column of links */
+            font-weight: normal;
+            color: white;
+            margin-top: px(5px);
+            
+            strong{ font-weight: bold; }
+        }
+        a{
+            
+            text-decoration: none;
+            
+            &:hover{
+                color: $yellow;
+            }
+        }
+        
+        .static{
+           
+            /* The static block contains the newsletter sign up and company hours */
+           
+            float: right;
+            width: columns(4);
+            .newsletter{
+                .email{
+                    
+                    position: relative;
+                    
+                    h3{ margin: 0 0 px(20px); }
+                    
+                    input{
+                        font-size: px($largeInputFontSize);
+                        padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+                        width: px(280px, $largeInputFontSize);
+                    }
+                    
+                    .b1{
+                        position: absolute;
+                        right: px(-3px);
+                        top: px(2px);
+                    }
+                }
+            }
+            .contact{
+                background-color: #1f150d;
+                @include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
+                margin-top: px(20px);
+                padding: px(10px);
+                @include border-radius($borderRadius);
+                
+                em{
+                    font-style: normal;
+                }
+                
+                > li{
+                    margin: px(10px);
+                }
+                .hours {
+                    text-transform: uppercase;
+                }
+                *[class*="icon-"]:after{ /* Icons */
+                    top:0;
+                    margin-top:0;
+                }
+            }
+        }
+        
+        .sitemap-lists{
+           
+            /* The list of links titled by a header tag */
+           
+            li{
+                
+                width: columns(2);
+                margin-right: $gutterWidth;
+                float: left;
+                
+                ul{
+                    li{
+                    }
+                }
+            }
+        }
+        
+        .logo{
+          
+            clear: both;
+            margin: auto;
+            text-align:center; /* It's just an img */
+            margin-top: px(40px);
+            float:left;
+            width: 100%;
+            *[class*='image']{
+                margin: auto;   
+            }
+        }
+        
+        .copyright{
+          
+            margin: px(20px) 0;
+            clear: both;
+            text-align: center;
+            float: left;
+            width: 100%;
+        }
+    }
+    
+}

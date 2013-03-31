@@ -1,0 +1,236 @@
+/* Header */
+.header {
+    
+    /* Layout */
+    width: px($pageWidth);
+    margin:0 auto px(20px);
+    @include clearfix;
+    
+    background-color: #33281E;
+    
+    .logo{
+        float: left; 
+    }
+    
+    .b3{ 
+        /* Other darker buttons like Wish List and Your Cart */
+        /* These are the color-specific declarations, the main styling is in form.scss under highlight-icon property */
+        
+        text-shadow: -1px -1px #000000;
+        color: #fff;
+        border-color: $darkBrownBorder;
+        @include gradient($brown, $darkBrown);
+        @include box-shadow-multiple(0 1px 0px #7b6d62 inset, 
+                                     0 2px 3px #000); /* Top Highlight, Drop shadow */  
+        
+        &:hover{
+            @include gradient(#574c41, $darkBrown); /* Hover light brown */
+        }
+        
+        &:before{
+            background-color: #3F362F;
+            @include box-shadow-multiple(0 -1px 0 #52483d inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #312a24 inset);
+        }
+    }
+    
+    .well{
+        
+        $_taglineMarginTop : 80px;
+        /* This is the section between the nav bar and the shop bar */
+       
+        position: relative;
+        clear: both;
+        color: #ffffff;
+        text-transform: uppercase;
+        
+        font-size: 110%;
+        
+        .logo {
+            float: left;
+        }
+        
+        .established{
+            
+            float: left;
+            margin: px($_taglineMarginTop) px(10px) px(10px); /* Should be same as margin-top on .tagline */
+            
+            .year:before{
+                
+            }
+        }
+        
+        .tagline{
+            float: right;
+            margin: px($_taglineMarginTop) px(10px) px(10px);
+        }
+    }
+    
+    .navbar {
+        
+        /* The list of actions at the top of the page */
+        
+        float: right;
+        width:100%;
+        background-color: black;
+        
+        li {    
+            display: inline-block;
+            margin: 0;
+            float:right;
+            
+        }
+        
+        .b5{
+            text-transform: uppercase;
+            text-decoration: none;
+            margin: 0;
+            color: #fff;
+            font-weight: bold;
+            display: block;
+            font-size: px(12px);
+            
+            /* How far apart items are from one another, don't forget space for the icon */
+            padding: px(10px, 12px) px(15px, 12px) px(10px, 12px) px(45px, 12px); 
+            
+            &:after{
+                left: px(10px);
+            }
+            &:hover{
+                background-color: #322c28;
+            }
+        }
+    }  
+    
+    .shopbar {
+        
+        /* Includes the Shop by Department, Search bar, and other darker buttons */
+        
+        clear:both;
+        height: px(60px); /* We have to give it a height because the inner li's are float:left */
+        padding-top: px(10px); /* Push it down a little from the logo */
+        line-height: px(41px);
+        
+        li {
+            float: left;
+            position: relative;
+            margin-left: px($paddingUnit);
+        }
+        .b1{
+            padding-top: px(8px, 14px);
+            padding-bottom: px(8px, 14px);
+        }
+        .b2, .b3, .b4{
+            padding-top: px(8px, 13px);
+            padding-bottom: px(8px, 13px);            
+        }
+        .b1{
+            width: px(110px, $b1FontSize); /* Shop By Department */
+            margin-left: 0;
+            
+            strong:after{ /* We need .b1:after for the icon, so we'll use .b1 strong:after for the little down arrow */
+              border-color: black transparent transparent transparent;
+              border-style:solid;
+              border-width: px(5px);
+              width:0;
+              height:0;
+              content: '';
+              position: absolute;
+              top: px(23px);
+              right: px(10px);
+            }
+            
+        }
+        .wishlist .b3{
+            width: px(35px);
+        }
+        .departments{
+            margin-left: 0;   
+        }
+        .cart .b3{
+            width: px(50px);
+            padding-right: px(35px); /* Only if we are going to use the count */
+            margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
+            margin-right: 0;
+            
+            .count{
+                background-color: $yellow;
+                color: black;
+                padding: px(3px);
+                position: absolute;
+                font-weight: bold;
+                padding: px(3px) px(7px);
+                right: px(22px);
+                top: px(13px);
+                @include border-radius(px(3px));
+                text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
+                
+                &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
+                  border-color: white transparent transparent transparent;
+                  border-style:solid;
+                  border-width: px(5px);
+                  width:0;
+                  height:0;
+                  content: '';
+                  position: absolute;
+                  top: px(9px);
+                  right: px(-15px);
+                }
+                @include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
+                @include gradient($lightYellow, $yellow);
+            }
+        }
+        input.search { /* Main Search bar */
+            
+            width: px(500px, $largeInputFontSize);
+            display: inline-block;
+            margin-right: 0;
+            font-size: px($largeInputFontSize);
+            padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+        }
+
+        .search button { /* Magnifying glass button */
+            width: px(44px);
+            height: px(44px);
+            position: absolute;
+            right: px(3px);
+            top: px(3px);
+            margin: 0;
+            text-indent: -$hideDistance;
+            overflow: hidden;
+            &:after{ /* Icon! */
+                left: 50%;
+                margin-left: px(-12px);
+            }
+        }
+    }
+    
+    .breadcrumbs{
+      
+        /* The list of breadcrumbs below the shopbar */
+        
+        background-color: $superLightGrey;
+        padding: px($paddingUnit) 0;
+        width: 100%;
+        float: left;
+        
+        li{ 
+          
+            /* Each item contains an A tag which contains the text of the category */
+            
+            float: left;
+            
+            &:after{
+                content: '→';
+                padding:0 px(5px);
+            }
+            &:last-child:after{
+                content: '';
+            }
+            
+            &:last-child a{
+                text-decoration: none; 
+                color: $black;
+            }
+        }
+    }
+}

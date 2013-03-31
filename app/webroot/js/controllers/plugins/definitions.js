@@ -38,10 +38,13 @@
                     }
                 }
             },
+            
             assets : {},
+            
             getDefinitions : function(slugs){
                  return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
             },
+            
             parseDefinitions : function(definitions, selector){
             	$(_settings.definitionlessSelector, selector).each(function(index, element){
             		// Not the most elegant -- but because neither array will be very big, it shouldn't

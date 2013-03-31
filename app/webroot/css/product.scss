@@ -1,0 +1,409 @@
+/* Product Detail Page */
+.page-productDetail{
+    .head{}
+    .b3{
+        float: left;
+    }
+    
+    .byline{
+        float:right;
+        display: block;
+        color: $grey;
+        text-transform: uppercase;
+        text-align: right;
+        padding-right: px(columns(1) + $gutterWidth);
+        position: relative;
+        font-size: px(11px);
+        margin: px($gutterWidth);
+        margin-right: 0;
+        line-height: 1.5em;
+        .author{
+            font-size: px(13px, 11px);
+            text-transform: none;
+            color: $black;
+            font-weight: bold;
+            display: block;
+            &:after{
+                @include border-radius(px(columns(1)));
+                background-color: red;
+                content: ' ';
+                display: block;
+                position: absolute;
+                top: px(-$gutterWidth/2);
+                right: 0;
+                width: px(columns(1));
+                height: px(columns(1));
+            }
+            &[data-author="michael"]{ background-position: 0 0; }
+        }
+    }
+    
+    .media{ 
+      
+      /* The left hand side containing giant picture, video and audio links */
+        
+        width: px(columns(6));
+        float:left;
+        
+        li{ 
+            display: block;
+            clear:both;
+            margin-top: px(2 * $paddingUnit);
+            @include clearfix;
+        }
+        .videos{
+            label{ 
+                display: inline-block;
+                position:relative; 
+                margin-left: px($paddingUnit);
+                left: px(32px + 2 * $paddingUnit);
+            }
+            label:before{
+                background-color: red;
+                content: '';
+                display: inline-block;
+                position: absolute;
+                left: px(-(32px + ($paddingUnit * 2)));
+                top: px($paddingUnit);
+                width: px(32px);
+                height: px(32px);
+            }
+            .video{
+                width: px(columns(6) - $gutterWidth);
+                padding: px(2* $paddingUnit);
+                border: 1px solid $lightGrey;
+                background-color: $superLightGrey;
+                label{ margin-top: px($paddingUnit); }
+                iframe{ width: 100%; }
+            }
+        }
+        .images{
+            .zoom-mainImage{
+                display:inline-block;
+            }
+            .zoom-thumbnails{
+                &:before{
+                    content : 'Hover over image to zoom';
+                    font-style: italic;
+                    display: block;
+                    margin: px($paddingUnit) 0;
+                    color: $lightGrey;
+                }
+                a img{
+                    border: 1px solid $lightGrey;
+                    &:hover{
+                        @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
+                        border-color: $darkYellow;   
+                    }
+                }
+                li{ 
+                    display:inline-block;  
+                    margin-right: $gutterWidth;
+                    clear: none;
+                    float:left;
+                }
+                @include clearfix;
+            }
+        }
+        
+    }
+   
+    .media .section,
+    .information .section{
+        
+        padding-bottom: px(2 * $paddingUnit);
+        border-bottom: 1px solid $lightGrey;
+        &:last-child{ border-bottom-width: 0; }
+        
+        > .b3[data-reveal-children]{ /* The plus/minus toggle button */
+            margin-top: px(2 * $paddingUnit + 2);
+            margin-right: px(2 * $paddingUnit);
+            text-indent: px(1000px);
+            float:left;
+            text-indent: px(-$hideDistance);
+            width: px(25px);
+            height: px(25px);
+            border-color: $taintedGrey;
+            overflow: hidden;
+            padding:0;
+            @include gradient($lightGreyGradientTop, $lightGreyGradientBottom);
+        }
+        > h2{  /* Section headers */
+            float: left;
+            line-height: 1em;
+            margin-bottom: $paddingUnit;
+        }
+        label{ 
+            display: block;
+            float: left;
+            .details{ display: block; }
+            
+        }
+        .content{ 
+            clear: both;
+            float: left;
+            width: 100%;
+        }
+        
+        @include clearfix;
+        
+    }
+    .information{
+        
+        width: px(columns(6));
+        margin-left: $gutterWidth;
+        float: right;
+        
+        .addToCart{}
+        .addRelatedItems{}
+        
+    }
+    .description{
+        @include clearfix;
+    }
+    .reviews{
+        
+        padding-top: px(10px);
+        
+        h2{
+            margin: px(6px, $h2FontSize) 0 px(15px, $h2FontSize);
+            float:left;
+        }
+        
+        .aggregateReviews{
+            
+            float: left; 
+            position: relative;
+            margin: px(10px) 0 0 px(30px);
+            
+            label{
+                position: absolute;
+                left: 100%;
+                width: px(200px);
+                font-style: italic;
+            }
+        }
+        .b1{
+            float: right;
+        }
+        .add{
+            
+            display: block;
+            clear: both;
+            border-top: 1px solid $lightGrey;
+            padding: 1em 0 0 0;
+            .panel{ margin-bottom: 0; }
+            .review{
+                float: left;
+                margin-bottom: 1em;
+                .field{ float: none;
+                    input{ width: columns(6) - $gutterWidth; }
+                }
+                textarea{ width: px(columns(5) + $gutterWidth + 10); }
+            }
+            .author{
+                float: left;
+                clear: none;
+                width: px(columns(5));
+                margin-left: px($gutterWidth);
+                margin-bottom: 1em;
+                .firstName{
+                    float: left;
+                    label, input{ width: px(200px); }
+                }
+                .lastInitial{
+                    float: left;
+                    clear: none;
+                    margin-left: px($paddingUnit);
+                    input{ width: px(100px); }
+                }
+                .city{
+                    float: left;
+                    input{ width: px(200px); }
+                }
+                .state{
+                    margin-left: px($paddingUnit);
+                    clear: none;
+                    select{ width: px(100px); }
+                }
+                .experience{
+                    /* IE7 */
+                    width: 100%; ul{ width: 100%; li{ width: 100%; }}
+                        
+                    .field{
+                        
+                        
+                        position: relative;
+                        margin-top: px($paddingUnit);
+                        height: px(36px);                        
+                        
+                        .yearsPlaying{
+                            
+                            position:absolute;
+                            top:0;
+                            left: px(100px);
+                            float: left;
+                            width: px(300px);
+                            
+                            label{ 
+                                float: left;
+                                margin-top: px($paddingUnit);
+                                margin-left: px($paddingUnit);
+                            }
+                            input[type="text"]{ 
+                                width: px(75px);
+                                float: left;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            .submit{
+                
+                border-top: 1px solid $lightGrey;
+                clear: both;
+                
+                .details{
+                    margin: 1em; /* matches button */
+                    position: relative;
+                    top: px(3px);
+                    float: right;
+                }
+            }
+            @include clearfix;
+            
+        }
+        .entries{
+            
+            clear: both;
+            border-top: 1px solid $lightGrey;
+                
+            .entry{
+                
+                padding: px($gutterWidth / 2) 0;
+                border-bottom: 1px solid $lightGrey;
+                float: left;
+                position: relative;
+                overflow: hidden;
+                clear: both;
+                width: 100%;
+                
+                &.preview{
+                    &:before{ /* Two colons to hide from IE8 */
+
+                        overflow: hidden;
+                        padding: px($paddingUnit * 2) 0;
+                        width: 100%;
+                        display: block;
+                        top: px(-$paddingUnit);
+                        font-weight: 800;
+                        text-align: center;
+                        content: 'Preview';
+                        color: $superDarkGrey;
+                        letter-spacing: px(1px);
+                        text-transform: uppercase;
+                        text-shadow : 0 1px $saturatedHighlightGrey;
+                        border : 1px solid $grey;
+                        border-width: 1px 0;
+                        margin: 0 0 px($gutterWidth / 2) 0;
+                        
+                        @include gradient($buttonLightGrey, $buttonDarkGrey); 
+                    }
+                    &::before{ /* Only rotate for IE9 */
+                        position: absolute;
+                        top: px(10px);
+                        left: px(-40px);
+                        width: px(150px);
+                        @include rotate(-45);
+                    }
+                    .points .actions button[data-action="voteDown"],
+                    .points .actions button[data-action="voteUp"],
+                    .reviewInteractionCount{ display: none; }
+                }
+                
+                button[data-action="voteUp"],
+                button[data-action="voteDown"],
+                .reviewInteractionCount{
+                    position: absolute;
+                    top: 0;
+                    left: px($gutterWidth);
+                }
+                button[data-action="voteUp"],
+                button[data-action="voteDown"]{ 
+                    top: px(20px);
+                    width: px(32px);
+                    height: px(32px);
+                    @include border-radius(px(32px));
+                    background-color: $lightGrey;
+                    text-indent: px(-1000px);
+                    &:hover{
+                        background-color: $yellow;
+                    }
+                }
+                .reviewInteractionCount{ 
+                    
+                    top: px(60px, 14px);
+                    border: 1px solid $lightGrey;
+                    font-weight: bold;
+                    font-style: italic;
+                    font-size: px(14px);
+                    padding: 0 px($paddingUnit);
+                    color: $grey;
+                    background-color: $superLightGrey;
+                    
+                    @include box-shadow-multiple(0 0 px(2px) 0 $lightGrey inset);
+                    
+                }
+                button[data-action="voteDown"]{ top: px(90px); }
+                
+                .author{
+                    
+                    float:left;
+                    margin-left: px(columns(1) + $gutterWidth);
+                    width: px(columns(2));
+                    
+                    .reviewAuthorPhoto"]{ @include border-radius(px(32px)); }
+                    .reviewAuthor"]{font-weight:bold;}
+                    .reviewLocation"]{text-transform: uppercase;}
+                    .reviewProfile"]{font-style:italic; color: $grey;}
+                }
+                
+                .review{
+                    
+                    float: left;
+                    margin-left: px($gutterWidth);
+                    
+                    .reviewItemReviewed{
+                        display: none; /* We don't need to show this to users, but we need it for microdata */
+                    }
+                    .reviewReviewRating,
+                    .reviewTitle,
+                    .reviewDatePublished,
+                    .reviewReviewBody{
+                        width: px(columns(7));
+                        float: left;
+                        clear: left;
+                    }
+                    .reviewDatePublished{color: $grey; font-style: italic; } 
+                    .reviewTitle{
+                        
+                        font-weight:bold;
+                        &:after, &:before{ content: '"'; }
+                    
+                    }
+                }
+                
+                .points{
+                    float:left;
+                    width: px(columns(2));
+                    margin-left: px($gutterWidth);
+                    .cons{
+                        margin-top: $paddingUnit * 2;
+                    }
+                }
+            }
+        }
+    } /* End Reviews */
+}
+

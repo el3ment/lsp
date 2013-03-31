@@ -1,0 +1,525 @@
+/* Application Wide Styles */
+html{
+    
+    font-size: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    
+
+    body{ 
+        font-family: 'Open Sans', sans-serif;
+        color: $black;
+        font-size: 13px;
+        line-height: px(22px);
+    }
+    
+    /* Content Container */
+    div[class|="page"]{
+        margin: auto;
+        max-width: px(940px);
+        clear: both;
+    }
+    
+    /* Page Title */
+    h1, .h1, h2, .h2{
+        margin-top: px($paddingUnit);
+        line-height: 1em;
+        font-size: 2.9em;
+        font-family: 'League Gothic', sans-serif;
+        text-transform: uppercase;
+        color: $black; 
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Section Headings */
+    h2, .h2{ font-size: px($h2FontSize);}
+    
+    /* Captialized, Bigger, Bold */
+    h3, .h3, h4, .h4{ 
+        font-size: 1em; 
+        text-transform:uppercase;
+        font-weight: bold;
+    }
+    
+    /* Captialized, Bold */
+    h4, .h4{ text-transform: none; }
+    
+    /* Lowercase, Bold */
+    h5, .h5{ font-weight: bold; }
+    
+    /* Text */
+    h6, .h6{ color: $grey; }
+    
+    /* Links */
+    a, .b5{
+        color: $grey;
+        &:hover{ text-decoration: none; }
+    }
+    
+    p{
+        margin-bottom: px(2 * $paddingUnit);
+    }
+    
+    em{
+        font-style: italic;
+    }
+    
+    /* General Tags */
+    /* Normally the UL and LI tags are style-less - but in product descriptions we want them to have the bullets */
+    .productDescription ul{
+        margin: px($paddingUnit) 0 px($paddingUnit) px(3 * $paddingUnit);
+    }
+    ul.list li,
+    .productDescription ul li{
+        list-style: square inside;
+    }
+    
+    /* Panels */
+    /* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
+    .panel, a .panel{
+        @include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
+        background-color: $white;
+        display: inline-block;
+        position: relative;
+        border: 1px solid $lightGrey;
+        @include border-radius(px($borderRadius));
+        padding: px($paddingUnit) px($paddingUnit * 2) 0;
+        margin-bottom: px($paddingUnit * 2);
+        color: $black;
+    }
+    
+    /* A section is a broken division within a panel, generally titled by a header tag, it basically adds a line break and some margins */
+    .section{
+        clear: both;
+        &:last-child{ border-bottom: 0; }
+        h2{
+            margin-bottom: px($paddingUnit);
+        }
+    }
+    
+    /* An engaged panel has a yellow highlight on top */
+    .panel.engaged{
+        border-top: px($paddingUnit) solid $yellow;
+    }
+    
+    /* Disengaged panels are grey */
+    .panel.disengaged{
+        background-color: $superLightGrey;
+        padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
+    }
+    
+    /* Common Properties */
+    /* Details are subtext */
+    .details{ color: $grey; }
+    
+    /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
+    .productAvailability .status,
+    .relatedItems .currentItem:after{
+        font-size: px($boldAllCapsH4);
+        font-weight: 800;
+        text-transform: uppercase;
+        @include border-radius(px(5px));
+        padding: px(3px) px($paddingUnit);
+    }
+    .productAvailability[data-method="seperately"] .status{
+        background-color: $superLightGrey;
+        color: $grey;
+    }
+    .productAvailability[data-method="today"] .status{
+        background-color: $grey;
+        color: $white;
+    }
+    
+    /* The add-to-cart panel can be seen on the product-detail page and list-view search results */
+    .addToCart{
+        
+        width: 100%;
+        padding: 0;
+        
+        li{
+            
+            padding: px($paddingUnit) px($paddingUnit * 2);
+            border-bottom:1px solid $lightGrey;
+            border-top: 1px solid white;
+            background-color: $superLightGrey;
+            
+            &:first-child{
+                @include border-radius(px($borderRadius) px($borderRadius) 0 0);
+            }
+            &.action{ /* Handle the bottom border */
+                @include border-radius(0 0 px($borderRadius) px($borderRadius));
+                border-bottom: 0;
+            }
+            label{
+                margin: px($paddingUnit) px($paddingUnit) 0 0;
+                display: inline; /* IE */
+                display: inline-block;
+            }
+            input, select{ 
+                float: none;
+                display: inline;
+                display: inline-block;
+            }
+            @include clearfix;
+        }
+        .productPrice{ 
+            font-size: px(30px);
+            line-height: 1em;
+            font-weight: bold;
+        }
+        .productMsrp{ text-decoration: line-through; }
+        .productDiscount{ font-weight: bold; }
+        .productAvailability{
+            .status{
+                font-weight: bold;
+                color: black;
+                background-color: transparent;
+                padding-left: 0;
+            }
+            .shortStatus{
+                display: none;
+            }
+            .details{
+                
+                font-style: italic;
+                
+                .method{    
+                    &:before{
+                        content: '(';
+                    }
+                    &:after{
+                        content: ')';
+                    }
+                }
+            }
+        }
+        .price{ 
+            background-color: white;
+            .productGrouping{ color: $grey; }
+            .details{ display: block; }
+        }
+        .quantity{
+            input{ float: none; }
+        }
+        .productAvailability{ background-color: white; }
+        .action{
+            .b1{ 
+                margin-bottom: px($paddingUnit);
+                margin-left: 0;
+            }
+            a{ display:block; }
+        }
+    }
+    
+    
+    /* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
+     * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
+    .notice{ 
+        
+        color: $black;
+        font-weight: bold;
+        position: relative;
+        padding-left: px(16 + 5px);
+    
+        .details{
+            font-weight: normal;
+            display: block;
+            clear: both;
+        }
+        &:before{
+            background-color: red;
+            content: ' ';
+            display: block;
+            position: absolute;
+            top: px(2px);
+            left: 0;
+            width: px(16px);
+            height: px(16px);
+        }
+    }
+    
+ 
+    /* Related items are the things-you-might need, hand selected products seen on product detail pages 
+     * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page
+     * 
+     * There is a little fancy-css happening which changes the look of the list based on how many items are listed */
+    .relatedItems{
+        
+        display: inline-block;
+        position: relative;
+        
+        
+        .productPrice{ font-weight: bold; font-size: px(12px); }
+        .productName{ display:block; font-size: px(12px); }
+        img{ 
+            margin-bottom: px($paddingUnit);
+            border: 1px solid $lightGrey;
+        }
+
+        .currentItem{ 
+             
+            position: absolute;
+            top:0;
+            left:0;
+            padding: px($gutterWidth / 2);
+            padding-top: px($gutterWidth + $gutterWidth / 2);
+            width: px(columns(2) - $gutterWidth);
+            
+            .productName:before{ /* Because we can't display the overlay, add it to the name */
+                content : 'This Item: ';
+                font-weight: bold;
+            }
+            .productName::before{ /* Hide it from everything except IE8 */
+                display: none;
+            }
+            .productName{  }
+            
+            &::after{ /* Double colon to hide from IE8 - which renders the background color behind the image */
+                display: block;
+                content: 'This Item';
+                font-size: px(13px);
+                position: absolute;
+                top: px(60px);
+                background-color: $grey;
+                left: 50%;
+                color: white;
+                width: px(70px);
+                text-align: center;
+                margin-left: px(-35px, 13px);
+                
+            }
+            &:before{
+                content: '+';
+                text-align: right;
+                vertical-align: middle;
+                font-size: px(30px);
+                font-weight: bold;
+                position: absolute;
+                top: px(60px, 30px);
+                right: px(-5px, 30px);
+                
+               
+            }
+            img{ 
+                border: 0;
+                margin: 0 px($gutterWidth);
+                @include opacity(.5);
+            }
+        }
+            
+        ul{ 
+            display:inline-block;
+            background-color: $superLightGrey;
+            margin-left: px(columns(2) + $gutterWidth);
+            float:left;
+            li{
+                background-color: $superLightGrey;
+                display:inline-block;
+                float:left;
+                width: px(columns(2) - $gutterWidth);
+                height: 100%;
+                border: px($gutterWidth / 2) solid $superLightGrey;
+                border-top-width: px($gutterWidth);
+                
+                &:nth-child(odd){ clear:both; border-left-width: px($gutterWidth); } 
+                &:nth-child(even), &:last-child{ 
+                    border-right-width: px($gutterWidth);
+                    clear: none;
+                }
+                &:nth-child(1){ /* nth child instead of first-child for ie */ border-left-width: px($gutterWidth); }
+                &:last-child{ border-right-width: px($gutterWidth); }
+            }
+            li.disengaged{
+                padding-top: 0;
+                .productPrice, .productName, img{ @include opacity(.4); }
+            }
+            
+            /* When there are 3 or more items, then display it as a list */
+            li:first-child:nth-last-child(n + 3),
+            li:first-child:nth-last-child(n + 3) ~ li{
+                clear:both;
+                width: px(columns(4) - $gutterWidth * 2);
+                border-width: px($gutterWidth);
+                border-bottom-width: 0;
+                position: relative;
+                img{
+                    margin-left: px($gutterWidth + $paddingUnit);
+                    margin-right: px($paddingUnit * 2);
+                    float: left;
+                    max-width: px(80px);
+                    max-height: px(80px);
+                }
+                input[type="checkbox"]{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                .productPrice{
+                    float: left;
+                    display: block;
+                    width: px(columns(2));
+                }
+                .productName{
+                    float: left;
+                    max-width: columns(2);
+                }
+                &:last-child{
+                    border-bottom-width: px($gutterWidth);
+                }
+            }
+                
+        }
+        .addToCart{
+            
+            display: inline-block;
+            float: left;
+            clear: both;
+            
+            .subtotal{
+                display: inline-block;
+                font-weight: bold;
+                text-align: right;
+                float: right;
+                margin-right: px($paddingUnit);
+                .details{
+                    display:block;
+                    font-weight: normal;
+                }
+            }
+            button{
+                display: block;
+                float: right;
+                position: relative;
+                margin-right: px($paddingUnit);
+            }
+            .subtotal, button{ margin-top: $paddingUnit; }
+        }
+    }
+    
+    /* Dynamic Item Suggestions are the horizontal lists of items that are populated by easyask and list products
+     * like "People who bought this also bought" or "Similar items" */
+    .dynamicItemSuggestions{
+        
+        
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border: 1px solid $lightGrey;
+        border-width: 1px 0 3px 0;
+        
+        .productScope{
+            
+            border: 1px solid $lightGrey;
+            border-bottom-width: 0;
+            border-top-width: 0;
+            border-right-color: transparent;
+            float: left;
+            width: 16.4%;
+            position: relative;
+            display: block;
+            padding-bottom: px(2 * $paddingUnit);
+            
+            a{
+                width: 100%;
+                height: 100%;
+                display: block;
+                text-decoration: none;
+            }
+            
+            &:nth-child(1){
+                border-left-color: transparent;
+            }
+            &:last-child{
+                border-right-color: transparent;
+            }
+            img{ margin: px($paddingUnit + 2);}
+            
+            .productPrice{ 
+                font-weight: bold;
+                padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
+                text-decoration: none;
+                color: $black;
+            }
+            .productName{ 
+                display: block; 
+                padding: 0 px($paddingUnit + 2);
+                color: $black;
+            }
+            &:hover{
+                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+                border: 1px solid $darkYellow;
+                border-bottom-width: 0;
+                border-top-width: 0;
+            }
+        }
+        
+        @include clearfix;
+        
+    }
+    
+    
+    /* Definitions are marked with the attribute "data-definitions-hasDefinition" - any text with this attribute
+     * will be populated with the definition data, and get a little lightning bolt icon */
+    *[data-definitions-hasDefinition]{
+        position: relative;
+        display:inline-block;
+        margin-right: px(2px);
+        dl{ 
+            display: none; 
+            position: absolute;
+            left: px(-1* (columns(2) + 16 * 2 + 2));
+            top: px(-2px);
+            width: px(columns(2));
+            border-left: px($paddingUnit) solid $yellow;
+            .details{
+                display: block;
+                margin: px($paddingUnit) 0;
+                float:right;
+            }
+            @include panel-arrow(6px, 'right', $white, 20px);
+        }
+        &:after{
+            content: '';
+            width: px(16px);
+            height: px(16px);
+            display:inline-block;
+            margin: 0 px(2px) 0 px(3px);
+            background-color: red; /* $lightGrey */
+            @include border-radius(px($borderRadius));
+            position:relative;
+            top: px(4px);
+
+        }
+        &:hover:after{
+            background-color:$yellow;
+        }
+        &:hover{
+            dl{
+                display:block;
+            }
+        }
+    }
+    
+    /* Aggregate reviews are basically just the 5 star rating, it uses the old-school sliding doors method */
+    .aggregateReviews{
+        
+        width: px(200px);
+        background-color: $superLightGrey;
+        display: inline-block;
+        
+        .reviewAggregateRating{ background-color: red; display: inline-block; }
+        .reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); }
+        .reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); }
+        .reviewCount{
+            &:before{ content: '('; }
+            &:after{ content: ')'; }
+        }
+    }
+
+
+
+}
+
+

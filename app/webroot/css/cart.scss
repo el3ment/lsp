@@ -1,0 +1,179 @@
+/* Shopping Cart */
+.page-cart{
+    .head{ 
+       
+        /* Contains the contact us link, Proceed To Checkout button, and main title */
+       
+        min-height: px(100px);
+        width: px($pageWidth);
+        float: left;
+        position: relative;
+        
+        h1{ 
+            display: inline-block;
+            float: left;
+            clear: both;
+        }
+        .b1{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        .ad-contact{ 
+            
+            text-align: right;
+            color: $grey;
+            float: right;
+            padding: px(10px) 0;
+            
+            a{ 
+                display:block; 
+            }
+        }
+    }
+    
+    .warning{
+        /* The warning is a speech bubble that tells the user something about their cart -- this is likely to be the explanation
+         * about backordered items
+         */
+        margin: 0 0 px(15px);
+        background-color: $superLightGrey;
+        border: 1px solid $lightGrey;
+        padding: px(5px) px(20px) px(5px) px(10px);
+        @include border-radius(px($borderRadius));
+        float: left;
+        clear: both;
+        position: relative;
+        
+        .details{}
+        .message{ 
+            font-size: px(20px);
+            font-weight: 600;
+            @include panel-arrow(6px, 'left', $superLightGrey);
+        }
+    }
+    .b1{ /* Proceed to Checkout */
+        float: right;
+        clear: right;
+        margin: 0 0 px(20px);
+        width: px(220px);
+    }
+    
+    table.cart{
+        
+        margin: px(10px) 0 0 0;
+        clear: both;
+        width: 100%;
+        
+        thead{
+            text-align: center;
+            tr td{ 
+                padding: px(10px) 0;
+                border: 1px solid $lightGrey;
+                border-right: 0;
+                text-align: center;
+            }
+            tr td:first-child{ 
+                border-left: 0;
+                text-align: left;
+            }
+            .product{ 
+                text-align: left;
+            }
+            .unitPrice, .quantity, .extendedPrice{ 
+                width: px(130px);
+            }
+        }
+        tbody{
+            td{ 
+                padding: px(15px) 0;
+                border-bottom: 1px solid $lightGrey;
+            }
+            
+            .productImage{
+                float: left;
+                img{ 
+                    max-width: px(64px);
+                    max-height: px(64px);
+                }
+            }
+            .properties{
+                float: left;
+                margin-left: px(10px);
+                .productName{
+                    margin-top: px(-5px);
+                    font-size: px(15px);
+                    font-weight: 600;
+                }
+                
+                .productOptions{
+                    color: $grey;
+                    display: block;
+                }
+                .productAvailability, .details{ 
+                    margin-bottom: px(8px); /* Distance between detail groups */
+                } 
+            }
+            
+            .unitPrice{
+                font-size: px(15px);
+                text-align: center;
+                vertical-align: top;
+                .productPrice{ }
+            }
+            .quantity{
+                text-align: center;
+                vertical-align: top;
+                .scroller{ 
+                    display: block;
+                    margin: auto;
+                }
+                *[data-action='remove']{
+                    margin: auto;
+                }
+            }
+            .extendedPrice{
+                vertical-align: top;
+                text-align: right;
+                .productExtendedPrice{
+                    font-size: px(24px);
+                    font-weight: 600;
+                }
+            }
+        }
+        tfoot{
+            td { 
+                text-align: right;
+                vertical-align: center;
+            }
+            
+            label span { display: block; }
+            input, select, label{ display:inline-block; }
+            .value{ font-weight: 600; }
+            
+            .merchandiseTotal{
+                td{ padding: px(15px) 0 0; }
+            }
+            .taxTotal{
+                td{ padding: 0 0 px(15px); }
+            }
+            .shippingTotal{
+                label{ margin-right: px(5px); }
+                input, select{ 
+                    position: relative;
+                    top: px(-6px);
+                }
+            }
+            .orderTotal{
+                td{ 
+                    border-top: 1px solid $lightGrey;
+                    padding: px(15px) 0;
+                }
+                .value{  
+                    font-size: px(24px);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
