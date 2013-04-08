@@ -141,7 +141,7 @@
 	
     <h1>Reveal</h1>
     <!-- Add childIds seperated by spaces, and the reveal widget will handle toggling the css classes -->
-    <div data-reveal-children='productSpecs'>
+    <div data-reveal-children='productSpecs child2 child3'>
     	Product Specs
     	
         <div id='productSpecs'>Specs!!</div>
