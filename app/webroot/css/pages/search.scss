@@ -36,7 +36,7 @@
                 padding-right: px(6px);
                 
             }
-            button[data-action='hideRefinements']{
+            button.toggleRefinements{
                 position:absolute;
                 top: px(-11px);
                 right: 0;

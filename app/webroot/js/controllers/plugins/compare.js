@@ -11,15 +11,20 @@
         
         _this =  {
             events : {
+				self : {
+					onCompare : function(e, data){
+						alert('Compare the selected items (compare.js : 16)');
+					}
+				},
                 application : {
                     onReady : function(e, data){
-                    	if(_requestedItemIds.length > 0){
-	                    	$.when(_this.getItems(_requestedItemIds)).done(function(response){
-	                    		var sortedData = _this.sort(response.response.data);
-	                    		var tableHTML = _util.parseMicroTemplate('templates-compare-table', _this.diff(_util.tablify(sortedData)));
-	                    		$('#templates-compare-table').replaceWith(tableHTML);
-	                    	});
-                    	}// else there is no 'ids' parameter
+                    	//if(_requestedItemIds.length > 0){
+	                    //	$.when(_this.getItems(_requestedItemIds)).done(function(response){
+	                    //		var sortedData = _this.sort(response.response.data);
+	                    //		var tableHTML = _util.parseMicroTemplate('templates-compare-table', _this.diff(_util.tablify(sortedData)));
+	                    //		$('#templates-compare-table').replaceWith(tableHTML);
+	                    //	});
+                    	//}// else there is no 'ids' parameter
                     },
                     onInit : function(e, data){
                     	var urlParameters = _util.getURLParameters();

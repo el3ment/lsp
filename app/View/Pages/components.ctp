@@ -1,41 +1,6 @@
 <!DOCTYPE>
 <html>
 <head>
-    <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    
-    <script type='text/javascript' src='js/utilities/global.js'></script>
-    
-    <script type='text/javascript' src='js/vendors/jqzoom/jqzoom.js'></script>
-    <script type='text/javascript' src='js/vendors/form2js/form2js.js'></script>
-    <script type='text/javascript' src='js/vendors/jcookie/jcookie.js'></script>
-    
-    <script type='text/javascript' src='js/models/api.js'></script>
-        
-        
-    <script type='text/javascript' src='js/assets/history.js'></script>
-    <script type='text/javascript' src='js/assets/listEncoder.js'></script>
-        
-        
-    <script type='text/javascript' src='js/controllers/plugins/badges.js'></script>
-    <script type='text/javascript' src='js/controllers/plugins/compare.js'></script>
-    <script type='text/javascript' src='js/controllers/plugins/definitions.js'></script>
-    <script type='text/javascript' src='js/controllers/plugins/reveal.js'></script>
-    <script type='text/javascript' src='js/controllers/plugins/validation.js'></script>
-    <script type='text/javascript' src='js/controllers/plugins/zoom.js'></script>
-    
-    
-    <script type='text/javascript' src='js/controllers/reviews.js'></script>
-    <script type='text/javascript' src='js/controllers/shipping.js'></script>
-    <script type='text/javascript' src='js/controllers/account.js'></script>
-    <script type='text/javascript' src='js/controllers/product.js'></script>
-    <script type='text/javascript' src='js/controllers/cart.js'></script>
-    <script type='text/javascript' src='js/controllers/list.js'></script>
-    <script type='text/javascript' src='js/controllers/application.js'></script>
-    
-    
-    
-    <link rel='stylesheet' type='text/css' href='js/vendors/jqzoom/jqzoom.css'> 
     <link rel='stylesheet' type='text/css' href='js/styles/application.css'>
     <link rel='stylesheet' type='text/css' href='js/styles/badges.css'> 
     <link rel='stylesheet' type='text/css' href='js/styles/reviews.css'> 
@@ -172,7 +137,7 @@
     <div class='definitions-showWhenDownloadSuccess'>Success Message</div>
     <div class='definitions-showWhenDownloadFailure'>Failure Message</div>
     <!-- if data-slug is not present, it will autogenerate one based on the content -->
-    <span data-definitions-hasDefinition>test</span>
+    <span data-def>test</span>
     <span class='definitions-hasDefinition'>It's a me, mario!</span>
     <span class='definitions-hasDefinition' data-slug='test'>widget</span>
     <br><br><br>

@@ -14,13 +14,18 @@
                         $('*[data-reveal-children]', data.selector).bind('click', function(e){
                         	_this.toggleClick(this, $(_this.buildChildrenSelector(this)));
                         	e.stopPropagation();
-                        	return false;
+                        	return true;
                         }).bind('mouseover', function(e){
                         	_this.onMouseover(this, $(_this.buildChildrenSelector(this)));
                         }).bind('mouseout', function(e){
                         	_this.onMouseout(this, $(_this.buildChildrenSelector(this)));
                         }).each(function(index, element){
                         	$(_this.buildChildrenSelector(this)).addClass('reveal-child');
+							
+							// If we ask it to start open, toggle the children
+							if($(this).hasClass('reveal-isOpen')){
+								$(_this.buildChildrenSelector(this)).addClass('reveal-isOpen');
+							}
                         }).addClass('reveal-parent');
                     }
                 }
@@ -42,13 +47,13 @@
             	var parent = $(revealParent);
             	var children = $(revealChildren);
             	
-	            if(!parent.hasClass('reveal-onClick')){
-	            	parent.addClass('reveal-onClick');
-	            	children.addClass('reveal-onClick');
+	            if(!parent.hasClass('reveal-isOpen')){
+	            	parent.addClass('reveal-isOpen');
+	            	children.addClass('reveal-isOpen');
 	            	children.triggerHandler('expand.reveal');
 	            }else{
-	            	parent.removeClass('reveal-onClick');
-	            	children.removeClass('reveal-onClick');
+	            	parent.removeClass('reveal-isOpen');
+	            	children.removeClass('reveal-isOpen');
 	            	children.triggerHandler('close.reveal');
 	            }
             }

@@ -2,60 +2,76 @@
 @import "functions";
 
 /* Standard Form Styling */
-input, select, textarea{
+	input, select, textarea{
     
-    font-family: 'Open Sans', san-serif;
-    border-radius : px($borderRadius, 16px);
-    padding : px($paddingUnit*2, $inputFontSize) px($inputPadding, $inputFontSize);
-    line-height:1em;
-    border : 1px solid $lightGrey;
-    font-weight : bold;
-    font-size : px($inputFontSize);
-    color : $black;
-    margin : 0 px(2px, 16px) px(2px, 16px) 0;
-    display : block;
+	    font-family: 'Open Sans', san-serif;
+	    border-radius : px($borderRadius, 16px);
+	    padding : px($paddingUnit*2, $inputFontSize) px($inputPadding, $inputFontSize);
+	    line-height:1em;
+	    border : 1px solid $lightGrey;
+	    font-weight : bold;
+	    font-size : px($inputFontSize);
+	    color : $black;
+	    margin : 0 px(2px, 16px) px(2px, 16px) 0;
+	    display : block;
     
-    &:focus{
-        @include box-shadow-multiple(0 0 px(3px, $inputFontSize) 0 $darkYellow);
-        border-color: $darkYellow;
-    }
-}
-select{
-    padding: px($inputPadding - 1); /* Fix for unknown space on selects */
-    height: px(40px, $inputFontSize);
-}
-textarea{ width: 100%; height: px(100px, $inputFontSize); }
-/* Type-specific styling */
-input[type="checkbox"], input[type="radio"]{ 
-    margin : px($paddingUnit / 2, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
-    border: 0;
-    padding: 0;
-    border-radius: 0;
-}
-input[type="text"], input[type="email"]{    
-    width : px($emailInputLength, $inputFontSize);
-}
-input[name="zipcode"]{                      width : px(150px); }
-input[name="creditCardNumber"]{             width : px(225px); }
-input[name="giftCardNumber"]{               width : px(225px); }
-input.scroller{                             width : px(20px); }
+	    &:focus{
+	        @include box-shadow-multiple(0 0 px(3px, $inputFontSize) 0 $darkYellow);
+	        border-color: $darkYellow;
+	    }
+	}
+	select{
+	    padding: px($inputPadding - 1); /* Fix for unknown space on selects */
+	    height: px(40px, $inputFontSize);
+	}
+	textarea{ width: 100%; height: px(100px, $inputFontSize); }
+	/* Type-specific styling */
+	input[type="checkbox"], input[type="radio"]{ 
+	    margin : px($paddingUnit / 2, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
+	    border: 0;
+	    padding: 0;
+	    border-radius: 0;
+	}
+	input[type="text"], input[type="email"]{    
+	    width : px($emailInputLength, $inputFontSize);
+	}
+	input[name="zipcode"]{                      width : px(150px); }
+	input[name="creditCardNumber"]{             width : px(225px); }
+	input[name="giftCardNumber"]{               width : px(225px); }
+	input.scroller{                             width : px(20px); }
 
-/* Style labels */
-    label{display: block; }
-    input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; }
+	/* Style labels */
+	    label{display: block; }
+	    input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; }
 
-.field{
-    margin-bottom: px(10px);
-    display: block;
-    clear:left;
-    float:left; /* Otherwise our radio element fields lose layout */
-}
-.field.zipcode, .field.creditCardType, .field.creditCardExpirationYear{
-    float: left;
-    clear:none;
-    margin-left: px(10px);
-}
+	.field{
+	    margin-bottom: px(10px);
+	    display: block;
+	    clear:left;
+	    float:left; /* Otherwise our radio element fields lose layout */
+	}
+	.field.zipcode, .field.creditCardType, .field.creditCardExpirationYear{
+	    float: left;
+	    clear:none;
+	    margin-left: px(10px);
+	}
 
+/* Validation Plugin */
+	.validation-required,
+	.validation-alphaOnly,
+	.validation-numericOnly,
+	.validation-alphaNumeric,
+	.validation-emailAddress,
+	.validation-creditCardNumber{
+		border: 1px solid blue;
+	}
+
+	.validation-invalid{
+		border:1px solid red;
+	}
+	.validation-valid{
+		border: 1px solid green;
+	}
 
 /* Button Styling */
     /* Yellow, Uppercase */ 

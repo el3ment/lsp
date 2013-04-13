@@ -10,21 +10,26 @@
         
         _this =  {
             events : {
+				self : {
+					downloadSpecifications : function(e, data){
+						alert('Get Specifications Table (product.js : 15)');
+					}
+				},
                 application : {
                     onReady : function(e, data){
                     	
                     	// For Testing Only
-                    	$.when(_this.getSpecifications('2217')).done(function(response){
-                    		var tableHTML = _util.parseMicroTemplate('templates-specifications-table', _util.tablify(response.response.data));
-                    		var specsTable = $('#templates-specifications-table').replaceWith(tableHTML);
-							_app.controllers.application.attachEvents(specsTable);
-                    	});
+                    	//$.when(_this.getSpecifications('2217')).done(function(response){
+                    	//	var tableHTML = _util.parseMicroTemplate('templates-specifications-table', _util.tablify(response.response.data));
+                    	//	var specsTable = $('#templates-specifications-table').replaceWith(tableHTML);
+						//	_app.controllers.application.attachEvents(specsTable);
+                    	//});
                     	
                     	// For Testing Only
-                    	$.when(_this.getMatrixOptions(34103))
-                    	.done(function(response){
-                    		$('#testOnly-inventoryOptionsTest').html(JSON.stringify(response.response.data));
-                    	});
+                    	//$.when(_this.getMatrixOptions(34103))
+                    	//.done(function(response){
+                    	//	$('#testOnly-inventoryOptionsTest').html(JSON.stringify(response.response.data));
+                    	//});
                     	
                     },
                     onInit : function(e, data){}

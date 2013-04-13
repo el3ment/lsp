@@ -1,7 +1,0 @@
-.reveal-child{
-	display:none;
-	border: 1px solid purple;
-}
-.reveal-onClick, .reveal-onMouseover{
-	display:block;
-}
