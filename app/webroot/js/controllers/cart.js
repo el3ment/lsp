@@ -177,8 +177,53 @@
 			updateShippingAmount : function(){
 				alert('Update Shipping Method (cart.js : 51)');
 			},
+			
 			renderCheckoutSummary : function(){
-				var cartData = {products : ['product1', 'product2'], total : 1492};
+				
+				// This is an example you could use for the cart
+				// perhaps you format it like this on the server
+				// or you can change the format and update the
+				// microtemplate
+				var cartData = {
+					totals : {
+						merchandise : {
+							value : 14.00
+						},
+						shipping : {
+							method : 'Standard Shipping',
+							value : 10.00
+						},
+						tax : {
+							value : 15.00
+						},
+						total : {
+							value : 16.00
+						}
+					},
+					products : [
+						{
+							title : "this is a product title",
+							quantity : 3,
+							mpn : "IP240",
+							extendedPrice : 22.00,
+							description : "ip240 Red Sparkle Finish, Chrome Hardware",
+							status :{
+								description : "Ships Seperately",
+								slug : "seperately"
+							}
+						},{
+							title : "this is a product title",
+							quantity : 3,
+							mpn : "IP240",
+							extendedPrice : 22.00,
+							description : "ip240 Red Sparkle Finish, Chrome Hardware",
+							status :{
+								description : "Ships Seperately",
+								slug : "seperately"
+							}
+							
+						}
+					]};
 				var summaryHTML = _util.parseMicroTemplate('templates-checkout-summary', cartData);
 				$('#checkoutSummary').html(summaryHTML);
 			}

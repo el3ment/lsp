@@ -313,36 +313,40 @@
 	            </tr>
 	        </thead>
 	        <tbody>
+				<# for(var i = 0; i < this.products.length; i++){ #>
 	            <tr class='productScope'>
 	                <td class='product'>
 	                    <div class='properties'>
-	                        <div class='productName'>Innovative IP240</div>
-	                        <div class='details productOptions'><span class='productMpn'>IP240</span> Red Sparkle Finish, Chrome Hardware</div>
-	                        <div class='quantity'>Quantity: <span class='data'>3</span></div>
-	                        <div data-method='seperately' class='productAvailability'><span class='status'>Ships Seperately</span></div>
+	                        <div class='productName'><#=this.products[i].title #></div>
+	                        <div class='details productOptions'><span class='productMpn'><#=this.products[i].mpn #></span> <#=this.products[i].description #></div>
+	                        <div class='quantity'>Quantity: <span class='data'><#=this.products[i].quantity #></span></div>
+	                        <div data-method='<#=this.products[i].status.slug #>' class='productAvailability'><span class='status'><#=this.products[i].status.description #></span></div>
 	                    </div>
 	                </td>
 	                <td class='extendedPrice'>
-	                    <span class='productExtendedPrice'>$22.22</span>
+	                    <span class='productExtendedPrice'><#=this.products[i].extendedPrice #></span>
 	                </td>
 	            </tr>
+				<# } #>
 	        </tbody>
 	        <tfoot>
 	            <tr class='merchandiseTotal'>
 	                <td><label>Merchandise</label></td>
-	                <td><span class='value'>$2120.00</span></td>
+	                <td><span class='value'><#=_util.parseCurrency(this.totals.merchandise.value) #></span></td>
 	            </tr>
-	            <tr class='shippingTotal'>
-	                <td><label>Method</label></td>
-	                <td><span class='value'>$2120.00</span></td>
-	            </tr>
+				<# if(this.totals.shipping){ #>
+		            <tr class='shippingTotal'>
+		                <td><label><#=this.totals.shipping.method #></label></td>
+		                <td><span class='value'><#=_util.parseCurrency((this.totals.shipping ? "0.00" : this.totals.shipping.value)) #></span></td>
+		            </tr>
+				<# } #>
 	            <tr class='taxTotal'>
 	                <td><label>Tax</label></td>
-	                <td><span class='value'>$0.00</span></td>
+	                <td><span class='value'><#=_util.parseCurrency(this.totals.tax ? "0.00" : this.totals.tax.value) #></span></td>
 	            </tr>
 	            <tr class='orderTotal'>
 	                <td><label>Order Total</label></td>
-	                <td><span class='value'>$1231.00</span></td>
+	                <td><span class='value'><#=_util.parseCurrency(this.totals.total.value) #></span></td>
 	            </tr>
 	        </tfoot>
     
