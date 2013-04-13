@@ -318,7 +318,7 @@
 	                <td class='product'>
 	                    <div class='properties'>
 	                        <div class='productName'><#=this.products[i].title #></div>
-	                        <div class='details productOptions'><span class='productMpn'><#=this.products[i].mpn #></span> <#=this.products[i].description #></div>
+	                        <div class='details productOptions'><span class='productMpn'><#=this.products[i].mpn #></span> <#=this.products[i].options #></div>
 	                        <div class='quantity'>Quantity: <span class='data'><#=this.products[i].quantity #></span></div>
 	                        <div data-method='<#=this.products[i].status.slug #>' class='productAvailability'><span class='status'><#=this.products[i].status.description #></span></div>
 	                    </div>

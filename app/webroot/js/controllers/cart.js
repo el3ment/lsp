@@ -206,7 +206,7 @@
 							quantity : 3,
 							mpn : "IP240",
 							extendedPrice : 22.00,
-							description : "ip240 Red Sparkle Finish, Chrome Hardware",
+							options : "Red Sparkle Finish, Chrome Hardware",
 							status :{
 								description : "Ships Seperately",
 								slug : "seperately"
@@ -216,7 +216,7 @@
 							quantity : 3,
 							mpn : "IP240",
 							extendedPrice : 22.00,
-							description : "ip240 Red Sparkle Finish, Chrome Hardware",
+							options : "Red Sparkle Finish, Chrome Hardware",
 							status :{
 								description : "Ships Seperately",
 								slug : "seperately"
