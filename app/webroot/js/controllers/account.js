@@ -7,7 +7,7 @@
         var _app = window.LSP;
         var _assets = _app.assets;
         
-        _this =  {
+        _this = {
         	
             events : {
                 application : {
@@ -20,7 +20,7 @@
             
             getCurrentCustomerId : function(){
             	return 8989;
-            },
+            }
         };
         
         return _this;
