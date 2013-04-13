@@ -65,7 +65,7 @@
 						
 							_this.toggleStepVisability('shipping');
 							$('.page-checkout').addClass('finishedShipping');
-							_this.proceedTo('payment');
+							_this.proceedTo('billing');
 							
 							_this.hideLoading();
 							
@@ -139,7 +139,7 @@
 					if(completedSteps.indexOf(stepName) == -1){
 						
 						// Do these things only once per step
-						
+						completedSteps.push(stepName);
 						$('.steps .active').removeClass('active');
 						$('.steps .' + stepName).addClass('active completed');
 						
@@ -148,10 +148,16 @@
 								$('#shippingInputPanel').removeClass('hide');
 								$('#loginPanels').addClass('hide');
 								break;
-							case 'payment' : // The user has moved away from shipping to payment
+								
+							case 'billing' : // The user has moved away from shipping to payment
 								$("#billingInputPanel").removeClass('hide');
+								$('button[data-action="saveShipping"]').html("Save Shipping");
 								break;
+								
 							case 'review' : // Do stuff here that needs to be done after billing is complete
+								$('button[data-action="saveBilling"]').html("Save Billing");
+								$('button[data-action="finishOrder"]').removeClass('hide');
+								$('.advertisement').addClass('hide');
 								break;
 						}
 					}

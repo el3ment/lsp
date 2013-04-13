@@ -86,6 +86,9 @@ html{
         padding: px($paddingUnit) px($paddingUnit * 2) 0;
         margin-bottom: px($paddingUnit * 2);
         color: $black;
+		h2{
+			margin-bottom: px($paddingUnit);
+		}
     }
     
     /* A section is a broken division within a panel, generally titled by a header tag, it basically adds a line break and some margins */

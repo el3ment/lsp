@@ -27,7 +27,7 @@
 	textarea{ width: 100%; height: px(100px, $inputFontSize); }
 	/* Type-specific styling */
 	input[type="checkbox"], input[type="radio"]{ 
-	    margin : px($paddingUnit / 2, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
+	    margin : px($paddingUnit, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
 	    border: 0;
 	    padding: 0;
 	    border-radius: 0;
@@ -71,6 +71,12 @@
 	}
 	.validation-valid{
 		border: 1px solid green;
+	}
+	
+	label{
+		.details {
+			display: block;
+		}
 	}
 
 /* Button Styling */

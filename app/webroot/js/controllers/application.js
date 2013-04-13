@@ -33,10 +33,8 @@
 	                            var asset = element.data('asset');
 								var preventDefault = false;
 								
-								if(element.is('input[type="radio"], input[type="checkbox"], select')){
+								if(element.is('input[type="radio"], input[type="checkbox"], input[type="text"], select')){
 									event = 'change';
-								}else if(element.is('input[type="text"]')){
-									event = 'blur';
 								}else if(element.is('form')){
 									event = 'submit';
 									preventDefault = true;

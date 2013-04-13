@@ -155,16 +155,21 @@
     }
     
     .process{ /* Page 2 */
+        $bottomPanelPadding : 75px;
         
-        @include border-radius($borderRadius);
+		@include border-radius($borderRadius);
         width: px($pageWidth - $summaryWidth - (4 * $paddingUnit));
+		
         float: left;
-        
-        > .b1{ float: right; } /* Main Continue Button */
+
+		.b1{ float: right; }
         .notice{ float: left; }
         
         .panel{
             width: px(520px);
+			&.engaged{
+				margin-bottom: px($bottomPanelPadding);
+			}
         }
         
         fieldset{
@@ -172,13 +177,22 @@
             margin-bottom: px(15px);
             padding-bottom: px(10px);
         }
-        fieldset:last-child{
+        fieldset:last-of-type{
             border-bottom: 0;
             margin-bottom: 0;
             padding-bottom: 0;
         }
-        
+        .proceed{
+        	position: absolute;
+			width: 100%;
+			bottom: px(-55px);
+			right: px(-5px);
+			.notice{
+				
+			}
+        }
         .shipping {
+			
             .shippingMethod{
                 label{ }
                 .details{ }
@@ -191,10 +205,30 @@
                 float: left;
                 width: px(495px);
             }
+			.secureBlock{
+				position:relative; /* To position the  norton security */
+			}
+			.creditCardCVS{
+				input{
+					width: px(50px);
+					float:left;
+				}
+				*[class*='image-']{
+					float:left;
+					margin-left: px($paddingUnit);
+					margin-top: -1em; /* Intentionally 1em */
+				}
+			}
+			.image-nortonSecurity{
+				position: absolute;
+				top: px(15px);
+				right: px(20px);
+			}
         }
         .disengaged{
             
             float: left;
+			margin-bottom: px(20px);
             
             label{ color: $grey; }
             
@@ -268,6 +302,10 @@
         margin-left: px(20px);
         float: right;
         
+		.b1{
+			float: right;
+		}
+		
         .cart{
             /* width: 100%; */
             padding: 0;

@@ -4,7 +4,7 @@
 			<ul>
 				<li class='start completed active'>Start</li>
 				<li class='shipping'>Shipping</li>
-				<li class='payment'>Payment</li>
+				<li class='billing'>Payment</li>
 				<li class='review'>Review &amp; Place Order</li>
 			</ul>
 		</div>
@@ -138,7 +138,9 @@
 						</li>
 					</ul>
 				</fieldset>
-				<button class='b1' data-controller='cart' data-action='saveShipping'>Continue Checkout</button>
+				<div class='proceed'>
+					<button class='b1' data-controller='cart' data-action='saveShipping'>Continue Checkout</button>
+				</div>
 			</div>
 		
 			<div id='billingSummary'></div>
@@ -193,38 +195,42 @@
 				</fieldset>
 				<fieldset class='payment'>
 					<h2>Payment</h2>
-					<ul class='panel'>
-						<li class='name field'>
-							<label>Name on Card</label>
-							<input type='text' name='billingName' />
-						</li>
-						<li class='creditCardNumber field'>
-							<label>Number</label>
-							<input type='text' name='creditCardNumber' class='validation-creditCardNumber' />
-						</li>
-						<li class='creditCardType field'>
-							<label>Type</label>
-							<select name='creditCardType'>
-								<option value='visa'>Visa</option>
-							</select>
-						</li>
-						<li class='creditCardCVS field'>
-							<label>CVS Security Code</label>
-							<input type='text' name='creditCardCVS' />
-						</li>
-						<li class='creditCardExpirationMonth field'>
-							<label>Expiration Month</label>
-							<select name='creditCardExpirationMonth'>
-								<option value='visa'>09 - September</option>
-							</select>
-						</li>
-						<li class='creditCardExpirationYear field'>
-							<label>Expiration Year</label>
-							<select name='creditCardExpirationYear'>
-								<option value='visa'>2012</option>
-							</select>
-						</li>
-					</ul>
+					<div class='secureBlock'>
+						<ul class='panel'>
+							<li class='name field'>
+								<label>Name on Card</label>
+								<input type='text' name='billingName' />
+							</li>
+							<li class='creditCardNumber field'>
+								<label>Number</label>
+								<input type='text' name='creditCardNumber' class='validation-creditCardNumber' />
+							</li>
+							<li class='creditCardType field'>
+								<label>Type</label>
+								<select name='creditCardType'>
+									<option value='visa'>Visa</option>
+								</select>
+							</li>
+							<li class='creditCardCVS field'>
+								<label>CVS Code</label>
+								<input type='text' name='creditCardCVS' />
+								<div class='image-creditCardCSV-visa'></div>
+							</li>
+							<li class='creditCardExpirationMonth field'>
+								<label>Expiration Month</label>
+								<select name='creditCardExpirationMonth'>
+									<option value='visa'>09 - September</option>
+								</select>
+							</li>
+							<li class='creditCardExpirationYear field'>
+								<label>Expiration Year</label>
+								<select name='creditCardExpirationYear'>
+									<option value='visa'>2012</option>
+								</select>
+							</li>
+						</ul>
+						<div class='image-nortonSecurity'></div>
+					</div>
 				</fieldset>
 				<fieldset class='giftCard'>
 					<h2>Gift Card</h2>
@@ -243,10 +249,10 @@
 						</li>
 					</ul>
 				</fieldset>
-
-				<div class='notice'>You won't be charged yet.<span class='details'>You can review and place your order on the next page</span></div>
-				<button class='b1' data-controller='cart' data-action='saveBilling'>Continue Checkout</button>
-			
+				<div class='proceed'>
+					<div class='notice'>You won't be charged yet.<span class='details'>You can review and place your order on the next page</span></div>
+					<button class='b1' data-controller='cart' data-action='saveBilling'>Continue Checkout</button>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -304,11 +310,9 @@
 			</ul>
 			<button class='b5' data-controller='cart' data-action='editBilling'>Edit</button>
 		</div>
-		<button class='b1' data-controller='cart' data-action='finishOrder'>Finish Order</button>
 	</script>
 	
 	<script id='templates-checkout-summary' type='text/html'>
-<<<<<<< HEAD
 		<table class='panel cart' cellpadding='0' cellspacing='0'>
 			<thead>
 				<tr>
@@ -354,6 +358,7 @@
 			</tfoot>
 	
 		</table>
+		<button class='b1 hide' data-controller='cart' data-action='finishOrder'>Finish Order</button>
 		<div class='advertisement ad-noHassleReturns'>Advertisement</div>
 	</script>
 </div>
