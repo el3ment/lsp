@@ -15,28 +15,56 @@
                         // This is a helper event attacher, it looks for all
                         // buttons, and if they have data-controller, and data-action
                         // attributes, will call the appropriate event.
-                        $('button, input', data.selector).each(function(){
-                            var button = $(this);
-                            var controller = button.data('controller');
-                            var action = button.data('action');
-                            var asset = button.data('asset');
+                        $('*[data-action]', data.selector).each(function(){
                             
-                            if(controller && action && !asset){
-                                button.bind('click', function(e){  
-                                    
-                                    //console.log('Click registered');
-                                    
-                                    $(_app.controllers[controller]).
-                                        triggerHandler(_util.camelCase('on-'+action), 
-                                            {selector : button});
-                                });
-                            }else if(controller && action && asset){
-                                button.bind('click', function(e){  
-                                    $(_app.controllers[controller].assets[asset]).
-                                        triggerHandler(_util.camelCase('on-'+action), 
-                                            {selector : button});
-                                });
-                            }
+							var elements = $(this);
+							
+							elements.each(function(index, element){
+								
+								element = $(element);
+								
+	                            var controller = element.data('controller');
+								if(!controller){
+									// find the first parent with data-controller
+									// this allows a type of inheritance
+									controller = element.parents('*[data-controller]').first().data('controller');
+								}
+	                            var action = element.data('action');
+	                            var asset = element.data('asset');
+								var preventDefault = false;
+								
+								if(element.is('input[type="radio"], input[type="checkbox"], select')){
+									event = 'change';
+								}else if(element.is('input[type="text"]')){
+									event = 'blur';
+								}else if(element.is('form')){
+									event = 'submit';
+									preventDefault = true;
+								}else{
+									event = 'click';
+								}
+								
+	                            if(controller && action && !asset){
+									element.bind(event, {preventDefault : preventDefault}, function(e){  
+	                                    $(_app.controllers[controller]).
+	                                        triggerHandler(_util.camelCase('on-'+action), 
+	                                            {selector : element});
+										if(e.data.preventDefault){
+											e.preventDefault();
+										}
+	                                });
+								
+	                            }else if(controller && action && asset){
+	                                element.bind(event, {preventDefault : preventDefault}, function(e){  
+	                                    $(_app.controllers[controller].assets[asset]).
+	                                        triggerHandler(_util.camelCase('on-'+action), 
+	                                            {selector : element});
+										if(e.data.preventDefault){
+											e.preventDefault();
+										}
+	                                });
+	                            }
+							})
                         });
                     },
                     onReady : function(e, data){
@@ -75,6 +103,9 @@
                         subControllerObj = _app.controllers[subController]; // Convience
                         
                             for(event in controllerObj.events[subController]){
+								if(event === 'self'){
+									event = subController;
+								}
                                 if(event === 'assets'){
                                     for(asset in controllerObj.events[subController].assets){
                                         for(event in controllerObj.events[subController].assets[asset]){

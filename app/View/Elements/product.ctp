@@ -54,7 +54,7 @@
                 <p>There are so many things to like about this <strong>product</strong> and <em>stuff</em></p>
                 Lorem ipsum dolor sit <b>amet</b>, <i>consectetur</i> adipiscing elit. Integer nec diam ipsum. Phasellus sed faucibus tellus.
                 Pellentesque habitant morbi tristique senectus 
-                <a href='#' data-definitions-hasDefinition>things
+                <a href='#' data-def>things
                     <dl class='panel'>
                         <dt class='h3'>This is a title</dt>
                         <dd>This is a fastener that has external screw threads. <span class='details'>Click to learn more</span></dd>
@@ -76,14 +76,14 @@
         </li>
         <li class='specifications section'>
             <button class='b3 icon-24-toggleHide' data-reveal-children='productSpecifications'>Toggle Section</button>
-            <h2>Specifications</h2>
+            <h2 data-reveal-children='productSpecifications'>Specifications</h2>
             <table id='productSpecifications' class='content'>
                 <tr><td>hey</td></tr>
             </table>
         </li>
         <li class='returns section' data-reveal-children='returns'>
             <button class='b3 icon-24-toggleHide' data-reveal-children='returns'>Toggle Section</button>
-            <h2>Returns &amp; Shipping</h2>
+            <h2 data-reveal-children='returns'>Returns &amp; Shipping</h2>
             <div id='returns' class='content'>
                 Paragraphs of data
             </div>
@@ -93,20 +93,20 @@
             <div class='content'>
                 <div class='relatedItems'>
                     <div class='currentItem'>
-                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
+                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
                     </div>
                     <ul>
                         <li class='productScope'>
-                            <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
                         </li>
                         <li class='productScope'>
-                            <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Innovative Percussion IP240 Marimba Mallets</span>
@@ -127,14 +127,14 @@
             <div class='content'>
                 <div class='relatedItems'>
                     <div class='currentItem'>
-                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
+                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
                     </div>
                     <ul>
                         <li class='productScope'>
-                            <img src='http://s3.lonestarpercussion.com/resize/images/Other%20Images/Yamaha-Absolute-Burgundy-Sparkle.jpg.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Other%20Images/Yamaha-Absolute-Burgundy-Sparkle.jpg.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Innovative Percussion IP240 Marimba Mallets</span>
@@ -155,38 +155,38 @@
             <div class='content'>
                 <div class='relatedItems'>
                     <div class='currentItem'>
-                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
+                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Innovative Percussion IP240 Marimba Mallets</span>
                     </div>
                     <ul>
                         <li class='productScope'>
-                            <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Evans 18" EQ1 Coated "Frost" Bass Head</span>
                         </li>
                         <li class='disengaged productScope'>
-                            <img src='http://s2.lonestarpercussion.com/resize/images/Other%20Images/Pearl-CBS15.jpg.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Other%20Images/Pearl-CBS15.jpg.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>LP Black Beauty Studio Recording Drummer's Pack</span>
                         </li>
                         <li class='productScope'>
-                            <img src='http://s3.lonestarpercussion.com/resize/images/Pearl/Pearl-Philharmonic-Bass.jpg.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Pearl/Pearl-Philharmonic-Bass.jpg.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Lone Star Percussion Invader V3 GOLD Practice Pad by Offworld</span>
                         </li>
                         <li class='disengaged productScope'>
-                            <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
                         </li>
                         <li class='disengaged productScope'>
-                            <img src='http://s4.lonestarpercussion.com/resize/images/product-image/Yamaha-BS425.jpg.120x120' width='120' height='120' />
+                            <img data-badge='new' src='http://s4.lonestarpercussion.com/resize/images/product-image/Yamaha-BS425.jpg.120x120' width='120' height='120' />
                             <input type='checkbox' />
                             <span class='productPrice'>$14.25</span>
                             <span class='productName'>Sabian 15" HHX Studio Crash</span>
@@ -210,7 +210,7 @@
     <ul class='media'>
         <li class='images section'>
             <a id='zoom-mainImage' href='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg' data-asset='mouseoverZoom'>
-                <img itemprop="image" src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.460x460' width='460' height='460' />
+                <img data-badge='new' itemprop="image" src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.460x460' width='460' height='460' />
             </a>
             <ul class='zoom-thumbnails' data-targetZoomId='zoom-mainImage'>
                 <li>
@@ -257,74 +257,15 @@
     <div class='customerPurchaseSuggestions section'>
         <h2>Customers Who Bought This Also Bought</h2>
         <ul class='dynamicItemSuggestions'>
+        	<?php for($i=0; $i < 10; $i++){ ?>
             <li class='productScope'>
                 <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
+                    <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
                     <span class='productPrice'>$14.25</span>
                     <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
                 </a>
             </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class='similarItems section'>
-        <h2>Items Similar to This One</h2>
-        <ul class='dynamicItemSuggestions'>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
-            <li class='productScope'>
-                <a href='#'>
-                    <img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
-                    <span class='productPrice'>$14.25</span>
-                    <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
-                </a>
-            </li>
+            <? } ?>
         </ul>
     </div>
     <div class='reviews section'>

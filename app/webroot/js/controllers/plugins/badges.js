@@ -11,7 +11,7 @@
             events : {
                 application : {
                     onAttachEvents : function(e, data){
-                        $('div.badges-productImage[data-badge]:not(:has(div.badge))', data.selector)
+                        $('*[data-badge]:not(:has(div.badges-badge))', data.selector)
                             .append(_this.makeElement);
                     }
                 }

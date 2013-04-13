@@ -457,9 +457,9 @@ html{
     }
     
     
-    /* Definitions are marked with the attribute "data-definitions-hasDefinition" - any text with this attribute
+    /* Definitions are marked with the attribute "data-def" - any text with this attribute
      * will be populated with the definition data, and get a little lightning bolt icon */
-    *[data-definitions-hasDefinition]{
+    *[data-def]{
         position: relative;
         display:inline-block;
         margin-right: px(2px);
@@ -498,7 +498,43 @@ html{
             }
         }
     }
-    
+	
+	/* Badges */
+	*[data-badge]{
+		position:relative;
+		display:inline-block;
+		zoom:1;
+		*display:inline; /* IE7 inline-block Fix */
+		
+		/* Generic badge styling */
+		.badges-badge{ 
+		    position: absolute;
+		    top: 0;
+		    right: 0;
+			padding: px(5px) px(8px);
+		}
+
+		/* Individual Badges */
+		.badge-new{
+		    background: blue url() no-repeat top right;
+		    width:28px;
+		    height:17px;
+		}
+	}
+	
+	/* Data-Reveal Children Plugin */
+	.reveal-child{
+		display: none !important;
+	}
+	.reveal-isOpen, .reveal-onMouseover.reveal-ShowOnHover{
+		display: inherit !important;
+	}
+	
+	/* Useful when showing/hiding things in javascript */
+	.hide{
+		display: none;
+	}
+	
     /* Aggregate reviews are basically just the 5 star rating, it uses the old-school sliding doors method */
     .aggregateReviews{
         

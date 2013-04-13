@@ -7,9 +7,9 @@
         var _lsp = window.LSP;
         var _api = _lsp.models.api;
         var _settings = {
-        		sluglessSelector : '.definitions-hasDefinition:not([data-definitions-slug]):not([data-definitions-definition])',
-        		definitionlessSelector : '.definitions-hasDefinition[data-definitions-slug]:not([data-definitions-definition])',
-        		parsedSelector : '.definitions-hasDefinition[data-definitions-definition]'
+        		sluglessSelector : '*[data-def]:not([data-definitions-slug]):not([data-definitions-definition])',
+        		definitionlessSelector : '*[data-def][data-definitions-slug]:not([data-definitions-definition])',
+        		parsedSelector : '*[data-def][data-definitions-definition]'
         };
         
         _this =  {
@@ -65,13 +65,16 @@
             		}
             	});
             },
+			
             hideDefinition : function(element){
             	$('.definitions-display', element).remove();
             }, // These work, but if we can do it in CSS with :hover -- all the better
-            showDefinition : function(element){
+            
+			showDefinition : function(element){
             	$(element).append(_util.parseMicroTemplate('templates-definitons-display', $(element).data()));
             },
-            makeSlug : function(content){
+            
+			makeSlug : function(content){
                 return content.toLowerCase().replace(/[ ]+/g, '-').replace(/[^\w\-]/g, '');   
             }
         };

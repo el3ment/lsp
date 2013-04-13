@@ -11,10 +11,11 @@
         </div>
         <div class='refineResults panel disengaged'>
             <h2>Refine Your Results</h2>
+			<?php for($i = 0; $i < 10; $i++){ ?>
             <div class='section'>
                 <h4>Category</h4>
-                <button class='b4 icon-16-toggleHide' data-action='hideRefinements'>Toggle Refinement Group</button>
-                <ul>
+                <button class='b4 icon-16-toggleHide toggleRefinements <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button>
+                <ul id='refinement-<?php echo $i; ?>'>
                     <li class='field'>
                         <input id='refinement-0-0' type='checkbox' />
                         <label for='refinement-0-0'>Vibraphone Mallets With a Really Long Name <span class='details'>(22)</span></label>
@@ -34,52 +35,7 @@
                 </ul>
                 <button class='b5 loadMore'>See More (10)</button>
             </div>
-            <div class='section'>
-                <h4>Category</h4>
-                <button class='b4 icon-16-toggleHide' data-action='hideRefinements'>Toggle Refinement Group</button>
-                <ul>
-                    <li class='field'>
-                        <input id='refinement-0-0' type='checkbox' />
-                        <label for='refinement-0-0'>Vibraphone Mallets With a Really Long Name <span class='details'>(22)</span></label>
-                    </li>
-                    <li class='field'>
-                        <input id='refinement-0-1' type='checkbox' />
-                        <label for='refinement-0-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
-                    </li>
-                    <li class='field'>
-                        <input id='refinement-0-2' type='checkbox' />
-                        <label for='refinement-0-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
-                    </li>
-                    <li class='field'>
-                        <input id='refinement-0-3' type='checkbox' />
-                        <label for='refinement-0-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
-                    </li>
-                </ul>
-                <button class='b5 loadMore'>See More (10)</button>
-            </div>
-            <div class='section'>
-                <h4>Category</h4>
-                <button class='b4 icon-16-toggleHide' data-action='hideRefinements'>Toggle Refinement Group</button>
-                <ul>
-                    <li class='field'>
-                        <input id='refinement-0-0' type='checkbox' />
-                        <label for='refinement-0-0'>Vibraphone Mallets With a Really Long Name <span class='details'>(22)</span></label>
-                    </li>
-                    <li class='field'>
-                        <input id='refinement-0-1' type='checkbox' />
-                        <label for='refinement-0-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
-                    </li>
-                    <li class='field'>
-                        <input id='refinement-0-2' type='checkbox' />
-                        <label for='refinement-0-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
-                    </li>
-                    <li class='field'>
-                        <input id='refinement-0-3' type='checkbox' />
-                        <label for='refinement-0-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
-                    </li>
-                </ul>
-                <button class='b5 loadMore'>See More (10)</button>
-            </div>
+			<?php } ?>
         </div>
     </div>
     <div id='hookForTestingDetailViewAndCompactViewOnly' class='results gridView'>
@@ -116,6 +72,7 @@
         </div>
         <div class='searchResults section entries'>
             <ul class='listScope'>
+            	<?php for($i = 0; $i < 5; $i++){ ?>
                 <li class='entry productScope'>
                     <form>
                         <ul class='addToCart panel'>
@@ -144,7 +101,7 @@
                             </li>
                         </ul>
                     </form>
-                    <img class='thumbnail' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.220x220' width='220' height='220' />
+                    <img data-badge='new' class='thumbnail' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.220x220' width='220' height='220' />
                     <span class='field compare'>
                         <input type='checkbox' />
                         <button class='b5'>Compare Now</button>
@@ -163,6 +120,7 @@
                         </ul>
                     </div>
                 </li>
+                <?php } ?>
             </ul>
         </div>
         <div class='foot'>
