@@ -265,7 +265,7 @@
                     <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>                        
                 </a>
             </li>
-            <? } ?>
+            <?php } ?>
         </ul>
     </div>
     <div class='reviews section'>

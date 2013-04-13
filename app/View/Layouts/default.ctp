@@ -7,6 +7,7 @@ add ids to labels
 <head>
 	<?php
         echo $this->Html->css(array('complete'));
+        echo $this->Html->css(array('vendors/unsemantic/unsemantic-grid-semantic'));
 	?>
 	
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
