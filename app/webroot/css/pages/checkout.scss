@@ -31,7 +31,8 @@
             }
             
             /* Step Indicator (Background Circle) */
-            li:before, li.completed:after{
+            li:before, li.completed:after,
+			li.start span:before{
                 content: ' ';
                 display: block;
                 overflow: hidden;
@@ -47,7 +48,8 @@
             }
             
             /* Indicator for Completed Steps (Small Black Inner circle) */
-            li.completed:after, ul:after{
+            li.completed:after, ul:after,
+			li.start span:before{
                 background-color: $black;
                 width: px($smallCircleDiameter);
                 height: px($smallCircleDiameter);
@@ -69,7 +71,8 @@
                 /*background-image: url();*/
             }
             
-            li.active:after, li.start:after{
+			/* Black Progress Bar and Grey Track */
+            li.active:after, li.start span:before{
                 content: ' ';
                 position: absolute;
                 top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter);
@@ -81,19 +84,13 @@
                 margin-left: 0;
             }
             
-            /* Use the review to draw the grey progress bar */
-            li.start:after{
+            /* Grey Track */
+            li.start span:before{
                 background-color:$superLightGrey;
                 z-index:1;
                 width: px($spaceBetweenSteps * ($numberOfSteps - 1));
-                left: px($spaceBetweenSteps / 2);
+                left: 50%;
             }
-            
-            /* Active Icons */
-            li.active.start:before{ background-position: 0 0; }
-            li.active.shipping:before{ background-position: 0 0; }
-            li.active.payment:before{ background-position: 0 0; }
-            li.active.review:before{ background-position: 0 0; }
 
             /* Progress Bar */
             li.active.start:after{ width: 0; }
@@ -101,10 +98,36 @@
                 width: px($spaceBetweenSteps);
                 left: px(-$spaceBetweenSteps + ($spaceBetweenSteps / 2));
             }
-            li.active.payment:after{ 
+            li.active.billing:after{
                 width: px($spaceBetweenSteps * 2);
-                left: px(-$spaceBetweenSteps * 2 + ($spaceBetweenSteps / 2)); 
+                left: px(-$spaceBetweenSteps * 2 + ($spaceBetweenSteps / 2));
             }
+            li.active.review:after{ 
+                width: px($spaceBetweenSteps * 3);
+                left: px(-$spaceBetweenSteps * 3 + ($spaceBetweenSteps / 2)); 
+            }
+			
+			/* Icons */
+			li span{
+				padding:0;
+			}
+			li span:after{
+				display: none;
+				padding: 0;
+			}
+			li.active span:after{
+				$width : 32px;
+				content: ' ';
+				position: absolute;
+				display:block;
+				width: $width;
+				background-color:red;
+				height: $width;
+				z-index:3;
+				left: 50%;
+				margin-left: px(-$width / 2);
+                top: px(-($largeCircleDiameter / 2) - $width / 2 - 3);
+			}
         }
     }
     

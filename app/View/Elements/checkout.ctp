@@ -2,10 +2,10 @@
 	<div class="grid-100">
 		<div id='stepSlider' class='steps'>
 			<ul>
-				<li class='start completed active'>Start</li>
-				<li class='shipping'>Shipping</li>
-				<li class='billing'>Payment</li>
-				<li class='review'>Review &amp; Place Order</li>
+				<li class='start completed active'><span class='label icon-24-user'>Start</span></li>
+				<li class='shipping'><span class='label icon-24-box'>Shipping</span></li>
+				<li class='billing'><span class='label icon-24-card'>Payment</span></li>
+				<li class='review'><span class='label icon-24-check'>Review &amp; Place Order</span></li>
 			</ul>
 		</div>
 	</div>
