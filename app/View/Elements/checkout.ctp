@@ -1,13 +1,13 @@
  <div class='page-checkout'>
     <div id='stepSlider' class='steps'>
         <ul>
-            <li class='start completed'>Start</li>
-            <li class='shipping completed active'>Shipping</li>
-            <li class='payment '>Payment</li>
+            <li class='start completed active'>Start</li>
+            <li class='shipping'>Shipping</li>
+            <li class='payment'>Payment</li>
             <li class='review'>Review &amp; Place Order</li>
         </ul>
     </div>
-    <div class='login'>
+    <div id='loginPanels' class='login'>
         <div class='guest panel engaged'>
             <h2>New Customers</h2>
             <p>You can checkout as a guest, and after you place your order you'll have a chance to create an account</p>
@@ -44,7 +44,7 @@
     <div class='process'>
 		<form>
 			<div id='shippingSummary'></div>
-	        <div id='shippingInputPanel' class='shipping engaged panel'>
+	        <div id='shippingInputPanel' class='shipping engaged panel hide'>
 	            <fieldset class='shippingAddress'>
 	                <h2>Shipping Address</h2>
 	                <ul>
@@ -324,7 +324,7 @@
 	                    </div>
 	                </td>
 	                <td class='extendedPrice'>
-	                    <span class='productExtendedPrice'><#=this.products[i].extendedPrice #></span>
+	                    <span class='productExtendedPrice'><#=_util.parseCurrency(this.products[i].extendedPrice) #></span>
 	                </td>
 	            </tr>
 				<# } #>

@@ -15,10 +15,13 @@
 				cart : {
 					onLogin : function(e, data){
 						alert('Login (cart.js : 17)');
+						_this.proceedTo('shipping');
 						_this.renderCheckoutSummary(); // After updating the address
+						
 					},
 					onLoginAsGuest : function(e, data){
 						alert('Login as Guest (cart.js : 20)');
+						_this.proceedTo('shipping');
 						_this.renderCheckoutSummary(); // After updating the address
 					},
 					onApplyPromoCode : function(e, data){
@@ -47,6 +50,8 @@
 					// Fired when the Continue button is clicked after Shipping
 					onSaveShipping : function(e, data){
 						
+						alert('Save Shipping (cart.js : 53)');
+						
 						_this.showLoading();
 						var data = {stuff : true};
 						
@@ -60,10 +65,10 @@
 						
 							_this.toggleStepVisability('shipping');
 							$('.page-checkout').addClass('finishedShipping');
-							_this.progressSliderTo('payment');
-							$('#billingInputPanel').removeClass('hide');
+							_this.proceedTo('payment');
 							
-							_this.hideLoading();	
+							_this.hideLoading();
+							
 						});
 						
 					},
@@ -77,6 +82,8 @@
 					// Fired when the Continue button is clicked after Billing
 					onSaveBilling : function(e, data){
 						
+						alert('Save Billing (cart.js : 53)');
+						
 						_this.showLoading();
 						var data = {stuff : true};
 						
@@ -89,9 +96,7 @@
 							_app.controllers.application.attachEvents($('#billingSummary'));
 						
 							_this.toggleStepVisability('billing');
-							$('.page-checkout').addClass('finishedBilling');
-							$('.summary .b1').removeClass('hide'); // The Finish Order Button
-							_this.progressSliderTo('review');
+							_this.proceedTo('review');
 							
 							_this.hideLoading();	
 							
@@ -126,10 +131,32 @@
             	listEncoder : new _assets.listEncoder(_this, 'listEncoder')
             },
 			
-			progressSliderTo : function(stepName){
-				$('.steps .active').removeClass('active');
-				$('.steps .' + stepName).addClass('active completed');
-			},
+			proceedTo : function(){
+				
+				var completedSteps = []; // Closure variable - this will persist between calls
+				
+				return function(stepName){
+					if(completedSteps.indexOf(stepName) == -1){
+						
+						// Do these things only once per step
+						
+						$('.steps .active').removeClass('active');
+						$('.steps .' + stepName).addClass('active completed');
+						
+						switch(stepName){
+							case 'shipping' : // Proceed to shipping
+								$('#shippingInputPanel').removeClass('hide');
+								$('#loginPanels').addClass('hide');
+								break;
+							case 'payment' : // The user has moved away from shipping to payment
+								$("#billingInputPanel").removeClass('hide');
+								break;
+							case 'review' : // Do stuff here that needs to be done after billing is complete
+								break;
+						}
+					}
+				}
+			}(),
 			
 			showLoading : function(){
 				console.log('Loading');
