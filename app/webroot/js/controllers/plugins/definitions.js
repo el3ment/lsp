@@ -31,7 +31,7 @@
                         
                         // Request them, and set up the parser for when they return
                         $.when(_this.getDefinitions(slugs)).done(function(response){
-                        	if(response.response.data){
+                        	if(response && response.response && response.response.data){
                         		_this.parseDefinitions(response.response.data, data.selector);
                         	}
                         });
@@ -42,7 +42,9 @@
             assets : {},
             
             getDefinitions : function(slugs){
-                 return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
+				if(slugs.length > 0){
+                	return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
+				}
             },
             
             parseDefinitions : function(definitions, selector){

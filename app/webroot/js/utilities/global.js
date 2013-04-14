@@ -2,7 +2,9 @@
     
 	window = window || {};
     window.LSP = window.LSP || {};
-    window.LSP.utilities = function(){
+	window.LSP.utilities = window.LSP.utilities || {};
+	
+	$.extend(window.LSP.utilities, function(){
         
         var _util = {};
         var _app = window.LSP;
@@ -203,8 +205,6 @@
         
         return _util;
     
-    }();
-    
-   
+    }())
     
 })();

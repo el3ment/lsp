@@ -2,20 +2,20 @@
 <html>
 <head>
 	<?php
-        echo $this->Html->css(array('complete'));
-        echo $this->Html->css(array('vendors/unsemantic/unsemantic-grid-responsive'));
+        echo $this->Html->css(array('complete', 'vendors/bootstrap/bootstrap'));
 	?>
 	
+
+    <script type='text/javascript' src='js/vendors/jquery/jquery-1.6.2.js'></script>
+	
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    
-    <script type='text/javascript' src='js/utilities/global.js'></script>
-    
     <script type='text/javascript' src='js/vendors/jqzoom/jqzoom.js'></script>
     <script type='text/javascript' src='js/vendors/form2js/form2js.js'></script>
     <script type='text/javascript' src='js/vendors/jcookie/jcookie.js'></script>
+    <script type='text/javascript' src='js/utilities/global.js'></script>
     
     <script type='text/javascript' src='js/models/api.js'></script>
+	<script type='text/javascript' src='js/models/cart.js'></script>
         
     <script type='text/javascript' src='js/assets/history.js'></script>
     <script type='text/javascript' src='js/assets/listEncoder.js'></script>
@@ -31,7 +31,7 @@
     <script type='text/javascript' src='js/controllers/shipping.js'></script>
     <script type='text/javascript' src='js/controllers/account.js'></script>
     <script type='text/javascript' src='js/controllers/product.js'></script>
-    <script type='text/javascript' src='js/controllers/cart.js'></script>
+    <script type='text/javascript' src='js/controllers/checkout.js'></script>
     <script type='text/javascript' src='js/controllers/list.js'></script>
     <script type='text/javascript' src='js/controllers/application.js'></script>
     
