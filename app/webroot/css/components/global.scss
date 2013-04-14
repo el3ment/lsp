@@ -1,3 +1,15 @@
+
+/* Fonts */
+@font-face {
+     font-family: "League Gothic";
+     src: url("../files/leaguegothic-regular-webfont.eot") format('embedded-opentype'), 
+     url('../files/leaguegothic-regular-webfont.woff') format('woff'),
+     url('../files/leaguegothic-regular-webfont.ttf') format('truetype'),
+     url('../files/leaguegothic-regular-webfont.svg') format('svg');
+     font-weight:bold;
+    font-style:normal;
+  }
+
 /* Application Wide Styles */
 html{
     
@@ -19,13 +31,12 @@ html{
         max-width: px(940px);
         clear: both;
     }
-    
     /* Page Title */
     h1, .h1, h2, .h2{
         margin-top: px($paddingUnit);
         line-height: 1em;
         font-size: 2.9em;
-        font-family: 'League Gothic', sans-serif;
+        font-family: "League Gothic", sans-serif;
         text-transform: uppercase;
         color: $black; 
         -webkit-font-smoothing: antialiased;

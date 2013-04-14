@@ -70,7 +70,7 @@
 							<input type='text' name='address2' />
 						</li>
 						<li class='city field'>
-							<label>Optional Address</label>
+							<label>City</label>
 							<input type='text' name='city' />
 						</li>
 						<li class='state field'>
@@ -138,6 +138,7 @@
 						</li>
 					</ul>
 				</fieldset>
+				<button class='b5 hide' data-controller='cart' data-action='saveShipping'>Save Shipping</button>
 				<div class='proceed'>
 					<button class='b1' data-controller='cart' data-action='saveShipping'>Continue Checkout</button>
 				</div>
@@ -249,6 +250,7 @@
 						</li>
 					</ul>
 				</fieldset>
+				<button class='b5 hide' data-controller='cart' data-action='saveBilling'>Save Billing</button>
 				<div class='proceed'>
 					<div class='notice'>You won't be charged yet.<span class='details'>You can review and place your order on the next page</span></div>
 					<button class='b1' data-controller='cart' data-action='saveBilling'>Continue Checkout</button>

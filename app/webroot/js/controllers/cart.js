@@ -9,7 +9,8 @@
         var _api = _app.models.api;
         var _util = _app.utilities;
         var _cartContents = [{quantity : 2, id : 34103}, {id : 2217, quantity: 23}];
-        
+        var _completedSteps = [];
+		
         _this =  {
             events : {
 				cart : {
@@ -131,38 +132,35 @@
             	listEncoder : new _assets.listEncoder(_this, 'listEncoder')
             },
 			
-			proceedTo : function(){
-				
-				var completedSteps = []; // Closure variable - this will persist between calls
-				
-				return function(stepName){
-					if(completedSteps.indexOf(stepName) == -1){
-						
-						// Do these things only once per step
-						completedSteps.push(stepName);
-						$('.steps .active').removeClass('active');
-						$('.steps .' + stepName).addClass('active completed');
-						
-						switch(stepName){
-							case 'shipping' : // Proceed to shipping
-								$('#shippingInputPanel').removeClass('hide');
-								$('#loginPanels').addClass('hide');
-								break;
-								
-							case 'billing' : // The user has moved away from shipping to payment
-								$("#billingInputPanel").removeClass('hide');
-								$('button[data-action="saveShipping"]').html("Save Shipping");
-								break;
-								
-							case 'review' : // Do stuff here that needs to be done after billing is complete
-								$('button[data-action="saveBilling"]').html("Save Billing");
-								$('button[data-action="finishOrder"]').removeClass('hide');
-								$('.advertisement').addClass('hide');
-								break;
-						}
+			proceedTo : function(stepName){
+				if(_completedSteps.indexOf(stepName) == -1){
+					
+					// Do these things only once per step
+					_completedSteps.push(stepName);
+					$('.steps .active').removeClass('active');
+					$('.steps .' + stepName).addClass('active completed');
+					
+					switch(stepName){
+						case 'shipping' : // Proceed to shipping
+							$('#shippingInputPanel').removeClass('hide');
+							$('#loginPanels').addClass('hide');
+							break;
+							
+						case 'billing' : // The user has moved away from shipping to payment
+							$("#billingInputPanel").removeClass('hide');
+							$('button[data-action="saveShipping"]').html("Save Shipping");
+							$('button[data-action="saveShipping"].hide').removeClass('hide');
+							break;
+							
+						case 'review' : // Do stuff here that needs to be done after billing is complete
+							$('button[data-action="saveBilling"]').html("Save Billing");
+							$('button[data-action="finishOrder"]').removeClass('hide');
+							$('button[data-action="saveBilling"].hide').removeClass('hide');
+							$('.advertisement').addClass('hide');
+							break;
 					}
 				}
-			}(),
+			},
 			
 			showLoading : function(){
 				console.log('Loading');
@@ -198,11 +196,17 @@
 				var summary = $('#' + stepName + 'Summary');
 				
 				if(panel.hasClass('hide')){
+					// Show Panel, Hide Summary
 					panel.removeClass('hide');
 					summary.addClass('hide');
+					$('button[data-action="finishOrder"]').addClass('hide');
 				}else{
+					// Show Summary, Hide Panel
 					panel.addClass('hide');
 					summary.removeClass('hide');
+					if($('#shippingInputPanel').hasClass('hide') && $('#billingInputPanel').hasClass('hide')){
+						$('button[data-action="finishOrder"]').removeClass('hide');	
+					}
 				}
 				
 			},

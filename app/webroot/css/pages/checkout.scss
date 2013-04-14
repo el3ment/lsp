@@ -147,24 +147,23 @@
             
             float: left;
             width: px($summaryWidth);
-            height: px($summaryWidth / 2);
+            height: px(250px);
             
             &.guest{
                 
                 text-align: center;
-                
+                p{ margin-top: 50px;}
                 h2{ text-align: left; }
             }
             &.returning{
                 margin-left: px(4 * $paddingUnit); 
                 fieldset{
                     
-                    width: px($emailInputLength + 4 * $paddingUnit);
+                    width: px($emailInputLength);
                     display: block;
                     margin: px(2 * $paddingUnit) auto;
                     
                     .field{ margin-bottom: px($paddingUnit); }
-                    label{ display: none; }
                     
                     input{
                         width: px($emailInputLength - (4 * $paddingUnit));
@@ -222,6 +221,17 @@
                 .cost{ font-weight: bold; }
             }
         }
+		
+		/* Edit links */
+        .b5[data-action="saveShipping"],
+		.b5[data-action="saveBilling"], 
+	    .b5[data-action="editShipping"],
+		.b5[data-action="editBilling"]{ 
+            position: absolute;
+            top: px(10px);
+            right: px(10px);
+        }
+		
         .billing{
             .payment ul{
                 background-color: $superLightGrey;
@@ -253,7 +263,7 @@
             float: left;
 			margin-bottom: px(20px);
             
-            label{ color: $grey; }
+            label{ color: $grey; font-weight: normal; }
             
             h2{
                 padding-left: 1.2em;
@@ -296,11 +306,6 @@
             }
             .value.state:after{ content: ','; }
             .value.phone{ margin-top: px(20px); }
-            .b5{ /* Edit link */
-                position: absolute;
-                top: px(10px);
-                right: px(10px);
-            }
         }   
         #checkout-insertPromoCode, #checkout-insertGiftCard{ 
             
@@ -358,6 +363,7 @@
                 
                 float: left;
                 
+				.data{ font-weight:bold; }
                 .productQuantity{
                     font-weight: bold;
                 }
@@ -391,7 +397,10 @@
                 padding-bottom: px(10px);
             }
             
-            label{ color: $grey; }
+            label{ 
+				color: $grey;
+				font-weight: normal;
+			}
             
             .value{ font-weight: bold;}
             
@@ -413,7 +422,9 @@
             .orderTotal{
                 
                 background-color: $superLightGrey;
-                
+                label{ 
+					font-weight: bold;
+				}
                 td{ padding-top: px(10px); }
                 .value{}
             }

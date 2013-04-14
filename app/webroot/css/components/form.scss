@@ -41,8 +41,16 @@
 	input.scroller{                             width : px(20px); }
 
 	/* Style labels */
-	    label{display: block; }
-	    input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; }
+	    label{
+			display: block; 
+			font-weight: bold;
+
+			.details {
+				display: block;
+				font-weight: normal;
+			}
+		}
+	    input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; font-weight: normal;}
 
 	.field{
 	    margin-bottom: px(10px);
@@ -71,12 +79,6 @@
 	}
 	.validation-valid{
 		border: 1px solid green;
-	}
-	
-	label{
-		.details {
-			display: block;
-		}
 	}
 
 /* Button Styling */
