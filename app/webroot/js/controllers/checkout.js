@@ -287,6 +287,8 @@
 					// the event name will help fire some events like onAPISaveShippingDataSuccess and
 					// onAPISaveShippingDataFailure etc... in almost every case, the method and the eventName
 					// will be the same thing.
+					
+					
 				).done(function(serverResponse){
 					
 					var serverResponse = checkoutForm; // For testing, I'll just 'return' the form values as they are
@@ -334,7 +336,7 @@
 				// Send a request to the server, return a Deferred object
 				
 				var deferred = $.Deferred();
-				var checkoutForm = _util.formToObject($('#checkoutForm')[0], null, false);;
+				var checkoutForm = _util.formToObject($('#checkoutForm')[0], null, false);
 				
 				$.when(
 					// Make API request here using data

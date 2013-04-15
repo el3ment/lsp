@@ -110,11 +110,13 @@
 							$('#shippingSummary').html(summaryHTML);
 							_app.controllers.application.attachEvents($('#shippingSummary'));
 				
-							// Hide the input panel
-							_this.toggleStepVisability('shipping');
 					
 							// Move to billing
 							_this.proceedTo('billing');
+				
+							// Hide the input panel
+							_this.toggleStepVisability('shipping');
+					
 							
 						})
 						
@@ -142,11 +144,12 @@
 							$('#billingSummary').html(summaryHTML);
 							_app.controllers.application.attachEvents($('#billingSummary'));
 				
+							// Move to billing
+							_this.proceedTo('review');
+							
 							// Hide the input panel
 							_this.toggleStepVisability('billing');
 					
-							// Move to billing
-							_this.proceedTo('review');
 							
 						})
 						
@@ -288,7 +291,6 @@
 					// onAPISaveShippingDataFailure etc... in almost every case, the method and the eventName
 					// will be the same thing.
 					
-					_api.request(_this, 'saveShippingData', 'saveShippingData', checkoutForm['shipping'])
 					
 				).done(function(serverResponse){
 					
