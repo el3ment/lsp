@@ -41,6 +41,9 @@
 									preventDefault = true;
 								}else{
 									eventType = 'click';
+									if(element.is('button, submit')){
+										preventDefault = true;
+									}
 								}
 								
 	                            if(controller && action && !asset){

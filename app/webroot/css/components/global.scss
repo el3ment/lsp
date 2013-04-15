@@ -14,12 +14,18 @@
 /* Application Wide Styles */
 html{
     
+	width: 100%;
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     
 
-    body{ 
+    body{
+		
+		width: 100%;
+		padding: $fluidGutterPercentage;
+		@include box-sizing();
+		
         font-family: 'Open Sans', sans-serif;
         color: $black;
         font-size: 13px;
