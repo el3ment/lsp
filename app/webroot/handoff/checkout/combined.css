@@ -196,8 +196,8 @@ li {
  */
 @font-face {
   font-family: "League Gothic";
-  src: url("../files/leaguegothic-regular-webfont.eot");
-  src: local("☺"), url("../files/leaguegothic-regular-webfont.eot") format('eot'), url('../files/leaguegothic-regular-webfont.woff') format('woff'), url('../files/leaguegothic-regular-webfont.ttf') format('truetype'), url('../files/leaguegothic-regular-webfont.svg#LeagueGothic') format('svg');
+  src: url("http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot");
+  src: local("☺"), url("http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot") format('eot'), url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.woff') format('woff'), url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype'), url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.svg#LeagueGothic') format('svg');
   font-weight: bold;
   font-style: normal; }
 /*
