@@ -13,6 +13,7 @@
 }
 
 *[class*="icon-24-"]{
+	content: '  ';
     
     padding-left: 30px;
 
@@ -25,6 +26,7 @@
 
 *[class*="icon-16-"]{
     
+	content: '   ';
     padding-left: 20px;
 
     &:after{

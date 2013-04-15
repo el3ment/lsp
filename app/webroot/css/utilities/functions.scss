@@ -44,6 +44,13 @@
   border-radius: #{$size};
 }
 
+@mixin box-sizing($method : border-box){
+	-webkit-box-sizing: $method; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: $method;    /* Firefox, other Gecko */
+	box-sizing: $method;	
+}
+
+
 @mixin clearfix(){
     zoom: 1; /* Sigh... This is to clearfix for IE7 */
     &:after{

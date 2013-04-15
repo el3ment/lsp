@@ -38,51 +38,51 @@
 		<div class='process span7'>
 			<form id='checkoutForm'>
 				<div id='shippingSummary'></div>
-				<div id='shippingInputPanel' class='shipping engaged panel hide'>
+				<div id='shippingInputPanel' class='shipping engaged panel row-fluid hide'>
 					<fieldset class='shippingAddress'>
 						<h2>Shipping Address</h2>
 						<ul>
-							<li class='country field'>
+							<li class='country span8 field'>
 								<label>Country</label>
 								<select name='shipping.country' data-controller='checkout' data-action='updateCountry'>
 									<option>Select a Country</option>
 									<option>United States</option>
 								</select>
 							</li>
-							<li class='name field'>
+							<li class='name span8 field'>
 								<label>Full Name</label>
 								<input type='text' name='shipping.name' />
 							</li>
-							<li class='address1 field'>
+							<li class='address1 span8 field'>
 								<label>Street Address</label>
 								<input type='text' name='shipping.address1' />
 							</li>
-							<li class='address2 field'>
+							<li class='address2 span8 field'>
 								<label>Optional Address</label>
 								<input type='text' name='shipping.address2' />
 							</li>
-							<li class='city field'>
+							<li class='city span8 field'>
 								<label>City</label>
 								<input type='text' name='shipping.city' />
 							</li>
-							<li class='state field'>
+							<li class='state span4 field'>
 								<label>State</label>
 								<select name='shipping.state'>
 									<option>Texas</option>
 								</select>
 							</li>
-							<li class='zipcode field'>
+							<li class='zipcode span4 field'>
 								<label>Zip Code</label>
 								<input type='text' name='shipping.zipcode' data-controller='checkout' data-action='updateZipcode'/>
 							</li>
-							<li class='phone field'>
+							<li class='phone span8 field'>
 								<label>Phone Number</label>
 								<input type='tel' name='shipping.phone' />
 							</li>
 							<li class='promo field'>
 								<input id='insertPromoCode' type='checkbox' data-reveal-children='checkout-insertPromoCode' />
 								<label for='insertPromoCode'>Do you have a promo code?</label>
-								<div id='checkout-insertPromoCode' class='hide'>
+								<div id='checkout-insertPromoCode' class='hide span8 '>
 									<label>Promotional Code</label>
 									<input type='text' name='promo' />
 									<button class='b2' data-controller='checkout' data-action='applyPromoCode'>Apply</button>
@@ -94,7 +94,7 @@
 					<fieldset class='orderTracking'>
 						<h2>Order Tracking</h2>
 						<ul>
-							<li class='email field'>
+							<li class='email span8 field'>
 								<label>Email Address <span class='details'>(for order tracking information)</span></label>
 								<input type='email' name='shipping.email' />
 							</li>
@@ -115,7 +115,7 @@
 				</div>
 		
 				<div id='billingSummary' class=''></div>
-				<div id='billingInputPanel' class='billing engaged panel hide'>
+				<div id='billingInputPanel' class='billing engaged panel hide row-fluid'>
 					<fieldset class='billingAddress'>
 						<h2>Billing Address</h2>
 						<ul>
@@ -125,40 +125,40 @@
 							</li>
 						</ul>
 						<ul id="billingAddress">
-							<li class='country field'>
+							<li class='country span8 field'>
 								<label>Country</label>
 								<select name='billing.country' data-controller='checkout' data-action='updateCountry'>
 									<option>Select a Country</option>
 									<option>United States</option>
 								</select>
 							</li>
-							<li class='name field'>
+							<li class='name span8 field'>
 								<label>Full Name</label>
 								<input type='text' name='billing.name' class='validation-required' />
 							</li>
-							<li class='address1 field'>
+							<li class='address1 span8 field'>
 								<label>Street Address</label>
 								<input type='text' name='billing.address1' class='validation-required' />
 							</li>
-							<li class='address2 field'>
+							<li class='address2 span8 field'>
 								<label>Optional Address</label>
 								<input type='text' name='billing.address2' />
 							</li>
-							<li class='city field'>
+							<li class='city span8 field'>
 								<label>City</label>
 								<input type='text' name='billing.city' />
 							</li>
-							<li class='state field'>
+							<li class='state span8 field'>
 								<label>State</label>
 								<select name='billing.state'>
 									<option>Texas</option>
 								</select>
 							</li>
-							<li class='zipcode field'>
+							<li class='zipcode span8 field'>
 								<label>Zip Code</label>
 								<input type='text' name='billing.zipcode' data-controller='checkout' data-action='updateZipcode' class='validation-required' />
 							</li>
-							<li class='phone field'>
+							<li class='phone span8 field'>
 								<label>Phone Number</label>
 								<input type='tel' name='billing.phone' class='validation-required' />
 							</li>
@@ -168,15 +168,15 @@
 						<h2>Payment</h2>
 						<div class='secureBlock'>
 							<ul class='panel'>
-								<li class='name field'>
+								<li class='name span8 field'>
 									<label>Name on Card</label>
 									<input type='text' name='billing.name' />
 								</li>
-								<li class='creditCardNumber field'>
+								<li class='creditCardNumber span5 field'>
 									<label>Number</label>
 									<input type='text' name='billing.creditCardNumber' class='validation-creditCardNumber' />
 								</li>
-								<li class='creditCardType field'>
+								<li class='creditCardType span3 field'>
 									<label>Type</label>
 									<select name='billing.creditCardType'>
 										<option value='visa'>Visa</option>
@@ -187,20 +187,20 @@
 									<input type='text' name='billing.creditCardCVS' />
 									<div class='image-creditCardCSV-visa'></div>
 								</li>
-								<li class='creditCardExpirationMonth field'>
+								<li class='creditCardExpirationMonth span5 field'>
 									<label>Expiration Month</label>
 									<select name='billing.creditCardExpirationMonth'>
 										<option value='visa'>09 - September</option>
 									</select>
 								</li>
-								<li class='creditCardExpirationYear field'>
+								<li class='creditCardExpirationYear span3 field'>
 									<label>Expiration Year</label>
 									<select name='billing.creditCardExpirationYear'>
 										<option value='visa'>2012</option>
 									</select>
 								</li>
 							</ul>
-							<div class='image-nortonSecurity'></div>
+							<div class='image-nortonSecurity hidden-phone'></div>
 						</div>
 					</fieldset>
 					<fieldset class='giftCard'>
@@ -212,7 +212,7 @@
 									Do you want to use your Gift Card?
 									<span class='details'>Redeeming a gift card is easy!</span>
 								</label>
-								<div id='checkout-insertGiftCard' class='hide'>
+								<div id='checkout-insertGiftCard' class='hide span8'>
 									<label for='giftCardNumber'>Gift Card Number</label>
 									<input type='text' name='giftCardNumber' />
 									<button class='b2'>Apply</button>
@@ -292,7 +292,7 @@
 					<td colspan='2'><h2>Order Summary</h2></td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="hidden-phone">
 				<# for(var i = 0; i < this.products.length; i++){ #>
 				<tr class='productScope'>
 					<td class='product'>
@@ -332,7 +332,7 @@
 	
 		</table>
 		<button class='b1 hide' data-controller='checkout' data-action='finishOrder'>Finish Order</button>
-		<div class='advertisement ad-noHassleReturns'>Advertisement</div>
+		<div class='advertisement hidden-phone ad-noHassleReturns'>Advertisement</div>
 	</script>
 	
 	<script id='template-checkout-shippingMethods' type='text/html'>

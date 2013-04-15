@@ -194,7 +194,7 @@
 			
 			/* Process Centered Methods */
 			proceedTo : function(stepName){
-				if(_completedSteps.indexOf(stepName) == -1){
+				if($.inArray(stepName, _completedSteps) < 0){
 					
 					// Do these things only once per step
 					_completedSteps.push(stepName);

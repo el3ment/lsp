@@ -24,6 +24,7 @@ html div.page-checkout{
             
             /* Circles */
             li{
+				content: '  ';
                 width: px($spaceBetweenSteps);
                 vertical-align: bottom;
                 display: block;
@@ -35,7 +36,7 @@ html div.page-checkout{
             /* Step Indicator (Background Circle) */
             li:before, li.completed:after,
 			li.start span:before{
-                content: ' ';
+                content: '   ';
                 display: block;
                 overflow: hidden;
                 width: px($mediumCircleDiameter);
@@ -52,17 +53,19 @@ html div.page-checkout{
             /* Indicator for Completed Steps (Small Black Inner circle) */
             li.completed:after, ul:after,
 			li.start span:before{
+				content: '    ';
                 background-color: $black;
                 width: px($smallCircleDiameter);
                 height: px($smallCircleDiameter);
                 @include border-radius(px($smallCircleDiameter));
-                top: px(-($mediumCircleDiameter - $smallCircleDiameter/2px) - $smallCircleDiameter);
+                top: px(-($mediumCircleDiameter - $smallCircleDiameter/2) - $smallCircleDiameter);
                 left: px($smallCircleDiameter/2 - $mediumCircleDiameter/2);
                 z-index: 2;
             }
             
             /* Indicator for Active Step (Big Black Dot) */
             li.active:before{
+				content: '      ';
                 background-color: $black;
                 width: px($largeCircleDiameter);
                 height: px($largeCircleDiameter);
@@ -75,11 +78,11 @@ html div.page-checkout{
             
 			/* Black Progress Bar and Grey Track */
             li.active:after, li.start span:before{
-                content: ' ';
+                content: '       ';
                 position: absolute;
                 top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter);
                 background-color: $black;
-                height: px($smallCircleDiameter/4);
+                height: px($smallCircleDiameter / 4);
                 display: block;
                 width: 0;
                 @include border-radius(0);
@@ -88,23 +91,28 @@ html div.page-checkout{
             
             /* Grey Track */
             li.start span:before{
+				content: '         ';
                 background-color:$superLightGrey;
                 z-index:1;
                 width: px($spaceBetweenSteps * ($numberOfSteps - 1));
                 left: 50%;
+				top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter - 2);
             }
 
             /* Progress Bar */
             li.active.start:after{ width: 0; }
             li.active.shipping:after{
+				content: '           ';
                 width: px($spaceBetweenSteps);
                 left: px(-$spaceBetweenSteps + ($spaceBetweenSteps / 2));
             }
             li.active.billing:after{
+				content: '       ';
                 width: px($spaceBetweenSteps * 2);
                 left: px(-$spaceBetweenSteps * 2 + ($spaceBetweenSteps / 2));
             }
             li.active.review:after{ 
+				content: '         ';
                 width: px($spaceBetweenSteps * 3);
                 left: px(-$spaceBetweenSteps * 3 + ($spaceBetweenSteps / 2)); 
             }
@@ -114,12 +122,13 @@ html div.page-checkout{
 				padding:0;
 			}
 			li span:after{
+				content: '     ';
 				display: none;
 				padding: 0;
 			}
 			li.active span:after{
 				$width : 32px;
-				content: ' ';
+				content: '       ';
 				position: absolute;
 				display:block;
 				width: $width;
@@ -205,10 +214,12 @@ html div.page-checkout{
         .proceed{
         	position: absolute;
 			width: 100%;
-			bottom: px(-55px);
+			margin-left:-px($paddingUnit);
+			bottom: px(-80px);
+			height: px(70px);
 			right: px(-5px);
 			.notice{
-				
+				width: 45%;
 			}
         }
         .shipping {
@@ -245,7 +256,7 @@ html div.page-checkout{
 				}
 				*[class*='image-']{
 					float:left;
-					margin-left: px($paddingUnit);
+					margin-left: px(15px);
 					margin-top: -1em; /* Intentionally 1em */
 				}
 			}
@@ -330,6 +341,7 @@ html div.page-checkout{
 		.b1{
 			float: right;
 			margin-bottom: px(20px);
+			@include clearfix();
 		}
 		
         .cart{
@@ -339,6 +351,9 @@ html div.page-checkout{
         }
         table{
         	width: 100%;
+			td{
+				width: 100%;
+			}
         }
         thead{
             td{ padding: px(10px) 0 0 px(10px); }

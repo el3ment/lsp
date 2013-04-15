@@ -2,12 +2,13 @@
 /* Fonts */
 @font-face {
      font-family: "League Gothic";
-     src: url("../files/leaguegothic-regular-webfont.eot") format('embedded-opentype'), 
+	 src: url("../files/leaguegothic-regular-webfont.eot");
+     src: local("☺"), url("../files/leaguegothic-regular-webfont.eot") format('eot'),
      url('../files/leaguegothic-regular-webfont.woff') format('woff'),
      url('../files/leaguegothic-regular-webfont.ttf') format('truetype'),
-     url('../files/leaguegothic-regular-webfont.svg') format('svg');
+     url('../files/leaguegothic-regular-webfont.svg#LeagueGothic') format('svg');
      font-weight:bold;
-    font-style:normal;
+     font-style:normal;
   }
 
 /* Application Wide Styles */
@@ -98,9 +99,7 @@ html{
         @include border-radius(px($borderRadius));
         padding: px($paddingUnit) px($paddingUnit * 2) 0;
 		
-		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-		box-sizing: border-box;
+		@include box-sizing();
 		
         margin-bottom: px($paddingUnit * 2);
         color: $black;

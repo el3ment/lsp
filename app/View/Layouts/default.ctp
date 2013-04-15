@@ -2,11 +2,10 @@
 <html>
 <head>
 	<?php
-        echo $this->Html->css(array('complete', 'vendors/bootstrap/bootstrap'));
+        echo $this->Html->css(array('vendors/bootstrap/bootstrap','complete'));
 	?>
-	
 
-    <script type='text/javascript' src='js/vendors/jquery/jquery-1.6.2.js'></script>
+    <script type='text/javascript' src='js/vendors/jquery/jquery-1.9.1.js'></script>
 	
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
     <script type='text/javascript' src='js/vendors/jqzoom/jqzoom.js'></script>
@@ -46,11 +45,11 @@
 			
 	    </style>
 		
-        <?php echo $this->element('header'); ?>
+        <!--<?php echo $this->element('header'); ?>-->
         
 		<?php echo $this->fetch('content'); ?>
 		
-		<?php echo $this->element('footer'); ?>
+		<!--<?php echo $this->element('footer'); ?>-->
         
     </body>
 </html>

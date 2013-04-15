@@ -32,18 +32,19 @@
 	                            var action = element.data('action');
 	                            var asset = element.data('asset');
 								var preventDefault = false;
+								var eventType;
 								
 								if(element.is('input[type="radio"], input[type="checkbox"], input[type="text"], select')){
-									event = 'change';
+									eventType = 'change';
 								}else if(element.is('form')){
-									event = 'submit';
+									eventType = 'submit';
 									preventDefault = true;
 								}else{
-									event = 'click';
+									eventType = 'click';
 								}
 								
 	                            if(controller && action && !asset){
-									element.bind(event, {preventDefault : preventDefault}, function(e){  
+									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
 	                                    $(_app.controllers[controller]).
 	                                        triggerHandler(_util.camelCase('on-'+action), 
 	                                            {selector : element});
@@ -53,7 +54,7 @@
 	                                });
 								
 	                            }else if(controller && action && asset){
-	                                element.bind(event, {preventDefault : preventDefault}, function(e){  
+	                                element.bind(eventType, {preventDefault : preventDefault}, function(e){  
 	                                    $(_app.controllers[controller].assets[asset]).
 	                                        triggerHandler(_util.camelCase('on-'+action), 
 	                                            {selector : element});
@@ -70,7 +71,7 @@
                         
                         
                         // Add pagetype to the body tag for CSS styling
-                        $('body').data('pagetype', $('*[data-pagetype:first').data('pagetype'));
+                        $('body').data('pagetype', $('*[data-pagetype]:first').data('pagetype'));
                     },
                     onInit : function(e, data){}
                 }
