@@ -18,13 +18,16 @@ html{
     font-size: 100%;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    
+	margin: 0 $fluidGutterPercentage;
+	@include box-sizing();
+
+    .row.span12{
+    	margin-left:0;
+    }
 
     body{
 		
 		width: 100%;
-		padding: $fluidGutterPercentage;
-		@include box-sizing();
 		
         font-family: 'Open Sans', sans-serif;
         color: $black;
@@ -33,7 +36,8 @@ html{
     }
     
     /* Content Container */
-    div[class|="page"]{
+    div[class|="page"],
+	.header{
         //margin: auto;
         //max-width: px(940px);
         //clear: both;
@@ -177,11 +181,12 @@ html{
                 border-bottom: 0;
             }
             label{
-                margin: px($paddingUnit) px($paddingUnit) 0 0;
+                margin: px($paddingUnit+3) px($paddingUnit) 0 0;
                 display: inline; /* IE */
                 display: inline-block;
             }
-            input, select{ 
+            input, select{
+				width: 60%;
                 float: none;
                 display: inline;
                 display: inline-block;
@@ -225,7 +230,7 @@ html{
             .details{ display: block; }
         }
         .quantity{
-            input{ float: none; }
+            input{ float: none; width: px(50px); }
         }
         .productAvailability{ background-color: white; }
         .action{
@@ -425,62 +430,71 @@ html{
     /* Dynamic Item Suggestions are the horizontal lists of items that are populated by easyask and list products
      * like "People who bought this also bought" or "Similar items" */
     .dynamicItemSuggestions{
+		
+		.well{
+			height: px(250px);
+			width: 100%;
+		}
+		
+		.itemList{
         
-        
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border: 1px solid $lightGrey;
-        border-width: 1px 0 3px 0;
-        
-        .productScope{
+			width:;
+	        margin-bottom: 0;
+	        padding-bottom: 0;
+	        border: 1px solid $lightGrey;
+	        border-width: 1px 0 3px 0;
+		
+	        .productScope{
             
-            border: 1px solid $lightGrey;
-            border-bottom-width: 0;
-            border-top-width: 0;
-            border-right-color: transparent;
-            float: left;
-            width: 16.4%;
-            position: relative;
-            display: block;
-            padding-bottom: px(2 * $paddingUnit);
+	            border: 1px solid $lightGrey;
+	            border-bottom-width: 0;
+	            border-top-width: 0;
+	            border-right-color: transparent;
+	            float: left;
+	            width: 18	0px;
+	            position: relative;
+	            display: block;
+	            padding-bottom: px(2 * $paddingUnit);
             
-            a{
-                width: 100%;
-                height: 100%;
-                display: block;
-                text-decoration: none;
-            }
+	            a{
+	                width: 100%;
+	                height: 100%;
+	                display: block;
+	                text-decoration: none;
+	            }
             
-            &:nth-child(1){
-                border-left-color: transparent;
-            }
-            &:last-child{
-                border-right-color: transparent;
-            }
-            img{ margin: px($paddingUnit + 2);}
+	            &:nth-child(1){
+	                border-left-color: transparent;
+	            }
+	            &:last-child{
+	                border-right-color: transparent;
+	            }
+	            img{ margin: px($paddingUnit + 2);}
             
-            .productPrice{ 
-                font-weight: bold;
-                padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
-                text-decoration: none;
-                color: $black;
-            }
-            .productName{ 
-                display: block; 
-                padding: 0 px($paddingUnit + 2);
-                color: $black;
-            }
-            &:hover{
-                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-                border: 1px solid $darkYellow;
-                border-bottom-width: 0;
-                border-top-width: 0;
-            }
-        }
+	            .productPrice{ 
+	                font-weight: bold;
+	                padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
+	                text-decoration: none;
+	                color: $black;
+	            }
+	            .productName{ 
+	                display: block; 
+	                padding: 0 px($paddingUnit + 2);
+	                color: $black;
+	            }
+	            &:hover{
+	                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+	                border: 1px solid $darkYellow;
+	                border-bottom-width: 0;
+	                border-top-width: 0;
+	            }
+	        }
         
-        @include clearfix;
+	        @include clearfix;
         
+	    }
     }
+	
     
     
     /* Definitions are marked with the attribute "data-def" - any text with this attribute
@@ -549,6 +563,9 @@ html{
 	}
 	
 	/* Data-Reveal Children Plugin */
+	*[data-reveal-children]{
+		cursor: pointer;
+	}
 	.reveal-child{
 		display: none !important;
 	}

@@ -42,8 +42,8 @@
       
       /* The left hand side containing giant picture, video and audio links */
         
-        width: px(columns(6));
-        float:left;
+        //width: px(columns(6));
+        //float:left;
         
         li{ 
             display: block;
@@ -69,7 +69,8 @@
                 height: px(32px);
             }
             .video{
-                width: px(columns(6) - $gutterWidth);
+                //width: px(columns(6) - $gutterWidth);
+				width: 100%;
                 padding: px(2* $paddingUnit);
                 border: 1px solid $lightGrey;
                 background-color: $superLightGrey;
@@ -82,19 +83,28 @@
                 display:inline-block;
             }
             .zoom-thumbnails{
+				position: relative;
                 &:before{
                     content : 'Hover over image to zoom';
                     font-style: italic;
                     display: block;
+					position: absolute;
+					top: -1.5em;
+					height: 1.5em;
                     margin: px($paddingUnit) 0;
+					width:100%;
+					text-align:center;
                     color: $lightGrey;
                 }
-                a img{
-                    border: 1px solid $lightGrey;
-                    &:hover{
-                        @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
-                        border-color: $darkYellow;   
-                    }
+                a{
+					vertical-align: bottom;
+					img{
+	                    border: 1px solid $lightGrey;
+	                    &:hover{
+	                        @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
+	                        border-color: $darkYellow;   
+	                    }
+	                }	
                 }
                 li{ 
                     display:inline-block;  
@@ -110,13 +120,12 @@
    
     .media .section,
     .information .section{
-        
+		
         padding-bottom: px(2 * $paddingUnit);
         border-bottom: 1px solid $lightGrey;
         &:last-child{ border-bottom-width: 0; }
         
         > .b3[data-reveal-children]{ /* The plus/minus toggle button */
-            margin-top: px(2 * $paddingUnit + 2);
             margin-right: px(2 * $paddingUnit);
             text-indent: px(1000px);
             float:left;
@@ -129,7 +138,7 @@
             @include gradient($lightGreyGradientTop, $lightGreyGradientBottom);
         }
         > h2{  /* Section headers */
-            float: left;
+			margin-top: px(2 * $paddingUnit + 2);
             line-height: 1em;
             margin-bottom: $paddingUnit;
         }
@@ -150,9 +159,9 @@
     }
     .information{
         
-        width: px(columns(6));
-        margin-left: $gutterWidth;
-        float: right;
+        //width: px(columns(6));
+        //margin-left: $gutterWidth;
+        //float: right;
         
         .addToCart{}
         .addRelatedItems{}
@@ -194,37 +203,38 @@
             padding: 1em 0 0 0;
             .panel{ margin-bottom: 0; }
             .review{
-                float: left;
+                //float: left;
+				//width: 100%;
                 margin-bottom: 1em;
                 .field{ float: none;
-                    input{ width: columns(6) - $gutterWidth; }
+                    //input{ width: columns(6) - $gutterWidth; }
                 }
-                textarea{ width: px(columns(5) + $gutterWidth + 10); }
+                //textarea{ width: px(columns(5) + $gutterWidth + 10); }
             }
             .author{
-                float: left;
+                //float: left;
                 clear: none;
-                width: px(columns(5));
-                margin-left: px($gutterWidth);
+                //width: px(columns(5));
+                //margin-left: px($gutterWidth);
                 margin-bottom: 1em;
                 .firstName{
                     float: left;
-                    label, input{ width: px(200px); }
+                    //label, input{ width: px(200px); }
                 }
                 .lastInitial{
                     float: left;
                     clear: none;
-                    margin-left: px($paddingUnit);
-                    input{ width: px(100px); }
+                    margin-left: $fluidGutterPercentage;
+                    //input{ width: px(100px); }
                 }
                 .city{
                     float: left;
-                    input{ width: px(200px); }
+                    //input{ width: px(200px); }
                 }
                 .state{
                     margin-left: px($paddingUnit);
                     clear: none;
-                    select{ width: px(100px); }
+                    //select{ width: px(100px); }
                 }
                 .experience{
                     /* IE7 */
@@ -262,12 +272,14 @@
             .submit{
                 
                 border-top: 1px solid $lightGrey;
+				padding: px($paddingUnit) 0;
                 clear: both;
                 
                 .details{
-                    margin: 1em; /* matches button */
+					margin-top:1.2em;
+					height:1em;
+					top:-.5em;
                     position: relative;
-                    top: px(3px);
                     float: right;
                 }
             }
@@ -371,7 +383,8 @@
                 
                 .review{
                     
-                    float: left;
+                    float: none;
+					overflow: hidden;
                     margin-left: px($gutterWidth);
                     
                     .reviewItemReviewed{
@@ -381,7 +394,8 @@
                     .reviewTitle,
                     .reviewDatePublished,
                     .reviewReviewBody{
-                        width: px(columns(7));
+                        width: 100%;
+						max-width: px(700px);
                         float: left;
                         clear: left;
                     }
@@ -395,7 +409,7 @@
                 }
                 
                 .points{
-                    float:left;
+                    float:right;
                     width: px(columns(2));
                     margin-left: px($gutterWidth);
                     .cons{

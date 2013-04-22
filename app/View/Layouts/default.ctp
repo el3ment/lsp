@@ -16,8 +16,8 @@
 	<script type='text/javascript' src='js/controllers/plugins/reveal.js'></script>
 	<script type='text/javascript' src='js/models/cart.js'></script>
         
-    <!--
-	<script type='text/javascript' src='js/vendors/jqzoom/jqzoom.js'></script>
+    
+	
 	<script type='text/javascript' src='js/vendors/jcookie/jcookie.js'></script>
 	<script type='text/javascript' src='js/models/api.js'></script>
 		
@@ -29,7 +29,7 @@
     <script type='text/javascript' src='js/controllers/plugins/definitions.js'></script>
     
     <script type='text/javascript' src='js/controllers/plugins/validation.js'></script>
-    <script type='text/javascript' src='js/controllers/plugins/zoom.js'></script>
+    
     
     <script type='text/javascript' src='js/controllers/reviews.js'></script>
     <script type='text/javascript' src='js/controllers/shipping.js'></script>
@@ -37,19 +37,22 @@
     <script type='text/javascript' src='js/controllers/product.js'></script>
 	<script type='text/javascript' src='js/controllers/list.js'></script>
 	
+	<!--g
+	<script type='text/javascript' src='js/vendors/jqzoom/jqzoom.js'></script>
 	<link rel='stylesheet' type='text/css' href='js/vendors/jqzoom/jqzoom.css'>
+	<script type='text/javascript' src='js/controllers/plugins/zoom.js'></script>
 	-->
     <script type='text/javascript' src='js/controllers/checkout.js'></script>
     <script type='text/javascript' src='js/controllers/application.js'></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css' />
 </head>
-    <body>
+    <body class='row'>
 		
-        <!--?php echo $this->element('header'); ?-->
+        <?php echo $this->element('header'); ?>
         
 		<?php echo $this->fetch('content'); ?>
 		
-		<!--?php echo $this->element('footer'); ?-->
+		<?php echo $this->element('footer'); ?>
         
     </body>
 </html>

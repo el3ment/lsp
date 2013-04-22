@@ -2,7 +2,6 @@
 .header {
     
     /* Layout */
-    width: px($pageWidth);
     margin:0 auto px(20px);
     @include clearfix;
     
@@ -70,7 +69,6 @@
         /* The list of actions at the top of the page */
         
         float: right;
-        width:100%;
         background-color: black;
         
         li {    
@@ -111,7 +109,6 @@
         line-height: px(41px);
         
         li {
-            float: left;
             position: relative;
             margin-left: px($paddingUnit);
         }
@@ -140,67 +137,86 @@
             }
             
         }
-        .wishlist .b3{
-            width: px(35px);
+        .wishlist{
+			float: right;
+			.b3{
+           	  	width: px(35px);
+			}
         }
         .departments{
+			float: left;
             margin-left: 0;   
         }
-        .cart .b3{
-            width: px(50px);
-            padding-right: px(35px); /* Only if we are going to use the count */
-            margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
-            margin-right: 0;
+        .cart{
+			
+			float: right;
+			
+		 	.b3{
+	        	width: px(50px);
+		        padding-right: px(35px); /* Only if we are going to use the count */
+		        margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
+		        margin-right: 0;
+        
+		        .count{
+		            background-color: $yellow;
+		            color: black;
+		            padding: px(3px);
+		            position: absolute;
+		            font-weight: bold;
+		            padding: px(3px) px(7px);
+		            right: px(22px);
+		            top: px(13px);
+		            @include border-radius(px(3px));
+		            text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
             
-            .count{
-                background-color: $yellow;
-                color: black;
-                padding: px(3px);
-                position: absolute;
-                font-weight: bold;
-                padding: px(3px) px(7px);
-                right: px(22px);
-                top: px(13px);
-                @include border-radius(px(3px));
-                text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
-                
-                &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
-                  border-color: white transparent transparent transparent;
-                  border-style:solid;
-                  border-width: px(5px);
-                  width:0;
-                  height:0;
-                  content: '';
-                  position: absolute;
-                  top: px(9px);
-                  right: px(-15px);
-                }
-                @include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
-                @include gradient($lightYellow, $yellow);
-            }
-        }
+		            &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
+		              border-color: white transparent transparent transparent;
+		              border-style:solid;
+		              border-width: px(5px);
+		              width:0;
+		              height:0;
+		              content: '';
+		              position: absolute;
+		              top: px(9px);
+		              right: px(-15px);
+		            }
+		            @include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
+		            @include gradient($lightYellow, $yellow);
+		        }
+		    }
+		}
         input.search { /* Main Search bar */
             
-            width: px(500px, $largeInputFontSize);
+            width: 100%;
             display: inline-block;
             margin-right: 0;
             font-size: px($largeInputFontSize);
             padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+			
+			@media (min-width: 768px) and (max-width: 979px) {
+				background-color:red;
+			}
+			
         }
 
-        .search button { /* Magnifying glass button */
-            width: px(44px);
-            height: px(44px);
-            position: absolute;
-            right: px(3px);
-            top: px(3px);
-            margin: 0;
-            text-indent: -$hideDistance;
-            overflow: hidden;
-            &:after{ /* Icon! */
-                left: 50%;
-                margin-left: px(-12px);
-            }
+        .search{
+        	overflow: hidden;
+			float: none;
+			
+			button { /* Magnifying glass button */
+	            width: px(44px);
+	            height: px(44px);
+	            position: absolute;
+	            right: px(3px);
+	            top: px(3px);
+	            margin: 0;
+	            text-indent: -$hideDistance;
+	            overflow: hidden;
+	            &:after{ /* Icon! */
+	                left: 50%;
+	                margin-left: px(-12px);
+	            }
+			}
         }
     }
     
