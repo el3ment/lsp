@@ -21,9 +21,9 @@
 	            </div>
             
 	            <ul class='contact'>
-	                <li class='icon-24-phone'><em>1-800-515-1515</em> / 212-122-1212</li>
-	                <li class='icon-24-texas'><em>1600 Control Place, Dallas Texas 75150</em></li>
-	                <li class='icon-24-clock'>
+	                <li class='icon-24-phone-yellow'><em>1-800-515-1515</em> / 212-122-1212</li>
+	                <li class='icon-24-texas-yellow'><em>1600 Control Place, Dallas Texas 75150</em></li>
+	                <li class='icon-24-clock-yellow'>
 	                  <ul class='hours'>
 	                    <li><strong>Monday-Friday:</strong> 9:30am-6:00pm</li>
 	                    <li><strong>Saturday:</strong> 9:30am-6:00pm</li>
@@ -88,16 +88,16 @@
 	                <h2>follow us</h2>
 	                <ul>
 	                    <li>
-	                        <a class="icon-24-facebook" href="#">Facebook</a>
+	                        <a class="icon-24-facebook-white" href="#">Facebook</a>
 	                    </li>
 	                    <li>
-	                        <a class="icon-24-twitter" href="#">Twitter</a>
+	                        <a class="icon-24-twitter-white" href="#">Twitter</a>
 	                    </li>
 	                    <li>
-	                        <a class="icon-24-youtube" href="#">YouTube</a>
+	                        <a class="icon-24-youtube-white" href="#">YouTube</a>
 	                    </li>
 	                    <li>
-	                        <a class="icon-24-instagram" href="#">Instagram</a>
+	                        <a class="icon-24-instagram-white" href="#">Instagram</a>
 	                    </li>
 	                </ul>
 	            </li>

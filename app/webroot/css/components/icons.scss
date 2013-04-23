@@ -5,7 +5,8 @@
     &:after{
         content: ' ';
         display: block;
-        background-color: black;
+        background: url(../img/lsp-master-sprite.png);
+		background-position: 0 0;
         position: absolute;
         top: 50%;
         left: 2px;
@@ -36,6 +37,60 @@
     }
 }
 
+.icon-24-voteUp:after{
+	background-position: -39px -147px;
+}
+.icon-24-voteDown:after{
+	background-position: -8px -150px;
+}
+
+.icon-24-account-grey:after{
+	background-position: -4px -185px;
+}
+
+.icon-24-chat-grey:after{
+	background-position: -155px -185px;
+}
+
+.icon-24-box-grey:after{
+	background-position: -82px -185px;
+}
+
+.icon-24-texas-grey:after{
+	background-position: -43px -185px;
+}
+
+.icon-24-card-grey:after{
+	background-position: -117px -185px;
+}
+
+.icon-24-star-black:after{
+	background-position: -45px -256px;
+}
+
+.icon-24-magnify-black:after{
+	background-position: -7px -256px;
+}
+
+.icon-24-star-yellow:after{
+	background-position: -8px -220px;
+}
+.icon-24-phone-yellow:after{
+	background-position: -82px -220px;
+}
+.icon-24-clock-yellow:after{
+	background-position: -43px -220px;
+}
+.icon-24-texas-yellow:after{
+	background-position: -118px -220px;
+}
+
+.icon-24-heart-white:after{
+	background-position: -8px -292px;
+}
+.icon-24-cart-white:after{
+	background-position: -45px -292px;
+}
 /*
 .icon-texas
 .icon-texas

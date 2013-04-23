@@ -302,7 +302,11 @@
 	                </ul>
 	                <ul class='review'>
 	                    <li itemprop="itemreviewed" class='reviewItemReviewed'>IP240 The Name of the Product</li>
-	                    <li itemprop="rating" class='reviewReviewRating'>3.5</li>
+	                    <li class='reviewReviewRating'>
+							<div class='aggregateReviews'>
+								<span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
+							</div>
+						</li>
 	                    <li itemprop="summary" class='reviewTitle'>I love this stand!</li>
 	                    <li itemprop="dtreviewed" class='reviewDatePublished'>December 1, 2012</li>
 						<li class='reviewAuthorName'>by Robert P.</li>

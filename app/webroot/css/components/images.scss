@@ -2,27 +2,32 @@
 @import "functions";
 
 *[class*="image-"]{
-    background-color: red;
+    background: url(../img/lsp-master-sprite.png);
     display: block;
+	background-position: 0px 0px;
     text-indent: -$hideDistance;
     overflow: hidden;
 }
 
 .image-logoCircle{
-    width: 128px;
-    height: 128px;
+	background-position: 0px 0px;
+    width: 140px;
+    height: 140px;
 }
 .image-logoRect{
+	background-position: -156px 6px;
     width: 241px;
     height: 115px;
 }
 .image-mcafee{
+	background-position: -61px -431px;
     width: 120px;
     height: 50px;
 }
 .image-creditCards{
-    width: 125px;
-    height: 50px;
+	background-position: -200px -431px;
+    width: 170px;
+    height: 28px;
 }
 .image-creditCardCSV-visa{
 	width: 190px;
