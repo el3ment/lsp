@@ -1,14 +1,16 @@
-<div class='footer row container'>
-    <div class='banner span12 row'>
-        <div class='profile'><img src='http://placehold.it/140x140' /></div>
-        <ul class='security hidden-phone'>
-            <li class='image-creditCards'>All major cards accepted.</li>
-            <li><a href='#' class='mcafee image-mcafee'>McAfee</a></li>
-        </ul>
-        <div class='content'> <strong>We speak drum.</strong> At Lone Star Percussion, we’re musicians too – we have a wealth of experience when it comes to percussion, so <a href='#'>let us know how we can help.</a> </div>
-    </div>
+<div class='footer'>
+	<div class='banner'>
+	    <div class='rowContent span12 row'>
+	        <div class='profile'><img src='http://placehold.it/140x140' /></div>
+	        <ul class='security hidden-phone'>
+	            <li class='image-creditCards'>All major cards accepted.</li>
+	            <li><a href='#' class='mcafee image-mcafee'>McAfee</a></li>
+	        </ul>
+	        <div class='content'> <strong>We speak drum.</strong> At Lone Star Percussion, we’re musicians too – we have a wealth of experience when it comes to percussion, so <a href='#'>let us know how we can help.</a> </div>
+	    </div>
+	</div>
     <div class='well'>
-		<div class='row'>
+		<div class='rowContent span12 row'>
 	        <div class='static span4 pull-right'>
 	            <div class='newsletter'>
 	                <h3><strong>Sign up</strong> for our newsletter</h3>
@@ -31,7 +33,7 @@
 	            </ul>
 	        </div>
 	        <ul class='sitemap-lists visible-desktop'>
-	            <li class='span2'>
+	            <li class='first span2'>
 	                <h2>categories</h2>
 	                <ul>
 	                    <li>

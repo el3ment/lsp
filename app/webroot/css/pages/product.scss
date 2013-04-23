@@ -138,15 +138,21 @@
             text-indent: px(1000px);
             float:left;
             text-indent: px(-$hideDistance);
-            width: px(25px);
-            height: px(25px);
+            width: px(32px);
+            height: px(32px);
             border-color: $taintedGrey;
             overflow: hidden;
             padding:0;
             @include gradient($lightGreyGradientTop, $lightGreyGradientBottom);
+			
+			@media (max-width: 980px){
+				float: right;
+			}
+			
         }
         > h2{  /* Section headers */
             line-height: 1em;
+			padding-top: 2px;
             margin-bottom: $paddingUnit;
         }
         label{ 

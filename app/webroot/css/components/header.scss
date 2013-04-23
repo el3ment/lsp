@@ -2,8 +2,9 @@
 .header {
     
     /* Layout */
-    margin:0 auto px(20px);
+    margin:0 auto px(10px);
 	position: relative;
+	width: 100%;
     @include clearfix;
     
     background-color: #33281E;
@@ -40,10 +41,12 @@
        
         position: relative;
         clear: both;
+		float: none;
+		margin: auto;
         color: #ffffff;
         text-transform: uppercase;
         
-        font-size: 110%;
+        //font-size: 110%;
         
         .logo {
             float: left;
@@ -71,8 +74,14 @@
         /* The list of actions at the top of the page */
         
         float: right;
+		width: 100%;
         background-color: black;
         
+		.utilityLinks{
+        	float: none;
+			margin: auto;
+        }
+		
         li {    
             display: inline-block;
             margin: 0;
@@ -106,6 +115,8 @@
         /* Includes the Shop by Department, Search bar, and other darker buttons */
         
         clear:both;
+		float: none;
+		margin: auto;
         height: px(60px); /* We have to give it a height because the inner li's are float:left */
         padding-top: px(10px); /* Push it down a little from the logo */
         line-height: px(41px);
@@ -227,7 +238,21 @@
         padding: px($paddingUnit) 0;
         width: 100%;
         float: left;
-        
+		
+		@media (max-width: 767px){
+
+			border: 20px solid transparent;
+			border-width: 0 20px;
+			@include box-sizing();
+	
+		}
+		
+		.breadcrumbLinks{
+			float: none;
+			margin: auto;
+			
+		}
+		
         li{ 
           
             /* Each item contains an A tag which contains the text of the category */

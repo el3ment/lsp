@@ -6,19 +6,30 @@
     //margin: auto;
     color: #5b4e44; /* Light brown */
     
-    
+    .rowContent{
+    	margin: auto;
+		float: none;
+    }
     .banner{
        
         /* The banner contains the picture and testimonial quote, as well as the mcafee and credit card security icons */
-       
+       	
         background-color: #f5f4f0;
         position: relative;
         padding: px($_bottomPadding) 0;
         float:left;
-        //width: 100%;
+		width: 100%;
         /* overflow: hidden; /* Stylistic decision */
         margin-top: px(30px); /* 20px + 10 for the top of the profile image */
         
+		@media (max-width: 767px){
+
+			border: 20px solid transparent;
+			border-width: 0 20px;
+			@include box-sizing();
+	
+		}
+		
         .profile{
             position: absolute;
             height: px(135px);
