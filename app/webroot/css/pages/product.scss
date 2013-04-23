@@ -42,8 +42,10 @@
       
       /* The left hand side containing giant picture, video and audio links */
         
-        //width: px(columns(6));
-        //float:left;
+		@media (min-width: 1200px){
+			/* Max width */
+			width: 460px;
+		}
         
         li{ 
             display: block;
@@ -85,7 +87,10 @@
             .zoom-thumbnails{
 				position: relative;
                 &:before{
-                    content : 'Hover over image to zoom';
+					content : 'Hover over image to zoom';
+					@media (max-width: 767px){
+						content : 'Click image to zoom';
+					}
                     font-style: italic;
                     display: block;
 					position: absolute;
@@ -123,6 +128,9 @@
 		
         padding-bottom: px(2 * $paddingUnit);
         border-bottom: 1px solid $lightGrey;
+		margin-bottom: px(2 * $paddingUnit + 2);
+		
+		
         &:last-child{ border-bottom-width: 0; }
         
         > .b3[data-reveal-children]{ /* The plus/minus toggle button */
@@ -138,7 +146,6 @@
             @include gradient($lightGreyGradientTop, $lightGreyGradientBottom);
         }
         > h2{  /* Section headers */
-			margin-top: px(2 * $paddingUnit + 2);
             line-height: 1em;
             margin-bottom: $paddingUnit;
         }
@@ -162,7 +169,11 @@
         //width: px(columns(6));
         //margin-left: $gutterWidth;
         //float: right;
-        
+		
+		@media (min-width: 1200px){
+			width: 680px;
+		}
+		
         .addToCart{}
         .addRelatedItems{}
         
@@ -171,8 +182,6 @@
         @include clearfix;
     }
     .reviews{
-        
-        padding-top: px(10px);
         
         h2{
             margin: px(6px, $h2FontSize) 0 px(15px, $h2FontSize);
@@ -225,14 +234,15 @@
                     float: left;
                     clear: none;
                     margin-left: $fluidGutterPercentage;
-                    //input{ width: px(100px); }
+					@media (max-width: 767px){
+						margin-left: 0;
+					}
                 }
                 .city{
                     float: left;
                     //input{ width: px(200px); }
                 }
                 .state{
-                    margin-left: px($paddingUnit);
                     clear: none;
                     //select{ width: px(100px); }
                 }
@@ -300,8 +310,17 @@
                 overflow: hidden;
                 clear: both;
                 width: 100%;
+				
+				@media (max-width: 767px){
+					display: table; 
+				}
                 
                 &.preview{
+					&.reveal-isOpen{
+						@media (max-width: 767px){
+							display: table !important; /* !important is to fix the hiding/showing problems because I was too lazy */
+						}
+					}
                     &:before{ /* Two colons to hide from IE8 */
 
                         overflow: hidden;
@@ -319,6 +338,7 @@
                         border : 1px solid $grey;
                         border-width: 1px 0;
                         margin: 0 0 px($gutterWidth / 2) 0;
+						line-height:1emboss;
                         
                         @include gradient($buttonLightGrey, $buttonDarkGrey); 
                     }
@@ -339,7 +359,8 @@
                 .reviewInteractionCount{
                     position: absolute;
                     top: 0;
-                    left: px($gutterWidth);
+                    left: $fluidGutterPercentage / 2;
+					margin-left: 10px;
                 }
                 button[data-action="voteUp"],
                 button[data-action="voteDown"]{ 
@@ -373,7 +394,6 @@
                     
                     float:left;
                     margin-left: px(columns(1) + $gutterWidth);
-                    width: px(columns(2));
                     
                     .reviewAuthorPhoto"]{ @include border-radius(px(32px)); }
                     .reviewAuthor"]{font-weight:bold;}
@@ -386,6 +406,11 @@
                     float: none;
 					overflow: hidden;
                     margin-left: px($gutterWidth);
+					
+					@media (max-width: 767px){
+						display: table-caption;
+						margin-left: 0;
+					}
                     
                     .reviewItemReviewed{
                         display: none; /* We don't need to show this to users, but we need it for microdata */
@@ -399,21 +424,45 @@
                         float: left;
                         clear: left;
                     }
-                    .reviewDatePublished{color: $grey; font-style: italic; } 
+                    .reviewDatePublished, .reviewAuthorName{
+						color: $grey; font-style: italic;
+						@media (max-width: 767px){
+							width: inherit;
+							float: left;
+						}
+					} 
                     .reviewTitle{
                         
                         font-weight:bold;
                         &:after, &:before{ content: '"'; }
                     
                     }
+					.reviewAuthorName{
+						display: none;
+						margin-left: 5px;
+						@media (max-width: 767px){
+							display: block;
+						}
+					}
                 }
                 
                 .points{
-                    float:right;
-                    width: px(columns(2));
+                    
+					float:right;
                     margin-left: px($gutterWidth);
-                    .cons{
-                        margin-top: $paddingUnit * 2;
+					
+					@media (max-width: 767px){
+						display: table-footer-group;
+					}
+					li{
+						padding-right: px($paddingUnit);
+					}
+                    .pros, .cons{
+                        margin-bottom: $paddingUnit * 2;
+						@media (max-width: 767px){
+							float: left;
+							width: 45%;
+						}
                     }
                 }
             }

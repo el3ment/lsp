@@ -147,7 +147,7 @@
 	                            <span class='productPrice'>$14.25</span>
 	                            <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
 	                    </div>
-	                    <ul>
+	                    <ul class='relatedItemList'>
 							<?php for($i = 0; $i < 3; $i++){ ?>
 	                        <li class='productScope'>
 	                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
@@ -176,14 +176,14 @@
 	
     <div class='row span12 reviews section'>
         <h2>User Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
-        <div class='aggregateReviews'>
+        <div class='aggregateReviews hidden-phone'>
             <label>Average User Rating</label>
             <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
             <a href='#'><span class='reviewReviewCount'>31</span> reviews</a>
         </div>
         <button class='b1' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>
-        <div id='addReviewForm' class='add row hide'>
-	        <form>
+        <div id='addReviewForm' class='add hide'>
+	        <form class='row'>
 	            <fieldset class='review panel disengaged span6'>
 	                <h2>Your Review</h2>
 	                <ul>
@@ -265,59 +265,22 @@
 	                    </li>
 	                </ul>
 	            </fieldset>
-	            <fieldset class='submit'>
+	            <fieldset class='submit span12'>
 	                <button class='b1'>Submit Review</button>
 	                <span class='details'>When you are satisfied with your review, click the submit review button &rarr;</span>
 	            </fieldset>
 	        </form>
 		</div>
-        <ul class='entries'>
-			
-            <li id='previewReview' itemscope itemtype="http://data-vocabulary.org/Review" class='entry preview reviewScope row span12'>
-                <ul class='author'>
-                    <li class='thumbnail'><img itemprop='authorPhoto' src='http://placehold.it/60x60' width='60' height='60' class='reviewAuthorPhoto' /></li>
-                    <li itemprop="reviewer" class='reviewAuthor'>Robert P.</li>
-                    <li class='reviewLocation'>Washington, VA</li>
-                    <li class='reviewProfile'>Drummer (3yrs), Teacher (4yrs)</li>
-                </ul>
-                <ul class='points'>
-                    <li class='pros'>
-                        <h3>Pros</h3>
-                        <ul class='list'>
-                            <li>Pro 1</li>
-                            <li>Pasdfa adf dsfsd fds sdf sdfa dsf adf a4grde ro 2</li>
-                        </ul>
-                    </li>
-                    <li class='cons'>
-                        <h3>Cons</h3>
-                        <ul class='list'>
-                            <li>Con 1</li>
-                            <li>Con 2</li>
-                        </ul>
-                    </li>
-                    <li class='actions'>
-                        <button class='b5 icon-24-voteUp' data-action='voteUp'>Vote Review as Helpful</button>
-                        <button class='b5 icon-24-voteDown' data-action='voteDown'>Vote Review as Un-Helpful</button>
-                    </li>
-                </ul>
-                <ul class='review'>
-                    <li itemprop="itemreviewed" class='reviewItemReviewed'>IP240 The Name of the Product</li>
-                    <li itemprop="rating" class='reviewReviewRating'>3.5</li>
-                    <li itemprop="summary" class='reviewTitle'>I love this stand!</li>
-                    <li itemprop="dtreviewed" class='reviewDatePublished'>December 1, 2012</li>
-                    <li itemprop="description" class='reviewReviewBody'>Holy crap this is the best sted in my entire life!</li>
-                    <li class='reviewInteractionCount' content='32:UserLikes'>32</li>
-                </ul>
-            </li>
+        <ul class='entries span12 row'>
 			<?php for($i = 0; $i < 10; $i++){ ?>
-	            <li itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope'>
-	                <ul class='author'>
+	            <li id="<?php echo ($i == 0) ? 'previewReview' : ''; ?>" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row <?php echo ($i == 0) ? 'preview' : ''; ?>'>
+	                <ul class='author offset1 span2 hidden-phone'>
 	                    <li class='thumbnail'><img itemprop='authorPhoto' src='http://placehold.it/60x60' width='60' height='60' class='reviewAuthorPhoto' /></li>
 	                    <li itemprop="reviewer" class='reviewAuthor'>Robert P.</li>
 	                    <li class='reviewLocation'>Washington, VA</li>
 	                    <li class='reviewProfile'>Drummer (3yrs), Teacher (4yrs)</li>
 	                </ul>
-	                <ul class='points'>
+	                <ul class='points span3'>
 	                    <li class='pros'>
 	                        <h3>Pros</h3>
 	                        <ul class='list'>
@@ -332,7 +295,7 @@
 	                            <li>Con 2</li>
 	                        </ul>
 	                    </li>
-	                    <li class='actions'>
+	                    <li class='actions hidden-phone'>
 	                        <button class='b5 icon-24-voteUp' data-action='voteUp'>Vote Review as Helpful</button>
 	                        <button class='b5 icon-24-voteDown' data-action='voteDown'>Vote Review as Un-Helpful</button>
 	                    </li>
@@ -342,12 +305,13 @@
 	                    <li itemprop="rating" class='reviewReviewRating'>3.5</li>
 	                    <li itemprop="summary" class='reviewTitle'>I love this stand!</li>
 	                    <li itemprop="dtreviewed" class='reviewDatePublished'>December 1, 2012</li>
+						<li class='reviewAuthorName'>by Robert P.</li>
 	                    <li itemprop="description" class='reviewReviewBody'>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 							Magna esse consectetur fugiat voluptate in esse tempor dolore pariatur. aliquip consequat. aute voluptate Lorem nulla labore dolore do elit, deserunt quis est velit mollit do ex irure pariatur. dolor voluptate ad aute id Duis voluptate exercitation eiusmod sint deserunt exercitation qui cillum laborum. pariatur. cupidatat ad sed undefined culpa elit, fugiat consequat. fugiat Duis cillum do et in Ut ut adipisicing deserunt aute ipsum adipisicing.
 							Laboris reprehenderit cupidatat eiusmod et esse ullamco dolore sed aute ut nisi labore qui commodo Excepteur aliqua. aliquip deserunt et tempor sunt velit laboris est non irure ea elit, elit, culpa sunt sed ea culpa sint sit Ut Excepteur reprehenderit elit, enim esse Excepteur laborum. in ex in dolore ea laborum. laboris sed voluptate ea do Ut dolore officia amet, laboris est.
 	                    </li>
-	                    <li class='reviewInteractionCount' content='32:UserLikes'>32</li>
+	                    <li class='reviewInteractionCount hidden-phone' content='32:UserLikes'>32</li>
 	                </ul>
 	                
 	            </li>

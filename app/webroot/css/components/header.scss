@@ -3,6 +3,7 @@
     
     /* Layout */
     margin:0 auto px(20px);
+	position: relative;
     @include clearfix;
     
     background-color: #33281E;
@@ -62,6 +63,7 @@
             float: right;
             margin: px($_taglineMarginTop) px(10px) px(10px);
         }
+		
     }
     
     .navbar {
@@ -140,50 +142,50 @@
         .wishlist{
 			float: right;
 			.b3{
-           	  	width: px(35px);
+           	  	width: px(20px);
 			}
         }
         .departments{
 			float: left;
-            margin-left: 0;   
+            margin-left: 0;  
+			margin-right: px($paddingUnit); 
         }
         .cart{
 			
 			float: right;
-			
-		 	.b3{
-	        	width: px(50px);
-		        padding-right: px(35px); /* Only if we are going to use the count */
-		        margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
-		        margin-right: 0;
+		}
+	 	.b3{
+        	width: px(50px);
+	        padding-right: px(35px); /* Only if we are going to use the count */
+	        margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
+	        margin-right: 0;
+    
+	        .count{
+	            background-color: $yellow;
+	            color: black;
+	            padding: px(3px);
+	            position: absolute;
+	            font-weight: bold;
+	            padding: px(3px) px(7px);
+	            right: px(22px);
+	            top: px(13px);
+	            @include border-radius(px(3px));
+	            text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
         
-		        .count{
-		            background-color: $yellow;
-		            color: black;
-		            padding: px(3px);
-		            position: absolute;
-		            font-weight: bold;
-		            padding: px(3px) px(7px);
-		            right: px(22px);
-		            top: px(13px);
-		            @include border-radius(px(3px));
-		            text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
-            
-		            &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
-		              border-color: white transparent transparent transparent;
-		              border-style:solid;
-		              border-width: px(5px);
-		              width:0;
-		              height:0;
-		              content: '';
-		              position: absolute;
-		              top: px(9px);
-		              right: px(-15px);
-		            }
-		            @include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
-		            @include gradient($lightYellow, $yellow);
-		        }
-		    }
+	            &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
+	              border-color: white transparent transparent transparent;
+	              border-style:solid;
+	              border-width: px(5px);
+	              width:0;
+	              height:0;
+	              content: '';
+	              position: absolute;
+	              top: px(9px);
+	              right: px(-15px);
+	            }
+	            @include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
+	            @include gradient($lightYellow, $yellow);
+	        }
 		}
         input.search { /* Main Search bar */
             
@@ -193,15 +195,12 @@
             font-size: px($largeInputFontSize);
             padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
 			
-			@media (min-width: 768px) and (max-width: 979px) {
-				background-color:red;
-			}
-			
         }
 
         .search{
         	overflow: hidden;
 			float: none;
+			margin-left: 0;
 			
 			button { /* Magnifying glass button */
 	            width: px(44px);
@@ -249,4 +248,78 @@
             }
         }
     }
+	@media (min-width: 768px){
+		.search{
+			display:block !important; /* the rare case that a user hides search, and flips their tablet */
+		}
+	}
+	@media (max-width: 767px){
+		.established, .tagline, .wishlist{
+			display: none;
+		}
+		.image-logoCircle, .well{
+			width: 64px;
+			height: 64px;
+			float: left;
+		}
+		.navbar{
+			display: none;
+		}
+		.shopbar{
+			
+			padding: 0;
+			width: 80%;
+			float: right;
+			clear: none;
+			
+			li.search{
+				position:absolute;
+				top: 64px;
+				left: 0;
+				background-color: #33281E;
+				padding: 10px;
+				width: 100%;
+				@include box-sizing();
+				.b2{
+					top:13px;
+					right:13px;
+				}
+			}
+			.departments{
+				margin-right: 70px;
+			}
+			.mobileSearch{
+				margin-right:140px;
+			}
+			.departments{
+				float:right;
+			}
+			.b1, .b3{
+				float:right;
+				width: 64px;
+				height: 64px;
+				text-indent: -1000px;
+				background: transparent;
+				background-color: red;
+				position: absolute;
+				margin: 0;
+				padding: 0;
+				top:0px;
+				right:0px;
+				border: 0;
+			
+				@include box-shadow-multiple(none);
+				@include box-sizing();
+				@include border-radius(0);
+			
+				&:after, &:before{
+					display: none;
+				}
+				strong, span{
+					display: none;
+				}
+			}
+		}
+	}
+	
 }

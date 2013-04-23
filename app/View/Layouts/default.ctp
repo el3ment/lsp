@@ -46,7 +46,7 @@
     <script type='text/javascript' src='js/controllers/application.js'></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css' />
 </head>
-    <body class='row'>
+    <body>
 		
         <?php echo $this->element('header'); ?>
         

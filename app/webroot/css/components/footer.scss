@@ -3,8 +3,7 @@
     
     $_bottomPadding : 20px;
     
-    width: px($pageWidth);
-    margin: auto;
+    //margin: auto;
     color: #5b4e44; /* Light brown */
     
     
@@ -16,7 +15,7 @@
         position: relative;
         padding: px($_bottomPadding) 0;
         float:left;
-        width: 100%;
+        //width: 100%;
         /* overflow: hidden; /* Stylistic decision */
         margin-top: px(30px); /* 20px + 10 for the top of the profile image */
         
@@ -32,9 +31,10 @@
             font-style: italic;
             color: $darkGrey;
             margin-left: px(160px, 16px);
-            float: left;
-            width: px(460px, 16px);
+            overflow: hidden;
+            //width: px(460px, 16px);
             line-height: 1.4em;
+			margin-right: px(2 * $paddingUnit);
             
             strong{
                 color: black;
@@ -44,7 +44,7 @@
             
             margin: px(20px) px(20px) 0 0;
             float:right;
-            
+			
             li{
                 float: right;
                 margin-left: px(10px);
@@ -62,6 +62,17 @@
         padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
         clear: both;
         
+		@media (min-width: 768px) and (max-width: 979px) {
+			.span2{
+				width: 166px;
+			}
+			.span4{
+				width: 724px;
+				@include box-sizing();
+				margin-left: 0;
+			}
+		}
+		
         h2, strong, em{
             color: white;
         }
@@ -81,23 +92,34 @@
             }
         }
         
+		.first{
+			margin-left: 0;
+		}
+		
         .static{
            
             /* The static block contains the newsletter sign up and company hours */
-           
-            float: right;
-            width: columns(4);
+			margin-bottom: px(2 * $paddingUnit);
+			
+			@media (max-width: 979px){
+				padding: 0 10%;
+			}
+			
             .newsletter{
+				
+				
+				
                 .email{
                     
+					
                     position: relative;
+					
                     
                     h3{ margin: 0 0 px(20px); }
                     
                     input{
                         font-size: px($largeInputFontSize);
                         padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
-                        width: px(280px, $largeInputFontSize);
                     }
                     
                     .b1{
@@ -107,6 +129,7 @@
                     }
                 }
             }
+			
             .contact{
                 background-color: #1f150d;
                 @include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
@@ -130,24 +153,7 @@
                 }
             }
         }
-        
-        .sitemap-lists{
-           
-            /* The list of links titled by a header tag */
-           
-            li{
-                
-                width: columns(2);
-                margin-right: $gutterWidth;
-                float: left;
-                
-                ul{
-                    li{
-                    }
-                }
-            }
-        }
-        
+
         .logo{
           
             clear: both;
