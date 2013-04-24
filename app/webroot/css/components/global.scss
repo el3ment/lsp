@@ -30,9 +30,9 @@ body{
 
 	@include box-sizing();
     font-family: 'Open Sans', sans-serif;
-    color: $black;
+    color: black;
     font-size: 13px;
-    line-height: px(22px);
+    line-height: px(19px);
 }
 
 /* Content Container */
@@ -105,6 +105,7 @@ em{
 }
 ul.list li,
 .productDescription ul li{
+	//padding-left: 5px;
     list-style: square inside;
 }
 
@@ -179,7 +180,7 @@ ul.list li,
     li{
         
         padding: px($paddingUnit) px($paddingUnit * 2);
-        border-bottom:1px solid $lightGrey;
+        border-bottom:1px solid #dedcda;
         border-top: 1px solid white;
         background-color: $superLightGrey;
         
@@ -291,8 +292,14 @@ ul.list li,
 	width: 100%;
     
     
-    .productPrice{ font-weight: bold; font-size: px(12px); }
-    .productName{ display:block; font-size: px(12px); }
+    .productPrice{ 
+		font-weight: 800;
+		font-size: 14px;
+		line-height: 22px;
+		position: relative;
+		left: 5px;
+	}
+    .productName{ display:block; }
     img{ 
         margin-bottom: px($paddingUnit);
         border: 1px solid $lightGrey;
@@ -413,7 +420,7 @@ ul.list li,
             }
             .productPrice{
                 overflow: hidden;
-				
+				left: 0;
                 display: block;
             }
             .productName{
@@ -536,11 +543,22 @@ ul.list li,
         position: relative;
         display:inline-block;
         margin-right: px(2px);
-        dl{ 
+		
+		&:hover:before;{
+			content:' ';
+			background-color: transparent;
+			width: 120%;
+			height: 100px;
+			position: absolute;
+			right: 0;
+			top: 0;
+			display: block;
+		}
+        dl{
             display: none; 
             position: absolute;
-            left: px(-1* (columns(2) + 16 * 2 + 2));
-            top: px(-2px);
+            left: px(-1* (columns(2)) - 8px);
+            top: px(-4px);
             width: px(columns(2));
             border-left: px($paddingUnit) solid $yellow;
             .details{

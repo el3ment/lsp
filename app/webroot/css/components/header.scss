@@ -73,6 +73,9 @@
         .tagline{
             float: right;
             margin: px($_taglineMarginTop) px(10px) px(10px);
+			font-size: 16px;
+			font-weight: bold;
+			-webkit-font-smoothing: antialiased;
         }
 		
     }
@@ -184,7 +187,7 @@
 			float: right;
 		}
 	 	.b3{
-        	width: px(50px);
+        	width: px(60px);
 	        padding-right: px(35px); /* Only if we are going to use the count */
 	        margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
 	        margin-right: 0;
@@ -256,6 +259,7 @@
         padding: px($paddingUnit) 0;
         width: 100%;
         float: left;
+		font-weight: 11px;
 		
 		@media (max-width: 767px){
 
@@ -288,6 +292,7 @@
             &:last-child a{
                 text-decoration: none; 
                 color: $black;
+				font-weight: bold;
             }
         }
     }
@@ -320,9 +325,15 @@
 				position:absolute;
 				top: 64px;
 				left: 0;
-				background-color: #33281E;
+				background: url(../img/dark_pattern.jpg);
+				
 				padding: 10px;
 				width: 100%;
+				z-index: 1;
+		        @include box-shadow-multiple(0 2px 3px #000); /* Top Highlight, Drop shadow */  
+											 
+				
+				
 				@include box-sizing();
 				.b2{
 					top:13px;
@@ -347,6 +358,9 @@
 			}
 			.mobileSearch .b3{
 				background-position: -189px -103px;
+			}
+			.mobileSearch .b3.reveal-isOpen{
+				background-position: -189px -209px;
 			}
 			.b1, .b3{
 				float:right;

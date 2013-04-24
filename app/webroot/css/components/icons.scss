@@ -25,6 +25,13 @@
     }
 }
 
+.b1[class*="icon-24-"]{
+	&:after{
+		left: 5px;
+	}
+	padding-left: 35px;
+}
+
 *[class*="icon-16-"]{
     
 	content: '   ';
@@ -70,6 +77,11 @@
 
 .icon-24-magnify-black:after{
 	background-position: -7px -256px;
+}
+
+
+.icon-24-cart-black:after{
+	background-position: -8px -322px;
 }
 
 .icon-24-star-yellow:after{

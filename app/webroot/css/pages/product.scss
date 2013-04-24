@@ -85,6 +85,10 @@
             }
         }
         .images{
+			
+			margin-top: 0;
+			padding-bottom: 25px;
+			
             .zoom-mainImage{
                 display:inline-block;
             }
@@ -93,7 +97,7 @@
                 &:before{
 					content : 'Hover over image to zoom';
 					@media (max-width: 767px){
-						content : 'Click image to zoom';
+						content : ' ';
 					}
                     font-style: italic;
                     display: block;
@@ -103,7 +107,7 @@
                     margin: px($paddingUnit) 0;
 					width:100%;
 					text-align:center;
-                    color: $lightGrey;
+                    color: $grey;
                 }
                 a{
 					vertical-align: bottom;
@@ -127,11 +131,10 @@
         
     }
    
-    .media .section,
-    .information .section{
+    .section{
 		
         padding-bottom: px(3 * $paddingUnit);
-        border-bottom: 1px solid $lightGrey;
+        border-bottom: 1px solid #dedcda;
 		
         &:last-child{ border-bottom-width: 0; }
         
@@ -193,7 +196,6 @@
     .reviews{
 
 		border-top: 1px solid $lightGrey;
-        border-bottom: 1px solid $lightGrey;
 		
 		@media (max-width: 767px){
 			padding-top:0;
@@ -337,6 +339,9 @@
             
             clear: both;
                 
+			.entry:last-child{
+				border-bottom: 0;
+			}
             .entry{
                 
                 padding: px($gutterWidth / 2) 0;
@@ -420,6 +425,8 @@
                     padding: 0 px($paddingUnit);
                     color: $grey;
                     background-color: $superLightGrey;
+					width: 20px;
+					text-align: center;
                     
                     @include box-shadow-multiple(0 0 px(2px) 0 $lightGrey inset);
                     
@@ -427,14 +434,16 @@
                 button[data-action="voteDown"]{ top: px(90px); }
                 
                 .author{
-                    
+					
+					@include box-sizing();
+					padding-right: 5px;
                     float:left;
                     margin-left: px(columns(1) + $gutterWidth);
                     
-                    .reviewAuthorPhoto"]{ @include border-radius(px(32px)); }
-                    .reviewAuthor"]{font-weight:bold;}
-                    .reviewLocation"]{text-transform: uppercase;}
-                    .reviewProfile"]{font-style:italic; color: $grey;}
+                    .reviewAuthorPhoto{ @include border-radius(px(32px)); }
+                    .reviewAuthor{font-weight:bold;}
+                    .reviewLocation{text-transform: uppercase;}
+                    .reviewProfile{font-style:italic; color: $grey;}
                 }
                 
                 .review{

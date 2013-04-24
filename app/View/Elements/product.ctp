@@ -2,7 +2,7 @@
     <div class='row'>
 		<div class='head span12'>
 	        <h1 itemprop='name' class='productName'>Multi-Height Practice Pad and Snare Drum Stand</h1>
-	        <div class='details'>From&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
+	        <div class='details'>By&nbsp;:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
 	        <div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 	            <span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
 	            <a href='#'><span itemprop='count' class='reviewReviewCount'>31</span> reviews</a>
@@ -76,21 +76,21 @@
 	                        </select>
 	                    </li>
 	                    <li class='action'>
-	                        <button class='b1'>Add To Cart</button>
+	                        <button class='b1 icon-24-cart-black'>Add To Cart</button>
 	                        <a href='#'>Add to Wish List</a>
 	                    </li>
 	                </ul>
 	            </form>
 	        </li>
 	        <li class='features section'>
-	            <h2>Product Details</h2>
+	            <h2>Overview</h2>
 	            <ul class='list content'>
 	                <li>Feature 1</li>
 	                <li>Feature 2</li>
 	            </ul>
 	        </li>
 	        <li class='description section'>
-	            <h2>Description</h2>
+	            <h2>Item Details</h2>
 	            <div itemprop='description' class='content productDescription'>
 	                <p>Heyo!</p>
 	                <p>There are so many things to like about this <strong>product</strong> and <em>stuff</em></p>
@@ -131,7 +131,7 @@
 	            </div>
 	        </li>
 	        <li class='addRelatedItems section hidden-phone hidden-tablet'>
-	            <h2>Things You Might Need</h2>
+	            <h2>Our Staff Suggests</h2>
 	            <div class='content'>
 	                <div class='relatedItems'>
 	                    <div class='currentItem'>
@@ -155,7 +155,7 @@
 							<?php } ?>
 	                    </ul>
 	                    <div class='addToCart'>
-	                        <button class='b1'>Add To Cart</button>
+	                        <button class='b1 icon-24-cart-black'>Add To Cart</button>
 	                        <div class='subtotal'>
 	                            $119.90
 	                            <span class='details'>Bundle Sub Total</span>
@@ -172,7 +172,7 @@
 	</div>
 	
     <div class='row span12 reviews section'>
-        <h2 data-reveal-children='reviewEntries'>User Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
+        <h2 data-reveal-children='reviewEntries'>Read Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
         <div class='aggregateReviews'>
             <label>Average User Rating</label>
             <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
