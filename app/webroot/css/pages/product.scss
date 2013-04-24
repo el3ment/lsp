@@ -16,12 +16,12 @@
         text-align: right;
         padding-right: px(columns(1) + $gutterWidth);
         position: relative;
-        font-size: px(11px);
+        font-size: 12px;
         margin: px($gutterWidth);
         margin-right: 0;
         line-height: 1.5em;
         .author{
-            font-size: px(13px, 11px);
+            font-size: 14px;
             text-transform: none;
             color: $black;
             font-weight: bold;
@@ -88,6 +88,10 @@
 			
 			margin-top: 0;
 			padding-bottom: 25px;
+			
+			@media (max-width: 767px){
+				border-bottom: 0;
+			}
 			
             .zoom-mainImage{
                 display:inline-block;
@@ -163,6 +167,7 @@
         label{ 
             display: block;
             float: left;
+			line-height: 19px;
             .details{ display: block; }
             
         }
@@ -442,7 +447,7 @@
                     
                     .reviewAuthorPhoto{ @include border-radius(px(32px)); }
                     .reviewAuthor{font-weight:bold;}
-                    .reviewLocation{text-transform: uppercase;}
+                    .reviewLocation{text-transform: uppercase; }
                     .reviewProfile{font-style:italic; color: $grey;}
                 }
                 
@@ -469,6 +474,9 @@
                         float: left;
                         clear: left;
                     }
+					.reviewDatePublished{
+						padding-bottom: 10px;
+					}
                     .reviewDatePublished, .reviewAuthorName{
 						color: $grey; font-style: italic;
 						@media (max-width: 767px){

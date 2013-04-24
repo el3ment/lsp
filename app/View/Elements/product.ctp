@@ -5,7 +5,7 @@
 	        <div class='details'>By&nbsp;:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
 	        <div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 	            <span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
-	            <a href='#'><span itemprop='count' class='reviewReviewCount'>31</span> reviews</a>
+	            <a href='#' class='details'><span itemprop='count' class='reviewReviewCount'>31</span> reviews</a>
 	        </div>
 	    </div>
 	</div>
@@ -274,8 +274,8 @@
 	                <ul class='author offset1 span2 hidden-phone'>
 	                    <li class='thumbnail'><img itemprop='authorPhoto' src='http://placehold.it/60x60' width='60' height='60' class='reviewAuthorPhoto' /></li>
 	                    <li itemprop="reviewer" class='reviewAuthor'>Robert P.</li>
-	                    <li class='reviewLocation'>Washington, VA</li>
-	                    <li class='reviewProfile'>Drummer (3yrs), Teacher (4yrs)</li>
+	                    <li class='reviewLocation details'>Washington, VA</li>
+	                    <li class='reviewProfile details'>Drummer (3yrs), Teacher (4yrs)</li>
 	                </ul>
 	                <ul class='points span3'>
 	                    <li class='pros'>
@@ -305,8 +305,8 @@
 							</div>
 						</li>
 	                    <li itemprop="summary" class='reviewTitle'>I love this stand!</li>
-	                    <li itemprop="dtreviewed" class='reviewDatePublished'>December 1, 2012</li>
-						<li class='reviewAuthorName'>by Robert P.</li>
+	                    <li itemprop="dtreviewed" class='reviewDatePublished details'>December 1, 2012</li>
+						<li class='reviewAuthorName details'>by Robert P.</li>
 	                    <li itemprop="description" class='reviewReviewBody'>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 							Magna esse consectetur fugiat voluptate in esse tempor dolore pariatur. aliquip consequat. aute voluptate Lorem nulla labore dolore do elit, deserunt quis est velit mollit do ex irure pariatur. dolor voluptate ad aute id Duis voluptate exercitation eiusmod sint deserunt exercitation qui cillum laborum. pariatur. cupidatat ad sed undefined culpa elit, fugiat consequat. fugiat Duis cillum do et in Ut ut adipisicing deserunt aute ipsum adipisicing.

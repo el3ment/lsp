@@ -32,7 +32,7 @@ body{
     font-family: 'Open Sans', sans-serif;
     color: black;
     font-size: 14px;
-    line-height: px(24px);
+    line-height: px(22px);
 }
 
 /* Content Container */
@@ -151,7 +151,7 @@ ul.list li,
 
 /* Common Properties */
 /* Details are subtext */
-.details{ color: $grey; }
+.details{ color: $grey; font-size: 13px; }
 
 /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
 .productAvailability .status,
@@ -299,7 +299,12 @@ ul.list li,
 		position: relative;
 		left: 5px;
 	}
-    .productName{ display:block; font-size: 13px; }
+	
+	label{
+		width: 100%;
+	}
+
+    .productName{ display:block; font-size: 13px; line-height: 19px; }
     img{ 
         margin-bottom: px($paddingUnit);
         border: 1px solid $lightGrey;
@@ -445,6 +450,7 @@ ul.list li,
             text-align: right;
             float: right;
             margin-right: px($paddingUnit);
+			line-height: 20px;
             .details{
                 display:block;
                 font-weight: normal;
