@@ -2,7 +2,7 @@
     <div class='row'>
 		<div class='head span12'>
 	        <h1 itemprop='name' class='productName'>Multi-Height Practice Pad and Snare Drum Stand</h1>
-	        <div class='details'>By&nbsp;:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
+	        <div class='details'>From&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
 	        <div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 	            <span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
 	            <a href='#'><span itemprop='count' class='reviewReviewCount'>31</span> reviews</a>
@@ -13,7 +13,7 @@
 	    <ul class='media span6 push-right'>
 	        <li class='images section'>
 	            <a id='zoom-mainImage' href='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg' data-asset='mouseoverZoom'>
-	                <img data-badge='new' itemprop="image" src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.460x460' width='100%' />
+	                <img data-badge='new' itemprop="image" src='http://s4.lonestarpercussion.com/resize/images/product-image/Pearl-VBL984PC-Shellpack.jpg.460x460' width='100%' />
 	            </a>
 	            <ul class='zoom-thumbnails' data-targetZoomId='zoom-mainImage'>
 	                <li>
@@ -44,13 +44,6 @@
 	                        <iframe width='420' height='315' src='http://www.youtube.com/embed/FVsijmCFs50' frameborder='0' allowfullscreen></iframe>
 	                    </div>
 	                    <label>Video 1 <span class='details'>Recorded by Innovative Percussion</span></label>
-	                    <span class='byline'>Video by <span data-author='michael' class='author'>Michael Dooley</span></span>
-	                </li>
-	                <li>
-	                    <div class='video panel'>
-	                        <iframe width='420' height='315' src='http://www.youtube.com/embed/FVsijmCFs50' frameborder='0' allowfullscreen></iframe>
-	                    </div>
-	                    <label>Video 2 <span class='details'>Recorded by Innovative Percussion</span></label>
 	                    <span class='byline'>Video by <span data-author='michael' class='author'>Michael Dooley</span></span>
 	                </li>
 	            </ul>
@@ -142,18 +135,22 @@
 	            <div class='content'>
 	                <div class='relatedItems'>
 	                    <div class='currentItem'>
-	                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
-	                            <input type='checkbox' />
-	                            <span class='productPrice'>$14.25</span>
-	                            <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
+								<label for='relatedItemsCurrentItem'>
+		                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
+									<input id='relatedItemsCurrentItem' type='checkbox' />
+		                            <span class='productPrice'>$14.25</span>
+		                            <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
+								</label>
 	                    </div>
 	                    <ul class='relatedItemList'>
 							<?php for($i = 0; $i < 3; $i++){ ?>
 	                        <li class='productScope'>
-	                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
-	                            <input type='checkbox' />
-	                            <span class='productPrice'>$14.25</span>
-	                            <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
+								<input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />
+								<label for='relatedItemsProduct-<?php echo $i; ?>'>
+		                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+		                            <span class='productPrice'>$14.25</span>
+		                            <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
+								</label>
 	                        </li>
 							<?php } ?>
 	                    </ul>
@@ -175,13 +172,13 @@
 	</div>
 	
     <div class='row span12 reviews section'>
-        <h2>User Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
+        <h2 data-reveal-children='reviewEntries'>User Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
         <div class='aggregateReviews'>
             <label>Average User Rating</label>
             <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
         </div>
-        <button class='b1 visible-desktop' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>
-        <button class='b4 icon-24-toggleHide hidden-desktop' data-reveal-children='reviewEntries'>Toggle Section</button>
+        <button class='b1 hidden-phone' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>
+        <button class='b4 icon-24-toggleHide visible-phone' data-reveal-children='reviewEntries'>Toggle Section</button>
         <div id='addReviewForm' class='add hide hidden-phone'>
 	        <form class='row'>
 	            <fieldset class='review panel disengaged span6'>
@@ -271,7 +268,7 @@
 	            </fieldset>
 	        </form>
 		</div>
-        <ul id='reviewEntries' class='entries span12 row'>
+        <ul id='reviewEntries' class='entries span12 row reveal-isOpen hidden-phone'>
 			<?php for($i = 0; $i < 10; $i++){ ?>
 	            <li id="<?php echo ($i == 0) ? 'previewReview' : ''; ?>" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row <?php echo ($i == 0) ? 'preview hidden-phone' : ''; ?>'>
 	                <ul class='author offset1 span2 hidden-phone'>

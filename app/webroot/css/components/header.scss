@@ -54,7 +54,7 @@
         .logo {
             float: left;
 			margin-top:-27px;
-			@media (max-width: 768px){
+			@media (max-width: 767px){
 				margin-top: 0;
 			}
         
@@ -135,7 +135,7 @@
         height: px(60px); /* We have to give it a height because the inner li's are float:left */
         line-height: px(41px);
 		
-		@media (max-width: 768px){
+		@media (max-width: 767px){
 			margin:0;
 		}
         
@@ -301,10 +301,10 @@
 			display: none;
 		}
 		.image-logoCircle, .well{
-			width: 64px;
+			width: 120px;
 			height: 64px;
 			float: left;
-			background-position: -131px -102px;
+			background-position: -190px -158px;
 		}
 		.navbar{
 			display: none;
@@ -312,7 +312,7 @@
 		.shopbar{
 			
 			padding: 0;
-			width: 80%;
+			width: 70%;
 			float: right;
 			clear: none;
 			

@@ -1,7 +1,9 @@
 <div class='footer'>
 	<div class='banner'>
 	    <div class='rowContent span12 row'>
-	        <div class='profile'><img src='http://placehold.it/140x140' /></div>
+	        <div class='profile'>
+	        	<div class='profileImage'></div>
+	        </div>
 	        <ul class='security hidden-phone'>
 	            <li class='image-creditCards'>All major cards accepted.</li>
 	            <li><a href='#' class='mcafee image-mcafee'>McAfee</a></li>

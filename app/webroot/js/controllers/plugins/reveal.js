@@ -47,6 +47,12 @@
             	var parent = $(revealParent);
             	var children = $(revealChildren);
             	
+				if(children.hasClass('reveal-isOpen') && children.hasClass('hidden-phone')){
+					// this is a bit of a hack
+					children.removeClass('hidden-phone');
+					children.removeClass('reveal-isOpen');
+				}
+				
 	            if(!parent.hasClass('reveal-isOpen')){
 	            	parent.addClass('reveal-isOpen');
 	            	children.addClass('reveal-isOpen');
@@ -54,6 +60,7 @@
 	            }else{
 	            	parent.removeClass('reveal-isOpen');
 	            	children.removeClass('reveal-isOpen');
+					children.removeClass('hidden-phone');
 	            	children.triggerHandler('close.reveal');
 	            }
             }

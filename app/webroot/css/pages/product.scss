@@ -1,6 +1,9 @@
 /* Product Detail Page */
 .page-productDetail{
-    .head{}
+	h1{
+		position: relative;
+		top: 3px;
+	}
     .b3{
         float: left;
     }
@@ -127,10 +130,8 @@
     .media .section,
     .information .section{
 		
-        padding-bottom: px(2 * $paddingUnit);
+        padding-bottom: px(3 * $paddingUnit);
         border-bottom: 1px solid $lightGrey;
-		margin-bottom: px(2 * $paddingUnit + 2);
-		
 		
         &:last-child{ border-bottom-width: 0; }
         
@@ -142,6 +143,9 @@
             width: px(32px);
             height: px(32px);
 			padding: 0;
+			position: relative;
+			margin-left:0;
+			margin-top: px(2 * $paddingUnit - 2);
 			
 			@media (max-width: 980px){
 				float: right;
@@ -150,8 +154,8 @@
         }
         > h2{  /* Section headers */
             line-height: 1em;
-			padding-top: 2px;
-            margin-bottom: $paddingUnit;
+			padding-top: px(1 * $paddingUnit + 7);
+			margin-bottom: 0;
         }
         label{ 
             display: block;
@@ -160,6 +164,7 @@
             
         }
         .content{ 
+			margin-top: 5px;
             clear: both;
             float: left;
             width: 100%;
@@ -187,7 +192,6 @@
     }
     .reviews{
 
-		padding-top: 10px;
 		border-top: 1px solid $lightGrey;
         border-bottom: 1px solid $lightGrey;
 		
@@ -197,7 +201,8 @@
 		}
 		
         h2{
-            margin: px(6px, $h2FontSize) 0 px(15px, $h2FontSize);
+			margin:0;
+            padding: 16px 16px 16px 0;
             float:left;
         }
         
@@ -205,7 +210,7 @@
             
             float: left; 
             position: relative;
-            margin: px(10px) 0 0 px(30px);
+            margin: 19px 0 0 px(10px);
 			width: 105px;
             
             label{
@@ -216,9 +221,13 @@
                 font-style: italic;
 				font-weight: normal;
 				color: $lightGrey;
+				@media (max-width: 475px){
+					display: none;
+				}
             }
         }
 		.icon-24-toggleHide{
+			margin-top:13px;
             margin-right: px(2 * $paddingUnit);
             text-indent: px(-1000px);
             float:left;
@@ -229,6 +238,7 @@
 			float: right;
 		}
         .b1{
+			margin-top:8px;
             float: right;
         }
         .add{
@@ -313,7 +323,7 @@
                 clear: both;
                 
                 .details{
-					margin-top:1.2em;
+					margin-top:22px;
 					height:1em;
 					top:-.5em;
                     position: relative;

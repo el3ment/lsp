@@ -16,7 +16,7 @@
 *[class*="icon-24-"]{
 	content: '  ';
     
-    padding-left: 30px;
+    padding-left: 28px;
 
     &:after{
         width: 24px;
@@ -103,6 +103,19 @@
 }
 .icon-24-toggleHide.reveal-isOpen:after{
 	content: '-' !important;
+}
+
+.icon-24-facebook-white:after{
+	background-position: -7px -488px;
+}
+.icon-24-twitter-white:after{
+	background-position: -47px -488px;
+}
+.icon-24-instagram-white:after{
+	background-position: -87px -488px;
+}
+.icon-24-youtube-white:after{
+	background-position: -127px -488px;
 }
 /*
 .icon-texas
