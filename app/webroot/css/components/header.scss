@@ -146,18 +146,23 @@
             position: relative;
             margin-left: px(2 * $paddingUnit);
         }
-        .b1{
-            padding-top: px(8px, 14px);
-            padding-bottom: px(8px, 14px);
-        }
+		
         .b2, .b3, .b4{
             padding-top: px(8px, 13px);
             padding-bottom: px(8px, 13px);            
         }
+		
         .b1{
             width: px(110px, $b1FontSize); /* Shop By Department */
             margin-left: 0;
-            
+			padding-left: 40px;
+            padding-top: px(8px, 14px);
+            padding-bottom: px(8px, 14px);
+			
+			&:after{
+				left: 8px;
+			}
+			
             strong:after{ /* We need .b1:after for the icon, so we'll use .b1 strong:after for the little down arrow */
               border-color: black transparent transparent transparent;
               border-style:solid;
@@ -259,7 +264,7 @@
         padding: px($paddingUnit) 0;
         width: 100%;
         float: left;
-		font-weight: 11px;
+		font-size: 11px;
 		
 		@media (max-width: 767px){
 

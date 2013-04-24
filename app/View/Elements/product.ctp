@@ -43,7 +43,7 @@
 	                    <div class='video panel'>
 	                        <iframe width='420' height='315' src='http://www.youtube.com/embed/FVsijmCFs50' frameborder='0' allowfullscreen></iframe>
 	                    </div>
-	                    <label>Video 1 <span class='details'>Recorded by Innovative Percussion</span></label>
+	                    <!--<label>Video 1 <span class='details'>Recorded by Innovative Percussion</span></label>-->
 	                    <span class='byline'>Video by <span data-author='michael' class='author'>Michael Dooley</span></span>
 	                </li>
 	            </ul>
