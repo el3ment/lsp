@@ -552,7 +552,8 @@ ul.list li,
             height: px(16px);
             display:inline-block;
             margin: 0 px(2px) 0 px(3px);
-            background-color: red; /* $lightGrey */
+            background-color: $lightGrey; /* $lightGrey */
+			background: -6px -410px url(../img/lsp-master-sprite.png) $lightGrey ;
             @include border-radius(px($borderRadius));
             position:relative;
             top: px(4px);

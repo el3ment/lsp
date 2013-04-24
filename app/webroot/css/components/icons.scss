@@ -53,7 +53,7 @@
 }
 
 .icon-24-box-grey:after{
-	background-position: -82px -185px;
+	background-position: -80px -185px;
 }
 
 .icon-24-texas-grey:after{
@@ -79,10 +79,10 @@
 	background-position: -82px -220px;
 }
 .icon-24-clock-yellow:after{
-	background-position: -43px -220px;
+	background-position: -45px -220px;
 }
 .icon-24-texas-yellow:after{
-	background-position: -118px -220px;
+	background-position: -120px -220px;
 }
 
 .icon-24-heart-white:after{
@@ -90,6 +90,19 @@
 }
 .icon-24-cart-white:after{
 	background-position: -45px -292px;
+}
+
+.icon-24-toggleHide:after{
+	text-indent:0;
+	line-height: 22px;
+	margin-left: 1px;
+	content: '+' !important;
+	font-size: 25px;
+	background-image: none;
+	font-weight: normal;
+}
+.icon-24-toggleHide.reveal-isOpen:after{
+	content: '-' !important;
 }
 /*
 .icon-texas

@@ -176,13 +176,13 @@
 	
     <div class='row span12 reviews section'>
         <h2>User Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
-        <div class='aggregateReviews hidden-phone'>
+        <div class='aggregateReviews'>
             <label>Average User Rating</label>
             <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
-            <a href='#'><span class='reviewReviewCount'>31</span> reviews</a>
         </div>
-        <button class='b1' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>
-        <div id='addReviewForm' class='add hide'>
+        <button class='b1 visible-desktop' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>
+        <button class='b4 icon-24-toggleHide hidden-desktop' data-reveal-children='reviewEntries'>Toggle Section</button>
+        <div id='addReviewForm' class='add hide hidden-phone'>
 	        <form class='row'>
 	            <fieldset class='review panel disengaged span6'>
 	                <h2>Your Review</h2>
@@ -271,9 +271,9 @@
 	            </fieldset>
 	        </form>
 		</div>
-        <ul class='entries span12 row'>
+        <ul id='reviewEntries' class='entries span12 row'>
 			<?php for($i = 0; $i < 10; $i++){ ?>
-	            <li id="<?php echo ($i == 0) ? 'previewReview' : ''; ?>" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row <?php echo ($i == 0) ? 'preview' : ''; ?>'>
+	            <li id="<?php echo ($i == 0) ? 'previewReview' : ''; ?>" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row <?php echo ($i == 0) ? 'preview hidden-phone' : ''; ?>'>
 	                <ul class='author offset1 span2 hidden-phone'>
 	                    <li class='thumbnail'><img itemprop='authorPhoto' src='http://placehold.it/60x60' width='60' height='60' class='reviewAuthorPhoto' /></li>
 	                    <li itemprop="reviewer" class='reviewAuthor'>Robert P.</li>

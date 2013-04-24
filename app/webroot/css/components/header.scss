@@ -7,7 +7,7 @@
 	width: 100%;
     @include clearfix;
     
-    background-color: #33281E;
+    background: url(../img/dark_pattern.jpg);
     
     .logo{
         float: left; 
@@ -36,10 +36,13 @@
     
     .well{
         
-        $_taglineMarginTop : 80px;
+        $_taglineMarginTop : 60px;
         /* This is the section between the nav bar and the shop bar */
        
         position: relative;
+		margin-top:-23px;
+		height: 136px;
+		overflow: visible;
         clear: both;
 		float: none;
 		margin: auto;
@@ -50,6 +53,11 @@
         
         .logo {
             float: left;
+			margin-top:-27px;
+			@media (max-width: 768px){
+				margin-top: 0;
+			}
+        
         }
         
         .established{
@@ -75,7 +83,7 @@
         
         float: right;
 		width: 100%;
-        background-color: black;
+        background-color: rgba(0,0,0,0.25);
         
 		.utilityLinks{
         	float: none;
@@ -100,9 +108,16 @@
             
             /* How far apart items are from one another, don't forget space for the icon */
             padding: px(10px, 12px) px(15px, 12px) px(10px, 12px) px(45px, 12px); 
+			@media (max-width: 979px) and (min-width: 768px){
+				padding-left: px(15px);
+			}
             
             &:after{
                 left: px(10px);
+				@media (max-width: 979px) and (min-width: 768px){
+					margin:0;
+					display: none;
+				}
             }
             &:hover{
                 background-color: #322c28;
@@ -116,14 +131,17 @@
         
         clear:both;
 		float: none;
-		margin: auto;
+		margin: -15px auto auto;
         height: px(60px); /* We have to give it a height because the inner li's are float:left */
-        padding-top: px(10px); /* Push it down a little from the logo */
         line-height: px(41px);
+		
+		@media (max-width: 768px){
+			margin:0;
+		}
         
         li {
             position: relative;
-            margin-left: px($paddingUnit);
+            margin-left: px(2 * $paddingUnit);
         }
         .b1{
             padding-top: px(8px, 14px);
@@ -286,6 +304,7 @@
 			width: 64px;
 			height: 64px;
 			float: left;
+			background-position: -131px -102px;
 		}
 		.navbar{
 			display: none;
@@ -319,13 +338,23 @@
 			.departments{
 				float:right;
 			}
+			
+			.cart .icon-24-cart-white{
+				background-position: -239px -103px;
+			}
+			.departments .icon-24-star-black{
+				background-position: -333px -103px
+			}
+			.mobileSearch .b3{
+				background-position: -189px -103px;
+			}
 			.b1, .b3{
 				float:right;
 				width: 64px;
 				height: 64px;
 				text-indent: -1000px;
 				background: transparent;
-				background-color: red;
+				background: url(../img/lsp-master-sprite.png);
 				position: absolute;
 				margin: 0;
 				padding: 0;
