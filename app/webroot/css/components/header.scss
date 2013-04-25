@@ -30,6 +30,7 @@
         
         &:before{
             background-color: #3F362F;
+			background-color: transparent\9; /* Remove the background for IE8 */
             @include box-shadow-multiple(0 -1px 0 #52483d inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #312a24 inset);
         }
     }
@@ -153,6 +154,7 @@
         }
 		
         .b1{
+			
             width: px(110px, $b1FontSize); /* Shop By Department */
             margin-left: 0;
 			padding-left: 40px;
@@ -233,7 +235,6 @@
             padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
 			
         }
-
         .search{
         	overflow: hidden;
 			float: none;
@@ -247,10 +248,13 @@
 	            top: px(3px);
 	            margin: 0;
 	            text-indent: -$hideDistance;
+				padding: 0; /* Icon only */
 	            overflow: hidden;
+				line-height:44px;
 	            &:after{ /* Icon! */
 	                left: 50%;
 	                margin-left: px(-12px);
+					top: 8px\9;
 	            }
 			}
         }
@@ -290,11 +294,11 @@
                 content: '→';
                 padding:0 px(5px);
             }
-            &:last-child:after{
-                content: '';
+            &.active:after{
+                content: ' ';
             }
             
-            &:last-child a{
+            &.active a{
                 text-decoration: none; 
                 color: $black;
 				font-weight: bold;
@@ -322,7 +326,7 @@
 		.shopbar{
 			
 			padding: 0;
-			width: 70%;
+			width: 202px;
 			float: right;
 			clear: none;
 			
@@ -374,6 +378,7 @@
 				text-indent: -1000px;
 				background: transparent;
 				background: url(../img/lsp-master-sprite.png);
+				filter: none;
 				position: absolute;
 				margin: 0;
 				padding: 0;

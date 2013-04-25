@@ -12,8 +12,8 @@
     <div class='row'>
 	    <ul class='media span6 push-right'>
 	        <li class='images section'>
-	            <a id='zoom-mainImage' href='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg' data-asset='mouseoverZoom'>
-	                <img data-badge='new' itemprop="image" src='http://s4.lonestarpercussion.com/resize/images/product-image/Pearl-VBL984PC-Shellpack.jpg.460x460' width='100%' />
+	            <a data-badge='new' id='zoom-mainImage' href='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg' data-asset='mouseoverZoom'>
+	                <img itemprop="image" src='http://s4.lonestarpercussion.com/resize/images/product-image/Pearl-VBL984PC-Shellpack.jpg.460x460' width='100%' />
 	            </a>
 	            <ul class='zoom-thumbnails' data-targetZoomId='zoom-mainImage'>
 	                <li>
@@ -77,7 +77,7 @@
 	                    </li>
 	                    <li class='action'>
 	                        <button class='b1 icon-24-cart-black'>Add To Cart</button>
-	                        <a href='#'>Add to Wish List</a>
+	                        <a href='#' class='details icon-16-heart-grey'>Add to Wish List</a>
 	                    </li>
 	                </ul>
 	            </form>
@@ -108,11 +108,34 @@
 	                    <li>Hey</li>
 	                    <li>Hey1</li>
 	                </ul>
-	                ornare mattis leo sem vitae mi. Praesent eu est sapien. Aenean mauris odio, tempor dignissim
-	                ornare at, euismod a est. Cras venenatis semper tincidunt. Aliquam non leo dolor. Sed sagittis
-	                sapien non tellus pellentesque bibendum. Etiam aliquet aliquet felis dictum pellentesque. Fusce
-	                mauris tellus, porttitor vitae cursus commodo, viverra sed purus. Suspendisse faucibus faucibus quam,
-	                sit amet dignissim sem tincidunt ac. to learn!    
+					<p>Back in high school my track coach would often get on me about my sloppy block practice. He’d say “You aren’t setting up in the blocks properly. You’re rushing it, just going through the motions.” I’d say “Why does it matter right now? I’m not racing anyone today. I’ll do it right at the meet this weekend.”</p>
+
+
+						<p>“I’ll tell you why it matters” he’d say, sternly. “You play like you practice. Practice sloppy and you’ll play sloppy.”</p>
+
+
+						<p>You’ll play like you practice. You’re not going to be sharp unless you practice being sharp. I’ve heard this again over the years.</p>
+
+
+						<p>A few years ago I took a self-defense class. At one point in the class, we worked with fake handguns. We each had a partner and we had to work on scenarios where a gun might be involved.</p>
+
+
+						<p>The instructor repeatedly said, “When your turn is over, do not hand the gun to your partner. Instead, they’ll turn their back, and you’ll just drop it on the ground so they can pick it up and start the exercise over.”</p>
+
+
+						<p>That sounded weird. You’re right next to the person, why would you drop the gun so they had to pick it up?</p>
+
+
+						<p>Without having to ask why, the instructor explained himself: “If you practice handing the gun over to your partner now, you might end up handing the gun over to an actual assailant later. Don’t laugh, I’ve seen it happen.” Then he showed us surveillance camera footage of someone doing it in robbery.</p>
+
+
+						<p>It sounded ridiculous. Why would I ever give my gun to someone who’s attacking me? The answer is because if I practiced doing that earlier, I might do it later.</p>
+
+
+						<p>When humans are in stressful situations, we tend to fall back on our practice. If I practiced handing my gun over, I might mindlessly fall back on that when it mattered most. That would be bad.</p>
+
+
+						<p>Skip steps now, you’ll skip them later. Cut corners now, you’ll cut them later. You get used to what you do most of the time.</p>
 	                <span class='byline'>Description written by <span itemprop='author' data-author='michael' class='author'>Michael Dooley</span></span>
 	            </div>
 	        </li>
@@ -124,7 +147,7 @@
 	            </table>
 	        </li>
 	        <li class='returns section' data-reveal-children='returns'>
-	            <button class='b3 icon-24-toggleHide' data-reveal-children='returns'>Toggle Section</button>
+	            <button class='b3 icon-24-toggleHide icon-only' data-reveal-children='returns'>Toggle Section</button>
 	            <h2 data-reveal-children='returns'>Returns &amp; Shipping</h2>
 	            <div id='returns' class='content'>
 	                Paragraphs of data
@@ -136,7 +159,7 @@
 	                <div class='relatedItems'>
 	                    <div class='currentItem'>
 								<label for='relatedItemsCurrentItem'>
-		                            <img data-badge='new' src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
+		                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
 									<input id='relatedItemsCurrentItem' type='checkbox' />
 		                            <span class='productPrice'>$14.25</span>
 		                            <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
@@ -145,10 +168,10 @@
 	                    <ul class='relatedItemList'>
 							<?php for($i = 0; $i < 3; $i++){ ?>
 	                        <li class='productScope'>
-								<input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />
 								<label for='relatedItemsProduct-<?php echo $i; ?>'>
-		                            <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
-		                            <span class='productPrice'>$14.25</span>
+		                            <div data-badge='new'><img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' /></div>
+		                            <input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />
+									<span class='productPrice'>$14.25</span>
 		                            <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
 								</label>
 	                        </li>
@@ -174,7 +197,7 @@
     <div class='row span12 reviews section'>
         <h2 data-reveal-children='reviewEntries'>Read Reviews (<span itemprop='reviewCount' class='reviewReviewCount'>2</span>)</h2>
         <div class='aggregateReviews'>
-            <label>Average User Rating</label>
+            <label class='details'>Average User Rating</label>
             <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
         </div>
         <button class='b1 hidden-phone' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>

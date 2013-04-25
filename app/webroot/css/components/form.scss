@@ -96,6 +96,8 @@
         @include gradient($lightYellow, $darkYellow);
         @include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
         
+		cursor: pointer;
+		
         border : 1px solid $brownYellow;
         border-radius : px($borderRadius);
         color : black;
@@ -111,10 +113,10 @@
         line-height: 1.3em;
         display: inline-block;
         margin : 0 px($paddingUnit);
-        
+		
         &:hover{
             @include gradient($hoverLightYellow, $darkYellow);
-        }
+		}
     }
     
     .b2, .b3, .b4, .b5{
@@ -133,6 +135,10 @@
         @include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
         text-shadow : 0 1px $saturatedHighlightGrey;
         border : 1px solid $darkGrey;
+		
+		//&:hover{
+		//	@include gradient("b3hover", $buttonDarkGrey); 
+		//}
     } 
     
     /* Grey, Normal */
@@ -205,11 +211,12 @@
       .b1.highlight-icon, .b2.highlight-icon {
        
         /* Color declarations for Yellow buttons with highlight disc*/
-       
-        border: 0px;
         @include box-shadow-multiple(0 1px 0px #fdf8a6 inset, 0 -1px 0px #fdf8a6 inset, 0 2px 3px #000); /* Top/Bottom highlight, Drop shadow */
         &:before {
-          background-color: #f6d54f;
+          
+		  background-color: #f6d54f;
+		  background-color: transparent\9;
+		  
           -webkit-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
           -moz-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
           box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;

@@ -107,10 +107,13 @@
             
             strong{ font-weight: bold; }
         }
-        a{
+		li{
+			margin-top: .25em;
+		}
+        a{	
             
-            text-decoration: none;
-            
+			text-decoration: none;
+			  
             &:hover{
                 color: $yellow;
             }
@@ -193,7 +196,7 @@
         }
         
         .copyright{
-          
+          	font-size: 13px;
             margin: px(20px) 0;
             clear: both;
             text-align: center;

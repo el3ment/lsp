@@ -20,9 +20,9 @@
         <li class='departments'><a class='b1 icon-24-star-black highlight-icon dropdown'>Shop By <strong>Department</strong></a></li>
         <li class='cart'><a class='b3 icon-24-cart-white highlight-icon'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
 		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon'><strong>Wish</strong> List</a></li>
-        <li id='searchBar' class='search'>
+        <li id='searchBar' class='search reveal-isOpen'>
             <input type='text' class='autocomplete search' />
-            <button class='b2 icon-24-magnify-black'>Search</button>
+            <button class='b2 icon-24-magnify-black icon-only'>Search</button>
         </li>
 		<li class='mobileSearch visible-phone'><button class='b3' data-reveal-children='searchBar'>Toggle Search</button></li>
     </ul>
@@ -34,7 +34,7 @@
 	        <li><a href='#'>IP240</a></li>
 	        <li><a href='#'>Sticks &amp; Mallets</a></li>
 	        <li><a href='#'>Mallets</a></li>
-	        <li><a href='#'>IP240</a></li>
+	        <li class='active'><a href='#'>IP240</a></li>
 	    </ul>
 	</div>
 </div>

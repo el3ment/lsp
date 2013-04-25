@@ -11,7 +11,7 @@
             events : {
                 application : {
                     onAttachEvents : function(e, data){
-                        $('*[data-badge]:not(:has(div.badges-badge))', data.selector)
+                        $('div[data-badge]:not(:has(div.badges-badge)), a[data-badge]:not(:has(div.badges-badge))', data.selector)
                             .append(_this.makeElement);
                     }
                 }

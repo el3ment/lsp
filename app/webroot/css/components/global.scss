@@ -189,6 +189,9 @@ ul.list li,
         }
         &.action{ /* Handle the bottom border */
             @include border-radius(0 0 px($borderRadius) px($borderRadius));
+			.icon-16-heart-grey{
+				margin-left: 11px; /* center the add to wish list button under the add to cart */
+			}
             border-bottom: 0;
         }
         label{
@@ -289,7 +292,7 @@ ul.list li,
     
     display: inline-block;
     position: relative;
-	width: 100%;
+	//width: 100%;
     
     
     .productPrice{ 
@@ -304,7 +307,7 @@ ul.list li,
 		width: 100%;
 	}
 
-    .productName{ display:block; font-size: 13px; line-height: 19px; }
+    .productName{ display:block; font-size: 13px; line-height: 19px; font-weight: normal; }
     img{ 
         margin-bottom: px($paddingUnit);
         border: 1px solid $lightGrey;
@@ -375,7 +378,7 @@ ul.list li,
 
         border-left: px(columns(2) + $gutterWidth) solid transparent;
         float:left;
-		width: 100%;
+		
 		@include box-sizing();
 		
         li{
@@ -401,17 +404,19 @@ ul.list li,
         }
         
         /* When there are 3 or more items, then display it as a list */
+		
+	
         li:first-child:nth-last-child(n + 3),
         li:first-child:nth-last-child(n + 3) ~ li{
             clear:both;
-            
+        
 			width: 100%;
 			@include box-sizing();
-			
+		
             border-width: px($gutterWidth);
             border-bottom-width: 0;
             position: relative;
-            img{
+			.image{
                 margin-left: px($gutterWidth + $paddingUnit);
                 margin-right: px($paddingUnit * 2);
                 float: left;
@@ -430,7 +435,7 @@ ul.list li,
             }
             .productName{
                 overflow: hidden;
-				
+			
             }
             &:last-child{
                 border-bottom-width: px($gutterWidth);
@@ -446,11 +451,12 @@ ul.list li,
         
         .subtotal{
             display: inline-block;
-            font-weight: bold;
             text-align: right;
             float: right;
             margin-right: px($paddingUnit);
 			line-height: 20px;
+			font-weight: 800;
+			font-size: 14px;
             .details{
                 display:block;
                 font-weight: normal;
@@ -477,7 +483,6 @@ ul.list li,
 	
 	.itemList{
     
-		width:;
         margin-bottom: 0;
         padding-bottom: 0;
         border: 1px solid $lightGrey;
@@ -552,7 +557,7 @@ ul.list li,
 		
 		&:hover:before;{
 			content:' ';
-			background-color: transparent;
+			background-color: rgba(0,0,0,0.0001);
 			width: 120%;
 			height: 100px;
 			position: absolute;
@@ -604,7 +609,6 @@ ul.list li,
 	display:inline-block;
 	zoom:1;
 	*display:inline; /* IE7 inline-block Fix */
-	
 	/* Generic badge styling */
 	.badges-badge{ 
 	    position: absolute;
@@ -618,6 +622,7 @@ ul.list li,
 	    background: blue url() no-repeat top right;
 	    width:28px;
 	    height:17px;
+		@include box-sizing();
 	}
 }
 

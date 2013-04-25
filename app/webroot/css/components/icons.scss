@@ -44,6 +44,10 @@
     }
 }
 
+.icon-16-heart-grey:after{
+	background-position: -48px -409px;
+}
+
 .icon-24-voteUp:after{
 	background-position: -39px -147px;
 }
@@ -112,6 +116,8 @@
 	font-size: 25px;
 	background-image: none;
 	font-weight: normal;
+	text-align:center;
+	top: 9px\9;
 }
 .icon-24-toggleHide.reveal-isOpen:after{
 	content: '-' !important;

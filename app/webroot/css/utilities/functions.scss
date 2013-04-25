@@ -23,15 +23,36 @@
    CSS3 properties easier */
 
 @mixin gradient($from, $to){
-    background : $from; /* Old browsers */
-    background : -moz-linear-gradient(top, $from 0%, $to 100%); /* FF3.6+ */
-    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to)); /* Chrome,Safari4+ */
-    background : -webkit-linear-gradient(top, $from 0%,$to 100%); /* Chrome10+,Safari5.1+ */
-    background : -o-linear-gradient(top, $from 0%,$to 100%); /* Opera 11.10+ */
-    background : -ms-linear-gradient(top, $from 0%,$to 100%); /* IE10+ */
-    background : linear-gradient(to bottom, $from 0%,$to 100%); /* W3C */
-    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}'); /* IE6,IE7 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}')"; /* IE8 */
+	background-image: url('../img/lsp-master-sprite.png');
+	@if $from == $lightYellow{
+		background-position: 0 -527px;
+	}@else if $from == $darkYellow{ // click
+		background-position: -198px -527px;
+	}@else if $from == $hoverLightYellow{ // hover
+		background-position: 0 -682px;
+	}@else if $from == $buttonLightGrey{
+		background-position: 0 -632px;
+	}@else if $from == $buttonDarkGrey{ // click
+		background-position: -198px -629px;
+	}@else if $from == "b3hover"{
+		background-position: -199px -684px;
+	}@else if $from == $brown{
+		background-position: 0 -579px;
+	}@else if $from == $darkBrown{ // click
+		background-position: -133px -579px;
+	}@else if $from == #574c41{ // hover
+		background-position: -200px -472px;
+	}@else{
+		background : $from; /* Old browsers */
+	    background : -moz-linear-gradient(top, $from 0%, $to 100%); /* FF3.6+ */
+	    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to)); /* Chrome,Safari4+ */
+	    background : -webkit-linear-gradient(top, $from 0%,$to 100%); /* Chrome10+,Safari5.1+ */
+	    background : -o-linear-gradient(top, $from 0%,$to 100%); /* Opera 11.10+ */
+	    background : -ms-linear-gradient(top, $from 0%,$to 100%); /* IE10+ */
+	    background : linear-gradient(to bottom, $from 0%,$to 100%); /* W3C */
+	    filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}'); /* IE6,IE7 */
+	    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}')"; /* IE8 */
+	}
 }
 
 @mixin box-shadow-multiple($params...){
