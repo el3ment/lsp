@@ -2,11 +2,11 @@
 /* Fonts */
 @font-face {
      font-family: "League Gothic";
-	 src: url("../files/leaguegothic-regular-webfont.eot");
-     src: local("☺"), url("../files/leaguegothic-regular-webfont.eot") format('eot'),
-     url('../files/leaguegothic-regular-webfont.woff') format('woff'),
-     url('../files/leaguegothic-regular-webfont.ttf') format('truetype'),
-     url('../files/leaguegothic-regular-webfont.svg#LeagueGothic') format('svg');
+	 src: url("http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot");
+     src: local("☺"), url("http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot") format('eot'),
+     url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.woff') format('woff'),
+     url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype'),
+     url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.svg#LeagueGothic') format('svg');
      font-weight:bold;
      font-style:normal;
   }
@@ -291,7 +291,6 @@ ul.list li,
     position: relative;
 	width: 100%;
     
-    
     .productPrice{ 
 		font-weight: 800;
 		font-size: 14px;
@@ -305,6 +304,7 @@ ul.list li,
 	}
 
     .productName{ display:block; font-size: 13px; line-height: 19px; font-weight: normal; }
+	
     img{ 
         margin-bottom: px($paddingUnit);
         border: 1px solid $lightGrey;
@@ -386,7 +386,8 @@ ul.list li,
 		
 		@include box-sizing();
 		
-		.element{
+		
+		/*.element{
             background-color: $superLightGrey;
             display:inline-block;
             float:left;
@@ -440,11 +441,46 @@ ul.list li,
         li:first-child .element{
             border-top-width: px($gutterWidth);
         }
+		*/
 		
-		/*
-        li:nth-child(n){
+		.productScope{
+			display: none;
+		}
+		
+		.productScope:first-child,
+		.productScope:first-child + .productScope{
+			display: block;
+			float:left;
+			width: 50%;
+		}
+		
+		
+		@media (min-width: 1200px){
+			.productScope:first-child,
+			.productScope:first-child + .productScope,
+			.productScope:first-child + .productScope + .productScope{
+				display: block;
+				float:left;
+				width: 33%;
+			}
+		}
+		
+        .element{
 			
 			// Grid View 
+			
+            background-color: $superLightGrey;
+            float:left;
+            border: px($gutterWidth / 2) solid $superLightGrey;
+            border-bottom-width: px($gutterWidth);
+			color: inherit;
+			text-decoration: none;
+			width: 100%;
+			@include box-sizing();
+	
+            border-width: px($gutterWidth);
+            border-top-width: 0;
+            position: relative;
 			
             background-color: $superLightGrey;
             display:inline-block;
@@ -454,7 +490,7 @@ ul.list li,
             height: 100%;
             border: px($gutterWidth) solid $superLightGrey;
             border-left-width: 0;
-            width: 160px;
+            width: 100%;
 
 			.image{
                 float: none;
@@ -477,21 +513,7 @@ ul.list li,
            	
         }
 		
-		@media (max-width: 1199px){
-			li:nth-last-child(n + 3),
-			li:nth-last-child(n + 3) ~ li{
-				@include listView();
-			}
-		}
-		@media (min-width: 1200px){
-	        li:nth-last-child(n + 4),
-	        li:nth-last-child(n + 4) ~ li{
-				@include listView();
-			}
-		}
-		
         /* When there are 3 or more items, then display it as a list */
-        
 		
         li.disengaged{
             padding-top: 0;

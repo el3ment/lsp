@@ -35,25 +35,8 @@ geo:32.898207,-96.702881;u=35'>1600&nbsp;Control&nbsp;Place, Dallas,&nbsp;Tx&nbs
 	                </li>
 	            </ul>
 	            <ul class='block links hidden-desktop'>
-	                <li class='utilities icon-24-account-yellow'>
-	                  <ul class='hours'>
-						  <li><strong>Categories</strong></li>
-	                    <li><a href='#'>Cases & Accessories</li>
-	                    <li><a href='#'>Cymbals & Gongs</a></li>
-						<li><a href='#'>Drums & Drum Sets</a></li>
-						<li><a href='#'>Drumsticks & Mallets</a></li>
-						<li><a href='#'>Hardware & Parts</a></li>
-						<li><a href='#'>Keyboards</a></li>
-						<li><a href='#'>World & Effects</a></li>
-						<li><a href='#'>Marching</a></li>
-						<li><a href='#'>Concert</a></li>
-						<li><a href='#'>Practice & Classroom</a></li>
-						<li><a href='#'>Drum Heads</a></li>
-						<li><a href='#'>Sheet Music</a></li>
-	                  </ul>
-	                </li>
-	                <li class='utilities'>
-	                  <ul class='hours'>
+	                <li>
+	                  <ul class='utilities'>
 						  <li><strong>Resources</strong></li>
 	                    <li><a href='#'>Cymbal Trade-In</a></li>
 	                    <li><a href='#'>International Orders</li>
@@ -62,32 +45,32 @@ geo:32.898207,-96.702881;u=35'>1600&nbsp;Control&nbsp;Place, Dallas,&nbsp;Tx&nbs
 						<li><a href='#'>Heads</a></li>
 	                  </ul>
 	                </li>
-	                <li class='utilities icon-24-account-yellow'>
-	                  <ul class='hours'>
+	                <li class=''>
+	                  <ul class='utilities'>
 						  <li><strong>School Bids</strong></li>
 	                    <li><a href='#'>School Bid Form</a></li>
 						<li><a href='#'>Contact Bid Manager</a></li>
 						<li><a href='#'>Qualify for Special Discounts</a></li>
 	                  </ul>
 	                </li>
-	                <li class='utilities icon-24-phone-yellow'>
-	                  <ul class='hours'>
-						  <li><strong>Follow Us</strong></li>
-	                    <li><a href='#' class='icon-24-facebook-white'>Facebook</a></li>
-	                    <li><a href='#' class='icon-24-twitter-white'>Twitter</a></li>
-	                    <li><a href='#' class='icon-24-youtube-white'>YouTube</a></li>
-						<li><a href='#' class='icon-24-instagram-white'>Instagram</a></li>
-	                  </ul>
-	                </li>
-	                <li class='utilities icon-24-account-yellow'>
-	                  <ul class='hours'>
-						  <li><strong>Account</strong></li>
+	                <li class='visible-phone'>
+	                  <ul class='utilities'>
+						<li><strong>Account</strong></li>
 	                    <li><a href='#'>My Account</a></li>
 						<li><a href='#'>Track an Order</a></li>
 						<li><a href='#'>Gift Cards</a></li>
 						<li><a href='#'>Our Store</a></li>
 	                  </ul>
 	                </li>
+					<li>
+						<ul class='utilities'>
+							<li><strong>Follow Us</strong></li>
+		                    <li><a href='#' class='icon-24-facebook-white'>Facebook</a></li>
+		                    <li><a href='#' class='icon-24-twitter-white'>Twitter</a></li>
+		                    <li><a href='#' class='icon-24-youtube-white'>YouTube</a></li>
+							<li><a href='#' class='icon-24-instagram-white'>Instagram</a></li>
+						</ul>
+					</li>
 	            </ul>
 	        </div>
 	        <ul class='sitemap-lists visible-desktop'>

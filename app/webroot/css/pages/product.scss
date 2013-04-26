@@ -114,7 +114,7 @@
             .zoom-thumbnails{
 				position: relative;
                 &:before{
-					content : 'Hover over image to zoom';
+					content : 'Hover to zoom';
 					@media (max-width: 767px){
 						content : ' ';
 					}
@@ -124,10 +124,12 @@
 					top: -1.5em;
 					height: 1.5em;
                     margin: px($paddingUnit) 0;
-					width:100%;
 					text-align:center;
 					font-size:13px;
                     color: $grey;
+					padding-left: 23px;
+					background-image: url(../img/lsp-master-sprite.png);
+					background-position: -71px -406px;
                 }
                 a{
 					vertical-align: bottom;

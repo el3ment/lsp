@@ -2,7 +2,7 @@
     <div class='row'>
 		<div class='head span12'>
 	        <h1 itemprop='name' class='productName'>Multi-Height Practice Pad and Snare Drum Stand</h1>
-	        <div class='details isAuthorized'>By&nbsp;:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
+	        <div class='details isAuthorized'>By:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
 	        <div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 	            <span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
 	            <a href='#' class='details'><span itemprop='count' class='reviewReviewCount'>31</span> reviews</a>
@@ -61,7 +61,7 @@
 	                        <span class='details'>List: <span itemprop='msrp' class='productMsrp'>$80.00</span>, You Save: <span itemprop='discount' class='productDiscount'>$21.05</span>!</span>
 	                    </li>
 	                    <li class='productAvailability' itemprop="offers" itemscope itemtype="http://data-vocabulary.org/Offer" data-method='seperately'>
-	                        <span itemprop="availability" class='status'>In Stock</span>
+	                        <span itemprop="availability" class='status'>In Stock:</span>
 	                        <span class='shortStatus'>Two Finishes In Stock</span>
 	                        <span class='details'>Arrives within 3-5 business days with <a href='#' class='method'>Standard Shipping</a></span>
 	                    </li>
@@ -161,7 +161,7 @@
 	                    <div class='currentItem hidden-phone hidden-tablet'>
 								<label for='relatedItemsCurrentItem'>
 		                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
-									<!--<input id='relatedItemsCurrentItem' type='checkbox' />-->
+									<input id='relatedItemsCurrentItem' type='checkbox' />
 		                            <span class='productPrice'>$14.25</span>
 		                            <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
 								</label>
@@ -170,14 +170,14 @@
 							<?php for($i = 0; $i < 3; $i++){ ?>
 	                        <li class='productScope'>
 								<a href='#<?php echo $i ?>' class='element'>
-									<!--<label for='relatedItemsProduct-<?php echo $i; ?>'>-->
-		                            <div data-badge='new' class='image'>
-										<img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
-									</div>
-		                            <!--<input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />-->
-									<span class='productPrice'>$14.25</span>
-		                            <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
-									<!--</label>-->
+									<label for='relatedItemsProduct-<?php echo $i; ?>'>
+			                            <div data-badge='new' class='image'>
+											<img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+										</div>
+			                            <input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />
+										<span class='productPrice'>$14.25</span>
+			                            <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
+									</label>
 								</a>
 							</li>
 							<?php } ?>

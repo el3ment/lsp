@@ -213,7 +213,7 @@
                     margin: px(10px) 10px 10px 3px;
 					padding-left: 38px;
                 }
-                .hours {
+                .hours, .utilities {
                     text-transform: uppercase;
                 }
                 *[class*="icon-"]:after{ /* Icons */
@@ -237,7 +237,7 @@
 		
 		.static .links{
 			background-color: transparent;
-			padding:0;
+			padding-top: 0;
             @include box-shadow-multiple(none); /* Intentionally 1px */
 		}
 
@@ -253,7 +253,7 @@
                 margin: auto;   
             }
         }
-        
+		
         .copyright{
 			color: #493d35;
           	font-size: 13px;
