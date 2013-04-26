@@ -13,7 +13,7 @@
     <div class='well span12'>
         <a href='#' class='image-logoCircle logo'>Lone Star Percussion</a>
         <span class='established'>Established <span class='icon-24-star-yellow'>1978</span></span>
-        <span class='tagline'>We Speak Drum <span class='icon-24-phone-yellow'>1-866-792-0143</span></span>
+        <span class='tagline'>We Speak Drum <span class='icon-24-phone-yellow'><a href='tel:1-866-792-0143'>1-866-792-0143</a></span></span>
     </div> 
 	
     <ul class='shopbar span12'> 
@@ -24,7 +24,7 @@
             <input type='text' class='autocomplete search' />
             <button class='b2 icon-24-magnify-black icon-only'>Search</button>
         </li>
-		<li class='mobileSearch visible-phone'><button class='b3' data-reveal-children='searchBar'>Toggle Search</button></li>
+		<li class='mobileSearch visible-phone'><button class='b3 reveal-isOpen' data-reveal-children='searchBar'>Toggle Search</button></li>
     </ul>
 	<div class='breadcrumbs'>
 	    <ul class='span12 breadcrumbLinks'>

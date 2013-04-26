@@ -18,7 +18,7 @@
             },
             assets : {},
             makeElement : function(index, elementString){
-                return '<div class="badges-badge badge-'+$(this).data('badge')+'"></div>';
+                return '<div class="badges-badge badge-'+$(this).data('badge')+'">'+ $(this).data('badge') +'</div>';
             }
         };
 

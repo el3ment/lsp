@@ -67,7 +67,7 @@
 	                    </li>
 	                    <li class='quantity'>
 	                        <label>Quantity</label>
-	                        <input class='scroller' />
+	                        <input class='scroller' type='number' min='1' value='1' />
 	                    </li>
 	                    <li class='option'>
 	                        <label>Finish</label>
@@ -147,20 +147,21 @@
 	            </table>
 	        </li>
 	        <li class='returns section' data-reveal-children='returns'>
-	            <button class='b3 icon-24-toggleHide icon-only' data-reveal-children='returns'>Toggle Section</button>
+	            <button class='b3 icon-24-toggleHide' data-reveal-children='returns'>Toggle Section</button>
 	            <h2 data-reveal-children='returns'>Returns &amp; Shipping</h2>
 	            <div id='returns' class='content'>
 	                Paragraphs of data
 	            </div>
 	        </li>
-	        <li class='addRelatedItems section hidden-phone hidden-tablet'>
-	            <h2>Our Staff Suggests</h2>
-	            <div class='content'>
+	        <li class='addRelatedItems section'>
+	            <button class='b3 icon-24-toggleHide visible-phone' data-reveal-children='suggestions'>Toggle Section</button>
+				<h2 data-reveal-children='suggestions'>Our Staff Suggests</h2>
+	            <div id='suggestions' class='content reveal-isOpen hidden-phone'>
 	                <div class='relatedItems'>
-	                    <div class='currentItem'>
+	                    <div class='currentItem hidden-phone hidden-tablet'>
 								<label for='relatedItemsCurrentItem'>
 		                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
-									<input id='relatedItemsCurrentItem' type='checkbox' />
+									<!--<input id='relatedItemsCurrentItem' type='checkbox' />-->
 		                            <span class='productPrice'>$14.25</span>
 		                            <span class='productName'>Lone Star Percussion V3Gold Practice Pad</span>
 								</label>
@@ -168,22 +169,26 @@
 	                    <ul class='relatedItemList'>
 							<?php for($i = 0; $i < 3; $i++){ ?>
 	                        <li class='productScope'>
-								<label for='relatedItemsProduct-<?php echo $i; ?>'>
-		                            <div data-badge='new'><img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' /></div>
-		                            <input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />
+								<a href='#<?php echo $i ?>' class='element'>
+									<!--<label for='relatedItemsProduct-<?php echo $i; ?>'>-->
+		                            <div data-badge='new' class='image'>
+										<img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
+									</div>
+		                            <!--<input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />-->
 									<span class='productPrice'>$14.25</span>
 		                            <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
-								</label>
-	                        </li>
+									<!--</label>-->
+								</a>
+							</li>
 							<?php } ?>
 	                    </ul>
-	                    <div class='addToCart'>
+	                    <!--<div class='addToCart'>
 	                        <button class='b1 icon-24-cart-black'>Add To Cart</button>
 	                        <div class='subtotal'>
 	                            $119.90
 	                            <span class='details'>Bundle Sub Total</span>
 	                        </div>
-	                    </div>
+	                    </div>-->
 	                </div>
 	            </div>
 	        </li>

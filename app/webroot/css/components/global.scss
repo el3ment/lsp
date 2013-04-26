@@ -91,7 +91,7 @@ a, .b5{
 }
 
 p{
-    margin-bottom: px(2 * $paddingUnit);
+    margin-bottom: px(4 * $paddingUnit);
 }
 
 em{
@@ -189,9 +189,9 @@ ul.list li,
         }
         &.action{ /* Handle the bottom border */
             @include border-radius(0 0 px($borderRadius) px($borderRadius));
-			.icon-16-heart-grey{
-				margin-left: 11px; /* center the add to wish list button under the add to cart */
-			}
+			//.icon-16-heart-grey{
+				//margin-left: 11px; /* center the add to wish list button under the add to cart */
+				//}
             border-bottom: 0;
         }
         label{
@@ -225,9 +225,6 @@ ul.list li,
             display: none;
         }
         .details{
-            
-            font-style: italic;
-            
             .method{    
                 &:before{
                     content: '(';
@@ -292,15 +289,15 @@ ul.list li,
     
     display: inline-block;
     position: relative;
-	//width: 100%;
+	width: 100%;
     
     
     .productPrice{ 
 		font-weight: 800;
 		font-size: 14px;
 		line-height: 22px;
-		position: relative;
-		left: 5px;
+		//position: relative;
+		//left: 5px;
 	}
 	
 	label{
@@ -371,56 +368,50 @@ ul.list li,
     ul{ 
         
 		display:inline-block;
-        background-color: $superLightGrey;
-		-moz-background-clip: padding;     /* Firefox 3.6 */
-		-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
-		background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+		width: 100%;
+        //background-color: $superLightGrey;
+		//-moz-background-clip: padding;     /* Firefox 3.6 */
+		//-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
+		//background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
 
+
+		
         border-left: px(columns(2) + $gutterWidth) solid transparent;
+		@media (max-width: 979px){
+			border-left: 0;
+		}
+		
+
         float:left;
 		
 		@include box-sizing();
 		
-        li{
+		.element{
             background-color: $superLightGrey;
             display:inline-block;
             float:left;
-            width: px(columns(2) - $gutterWidth);
-            height: 100%;
             border: px($gutterWidth / 2) solid $superLightGrey;
-            border-top-width: px($gutterWidth);
-            
-            &:nth-child(odd){ clear:both; border-left-width: px($gutterWidth); } 
-            &:nth-child(even), &:last-child{ 
-                border-right-width: px($gutterWidth);
-                clear: none;
-            }
-            &:nth-child(1){ /* nth child instead of first-child for ie */ border-left-width: px($gutterWidth); }
-            &:last-child{ border-right-width: px($gutterWidth); }
-        }
-        li.disengaged{
-            padding-top: 0;
-            .productPrice, .productName, img{ @include opacity(.4); }
-        }
-        
-        /* When there are 3 or more items, then display it as a list */
-		
-	
-        li:first-child:nth-last-child(n + 3),
-        li:first-child:nth-last-child(n + 3) ~ li{
+            border-bottom-width: px($gutterWidth);
+			color: inherit;
+			text-decoration: none;
             clear:both;
-        
+    
 			width: 100%;
 			@include box-sizing();
-		
+	
             border-width: px($gutterWidth);
-            border-bottom-width: 0;
+            border-top-width: 0;
             position: relative;
 			.image{
-                margin-left: px($gutterWidth + $paddingUnit);
+                margin-left: px($paddingUnit);
                 margin-right: px($paddingUnit * 2);
                 float: left;
-                max-width: px(80px);
+				width: 80px;
+				height: 80px;
+				margin-bottom: 0;
+            }
+			img{
+				max-width: px(80px);
                 max-height: px(80px);
             }
             input[type="checkbox"]{
@@ -435,11 +426,76 @@ ul.list li,
             }
             .productName{
                 overflow: hidden;
+		
+            }
 			
+			&:hover{
+				.image img{
+                    @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
+                    border-color: $darkYellow;  
+				}
+			}
+			
+		}
+        li:first-child .element{
+            border-top-width: px($gutterWidth);
+        }
+		
+		/*
+        li:nth-child(n){
+			
+			// Grid View 
+			
+            background-color: $superLightGrey;
+            display:inline-block;
+            float:left;
+			clear: none;
+			
+            height: 100%;
+            border: px($gutterWidth) solid $superLightGrey;
+            border-left-width: 0;
+            width: 160px;
+
+			.image{
+                float: none;
+				margin: 0;
+				width: 120px;
+				height: 120px;
+				margin-bottom: 10px;
             }
-            &:last-child{
-                border-bottom-width: px($gutterWidth);
+			img{
+				max-width: px(120px);
+                max-height: px(120px);
             }
+            input[type="checkbox"]{
+				float: left;
+				position: relative;
+            }
+			&:first-child{
+				border-width: $gutterWidth;
+			}
+           	
+        }
+		
+		@media (max-width: 1199px){
+			li:nth-last-child(n + 3),
+			li:nth-last-child(n + 3) ~ li{
+				@include listView();
+			}
+		}
+		@media (min-width: 1200px){
+	        li:nth-last-child(n + 4),
+	        li:nth-last-child(n + 4) ~ li{
+				@include listView();
+			}
+		}
+		
+        /* When there are 3 or more items, then display it as a list */
+        
+		
+        li.disengaged{
+            padding-top: 0;
+            .productPrice, .productName, img{ @include opacity(.4); }
         }
             
     }
@@ -612,17 +668,20 @@ ul.list li,
 	/* Generic badge styling */
 	.badges-badge{ 
 	    position: absolute;
-	    top: 0;
-	    right: 0;
+	    top: 5px;
+	    left: 5px;
 		padding: px(5px) px(8px);
+		text-transform: uppercase;
+		font-weight: bold;
+		color: white;
+		
+		@include border-radius(px($borderRadius));
+		
 	}
 
 	/* Individual Badges */
 	.badge-new{
-	    background: blue url() no-repeat top right;
-	    width:28px;
-	    height:17px;
-		@include box-sizing();
+	    background-color: red;
 	}
 }
 

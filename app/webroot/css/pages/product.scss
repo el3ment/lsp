@@ -93,8 +93,8 @@
 				border-bottom: 0;
 			}
 			
-            .zoom-mainImage{
-                display:inline-block;
+            #zoom-mainImage{
+				display: block;
             }
             .zoom-thumbnails{
 				position: relative;
@@ -111,10 +111,12 @@
                     margin: px($paddingUnit) 0;
 					width:100%;
 					text-align:center;
+					font-size:13px;
                     color: $grey;
                 }
                 a{
 					vertical-align: bottom;
+					
 					img{
 	                    border: 1px solid $lightGrey;
 	                    &:hover{
@@ -138,9 +140,9 @@
     .section{
 		
         padding-bottom: px(3 * $paddingUnit);
-        border-bottom: 1px solid #dedcda;
+        border-top: 1px solid #dedcda;
 		
-        &:last-child{ border-bottom-width: 0; }
+        &:first-child{ border-top-width: 0; }
         
         > .b3[data-reveal-children]{ /* The plus/minus toggle button */
             margin-right: px(2 * $paddingUnit);
@@ -152,7 +154,7 @@
 			padding: 0;
 			position: relative;
 			margin-left:0;
-			margin-top: px(2 * $paddingUnit - 2);
+			margin-top: px(2 * $paddingUnit + 4);
 			line-height:200px;
 			
 			@media (max-width: 980px){
@@ -173,13 +175,11 @@
             
         }
         .content{ 
-			margin-top: 5px;
+			margin-top: 10px;
             clear: both;
             float: left;
             width: 100%;
-			padding-left: 10px;
         }
-        
         @include clearfix;
         
     }
@@ -198,21 +198,20 @@
         
     }
     .description{
-		.content{ max-width: 550px; } // Maintains readability of text
+		.content{ max-width: 550px; padding-left: 10px;} // Maintains readability of text
         @include clearfix;
     }
+	.features .content{
+		padding-left: 10px;
+	}
     .reviews{
 
-		border-top: 1px solid $lightGrey;
+		//border-top: 1px solid $lightGrey;
 		
-		@media (max-width: 767px){
-			padding-top:0;
-			border-top:0;
-		}
 		
         h2{
 			margin:0;
-            padding: 16px 16px 16px 0;
+            padding: 20px 16px 15px 0;
             float:left;
         }
         
@@ -220,7 +219,7 @@
             
             float: left; 
             position: relative;
-            margin: 19px 0 0 px(10px);
+            margin: 21px 0 0 px(10px);
 			width: 105px;
             
             label{
@@ -237,7 +236,7 @@
             }
         }
 		.icon-24-toggleHide{
-			margin-top:13px;
+			margin-top:17px;
             margin-right: px(2 * $paddingUnit);
             text-indent: px(-1000px);
             float:left;
@@ -248,7 +247,7 @@
 			float: right;
 		}
         .b1{
-			margin-top:8px;
+			margin-top:10px;
             float: right;
         }
         .add{
@@ -329,6 +328,7 @@
             .submit{
                 
                 border-top: 1px solid $lightGrey;
+				border-bottom: 1px solid $lightGrey;
 				padding: px($paddingUnit) 0;
                 clear: both;
                 
@@ -417,7 +417,7 @@
                     width: px(32px);
                     height: px(32px);
                     @include border-radius(px(32px));
-                    background-color: $lightGrey;
+                    //background-color: $lightGrey;
                     text-indent: px(-1000px);
                     &:hover{
                         background-color: $yellow;

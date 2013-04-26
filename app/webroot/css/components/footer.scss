@@ -4,7 +4,7 @@
     $_bottomPadding : 20px;
     
     //margin: auto;
-    color: #5b4e44; /* Light brown */
+    color: #b7aca4; /* Light brown */
     
     .rowContent{
     	margin: auto;
@@ -24,7 +24,7 @@
         margin-top: px(30px); /* 20px + 10 for the top of the profile image */
         
 		@media (max-width: 767px){
-
+			min-height:100px;
 			border: 20px solid transparent;
 			border-width: 0 20px;
 			@include box-sizing();
@@ -33,12 +33,18 @@
 		
         .profile{
             position: absolute;
-            height: px(135px);
+            height: px(140px);
             width: px(140px);
-            top: px(-20px); 
+			top: px(-20px); 
+			@media (max-width: 767px) {
+	            height: px(110px);
+	            width: px(110px);
+				top: -3px;
+			}
+           
             .profileImage{ 
-				width: 145px;
-				height: 145px;
+				width: 100%;
+				height: 100%;
 				@include border-radius(px(150px));
 				background-size: 238%;
 				background-position: -99px -1px;
@@ -49,8 +55,15 @@
             font-size: px(16px);
             font-style: italic;
             color: $darkGrey;
+			
+			
             margin-left: px(160px, 16px);
-            overflow: hidden;
+            
+			@media (max-width: 767px) {
+				margin-left:130px;
+			}
+			
+			overflow: hidden;
             //width: px(460px, 16px);
             line-height: 1.4em;
 			margin-right: px(2 * $paddingUnit);
@@ -108,16 +121,22 @@
             strong{ font-weight: bold; }
         }
 		li{
-			margin-top: .25em;
+			font-size: 13px;
+			@media (max-width: 979px){
+				font-size: 14px;
+			}
 		}
         a{	
-            
 			text-decoration: none;
-			  
+			
             &:hover{
                 color: $yellow;
             }
         }
+		
+		.utilities a{
+			text-transform: none;
+		}
         
 		.first{
 			margin-left: 0;
@@ -129,7 +148,14 @@
 			margin-bottom: px(2 * $paddingUnit);
 			
 			@media (max-width: 979px){
-				padding: 0 10%;
+				padding: 0 5%;
+			}
+			
+			a { 
+				color: inherit; /* Light brown */
+				&:hover{
+					color: $yellow;
+				}
 			}
 			
             .newsletter{
