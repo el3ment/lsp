@@ -198,7 +198,14 @@
         
     }
     .description{
-		.content{ max-width: 550px; padding-left: 10px;} // Maintains readability of text
+		.content{ 
+			max-width: 550px; 
+		
+			@media (min-width: 767px){
+				padding-left: 10px;
+			}
+		
+		} // Maintains readability of text
         @include clearfix;
     }
 	.features .content{
