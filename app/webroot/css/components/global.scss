@@ -91,7 +91,7 @@ a, .b5{
 }
 
 p{
-    margin-bottom: px(4 * $paddingUnit);
+    margin-bottom: px(4 * $paddingUnit + 3);
 }
 
 em{
