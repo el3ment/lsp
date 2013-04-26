@@ -22,10 +22,10 @@
 	    }
 	}
 	
-	::-webkit-input-placeholder { font-style: italic; color: $lightGrey; line-height:22px; font-weight: 500; }
-	::-moz-placeholder { font-style: italic; color: $lightGrey; line-height:22px;font-weight: 500; } /* firefox 19+ */
-	:-ms-input-placeholder { font-style: italic; color: $lightGrey; line-height:22px;font-weight: 500; } /* ie */
-	input:-moz-placeholder { font-style: italic; color: $lightGrey; line-height:22px;font-weight: 500; }
+	::-webkit-input-placeholder { font-style: italic; color: $grey; line-height:22px; font-weight: 500; }
+	::-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* firefox 19+ */
+	:-ms-input-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* ie */
+	input:-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; }
 	
 	select{
 	    padding: px($inputPadding - 1); /* Fix for unknown space on selects */

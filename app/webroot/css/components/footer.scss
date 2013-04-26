@@ -77,15 +77,32 @@
             margin: px(20px) 0 0 px(20px);
             float:right;
 			
+			@media (max-width: 979px) and (min-width: 768px){
+				margin-top: 0px;
+			}
+			
             li{
                 float: right;
                 margin-left: px(10px);
+				@media (max-width: 979px) and (min-width: 768px){
+					clear:both;
+					margin-top: 20px;
+					&.image-creditCards{
+						margin-top:5px;
+					}
+					.image-mcafee{
+						margin-right: 20px;
+						margin-bottom: 0;
+					}
+				}
             }
 			
 			.image-mcafee{
 				position:relative;
 				top:-10px;
 			}
+			
+			
         }
     }
     
@@ -181,7 +198,7 @@
                 }
             }
 			
-            .contact{
+            .block{
                 background-color: #1f150d;
                 @include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
                 margin-top: px(20px);
@@ -205,6 +222,25 @@
                 }
             }
         }
+
+		@media (min-width: 767px) and (max-width: 979px){
+			.static .block{
+				float: left;
+				width: 46%;
+				padding: 5px;
+				margin-left: 3%;
+				&.contact{
+					margin-left: 5px;
+				}
+			}
+		}
+		
+		.static .links{
+			background-color: transparent;
+			padding:0;
+            @include box-shadow-multiple(none); /* Intentionally 1px */
+			ul{ width: 50%; }
+		}
 
         .logo{
           
