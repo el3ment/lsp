@@ -2,7 +2,7 @@
     <div class='row'>
 		<div class='head span12'>
 	        <h1 itemprop='name' class='productName'>Multi-Height Practice Pad and Snare Drum Stand</h1>
-	        <div class='details'>By&nbsp;:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
+	        <div class='details isAuthorized'>By&nbsp;:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>Innovative Percussion</a></div>
 	        <div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 	            <span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
 	            <a href='#' class='details'><span itemprop='count' class='reviewReviewCount'>31</span> reviews</a>
@@ -29,7 +29,7 @@
 	            </ul>
 	        </li>
 	        <li class='audio section hidden-phone'>
-	            <h2>Audio</h2>
+	            <h2>Listen</h2>
 	            <ul>
 	                <li><label>Audio 1 <span class='details'>Recorded by Innovative Percussion</span></label></li>
 	                <li><label>Audio 2 <span class='details'>Recorded by Innovative Percussion</span></label></li>
@@ -37,7 +37,7 @@
 	            </ul>
 	        </li>
 	        <li class='videos hidden-phone section'>
-	            <h2>Video</h2>
+	            <h2>Watch</h2>
 	            <ul>
 	                <li>
 	                    <div class='video panel'>
@@ -58,7 +58,7 @@
 	                    <li class='price'>
 	                        <span itemprop='price' class='productPrice'>$58.96</span>
 	                        <span itemprop='grouping' class='productGrouping'>each</span>
-	                        <span class='details'>List : <span itemprop='msrp' class='productMsrp'>$80.00</span>, You Save: <span itemprop='discount' class='productDiscount'>$21.05</span>!</span>
+	                        <span class='details'>List: <span itemprop='msrp' class='productMsrp'>$80.00</span>, You Save: <span itemprop='discount' class='productDiscount'>$21.05</span>!</span>
 	                    </li>
 	                    <li class='productAvailability' itemprop="offers" itemscope itemtype="http://data-vocabulary.org/Offer" data-method='seperately'>
 	                        <span itemprop="availability" class='status'>In Stock</span>
@@ -66,11 +66,11 @@
 	                        <span class='details'>Arrives within 3-5 business days with <a href='#' class='method'>Standard Shipping</a></span>
 	                    </li>
 	                    <li class='quantity'>
-	                        <label>Quantity</label>
+	                        <label>Quantity:</label>
 	                        <input class='scroller' type='number' min='1' value='1' />
 	                    </li>
 	                    <li class='option'>
-	                        <label>Finish</label>
+	                        <label>Finish:</label>
 	                        <select>
 	                            <option>Red</option>    
 	                        </select>
@@ -136,7 +136,7 @@
 
 
 						<p>Skip steps now, you’ll skip them later. Cut corners now, you’ll cut them later. You get used to what you do most of the time.</p>
-	                <span class='byline'>Description written by <span itemprop='author' data-author='michael' class='author'>Michael Dooley</span></span>
+	                <span class='byline'>Details written by <span itemprop='author' data-author='michael' class='author'>Michael Dooley</span></span>
 	            </div>
 	        </li>
 	        <li class='specifications section'>
@@ -205,7 +205,7 @@
             <label class='details'>Average User Rating</label>
             <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
         </div>
-        <button class='b1 hidden-phone' data-reveal-children='addReviewForm previewReview'>Submit A Review</button>
+        <button class='b1 hidden-phone' data-reveal-children='addReviewForm previewReview'>Write A Review</button>
         <button class='b4 icon-24-toggleHide visible-phone' data-reveal-children='reviewEntries'>Toggle Section</button>
         <div id='addReviewForm' class='add hide hidden-phone'>
 	        <form class='row'>

@@ -17,7 +17,7 @@
 	            <div class='newsletter'>
 	                <h3><strong>Sign up</strong> for our newsletter</h3>
 	                <div class='email'>
-	                    <input type='text' />
+	                    <input type='email' placeholder='Enter your email address' />
 	                    <button class='b1'>Sign-Up</button>
 	                </div>
 	            </div>
@@ -25,11 +25,11 @@
 	            <ul class='contact'>
 	                <li class='icon-24-phone-yellow'><em><a href='tel:1-800-515-1515'>1-800-515-1515</a></em> / <a href='tel:212-122-1212'>212-122-1212</a></li>
 	                <li class='icon-24-texas-yellow'><em><a href='
-geo:32.898207,-96.702881;u=35'>1600 Control Place, Dallas Texas 75150</a></em></li>
+geo:32.898207,-96.702881;u=35'>1600&nbsp;Control&nbsp;Place, Dallas,&nbsp;Tx&nbsp;75150</a></em></li>
 	                <li class='icon-24-clock-yellow'>
 	                  <ul class='hours'>
-	                    <li><strong>Monday-Friday:</strong> 9:30am-6:00pm</li>
-	                    <li><strong>Saturday:</strong> 9:30am-6:00pm</li>
+	                    <li><strong>Monday-Friday:</strong> 9:30am - 6:00pm</li>
+	                    <li><strong>Saturday:</strong> 9:30am - 6:00pm</li>
 	                    <li><strong>Sunday:</strong> Closed</li>
 	                  </ul>
 	                </li>

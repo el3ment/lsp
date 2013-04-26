@@ -7,6 +7,21 @@
     .b3{
         float: left;
     }
+	
+	.isAuthorized{
+		
+		&:after{
+				content: ' ';
+				width: 141px;
+				height: 24px;
+				display: inline-block;
+				margin-left: 10px;
+				position:relative;
+				top:8px;
+				background-image: url(../img/lsp-master-sprite.png);
+				background-position: -250px -223px;
+			}	
+	}
     
     .byline{
         float:right;
@@ -185,9 +200,12 @@
     }
     .information{
         
-        //width: px(columns(6));
-        //margin-left: $gutterWidth;
-        //float: right;
+        position: relative;
+		top: -1.5em;
+		
+		@media (max-width: 767px){
+			top: 0;
+		}
 		
 		@media (min-width: 1200px){
 			width: 680px;

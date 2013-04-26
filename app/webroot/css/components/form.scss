@@ -21,6 +21,12 @@
 	        border-color: $darkYellow;
 	    }
 	}
+	
+	::-webkit-input-placeholder { font-style: italic; color: $lightGrey; line-height:22px; font-weight: 500; }
+	::-moz-placeholder { font-style: italic; color: $lightGrey; line-height:22px;font-weight: 500; } /* firefox 19+ */
+	:-ms-input-placeholder { font-style: italic; color: $lightGrey; line-height:22px;font-weight: 500; } /* ie */
+	input:-moz-placeholder { font-style: italic; color: $lightGrey; line-height:22px;font-weight: 500; }
+	
 	select{
 	    padding: px($inputPadding - 1); /* Fix for unknown space on selects */
 	    height: px(40px, $inputFontSize);
@@ -215,7 +221,7 @@
         &:before {
           
 		  background-color: #f6d54f;
-		  background-color: transparent\9;
+		  background-color: transparent\9; /* Because IE8 dosen't have rounded borders, our little circle thing looks weird with a background color - so for < IE8 we will hide the background */
 		  
           -webkit-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
           -moz-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;

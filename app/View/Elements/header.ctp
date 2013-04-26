@@ -21,7 +21,7 @@
         <li class='cart'><a class='b3 icon-24-cart-white highlight-icon'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
 		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon'><strong>Wish</strong> List</a></li>
         <li id='searchBar' class='search reveal-isOpen'>
-            <input type='text' class='autocomplete search' />
+            <input type='text' class='autocomplete search' placeholder='e.g. Sticks, Pearl, 16" Drum Head"'/>
             <button class='b2 icon-24-magnify-black icon-only'>Search</button>
         </li>
 		<li class='mobileSearch visible-phone'><button class='b3 reveal-isOpen' data-reveal-children='searchBar'>Toggle Search</button></li>
