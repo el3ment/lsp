@@ -239,7 +239,6 @@
 			background-color: transparent;
 			padding:0;
             @include box-shadow-multiple(none); /* Intentionally 1px */
-			ul{ width: 50%; }
 		}
 
         .logo{
