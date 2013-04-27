@@ -23,9 +23,9 @@
 	            </div>
             
 	            <ul class='block contact'>
-	                <li class='icon-24-phone-yellow'><em><a href='tel:1-800-515-1515'>1-800-515-1515</a></em> / <a href='tel:212-122-1212'>212-122-1212</a></li>
+	                <li class='icon-24-phone-yellow'><em><a href='tel:1-800-515-1515' class='visible-phone'>1-800-515-1515</a><span class='hidden-phone'>1-800-515-1515</span></em> / <a href='tel:212-122-1212' class='visible-phone'>212-122-1212</a><span class='hidden-phone'>212-122-1212</span></li>
 	                <li class='icon-24-texas-yellow'><em><a href='
-geo:32.898207,-96.702881;u=35'>1600&nbsp;Control&nbsp;Place, Dallas,&nbsp;Tx&nbsp;75150</a></em></li>
+geo:32.898207,-96.702881;u=35' class='visible-phone'>1600&nbsp;Control&nbsp;Place, Dallas,&nbsp;TX&nbsp;75150</a><span class='hidden-phone'>1600&nbsp;Control&nbsp;Place, Dallas,&nbsp;TX&nbsp;75150</span></em></li>
 	                <li class='icon-24-clock-yellow'>
 	                  <ul class='hours'>
 	                    <li><strong>Monday - Friday:</strong> 9:30am&nbsp;-&nbsp;6:00pm</li>

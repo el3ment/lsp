@@ -13,7 +13,7 @@
     <div class='well span12'>
         <a href='#' class='image-logoCircle logo'>Lone Star Percussion</a>
         <span class='established'>Established <span class='icon-24-star-yellow'>1978</span></span>
-        <span class='tagline'>We Speak Drum <span class='icon-24-phone-yellow'><a href='tel:1-866-792-0143'>1-866-792-0143</a></span></span>
+        <span class='tagline'>We Speak Drum <span class='icon-24-phone-yellow'>1-866-792-0143</span></span>
     </div> 
 	
     <ul class='shopbar span12'> 

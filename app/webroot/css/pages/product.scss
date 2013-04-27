@@ -117,6 +117,7 @@
 					content : 'Hover to zoom';
 					@media (max-width: 767px){
 						content : ' ';
+						display: none;
 					}
                     font-style: italic;
                     display: block;
@@ -212,9 +213,6 @@
 		@media (min-width: 1200px){
 			width: 680px;
 		}
-		
-        .addToCart{}
-        .addRelatedItems{}
         
     }
     .description{
@@ -248,7 +246,7 @@
             position: relative;
             margin: 21px 0 0 px(10px);
 			width: 105px;
-            
+			
             label{
                 position: absolute;
                 left: 100%;
@@ -288,6 +286,8 @@
                 //float: left;
 				//width: 100%;
                 margin-bottom: 1em;
+				
+            
                 .field{ float: none;
                     //input{ width: columns(6) - $gutterWidth; }
                 }
@@ -388,7 +388,7 @@
                 width: 100%;
 				
 				@media (max-width: 767px){
-					display: table; 
+					display: table;
 				}
                 
                 &.preview{
@@ -490,6 +490,7 @@
 					@media (max-width: 767px){
 						display: table-caption;
 						margin-left: 0;
+						margin-top: 10px;
 					}
                     
                     .reviewItemReviewed{

@@ -145,11 +145,29 @@
 		}
         a{	
 			text-decoration: none;
-			
+			position:relative;
             &:hover{
                 color: $yellow;
             }
         }
+		.sitemap-lists a:hover:before{
+			content:'  ';
+			display:block;
+			width:24px;
+			height:24px;
+			position:absolute;
+			top:-2px;
+			left:-30px;
+			background-image: url(../img/lsp-master-sprite.png);
+			background-position: -5px -220px;
+		}
+		.sitemap-lists a[class*="icon-"]:hover:before{
+			display:none;
+		}
+		
+		.utilities{
+			margin-bottom: 20px;
+		}
 		
 		.utilities a{
 			text-transform: none;
