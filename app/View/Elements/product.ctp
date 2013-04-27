@@ -1,60 +1,60 @@
 <div class='page-productDetail container productScope' itemscope itemtype="http://data-vocabulary.org/Product">
     <div class='row'>
 		<div class='head span12'>
-	        <h1 itemprop='name' class='productName'>{featureddescription}</h1>
-	        <div class='details isAuthorized'>By:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'>{manufacturer}</a></div>
+	        <h1 itemprop='name' class='productName'><!--{featureddescription}--></h1>
+	        <div class='details isAuthorized'>By:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'><!--{manufacturer}--></a></div>
 	        <div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
-	            <span itemprop="rating" data-reviews-aggregateRating='{custitemreviewaverage}' class='reviewAggregateRating'>{custitemreviewaverage}</span>
-	            <a href='#' class='details'><span itemprop='count' class='reviewReviewCount'>{custitemreviewsquantity}</span> reviews</a>
+	            <span itemprop="rating" data-reviews-aggregateRating='<!--{custitemreviewaverage}-->' class='reviewAggregateRating'><!--{custitemreviewaverage}--></span>
+	            <a href='#' class='details'><span itemprop='count' class='reviewReviewCount'><!--{custitemreviewsquantity}--></span> reviews</a>
 	        </div>
 	    </div>
 	</div>
     <div class='row'>
 	    <ul class='media span6 push-right'>
 	        <li class='images section'>
-	            <a data-badge='new' id='zoom-mainImage' href='{custitemimage_1_url}' data-asset='mouseoverZoom'>
-	                <img itemprop="image" src='{custitemimage_1_url}.460x460' width='100%' />
+	            <a data-badge='new' id='zoom-mainImage' href='<!--{custitemimage_1_url}-->' data-asset='mouseoverZoom'>
+	                <img itemprop="image" src='<!--{custitemimage_1_url}-->.460x460' width='100%' />
 	            </a>
 	            <ul class='zoom-thumbnails' data-targetZoomId='zoom-mainImage'>
 	                <li>
-	                    <a href='{custitemimage_1_url}' data-prezoomimage='{custitemimage_1_url}.460x460'>
-	                        <img src='{custitemimage_1_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_1_url}-->' data-prezoomimage='<!--{custitemimage_1_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_1_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href='{custitemimage_2_url}' data-prezoomimage='{custitemimage_2_url}.460x460'>
-	                        <img src='{custitemimage_2_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_2_url}-->' data-prezoomimage='<!--{custitemimage_2_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_2_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href='{custitemimage_3_url}' data-prezoomimage='{custitemimage_3_url}.460x460'>
-	                        <img src='{custitemimage_3_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_3_url}-->' data-prezoomimage='<!--{custitemimage_3_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_3_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href='{custitemimage_4_url}' data-prezoomimage='{custitemimage_4_url}.460x460'>
-	                        <img src='{custitemimage_4_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_4_url}-->' data-prezoomimage='<!--{custitemimage_4_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_4_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href='{custitemimage_5_url}' data-prezoomimage='{custitemimage_5_url}.460x460'>
-	                        <img src='{custitemimage_5_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_5_url}-->' data-prezoomimage='<!--{custitemimage_5_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_5_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href='{custitemimage_6_url}' data-prezoomimage='{custitemimage_6_url}.460x460'>
-	                        <img src='{custitemimage_6_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_6_url}-->' data-prezoomimage='<!--{custitemimage_6_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_6_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 
 	                <li>
-	                    <a href='{custitemimage_7_url}' data-prezoomimage='{custitemimage_7_url}.460x460'>
-	                        <img src='{custitemimage_7_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_7_url}-->' data-prezoomimage='<!--{custitemimage_7_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_7_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href='{custitemimage_8_url}' data-prezoomimage='{custitemimage_8_url}.460x460'>
-	                        <img src='{custitemimage_8_url}.60x60' width='60' height='60' />
+	                    <a href='<!--{custitemimage_8_url}-->' data-prezoomimage='<!--{custitemimage_8_url}-->.460x460'>
+	                        <img src='<!--{custitemimage_8_url}-->.60x60' width='60' height='60' />
 	                    </a>
 	                </li>
 	            </ul>
@@ -62,9 +62,9 @@
 	        <li class='audio section hidden-phone'>
 	            <h2>Listen</h2>
 	            <ul>
-	                <li><label>{custitemaudiofile1_title} <span class='details'>{custitemaudiofile1}</span></label></li>
-	                <li><label>{custitemaudiofile2_title} <span class='details'>{custitemaudiofile2}</span></label></li>
-	                <li><label>{custitemaudiofile3_title} <span class='details'>{custitemaudiofile3}</span></label></li>
+	                <li><label><!--{custitemaudiofile1_title}--> <span class='details'><!--{custitemaudiofile1}--></span></label></li>
+	                <li><label><!--{custitemaudiofile2_title}--> <span class='details'><!--{custitemaudiofile2}--></span></label></li>
+	                <li><label><!--{custitemaudiofile3_title}--> <span class='details'><!--{custitemaudiofile3}--></span></label></li>
 	            </ul>
 	        </li>
 	        <li class='videos hidden-phone section'>
@@ -72,11 +72,11 @@
 	            <ul>
 	                <li>
 	                    <div class='video panel'>
-	                        {custitemcustitemvideo}
+	                        <!--{custitemcustitemvideo}-->
 	                    </div>
 	                    <!--<label>Video 1 <span class='details'>Recorded by Innovative Percussion</span></label>-->
-	                    <span class='byline'>Video by <span data-author='michael' class='author'>{custitemvideoauthor}</span></span>
-						</l
+	                    <span class='byline'>Video by <span data-author='michael' class='author'><!--{custitemvideoauthor}--></span></span>
+					</li>
 	            </ul>
 	        </li>
         
@@ -87,9 +87,9 @@
 	            <form>
 	                <ul class='addToCart panel' itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
 	                    <li class='price'>
-	                        <span itemprop='price' class='productPrice'>${onlineprice}</span>
-	                        <span itemprop='grouping' class='productGrouping'>{custitem31}</span>
-	                        <span class='details'>List: <span itemprop='msrp' class='productMsrp'>${price}</span>, You Save: <span itemprop='discount' class='productDiscount'>$21.05</span>!</span>
+	                        <span itemprop='price' class='productPrice'>$<!--{onlineprice}--></span>
+	                        <span itemprop='grouping' class='productGrouping'><!--{custitem31}--></span>
+	                        <span class='details'>List: <span itemprop='msrp' class='productMsrp'>$<!--{price}--></span>, You Save: <span itemprop='discount' class='productDiscount'>$21.05</span>!</span>
 	                    </li>
 	                    <li class='productAvailability' itemprop="offers" itemscope itemtype="http://data-vocabulary.org/Offer" data-method='seperately'>
 	                        <span itemprop="availability" class='status'>In Stock:</span>
@@ -116,19 +116,19 @@
 	        <li class='features section'>
 	            <h2>Overview</h2>
 	            <ul class='list content'>
-	                <li>{custitem36}</li>
-	                <li>{custitem37}</li>
-					<li>{custitem38}</li>
-					<li>{custitem39}</li>
-					<li>{custitem42}</li>
-					<li>{custitem43}</li>
+	                <li><!--{custitem36}--></li>
+	                <li><!--{custitem37}--></li>
+					<li><!--{custitem38}--></li>
+					<li><!--{custitem39}--></li>
+					<li><!--{custitem42}--></li>
+					<li><!--{custitem43}--></li>
 	            </ul>
 	        </li>
 	        <li class='description section'>
 	            <h2>Item Details</h2>
 	            <div itemprop='description' class='content productDescription'>
-	                {storedetaileddescription}
-	                <span class='byline'>Description written by <span itemprop='author' data-author='michael' class='author'>{custitemdescriptionsassignedto}</span></span>
+	                <!--{storedetaileddescription}-->
+	                <span class='byline'>Description written by <span itemprop='author' data-author='michael' class='author'><!--{custitemdescriptionsassignedto}--></span></span>
 	            </div>
 	        </li>
 	        <li class='specifications section'>
@@ -154,8 +154,8 @@
 								<label for='relatedItemsCurrentItem'>
 		                            <img src='http://s3.lonestarpercussion.com/resize/images/Offworld%20Percussion/Offworld-V3-Gold-full.jpg.90x90' width='90' height='90' />
 									<input id='relatedItemsCurrentItem' type='checkbox' />
-		                            <span class='productPrice'>${onlineprice}</span>
-		                            <span class='productName'>{featureddescription}</span>
+		                            <span class='productPrice'>$<!--{onlineprice}--></span>
+		                            <span class='productName'><!--{featureddescription}--></span>
 								</label>
 	                    </div>
 	                    <ul class='relatedItemList'>
@@ -167,8 +167,8 @@
 											<img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.120x120' width='120' height='120' />
 										</div>
 			                            <input id='relatedItemsProduct-<?php echo $i; ?>' type='checkbox' />
-										<span class='productPrice'>${onlineprice}</span>
-			                            <span class='productName'>${featureddescription}</span>
+										<span class='productPrice'>$<!--{onlineprice}--></span>
+			                            <span class='productName'>$<!--{featureddescription}--></span>
 									</label>
 								</a>
 							</li>
