@@ -739,11 +739,11 @@ ul.list li,
     background: -3px -384px url(../img/lsp-master-sprite.png);
     display: inline-block;
 	margin-top: 5px;
-    
+    overflow: hidden;
     .reviewAggregateRating{ 
 		background: -3px -354px url(../img/lsp-master-sprite.png);
 		display: inline-block;
-		text-indent: -1000px;
+		text-indent: $hideDistance;
 	}
 	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px); margin-right: 100px; }
     .reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); margin-right: 80px; }

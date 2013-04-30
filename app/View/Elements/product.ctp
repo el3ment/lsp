@@ -1,5 +1,5 @@
 <div class='page-productDetail container productScope' itemscope itemtype="http://data-vocabulary.org/Product">
-    <div class='row'>
+    <div class='row span12'>
 		<div class='head span12'>
 	        <h1 itemprop='name' class='productName'><!--{featureddescription}--></h1>
 	        <div class='details isAuthorized'>By:&nbsp;<a href='#' itemprop="brand" class='productManufacturer'><!--{manufacturer}--></a></div>

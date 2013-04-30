@@ -35,7 +35,7 @@
 *[class*="icon-16-"]{
     
 	content: '   ';
-    padding-left: 20px;
+    padding-left: 22px;
 
     &:after{
         width: 16px;
@@ -126,6 +126,21 @@
 .icon-24-toggleHide.reveal-isOpen:after{
 	content: '-' !important;
 }
+.icon-16-toggleHide:after{
+	text-indent:0;
+	line-height: 16px;
+	margin-left: 1px;
+	content: '+' !important;
+	font-size: 21px;
+	background-image: none;
+	font-weight: normal;
+	text-align:center;
+	left: 0;
+}
+.icon-16-toggleHide.reveal-isOpen:after{
+	content: '-' !important;
+	line-height: 15px;
+}
 
 .icon-24-facebook-white:after{
 	background-position: -7px -488px;
@@ -138,6 +153,41 @@
 }
 .icon-24-youtube-white:after{
 	background-position: -127px -488px;
+}
+
+.icon-24-compact:after{
+	background-position: -46px -323px;
+}
+
+.icon-24-list:after{
+	background-position: -82px -322px;
+}
+.gridView .icon-24-compact:after{
+	background-position: -82px -292px;
+}
+
+.listView .icon-24-list:after{
+	background-position: -118px -291px;
+}
+
+.icon-24-leftArrow:after{
+	background-position: -82px -256px;
+}
+.icon-24-rightArrow:after{
+	background-position: -117px -256px;
+}
+
+
+.icon-16-close:after{
+	content: 'x';
+	color: white;
+	line-height: 13px;
+	text-align:center;
+	font-size: 11px;
+	top:2px;
+	margin-top:0;
+	background-color: #847e77;
+	@include border-radius(16px);
 }
 /*
 .icon-texas
