@@ -15,12 +15,12 @@
         </div>
         <div class='refineResults panel disengaged'>
             <button class='b3 icon-24-toggleHide visible-phone' data-reveal-children='refineResults'>Toggle Refinement Panel</button>
-			<h2 data-reveal-children='refineResults'>Refine Your Results</h2>
+			<h2 data-reveal-children='refineResults'>Refine <span class='hidden-tablet'>Your</span> Results</h2>
 			<div id='refineResults'>
 			<?php for($i = 0; $i < 10; $i++){ ?>
 	            <div class='section'>
 	                <h4 data-reveal-children='refinement-<?php echo $i; ?>'>Category</h4>
-	                <button class='b4 icon-16-toggleHide toggleRefinements <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button>
+	                <div class='toggleRefinements'><button class='b4 icon-16-toggleHide <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button></div>
 					<div id='refinement-<?php echo $i; ?>' class='refinementList'>
 		                <ul>
 		                    <li class='field'>
@@ -59,19 +59,18 @@
 	            <li class='compare'><button class='b2' data-action='compare'>Compare <span class='count'>(2)</span></button></li>
             
 	            <li class='pagination'>
-	                &nbsp; <!-- Don't ask me why the &nbsp; is needed, but IE7 won't render this section at all unless it's here -->
 	                <button class='b3 icon-24-leftArrow' data-action='previousPage'>Previous Page</button>
-	                <span class='pageCount'>Page <span class='currentPage'>3</span> of <span class='totalPages'>8</span></span>
+	                <span class='pageCount details'>Page <span class='currentPage'>3</span> of <span class='totalPages'>8</span></span>
 	                <button class='b3 icon-24-rightArrow' data-action='nextPage'>Next Page</button>
 	            </li>
 	            <li class='control-pagination-itemCount'>
-	                <label for='control-pagination-itemCount'>Items</label>
+	                <label for='control-pagination-itemCount'>Items:</label>
 	                <select id='control-pagination-itemCount'>
 	                    <option>20</option>
 	                </select>
 	            </li>
 	            <li class='control-pagination-sort'>
-	                <label for='control-pagination-sort'>Sort</label>
+	                <label for='control-pagination-sort'>Sort:</label>
 	                <select id='control-pagination-sort'>
 	                    <option>Price (Low - High)</option>
 	                </select>
@@ -91,13 +90,9 @@
                                 <span class='details'>List : <span class='productMsrp'>$80.00</span>, You Save: <span class='productDiscount'>$21.05</span>!</span>
                             </li>
                             <li class='productAvailability' data-method='seperately'>
-                                <span class='status'>In Stock</span>
+                                <span class='status'>In Stock<span class='visible-desktop'>:</span></span>
                                 <span class='shortStatus'>Two Finishes In Stock</span>
                                 <span class='details'>Arrives in 3-5 days <a href='#' class='method'>Standard Shipping</a></span>
-                            </li>
-                            <li class='quantity visible-desktop'>
-                                <label>Quantity:</label>
-                                <input class='scroller' />
                             </li>
                             <li class='option'>
                                 <label>Finish:</label>
@@ -105,13 +100,17 @@
                                     <option>Red</option>    
                                 </select>
                             </li>
+                            <li class='quantity hidden-phone'>
+                                <label>Quantity:</label>
+								<input class='scroller' type='number' min='1' value='1' />
+                            </li>
                             <li class='action'>
                                 <button class='b1'>Add To Cart</button>
                             </li>
                         </ul>
                     </form>
                     <div data-badge='new' class='thumbnail'><img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.220x220' /></div>
-                    <span class='field compare'>
+                    <span class='field compare details'>
                         <input type='checkbox' />
                         <button class='b5'>Compare Now</button>
                     </span>
@@ -119,11 +118,15 @@
 					<span class='details model'>Model Number #<span class='productMpn'>IP240</span></span>
                     <div class='aggregateReviews'>
                         <span data-reviews-aggregateRating='3' class='reviewAggregateRating'>3.5</span>
-                        <a href='#' class='reviewCountLabel'><span class='reviewReviewCount'>31</span> reviews</a>
+                        <a href='#' class='reviewCountLabel details'><span class='reviewReviewCount'>31</span> reviews</a>
                     </div>
-                    <div class='features'>
-                        <h6>Features</h6>
+                    <div class='features details'>
+                        <h6>Overview</h6>
                         <ul class='list'>
+                            <li>Hand Made this is long enough that we hope it wraps - look at how long this feature is</li>
+                            <li>Machine Cut</li>
+                            <li>Hand Made</li>
+                            <li>Machine Cut</li>
                             <li>Hand Made</li>
                             <li>Machine Cut</li>
                         </ul>
@@ -138,17 +141,17 @@
                 
                  <li class='pagination'>
                     <button class='b3 icon-24-leftArrow' data-action='previousPage'>Previous Page</button>
-                    <span class='pageCount'>Page <span class='currentPage'>3</span> of <span class='totalPages'>8</span></span>
+                    <span class='pageCount details'>Page <span class='currentPage'>3</span> of <span class='totalPages'>8</span></span>
                     <button class='b3 icon-24-rightArrow' data-action='nextPage'>Next Page</button>
                 </li>
                 <li class='control-pagination-itemCount'>
-                    <label for='control-pagination-itemCount'>Items</label>
+                    <label for='control-pagination-itemCount'>Items:</label>
                     <select id='control-pagination-itemCount'>
                         <option>20</option>
                     </select>
                 </li>
                 <li class='control-pagination-sort'>
-                    <label for='control-pagination-sort'>Sort</label>
+                    <label for='control-pagination-sort'>Sort:</label>
                     <select id='control-pagination-sort'>
                         <option>Price (Low - High)</option>
                     </select>

@@ -5,9 +5,9 @@
   font-family: "League Gothic";
   src: url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot');
   src: url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+	   url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
        url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.woff') format('woff'),
-       url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype'),
-       url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg');
+       url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 
@@ -39,6 +39,7 @@ body{
 
 /* Content Container */
 div[class|="page"]{
+	overflow: hidden;
 	@media (max-width: 767px){
 
 		border: 20px solid transparent;
@@ -58,20 +59,25 @@ div[class|="page"],
 }
 /* Page Title */
 h1, .h1, h2, .h2{
-    margin-top: px($paddingUnit);
+    //margin-top: px($paddingUnit);
     line-height: 1em;
     font-size: 2.9em;
     font-family: "League Gothic", sans-serif;
     text-transform: uppercase;
     color: $black; 
     -webkit-font-smoothing: antialiased;
+	margin-top:10px;
+	@media (max-width: 767px){
+		margin-top: 0;
+	}
 }
 
 /* Section Headings */
-h2, .h2{ font-size: px($h2FontSize);}
+h2, .h2{ font-size: px($h2FontSize); margin-top:0;}
 
 /* Captialized, Bigger, Bold */
 h3, .h3, h4, .h4{ 
+	margin-top:0;
     font-size: 1em; 
     text-transform:uppercase;
     font-weight: bold;
@@ -124,7 +130,7 @@ ul.list li,
 	
 	@include box-sizing();
 	
-    margin-bottom: px($paddingUnit * 2);
+    margin-bottom: 17px;
     color: $black;
 	h2{
 		margin-bottom: px($paddingUnit);
@@ -666,7 +672,8 @@ ul.list li,
             display:inline-block;
             margin: 0 px(2px) 0 px(3px);
             background-color: $lightGrey; /* $lightGrey */
-			background: -6px -410px url(../img/lsp-master-sprite.png) $lightGrey ;
+			@include lsp-sprite-background();
+			background-position: -6px -410px;
             @include border-radius(px($borderRadius));
             position:relative;
             top: px(4px);
@@ -694,11 +701,11 @@ ul.list li,
 	    position: absolute;
 	    top: 5px;
 	    left: 5px;
-		padding: px(5px) px(8px);
+		padding: px(1px) px(5px) px(0);
 		text-transform: uppercase;
 		font-weight: bold;
 		color: white;
-		
+		font-size: 12px;
 		@include border-radius(px($borderRadius));
 		
 	}
@@ -735,13 +742,15 @@ ul.list li,
 /* Aggregate reviews are basically just the 5 star rating, it uses the old-school sliding doors method */
 .aggregateReviews{
     
-    width: px(200px);
-    background: -3px -384px url(../img/lsp-master-sprite.png);
+    width: px(180px);
+	@include lsp-sprite-background();
+    background-position: -3px -384px;
     display: inline-block;
 	margin-top: 5px;
     overflow: hidden;
     .reviewAggregateRating{ 
-		background: -3px -354px url(../img/lsp-master-sprite.png);
+		@include lsp-sprite-background();
+		background-position: -3px -354px;
 		display: inline-block;
 		text-indent: $hideDistance;
 	}
@@ -755,7 +764,7 @@ ul.list li,
 		position: relative;
 		top: -3px;
     }
-	.reviewCount{
+	.reviewCountLabel{
         &:before{ content: '('; }
         &:after{ content: ')'; }
     }

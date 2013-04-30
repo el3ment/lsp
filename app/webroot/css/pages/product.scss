@@ -18,7 +18,7 @@
 				margin-left: 10px;
 				position:relative;
 				top:8px;
-				background-image: url(../img/lsp-master-sprite.png);
+				@include lsp-sprite-background();
 				background-position: -254px -223px;
 			}	
 	}
@@ -80,7 +80,8 @@
                 left: px(32px + 2 * $paddingUnit);
             }
             label:before{
-                background: -8px -433px url(../img/lsp-master-sprite.png);
+				@include lsp-sprite-background();
+                background-position: -8px -433px;
                 content: '';
                 display: inline-block;
                 position: absolute;
@@ -129,7 +130,7 @@
 					font-size:13px;
                     color: $grey;
 					padding-left: 23px;
-					background-image: url(../img/lsp-master-sprite.png);
+					@include lsp-sprite-background();
 					background-position: -71px -406px;
                 }
                 a{

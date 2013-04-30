@@ -2,7 +2,7 @@
 @import "functions";
 
 *[class*="image-"]{
-    background: url(../img/lsp-master-sprite.png);
+    @include lsp-sprite-background();
     display: block;
 	background-position: 0px 0px;
     text-indent: -$hideDistance;

@@ -5,8 +5,15 @@
     	float:right;
 		text-align:left;
 		strong{ color: black; }
+		.details{
+			font-size: 14px;
+		}
     }
-    
+	
+	#refineResults{
+		margin-top:25px;
+	}
+	
     .refinements{
       
         /* Left hand refinements panels */
@@ -24,16 +31,28 @@
 		
 		h2{
 			margin-bottom: 10px;
+			
 		}
         .section{ // A division within the box
-            padding-bottom: 15px;
+            padding-bottom: 30px;
             float: left;
             width: 100%; 
             position: relative;
 			border-top: 1px solid  $lightGrey;
 			box-shadow: inset 0 1px 0 white;
 			margin-bottom: 7px;
+			
+			@include prevent-word-breakouts();
+			
+			//@media (max-width: 767px){
+			//	padding-bottom: 30px;
+			//}
+			
+			//@media (max-width: 979px){
+			//	padding-bottom: 30px;
+			//}
             
+			
             h4{ // The attribute titles
                 float: left;
                 position:absolute;
@@ -43,29 +62,34 @@
                 padding-right: px(6px);
                 
             }
-            button.toggleRefinements{ // The hide/show button
+			.toggleRefinements{
                 position:absolute;
                 top: px(-11px);
-                right: 0;
-                float: right;
-                width: px(20px);
-                height: px(20px);
-                padding: 0;
-                text-indent: -$hideDistance;
-                overflow: hidden;
+				float: right;
+				right: 0;
+				background-color: $superLightGrey;
+				button{ // The hide/show button
+	                margin-right:0;
+	                width: px(20px);
+	                height: px(20px);
+	                padding: 0;
+	                text-indent: -$hideDistance;
+	                overflow: hidden;
 
-                &:before{
-                    content: ' ';
-                    height: px(25px);
-                    width: px($paddingUnit);
-                    background-color: $superLightGrey;
-                    position: absolute;
-                    top:0;
-                }
-                &:before{
-                    left:px(-($paddingUnit + 2));
-                }
-            }
+	                &:before{
+	                    content: ' ';
+	                    height: px(25px);
+	                    width: px($paddingUnit);
+	                    background-color: $superLightGrey;
+	                    position: absolute;
+	                    top:0;
+	                }
+	                &:before{
+	                    left:px(-($paddingUnit + 2));
+	                }
+	            }
+				
+			} 
             ul{ 
                 
                 display: block;
@@ -113,7 +137,7 @@
             
             @include clearfix;
             
-            li{ clear: both; }
+            li{ clear: both; margin-top: 5px; float: left; }
 			h2{
 				margin-bottom:0;
 			}
@@ -141,7 +165,7 @@
             .section{
                 margin-top: px($paddingUnit);
                 border-top: none;
-				padding-bottom: 0;
+				padding-bottom:0;
             }
         }
     }
@@ -154,6 +178,7 @@
         //width: px(columns(9)-$paddingUnit);
         
         .tabs{
+			font-size: 13px;
             margin-top: -1em;
             margin-right: px($paddingUnit);
             li{
@@ -178,6 +203,7 @@
                 margin-left: -1px;
             }
         }
+		
         
         .controls{
             
@@ -191,8 +217,10 @@
             
             li{
                 float: right;
-                margin-right: px($gutterWidth);
-                
+                margin-right: 50px;
+                @media (max-width: 979px){
+					margin-right: 33px;
+				}
                 &:first-child{
                     float: left;
                 }
@@ -213,7 +241,6 @@
 				}
             }
 			
-			
             select{
                 float: left;
                 clear: none;
@@ -231,12 +258,14 @@
                 
                 @include border-radius(px(32px));
                 
-                margin-top: px(2px);   
+                margin-top: px(2px);  
+				margin-left: 0; 
                 height: px(32px);
                 width: px(32px);
                 text-indent: px(-$hideDistance);
                 overflow: hidden;
                 padding:0;
+				line-height: 30px;
                 
             }
             .pageCount{
@@ -277,6 +306,11 @@
             .productName{ 
                 font-size: px(15px);
             }
+		
+			.features .list{
+				color: black;
+			}
+		
         }
     }
 
@@ -289,7 +323,7 @@
         }
 		
         .entry{
-            padding-left: px(columns(2));
+            padding-left: 165px;
 			
 			@media (min-width: 1200px){
 				padding-left: px(columns(3));
@@ -321,8 +355,8 @@
             position: absolute;
             top: 10px;
             left: 0;
-            width: px(140px);
-            height: px(140px);
+            width: 160px;
+            height: 160px;
 			img{
 				width: 100%;
 			}
@@ -333,7 +367,7 @@
 		}
         .searchResults .compare{
             position: absolute;
-            top: px(155px);
+            top: px(170px);
             left: px(10px);
 			@media (min-width: 1200px){
 				top: px(columns(3));
@@ -342,9 +376,9 @@
         .addToCart{
             
             float: right;
-            width: inherit;
 			width: 40%;
-            margin-left: px($paddingUnit);
+			min-width: 170px;
+            margin-left: px(2 * $paddingUnit);
             margin-bottom: 0;
             
             .status{ display: inline; }
@@ -361,7 +395,7 @@
     }
     .gridView{
         
-        $_topOfPrice : 360px;
+        $_topOfPrice : 350px;
         
         .listScope{
             clear: both;
@@ -452,18 +486,32 @@
             .scroller{
                 position: absolute;
                 top: px($_topOfPrice + 90px, $inputFontSize);
-                left: px($hideDistance + $paddingUnit + 14px, $inputFontSize);
+                left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
             }
             .b1{
                 position: absolute;
                 top: px($_topOfPrice + 90px, $boldAllCapsH4);
-                left: px($hideDistance + 2 * $paddingUnit + 50px + 14px, $b1FontSize);
-                width: px(125px, $b1FontSize);
+                left: px($hideDistance + 2 * $paddingUnit + 50px + 7px, $b1FontSize);
+                width: px(135px, $b1FontSize);
 					@media (max-width: 979px) and (min-width: 768px){
-						left: px($hideDistance + 2 * $paddingUnit + 17px, $b1FontSize);
+						left: px($hideDistance + 2 * $paddingUnit + 12px, $b1FontSize);
 					}
             }
         }
+		@media (max-width: 979px) and (min-width: 768px){
+			.entry{
+				height: 455px;
+				.quantity{
+					display: none;
+				}
+				.productPrice,
+				.shortStatus,
+				.b1,
+				.aggregateReviews{
+					margin-top:-40px;
+				}
+			}
+		}
         
     }
     
@@ -475,8 +523,18 @@
 			
     }
 	
+	@media (min-width: 768px){
+
+		.refineResults .b3{
+			display: none;
+		}
+	}
 	// Design of the entries on mobile
 	@media (max-width: 767px){
+		
+		#refineResults{
+			margin-top:25px;
+		}
 
 		.refineResults .b3{
             margin-right: 0;
@@ -489,6 +547,7 @@
 			margin-top: 0;
 			line-height:200px;
 			float:right;
+			
 		}
 		h1{
 			margin-bottom:10px;
@@ -510,15 +569,33 @@
 			width: 100px;
 			height: 100px;
 		}
+		
+		.badges-badge{
+			position:absolute;
+			top: auto;
+			right: 0;
+			bottom: -27px;
+			left: auto;
+		}
+		
+		.gridView .entry{
+			padding-bottom: ;
+		}
 		.compare{
 			display: none;
 		}
-		.results .searchResults .entry{
-			padding-bottom: 100px;
-			overflow: hidden;
-			padding-left: 110px;
-			padding-bottom: 60px;
-		}
+		.results .searchResults{
+			ul{
+				width: 100%;
+			}
+			.entry{
+				padding-bottom: 100px;
+				overflow: hidden;
+				padding-left: 110px;
+				width: 100%;
+				padding-bottom: 60px;
+			}	
+		} 
 		.controls .details,
 		.head .controls button,
 		.control-pagination-itemCount,
@@ -529,7 +606,7 @@
 		.head .resultCount{
 			float:left;
 			position:relative;
-			top: -49px;
+			top: -27px;
 
 			background-color: white;
 			padding: 0 5px;
@@ -553,7 +630,7 @@
 		.foot button[data-action="prevPage"]{
 			z-index:2;
 		}
-		.pageCount{
+		.foot .pageCount{
 			float: none;
 			overflow: hidden;
 			text-align:center;
@@ -561,18 +638,19 @@
 			width:100%;
 			left: 0;
 			top:5px;
+			display: block;
 		}
 		.head .resultCount{
 			font-size: 13px;
 			float:right;
-			top: -44px;
+			top: -22px;
 			background-color: white;
 			padding: 0 5px;
 		}
 		.results .head .controls{
 			background-color: transparent;
-			border-bottom:0;
-			margin-top:20px;
+			border-bottom: 0;
+			margin-top: 20px;
 			height: 0px;
 		}
         .addToCart{
@@ -607,10 +685,15 @@
                 position: absolute;
                 bottom: 10px;
                 right: px($hideDistance, $b1FontSize);
-                width: px(125px, $b1FontSize);
+                width: px(135px, $b1FontSize);
 				display: block;
             }
         }
 		
+	}
+	@media (max-width: 400px){
+		.results .searchResults .entry{
+			padding-bottom: 85px;
+		}
 	}
 }

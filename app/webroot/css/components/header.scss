@@ -2,7 +2,7 @@
 .header {
     
     /* Layout */
-    margin:0 auto px(10px);
+    margin:0 auto px(20px);
 	position: relative;
 	width: 100%;
     @include clearfix;
@@ -325,6 +325,7 @@
 			float: left;
 			background-position: -190px -158px;
 		}
+		
 		.navbar{
 			display: none;
 		}
@@ -382,7 +383,7 @@
 				height: 64px;
 				text-indent: -1000px;
 				background: transparent;
-				background: url(../img/lsp-master-sprite.png);
+				@include lsp-sprite-background();
 				filter: none;
 				position: absolute;
 				margin: 0;
@@ -402,6 +403,13 @@
 					display: none;
 				}
 			}
+		}
+	}
+
+	@media (max-width: 350px){
+		.well, .image-logoCircle{
+			width: 64px;
+			background-position: -127px -103px;
 		}
 	}
 	

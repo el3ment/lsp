@@ -5,7 +5,7 @@
     &:after{
         content: ' ';
         display: block;
-        background: url(../img/lsp-master-sprite.png);
+        @include lsp-sprite-background();
 		background-position: 0 0;
         position: absolute;
         top: 50%;
@@ -157,17 +157,21 @@
 
 .icon-24-compact:after{
 	background-position: -46px -323px;
+	content: ' ';
 }
 
 .icon-24-list:after{
 	background-position: -82px -322px;
+	content: ' ';
 }
 .gridView .icon-24-compact:after{
 	background-position: -82px -292px;
+	content: '   ';
 }
 
 .listView .icon-24-list:after{
 	background-position: -118px -291px;
+	content: '   ';
 }
 
 .icon-24-leftArrow:after{
