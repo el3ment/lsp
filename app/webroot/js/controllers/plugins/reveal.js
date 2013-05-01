@@ -10,60 +10,67 @@
         	name : 'reveal',
             events : {
                 application : {
+					//onResize : function(e, data){
+					//	var width = $(window).width();
+					//	if(width < 768){
+							//console.log('mobile');
+							//_this.open($(".reveal-openOnlyMobile"));
+					//	}else{
+							//console.log('not mobile');
+							//_this.open($(".reveal-openOnlyDesktop"));
+					//	}
+					//},
                     onAttachEvents : function(e, data){
                         $('*[data-reveal-children]', data.selector).bind('click', function(e){
-                        	_this.toggleClick(this, $(_this.buildChildrenSelector(this)));
-                        	e.stopPropagation();
+                        	
+							// On click - fire the click event
+							_this.toggle(_this.buildChildrenSelector(this));
+                        	
+							// We don't want to propagate default browser events
+							e.stopPropagation();
                         	return true;
-                        }).bind('mouseover', function(e){
-                        	_this.onMouseover(this, $(_this.buildChildrenSelector(this)));
-                        }).bind('mouseout', function(e){
-                        	_this.onMouseout(this, $(_this.buildChildrenSelector(this)));
+							
                         }).each(function(index, element){
-                        	$(_this.buildChildrenSelector(this)).addClass('reveal-child');
+							
+							// Mark all children as children
+                        	_this.buildChildrenSelector(this).addClass('reveal-child');
 							
 							// If we ask it to start open, toggle the children
-							if($(this).hasClass('reveal-isOpen')){
-								$(_this.buildChildrenSelector(this)).addClass('reveal-isOpen');
-							}
+							//if($(this).hasClass('reveal-isOpen')){
+							//	$(_this.buildChildrenSelector(this)).addClass('reveal-isOpen');
+							//}
                         }).addClass('reveal-parent');
                     }
                 }
             },
             assets : {},
             buildChildrenSelector : function(element){
-            	return '#' + $(element).data('reveal-children').split(' ').join(', #');
+            	return $('#' + $(element).data('reveal-children').split(' ').join(', #'));
             },
-            onMouseover : function(revealParent, revealChildren){
-            	$(revealParent).addClass('reveal-onMouseover');
-            	$(revealChildren).addClass('reveal-onMouseover');
-            },
-            onMouseout : function(revealParent, revealChildren){
-            	$(revealParent).removeClass('reveal-onMouseover');
-            	$(revealChildren).removeClass('reveal-onMouseover');
-            },
-            toggleClick : function(revealParent, revealChildren){
-            	
-            	var parent = $(revealParent);
-            	var children = $(revealChildren);
-            	
-				if(children.hasClass('reveal-isOpen') && children.hasClass('hidden-phone')){
-					// this is a bit of a hack
-					children.removeClass('hidden-phone');
-					children.removeClass('reveal-isOpen');
+			open : function(children){
+            	children.addClass('reveal-isOpen');
+				children.each(function(index, child){
+					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
+				});
+				
+			},
+			close : function(children){
+            	children.removeClass('reveal-isOpen');
+				children.each(function(index, child){
+					$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
+				});
+			},
+			toggle : function(children){
+				if(children.hasClass('reveal-isOpen')){
+					_this.close(children);
+				}else{
+					_this.open(children);
 				}
 				
-	            if(!parent.hasClass('reveal-isOpen')){
-	            	parent.addClass('reveal-isOpen');
-	            	children.addClass('reveal-isOpen');
-	            	children.triggerHandler('expand.reveal');
-	            }else{
-	            	parent.removeClass('reveal-isOpen');
-	            	children.removeClass('reveal-isOpen');
-					children.removeClass('hidden-phone');
-	            	children.triggerHandler('close.reveal');
-	            }
-            }
+				// They've made a decision - so let's remove our start-only helpers
+				children.removeClass('reveal-openOnlyMobile reveal-openOnlyDesktop');
+					
+			}
         };
 
         return _this;

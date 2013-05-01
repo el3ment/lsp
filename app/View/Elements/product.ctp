@@ -156,7 +156,7 @@
 	        <li class='addRelatedItems section'>
 	            <button class='b3 icon-24-toggleHide visible-phone' data-reveal-children='suggestions'>Toggle Section</button>
 				<h2 data-reveal-children='suggestions'>Our Staff Suggests</h2>
-	            <div id='suggestions' class='content reveal-isOpen hidden-phone'>
+	            <div id='suggestions' class='content reveal-openOnlyDesktop reveal-openAlwaysDesktop'>
 	                <div class='relatedItems'>
 	                    <div class='currentItem hidden-phone hidden-tablet'>
 								<label for='relatedItemsCurrentItem'>
@@ -207,7 +207,7 @@
         </div>
         <button class='b1 hidden-phone' data-reveal-children='addReviewForm previewReview'>Write A Review</button>
         <button class='b4 icon-24-toggleHide visible-phone' data-reveal-children='reviewEntries'>Toggle Section</button>
-        <div id='addReviewForm' class='add hide hidden-phone'>
+        <div id='addReviewForm' class='add'>
 	        <form class='row'>
 	            <fieldset class='review panel disengaged span6'>
 	                <h2>Your Review</h2>
@@ -296,7 +296,7 @@
 	            </fieldset>
 	        </form>
 		</div>
-        <ul id='reviewEntries' class='entries span12 row reveal-isOpen hidden-phone'>
+        <ul id='reviewEntries' class='entries span12 row reveal-openOnlyDesktop'>
 			<?php for($i = 0; $i < 10; $i++){ ?>
 	            <li id="<?php echo ($i == 0) ? 'previewReview' : ''; ?>" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row <?php echo ($i == 0) ? 'preview hidden-phone' : ''; ?>'>
 	                <ul class='author offset1 span2 hidden-phone'>

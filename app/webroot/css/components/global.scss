@@ -43,7 +43,7 @@ div[class|="page"]{
 	@media (max-width: 767px){
 
 		border: 20px solid transparent;
-		border-width: 0 20px;
+		border-width: 0 10px;
 		@include box-sizing();
 		
 	}
@@ -631,16 +631,15 @@ ul.list li,
  * will be populated with the definition data, and get a little lightning bolt icon */
 *[data-def]{
 	margin-right: 0;
-	dl{
-		display: none;
-	}
-}
-@media (min-width: 767px){
-    *[data-def]{
+	
+	dl{ display: none; }
+
+	@media (min-width: 767px){
+		
         position: relative;
         display:inline-block;
         margin-right: px(2px);
-		
+	
 		&:hover:before;{
 			content:' ';
 			background-color: rgba(0,0,0,0.0001);
@@ -652,31 +651,35 @@ ul.list li,
 			display: block;
 		}
         dl{
-            display: none; 
+			display: none; 
             position: absolute;
             left: px(-1* (columns(2)) - 8px);
             top: px(-4px);
             width: px(columns(2));
             border-left: px($paddingUnit) solid $yellow;
-            .details{
+			
+			@include panel-arrow(6px, 'right', $white, 20px);
+            
+			.details{
                 display: block;
                 margin: px($paddingUnit) 0;
                 float:right;
             }
-            @include panel-arrow(6px, 'right', $white, 20px);
         }
         &:after{
-            content: '';
+			content: '';
             width: px(16px);
             height: px(16px);
             display:inline-block;
             margin: 0 px(2px) 0 px(3px);
-            background-color: $lightGrey; /* $lightGrey */
-			@include lsp-sprite-background();
-			background-position: -6px -410px;
-            @include border-radius(px($borderRadius));
             position:relative;
             top: px(4px);
+			
+            background-color: $lightGrey;
+			@include lsp-sprite-background();
+			background-position: -6px -410px;
+            
+			@include border-radius(px($borderRadius));
 
         }
         &:hover:after{
@@ -687,7 +690,7 @@ ul.list li,
                 display:block;
             }
         }
-    }
+	}
 }
 
 /* Badges */
@@ -716,22 +719,34 @@ ul.list li,
 	}
 }
 
+
+
+
+
 /* Data-Reveal Children Plugin */
-*[data-reveal-children]{
-	cursor: pointer;
-}
-.reveal-child{
-	display: none !important;
-}
-.reveal-isOpen, .reveal-onMouseover.reveal-ShowOnHover{
-	display: inherit !important;
+*[data-reveal-children]{ cursor: pointer; }
+.reveal-child{ display: none; }
+.reveal-isOpen{ display: inherit; }
+
+// Don't force hidden open parents to show.. we'll let the cascade determine that
+.reveal-parent.reveal-isOpen{ display: inherit; }
+
+.reveal-openOnlyDesktop{ display: inherit; }
+
+@media (min-width: 768px){
+	.reveal-child.reveal-openAlwaysDesktop{ display: inherit; }
 }
 
 @media (max-width: 767px){
-	.reveal-isOpen.hidden-phone{
-		display: none !important;
+	.reveal-child.reveal-openOnlyDesktop{
+		display: none;
+	}
+	.reveal-child.reveal-openOnlyDesktop.reveal-isOpen{
+		display: inherit;
 	}
 }
+
+
 
 
 /* Useful when showing/hiding things in javascript */

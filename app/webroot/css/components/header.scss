@@ -2,7 +2,7 @@
 .header {
     
     /* Layout */
-    margin:0 auto px(20px);
+    margin:0 auto px(15px);
 	position: relative;
 	width: 100%;
     @include clearfix;
@@ -277,8 +277,8 @@
 		
 		@media (max-width: 767px){
 
-			border: 20px solid transparent;
-			border-width: 0 20px;
+			border: 10px solid transparent;
+			border-width: 0 10px;
 			@include box-sizing();
 	
 		}

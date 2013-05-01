@@ -8,32 +8,40 @@
 		.details{
 			font-size: 14px;
 		}
+		.numberOfPages{
+			&:before{
+				content: ' (';
+			}
+			&:after{
+				content: ' pages)';
+			}
+		}
     }
 	
-	#refineResults{
-		margin-top:25px;
-	}
-	
+	// Left hand refinement block
     .refinements{
-      
-        /* Left hand refinements panels */
+		
         margin-left:0;
 		font-size: 13px;
-        //float: left;
         
-        .panel{ // The whole box
+		// The actual box
+        .panel{
 			width: 100%;
             float: left;
             display: block;
             clear: both;
-            //width: px(columns(3) - $gutterWidth);
         }
 		
-		h2{
-			margin-bottom: 10px;
-			
+		// "Refine Your Results"
+		h2{ margin-bottom: 10px; }
+        
+		#attributeList{
+			margin-top:25px;
 		}
-        .section{ // A division within the box
+		
+		// A division within the box, an attribute
+		.section{ 
+			
             padding-bottom: 30px;
             float: left;
             width: 100%; 
@@ -44,16 +52,8 @@
 			
 			@include prevent-word-breakouts();
 			
-			//@media (max-width: 767px){
-			//	padding-bottom: 30px;
-			//}
-			
-			//@media (max-width: 979px){
-			//	padding-bottom: 30px;
-			//}
-            
-			
-            h4{ // The attribute titles
+			// The attribute titles
+            h4{ 
                 float: left;
                 position:absolute;
                 top: px(-11px);
@@ -62,13 +62,18 @@
                 padding-right: px(6px);
                 
             }
+			
+			// +/- button
 			.toggleRefinements{
-                position:absolute;
+                
+				position:absolute;
                 top: px(-11px);
 				float: right;
 				right: 0;
 				background-color: $superLightGrey;
-				button{ // The hide/show button
+				
+				// The hide/show button
+				button{ 
 	                margin-right:0;
 	                width: px(20px);
 	                height: px(20px);
@@ -90,12 +95,19 @@
 	            }
 				
 			} 
+			
+			.refinementList{
+				padding-top: 10px;
+			}
+			
+			// Actual container for each list element
             ul{ 
                 
                 display: block;
 				float:left;
                 width: 100%;
                 
+				// Each attribute type
                 .field{ 
                     clear: both;
                     margin-left: px($paddingUnit);
@@ -122,6 +134,7 @@
                     }
                 }
             }
+			
             .loadMore{
                 clear: both;
                 float: left;
@@ -129,19 +142,16 @@
                 left: px(25px);
                 top: px(-5px);
             }
-			.refinementList{
-				padding-top: 10px;
-			}
         }
         .selectedFilters{
             
             @include clearfix;
             
             li{ clear: both; margin-top: 5px; float: left; }
-			h2{
-				margin-bottom:0;
-			}
-            button[data-action='removeFilter']{ 
+			
+			h2{ margin-bottom:0; }
+            
+			button[data-action='removeFilter']{ 
                 float: left;
                 margin: px(2px) 0 px(5px);
                 overflow: hidden;
@@ -170,22 +180,20 @@
         }
     }
     
+	// Actual search results
     .results{
-        
-        //clear: none;
-        //float: left;
-        //margin-left: $gutterWidth;
-        //width: px(columns(9)-$paddingUnit);
-        
+		
         .tabs{
 			font-size: 13px;
             margin-top: -1em;
             margin-right: px($paddingUnit);
-            li{
+            
+			li{
 				top: 1px;
                 float: right;
                 position:relative;
             }
+			
             .b1, .b2, .b3, .b4, .b5, a{
                 
                 border: 1px solid $lightGrey;
@@ -199,7 +207,9 @@
                 }
                 
             }
-            button[data-action="showCompact"]{
+			
+            button[data-action="showCompact"],
+			button[data-action="showDetails"]{
                 margin-left: -1px;
             }
         }
@@ -219,7 +229,7 @@
                 float: right;
                 margin-right: 50px;
                 @media (max-width: 979px){
-					margin-right: 33px;
+					margin-right: 25px;
 				}
                 &:first-child{
                     float: left;
@@ -301,6 +311,12 @@
                 padding-bottom: px($gutterWidth);
                 border-bottom: 1px solid $lightGrey;
                 float:left;
+				@media (max-width: 767px){
+					padding-bottom: 60px;
+				}
+				@media (max-width: 400px){
+					padding-bottom: 85px;
+				}
             }
             .productPrice{ font-size: px(19px); }
             .productName{ 
@@ -314,13 +330,21 @@
         }
     }
 
-    .listView{
+    // Two Styles of views
+	.listView{
         
         .listScope{
             clear: both;
             display: block;
             float: left;
         }
+		
+		// The list tab - make it look 'active'
+		.tabs .icon-24-list{
+	        border-bottom: 1px solid $superLightGrey;
+	        background-color: $superLightGrey;
+			color: black;	
+		}
 		
         .entry{
             padding-left: 165px;
@@ -393,7 +417,8 @@
 			}
         }
     }
-    .gridView{
+	
+	.gridView{
         
         $_topOfPrice : 350px;
         
@@ -402,7 +427,14 @@
             display: block;
             float: left;
         }
-        
+		
+		// Make the grid tab look active
+		.tabs .icon-24-compact{
+	        border-bottom: 1px solid $superLightGrey;
+	        background-color: $superLightGrey;
+			color: black;	
+		}
+		
         .entry{
             clear:none;
             padding: 0 px(7px);
@@ -514,46 +546,101 @@
 		}
         
     }
-    
-    .gridView .tabs button[data-action="showCompact"],
-    .listView .tabs button[data-action="showDetails"]{
-            border-bottom: 1px solid $superLightGrey;
-            background-color: $superLightGrey;
-			color: black;
-			
-    }
 	
-	@media (min-width: 768px){
-
-		.refineResults .b3{
-			display: none;
-		}
-	}
 	// Design of the entries on mobile
+	// This conceptually should be up within the .results section
+	// but there are so many classes in here, it would have created 30 or 40
+	// individual media queries
 	@media (max-width: 767px){
 		
-		#refineResults{
-			margin-top:25px;
+		
+		.refinements{
+			display: table;
+			 #attributeList.reveal-isOpen{
+				 display: table;
+				 width: 100%;
+				 margin-top:60px; // Space between the top of the list and the header
+			}
 		}
-
-		.refineResults .b3{
-            margin-right: 0;
-            text-indent: px(-$hideDistance);
-            width: px(32px);
-            height: px(32px);
-			padding: 0;
-			position: relative;
-			margin-left: 0;
-			margin-top: 0;
-			line-height:200px;
+		.searchRefinementsAndResults{
+			display: block;
+			position:relative;
+			float:left;
+		}
+		.close,
+		.refinements .selectedFilters button[data-action='clearAllRefinements']{
+			margin-top:-10px;
 			float:right;
+			padding: 0 10px 15px 0;
+		}
+		// +/- button for refinements
+		.refinements .refineResults{
+			display: table-caption;
+			min-height:52px;
+			float: none;
+			@include box-shadow-multiple(none);
+			@include border-radius(0);
+			border-width: 1px 0;
+			margin-bottom: 0;
+			padding: 10px 5px 0;
 			
+			h2{ display: none; }
+			.b3{
+	            margin-right: 0;
+	            text-indent: px(-$hideDistance);
+	            width: px(32px);
+	            height: px(32px);
+				padding: 0;
+				position: relative;
+				margin-left: 0;
+				margin-top: 0;
+				line-height:200px;
+				float: right;
+	
+			}	
+		}
+		
+		.refinements .selectedFilters{
+
+			@include box-shadow-multiple(none);
+			@include border-radius(0);
+			border-top:0;
+			border-width: 0 1px 1px;
+			background-color: white;
+			display: table;
+			float: none;
+			border-left: 5px solid $yellow;
+			
+			h2{
+				font-size: 13px;
+				font-weight: bold;
+				font-family: 'Open Sans';
+				text-transform: none;
+				margin-top: 5px;
+			}
+			.section{
+				margin-top:10px;
+				margin-bottom: 0;
+				margin-left: 10px;
+				@include box-shadow-multiple(none);
+			}
 		}
 		h1{
 			margin-bottom:10px;
 		}
 		.title .details{
-			display: none;
+			//display: none;
+			//position: relative;
+			margin-top: -15px;
+			display: block;
+			font-size: 13px;
+			margin-bottom: 10px;
+			strong{
+				font-weight: normal;
+			}
+			.numberOfPages{
+				display: none;
+			}
 		}
 		.tabs{
 			display: none;
@@ -564,6 +651,7 @@
 		.shortStatus{
 			display:block;
 		}
+		
 		.listView .thumbnail,
 		.gridView .thumbnail{
 			width: 100px;
@@ -589,11 +677,9 @@
 				width: 100%;
 			}
 			.entry{
-				padding-bottom: 100px;
 				overflow: hidden;
 				padding-left: 110px;
 				width: 100%;
-				padding-bottom: 60px;
 			}	
 		} 
 		.controls .details,
@@ -602,19 +688,32 @@
 		.head .pageCount{
 			display: none;
 		}
-		.head .controls li.control-pagination-sort,
-		.head .resultCount{
+		.head .controls li.control-pagination-sort{
+			
 			float:left;
-			position:relative;
-			top: -27px;
-
-			background-color: white;
+			position:absolute;
+			top: 10px;
 			padding: 0 5px;
 			select{
 				height: 30px;
 				
 			}	
 		}
+		
+		.toggleLabel,
+		.head .controls li.control-pagination-sort label{
+			display: block;
+			line-height: 25px;
+			padding-top: 4px;
+			padding-bottom: 11px;
+			padding-right: 5px;
+			margin-right: 0;
+			margin-top: 0;
+		}
+		.toggleLabel{
+			float:right;
+		}
+		
 		.foot select{
 			display: none;
 		}
@@ -627,8 +726,13 @@
 			float:right;
 			z-index:1;
 		}
-		.foot button[data-action="prevPage"]{
+		.foot .controls button[data-action="previousPage"]{
+			margin-left: 5px;
 			z-index:2;
+		}
+		.foot .controls li.pagination{
+			width: 100%;
+			margin: 0;
 		}
 		.foot .pageCount{
 			float: none;
@@ -640,18 +744,12 @@
 			top:5px;
 			display: block;
 		}
-		.head .resultCount{
-			font-size: 13px;
-			float:right;
-			top: -22px;
-			background-color: white;
-			padding: 0 5px;
-		}
 		.results .head .controls{
-			background-color: transparent;
-			border-bottom: 0;
-			margin-top: 20px;
-			height: 0px;
+			background: transparent;
+			border: 0;
+			padding: 0;
+			margin: 0;
+			height: 0;
 		}
         .addToCart{
 			
@@ -691,9 +789,5 @@
         }
 		
 	}
-	@media (max-width: 400px){
-		.results .searchResults .entry{
-			padding-bottom: 85px;
-		}
-	}
+	
 }

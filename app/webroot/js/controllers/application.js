@@ -154,6 +154,9 @@
                 $(document).ready(function(){ 
                     $(_this).triggerHandler('onReady');
                 });
+				//$(window).resize(function(){
+				//	$(_this).triggerHandler('onResize');
+				//});
             }
 
         };

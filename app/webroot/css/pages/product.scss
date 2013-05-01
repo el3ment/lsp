@@ -277,11 +277,12 @@
         }
         .add{
             
-            display: block;
+            //display: block;
             clear: both;
             border-top: 1px solid $lightGrey;
             padding: 1em 0 0 0;
-            .panel{ margin-bottom: 0; }
+            
+			.panel{ margin-bottom: 0; }
             .review{
                 //float: left;
 				//width: 100%;
