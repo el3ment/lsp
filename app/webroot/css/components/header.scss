@@ -381,7 +381,7 @@
 				float:right;
 				width: 64px;
 				height: 64px;
-				text-indent: -1000px;
+				text-indent: -$hideDistance;
 				background: transparent;
 				@include lsp-sprite-background();
 				filter: none;
