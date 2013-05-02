@@ -19,7 +19,7 @@
             position: absolute;
             bottom: 0;
             right: 0;
-			margin-top: 15px;
+			margin-top: 20px;
         }
         .ad-contact{ 
             
@@ -72,7 +72,7 @@
     }
     
     table.cart{
-        margin: px(15px) 0;
+        margin: px(10px) 0 0;
         clear: both;
         width: 100%;
 		float: left;
@@ -113,16 +113,20 @@
             padding: px(15px) 0;
             border-bottom: 1px solid $lightGrey;
         }
-        
+        .productName,
+		.details{
+			padding-right: 5px;
+		}
         .productImage{
             float: left;
+			margin-right:10px;
             img{ 
                 max-width: px(64px);
                 max-height: px(64px);
             }
         }
         .properties{
-            margin-left: px(74px);
+            //padding-left: px(10px);
 			overflow: hidden;
 			
             .productName{
@@ -204,22 +208,33 @@
     }
 	
 	
-	@media (max-width: 768px){
+	@media (max-width: 767px){
+		//.properties{
+		//	outline: 1px solid red;
+			//@include box-sizing();
+			//width: 100%;
+		//	.details{
+		//		width: 100%;
+		//		outline: 1px solid red;
+		//	}	
+		//} 
+		//.productName{
+		//	width: 100%;
+		//	outline: 1px solid red;
+		//}
 		.unitPrice,
 		.ad-contact,
 		.unitPrice,
 		.shippingTotal,
 		.taxTotal,
-		.orderTotal,
-		.headers{
+		.orderTotal{
 			display: none;
 		}
 		thead .summary{
 			display: table-row;
 		}
-		.summary td{
-			border-top:1px solid $lightGrey;
-			border-bottom:1px solid $lightGrey;
+		tfoot tr{
+			border-bottom: 0;
 		}
 		.merchandiseTotal, thead .summary.merchandiseTotal{
 			.value{
@@ -231,12 +246,20 @@
 		.head .b1{
 			position: relative;
 		}
-		.table-cart{
-			margin-top: 0;
+		table.cart{
+			margin-top: 5px;
+			margin-bottom: 5px;
 		}
 	}
 	
-	@media (max-width: 500px){
+	@media (max-width: 600px){
+		.headers{
+			display:none;
+		}
+
+		.summary td{
+			border-bottom:1px solid $lightGrey;
+		}
 		table, tbody, tfoot, thead, tr, td{
 			display: inline;
 			//float: left !important; // reset removes the float with !important
@@ -256,7 +279,6 @@
 			height: auto;
 		}
 		thead .summary{
-			border-top:1px solid $lightGrey;
 			display: block;
 		}
 		thead .summary label,
@@ -266,6 +288,7 @@
 			//top: -3px;
 			float: none;
 		}
+		
 		.subtotal{
 			display: inline-block;
 			margin-top: -5px; // Not sure where this is coming from
@@ -287,12 +310,13 @@
 			//float: left;
 			//margin:15px 0;
 		}
+		tbody .productName{
+			padding-right: 68px; // space for remove
+		}
 		button[data-action='remove']{
 			position: absolute;
-			top: 82px;
-			left: 0;
-			width: 64px;
-			text-align:center;
+			top: 10px;
+			right: 10px;
 		}
 		tbody{
 			text-align:right;

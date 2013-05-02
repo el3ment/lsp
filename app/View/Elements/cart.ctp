@@ -34,14 +34,14 @@
                 <td class='product'>
                     <div class='productImage' data-badge='new'><img src='http://placehold.it/64x64' width='64' height='64' /></div>
                     <div class='properties'>
-                        <div class='productName'>Innovative IP240</div>
+                        <div class='productName'>Innovative IP240 Soloist Marimba Mallets</div>
                         <div class='details'>
                             <span class='productOptions'>Red Sparkle Finish, Chrome Hardware</span>
                             Model Number <span class='productMpn'>IP240</span>
                         </div>
                         <div data-method='seperately' class='productAvailability'>
                             <span class='status'>Ships Seperately</span>
-                            <span class='details'>1 today, 2 on the way</span>
+                            <span class='details'>1&nbsp;today,&nbsp;2&nbsp;on&nbsp;the&nbsp;way</span>
                         </div>
                         <div class='notice'>Only 1 left in stock</div>
                     </div>
