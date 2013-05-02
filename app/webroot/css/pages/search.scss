@@ -554,7 +554,6 @@
 	
 	@media (max-width: 767px){
 		
-		
 		.refinements{
 			display: table;
 			 #attributeList.reveal-isOpen{
@@ -577,7 +576,7 @@
 		}
 		// +/- button for refinements
 		.refinements .refineResults{
-			display: table-caption;
+			display: table-caption; // moes it above the selectedFilters
 			min-height:52px;
 			float: none;
 			@include box-shadow-multiple(none);
@@ -602,14 +601,17 @@
 			}	
 		}
 		
+		
+		
+		// The selected filters block below the refinements
 		.refinements .selectedFilters{
 
-			@include box-shadow-multiple(none);
+			@include box-shadow-multiple(inset 0 15px 10px -20px black);
 			@include border-radius(0);
 			border-top:0;
 			border-width: 0 1px 1px;
 			background-color: white;
-			display: table;
+			display: table; // moves it below the refinements
 			float: none;
 			border-left: 5px solid $yellow;
 			
@@ -658,14 +660,6 @@
 		.gridView .thumbnail{
 			width: 100px;
 			height: 100px;
-		}
-		
-		.badges-badge{
-			position:absolute;
-			top: auto;
-			right: 0;
-			bottom: -27px;
-			left: auto;
 		}
 		
 		.gridView .entry{
@@ -793,9 +787,7 @@
 	}
 	
 	@media (max-width: 400px){
-		.head .controls li.control-pagination-sort select{
-			padding: 3px;
-		}
+		// Hide the "Sort:" from the iphone - it's too skinny to fit
 		.head .controls li.control-pagination-sort label{
 			display:none;
 		}

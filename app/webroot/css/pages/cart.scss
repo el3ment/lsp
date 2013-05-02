@@ -5,26 +5,27 @@
         /* Contains the contact us link, Proceed To Checkout button, and main title */
        
         min-height: px(100px);
-        width: px($pageWidth);
-        float: left;
+        //float: left;
         position: relative;
+		float: left;
+		width: 100%;
         
         h1{ 
-            display: inline-block;
+            //display: inline-block;
             float: left;
-            clear: both;
+            //clear: both;
         }
         .b1{
             position: absolute;
             bottom: 0;
             right: 0;
+			margin-top: 15px;
         }
         .ad-contact{ 
             
             text-align: right;
             color: $grey;
             float: right;
-            padding: px(10px) 0;
             
             a{ 
                 display:block; 
@@ -33,147 +34,288 @@
     }
     
     .warning{
-        /* The warning is a speech bubble that tells the user something about their cart -- this is likely to be the explanation
-         * about backordered items
-         */
-        margin: 0 0 px(15px);
-        background-color: $superLightGrey;
-        border: 1px solid $lightGrey;
-        padding: px(5px) px(20px) px(5px) px(10px);
-        @include border-radius(px($borderRadius));
-        float: left;
-        clear: both;
-        position: relative;
-        
-        .details{}
-        .message{ 
-            font-size: px(20px);
-            font-weight: 600;
-            @include panel-arrow(6px, 'left', $superLightGrey);
-        }
+		float: left;
+		clear: both;
+		.panel{
+	        // The warning is a speech bubble that tells the user something about their cart.
+			// this is likely to be the explanation
+	        // about backordered items
+
+	        margin: 0;
+	        background-color: $superLightGrey;
+	        border: 1px solid $lightGrey;
+	        padding: px(5px) px(20px) px(5px) px(10px);
+	        @include border-radius(px($borderRadius));
+	        float: left;
+	        clear: both;
+	        position: relative;
+
+
+
+	        .details{}
+	        .message{ 
+	            font-size: px(20px);
+	            font-weight: 600;
+	            @include panel-arrow(6px, 'left', $superLightGrey);
+				@media (max-width: 979px) and (min-width: 768px){
+					max-width: 380px;
+				}
+	        }
+	    }	
     }
+	
     .b1{ /* Proceed to Checkout */
         float: right;
         clear: right;
-        margin: 0 0 px(20px);
-        width: px(220px);
+        margin: 0;
+        //width: px(230px);
     }
     
     table.cart{
-        
-        margin: px(10px) 0 0 0;
+        margin: px(15px) 0;
         clear: both;
         width: 100%;
+		float: left;
+	}
+    
+    thead{
         
-        thead{
-            text-align: center;
-            tr td{ 
+		text-align: center;
+		
+		.summary{ display: none; }
+		.headers{
+			
+			font-size: 13px;
+			
+			td{ 
                 padding: px(10px) 0;
                 border: 1px solid $lightGrey;
                 border-right: 0;
                 text-align: center;
             }
-            tr td:first-child{ 
+            td.product{ 
                 border-left: 0;
                 text-align: left;
-            }
-            .product{ 
-                text-align: left;
-            }
-            .unitPrice, .quantity, .extendedPrice{ 
-                width: px(130px);
+            }	
+		}
+        .product{ 
+            text-align: left;
+        }
+        
+    }
+	thead, tfoot{
+        .unitPrice, .quantity, .extendedPrice, .subtotal{ 
+            width: px(140px);	
+        }
+	}
+    tbody{
+        td{ 
+            padding: px(15px) 0;
+            border-bottom: 1px solid $lightGrey;
+        }
+        
+        .productImage{
+            float: left;
+            img{ 
+                max-width: px(64px);
+                max-height: px(64px);
             }
         }
-        tbody{
-            td{ 
-                padding: px(15px) 0;
-                border-bottom: 1px solid $lightGrey;
-            }
-            
-            .productImage{
-                float: left;
-                img{ 
-                    max-width: px(64px);
-                    max-height: px(64px);
-                }
-            }
-            .properties{
-                float: left;
-                margin-left: px(10px);
-                .productName{
-                    margin-top: px(-5px);
-                    font-size: px(15px);
-                    font-weight: 600;
-                }
-                
-                .productOptions{
-                    color: $grey;
-                    display: block;
-                }
-                .productAvailability, .details{ 
-                    margin-bottom: px(8px); /* Distance between detail groups */
-                } 
-            }
-            
-            .unitPrice{
+        .properties{
+            margin-left: px(74px);
+			overflow: hidden;
+			
+            .productName{
+                margin-top: px(-5px);
                 font-size: px(15px);
-                text-align: center;
-                vertical-align: top;
-                .productPrice{ }
+                font-weight: 600;
             }
-            .quantity{
-                text-align: center;
-                vertical-align: top;
-                .scroller{ 
-                    display: block;
-                    margin: auto;
-                }
-                *[data-action='remove']{
-                    margin: auto;
-                }
+            
+            .productOptions{
+                color: $grey;
+                display: block;
             }
-            .extendedPrice{
-                vertical-align: top;
-                text-align: right;
-                .productExtendedPrice{
-                    font-size: px(24px);
-                    font-weight: 600;
-                }
+            .productAvailability, .details{
+				//white-space: nowrap;
+                margin-bottom: px(8px); /* Distance between detail groups */
+            } 
+        }
+        
+        .unitPrice{
+            font-size: px(15px);
+            text-align: center;
+            vertical-align: top;
+            .productPrice{ }
+        }
+        .quantity{
+            text-align: center;
+            vertical-align: top;
+            .scroller{ 
+                display: block;
+                margin: auto;
+            }
+            button[data-action='remove']{
+                margin: auto;
+				font-size: 13px;
             }
         }
-        tfoot{
-            td { 
-                text-align: right;
-                vertical-align: center;
-            }
-            
-            label span { display: block; }
-            input, select, label{ display:inline-block; }
-            .value{ font-weight: 600; }
-            
-            .merchandiseTotal{
-                td{ padding: px(15px) 0 0; }
-            }
-            .taxTotal{
-                td{ padding: 0 0 px(15px); }
-            }
-            .shippingTotal{
-                label{ margin-right: px(5px); }
-                input, select{ 
-                    position: relative;
-                    top: px(-6px);
-                }
-            }
-            .orderTotal{
-                td{ 
-                    border-top: 1px solid $lightGrey;
-                    padding: px(15px) 0;
-                }
-                .value{  
-                    font-size: px(24px);
-                    font-weight: bold;
-                }
+        .extendedPrice{
+            vertical-align: top;
+            text-align: right;
+            .productExtendedPrice{
+                font-size: px(24px);
+                font-weight: 600;
             }
         }
     }
+    tfoot,
+	thead .summary{
+        td { 
+            text-align: right;
+            vertical-align: center;
+			height: 40px;
+        }
+        
+        label span { display: block; }
+        input, select, label{ display:inline-block; float:right; margin-left: 10px;}
+        .value{ font-weight: 600; }
+        
+		
+		
+		.zipcode{ width: 100px; }
+		.shipCountry{ width: 200px; }
+		.shipMethod{ width: 75px; }
+		
+        .shippingTotal{
+            label{ margin-right: px(5px); margin-top: -3px;}
+            input, select{ 
+            }
+        }
+        .orderTotal{
+            td{ 
+                border-top: 1px solid $lightGrey;
+                padding: px(15px) 0;
+            }
+            .value{  
+                font-size: px(24px);
+                font-weight: bold;
+            }
+        }
+    }
+	
+	
+	@media (max-width: 768px){
+		.unitPrice,
+		.ad-contact,
+		.unitPrice,
+		.shippingTotal,
+		.taxTotal,
+		.orderTotal,
+		.headers{
+			display: none;
+		}
+		thead .summary{
+			display: table-row;
+		}
+		.summary td{
+			border-top:1px solid $lightGrey;
+			border-bottom:1px solid $lightGrey;
+		}
+		.merchandiseTotal, thead .summary.merchandiseTotal{
+			.value{
+				font-size: px(24px);
+	            font-weight: bold;
+			}
+		}
+		
+		.head .b1{
+			position: relative;
+		}
+		.table-cart{
+			margin-top: 0;
+		}
+	}
+	
+	@media (max-width: 500px){
+		table, tbody, tfoot, thead, tr, td{
+			display: inline;
+			//float: left !important; // reset removes the float with !important
+		}
+		thead, tfoot{
+			text-align:right;
+		}
+		thead, tbody, tfoot, tr{
+			clear: both;
+			width: 100%;
+			display: block;
+		}
+		thead .summary td,
+		tbody td{
+			border-top: 0;
+			border-bottom: 0;
+			height: auto;
+		}
+		thead .summary{
+			border-top:1px solid $lightGrey;
+			display: block;
+		}
+		thead .summary label,
+		tfoot label{
+			
+			position: relative;
+			//top: -3px;
+			float: none;
+		}
+		.subtotal{
+			display: inline-block;
+			margin-top: -5px; // Not sure where this is coming from
+		}
+		tr{
+			position: relative;
+			border-bottom: 1px solid $lightGrey;
+			padding: 10px 0;
+			margin: 0 0 0px;
+		}
+		thead tr, tfoot tr{
+			@include box-sizing();
+			//height: 52px;
+			line-height: 50px;
+			padding:0;
+			margin-top:0;
+		}
+		table.cart{
+			//float: left;
+			//margin:15px 0;
+		}
+		button[data-action='remove']{
+			position: absolute;
+			top: 82px;
+			left: 0;
+			width: 64px;
+			text-align:center;
+		}
+		tbody{
+			text-align:right;
+		}
+		.extendedPrice{
+			line-height: 35px;
+		}
+		.quantity{
+			padding: 0;
+			margin-right: 10px;
+			display: inline-block;
+		}
+		thead .value,
+		tfoot .value{
+			line-height:42px;
+		}
+		//thead td, tfoot td{
+		//	width: 75%;
+		//}
+		//.subtotal{
+		//	width: 25%;
+		//}
+	
+	}
+	
 }

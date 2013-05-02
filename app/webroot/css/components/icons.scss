@@ -43,6 +43,17 @@
         margin-top: -8px;
     }
 }
+*[class*="icon-64-"]{
+    
+	content: '  ';
+    padding-left: 72px;
+
+    &:after{
+        width: 64px;
+        height: 64px;
+        margin-top: -32px;
+    }
+}
 
 .icon-16-heart-grey:after{
 	background-position: -48px -409px;
@@ -180,6 +191,9 @@
 .icon-24-rightArrow:after{
 	background-position: -117px -256px;
 }
+.icon-24-lock:after{
+	background-position: -156px -320px;
+}
 
 
 .icon-16-close:after{
@@ -192,6 +206,10 @@
 	margin-top:0;
 	background-color: #847e77;
 	@include border-radius(16px);
+}
+
+.icon-64-shippingAlert:after{
+	background-position:-190px -266px;
 }
 /*
 .icon-texas

@@ -277,14 +277,15 @@ ul.list li,
         clear: both;
     }
     &:before{
-        background-color: red;
-        content: ' ';
+		@include lsp-sprite-background();
+		background-position: -121px -325px;
+		content: ' ';
         display: block;
         position: absolute;
         top: px(2px);
         left: 0;
-        width: px(16px);
-        height: px(16px);
+        width: px(19px);
+        height: px(19px);
     }
 }
 
@@ -694,7 +695,7 @@ ul.list li,
 }
 
 /* Badges */
-*[data-badge]{
+.badges-hasBadge{
 	position:relative;
 	display:inline-block;
 	zoom:1;
@@ -716,6 +717,17 @@ ul.list li,
 	/* Individual Badges */
 	.badge-new{
 	    background-color: red;
+	}
+	
+	@media (max-width: 767px){
+		
+		padding-top:10px;
+		
+		.badges-badge{
+			position:absolute;
+			top: 0;
+			left: 0;
+		}
 	}
 }
 

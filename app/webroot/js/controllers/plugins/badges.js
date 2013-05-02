@@ -12,7 +12,7 @@
                 application : {
                     onAttachEvents : function(e, data){
                         $('div[data-badge]:not(:has(div.badges-badge)), a[data-badge]:not(:has(div.badges-badge))', data.selector)
-                            .append(_this.makeElement);
+                            .append(_this.makeElement).addClass('badges-hasBadge');
                     }
                 }
             },
