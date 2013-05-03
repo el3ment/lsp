@@ -198,18 +198,33 @@
 
 .icon-16-close:after{
 	content: 'x';
-	color: white;
+	color: black;
 	line-height: 13px;
-	text-align:center;
-	font-size: 11px;
-	top:2px;
-	margin-top:0;
-	background-color: #847e77;
-	@include border-radius(16px);
+	text-align: center;
+	font-size: 16px;
+	top: 1px;
+	font-weight: bold;
+	margin-top: 0;
 }
 
 .icon-64-shippingAlert:after{
 	background-position:-190px -276px;
+}
+
+.icon-24-box:after{
+	background-position: -152px -348px;
+}
+
+.icon-24-card:after{
+	background-position: -116px -348px;
+}
+
+.icon-24-user:after{
+	background-position: -186px -348px;
+}
+
+.icon-24-check:after{
+	background-position: -215px -348px;
 }
 /*
 .icon-texas

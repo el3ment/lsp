@@ -73,7 +73,7 @@ h1, .h1, h2, .h2{
 }
 
 /* Section Headings */
-h2, .h2{ font-size: px($h2FontSize); margin-top:0;}
+h2, .h2{ font-size: px($h2FontSize); margin-top:0; line-height: 32px;}
 
 /* Captialized, Bigger, Bold */
 h3, .h3, h4, .h4{ 
@@ -133,6 +133,7 @@ ul.list li,
     margin-bottom: 17px;
     color: $black;
 	h2{
+		margin-top:3px;
 		margin-bottom: px($paddingUnit);
 	}
 }
@@ -701,6 +702,7 @@ ul.list li,
 	zoom:1;
 	*display:inline; /* IE7 inline-block Fix */
 	/* Generic badge styling */
+	
 	.badges-badge{ 
 	    position: absolute;
 	    top: 5px;
@@ -713,14 +715,19 @@ ul.list li,
 		@include border-radius(px($borderRadius));
 		
 	}
+	
+	&.badges-text .badges-badge{
+		display: inline-block;
+		background-color: transparent;
+		position: static;
+		color: $yellow;
+	}
 
 	/* Individual Badges */
-	.badge-new{
-	    background-color: red;
-	}
-	
-	@media (max-width: 767px){
-		
+	.badge-new{ background-color: red; }
+	&.badges-text .badge-new{ color: red; }
+	/*
+	&.badge-smallImage{
 		padding-top:10px;
 		
 		.badges-badge{
@@ -728,7 +735,9 @@ ul.list li,
 			top: 0;
 			left: 0;
 		}
-	}
+	}*/
+	
+	
 }
 
 

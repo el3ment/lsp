@@ -16,6 +16,7 @@
             //clear: both;
         }
         .b1{
+			margin-bottom: 10px;
             position: absolute;
             bottom: 0;
             right: 0;
@@ -28,15 +29,18 @@
             float: right;
 			margin-top:-6px;
             
-            a{ 
+            .contact{ 
                 display:block; 
             }
         }
     }
     
     .warning{
+		
 		float: left;
 		clear: both;
+		margin: 10px 0;
+		
 		.panel{
 	        // The warning is a speech bubble that tells the user something about their cart.
 			// this is likely to be the explanation
@@ -108,7 +112,12 @@
     }
 	thead, tfoot{
         .unitPrice, .quantity, .extendedPrice, .subtotal{ 
-            width: px(140px);	
+            width: px(140px);
+			
+			@media (max-width: 979px) and (min-width: 768px){
+				width: 99px;
+			}
+				
         }
 	}
     tbody{
@@ -186,6 +195,11 @@
             .productExtendedPrice{
                 font-size: px(24px);
                 font-weight: 600;
+				
+				@media (max-width: 979px) and (min-width: 768px){
+					font-size: px(21px);
+				}
+				
             }
         }
     }
@@ -220,6 +234,9 @@
             .value{  
                 font-size: px(24px);
                 font-weight: bold;
+				@media (max-width: 979px) and (min-width: 768px){
+					font-size: 21px;
+				}
             }
         }
     }
@@ -265,6 +282,7 @@
 		}
 		.warning{
 			margin-top: 10px;
+			margin-bottom: 0;
 		}
 	}
 	

@@ -63,7 +63,7 @@
 	                    <li class='productAvailability' itemprop="offers" itemscope itemtype="http://data-vocabulary.org/Offer" data-method='seperately'>
 	                        <span itemprop="availability" class='status'>In Stock:</span>
 	                        <span class='shortStatus'>Two Finishes In Stock</span>
-	                        <span class='details'>Arrives within 3-5 business days with <a href='#' class='method'>Standard Shipping</a></span>
+	                        <span class='details'>Arrives within 3-5 business days with&nbsp;<a href='#' class='method'>Standard Shipping</a></span>
 	                    </li>
 	                    <li class='quantity'>
 	                        <label>Quantity:</label>
