@@ -7,7 +7,11 @@
     .b3{
         float: left;
     }
-	
+	.head .aggregateReviews, .head > .details{
+		position: relative;
+		top: -10px;
+		
+	}
 	.isAuthorized{
 		
 		&:after{
@@ -164,7 +168,8 @@
         &:first-child{ border-top-width: 0; }
         
         > .b3[data-reveal-children]{ /* The plus/minus toggle button */
-            margin-right: px(2 * $paddingUnit);
+            margin-top: 10px;
+			margin-right: px(2 * $paddingUnit);
             text-indent: px(-1000px);
             float:left;
             text-indent: px(-$hideDistance);
@@ -181,8 +186,7 @@
 			
         }
         > h2{  /* Section headers */
-            line-height: 1em;
-			padding-top: px(1 * $paddingUnit + 7);
+			padding-top: px(1 * $paddingUnit + 9);
 			margin-bottom: 0;
         }
         label{ 
@@ -197,6 +201,7 @@
             clear: both;
             float: left;
             width: 100%;
+			@include box-sizing();
         }
         @include clearfix;
         

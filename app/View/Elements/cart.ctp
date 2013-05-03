@@ -1,7 +1,7 @@
 <div class='page-cart span12 container'>
     <div class='head'>
         <h1>Your Cart</h1>
-        <div class='ad-contact details'>Need help or have questions? <a href='/contact'>Contact us anytime!</a></div>
+        <div class='ad-contact details'>Need help or have questions? <a class='contact hidden-phone' href='/contact'>Contact us anytime!</a><span class='contact visible-phone'>Give us a call! <a href='tel:18667920143'>1-866-792-0143</a></span></div>
        	<div class='icon-64-shippingAlert warning'>
 		    <div class='panel'>
 	            <div class='details'>Looks like some of the ...</div>
@@ -34,9 +34,9 @@
 			<?php for($i = 0; $i < 4; $i++){ ?>
             <tr class='productScope'>
                 <td class='product'>
-                    <div class='productImage' data-badge='new'><img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.64x64' width='64' height='64' /></div>
+                    <div class='productImage'><img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.64x64' width='64' height='64' /></div>
                     <div class='properties'>
-                        <div class='productName'>Innovative IP240 Soloist Marimba Mallets</div>
+                        <div class='productName badges-text' data-badge='new'>Innovative IP240 Soloist Marimba Mallets</div>
                         <div class='details'>
                             <span class='productOptions'>Red Sparkle Finish, Chrome Hardware</span>
                             Model Number <span class='productMpn'>IP240</span>

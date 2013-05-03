@@ -132,7 +132,6 @@ html div.page-checkout{
 				position: absolute;
 				display:block;
 				width: $width;
-				background-color:red;
 				height: $width;
 				z-index:3;
 				left: 50%;
@@ -283,11 +282,12 @@ html div.page-checkout{
                 overflow: hidden;
                 position: absolute;
                 top: 50%;
-                margin-top: -.5em;
+                margin-top: -15px;
                 left: 0;
                 width: 1em;
                 height: 1em;
-                background-color: red;
+				@include lsp-sprite-background();
+				background-position: -250px -350px;
             }
             
             li{
