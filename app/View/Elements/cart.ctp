@@ -12,15 +12,17 @@
     </div>
     <table class='cart' cellpadding='0' cellspacing='0'>
         <thead>
+			<!-- 
             <tr class='merchandiseTotal summary'>
 				<td class='hidden-phone'></td>
                 <td colspan='2'>
-                    <label>Subtotal</label>
+                    <label>Merchendise Subtotal</label>
                 </td>
                 <td class='subtotal'>
                     <span class='value'>$120.00</span>
                 </td>
             </tr>
+			-->
             <tr class='headers'>
                 <td class='product'>Product</td>
                 <td class='unitPrice'>Item Price</td>
@@ -32,7 +34,7 @@
 			<?php for($i = 0; $i < 4; $i++){ ?>
             <tr class='productScope'>
                 <td class='product'>
-                    <div class='productImage' data-badge='new'><img src='http://placehold.it/64x64' width='64' height='64' /></div>
+                    <div class='productImage' data-badge='new'><img src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.64x64' width='64' height='64' /></div>
                     <div class='properties'>
                         <div class='productName'>Innovative IP240 Soloist Marimba Mallets</div>
                         <div class='details'>
@@ -50,6 +52,7 @@
                     <span class='productPrice'>$23.00</span>
                 </td>
                 <td class='quantity'>
+				   <label>Quantity:</label>
                    <input class='scroller' type='number' min='1' value='1' />
                    <button class='b5' data-action='remove'>Remove</button>
                 </td>

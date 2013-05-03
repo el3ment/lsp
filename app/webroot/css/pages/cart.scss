@@ -26,6 +26,7 @@
             text-align: right;
             color: $grey;
             float: right;
+			margin-top:-6px;
             
             a{ 
                 display:block; 
@@ -43,6 +44,7 @@
 
 	        margin: 0;
 	        background-color: $superLightGrey;
+			
 	        border: 1px solid $lightGrey;
 	        padding: px(5px) px(20px) px(5px) px(10px);
 	        @include border-radius(px($borderRadius));
@@ -76,6 +78,7 @@
         clear: both;
         width: 100%;
 		float: left;
+		border-otp
 	}
     
     thead{
@@ -109,10 +112,13 @@
         }
 	}
     tbody{
-        td{ 
+        td, tr{ 
             padding: px(15px) 0;
             border-bottom: 1px solid $lightGrey;
         }
+		td{
+			position: relative;
+		}
         .productName,
 		.details{
 			padding-right: 5px;
@@ -120,15 +126,18 @@
         .productImage{
             float: left;
 			margin-right:10px;
+			position: absolute;
             img{ 
                 max-width: px(64px);
                 max-height: px(64px);
             }
         }
+		.properties, .quantity{
+			margin-left: 74px;
+		}
         .properties{
             //padding-left: px(10px);
 			overflow: hidden;
-			
             .productName{
                 margin-top: px(-5px);
                 font-size: px(15px);
@@ -142,7 +151,7 @@
             .productAvailability, .details{
 				//white-space: nowrap;
                 margin-bottom: px(8px); /* Distance between detail groups */
-            } 
+            }
         }
         
         .unitPrice{
@@ -154,6 +163,14 @@
         .quantity{
             text-align: center;
             vertical-align: top;
+			label{
+				display: none;
+				float: left;
+				margin-top: 8px;
+				padding-right: 5px;
+				font-size: 13px;
+				font-weight: normal;
+			}
             .scroller{ 
                 display: block;
                 margin: auto;
@@ -223,15 +240,11 @@
 		//	outline: 1px solid red;
 		//}
 		.unitPrice,
-		.ad-contact,
 		.unitPrice,
 		.shippingTotal,
 		.taxTotal,
 		.orderTotal{
 			display: none;
-		}
-		thead .summary{
-			display: table-row;
 		}
 		tfoot tr{
 			border-bottom: 0;
@@ -247,12 +260,26 @@
 			position: relative;
 		}
 		table.cart{
-			margin-top: 5px;
-			margin-bottom: 5px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.warning{
+			margin-top: 10px;
 		}
 	}
 	
 	@media (max-width: 600px){
+		
+		tbody .quantity label{
+			display: inline-block;
+		}
+		
+
+		thead .summary{
+			display: table-row;
+		}
+		
+		
 		.headers{
 			display:none;
 		}
@@ -260,8 +287,9 @@
 		.summary td{
 			border-bottom:1px solid $lightGrey;
 		}
-		table, tbody, tfoot, thead, tr, td{
+		table, tbody, tfoot, thead, tr, tbody td{
 			display: inline;
+			position: static;
 			//float: left !important; // reset removes the float with !important
 		}
 		thead, tfoot{
@@ -271,6 +299,7 @@
 			clear: both;
 			width: 100%;
 			display: block;
+			position: relative;
 		}
 		thead .summary td,
 		tbody td{
@@ -278,48 +307,42 @@
 			border-bottom: 0;
 			height: auto;
 		}
-		thead .summary{
-			display: block;
+		thead .summary,
+		tfoot td{
+			display: inline;
 		}
-		thead .summary label,
-		tfoot label{
-			
-			position: relative;
-			//top: -3px;
-			float: none;
-		}
+		
 		
 		.subtotal{
 			display: inline-block;
 			margin-top: -5px; // Not sure where this is coming from
 		}
-		tr{
+		tbody tr{
 			position: relative;
 			border-bottom: 1px solid $lightGrey;
-			padding: 10px 0;
+			padding: 10px 0 48px; // space for the productAvailability
 			margin: 0 0 0px;
 		}
-		thead tr, tfoot tr{
-			@include box-sizing();
-			//height: 52px;
-			line-height: 50px;
-			padding:0;
-			margin-top:0;
-		}
+		
 		table.cart{
 			//float: left;
 			//margin:15px 0;
+
+			border-top:1px solid $lightGrey;
 		}
 		tbody .productName{
 			padding-right: 68px; // space for remove
 		}
+
+		.productAvailability{
+			position: absolute;
+			bottom: 5px;
+		}
+		
 		button[data-action='remove']{
 			position: absolute;
 			top: 10px;
 			right: 10px;
-		}
-		tbody{
-			text-align:right;
 		}
 		.extendedPrice{
 			line-height: 35px;
@@ -328,6 +351,38 @@
 			padding: 0;
 			margin-right: 10px;
 			display: inline-block;
+			input{
+				float: left;
+			}
+		}
+		tbody .extendedPrice .productExtendedPrice{
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.notice{ display: none;}
+		
+		
+		thead .summary label,
+		tfoot label{
+			
+			position: relative;
+			//top: -3px;
+			float: none;
+			font-weight: normal;
+		}
+		thead tr, tfoot tr{
+			@include box-sizing();
+			//height: 52px;
+			line-height: 50px;
+			padding:0;
+			padding-right: 5px;
+			margin-top:0;
+			background-color: $superLightGrey;
+			border: 1px solid $lightGrey;
+			border-width: 1px 0;
+		}
+		tfoot tr{
+			border-top: 0;
 		}
 		thead .value,
 		tfoot .value{
@@ -340,6 +395,14 @@
 		//	width: 25%;
 		//}
 	
+	}
+	
+	@media (max-width: 400px){
+		.productAvailability{
+			.details{
+				display: none;
+			}
+		}
 	}
 	
 }
