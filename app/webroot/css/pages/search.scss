@@ -147,22 +147,27 @@
             
             @include clearfix;
             
-            li{ clear: both; margin-top: 5px; float: left; }
+            li{ clear: both; float: left; }
 			
 			h2{ margin-bottom:0; }
             
 			button[data-action='removeFilter']{ 
                 float: left;
-                margin: px(2px) 0 px(5px);
+                margin: px(2px) 0 px(0px);
                 overflow: hidden;
                 text-decoration: none;
-                color: $black;
+                color: black;
 				text-align:left;
+				padding-bottom: 12px;
+				padding-top: 3px;
+				padding-left: 32px;
+				
+				@media (min-width: 768px){
+					padding-bottom: 10px;
+				}
+				
                 &:hover{
-                    text-decoration: underline;
-                }
-                &:after{
-                    left:0; /* Icon */
+                    color: black;
                 }
             }
             

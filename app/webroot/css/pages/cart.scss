@@ -27,8 +27,7 @@
             text-align: right;
             color: $grey;
             float: right;
-			margin-top:-6px;
-            
+            margin-top:8px;
             .contact{ 
                 display:block; 
             }
@@ -45,7 +44,6 @@
 	        // The warning is a speech bubble that tells the user something about their cart.
 			// this is likely to be the explanation
 	        // about backordered items
-			// heyo
 
 	        margin: 0;
 	        background-color: $superLightGrey;
@@ -158,10 +156,14 @@
                 color: $grey;
                 display: block;
             }
-            .productAvailability, .details{
+            .productAvailability, .details, .notice{
 				//white-space: nowrap;
                 margin-bottom: px(8px); /* Distance between detail groups */
             }
+			.notice{
+				position:relative;
+				top: -2px;
+			}
         }
         
         .unitPrice{
@@ -193,6 +195,7 @@
         .extendedPrice{
             vertical-align: top;
             text-align: right;
+			padding-right: 10px;
             .productExtendedPrice{
                 font-size: px(24px);
                 font-weight: 600;
@@ -208,11 +211,12 @@
 	thead .summary{
         td { 
             text-align: right;
+			padding-right: 5px;
             vertical-align: center;
 			height: 40px;
         }
         
-        label span { display: block; }
+        //label span { display: block; }
         input, select, label{ display:inline-block; float:right; margin-left: 10px;}
         .value{ font-weight: 600; }
         

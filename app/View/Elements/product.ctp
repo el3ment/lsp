@@ -182,13 +182,13 @@
 							</li>
 							<?php } ?>
 	                    </ul>
-	                    <!--<div class='addToCart'>
+	                    <div class='addToCart'>
 	                        <button class='b1 icon-24-cart-black'>Add To Cart</button>
 	                        <div class='subtotal'>
 	                            $119.90
 	                            <span class='details'>Bundle Sub Total</span>
 	                        </div>
-	                    </div>-->
+	                    </div>
 	                </div>
 	            </div>
 	        </li>

@@ -8,9 +8,9 @@
 	        <div class='selectedFilters panel engaged'>
 	            <h2>You've Selected</h2>
 	            <ul class='section'>
-	                <li><button class='b5 icon-16-close' data-action='removeFilter'>Vibraphone Mallets</button></li>
-	                <li><button class='b5 icon-16-close' data-action='removeFilter'>20" Diameter</button></li>
-	                <li><button class='b5 icon-16-close' data-action='removeFilter'>Reverse Teardrop</button></li>
+	                <li><button class='b5 icon-24-close' data-action='removeFilter'>Vibraphone Mallets</button></li>
+	                <li><button class='b5 icon-24-close' data-action='removeFilter'>20" Diameter</button></li>
+	                <li><button class='b5 icon-24-close' data-action='removeFilter'>Reverse Teardrop</button></li>
 	            </ul>
 	            <button class='b5' data-action='clearAllRefinements'>Clear All Selected</button>
 	        </div>
