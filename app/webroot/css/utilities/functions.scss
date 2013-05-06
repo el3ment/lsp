@@ -61,12 +61,12 @@
         @if $direction == 'left'{
             border-right: px($size) solid $panelColor; /*findme*/
             left: px(-($size * 2 - 1 + $borderWidth));
-            margin-top: px(-($size * 2));
+            margin-top: px(-($size));
             top: $position;
         }@else if $direction == 'top'{
             border-bottom: px($size) solid $panelColor; 
             left: $position;
-            margin-left: px(-($size * 2));
+            margin-left: px(-($size));
             top: px($top + 1);
         }@else if $direction == 'right'{
             border-left: px($size) solid $panelColor;

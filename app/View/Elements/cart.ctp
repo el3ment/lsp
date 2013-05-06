@@ -75,13 +75,15 @@
             <tr class='shippingTotal'>
                 <td colspan='3'>
 					<select name='shipMethod' class='shipMethod'>
-                        <option>UPS Second Day Air</option>
+                        <option>Standard Shipping</option>
+						<option>2-Day Shipping</option>
+						<option>1-Day Shipping</option>
                     </select>
                     <select name='shipCountry' class='shipCountry'>
-                        <option>United States of America</option>
+                        <option>United States</option>
                     </select>
 					<input class='zipcode' type='number' name='zipcode' />
-					<label>Shipping <span class='details'>Enter your Zip Code</span></label>
+					<label>Shipping <span class='details'>Enter Your Zip Code</span></label>
                 </td>
                 <td>
                     <span class='value'>$2120.00</span>
@@ -101,7 +103,7 @@
                     <label>Order Total</label>
                 </td>
                 <td>
-                    <span class='value'>$1231.00</span>
+                    <span class='value'>$1,231.00</span>
                 </td>
             </tr>
         </tfoot>
