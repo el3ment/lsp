@@ -39,13 +39,13 @@
                         <div class='productName badges-text' data-badge='new'>Innovative IP240 Soloist Marimba Mallets</div>
                         <div class='details'>
                             <span class='productOptions'>Red Sparkle Finish, Chrome Hardware</span>
-                            Model Number <span class='productMpn'>IP240</span>
+                            Model: <span class='productMpn'>IP240</span>
                         </div>
+						<div class='notice'>Only 1 left in stock</div>
                         <div data-method='seperately' class='productAvailability'>
                             <span class='status'>Ships Seperately</span>
                             <span class='details'>1&nbsp;today,&nbsp;2&nbsp;on&nbsp;the&nbsp;way</span>
                         </div>
-                        <div class='notice'>Only 1 left in stock</div>
                     </div>
                 </td>
                 <td class='unitPrice'>
@@ -66,7 +66,7 @@
             <tr class='merchandiseTotal'>
 				<td class='hidden-phone'></td>
                 <td colspan='2'>
-                    <label>Subtotal</label>
+                    <label><span class='hidden-iphone'>Merchandise</span> Subtotal</label>
                 </td>
                 <td class='subtotal'>
                     <span class='value'>$120.00</span>
