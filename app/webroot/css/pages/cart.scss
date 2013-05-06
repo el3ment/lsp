@@ -196,6 +196,10 @@
                 margin: auto;
 				font-size: 13px;
 				margin-top:10px;
+				padding-left:0;
+				&:after{
+					display: none;
+				}
             }
         }
         .extendedPrice{
@@ -340,6 +344,7 @@
 			border-top: 0;
 			border-bottom: 0;
 			height: auto;
+			margin-top: 5px;
 		}
 		thead .summary,
 		tfoot td{
@@ -354,7 +359,7 @@
 		tbody tr{
 			position: relative;
 			border-bottom: 1px solid $lightGrey;
-			padding: 10px 0 48px; // space for the productAvailability
+			padding-bottom: 48px; // space for the productAvailability
 			margin: 0 0 0px;
 		}
 		
@@ -365,33 +370,43 @@
 			border-top:1px solid $lightGrey;
 		}
 		tbody .productName{
-			padding-right: 68px; // space for remove
+			padding-right: 55px; // space for remove
 		}
 
 		.productAvailability{
 			position: absolute;
-			bottom: 5px;
+			bottom: 13px;
 		}
 		
-		button[data-action='remove']{
+		tbody .quantity button[data-action='remove']{
 			position: absolute;
 			top: 10px;
-			right: 10px;
+			right: 15px;
+			text-indent: -$hideDistance;
+			width: 28px;
+			height: 28px;
+			&:after{
+				text-indent: 0;
+				display: inherit;
+			}
 		}
 		.extendedPrice{
 			line-height: 35px;
 		}
-		.quantity{
+		tbody .quantity{
 			padding: 0;
 			margin-right: 10px;
 			display: inline-block;
-			input{
+			.scroller{
 				float: left;
+				margin-top:-1px;
 			}
 		}
 		tbody .extendedPrice .productExtendedPrice{
 			font-size: 18px;
 			font-weight: bold;
+			position:relative;
+			top: 3px;
 		}
 		.notice{ display: none;}
 		

@@ -54,7 +54,7 @@
                 <td class='quantity'>
 				   <label>Quantity:</label>
                    <input class='scroller' type='number' min='1' value='1' />
-                   <button class='b5' data-action='remove'>Remove</button>
+                   <button class='b5 icon-24-close' data-action='remove'>Remove</button>
                 </td>
                 <td class='extendedPrice'>
                     <span class='productExtendedPrice'>$23.00</span>
