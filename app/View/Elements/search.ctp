@@ -8,9 +8,9 @@
 	        <div class='selectedFilters panel engaged'>
 	            <h2>You've Selected</h2>
 	            <ul class='section'>
-	                <li><button class='b5 icon-16-close' data-action='removeFilter'>Vibraphone Mallets</button></li>
-	                <li><button class='b5 icon-16-close' data-action='removeFilter'>20" Diameter</button></li>
-	                <li><button class='b5 icon-16-close' data-action='removeFilter'>Reverse Teardrop</button></li>
+	                <li><button class='b5 icon-24-close' data-action='removeFilter'>Vibraphone Mallets</button></li>
+	                <li><button class='b5 icon-24-close' data-action='removeFilter'>20" Diameter</button></li>
+	                <li><button class='b5 icon-24-close' data-action='removeFilter'>Reverse Teardrop</button></li>
 	            </ul>
 	            <button class='b5' data-action='clearAllRefinements'>Clear All Selected</button>
 	        </div>
@@ -46,7 +46,7 @@
 						</div>
 		            </div>
 					<?php } ?>
-					<div data-reveal-children='attributeList' class='b5 close visible-phone'>Collapse Refinements</div>
+					<div data-reveal-children='attributeList' class='b1 close visible-phone'>Apply Filters</div>
 				</div>
 	        </div>
 	    </div>
