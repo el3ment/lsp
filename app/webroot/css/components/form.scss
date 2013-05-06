@@ -22,6 +22,10 @@
 	    }
 	}
 	
+	label{
+		font-size:13px;
+	}
+	
 	::-webkit-input-placeholder { font-style: italic; color: $grey; line-height:22px; font-weight: 500; }
 	::-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* firefox 19+ */
 	:-ms-input-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* ie */
@@ -187,7 +191,7 @@
           /* Buttons that have the disc to highlight the icon */
             
           position: relative; /* To position the disc */
-          padding-left: 40px;
+          padding-left: 43px;
           text-align: left;
           font-weight: normal;
           

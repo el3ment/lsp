@@ -4,7 +4,7 @@
        
         /* Contains the contact us link, Proceed To Checkout button, and main title */
        
-        min-height: px(100px);
+        min-height: px(120px);
         //float: left;
         position: relative;
 		float: left;
@@ -20,14 +20,15 @@
             position: absolute;
             bottom: 0;
             right: 0;
-			margin-top: 20px;
+			margin-top: 10px;
         }
         .ad-contact{ 
             
             text-align: right;
             color: $grey;
             float: right;
-            margin-top:8px;
+            margin-top:13px;
+			margin-bottom: 10px;
             .contact{ 
                 display:block; 
             }
@@ -61,7 +62,7 @@
 	        .message{ 
 	            font-size: px(20px);
 	            font-weight: 600;
-	            @include panel-arrow(6px, 'left', $superLightGrey);
+	            @include panel-arrow(9px, 'left', $superLightGrey);
 				@media (max-width: 979px) and (min-width: 768px){
 					max-width: 380px;
 				}
@@ -77,7 +78,7 @@
     }
     
     table.cart{
-        margin: px(10px) 0 0;
+        margin: px(15px) 0 0;
         clear: both;
         width: 100%;
 		float: left;
@@ -121,7 +122,7 @@
 	}
     tbody{
         td, tr{ 
-            padding: px(15px) 0;
+            padding: px(20px) 0;
             border-bottom: 1px solid $lightGrey;
         }
 		td{
@@ -158,8 +159,11 @@
             }
             .productAvailability, .details, .notice{
 				//white-space: nowrap;
-                margin-bottom: px(8px); /* Distance between detail groups */
+                margin-top: px(8px); /* Distance between detail groups */
             }
+			.details{
+				margin-top:0;
+			}
 			.notice{
 				position:relative;
 				top: -2px;
@@ -186,10 +190,12 @@
             .scroller{ 
                 display: block;
                 margin: auto;
+				margin-top:-10px;
             }
             button[data-action='remove']{
                 margin: auto;
 				font-size: 13px;
+				margin-top:10px;
             }
         }
         .extendedPrice{
@@ -218,23 +224,28 @@
         
         //label span { display: block; }
         input, select, label{ display:inline-block; float:right; margin-left: 10px;}
-        .value{ font-weight: 600; }
+        .value{ 
+			font-weight: 600;
+			padding-right:10px;
+		}
         
 		
 		
 		.zipcode{ width: 100px; }
-		.shipCountry{ width: 200px; }
-		.shipMethod{ width: 75px; }
+		.shipCountry{ width: 130px; }
+		.shipMethod{ width: 162px; }
 		
         .shippingTotal{
             label{ margin-right: px(5px); margin-top: -3px;}
-            input, select{ 
-            }
         }
         .orderTotal{
+			label{
+				margin-top:-1px;
+			}
             td{ 
                 border-top: 1px solid $lightGrey;
                 padding: px(15px) 0;
+				font-size: 16px;
             }
             .value{  
                 font-size: px(24px);

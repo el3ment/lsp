@@ -164,7 +164,7 @@ ul.list li,
 /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
 .productAvailability .status,
 .relatedItems .currentItem:after{
-    font-size: px($boldAllCapsH4);
+    font-size: px(12px);
     font-weight: 800;
     text-transform: uppercase;
     @include border-radius(px(5px));
@@ -270,6 +270,7 @@ ul.list li,
     font-weight: bold;
     position: relative;
     padding-left: px(16 + 5px);
+	font-size: 13px;
 
     .details{
         font-weight: normal;
@@ -711,16 +712,21 @@ ul.list li,
 		text-transform: uppercase;
 		font-weight: bold;
 		color: white;
-		font-size: 12px;
+		font-size: 11px;
 		@include border-radius(px($borderRadius));
 		
 	}
 	
-	&.badges-text .badges-badge{
-		display: inline-block;
-		background-color: transparent;
-		position: static;
-		color: $yellow;
+	&.badges-text{
+		padding-top: 3px;
+		.badges-badge{
+			display: inline-block;
+			background-color: transparent;
+			color: $yellow;
+			position:relative;
+			top: -7px;
+			padding-left:2px;
+		}	
 	}
 
 	/* Individual Badges */
