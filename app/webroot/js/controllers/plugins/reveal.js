@@ -36,7 +36,7 @@
                         	_this.buildChildrenSelector(this).addClass('reveal-child');
 							
 							// If we ask it to start open, toggle the children
-							//if($(this).hasClass('reveal-isOpen')){
+							//if($(this).hasClass('reveal-ispen')){
 							//	$(_this.buildChildrenSelector(this)).addClass('reveal-isOpen');
 							//}
                         }).addClass('reveal-parent');

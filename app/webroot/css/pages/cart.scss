@@ -206,12 +206,11 @@
             vertical-align: top;
             text-align: right;
 			padding-right: 10px;
-			position:relative;
-			top: 4px;
+			
+			
             .productExtendedPrice{
                 font-size: px(24px);
                 font-weight: 600;
-				
 				@media (max-width: 979px) and (min-width: 768px){
 					font-size: px(21px);
 				}
@@ -256,6 +255,7 @@
             .value{  
                 font-size: px(24px);
                 font-weight: bold;
+				padding-left: 10px;
 				@media (max-width: 979px) and (min-width: 768px){
 					font-size: 21px;
 				}
@@ -287,6 +287,7 @@
 		}
 		tfoot tr{
 			border-bottom: 0;
+			@include box-sizing();
 		}
 		.merchandiseTotal, thead .summary.merchandiseTotal{
 			.value{
@@ -297,6 +298,7 @@
 		
 		.head .b1{
 			position: relative;
+			margin-top:20px;
 		}
 		table.cart{
 			margin-top: 10px;
@@ -354,14 +356,15 @@
 		}
 		
 		
-		.subtotal{
+		tfoot .subtotal{
 			display: inline-block;
 			margin-top: -5px; // Not sure where this is coming from
+			width: auto;
 		}
 		tbody tr{
 			position: relative;
 			border-bottom: 1px solid $lightGrey;
-			padding-bottom: 48px; // space for the productAvailability
+			padding-bottom: 58px; // space for the productAvailability
 			margin: 0 0 0px;
 		}
 		
@@ -377,7 +380,7 @@
 
 		.productAvailability{
 			position: absolute;
-			bottom: 13px;
+			bottom: 20px;
 		}
 		
 		tbody .quantity button[data-action='remove']{
@@ -392,13 +395,11 @@
 				display: inherit;
 			}
 		}
-		.extendedPrice{
-			line-height: 35px;
-		}
 		tbody .quantity{
 			padding: 0;
 			margin-right: 10px;
 			display: inline-block;
+			margin-top: 10px;
 			.scroller{
 				float: left;
 				margin-top:-1px;
@@ -408,7 +409,7 @@
 			font-size: 18px;
 			font-weight: bold;
 			position:relative;
-			top: 3px;
+			top: 18px;
 		}
 		.notice{ display: none;}
 		
