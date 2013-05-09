@@ -142,9 +142,15 @@
 	        <li class='specifications section'>
 	            <button class='b3 icon-24-toggleHide' data-reveal-children='productSpecifications'>Toggle Section</button>
 	            <h2 data-reveal-children='productSpecifications'>Specifications</h2>
-	            <table id='productSpecifications' class='content'>
-	                <tr><td>hey</td></tr>
-	            </table>
+	            <div id='productSpecifications'>
+		            <table class='content'>
+		                <tr><td>hey</td></tr>
+		                <tr><td>hey</td></tr>
+		                <tr><td>hey</td></tr>
+		                <tr><td>hey</td></tr>
+		                <tr><td>hey</td></tr>
+		            </table>
+	        	</div>
 	        </li>
 	        <li class='returns section' data-reveal-children='returns'>
 	            <button class='b3 icon-24-toggleHide' data-reveal-children='returns'>Toggle Section</button>
