@@ -21,10 +21,12 @@
         <li class='cart'><a class='b3 icon-24-cart-white highlight-icon'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
 		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon'><strong>Wish</strong> List</a></li>
         <li id='searchBar' class='search reveal-openOnlyDesktop'>
-            <input type='text' class='autocomplete search' placeholder='e.g. Sticks, Pearl, 16" Drum Head"'/>
-            <button class='b2 icon-24-magnify-black icon-only'>Search</button>
+        	<div id='searchBarContainer'>
+            	<input type='text' class='autocomplete search' placeholder='e.g. Sticks, Pearl, 16" Drum Head"'/>
+            	<button class='b2 icon-24-magnify-black icon-only'>Search</button>
+        	</div>
         </li>
-		<li class='mobileSearch visible-phone'><button class='b3' data-reveal-children='searchBar'>Toggle Search</button></li>
+		<li class='mobileSearch visible-phone'><button class='b3' data-reveal-children='searchBarContainer'>Toggle Search</button></li>
     </ul>
 	<div class='breadcrumbs'>
 	    <ul class='span12 breadcrumbLinks'>
