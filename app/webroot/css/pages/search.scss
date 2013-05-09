@@ -37,6 +37,7 @@
         
 		#attributeList{
 			margin-top:25px;
+			width: 100%;
 		}
 		
 		// A division within the box, an attribute
@@ -112,15 +113,10 @@
                     clear: both;
                     margin-left: px($paddingUnit);
                     width: 100%;
-
-					input[type="checkbox"]{
-						position: absolute;
-					}
 					
                     label{ 
-						padding-left: 20px;
-                        width: 100%;
-						max-width: 100%;
+						padding-left: 0px;
+                        width: 90%;
 						@include box-sizing();
 						.details{
 							display: inline-block;
