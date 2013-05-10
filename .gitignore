@@ -3,3 +3,4 @@ app/tmp/sessions/ses*
 .project/
 dummy
 app/tmp/logs/*
+.DS_Store
