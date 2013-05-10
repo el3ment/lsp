@@ -1,6 +1,6 @@
-<div class='dynamicItemSuggestions customerPurchaseSuggestions hidden-phone section span12'>
+<div class='dynamicItemSuggestions customerPurchaseSuggestions section span12'>
     <h2>Customers Who Bought This Also Bought</h2>
-	<div class='well span12'>
+	<div class='well row span12'>
 	    <ul class='itemList'>
 	    	<?php for($i=0; $i < 10; $i++){ ?>
 	        <li class='productScope'>
