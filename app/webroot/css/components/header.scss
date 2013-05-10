@@ -263,6 +263,10 @@
 	            }
 			}
         }
+        #searchBarContainer{
+            position: relative;
+            height: 51px;
+        }
     }
     
     .breadcrumbs{
@@ -351,8 +355,8 @@
 				
 				@include box-sizing();
 				.b2{
-					top:13px;
-					right:13px;
+					top:4px;
+					right:5px;
 				}
 			}
 			.departments{

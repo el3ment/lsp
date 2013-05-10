@@ -48,16 +48,14 @@
             	return $('#' + $(element).data('reveal-children').split(' ').join(', #'));
             },
 			open : function(children){
-				children.find('input').hide();
-            	children.slideDown(400, 'swing', function(){children.find('input').show();});
+            	children.slideDown(400, 'swing');
 				children.each(function(index, child){
 					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
 				});
 				
 			},
 			close : function(children){
-				children.find('input').hide();
-            	children.slideUp(400, 'swing');
+				children.slideUp(400, 'swing');
 				children.each(function(index, child){
 					$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
 				});
