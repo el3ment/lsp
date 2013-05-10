@@ -249,8 +249,8 @@
 	            width: px(44px);
 	            height: px(44px);
 	            position: absolute;
-	            right: px(3px);
-	            top: px(3px);
+	            right: px(4px);
+	            top: px(4px);
 	            margin: 0;
 	            text-indent: -$hideDistance;
 				padding: 0; /* Icon only */
@@ -266,6 +266,11 @@
         #searchBarContainer{
             position: relative;
             height: 51px;
+            padding: 0 0 10px 0;
+
+            @media (max-width: 767px){
+                padding: 0 10px 10px 10px;
+            }
         }
     }
     
@@ -345,8 +350,7 @@
 				top: 64px;
 				left: 0;
 				background: url(../img/dark_pattern.jpg);
-				
-				padding: 10px;
+
 				width: 100%;
 				z-index: 1;
 		        @include box-shadow-multiple(0 2px 3px #000); /* Top Highlight, Drop shadow */  
@@ -356,7 +360,7 @@
 				@include box-sizing();
 				.b2{
 					top:4px;
-					right:5px;
+					right:14px;
 				}
 			}
 			.departments{

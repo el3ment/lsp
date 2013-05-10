@@ -69,12 +69,6 @@
 	                        <label>Quantity:</label>
 	                        <input class='scroller' type='number' min='1' value='1' />
 	                    </li>
-	                    <li class='option'>
-	                        <label>Finish:</label>
-	                        <select>
-	                            <option>Red</option>    
-	                        </select>
-	                    </li>
 	                    <li class='action'>
 	                        <button class='b1 icon-24-cart-black'>Add To Cart</button>
 	                        <a href='#' class='details icon-16-heart-grey'>Add to Wish List</a>
@@ -202,7 +196,7 @@
     </div>
     
     <div class='row'>
-		<!--?php echo $this->element('dynamicSuggestions'); ?-->
+		<?php echo $this->element('dynamicSuggestions'); ?>
 	</div>
 	
     <div class='row span12 reviews section'>
@@ -354,3 +348,5 @@
         </ul>
     </div>
 </div>
+
+

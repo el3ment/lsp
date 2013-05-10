@@ -23,25 +23,27 @@
 		            <div class='section'>
 		                <h4 data-reveal-children='refinement-<?php echo $i; ?>'>Category</h4>
 		                <div class='toggleRefinements'><button class='b4 icon-16-toggleHide <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button></div>
-						<div id='refinement-<?php echo $i; ?>' class='refinementList <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>'>
-			                <ul>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-0' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-0'>Vibraphone Mallets With a Really Long Name&nbsp;<span class='details'>(22)</span></label>
-			                    </li>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-1' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
-			                    </li>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-2' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
-			                    </li>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-3' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
-			                    </li>
-			                </ul>
+						<div id='refinement-<?php echo $i; ?>' class='<?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>'>
+							<div class="refinementList">
+				                <ul>
+				                    <li class='field'>
+				                        <input id='refinement-<?php echo $i; ?>-0' type='checkbox' />
+				                        <label for='refinement-<?php echo $i; ?>-0'>Vibraphone Mallets With a Really Long Name&nbsp;<span class='details'>(22)</span></label>
+				                    </li>
+				                    <li class='field'>
+				                        <input id='refinement-<?php echo $i; ?>-1' type='checkbox' />
+				                        <label for='refinement-<?php echo $i; ?>-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
+				                    </li>
+				                    <li class='field'>
+				                        <input id='refinement-<?php echo $i; ?>-2' type='checkbox' />
+				                        <label for='refinement-<?php echo $i; ?>-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
+				                    </li>
+				                    <li class='field'>
+				                        <input id='refinement-<?php echo $i; ?>-3' type='checkbox' />
+				                        <label for='refinement-<?php echo $i; ?>-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
+				                    </li>
+				                </ul>
+				            </div>
 			                <button class='b5 loadMore'>See More (10)</button>
 						</div>
 		            </div>
