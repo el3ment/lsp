@@ -165,6 +165,10 @@
         padding-bottom: px(3 * $paddingUnit);
         border-top: 1px solid #dedcda;
 		
+		&.dynamicItemSuggestions{
+			padding-bottom: 0;
+		}
+		
         &:first-child{ border-top-width: 0; }
         
         > .b3[data-reveal-children]{ /* The plus/minus toggle button */
@@ -206,10 +210,15 @@
         @include clearfix;
         
     }
+	
+	.addRelatedItems{
+		padding-bottom:0;
+	}
+	
     .information{
         
         position: relative;
-		top: -1.5em;
+		margin-top: -1.5em;
 		
 		@media (max-width: 767px){
 			top: 0;

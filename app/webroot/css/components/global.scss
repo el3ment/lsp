@@ -561,73 +561,8 @@ ul.list li,
     }
 }
 
-/* Dynamic Item Suggestions are the horizontal lists of items that are populated by easyask and list products
- * like "People who bought this also bought" or "Similar items" */
-.dynamicItemSuggestions{
-	
-	.well{
-		height: px(250px);
-		width: 100%;
-	}
-	
-	.itemList{
-    
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border: 1px solid $lightGrey;
-        border-width: 1px 0 3px 0;
-	
-        .productScope{
-        
-            border: 1px solid $lightGrey;
-            border-bottom-width: 0;
-            border-top-width: 0;
-            border-right-color: transparent;
-            float: left;
-            width: 18	0px;
-            position: relative;
-            display: block;
-            padding-bottom: px(2 * $paddingUnit);
-        
-            a{
-                width: 100%;
-                height: 100%;
-                display: block;
-                text-decoration: none;
-            }
-        
-            &:nth-child(1){
-                border-left-color: transparent;
-            }
-            &:last-child{
-                border-right-color: transparent;
-            }
-            img{ margin: px($paddingUnit + 2);}
-        
-            .productPrice{ 
-                font-weight: bold;
-                padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
-                text-decoration: none;
-                color: $black;
-            }
-            .productName{ 
-                display: block; 
-                padding: 0 px($paddingUnit + 2);
-                color: $black;
-            }
-            &:hover{
-                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-                border: 1px solid $darkYellow;
-                border-bottom-width: 0;
-                border-top-width: 0;
-            }
-        }
-    
-        @include clearfix;
-    
-    }
-}
 
+@import "dynamicSuggestions.scss";
 
 
 /* Definitions are marked with the attribute "data-def" - any text with this attribute
