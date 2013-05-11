@@ -1,20 +1,55 @@
 .page-category{
 	
 	.navigationLinks{
+		
 		a{
 			display: block;
 			font-size: 13px;
 			text-decoration: none;
+			color: black;
+			
 			&:hover{
-				text-decoration: underline;
+				color: black;
+				font-weight: bold;
+				&:before{
+					content : '›';
+					padding-right: 3px;
+				}
+			}
+		}
+		.link2{
+			color: $grey; 
+		}
+
+		.leftLinkBold{
+			font-weight: bold;
+			color: black;
+			&:hover{
+				text-decoration: none;
+				&:before{
+					display: none;
+				}
 			}
 		}
 		.link3{
 			padding-left: 10px;
+			margin-left: 10px;
+			border-left: 1px solid $lightGrey;
 		}
+		//.link3 + .link2{ // The first link after a sub section
+			//margin-top: 5px;
+		//}
+		
 		.link4{
-			padding-left: 20px;
+			padding-left: 10px;
+			margin-left: 30px;
+			border-left: 1px solid $lightGrey;
 		}
+		
+		.link4 ~ .link3{
+			color: red;
+		}
+		
 	}
 	
 	.section{
@@ -22,34 +57,103 @@
 	}
 	
 
-	ul.grid li{
-		width: 16.6%;
-		height: 160px;
+	ul.grid{
+		
+		width: 100%;
 		float: left;
-		margin-bottom: 20px;
-		margin-left: 10px;
-		margin-right: 10px;
-		text-align: center;
-	
-		@media (min-width: 1200px){
-			width:16.6%; // 6 across
-		}
-		@media (max-width: 979px) and (min-width: 768px){
-			width: 20%; // 5 across
-		}
-		@media (max-width: 767px){
 		
-		}
-		.title{
-			display: block;
-			width: 100%;
+		li a{
+			width: 25%;
+			float: left;
+			padding: 5px 10px 20px;
+			margin-bottom: 10px;
 			text-align: center;
-			font-weight: bold;
-			color: black;
-		}
-		
-		a{
+			display: block;
 			text-decoration: none;
+			
+			
+			
+			@include box-sizing();
+	
+			@media (min-width: 1200px){
+				//width:16.6%; // 6 across
+			}
+			@media (max-width: 979px) and (min-width: 768px){
+				width: 33.33%; // 5 across
+			}
+			@media (max-width: 767px){
+		
+			}
+			.title{
+				display: block;
+				width: 100%;
+				text-align: center;
+				//font-weight: bold;
+				//color: $grey;
+			}
+			&:hover{
+				.title{
+					color: black;
+					font-weight: bold;
+				}
+			}
 		}
 	}
+
+	.categories .section,
+	.brands .section{
+		position: relative;
+		top: 8px;
+		padding-left: 10px;
+	}
+
+	.categories{
+		a{
+			height: 200px;
+		}	
+	} 
+	.brands{
+		
+		a{
+			height: 100px;
+		}	
+	} 
+	.prices ul.grid{
+		
+		//$width  : 150px;
+		
+		position: relative;
+		
+		li{
+			//float: left;
+			a {
+				padding: 12px 20px;
+				width: 19%;
+				margin: 15px 3% 30px;
+				color: black;
+				border: 1px solid $lightGrey;
+				font-weight: bold;
+				font-size: 19px;
+				
+				@media (min-width: 1200px){
+					
+				}
+				@media (max-width: 979px) and (min-width: 768px){
+					font-size: 15px; // 5 across
+					width: 22%;
+					margin-right: 1%;
+					margin-left: 1%;
+				}
+				@media (max-width: 767px){
+		
+				}
+				
+				&:hover{
+					color: white;
+					background-color: black;
+					border-color: black;
+				}
+			}
+		} 	
+	} 
 }
