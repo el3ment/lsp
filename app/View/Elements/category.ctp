@@ -21,7 +21,7 @@
 						<?php for($i = 0; $i < 20; $i++){ ?>
 						<li>
 							<a href='#'>
-								<img src='http://s4.lonestarpercussion.com/resize/images/product-image/Pearl-VBL984PC-Shellpack.jpg.120x120' />
+								<img src='http://s4.lonestarpercussion.com/resize/images/product-image/Pearl-VBL984PC-Shellpack.jpg.140x140' />
 								<span class='title'>Brushes & Bundles</span>
 							</a>
 						</li>
