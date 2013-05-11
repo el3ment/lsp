@@ -1,0 +1,55 @@
+.page-category{
+	
+	.navigationLinks{
+		a{
+			display: block;
+			font-size: 13px;
+			text-decoration: none;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+		.link3{
+			padding-left: 10px;
+		}
+		.link4{
+			padding-left: 20px;
+		}
+	}
+	
+	.section{
+		margin-bottom: 20px;
+	}
+	
+
+	ul.grid li{
+		width: 16.6%;
+		height: 160px;
+		float: left;
+		margin-bottom: 20px;
+		margin-left: 10px;
+		margin-right: 10px;
+		text-align: center;
+	
+		@media (min-width: 1200px){
+			width:16.6%; // 6 across
+		}
+		@media (max-width: 979px) and (min-width: 768px){
+			width: 20%; // 5 across
+		}
+		@media (max-width: 767px){
+		
+		}
+		.title{
+			display: block;
+			width: 100%;
+			text-align: center;
+			font-weight: bold;
+			color: black;
+		}
+		
+		a{
+			text-decoration: none;
+		}
+	}
+}

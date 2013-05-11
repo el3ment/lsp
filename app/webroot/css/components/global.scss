@@ -72,7 +72,7 @@ h1, .h1, h2, .h2{
 }
 
 /* Section Headings */
-h2, .h2{ font-size: px($h2FontSize); line-height: 32px;}
+h2, .h2{ font-size: px($h2FontSize); line-height: 28px; }
 
 /* Captialized, Bigger, Bold */
 h3, .h3, h4, .h4{ 
@@ -80,6 +80,7 @@ h3, .h3, h4, .h4{
     font-size: 1em; 
     text-transform:uppercase;
     font-weight: bold;
+	margin-top: -5px;
 }
 
 /* Captialized, Bold */
@@ -116,6 +117,7 @@ ul.list li,
     list-style: square inside;
 }
 
+
 /* Panels */
 /* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
 .panel, a .panel{
@@ -132,8 +134,8 @@ ul.list li,
     margin-bottom: 17px;
     color: $black;
 	h2{
-		margin-top:3px;
-		margin-bottom: px($paddingUnit);
+		margin-top:6px;
+		//margin-bottom: px($paddingUnit);
 	}
 }
 
@@ -142,7 +144,7 @@ ul.list li,
     clear: both;
     &:last-child{ border-bottom: 0; }
     h2{
-        margin-bottom: px($paddingUnit);
+        //margin-bottom: px($paddingUnit);
     }
 }
 
