@@ -162,9 +162,9 @@
 		};
 		
 		return _this;
-	})();
+	}());
 	
 	_util.register('controller', 'application', application);
 	window.LSP.controllers.application.init();
 
-})();
+}());
