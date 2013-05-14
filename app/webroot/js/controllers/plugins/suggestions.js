@@ -16,6 +16,7 @@
         	name : 'suggestions',
             events : {
                 application : {
+
                     onAttachEvents : function(e, data){
                         
 						// Find anything that should be a dynamic scroller, and do the deed
@@ -23,7 +24,7 @@
 						// Note! We'll eventually be handling multiple instances on a page - and
 						// this object is a giant singleton. You might need to create an array called cache
 						// or list or something up around like 10 or 11 and push instances to it.
-debugger;
+
 						$('.touchcarousel').touchCarousel({			
 							itemsPerMove: 6,
 							pagingNav: true,
