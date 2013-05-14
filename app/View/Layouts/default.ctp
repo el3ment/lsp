@@ -7,13 +7,18 @@
 	<?php
         echo $this->Html->css(array('vendors/bootstrap/bootstrap','complete'));
 	?>
+	<link rel="stylesheet" href="css/vendors/touch_carousel/touchcarousel.css" />
+	<link rel="stylesheet" href="css/vendors/touch_carousel/three-d-skin/three-d-skin.css" />	
+
 
     <script type='text/javascript' src='js/vendors/jquery/jquery-1.9.1.js'></script>
+    <script type='text/javascript' src='js/vendors/touch_carousel/jquery.touchcarousel-1.2.js'></script>
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
     <script type='text/javascript' src='js/vendors/form2js/form2js.js'></script>
     <script type='text/javascript' src='js/utilities/global.js'></script>
 	
 	<script type='text/javascript' src='js/controllers/plugins/reveal.js'></script>
+	<script type='text/javascript' src='js/controllers/plugins/suggestions.js'></script>
 	<script type='text/javascript' src='js/models/cart.js'></script>
         
     
