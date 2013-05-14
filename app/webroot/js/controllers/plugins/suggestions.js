@@ -3,61 +3,61 @@
 
 (function(){
 
-    var _util = window.LSP.utilities;
+	var _util = window.LSP.utilities;
 
-    _util.register('controller', 'suggestions', function(){
+	_util.register('controller', 'suggestions', function(){
 
 		// These are private properties
-        var _this = {};
-        var _lsp = window.LSP;
+		var _this = {};
+		var _lsp = window.LSP;
 
 		// These are public         
-        _this =  {
+		_this =  {
 			name : 'suggestions',
-            events : {
-                application : {
-                    onAttachEvents : function(e, data){
+			events : {
+				application : {
+					onResize : function(e, data){
+						_this.setup_carousel();
+					},
+					onAttachEvents : function(e, data){
 
-						// Find anything that should be a dynamic scroller, and do the deed
+						_this.setup_carousel();
+					}
+				}
+			},
+			assets : {},
+			items_per_page : function(){
+				var itemWidth = $('.touchcarousel .touchcarousel-item').first().width(),
+					windowWidth = $(window).width();
 
-						// Note! We'll eventually be handling multiple instances on a page - and
-						// this object is a giant singleton. You might need to create an array called cache
-						// or list or something up around like 10 or 11 and push instances to it.
+				return Math.floor(windowWidth / itemWidth);
+			},
+			get_carousel_instance : function(){
+				$('.touchcarousel').data('touchCarousel');
+			},
+			setup_carousel : function(){
+				var carousel_instance = _this.get_carousel_instance();
 
-						console.log(e);// find the element and add it to the $ function below
-
-						$('.touchcarousel').touchCarousel({
-							itemsPerMove: 6,
-							pagingNav: true,
-							scrollbar: false,
-							scrollToLast: true,
-							loopItems: true
-						});
-
-                    }
-                }
-            },
-            assets : {},
-
-			controllerFunction : function(myArgument){
-
-				// These functions should be indepenent and work much like any
-				// controller function works in another MVC framework.
-
-				// Generally, the argument should be human understandable, like 
-				// "id" or "element" -- if you need a callback to respond to an event
-				// like "onAfterTriggerNextPage" which passes a wierd event object you probably
-				// want to use an anonomus function as the callback, and then call your controller
-				// function using the parts of the event object you needed.
-
-				// Use extra explicit comments as you build this out, only becuase I'm going to have to pass through this
-				// when I actually integrate it with the EasyAsk datasource.
-
+				if(carousel_instance){
+					//carousel_instance.settings.itemsPerMove = _this.items_per_page();
+					carousel_instance.updateCarouselSize();
+				}
+				else{
+					$('.touchcarousel').touchCarousel({
+						//itemsPerMove: _this.items_per_page(),
+						snapToItems: true,
+						pagingNav: false,
+						pagingNavControls: true,
+						scrollbar: false,
+						// scrollToLast: true,
+						loopItems: true
+					});
+				}
 			}
 
-        };
+		};
 
-        return _this;
-    }());
+		return _this;
+	}());
 
 })();

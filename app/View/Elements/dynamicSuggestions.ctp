@@ -7,7 +7,7 @@
 	            <a href='#'>
 	                <img data-badge='new' src='http://s2.lonestarpercussion.com/resize/images/Stands%20and%20Hardware/STBD36_Pearl.png.140x140' width='140' height='140' />
 	                <span class='productPrice'>$14.25</span>
-	                <span class='productName'>Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
+	                <span class='productName'>(<?php echo $i+1 ?>) Dynasty Optional Powder Coat Hardware for Marching Tenors</span>
 	            </a>
 	        </li>
 	        <?php } ?>

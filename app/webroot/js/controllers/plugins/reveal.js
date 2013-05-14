@@ -2,7 +2,7 @@
 
 	var _util = window.LSP.utilities;
 
-	var reveal = function(){
+	var reveal = (function(){
 		var _this = {};
 		var _lsp = window.LSP;
 
@@ -53,7 +53,7 @@
 					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
 				});
 
-		},
+			},
 			close : function(children){
 				children.slideUp(400, 'swing');
 				children.each(function(index, child){
@@ -61,7 +61,7 @@
 				});
 			},
 			toggle : function(children){
-				if(children.is(":visible")){
+				if(children.is(':visible')){
 					_this.close(children);
 				}else{
 					_this.open(children);
@@ -74,7 +74,8 @@
 		};
 
 		return _this;
-	}();
+		
+	})();
 
 	_util.register('controller', 'reveal', reveal);
 

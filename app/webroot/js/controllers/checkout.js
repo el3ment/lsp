@@ -1,19 +1,19 @@
 (function(){
-    
-    var _util = window.LSP.utilities;
-    
-	_util.register('controller', 'checkout', function(){
-        
+	
+	var _util = window.LSP.utilities;
+	
+	_util.register('controller', 'checkout', (function(){
+		
 		var _this = {};
-        var _app = window.LSP;
-        var _assets = _app.assets;
-        var _api = _app.models.cart;
-        var _util = _app.utilities;
+		var _app = window.LSP;
+		var _assets = _app.assets;
+		var _api = _app.models.cart;
+		var _util = _app.utilities;
 		
-        var _completedSteps = [];
+		var _completedSteps = [];
 		
-        _this =  {
-            events : {
+		_this =  {
+			events : {
 				checkout : {
 					
 					onLogin : function(e, data){
@@ -116,7 +116,7 @@
 							// Move to billing
 							_this.proceedTo('billing');
 							
-						})
+						});
 						
 					},
 					
@@ -148,7 +148,7 @@
 							// Move to billing
 							_this.proceedTo('review');
 							
-						})
+						});
 						
 					},
 					
@@ -166,30 +166,30 @@
 						
 						console.log('Finish Order');
 						// There are two ways to do finish the order
-						//		1. Submit the form in a standard way
-						// 		   in this case, this function can be used for any last-minute changes or validations
-						//		2. Ajax the form
-						//		   in this case, this function preps the data, and sends it off.
+						//		1.	Submit the form in a standard way
+						//			in this case, this function can be used for any last-minute changes or validations
+						//		2.	Ajax the form
+						//			in this case, this function preps the data, and sends it off.
 					}
 				},
-                application : {
+				application : {
 					onAttachEvents : function(e, data){
 						// this fires whenever html is parsed into the document
 						// it gets fired once onDomReady, and again every
 						// time HTML is injected into the page - use it
 						// to hook up custom checkout events
 					},
-                    onReady : function(e, data){
+					onReady : function(e, data){
 						// This fires when all controllers have been loaded
 						// the dom is ready
-                    },
-                    onInit : function(e, data){
-                    	// this fires when this controller has been loaded
+					},
+					onInit : function(e, data){
+						// this fires when this controller has been loaded
 						// but the dom isn't ready yet
-                    }
-                }
-            },
-            
+					}
+				}
+			},
+			
 			assets : { },
 			
 			/* Process Centered Methods */
@@ -202,23 +202,23 @@
 					$('.steps .' + stepName).addClass('active completed');
 					
 					switch(stepName){
-						case 'shipping' : // Proceed to shipping
-							$('#shippingInputPanel').removeClass('hide');
-							$('#loginPanels').addClass('hide');
-							break;
-							
-						case 'billing' : // The user has moved away from shipping to payment
-							$("#billingInputPanel").removeClass('hide');
-							$('button[data-action="saveShipping"]').html("Save Shipping");
-							$('button[data-action="saveShipping"].hide').removeClass('hide');
-							break;
-							
-						case 'review' : // Do stuff here that needs to be done after billing is complete
-							$('button[data-action="saveBilling"]').html("Save Billing");
-							$('button[data-action="finishOrder"]').removeClass('hide');
-							$('button[data-action="saveBilling"].hide').removeClass('hide');
-							$('.advertisement').addClass('hide');
-							break;
+					case 'shipping' : // Proceed to shipping
+						$('#shippingInputPanel').removeClass('hide');
+						$('#loginPanels').addClass('hide');
+						break;
+						
+					case 'billing' : // The user has moved away from shipping to payment
+						$('#billingInputPanel').removeClass('hide');
+						$('button[data-action="saveShipping"]').html('Save Shipping');
+						$('button[data-action="saveShipping"].hide').removeClass('hide');
+						break;
+						
+					case 'review' : // Do stuff here that needs to be done after billing is complete
+						$('button[data-action="saveBilling"]').html('Save Billing');
+						$('button[data-action="finishOrder"]').removeClass('hide');
+						$('button[data-action="saveBilling"].hide').removeClass('hide');
+						$('.advertisement').addClass('hide');
+						break;
 					}
 				}
 			},
@@ -291,7 +291,7 @@
 					
 				).done(function(serverResponse){
 					
-					var serverResponse = checkoutForm; // For testing, I'll just 'return' the form values as they are
+					serverResponse = checkoutForm; // For testing, I'll just 'return' the form values as they are
 					
 					_this.hideLoading();
 					
@@ -315,7 +315,7 @@
 					// Make API request here
 				).done(function(serverResponse){
 					
-					var serverResponse = checkoutForm; // eventually use something the server sends back
+					serverResponse = checkoutForm; // eventually use something the server sends back
 					
 					_this.hideLoading();
 					
@@ -363,29 +363,28 @@
 								value : 16.00
 							}
 						},
-						products : [
-							{
-								title : "this is a product title",
-								quantity : 3,
-								mpn : "IP240",
-								extendedPrice : 22.00,
-								options : "Red Sparkle Finish, Chrome Hardware",
-								status :{
-									description : "Ships Seperately",
-									slug : "seperately"
-								}
-							},{
-								title : "this is a product title",
-								quantity : 3,
-								mpn : "IP240",
-								extendedPrice : 22.00,
-								options : "Red Sparkle Finish, Chrome Hardware",
-								status :{
-									description : "Ships Seperately",
-									slug : "seperately"
-								}
+						products : [{
+							title : 'this is a product title',
+							quantity : 3,
+							mpn : 'IP240',
+							extendedPrice : 22.00,
+							options : 'Red Sparkle Finish, Chrome Hardware',
+							status :{
+								description : 'Ships Seperately',
+								slug : 'seperately'
 							}
-						]};
+						},{
+							title : 'this is a product title',
+							quantity : 3,
+							mpn : 'IP240',
+							extendedPrice : 22.00,
+							options : 'Red Sparkle Finish, Chrome Hardware',
+							status :{
+								description : 'Ships Seperately',
+								slug : 'seperately'
+							}
+						}]
+					};
 						
 					_this.renderCartSummary(exampleServerResponse);
 						
@@ -454,9 +453,9 @@
 				$('#shippingMethods').html(summaryHTML);
 				_app.controllers.application.attachEvents($('#shippingMethods'));
 			}
-        };
-        
-        return _this;
-    }());
+		};
+		
+		return _this;
+	}()));
 
-})();
+}());

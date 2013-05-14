@@ -1095,7 +1095,8 @@
 						var newItemId = this._getItemAtPos(newX).index;						
 						
 						if(!this._pagingEnabled) {
-							newItemId = newItemId + (isNext ?  this._itemsPerMove : ( - this._itemsPerMove + 1));									
+							newItemId = newItemId + (isNext ?  1 : ( - 1 + 1));									
+							//newItemId = newItemId + (isNext ?  this._itemsPerMove : ( - this._itemsPerMove + 1));									
 						} else {	
 							if(isNext) {			
 								newX = Math.max(newX - this.carouselWidth - 1, 1 - self._maxXPos);	
