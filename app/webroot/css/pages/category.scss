@@ -1,57 +1,5 @@
 .page-category{
 	
-	.navigationLinks{
-		
-		a{
-			display: block;
-			font-size: 13px;
-			text-decoration: none;
-			color: black;
-			
-			&:hover{
-				color: black;
-				font-weight: bold;
-				&:before{
-					content : '›';
-					padding-right: 3px;
-				}
-			}
-		}
-		.link2{
-			color: $grey; 
-		}
-
-		.leftLinkBold{
-			font-weight: bold;
-			color: black;
-			&:hover{
-				text-decoration: none;
-				&:before{
-					display: none;
-				}
-			}
-		}
-		.link3{
-			padding-left: 10px;
-			margin-left: 10px;
-			border-left: 1px solid $lightGrey;
-		}
-		//.link3 + .link2{ // The first link after a sub section
-			//margin-top: 5px;
-		//}
-		
-		.link4{
-			padding-left: 10px;
-			margin-left: 30px;
-			border-left: 1px solid $lightGrey;
-		}
-		
-		.link4 ~ .link3{
-			color: red;
-		}
-		
-	}
-	
 	.section{
 		margin-bottom: 20px;
 	}
