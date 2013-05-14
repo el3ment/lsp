@@ -49,14 +49,14 @@
 						// render template for each item returned
 						// append templates to ul list id='list-parent'
 						
-						var urlParameters = _util.getURLParameters();
-						if(urlParameters.p){
-							_this.renderShareCart(_this.assets.listEncoder.decode(urlParameters.p));
-						}
+						// var urlParameters = _util.getURLParameters();
+						// if(urlParameters.p){
+						// _this.renderShareCart(_this.assets.listEncoder.decode(urlParameters.p));
+						// }
 
-						if(urlParameters.wishlistId){
-							_this.renderWishlist(urlParameters.wishlistId);
-						}
+						// if(urlParameters.wishlistId){
+						// _this.renderWishlist(urlParameters.wishlistId);
+						// }
 						
 					},
 					onAttachEvents : function(e, data){
