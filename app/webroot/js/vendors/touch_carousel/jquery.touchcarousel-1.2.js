@@ -1095,6 +1095,7 @@
 						var newItemId = this._getItemAtPos(newX).index;						
 						
 						if(!this._pagingEnabled) {
+							//Modified this to hard coded 1, so the draging will snap by 1 instead of the items per move setting.
 							newItemId = newItemId + (isNext ?  1 : ( - 1 + 1));									
 							//newItemId = newItemId + (isNext ?  this._itemsPerMove : ( - this._itemsPerMove + 1));									
 						} else {	
