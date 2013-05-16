@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 				}
 			},
 			'lonestarpercussion': {
-				src: [ 'app/webroot/js/controllers/*.js', 'app/webroot/js/assets/*.js','app/webroot/js/models/*.js', 'app/webroot/js/utilities/*.js' ]
+				src: [ 'app/webroot/js/controllers/**/*.js', 'app/webroot/js/assets/**/*.js','app/webroot/js/models/**/*.js', 'app/webroot/js/utilities/**/*.js' ]
 			}
 		},
 
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 	});
 
 	// Load the plugin that provides the "uglify" task.
-	grunt.loadNpmTasks('grunt-contrib-uglify');
+	//grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	//grunt.loadNpmTasks('grunt-browserstack');
 
