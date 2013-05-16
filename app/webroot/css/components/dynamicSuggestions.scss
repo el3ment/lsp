@@ -57,6 +57,12 @@
                 padding: 0 px($paddingUnit + 2);
                 color: $black;
             }
+            &:hover{
+                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+                border: 1px solid $darkYellow;
+                border-bottom-width: 0;
+                border-top-width: 0;
+            }
         }
     
         @include clearfix;
