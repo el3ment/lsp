@@ -244,6 +244,36 @@
 .icon-24-check:after{
 	background-position: -215px -348px;
 }
+
+
+.icon-32-chevronRight{
+
+	&:after{
+		background-image: none;
+		content: '❯';
+		color: $lightGrey;
+		line-height: 32px;
+		text-align: center;
+		font-size: 24px;
+		top: 0px;
+		font-weight: bold;
+		margin-top: 0;
+		position: absolute;
+		right: 20px;
+		left: inherit;
+		top: 50%;
+		margin-top: -16px;
+		display: block;
+	}
+}
+.icon-mobileOnly:after{
+	display: none;
+}
+@media (max-width: 767px){
+	.icon-mobileOnly:after{
+		display: inherit;
+	}
+}
 /*
 .icon-texas
 .icon-texas

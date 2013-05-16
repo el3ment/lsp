@@ -3,13 +3,13 @@
 		<div class='span9 body pull-right'>
 			<h1>Sticks &amp; Mallets</h1>
 			<div class='row-fluid section head'>
+				<img class='representativeImage' src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='280' height='280' />
 				<div class='content'>This is a description of the stuff it apparently can be really long and satisfyling full of information. <strong>look</strong> I can even use <em>styles</em> and <a href=''>links</a>This is a description of the stuff it apparently can be really long and satisfyling full of information. <strong>look</strong> I can even use <em>styles</em> and <a href=''>links</a></div>
 				<ul class='links'>
 					<li><a href=''>Link 1</a></li>
 					<li><a href=''>Link 2</a></li>
 				</ul>
 				<a href='' class='b2 action'>Search All →</a>
-				<img class='representativeImage' src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='280' height='280' />
 			</div>
 			<div class='section categories'>
 				<h2>Shop By Category</h2>
@@ -23,7 +23,7 @@
 								<?php }else{ ?>
 									<img src='http://s1.lonestarpercussion.com/resize/images/Hi%20Hats/AAMediumHats_Sabian.jpg.120x120'>
 								<?php } ?>
-								<h3>Mallets</h3>
+								<h3 class='icon-32-chevronRight icon-mobileOnly'><?php if($i % 7){ ?> Mallets <?php }else{ ?> Hardware, Parts, & Accessories, and More And More <?php } ?></h3>
 							</a>
 							<!--<ul class='links'>
 								<li><a href=''>Sub Category</a></li>
@@ -43,7 +43,7 @@
 				<div class='content'>
 					<ul class='grid'>
 						<li>
-							<a href='' class='review'>
+							<a href='' class='review icon-32-chevronRight icon-mobileOnly'>
 								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 									<span itemprop="rating" data-reviews-aggregateRating='2' class='reviewAggregateRating'>1 & 2-Star Reviews</span>
 								</div>
@@ -52,7 +52,7 @@
 							</a>
 						</li>
 						<li>
-							<a href='' class='review'>
+							<a href='' class='review icon-32-chevronRight icon-mobileOnly'>
 								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 									<span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3-Star Reviews</span>
 								</div>
@@ -61,7 +61,7 @@
 							</a>
 						</li>
 						<li>
-							<a href='' class='review'>
+							<a href='' class='review icon-32-chevronRight icon-mobileOnly'>
 								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 									<span itemprop="rating" data-reviews-aggregateRating='4' class='reviewAggregateRating'>4-Star Reviews</span>
 								</div>
@@ -70,7 +70,7 @@
 							</a>
 						</li>
 						<li>
-							<a href='' class='review'>
+							<a href='' class='review icon-32-chevronRight icon-mobileOnly'>
 								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
 									<span itemprop="rating" data-reviews-aggregateRating='5' class='reviewAggregateRating'>5-Star Reviews</span>
 								</div>
@@ -93,8 +93,7 @@
 						<?php for($i = 0; $i < 20; $i++){ ?>
 						<li class='brand'>
 							<a href='#'>
-								<img src='http://placehold.it/120x40' />
-								<span class='title h3'>Brushes & Bundles</span>
+								<img src='http://placehold.it/120x120' alt='Innovative Percussion'/>
 							</a>
 						</li>
 						<?php } ?>

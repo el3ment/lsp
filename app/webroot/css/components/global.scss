@@ -6,8 +6,8 @@
   src: url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot');
   src: url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
 	   url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
-       url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.woff') format('woff'),
-       url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype');
+	   url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.woff') format('woff'),
+	   url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 
@@ -15,11 +15,11 @@
 
 /* Application Wide Styles */
 html{
-    
+	
 	width: 100%;
-    font-size: 100%;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 400;
+	font-size: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
 }
 
 .row.span12{
@@ -31,10 +31,10 @@ body{
 	width: 100%;
 
 	@include box-sizing();
-    font-family: 'Open Sans', sans-serif;
-    color: black;
-    font-size: 14px;
-    line-height: px(22px);
+	font-family: 'Open Sans', sans-serif;
+	color: black;
+	font-size: 14px;
+	line-height: px(22px);
 }
 
 /* Content Container */
@@ -51,9 +51,9 @@ div[class|="page"]{
 div[class|="page"],
 .header,
 .footer{
-    //margin: auto;
-    //max-width: px(940px);
-    //clear: both;
+	//margin: auto;
+	//max-width: px(940px);
+	//clear: both;
 	float: none;
 	margin: auto;
 
@@ -61,13 +61,13 @@ div[class|="page"],
 }
 /* Page Title */
 h1, .h1, h2, .h2{
-    //margin-top: px($paddingUnit);
-    line-height: 43px;
-    font-size: 2.9em;
-    font-family: "League Gothic", sans-serif;
-    text-transform: uppercase;
-    color: $black; 
-    -webkit-font-smoothing: antialiased;
+	//margin-top: px($paddingUnit);
+	line-height: 43px;
+	font-size: 2.9em;
+	font-family: "League Gothic", sans-serif;
+	text-transform: uppercase;
+	color: $black; 
+	-webkit-font-smoothing: antialiased;
 	margin-top:10px;
 }
 
@@ -77,9 +77,9 @@ h2, .h2{ font-size: px($h2FontSize); line-height: 28px; }
 /* Captialized, Bigger, Bold */
 h3, .h3, h4, .h4{ 
 	margin-top:0;
-    font-size: 1em; 
-    text-transform:uppercase;
-    font-weight: bold;
+	font-size: 1em; 
+	text-transform:uppercase;
+	font-weight: bold;
 	margin-top: -5px;
 }
 
@@ -94,27 +94,27 @@ h6, .h6{ color: $grey; }
 
 /* Links */
 a, .b5{
-    color: $grey;
-    &:hover{ text-decoration: none; }
+	color: $grey;
+	&:hover{ text-decoration: none; }
 }
 
 p{
-    margin-bottom: px(4 * $paddingUnit + 3);
+	margin-bottom: px(4 * $paddingUnit + 3);
 }
 
 em{
-    font-style: italic;
+	font-style: italic;
 }
 
 /* General Tags */
 /* Normally the UL and LI tags are style-less - but in product descriptions we want them to have the bullets */
 .productDescription ul{
-    margin: px($paddingUnit) 0 px($paddingUnit) px(3 * $paddingUnit);
+	margin: px($paddingUnit) 0 px($paddingUnit) px(3 * $paddingUnit);
 }
 ul.list li,
 .productDescription ul li{
 	//padding-left: 5px;
-    list-style: square inside;
+	list-style: square inside;
 }
 
 
@@ -125,26 +125,26 @@ ul.list li,
 	border:1px solid transparent;
 	
 	&:hover{
-	    @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-	    border: 1px solid $darkYellow;
+		@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+		border: 1px solid $darkYellow;
 	}
 }
 
 /* Panels */
 /* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
 .panel, a .panel{
-    @include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
-    background-color: $white;
-    display: inline-block;
-    position: relative;
-    border: 1px solid $lightGrey;
-    @include border-radius(px($borderRadius));
-    padding: px($paddingUnit) px($paddingUnit * 2) 0;
+	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
+	background-color: $white;
+	display: inline-block;
+	position: relative;
+	border: 1px solid $lightGrey;
+	@include border-radius(px($borderRadius));
+	padding: px($paddingUnit) px($paddingUnit * 2) 0;
 	
 	@include box-sizing();
 	
-    margin-bottom: 17px;
-    color: $black;
+	margin-bottom: 17px;
+	color: $black;
 	h2{
 		margin-top:6px;
 		//margin-bottom: px($paddingUnit);
@@ -153,22 +153,22 @@ ul.list li,
 
 /* A section is a broken division within a panel, generally titled by a header tag, it basically adds a line break and some margins */
 .section{
-    clear: both;
-    &:last-child{ border-bottom: 0; }
-    h2{
-        //margin-bottom: px($paddingUnit);
-    }
+	clear: both;
+	&:last-child{ border-bottom: 0; }
+	h2{
+		//margin-bottom: px($paddingUnit);
+	}
 }
 
 /* An engaged panel has a yellow highlight on top */
 .panel.engaged{
-    border-top: px($paddingUnit) solid $yellow;
+	border-top: px($paddingUnit) solid $yellow;
 }
 
 /* Disengaged panels are grey */
 .panel.disengaged{
-    background-color: $superLightGrey;
-    padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
+	background-color: $superLightGrey;
+	padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
 }
 
 /* Common Properties */
@@ -178,130 +178,130 @@ ul.list li,
 /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
 .productAvailability .status,
 .relatedItems .currentItem:after{
-    font-size: px(12px);
-    font-weight: 800;
-    text-transform: uppercase;
-    @include border-radius(px(5px));
-    padding: px(3px) px($paddingUnit);
+	font-size: px(12px);
+	font-weight: 800;
+	text-transform: uppercase;
+	@include border-radius(px(5px));
+	padding: px(3px) px($paddingUnit);
 }
 .productAvailability[data-method="seperately"] .status{
-    background-color: $superLightGrey;
-    color: $grey;
+	background-color: $superLightGrey;
+	color: $grey;
 }
 .productAvailability[data-method="today"] .status{
-    background-color: $grey;
-    color: $white;
+	background-color: $grey;
+	color: $white;
 }
 
 /* The add-to-cart panel can be seen on the product-detail page and list-view search results */
 .addToCart{
-    
-    width: 100%;
-    padding: 0;
-    
-    li{
-        
-        padding: px($paddingUnit) px($paddingUnit * 2);
-        border-bottom:1px solid #dedcda;
-        border-top: 1px solid white;
-        background-color: $superLightGrey;
-        
-        &:first-child{
-            @include border-radius(px($borderRadius) px($borderRadius) 0 0);
-        }
-        &.action{ /* Handle the bottom border */
-            @include border-radius(0 0 px($borderRadius) px($borderRadius));
+	
+	width: 100%;
+	padding: 0;
+	
+	li{
+		
+		padding: px($paddingUnit) px($paddingUnit * 2);
+		border-bottom:1px solid #dedcda;
+		border-top: 1px solid white;
+		background-color: $superLightGrey;
+		
+		&:first-child{
+			@include border-radius(px($borderRadius) px($borderRadius) 0 0);
+		}
+		&.action{ /* Handle the bottom border */
+			@include border-radius(0 0 px($borderRadius) px($borderRadius));
 			//.icon-16-heart-grey{
 				//margin-left: 11px; /* center the add to wish list button under the add to cart */
 				//}
-            border-bottom: 0;
-        }
-        label{
-            margin: px($paddingUnit+3) px($paddingUnit) 0 0;
-            display: inline; /* IE */
-            display: inline-block;
-        }
-        input, select{
+			border-bottom: 0;
+		}
+		label{
+			margin: px($paddingUnit+3) px($paddingUnit) 0 0;
+			display: inline; /* IE */
+			display: inline-block;
+		}
+		input, select{
 			width: 60%;
-            float: none;
-            display: inline;
-            display: inline-block;
-        }
-        @include clearfix;
-    }
-    .productPrice{ 
-        font-size: px(30px);
-        line-height: 1em;
-        font-weight: bold;
-    }
-    .productMsrp{ text-decoration: line-through; }
-    .productDiscount{ font-weight: bold; }
-    .productAvailability{
-        .status{
-            font-weight: bold;
-            color: black;
-            background-color: transparent;
-            padding-left: 0;
-        }
-        .shortStatus{
-            display: none;
-        }
-        .details{
-            .method{    
-                &:before{
-                    content: '(';
-                }
-                &:after{
-                    content: ')';
-                }
-            }
-        }
-    }
-    .price{ 
-        background-color: white;
-        .productGrouping{ color: $grey; }
-        .details{ display: block; }
-    }
-    .quantity{
-        input{ float: none; width: px(50px); }
-    }
-    .productAvailability{ background-color: white; }
-    .action{
-        .b1{ 
-            margin-bottom: px($paddingUnit);
-            margin-left: 0;
-        }
-        a{ display:block; }
-    }
+			float: none;
+			display: inline;
+			display: inline-block;
+		}
+		@include clearfix;
+	}
+	.productPrice{ 
+		font-size: px(30px);
+		line-height: 1em;
+		font-weight: bold;
+	}
+	.productMsrp{ text-decoration: line-through; }
+	.productDiscount{ font-weight: bold; }
+	.productAvailability{
+		.status{
+			font-weight: bold;
+			color: black;
+			background-color: transparent;
+			padding-left: 0;
+		}
+		.shortStatus{
+			display: none;
+		}
+		.details{
+			.method{    
+				&:before{
+					content: '(';
+				}
+				&:after{
+					content: ')';
+				}
+			}
+		}
+	}
+	.price{ 
+		background-color: white;
+		.productGrouping{ color: $grey; }
+		.details{ display: block; }
+	}
+	.quantity{
+		input{ float: none; width: px(50px); }
+	}
+	.productAvailability{ background-color: white; }
+	.action{
+		.b1{ 
+			margin-bottom: px($paddingUnit);
+			margin-left: 0;
+		}
+		a{ display:block; }
+	}
 }
 
 
 /* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
  * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
 .notice{ 
-    
-    color: $black;
-    font-weight: bold;
-    position: relative;
-    padding-left: px(16 + 5px);
+	
+	color: $black;
+	font-weight: bold;
+	position: relative;
+	padding-left: px(16 + 5px);
 	font-size: 13px;
 
-    .details{
-        font-weight: normal;
-        display: block;
-        clear: both;
-    }
-    &:before{
+	.details{
+		font-weight: normal;
+		display: block;
+		clear: both;
+	}
+	&:before{
 		@include lsp-sprite-background();
 		background-position: -121px -325px;
 		content: ' ';
-        display: block;
-        position: absolute;
-        top: px(2px);
-        left: 0;
-        width: px(19px);
-        height: px(19px);
-    }
+		display: block;
+		position: absolute;
+		top: px(2px);
+		left: 0;
+		width: px(19px);
+		height: px(19px);
+	}
 }
 
 
@@ -310,12 +310,12 @@ ul.list li,
  * 
  * There is a little fancy-css happening which changes the look of the list based on how many items are listed */
 .relatedItems{
-    
-    display: inline-block;
-    position: relative;
+	
+	display: inline-block;
+	position: relative;
 	width: 100%;
-    
-    .productPrice{ 
+	
+	.productPrice{ 
 		font-weight: 800;
 		font-size: 14px;
 		line-height: 22px;
@@ -327,144 +327,144 @@ ul.list li,
 		width: 100%;
 	}
 
-    .productName{ display:block; font-size: 13px; line-height: 19px; font-weight: normal; }
+	.productName{ display:block; font-size: 13px; line-height: 19px; font-weight: normal; }
 	
-    img{ 
-        margin-bottom: px($paddingUnit);
-        border: 1px solid $lightGrey;
-    }
+	img{ 
+		margin-bottom: px($paddingUnit);
+		border: 1px solid $lightGrey;
+	}
 
-    .currentItem{ 
-         
-        position: absolute;
-        top:0;
-        left:0;
-        padding: px($gutterWidth / 2);
-        padding-top: px($gutterWidth + $gutterWidth / 2);
-        width: px(columns(2) - $gutterWidth);
-        
+	.currentItem{ 
+		 
+		position: absolute;
+		top:0;
+		left:0;
+		padding: px($gutterWidth / 2);
+		padding-top: px($gutterWidth + $gutterWidth / 2);
+		width: px(columns(2) - $gutterWidth);
+		
 		label{
 			font-weight: normal;
 		}
 		
-        .productName:before{ /* Because we can't display the overlay, add it to the name */
-            content : 'This Item: ';
-            font-weight: bold;
-        }
-        .productName::before{ /* Hide it from everything except IE8 */
-            display: none;
-        }
-        .productName{  }
-        
-        &::after{ /* Double colon to hide from IE8 - which renders the background color behind the image */
-            display: block;
-            content: 'This Item';
-            font-size: px(13px);
-            position: absolute;
-            top: px(60px);
-            background-color: $grey;
-            left: 50%;
-            color: white;
-            width: px(70px);
-            text-align: center;
-            margin-left: px(-35px, 13px);
-            
-        }
-        &:before{
-            content: '+';
-            text-align: right;
-            vertical-align: middle;
-            font-size: px(30px);
-            font-weight: bold;
-            position: absolute;
-            top: px(60px, 30px);
-            right: px(-5px, 30px);
-            
-           
-        }
-        img{ 
-            border: 0;
-            margin: 0 px($gutterWidth);
-            @include opacity(.5);
-        }
-    }
-        
-    ul{ 
-        
+		.productName:before{ /* Because we can't display the overlay, add it to the name */
+			content : 'This Item: ';
+			font-weight: bold;
+		}
+		.productName::before{ /* Hide it from everything except IE8 */
+			display: none;
+		}
+		.productName{  }
+		
+		&::after{ /* Double colon to hide from IE8 - which renders the background color behind the image */
+			display: block;
+			content: 'This Item';
+			font-size: px(13px);
+			position: absolute;
+			top: px(60px);
+			background-color: $grey;
+			left: 50%;
+			color: white;
+			width: px(70px);
+			text-align: center;
+			margin-left: px(-35px, 13px);
+			
+		}
+		&:before{
+			content: '+';
+			text-align: right;
+			vertical-align: middle;
+			font-size: px(30px);
+			font-weight: bold;
+			position: absolute;
+			top: px(60px, 30px);
+			right: px(-5px, 30px);
+			
+		   
+		}
+		img{ 
+			border: 0;
+			margin: 0 px($gutterWidth);
+			@include opacity(.5);
+		}
+	}
+		
+	ul{ 
+		
 		display:inline-block;
 		width: 100%;
-        //background-color: $superLightGrey;
+		//background-color: $superLightGrey;
 		//-moz-background-clip: padding;     /* Firefox 3.6 */
 		//-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
 		//background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
 
 
 		
-        border-left: px(columns(2) + $gutterWidth) solid transparent;
+		border-left: px(columns(2) + $gutterWidth) solid transparent;
 		@media (max-width: 979px){
 			border-left: 0;
 		}
 		
 
-        float:left;
+		float:left;
 		
 		@include box-sizing();
 		
 		
 		/*.element{
-            background-color: $superLightGrey;
-            display:inline-block;
-            float:left;
-            border: px($gutterWidth / 2) solid $superLightGrey;
-            border-bottom-width: px($gutterWidth);
+			background-color: $superLightGrey;
+			display:inline-block;
+			float:left;
+			border: px($gutterWidth / 2) solid $superLightGrey;
+			border-bottom-width: px($gutterWidth);
 			color: inherit;
 			text-decoration: none;
-            clear:both;
-    
+			clear:both;
+	
 			width: 100%;
 			@include box-sizing();
 	
-            border-width: px($gutterWidth);
-            border-top-width: 0;
-            position: relative;
+			border-width: px($gutterWidth);
+			border-top-width: 0;
+			position: relative;
 			.image{
-                margin-left: px($paddingUnit);
-                margin-right: px($paddingUnit * 2);
-                float: left;
+				margin-left: px($paddingUnit);
+				margin-right: px($paddingUnit * 2);
+				float: left;
 				width: 80px;
 				height: 80px;
 				margin-bottom: 0;
-            }
+			}
 			img{
 				max-width: px(80px);
-                max-height: px(80px);
-            }
-            input[type="checkbox"]{
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            .productPrice{
-                overflow: hidden;
+				max-height: px(80px);
+			}
+			input[type="checkbox"]{
+				position: absolute;
+				top: 0;
 				left: 0;
-                display: block;
-            }
-            .productName{
-                overflow: hidden;
+			}
+			.productPrice{
+				overflow: hidden;
+				left: 0;
+				display: block;
+			}
+			.productName{
+				overflow: hidden;
 		
-            }
+			}
 			
 			&:hover{
 				.image img{
-                    @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
-                    border-color: $darkYellow;  
+					@include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
+					border-color: $darkYellow;  
 				}
 			}
 			
 		}
-        li:first-child .element{
-            border-top-width: px($gutterWidth);
-        }
+		li:first-child .element{
+			border-top-width: px($gutterWidth);
+		}
 		*/
 		
 		.productScope{
@@ -489,90 +489,90 @@ ul.list li,
 			}
 		}
 		
-        .element{
+		.element{
 			
 			// Grid View 
 			
-            background-color: $superLightGrey;
-            float:left;
-            border: px($gutterWidth / 2) solid $superLightGrey;
-            border-bottom-width: px($gutterWidth);
+			background-color: $superLightGrey;
+			float:left;
+			border: px($gutterWidth / 2) solid $superLightGrey;
+			border-bottom-width: px($gutterWidth);
 			color: inherit;
 			text-decoration: none;
 			width: 100%;
 			@include box-sizing();
 	
-            border-width: px($gutterWidth);
-            border-top-width: 0;
-            position: relative;
+			border-width: px($gutterWidth);
+			border-top-width: 0;
+			position: relative;
 			
-            background-color: $superLightGrey;
-            display:inline-block;
-            float:left;
+			background-color: $superLightGrey;
+			display:inline-block;
+			float:left;
 			clear: none;
 			
-            height: 100%;
-            border: px($gutterWidth) solid $superLightGrey;
-            border-left-width: 0;
-            width: 100%;
+			height: 100%;
+			border: px($gutterWidth) solid $superLightGrey;
+			border-left-width: 0;
+			width: 100%;
 
 			.image{
-                float: none;
+				float: none;
 				margin: 0;
 				width: 120px;
 				height: 120px;
 				margin-bottom: 10px;
-            }
+			}
 			img{
 				max-width: px(120px);
-                max-height: px(120px);
-            }
-            input[type="checkbox"]{
+				max-height: px(120px);
+			}
+			input[type="checkbox"]{
 				float: left;
 				position: relative;
-            }
+			}
 			&:first-child{
 				border-width: $gutterWidth;
 			}
-           	
-        }
+			
+		}
 		
-        /* When there are 3 or more items, then display it as a list */
+		/* When there are 3 or more items, then display it as a list */
 		
-        li.disengaged{
-            padding-top: 0;
-            .productPrice, .productName, img{ @include opacity(.4); }
-        }
-            
-    }
-    .addToCart{
-        
-        display: inline-block;
-        float: left;
-        clear: both;
+		li.disengaged{
+			padding-top: 0;
+			.productPrice, .productName, img{ @include opacity(.4); }
+		}
+			
+	}
+	.addToCart{
+		
+		display: inline-block;
+		float: left;
+		clear: both;
 		margin-top:5px;
-        
-        .subtotal{
-            display: inline-block;
-            text-align: right;
-            float: right;
-            margin-right: px($paddingUnit);
+		
+		.subtotal{
+			display: inline-block;
+			text-align: right;
+			float: right;
+			margin-right: px($paddingUnit);
 			line-height: 20px;
 			font-weight: 800;
 			font-size: 14px;
-            .details{
-                display:block;
-                font-weight: normal;
-            }
-        }
-        button{
-            display: block;
-            float: right;
-            position: relative;
-            margin-right: px($paddingUnit);
-        }
-        .subtotal, button{ margin-top: $paddingUnit; }
-    }
+			.details{
+				display:block;
+				font-weight: normal;
+			}
+		}
+		button{
+			display: block;
+			float: right;
+			position: relative;
+			margin-right: px($paddingUnit);
+		}
+		.subtotal, button{ margin-top: $paddingUnit; }
+	}
 }
 
 
@@ -588,9 +588,9 @@ ul.list li,
 
 	@media (min-width: 767px){
 		
-        position: relative;
-        display:inline-block;
-        margin-right: px(2px);
+		position: relative;
+		display:inline-block;
+		margin-right: px(2px);
 	
 		&:hover:before;{
 			content:' ';
@@ -602,46 +602,46 @@ ul.list li,
 			top: 0;
 			display: block;
 		}
-        dl{
+		dl{
 			display: none; 
-            position: absolute;
-            left: px(-1* (columns(2)) - 8px);
-            top: px(-4px);
-            width: px(columns(2));
-            border-left: px($paddingUnit) solid $yellow;
+			position: absolute;
+			left: px(-1* (columns(2)) - 8px);
+			top: px(-4px);
+			width: px(columns(2));
+			border-left: px($paddingUnit) solid $yellow;
 			
 			@include panel-arrow(6px, 'right', $white, 20px);
-            
-			.details{
-                display: block;
-                margin: px($paddingUnit) 0;
-                float:right;
-            }
-        }
-        &:after{
-			content: '';
-            width: px(16px);
-            height: px(16px);
-            display:inline-block;
-            margin: 0 px(2px) 0 px(3px);
-            position:relative;
-            top: px(4px);
 			
-            background-color: $lightGrey;
+			.details{
+				display: block;
+				margin: px($paddingUnit) 0;
+				float:right;
+			}
+		}
+		&:after{
+			content: '';
+			width: px(16px);
+			height: px(16px);
+			display:inline-block;
+			margin: 0 px(2px) 0 px(3px);
+			position:relative;
+			top: px(4px);
+			
+			background-color: $lightGrey;
 			@include lsp-sprite-background();
 			background-position: -6px -410px;
-            
+			
 			@include border-radius(px($borderRadius));
 
-        }
-        &:hover:after{
-            background-color:$yellow;
-        }
-        &:hover{
-            dl{
-                display:block;
-            }
-        }
+		}
+		&:hover:after{
+			background-color:$yellow;
+		}
+		&:hover{
+			dl{
+				display:block;
+			}
+		}
 	}
 }
 
@@ -654,9 +654,9 @@ ul.list li,
 	/* Generic badge styling */
 	
 	.badges-badge{ 
-	    position: absolute;
-	    top: 5px;
-	    left: 5px;
+		position: absolute;
+		top: 5px;
+		left: 5px;
 		padding: px(1px) px(5px) px(0);
 		text-transform: uppercase;
 		font-weight: bold;
@@ -732,35 +732,35 @@ ul.list li,
 
 /* Aggregate reviews are basically just the 5 star rating, it uses the old-school sliding doors method */
 .aggregateReviews{
-    
-    width: px(180px);
+	
+	width: px(180px);
 	@include lsp-sprite-background();
-    background-position: -3px -384px;
-    display: inline-block;
+	background-position: -3px -384px;
+	display: inline-block;
 	margin-top: 5px;
-    overflow: hidden;
-    height: 20px;
-    text-align:left;
-    .reviewAggregateRating{ 
+	overflow: hidden;
+	height: 20px;
+	text-align:left;
+	.reviewAggregateRating{ 
 		@include lsp-sprite-background();
 		background-position: -3px -354px;
 		display: inline-block;
 		text-indent: $hideDistance;
 	}
 	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px); margin-right: 100px; }
-    .reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); margin-right: 80px; }
-    .reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); margin-right: 60px;}
-    .reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); margin-right: 40px;}
-    .reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); margin-right: 20px;}
-    .reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); margin-right: 0px;}
-    a{
+	.reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); margin-right: 80px; }
+	.reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); margin-right: 60px;}
+	.reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); margin-right: 40px;}
+	.reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); margin-right: 20px;}
+	.reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); margin-right: 0px;}
+	a{
 		position: relative;
 		top: -3px;
-    }
+	}
 	.reviewCountLabel{
-        &:before{ content: '('; }
-        &:after{ content: ')'; }
-    }
+		&:before{ content: '('; }
+		&:after{ content: ')'; }
+	}
 }
 
 
@@ -775,20 +775,20 @@ ul.list li,
 // Left hand refinement block
 .refinements{
 	
-    margin-left:0;
+	margin-left:0;
 	font-size: 13px;
-    
+	
 	// The actual box
-    .panel{
+	.panel{
 		//width: 100%;
-       // float: left;
-        //display: block;
-        //clear: both;
-    }
+	   // float: left;
+		//display: block;
+		//clear: both;
+	}
 	
 	// "Refine Your Results"
 	h2{ margin-bottom: 10px; }
-    
+	
 	#attributeList{
 		width: 100%;
 	}
@@ -803,7 +803,7 @@ ul.list li,
 		
 		&:hover{
 			//color: blue;
-            text-decoration: underline;
+			text-decoration: underline;
 			//padding-left: 10px;
 			&:before{
 				content : '›';
@@ -847,10 +847,10 @@ ul.list li,
 	// A division within the box, an attribute
 	.section{ 
 		
-        padding-bottom: 30px;
-        float: left;
-        width: 100%; 
-        position: relative;
+		padding-bottom: 30px;
+		float: left;
+		width: 100%; 
+		position: relative;
 		top: 10px;
 		border-top: 1px solid  $lightGrey;
 		box-shadow: inset 0 1px 0 white;
@@ -865,46 +865,46 @@ ul.list li,
 		}
 		
 		// The attribute titles
-        h4{ 
-            float: left;
-            position:absolute;
-            top: px(-11px);
-            left: 0;
-            background-color: $superLightGrey;
-            padding-right: px(6px);
-            
-        }
+		h4{ 
+			float: left;
+			position:absolute;
+			top: px(-11px);
+			left: 0;
+			background-color: $superLightGrey;
+			padding-right: px(6px);
+			
+		}
 		
 		// +/- button
 		.toggleRefinements{
-            
+			
 			position:absolute;
-            top: px(-11px);
+			top: px(-11px);
 			float: right;
 			right: 0;
 			background-color: $superLightGrey;
 			
 			// The hide/show button
 			button{ 
-                margin-right:0;
-                width: px(20px);
-                height: px(20px);
-                padding: 0;
-                text-indent: -$hideDistance;
-                overflow: hidden;
+				margin-right:0;
+				width: px(20px);
+				height: px(20px);
+				padding: 0;
+				text-indent: -$hideDistance;
+				overflow: hidden;
 
-                &:before{
-                    content: ' ';
-                    height: px(25px);
-                    width: px($paddingUnit);
-                    background-color: $superLightGrey;
-                    position: absolute;
-                    top:0;
-                }
-                &:before{
-                    left:px(-($paddingUnit + 2));
-                }
-            }
+				&:before{
+					content: ' ';
+					height: px(25px);
+					width: px($paddingUnit);
+					background-color: $superLightGrey;
+					position: absolute;
+					top:0;
+				}
+				&:before{
+					left:px(-($paddingUnit + 2));
+				}
+			}
 			
 		} 
 		
@@ -913,57 +913,57 @@ ul.list li,
 		}
 		
 		// Actual container for each list element
-        ul{ 
-            
-            display: block;
+		ul{ 
+			
+			display: block;
 			float:left;
-            width: 100%;
-            
+			width: 100%;
+			
 			// Each attribute type
-            .field{ 
-                clear: both;
-                margin-left: px($paddingUnit);
-                width: 100%;
+			.field{ 
+				clear: both;
+				margin-left: px($paddingUnit);
+				width: 100%;
 				
-                label{ 
+				label{ 
 					padding-left: 0px;
-                    width: 88%;
+					width: 88%;
 					@include box-sizing();
 					.details{
 						display: inline-block;
 					}
-                    &:hover{
-                        cursor: pointer;
-                    }
-                }
-                &:first-child{
-                    margin-top: px($paddingUnit);
-                }
-            }
-        }
+					&:hover{
+						cursor: pointer;
+					}
+				}
+				&:first-child{
+					margin-top: px($paddingUnit);
+				}
+			}
+		}
 		
-        .loadMore{
-            clear: both;
-            float: left;
-            position: relative;
-            left: px(25px);
-            top: px(-5px);
-        }
-    }
-    .selectedFilters{
-        
-        @include clearfix;
-        
-        li{ clear: both; float: left; }
+		.loadMore{
+			clear: both;
+			float: left;
+			position: relative;
+			left: px(25px);
+			top: px(-5px);
+		}
+	}
+	.selectedFilters{
+		
+		@include clearfix;
+		
+		li{ clear: both; float: left; }
 		
 		h2{ margin-bottom:0; }
-        
+		
 		button[data-action='removeFilter']{ 
-            float: left;
-            margin: px(2px) 0 px(0px);
-            overflow: hidden;
-            text-decoration: none;
-            color: black;
+			float: left;
+			margin: px(2px) 0 px(0px);
+			overflow: hidden;
+			text-decoration: none;
+			color: black;
 			text-align:left;
 			padding-bottom: 12px;
 			padding-top: 3px;
@@ -973,21 +973,21 @@ ul.list li,
 				padding-bottom: 10px;
 			}
 			
-            &:hover{
-                color: black;
-            }
-        }
-        
-        button[data-action='clearAllRefinements']{
-            float: right;
-            margin-top: px(5px);
-            margin-bottom: px(5px);
-        }
-        
-        .section{
-            margin-top: px($paddingUnit);
-            border-top: none;
+			&:hover{
+				color: black;
+			}
+		}
+		
+		button[data-action='clearAllRefinements']{
+			float: right;
+			margin-top: px(5px);
+			margin-bottom: px(5px);
+		}
+		
+		.section{
+			margin-top: px($paddingUnit);
+			border-top: none;
 			padding-bottom:0;
-        }
-    }
+		}
+	}
 }

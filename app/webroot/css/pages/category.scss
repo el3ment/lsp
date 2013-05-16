@@ -42,47 +42,185 @@
 
 		.links{
 			float: left;
-			margin: 10px 0 0px 20px;
+			margin: 0 0 0px 20px;
+		}
+
+		.content{
+			margin-bottom: 10px;
+		}
+
+		@media (max-width: 979px){
+			padding-right: 10px;
+			.representativeImage{
+				position:relative;
+				float: right;
+				top: -10px;
+				margin-top: 0;
+				width: 140px;
+				height: 140px;
+				//margin-left:-10px;
+
+			}
+			.action{
+				//right: 10px;
+				position: static;
+				float: right;
+				margin-top: 5px;
+			}
 		}
 	}
 
 	.body .categories{
 		
-		margin-bottom: 10px;
+		margin-bottom: 0px;
 
 		.category{
 			
-			height: 175px;
+			height: 205px;
 			border-bottom: 0;
 
 			&:after{
 				height: 145px;
-				top: -5px;
+				top: 0px;
+				right: -1px; // This allows us to hide it on hover
 			}
 
 			.title{
 				overflow: visible;
+				padding-top: 130px;
+				padding-bottom: 20px;
+				border: 1px solid transparent;
 			}
 
 			h3{
-				margin-top: 120px;
+				margin-top: 0px;
 			}
 
+			&:hover{
+				&:after{
+					border-color: transparent;
+				}
+				.title{
+					//background-color: #efeeea;
+					border: 1px solid $lightGrey;
+					background-color: $superLightGrey;
+					@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
+				}
+				h3{
+					background-color: white;
+				}
+			} 
+
+			a, a:hover{ text-decoration: none; }
+
 			img{
-				top: -120px;
+				top: 5px;
+				z-index: 1;
 			}
 
 			@media (min-width: 1200px){
 				//width:16.6%; // 6 across
 			}
-			@media (max-width: 979px){
+			@media (max-width: 979px) and (min-width: 516px){
 				width: 33.33%; // 5 across 
+				h3{ 
+					margin-right: 10px;
+					margin-left: 10px;
+				}
+				.title{ 
+					padding-bottom: 10px;
+				}
+
+				// This hides the right border from the 3rd, 6th and 9th element
+				// with nth-of-type this wouldnt' be nessesary, but the + selector
+				// is IE8 safe
+				&:first-child + .category + .category:after,
+				
+				&:first-child + .category + .category 
+					+ .category + .category + .category:after,
+				
+				&:first-child + .category + .category 
+					+ .category + .category + .category
+					+ .category + .category + .category:after,
+
+				&:first-child + .category + .category 
+					+ .category + .category + .category
+					+ .category + .category + .category
+					+ .category + .category + .category:after,
+
+				&:first-child + .category + .category 
+					+ .category + .category + .category
+					+ .category + .category + .category
+					+ .category + .category + .category
+					+ .category + .category + .category:after,
+
+				&:first-child + .category + .category 
+					+ .category + .category + .category
+					+ .category + .category + .category
+					+ .category + .category + .category
+					+ .category + .category + .category
+					+ .category + .category + .category:after{
+					border-right-width: 0 !important;
+				}
+
+				// Because the nth-of-type fix above is so specific, it's easier to just
+				// use !important than having another extremely long selector
+				&:first-child ~ .category:after{ border-right-width: 1px !important; };
+
 			}
+			
 			@media (max-width: 767px){
-		
+				
 			}
+
 		}
 
+		@media (max-width: 767px){
+			margin-bottom: 40px;
+			.category{
+				float: none;
+				width: 100%;
+				margin: 0;
+				height: auto;
+				padding: 0;
+				border: 1px solid $lightGrey;
+				border-width: 0 0 1px;
+
+				&:after{
+					border: 0 !important;
+				}
+
+				&:hover{
+					.title{ 
+						background-color: $superLightGrey;
+						border: 0;
+						@include box-shadow-multiple(none);
+					 }
+					 h3{
+					 	background-color: transparent;
+					 }
+				};
+
+				.title{ 
+					padding: 0;
+					border: 0;
+				}
+				h3{ 
+					background-color: transparent;
+					padding: 20px 50px 20px 0;
+					text-align: left;
+					border: 0;
+					margin: 0 0 0 10px;
+				}
+				img{ display: none; }
+
+				&:first-child{
+					border-top-width: 1px;
+				}
+
+
+			}
+		}
 
 	} 
 	.brands{
@@ -101,6 +239,7 @@
 			padding-bottom: 40px;
 			color: black;
 			margin-top: 10px;
+			display: none;
 		}
 
 		a{
@@ -117,7 +256,7 @@
 		position: relative;
 		float: left;
 		width: 100%;
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 		
 		li{
 			//float: left;
@@ -127,7 +266,6 @@
 				margin-bottom: 10px;
 
 			}
-
 
 			a {
 				padding: 12px 20px;
@@ -142,31 +280,47 @@
 
 				@include box-sizing();
 
-
+				.h6{
+					text-decoration: underline;
+				}
 				
 				@media (min-width: 1200px){
 					
 				}
 				@media (max-width: 979px) and (min-width: 768px){
-					padding: 10px;
+					padding: 10px 10px;
 					.label{ font-size: 13px; }
 				}
-				@media (max-width: 767px){
-		
-				}
+				
 				
 				&:hover{
 					//color: white;
 					background-color: $superLightGrey;
 					//border-color: black;
 					.h6{
-						text-decoration: underline;
+						text-decoration: none;
 					}
 				}
 			}
 
 			&:first-child a{
 				border-left: 0px; // First element dosen't need a border
+			}
+
+			@media (max-width: 767px){
+				&:first-child{
+					a{
+						border-top-width: 1px;
+					}
+				}
+				a{
+					text-align: left;
+					padding: 10px 50px 10px 10px;
+					float: none;
+					width: 100%;
+					border-width: 0 0 1px;
+
+				}
 			}
 		} 
 	} 
@@ -232,7 +386,7 @@
 			top: (65px + $spaceBetweenRows);
 			height: 100px;
 			display: block;
-			background-color:red;
+			//background-color:red;
 			border-right: 1px solid $lightGrey;
 			content: ' ';
 		}
