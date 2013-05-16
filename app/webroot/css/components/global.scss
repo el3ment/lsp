@@ -739,6 +739,8 @@ ul.list li,
     display: inline-block;
 	margin-top: 5px;
     overflow: hidden;
+    height: 20px;
+    text-align:left;
     .reviewAggregateRating{ 
 		@include lsp-sprite-background();
 		background-position: -3px -354px;
@@ -800,7 +802,7 @@ ul.list li,
 		//@include transition(padding-left .1s, color .1s);
 		
 		&:hover{
-			color: blue;
+			//color: blue;
             text-decoration: underline;
 			//padding-left: 10px;
 			&:before{
