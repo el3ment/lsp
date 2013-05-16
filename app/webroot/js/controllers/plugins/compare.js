@@ -27,12 +27,12 @@
 						//}// else there is no 'ids' parameter
 					},
 					onInit : function(e, data){
-						var urlParameters = _util.getURLParameters();
-						try{
-							_requestedItemIds = JSON.parse(urlParameters.ids);
-						}catch(error){
-							console.log('Error parsing JSON');
-						}
+						// var urlParameters = _util.getURLParameters();
+						// try{
+						// _requestedItemIds = JSON.parse(urlParameters.ids);
+						// }catch(error){
+						// console.log('Error parsing JSON');
+						// }
 					}
 				}
 			},

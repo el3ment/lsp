@@ -526,8 +526,14 @@
 			},
 			updateCarouselSize:function(leavePos) {
 				var self = this;
-				
+
 				this.carouselWidth = this.carouselRoot.width();
+
+				// Monkey Patch for Lone Star Percussion - calculates _itemsPerMove automatically
+				if(this.settings._calculatePageWidth){
+					this._itemsPerMove = Math.floor(this.carouselWidth / (this.items[0].width || 1));
+				}
+
 				if(this.settings.scrollToLast) {
 					var lastItemsWidth = 0;
 					if(this._pagingEnabled) {					
@@ -1095,8 +1101,7 @@
 						var newItemId = this._getItemAtPos(newX).index;						
 						
 						if(!this._pagingEnabled) {
-							newItemId = newItemId + (isNext ?  1 : ( - 1 + 1));									
-							//newItemId = newItemId + (isNext ?  this._itemsPerMove : ( - this._itemsPerMove + 1));									
+							newItemId = newItemId + (isNext ?  this._itemsPerMove : ( - this._itemsPerMove + 1));									
 						} else {	
 							if(isNext) {			
 								newX = Math.max(newX - this.carouselWidth - 1, 1 - self._maxXPos);	
@@ -1203,6 +1208,7 @@
 			snapToItems: false,           // Snaps to items, based on itemsPerMove
 			pagingNav: false,             // Enable paging nav (snaps to first item of every group, based on itemsPerMove). Overrides snapToItems
 			pagingNavControls: true,      // Paging controls (bullets)
+			_calculatePageWidth: false,	  // Proprietary - pagingNav but does not rely on itemsPerMove
 			
 			
 			
