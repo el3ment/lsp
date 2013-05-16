@@ -12,7 +12,7 @@
 				<img class='representativeImage' src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='280' height='280' />
 			</div>
 			<div class='section categories'>
-				<h2>Categories</h2>
+				<h2>Shop By Category</h2>
 				<div class='content'>
 					<ul class='categories'>
 						<?php for($i = 0; $i < 20; $i++){ ?>
@@ -38,13 +38,46 @@
 					</ul>
 				</div>
 			</div>
-			<div class='section prices hide'>
+			<div class='section reviews'>
+				<h2>Shop By Rating</h2>
 				<div class='content'>
 					<ul class='grid'>
-						<li><a href='#' class='panel'>$0 - $20</a></li>
-						<li><a href='#' class='panel'>$20 - $40</a></li>
-						<li><a href='#' class='panel'>$40 - $80</a></li>
-						<li><a href='#' class='panel'>$80+</a></li>
+						<li>
+							<a href='' class='review'>
+								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+									<span itemprop="rating" data-reviews-aggregateRating='2' class='reviewAggregateRating'>1 & 2-Star Reviews</span>
+								</div>
+								<div class='h4 label'>Didn't Like it</div>
+								<span class='h6 details'>1 & 2 Star Reviews</span>
+							</a>
+						</li>
+						<li>
+							<a href='' class='review'>
+								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+									<span itemprop="rating" data-reviews-aggregateRating='3' class='reviewAggregateRating'>3-Star Reviews</span>
+								</div>
+								<div class='h4 label'>Liked It</div>
+								<span class='h6 details'>3 Star Reviews</span>
+							</a>
+						</li>
+						<li>
+							<a href='' class='review'>
+								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+									<span itemprop="rating" data-reviews-aggregateRating='4' class='reviewAggregateRating'>4-Star Reviews</span>
+								</div>
+								<div class='h4 label'>Really Loved It</div>
+								<span class='h6 details'>4 Star Reviews</span>
+							</a>
+						</li>
+						<li>
+							<a href='' class='review'>
+								<div class='aggregateReviews' itemprop="review" itemscope itemtype="http://data-vocabulary.org/Review-aggregate">
+									<span itemprop="rating" data-reviews-aggregateRating='5' class='reviewAggregateRating'>5-Star Reviews</span>
+								</div>
+								<div class='h4 label'>Loved It</div>
+								<span class='h6 details'>5 Star Reviews</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -72,8 +105,8 @@
 		<div class='refinements'>
 			<div class='span3 navigationLinks panel disengaged'>
 				<div class='section links'>
-	                <h4 data-reveal-children='refinement-categories'>Categories</h4>
-	                <div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-categories'>Toggle Refinement Group</button></div>
+					<h4 data-reveal-children='refinement-categories'>Categories</h4>
+					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-categories'>Toggle Refinement Group</button></div>
 					<div id='refinement-categories' class='content reveal-isOpen'>
 						<a href='' class='link2'>Combination & Specialty</a>
 						<a href='' class='link2'>Names of Another Category</a>
@@ -91,8 +124,8 @@
 					</div>
 				</div>
 				<div class='section links'>
-	                <h4 data-reveal-children='refinement-<?php echo $i; ?>'>Supplies</h4>
-	                <div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-brands'>Toggle Refinement Group</button></div>
+					<h4 data-reveal-children='refinement-<?php echo $i; ?>'>Supplies</h4>
+					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-brands'>Toggle Refinement Group</button></div>
 					<div id='refinement-brands' class='content'>
 						<a href='' class='link2'>Combination & Specialty</a>
 						<a href='' class='link2'>Names of Another Category</a>
@@ -101,30 +134,30 @@
 					</div>
 				</div>
 				<div class='section brands'>
-	                <h4 data-reveal-children='refinement-<?php echo $i; ?>'>Brands</h4>
-	                <div class='toggleRefinements'><button class='b4 icon-16-toggleHide <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button></div>
+					<h4 data-reveal-children='refinement-<?php echo $i; ?>'>Brands</h4>
+					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button></div>
 					<div id='refinement-<?php echo $i; ?>' class='<?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>'>
 						<div class="refinementList">
-			                <ul>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-0' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-0'>Vibraphone Mallets With a Really Long Name&nbsp;<span class='details'>(22)</span></label>
-			                    </li>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-1' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
-			                    </li>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-2' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
-			                    </li>
-			                    <li class='field'>
-			                        <input id='refinement-<?php echo $i; ?>-3' type='checkbox' />
-			                        <label for='refinement-<?php echo $i; ?>-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
-			                    </li>
-			                </ul>
-			            </div>
-		                <button class='b5 loadMore'>See More (10)</button>
+							<ul>
+								<li class='field'>
+									<input id='refinement-<?php echo $i; ?>-0' type='checkbox' />
+									<label for='refinement-<?php echo $i; ?>-0'>Vibraphone Mallets With a Really Long Name&nbsp;<span class='details'>(22)</span></label>
+								</li>
+								<li class='field'>
+									<input id='refinement-<?php echo $i; ?>-1' type='checkbox' />
+									<label for='refinement-<?php echo $i; ?>-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
+								</li>
+								<li class='field'>
+									<input id='refinement-<?php echo $i; ?>-2' type='checkbox' />
+									<label for='refinement-<?php echo $i; ?>-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
+								</li>
+								<li class='field'>
+									<input id='refinement-<?php echo $i; ?>-3' type='checkbox' />
+									<label for='refinement-<?php echo $i; ?>-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
+								</li>
+							</ul>
+						</div>
+						<button class='b5 loadMore'>See More (10)</button>
 					</div>
 				</div>
 			</div>
