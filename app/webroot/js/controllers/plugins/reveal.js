@@ -40,6 +40,20 @@
 							//	$(_this.buildChildrenSelector(this)).addClass('reveal-isOpen');
 							//}
 						}).addClass('reveal-parent');
+
+
+						// Mouseover reveals
+						$('.reveal-showOnMouseover', data.selector).bind('mouseenter', function(e){
+							
+							_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
+							console.log('over');
+							return true;
+						}).bind('mouseleave', function(e){
+
+							_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
+							console.log('out');
+							return true;
+						});
 					}
 				}
 			},
@@ -47,24 +61,38 @@
 			buildChildrenSelector : function(element){
 				return $('#' + $(element).data('reveal-children').split(' ').join(', #'));
 			},
-			open : function(children){
-				children.slideDown(400, 'swing');
+			open : function(children, doAnimations){
+				
+				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
+
+				if(doAnimations){
+					children.slideDown(400, 'swing');
+				}else{
+					children.slideDown(0, 'swing');
+				}
 				children.each(function(index, child){
 					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
 				});
 
 			},
-			close : function(children){
-				children.slideUp(400, 'swing');
+			close : function(children, doAnimations){
+				
+				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
+				
+				if(doAnimations){
+					children.slideUp(400, 'swing');
+				}else{
+					children.slideUp(0, 'swing');
+				}
 				children.each(function(index, child){
 					$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
 				});
 			},
-			toggle : function(children){
+			toggle : function(children, doAnimations){
 				if(children.is(':visible')){
-					_this.close(children);
+					_this.close(children, doAnimations);
 				}else{
-					_this.open(children);
+					_this.open(children, doAnimations);
 				}
 
 				// They've made a decision - so let's remove our start-only helpers

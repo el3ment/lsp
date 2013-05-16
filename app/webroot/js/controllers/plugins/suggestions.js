@@ -32,7 +32,10 @@
 							pagingNavControls: false,
 							scrollbar: false,
 							scrollToLast: true,
-							loopItems: false
+							loopItems: false,
+
+							// Testing this out
+							useWebkit3d : true
 						});
 					}
 				}

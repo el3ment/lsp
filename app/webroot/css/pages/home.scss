@@ -1,0 +1,13 @@
+.page-home{
+
+	.section{
+		margin-bottom: 20px;
+	}
+
+	// Take the border off the bottom row
+	.category:first-child + .category + .category + .category 
+		+ .category + .category + .category + .category
+		~ .category{
+			border-bottom: 0;
+	}
+}

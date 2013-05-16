@@ -1,0 +1,62 @@
+.productAd{
+	
+	position: relative;
+	font-size: 13px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	display: block;
+	text-decoration: none;
+
+	.h2{
+		margin-top: 0;
+	}
+	.content{
+		background-color: $superLightGrey;
+		padding: 20px;
+		padding-left: 170px;	
+		padding-bottom: 30px;
+		color: black;
+	}
+	.action{
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+	}
+	.productImage{
+		position: absolute;
+		left: -10px;
+		top: 50%;
+		margin-top:-95px;
+	}
+}
+
+.businessAd{
+	
+	position: relative;
+	font-size: 13px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	display: block;
+	text-decoration: none;
+
+	.h2{
+		margin-top: 0;
+	}
+	.content{
+		background-color: $superLightGrey;
+		padding: 20px;	
+		padding-bottom: 30px;
+		padding-right: 150px;
+		color: black;
+	}
+	.action{
+		position: absolute;
+		right: 150px;
+		bottom: 10px;
+	}
+	
+	&.businessAd-shipping .content{
+
+	}
+
+}
