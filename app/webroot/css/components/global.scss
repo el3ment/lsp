@@ -791,6 +791,56 @@ ul.list li,
 		width: 100%;
 	}
 	
+	a{
+		display: block;
+		font-size: 13px;
+		text-decoration: none;
+		color: black;
+		padding-left: 0;
+		@include transition(padding-left .1s, color .1s);
+		
+		&:hover{
+			color: black;
+			padding-left: 10px;
+			&:before{
+				content : '›';
+				position: absolute;
+				left: 0px;
+			}
+		}
+		&.leftLinkBold{
+			font-weight: bold;
+			color: black;
+			&:hover{
+				padding-left: 0;
+				text-decoration: none;
+				&:before{
+					display: none;
+				}
+			}
+		}
+		&.link3{
+			padding-left: 10px;
+			margin-left: 10px;
+			border-left: 1px solid $lightGrey;
+			&:hover{
+				padding-left: 20px;
+			}
+		}
+		//.link3 + .link2{ // The first link after a sub section
+			//margin-top: 5px;
+		//}
+		
+		&.link4{
+			padding-left: 10px;
+			margin-left: 30px;
+			border-left: 1px solid $lightGrey;
+			&:hover{
+				padding-left: 20px;
+			}
+		}
+	}
+	
 	// A division within the box, an attribute
 	.section{ 
 		

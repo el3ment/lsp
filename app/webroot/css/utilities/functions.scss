@@ -44,6 +44,13 @@
     }
 }
 
+@mixin transition($property){
+	-moz-transition:$property;
+    -webkit-transition:$property;
+    -o-transition:$property;
+    transition:$property;
+}
+
 
 /*  This adds a little arrow-flag to the top, left, right, or bottom of a container... you'll see it used in the
     definition popup, and the notice on the checkout */
