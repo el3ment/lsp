@@ -9,7 +9,6 @@
 		float: left;
 		width: 100%;
 		margin-bottom: 40px;
-	}
 
 	.refinements{
 		.panel{
@@ -42,30 +41,52 @@
 
 		.links{
 			float: left;
-			margin: 0 0 0px 20px;
+			margin: 10px 0 0px 20px;
 		}
+	}
 
-		.content{
-			margin-bottom: 10px;
-		}
+	.body .categories{
+		
+		margin-bottom: 10px;
 
-		@media (max-width: 979px){
-			padding-right: 10px;
+		.category{
+			
+			padding-right: 170px;
+			overflow: hidden;
+
 			.representativeImage{
-				position:relative;
+				position: absolute;
 				float: right;
-				top: -10px;
-				margin-top: 0;
-				width: 140px;
-				height: 140px;
-				//margin-left:-10px;
+				top: 50%;
+				margin-top: -140px;
+				width: 280px;
+				right: -90px;
 
+				opacity: .25;
+				-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=25)";
+				
+				height: 280px;
+				//margin-left:-10px;
+				z-index: 0;
 			}
+
 			.action{
 				//right: 10px;
 				position: static;
 				float: right;
 				margin-top: 5px;
+				margin-right: 0px;
+			}
+		}
+		@media (max-width: 550px){
+			padding-right: 20px;
+			overflow: hidden;
+
+			.representativeImage{
+				display: none;
+			}
+			.links{
+				display: none;
 			}
 		}
 	}
@@ -74,14 +95,16 @@
 		
 		margin-bottom: 0px;
 
+		h2{ margin-top: 0; }
+
 		.category{
 			
 			height: 205px;
 			border-bottom: 0;
 
 			&:after{
-				height: 145px;
-				top: 0px;
+				height: 150px;
+				top: 15px;
 				right: -1px; // This allows us to hide it on hover
 			}
 
@@ -94,6 +117,7 @@
 
 			h3{
 				margin-top: 0px;
+				padding: 5px;
 			}
 
 			&:hover{
@@ -121,7 +145,7 @@
 			@media (min-width: 1200px){
 				//width:16.6%; // 6 across
 			}
-			@media (max-width: 979px) and (min-width: 516px){
+			@media (max-width: 979px) and (min-width: 768px){
 				width: 33.33%; // 5 across 
 				h3{ 
 					margin-right: 10px;
@@ -173,8 +197,14 @@
 				
 			}
 
+			@media (max-width: 550px){
+				//.h2{ display: none; }
+			}
+
 		}
 
+
+		// List Format
 		@media (max-width: 767px){
 			margin-bottom: 40px;
 			.category{
@@ -230,8 +260,13 @@
 			text-align: center;
 			padding-top: 10px;
 		
-			@media (max-width: 979px){
-				width: 33.33%; // 3 across 
+			@media (max-width: 530px){
+				width: 33%; // 3 across
+				min-width: 130px;
+			}
+			@media (max-width: 460px){
+				width: 50%; // 3 across
+				min-width: 150px;
 			}
 		}
 		.title{
@@ -249,14 +284,21 @@
 			}
 		}
 	} 
-	.reviews .grid{
+	.reviews{
+
+		.content{
+			border-bottom: 2px solid $lightGrey;
+			float: left;
+			width: 100%;
+		}
+
+		.grid{
 		
 		//$width  : 150px;
 		
 		position: relative;
 		float: left;
 		width: 100%;
-		margin-bottom: 10px;
 		
 		li{
 			//float: left;
@@ -307,7 +349,7 @@
 				border-left: 0px; // First element dosen't need a border
 			}
 
-			@media (max-width: 767px){
+			@media (max-width: 979px){
 				&:first-child{
 					a{
 						border-top-width: 1px;
@@ -323,7 +365,8 @@
 				}
 			}
 		} 
-	} 
+		} 
+	}
 }
 
 
@@ -342,6 +385,8 @@
 		background-color: white;
 		text-align: center;
 		font-size: 13px;
+		line-height: 26px;
+		padding-top: 5px;
 
 		.more{
 			font-weight: bold;
@@ -422,6 +467,94 @@
 			+ .category + .category + .category + .category
 			+ .category + .category + .category + .category:after{
 			border-right-width: 0;
+		}
+
+
+		@media (max-width: 979px) and (min-width: 768px){
+
+			width: 33%;
+
+			// This hides the right border from the 3rd, 6th and 9th element
+			// with nth-of-type this wouldnt' be nessesary, but the + selector
+			// is IE8 safe
+			&:first-child + .category + .category:after,
+			
+			&:first-child + .category + .category 
+				+ .category + .category + .category:after,
+			
+			&:first-child + .category + .category 
+				+ .category + .category + .category
+				+ .category + .category + .category:after,
+
+			&:first-child + .category + .category 
+				+ .category + .category + .category
+				+ .category + .category + .category
+				+ .category + .category + .category:after,
+
+			&:first-child + .category + .category 
+				+ .category + .category + .category
+				+ .category + .category + .category
+				+ .category + .category + .category
+				+ .category + .category + .category:after,
+
+			&:first-child + .category + .category 
+				+ .category + .category + .category
+				+ .category + .category + .category
+				+ .category + .category + .category
+				+ .category + .category + .category
+				+ .category + .category + .category:after{
+				border-right-width: 0 !important;
+			}
+
+			// Because the nth-of-type fix above is so specific, it's easier to just
+			// use !important than having another extremely long selector
+			&:first-child ~ .category:after{ border-right-width: 1px !important; };
+		}
+
+		@media (max-width: 767px){
+
+			width: 50%;
+
+			// 2nd, 4th, 6th, etc
+			&:first-child ~ .category:after{ border-right-width: 1px !important; };
+
+			&:first-child + .category:after,
+			
+			&:first-child + .category 
+				+ .category + .category:after,
+			
+			&:first-child + .category 
+				+ .category + .category
+				+ .category + .category:after,
+
+			&:first-child + .category 
+				+ .category + .category
+				+ .category + .category
+				+ .category + .category:after,
+
+			&:first-child + .category 
+				+ .category + .category
+				+ .category + .category
+				+ .category + .category
+				+ .category + .category:after,
+
+			&:first-child + .category 
+				+ .category + .category
+				+ .category + .category
+				+ .category + .category
+				+ .category + .category
+				+ .category + .category:after{
+				border-right-width: 0 !important;
+			}
+
+		}
+
+		@media (max-width: 520px){
+
+			width: 100%;
+
+			&:after{ border-right-width: 0px !important; };
+
 		}
 	}
 

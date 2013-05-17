@@ -24,10 +24,6 @@
 \******************************************************/
 
 .touchcarousel {
-	position: relative;
-	width: 600px;
-	height: 400px;		
-	
 	/* style is removed after carousel is inited, use !important if you want to keep it*/
 	overflow: hidden; 
 }

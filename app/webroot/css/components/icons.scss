@@ -246,27 +246,19 @@
 }
 
 
-.icon-32-chevronRight{
+.icon-24-chevronRight{
 
 	&:after{
-		background-image: none;
-		content: '❯';
-		color: $lightGrey;
-		line-height: 32px;
-		text-align: center;
-		font-size: 24px;
-		top: 0px;
-		font-weight: bold;
-		margin-top: 0;
-		position: absolute;
-		right: 20px;
+		background-position: -99px -405px;
+
+		right: 10px;
 		left: inherit;
-		top: 50%;
-		margin-top: -16px;
-		display: block;
 	}
 }
 .icon-mobileOnly:after{
+	display: none;
+}
+.icon-mobileAndTabletOnly:after{
 	display: none;
 }
 @media (max-width: 767px){
@@ -274,26 +266,8 @@
 		display: inherit;
 	}
 }
-/*
-.icon-texas
-.icon-texas
-.icon-texas
-.icon-box
-.icon-card
-.icon-chat
-.icon-account
-.icon-star
-.icon-magnify
-.icon-heart
-.icon-cart
-.icon-close
-.icon-toggleHide
-.icon-leftArrow
-.icon-rightArrow
-.icon-lock
-.icon-phone
-.icon-clock
-.icon-Facebook
-.icon-twitter
-.icon-youtube
-.icon-instagram*/
+@media (max-width: 979px){
+	.icon-mobileAndTabletOnly:after{
+		display: inherit;
+	}
+}
