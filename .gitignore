@@ -4,3 +4,4 @@ app/tmp/sessions/ses*
 dummy
 app/tmp/logs/*
 .DS_Store
+*.swp
