@@ -738,17 +738,10 @@ ul.list li,
 	background-position: -3px -384px;
 	display: inline-block;
 	margin-top: 5px;
-<<<<<<< HEAD
 	overflow: hidden;
 	height: 20px;
 	text-align:left;
 	.reviewAggregateRating{ 
-=======
-    overflow: hidden;
-    height: 20px;
-    text-align:left;
-    .reviewAggregateRating{ 
->>>>>>> 9c5e365ad56270bed39afb54aa54a40dfc05297c
 		@include lsp-sprite-background();
 		background-position: -3px -354px;
 		display: inline-block;
@@ -810,11 +803,7 @@ ul.list li,
 		
 		&:hover{
 			//color: blue;
-<<<<<<< HEAD
 			text-decoration: underline;
-=======
-            text-decoration: underline;
->>>>>>> 9c5e365ad56270bed39afb54aa54a40dfc05297c
 			//padding-left: 10px;
 			&:before{
 				content : '›';

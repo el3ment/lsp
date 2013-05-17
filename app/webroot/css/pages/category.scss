@@ -9,6 +9,7 @@
 		float: left;
 		width: 100%;
 		margin-bottom: 40px;
+
 		.toggleList{
 			margin-right: 10px;
 			text-indent: -10000px;
@@ -55,8 +56,6 @@
 			float: left;
 			margin: 10px 0 0px 20px;
 		}
-	}
-
 
 		.content{
 			margin-bottom: 20px;
@@ -65,7 +64,7 @@
 		@media (max-width: 979px){
 			
 			padding-right: 170px;
-
+			overflow: hidden;
 
 			.representativeImage{
 				position: absolute;
