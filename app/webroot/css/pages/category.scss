@@ -9,6 +9,19 @@
 		float: left;
 		width: 100%;
 		margin-bottom: 40px;
+		.toggleList{
+			margin-right: 10px;
+			text-indent: -10000px;
+			width: 32px;
+			height: 32px;
+			padding: 0;
+			position: relative;
+			margin-left: 0;
+			margin-top: 0;
+			line-height: 200px;
+			float: right;
+		}
+	}
 
 	.refinements{
 		.panel{
@@ -21,7 +34,8 @@
 		background-color: $superLightGrey;
 		border: 1px solid $lightGrey;
 		border-width: 1px 0;
-		padding: 20px 300px 20px 20px;
+		font-size: 13px;
+		padding: 20px 250px 20px 20px;
 		margin: 20px 0 30px 0;
 
 		@include box-sizing();
@@ -30,13 +44,11 @@
 			position: absolute;
 			top: 50%;
 			margin-top: -140px;
-			right: 0;
+			right: -20px;
 		}
 
 		.action{
-			position: absolute;
-			bottom: 20px;
-			right: 290px;
+			float: right
 		}
 
 		.links{
@@ -45,14 +57,15 @@
 		}
 	}
 
-	.body .categories{
-		
-		margin-bottom: 10px;
 
-		.category{
+		.content{
+			margin-bottom: 20px;
+		}
+
+		@media (max-width: 979px){
 			
 			padding-right: 170px;
-			overflow: hidden;
+
 
 			.representativeImage{
 				position: absolute;
