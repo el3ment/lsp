@@ -1,13 +1,46 @@
 .page-home{
 
-	.section{
-		margin-bottom: 20px;
-	}
-
 	// Take the border off the bottom row
 	.category:first-child + .category + .category + .category 
 		+ .category + .category + .category + .category
 		~ .category{
-			border-bottom: 0;
+			border-bottom-color: transparent;
+	}
+
+	@media (max-width: 979px) and (min-width: 768px){
+		.category{ border-bottom-color: $lightGrey !important; }
+		.category:first-child + .category + .category + .category 
+			+ .category + .category + .category + .category
+			+ .category ~ .category{
+				border-bottom-color: transparent !important; // The important! solves the over specificity of the + and ~ selectors
+		}
+
+		.businessAd, .productAd{
+			float: none;
+			display: block;
+			width: 100%;
+			margin-left: 0;
+			margin-bottom: 40px;
+		}
+	}
+
+	@media (max-width: 767px) and (min-width: 521px){
+		// Always show the border for mobile
+		.category{ border-bottom-color: $lightGrey !important; }
+		.category:first-child + .category + .category + .category 
+			+ .category + .category + .category + .category
+			+ .category + .category ~ .category{
+				border-bottom-color: transparent !important; // The important! solves the over specificity of the + and ~ selectors
+		}
+	}
+
+	@media (max-width: 520px){
+		// Just hide the last one
+		.category{ border-bottom-color: $lightGrey !important; }
+		.category:first-child + .category + .category + .category 
+			+ .category + .category + .category + .category
+			+ .category + .category + .category + .category{
+				border-bottom-color: transparent !important; // The important! solves the over specificity of the + and ~ selectors
+		}
 	}
 }

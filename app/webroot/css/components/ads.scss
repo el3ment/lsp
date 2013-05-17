@@ -28,6 +28,34 @@
 		top: 50%;
 		margin-top:-95px;
 	}
+	.description{
+		width: 100%;
+	}
+
+	@media (max-width: 767px){
+
+		
+
+		.productImage{
+			width: 140px;
+			height: 140px;
+			margin-top: 0;
+			margin-left: 10px;
+			top: 0;
+
+			img{
+				width: 140px;
+				height: 140px;
+			}
+
+		}
+		.content{
+			padding-left: 140px;
+			min-height: 95px;
+		}
+
+	}
+
 }
 
 .businessAd{
@@ -49,6 +77,11 @@
 		padding-right: 150px;
 		color: black;
 	}
+
+	.description{
+		width: 100%;
+	}
+
 	.action{
 		position: absolute;
 		right: 150px;

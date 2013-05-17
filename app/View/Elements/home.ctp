@@ -11,7 +11,7 @@
 				<span class='b5 action'>Check it out</span>
 			</div>
 		</a>
-		<a href='' class='businessAd span6 businessAd-shipping'>
+		<a href='' class='businessAd span6 businessAd-shipping visible-desktop'>
 			<div class='content'>
 				<div class='h2 title'>Boss A3D Metronome</div>
 				<div class='description'>This is the description of the product. It can have <strong>strong</strong> words and other descritions. You might even have a <span class='b5'>link</span> or two. 
