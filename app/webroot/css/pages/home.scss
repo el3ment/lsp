@@ -34,7 +34,7 @@
 		}
 	}
 
-	@media (max-width: 520px){
+	/*@media (max-width: 520px){
 		// Just hide the last one
 		.category{ border-bottom-color: $lightGrey !important; }
 		.category:first-child + .category + .category + .category 
@@ -42,5 +42,5 @@
 			+ .category + .category + .category + .category{
 				border-bottom-color: transparent !important; // The important! solves the over specificity of the + and ~ selectors
 		}
-	}
+	}*/
 }

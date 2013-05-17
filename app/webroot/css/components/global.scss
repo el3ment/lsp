@@ -117,9 +117,24 @@ ul.list li,
 	list-style: square inside;
 }
 
+ul.links li{
+	
+	position: relative;
+
+	&:before{
+		color: $grey;
+		content : '›';
+		margin-bottom:1px;
+		position: absolute;
+		top: 50%;
+		margin-top: -11px;
+		left: -10px;
+	}
+}
 
 
-/* Highlight on Hover */
+
+/* Highlight on Hover 
 .highlightOnHover{
 	
 	border:1px solid transparent;
@@ -129,6 +144,7 @@ ul.list li,
 		border: 1px solid $darkYellow;
 	}
 }
+*/
 
 /* Panels */
 /* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
@@ -799,6 +815,7 @@ ul.list li,
 		text-decoration: none;
 		color: black;
 		padding-left: 0;
+		padding-bottom: 2px;
 		//@include transition(padding-left .1s, color .1s);
 		
 		&:hover{
@@ -806,7 +823,8 @@ ul.list li,
 			text-decoration: underline;
 			//padding-left: 10px;
 			&:before{
-				content : '›';
+				color: $grey;
+				content: '›';
 				position: absolute;
 				left: -10px;
 			}

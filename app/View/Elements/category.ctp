@@ -2,7 +2,7 @@
 	<div class='row'>
 		<div class='span9 body pull-right'>
 			<h1>Sticks &amp; Mallets</h1>
-			<div class='row-fluid section head'>
+			<div class='row-fluid section head hidden-phone'>
 				<div class='content'>
 					<div class='description'>This is a description of the stuff it apparently can be really long and satisfyling full of information. <strong>look</strong> I can even use <em>styles</em> and <a href=''>links</a>This is a description of the stuff it apparently can be really long and</a></div>
 					<ul class='links'>
@@ -15,18 +15,18 @@
 				<img class='representativeImage' src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='280' height='280' />
 			</div>
 			<div class='section categories'>
-				<h2>Shop By Category</h2>
+				<h2 class='hidden-phone'>Shop By Category</h2>
 				<div class='content'>
 					<ul>
 						<?php for($i = 0; $i < 20; $i++){ ?>
 						<li class='category'>
 							<a href='' class='title'>
 								<?php if($i % 2){ ?>
-									<img src='http://s1.lonestarpercussion.com/resize/http://www.lonestarpercussion.com/ATA-Cases-thumb.jpg.120x120'>
+									<img src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='120' height='120'>
 								<?php }else{ ?>
-									<img src='http://s1.lonestarpercussion.com/resize/images/Hi%20Hats/AAMediumHats_Sabian.jpg.120x120'>
+									<img src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='120' height='120'>
 								<?php } ?>
-								<h3 class='icon-24-chevronRight icon-mobileOnly'><?php if($i % 7){ ?> Mallets <?php }else{ ?> Hardware, Parts, & Accessories <?php } ?></h3>
+								<h3 class='icon-24-chevronRight icon-mobileOnly'><?php if($i % 7){ ?> Mallets <?php }else{ ?> Percussion Ensembles with Rhythm Section <?php } ?></h3>
 							</a>
 							<!--<ul class='links'>
 								<li><a href=''>Sub Category</a></li>

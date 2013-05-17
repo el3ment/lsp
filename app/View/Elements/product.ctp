@@ -70,7 +70,7 @@
 							<input class='scroller' type='number' min='1' value='1' />
 						</li>
 						<li class='action'>
-							<button class='b1 icon-24-cart-black'>Add To Cart</button>
+							<button class='b1 icon-24-cart-black btn-strong'>Add To Cart</button>
 							<a href='#' class='details icon-16-heart-grey'>Add to Wish List</a>
 						</li>
 					</ul>

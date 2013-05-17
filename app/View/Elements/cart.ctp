@@ -1,13 +1,16 @@
 <div class='page-cart span12 container'>
     <div class='head'>
         <h1>Your Cart</h1>
+        
         <div class='ad-contact details'>Need help or have questions? <a class='contact hidden-phone' href='/contact'>Contact us anytime!</a><span class='contact visible-phone'>Give us a call! <a href='tel:18667920143'>1-866-792-0143</a></span></div>
-       	<div class='icon-64-shippingAlert warning'>
+       	<!--
+        <div class='icon-64-shippingAlert warning'>
 		    <div class='panel'>
 	            <div class='details'>Looks like some of the ...</div>
 	            <div class='message'>So, at no extra charge we'll ship what we have out today</div>
 	        </div>
 		</div>
+        -->
         <button class='b1 icon-24-lock'>Proceed to Checkout</button>
     </div>
     <table class='cart' cellpadding='0' cellspacing='0'>

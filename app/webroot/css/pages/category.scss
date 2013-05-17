@@ -7,7 +7,7 @@
 	.body .section{
 		float: left;
 		width: 100%;
-		margin-bottom: 60px;
+		margin-bottom: 40px;
 
 		.toggleList{
 			margin-right: 10px;
@@ -34,8 +34,8 @@
 		background-color: $superLightGrey;
 		border: 1px solid $lightGrey;
 		border-width: 1px 0;
-		font-size: 13px;
-		padding: 20px 250px 20px 20px;
+		font-size: 14px;
+		padding: 20px 220px 20px 20px;
 		margin: 20px 0 30px 0;
 
 		@include box-sizing();
@@ -44,7 +44,7 @@
 			position: absolute;
 			top: 50%;
 			margin-top: -140px;
-			right: -20px;
+			right: -50px;
 		}
 
 		.action{
@@ -57,7 +57,7 @@
 		}
 
 		.content{
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 
 		@media (max-width: 979px){
@@ -89,6 +89,8 @@
 				margin-right: 0px;
 			}
 		}
+
+		/*
 		@media (max-width: 550px){
 			padding-right: 20px;
 			overflow: hidden;
@@ -99,7 +101,7 @@
 			.links{
 				display: none;
 			}
-		}
+		}*/
 	}
 
 	.body .categories{
@@ -107,6 +109,10 @@
 		margin-bottom: 0px;
 
 		h2{ margin-top: 0; }
+
+		@media (max-width: 767px){
+			margin-top: 15px;
+		}
 
 		.category{
 			
@@ -137,13 +143,16 @@
 				}
 				.title{
 					//background-color: #efeeea;
-					border: 1px solid $lightGrey;
-					background-color: $superLightGrey;
-					@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
+					border: 1px solid $yellow;
+					//background-color: $superLightGrey;
+					@include box-shadow-multiple(0 0 px(3px) 0 $yellow);
 				}
-				h3{
-					background-color: white;
-				}
+				//h3{
+					//background-color: white;
+					//border-color:transparent;
+					//border-right-width:1px;
+					//border-left-width: 1px;
+				//}
 			} 
 
 			a, a:hover{ text-decoration: none; }
@@ -339,15 +348,6 @@
 					text-decoration: underline;
 				}
 				
-				@media (min-width: 1200px){
-					
-				}
-				@media (max-width: 979px) and (min-width: 768px){
-					padding: 10px 10px;
-					.label{ font-size: 13px; }
-				}
-				
-				
 				&:hover{
 					//color: white;
 					background-color: $superLightGrey;
@@ -419,7 +419,7 @@
 	.category{
 		
 		float: left;
-		width: 25%;
+		width: 33%;
 		height: 300px;
 		border-bottom: 1px solid $lightGrey;
 		padding-bottom: $spaceBetweenRows;
@@ -447,82 +447,90 @@
 			//background-color:red;
 			border-right: 1px solid $lightGrey;
 			content: ' ';
-		}
+	}
 
-
-		// This hides the right border from the 4th, 8th and 12th element
+		// This hides the right border from the 3rd, 6th and 9th element
 		// with nth-of-type this wouldnt' be nessesary, but the + selector
 		// is IE8 safe
-		&:first-child + .category + .category + .category:after,
+		&:first-child + .category + .category:after,
 		
-		&:first-child + .category + .category + .category 
-			+ .category + .category + .category + .category:after,
+		&:first-child + .category + .category 
+			+ .category + .category + .category:after,
 		
-		&:first-child + .category + .category + .category 
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category:after,
+		&:first-child + .category + .category 
+			+ .category + .category + .category
+			+ .category + .category + .category:after,
 
-		&:first-child + .category + .category + .category 
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category:after,
+		&:first-child + .category + .category 
+			+ .category + .category + .category
+			+ .category + .category + .category
+			+ .category + .category + .category:after,
 
-		&:first-child + .category + .category + .category 
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category:after,
+		&:first-child + .category + .category 
+			+ .category + .category + .category
+			+ .category + .category + .category
+			+ .category + .category + .category
+			+ .category + .category + .category:after,
 
-		&:first-child + .category + .category + .category 
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category
-			+ .category + .category + .category + .category:after{
+		&:first-child + .category + .category 
+			+ .category + .category + .category
+			+ .category + .category + .category
+			+ .category + .category + .category
+			+ .category + .category + .category
+			+ .category + .category + .category:after{
 			border-right-width: 0;
 		}
 
+		// Because the nth-of-type fix above is so specific, it's easier to just
+		// use !important than having another extremely long selector
+		&:first-child ~ .category:after{ border-right-width: 1px; };
 
-		@media (max-width: 979px) and (min-width: 768px){
+		@media (min-width: 1200px){
+			
+			width: 25%;
 
-			width: 33%;
+
+			// !important solves the specificity issue with
+			// all of the next-sibling selectors ... a hack for a hack
+			.category{ border-right-width: 1px !important; }
 
 			// This hides the right border from the 3rd, 6th and 9th element
 			// with nth-of-type this wouldnt' be nessesary, but the + selector
 			// is IE8 safe
-			&:first-child + .category + .category:after,
-			
-			&:first-child + .category + .category 
-				+ .category + .category + .category:after,
-			
-			&:first-child + .category + .category 
-				+ .category + .category + .category
-				+ .category + .category + .category:after,
+			&:first-child + .category + .category + .category:after,
 
-			&:first-child + .category + .category 
-				+ .category + .category + .category
-				+ .category + .category + .category
-				+ .category + .category + .category:after,
+			&:first-child + .category + .category + .category 
+				+ .category + .category + .category + .category:after,
 
-			&:first-child + .category + .category 
-				+ .category + .category + .category
-				+ .category + .category + .category
-				+ .category + .category + .category
-				+ .category + .category + .category:after,
+			&:first-child + .category + .category + .category 
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category:after,
 
-			&:first-child + .category + .category 
-				+ .category + .category + .category
-				+ .category + .category + .category
-				+ .category + .category + .category
-				+ .category + .category + .category
+			&:first-child + .category + .category + .category 
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category:after,
+
+			&:first-child + .category + .category + .category 
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category:after,
+
+			&:first-child + .category + .category + .category 
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category
+				+ .category + .category + .category + .category
 				+ .category + .category + .category:after{
 				border-right-width: 0 !important;
 			}
 
-			// Because the nth-of-type fix above is so specific, it's easier to just
-			// use !important than having another extremely long selector
 			&:first-child ~ .category:after{ border-right-width: 1px !important; };
 		}
+
+
+/*
 
 		@media (max-width: 767px){
 
@@ -561,7 +569,6 @@
 			}
 
 		}
-
 		@media (max-width: 520px){
 
 			width: 100%;
@@ -570,7 +577,9 @@
 
 		}
 	}
+*/
 
+	
 	img{
 
 		position: absolute;

@@ -20,7 +20,7 @@
 			</div>
 		</a>
 	</div>
-	<div class='row span12 section'>
+	<div class='row span12 section featuredCategories hidden-phone'>
 		<h2 class='h1'>Featured Categories</h2>
 		<ul class='categories'>
 			<?php for($i = 0; $i < 12; $i++){ ?>
