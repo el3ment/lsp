@@ -17,7 +17,7 @@
 			<div class='section categories'>
 				<h2>Shop By Category</h2>
 				<div class='content'>
-					<ul class='categories'>
+					<ul>
 						<?php for($i = 0; $i < 20; $i++){ ?>
 						<li class='category'>
 							<a href='' class='title'>

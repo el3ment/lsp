@@ -5,10 +5,9 @@
 	}
 	
 	.body .section{
-		margin-bottom: 20px;
 		float: left;
 		width: 100%;
-		margin-bottom: 40px;
+		margin-bottom: 60px;
 
 		.toggleList{
 			margin-right: 10px;
@@ -218,7 +217,9 @@
 
 		// List Format
 		@media (max-width: 767px){
-			margin-bottom: 40px;
+			margin-bottom: 60px;
+			border-bottom: 2px solid $lightGrey;
+
 			.category{
 				float: none;
 				width: 100%;
