@@ -592,6 +592,24 @@
 
 	}
 
+	.links{
+		a{
+			
+			position: relative;
+
+			&:hover:before{
+				color: $grey;
+				font-size: 14px;
+				content : '›';
+				margin-bottom:1px;
+				position: absolute;
+				top: 50%;
+				margin-top: -4px;
+				left: -10px;
+			}
+		}
+	}
+
 	h3{
 		margin: (90px + $spaceBetweenRows) 20px 0; // Margin-top is the space between the picture and the title
 		background-color: $superLightGrey;

@@ -37,11 +37,89 @@
 		</li>
 		<li class='mobileSearch visible-phone'><button class='b3' data-reveal-children='searchBarContainer'>Toggle Search</button></li>
 	</ul>
+
 	<div class='breadcrumbs'>
 		<ul class='span12 breadcrumbLinks'>
 			<li><a href='#'>Sticks &amp; Mallets</a></li>
 			<li><a href='#'>Mallets</a></li>
 			<li class='active'><a href='#'>IP240</a></li>
+		</ul>
+	</div>
+</div>
+
+<div class='departmentDropdown'>
+	<div class='container span12'>
+		<ul class='topLevel'>
+			<?php for($i = 0; $i < 12; $i++){ ?>
+			<li>
+				<div class='title'>
+					<div class='h3'>Sticks &amp; Mallets</div>
+					<div class='details'>Subtext</div>
+				</div>
+				<div class='flyout'>
+					<div class='h1'>Sticks &amp; Mallets</div>
+					<div class='group'>
+						<span class='h2'>Group Name</span>
+						<ul class='lists'>
+							<li class='list'>
+								<span class='h3'>List Name</span>
+								<ul class='links'>
+									<li><a href=''>Link 1</a></li>
+									<li><a href=''>Link 1</a></li>
+								</ul>
+							</li>
+							<li class='list'>
+								<span class='h3'>List Name</span>
+								<ul class='links'>
+									<li><a href=''>Link 1</a></li>
+									<li><a href=''>Link 1</a></li>
+								</ul>
+							</li>
+							<li class='list'>
+								<span class='h3'>List Name</span>
+								<ul class='links'>
+									<li><a href=''>Link 1</a></li>
+									<li><a href=''>Link 1</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class='group'>
+						<span class='h2'>Group Name</span>
+						<ul class='lists'>
+							<li class='list'>
+								<span class='h3'>List Name</span>
+								<ul class='links'>
+									<li><a href=''>Link 1</a></li>
+									<li><a href=''>Link 1</a></li>
+								</ul>
+							</li>
+							<li class='list'>
+								<span class='h3'>List Name</span>
+								<ul class='links'>
+									<li><a href=''>Link 1</a></li>
+									<li><a href=''>Link 1</a></li>
+								</ul>
+							</li>
+							<li class='list'>
+								<span class='h3'>List Name</span>
+								<ul class='links'>
+									<li><a href=''>Link 1</a></li>
+									<li><a href=''>Link 1</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<a href='' class='ad'>
+						<div class='content'>
+							<span class='h3 name'>Innovative IP240</span>
+							<div class='price h3'>$79.00 <span class='productGrouping details'>per pair</span></div>
+						</div>
+						<img class='productImage' src='http://placehold.it/500x500' />
+					</a>
+				</div>
+			</li>
+			<?php } ?>
 		</ul>
 	</div>
 </div>

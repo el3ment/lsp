@@ -5,7 +5,7 @@
 			<div class='row-fluid section head hidden-phone'>
 				<div class='content'>
 					<div class='description'>This is a description of the stuff it apparently can be really long and satisfyling full of information. <strong>look</strong> I can even use <em>styles</em> and <a href=''>links</a>This is a description of the stuff it apparently can be really long and</a></div>
-					<ul class='links'>
+					<ul class='links withChevron'>
 						<li><a href=''>Link 1</a></li>
 						<li><a href=''>Link 2</a></li>
 					</ul>

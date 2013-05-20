@@ -76,11 +76,13 @@ h2, .h2{ font-size: px($h2FontSize); line-height: 28px; }
 
 /* Captialized, Bigger, Bold */
 h3, .h3, h4, .h4{ 
-	margin-top:0;
+	//margin-top:2px;
 	font-size: 1em; 
 	text-transform:uppercase;
 	font-weight: bold;
-	margin-top: -5px;
+	//margin-top: -5px;
+	line-height: 14px;
+	margin-bottom: 2px;
 }
 
 /* Captialized, Bold */
@@ -117,19 +119,22 @@ ul.list li,
 	list-style: square inside;
 }
 
-ul.links li{
-	
-	position: relative;
+.withChevron{
 
-	&:before{
-		color: $grey;
-		content : '›';
-		margin-bottom:1px;
-		position: absolute;
-		top: 50%;
-		margin-top: -11px;
-		left: -10px;
+	a{
+		position: relative;
+
+		&:before, &:hover:before{
+			color: $grey;
+			content : '›';
+			margin-bottom:1px;
+			position: absolute;
+			top: 50%;
+			margin-top: -11px;
+			left: -10px;
+		}
 	}
+
 }
 
 
@@ -189,7 +194,7 @@ ul.links li{
 
 /* Common Properties */
 /* Details are subtext */
-.details{ color: $grey; font-size: 13px; }
+.details{ color: $grey; font-size: 13px; line-height: 14px; }
 
 /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
 .productAvailability .status,

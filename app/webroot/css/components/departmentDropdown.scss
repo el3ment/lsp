@@ -1,0 +1,140 @@
+.departmentDropdown{
+	//position:absolute;
+	width:100%;
+	top: 0;
+	left: 0;
+	margin-bottom: 20px;
+	.container{
+		margin: auto;
+		background-color:white;
+		float: none;
+		position: relative; // origin for absolute positioning of the panel
+	}
+
+	.topLevel{
+		width: 220px;
+		border: 1px solid $lightGrey;
+		border-top: 10px solid $yellow;
+		background-color:white;
+		@include box-shadow-multiple(0 0 10px -2px $grey);
+	} //left nav
+	.title{
+		
+		padding: 10px;
+
+		.h3{  }
+		.details{ margin: 0; }
+		&:hover{ 
+			background-color: black;
+			.h3{ color: white; }
+		}
+	} //toplevel titles
+	.flyout{
+		padding: 10px;
+		padding-right: 150px;
+		padding-left: 25px;
+		position: absolute;
+		top: 0;
+		left: 215px;
+		margin-left:0;
+		height: 100%;
+		overflow: hidden;
+		width: 725px; // 9 columns designed width
+		padding-right: ;
+		border: 1px solid $lightGrey;
+		border-left-color: transparent;
+		border-top-color: $yellow;
+		//background-color:white;
+		//border-top: 3px solid $yellow;
+
+		&:before{
+			height: 10px;
+			content: ' ';
+			width: 725px;
+			margin-left: 5px;
+			display: block;
+			background-color: $yellow;
+			top: 0;
+			left: 0;
+			position: absolute;
+			z-index:1;
+			box-shadow: inset 3px 1px 6px #c9ab1e; // the shadow on the left side of the border
+		};
+
+		@include box-sizing();
+
+		@include box-shadow-multiple(4px 5px 9px -7px $grey, 2px -3px 8px -5px $grey);
+
+		display:none;
+
+		.productImage{
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+
+	} // panel
+	li:first-child .flyout{ display:block; }
+	.group{
+		float: left;
+		margin-bottom: 20px;
+	} //group of lists
+	.lists{
+		clear: both;
+		float: left;
+		position:relative;
+		z-index:1;
+	}
+	.list{
+		width: 120px;
+		float: left;
+	} // group of links
+	.h1{
+		position:relative;
+		z-index:1;
+	}
+	.h2{ 
+		float: left;
+		margin-bottom: 10px;
+		position:relative;
+		z-index:1;
+	} // group title
+	.h3{
+	} // list title
+
+	.ad{
+
+		.content{
+			position: absolute;
+			right: 100px;
+			bottom: 100px;
+			z-index: 1;
+			color: black;
+			text-decoration: none;
+		}
+
+		.name{
+			font-size: 13px;
+		}
+		.price{
+
+			background-color: $yellow;
+			padding: 7px 10px;
+			display: block;
+			margin-top: 10px;
+			@include border-radius(5px);
+			float: left;
+			position: relative;
+
+			.productGrouping{
+				position: absolute;
+				bottom: 3px;
+				right: -155px;
+				width: 150px;
+				top: 50%;
+				margin-top: -7px;
+			}
+		}
+
+	} // ad
+}
