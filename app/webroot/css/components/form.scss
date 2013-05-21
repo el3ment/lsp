@@ -120,7 +120,7 @@
 		display: inline-block;
 		margin : 0 px($paddingUnit);
 		
-		&:hover{
+		&:hover, &.active{
 			@include gradient($hoverLightYellow, $darkYellow);
 		}
 	}

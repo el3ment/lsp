@@ -12,6 +12,7 @@
 
 
     <script type='text/javascript' src='js/vendors/jquery/jquery-1.9.1.js'></script>
+    <script type='text/javascript' src='js/vendors/menu-aim/jquery.menu-aim.js'></script>
     <script type='text/javascript' src='js/vendors/touch_carousel/jquery.touchcarousel-1.2.js'></script>
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
     <script type='text/javascript' src='js/vendors/form2js/form2js.js'></script>
@@ -28,7 +29,8 @@
 		
 	<script type='text/javascript' src='js/assets/history.js'></script>
     <script type='text/javascript' src='js/assets/listEncoder.js'></script>
-        
+    
+    <script type='text/javascript' src='js/controllers/plugins/flyout.js'></script>    
     <script type='text/javascript' src='js/controllers/plugins/badges.js'></script>
     <script type='text/javascript' src='js/controllers/plugins/compare.js'></script>
     <script type='text/javascript' src='js/controllers/plugins/definitions.js'></script>

@@ -24,7 +24,7 @@
 	</div> 
 	
 	<ul class='shopbar span12'> 
-		<li class='departments'><a class='b1 icon-24-star-black highlight-icon dropdown'>Shop By <strong>Department</strong></a></li>
+		<li class='departments'><a id='flyoutControlButton' class='b1 icon-24-star-black highlight-icon dropdown'>Shop By <strong>Department</strong></a></li>
 		<li class='cart'><a class='b3 icon-24-cart-white highlight-icon'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
 		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon'><strong>Wish</strong> List</a></li>
 		<li id='searchBar' class='search'>
@@ -47,19 +47,18 @@
 	</div>
 </div>
 
-<div class='departmentDropdown'>
+<div id='mainFlyout' class='departmentDropdown'>
 	<div class='container span12'>
 		<ul class='topLevel'>
 			<?php for($i = 0; $i < 12; $i++){ ?>
-			<li>
-				<div class='title'>
+			<li class='collection'>
+				<div class='flyoutTitle'>
 					<div class='h3'>Sticks &amp; Mallets</div>
-					<div class='details'>Subtext</div>
+					<?php if($i > 6 ){ ?> <div class='details'>Subtext</div> <?php } ?>
 				</div>
 				<div class='flyout'>
-					<div class='h1'>Sticks &amp; Mallets</div>
 					<div class='group'>
-						<span class='h2'>Group Name</span>
+						<span class='h2'>Group Name <?php echo $i; ?></span>
 						<ul class='lists'>
 							<li class='list'>
 								<span class='h3'>List Name</span>
@@ -112,10 +111,10 @@
 					</div>
 					<a href='' class='ad'>
 						<div class='content'>
-							<span class='h3 name'>Innovative IP240</span>
+							<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
 							<div class='price h3'>$79.00 <span class='productGrouping details'>per pair</span></div>
 						</div>
-						<img class='productImage' src='http://placehold.it/500x500' />
+						<img class='productImage' src='http://s4.lonestarpercussion.com/resize/images/product-image/Innovative-IP240.jpg.500x500' />
 					</a>
 				</div>
 			</li>

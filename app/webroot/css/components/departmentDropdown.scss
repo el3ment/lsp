@@ -1,33 +1,120 @@
+.departmentDropdown{ display: none; }
+.departmentDropdown.active{	display: block; }
 .departmentDropdown{
 	//position:absolute;
 	width:100%;
-	top: 0;
+	top: 218px;
 	left: 0;
-	margin-bottom: 20px;
+	position: absolute;
+	z-index: 99; // In front of everything!
+
 	.container{
 		margin: auto;
-		background-color:white;
+		//background-color:white;
 		float: none;
 		position: relative; // origin for absolute positioning of the panel
 	}
 
 	.topLevel{
+		float: left;
 		width: 220px;
 		border: 1px solid $lightGrey;
-		border-top: 10px solid $yellow;
+		border-width: 0 0 1px 1px;
 		background-color:white;
 		@include box-shadow-multiple(0 0 10px -2px $grey);
-	} //left nav
-	.title{
-		
-		padding: 10px;
-
-		.h3{  }
-		.details{ margin: 0; }
-		&:hover{ 
-			background-color: black;
-			.h3{ color: white; }
+		display: block;
+		// The :before element covers the shadow (little yellow strip)
+		// It needs to have similar styling to a button
+		&:before{
+			width: 164px; // same as shop by department button
+			position: absolute;
+			top: -10px;
+			height: 10px;
+			left: 0;
+			content: ' ';
+			background-color: #f1c331; // the last covered pixel for the button
+			border : 1px solid $brownYellow;
+			border-width: 0px 1px;
 		}
+
+		// The :after element gives the onmouseleave something to recognize
+		// otherwise if you 'leave' the flyout, but 'enter' the button, you 
+		// can't get the flyout to close until you mouse back into the flyout
+		// and out again
+		&:after{
+			width: 166px;
+			position: absolute;
+			top: -60px;
+			height: 60px;
+			left: 0;
+			content: ' ';
+			background-color: transparent;
+		}
+
+
+		.collection:first-child{
+			border-top: 10px solid $yellow;
+		}
+	} //left nav
+	.collection.active{ 
+			
+
+			.flyoutTitle{
+				border-right: 1px solid $lightGrey;
+				background-color: black; 
+				
+				.h3{ color: white; }
+			
+				position: relative;
+				
+				// black triangle
+				&:after{
+					content: ' ';
+					width: 0;
+					height: 0;
+					position: absolute;
+					right: -8px;
+					top: 50%;
+					margin-top: -15px;
+					border-top: 15px solid transparent;
+					border-left: 8px solid black;
+					border-bottom: 15px solid transparent;
+					z-index: 3; // in front of flyout shadow
+				}
+
+				.details:after{
+					right: -8px;
+					content: ' ';
+					position: absolute;
+					top: 50%;
+					margin-top:-22px;
+					border-top: 22px solid transparent;
+					border-left: 8px solid black;
+					border-bottom: 22px solid transparent;
+				
+				}
+			}
+
+			.flyout{
+				display: block;
+			}
+			
+		}
+	.flyoutTitle{
+		
+		padding: 7px;
+		position: relative;
+		z-index:1;
+		//height: 30px;
+
+
+		.h3{ 
+			font-size: 15px;
+			//margin-top: 7px;
+		}
+
+		.details{ margin: 0; }
+		
 	} //toplevel titles
 	.flyout{
 		padding: 10px;
@@ -35,34 +122,31 @@
 		padding-left: 25px;
 		position: absolute;
 		top: 0;
-		left: 215px;
+		left: 220px;
 		margin-left:0;
 		height: 100%;
 		overflow: hidden;
-		width: 725px; // 9 columns designed width
+		width: 720px; // 9 columns designed width
 		padding-right: ;
 		border: 1px solid $lightGrey;
-		border-left-color: transparent;
-		border-top-color: $yellow;
-		//background-color:white;
-		//border-top: 3px solid $yellow;
+		border-left: 0;
+		border-top:0;
+		background-color:white;
+		z-index: 0;
 
 		&:before{
 			height: 10px;
 			content: ' ';
-			width: 725px;
-			margin-left: 5px;
+			width: 100%;
 			display: block;
-			background-color: $yellow;
-			top: 0;
-			left: 0;
 			position: absolute;
-			z-index:1;
-			box-shadow: inset 3px 1px 6px #c9ab1e; // the shadow on the left side of the border
+			top: 0;
+			z-index: 1; // over the image
+			left: 0;
+			background-color: $yellow; // the shadow on the left side of the border
 		};
 
 		@include box-sizing();
-
 		@include box-shadow-multiple(4px 5px 9px -7px $grey, 2px -3px 8px -5px $grey);
 
 		display:none;
@@ -74,10 +158,23 @@
 		}
 
 	} // panel
-	li:first-child .flyout{ display:block; }
 	.group{
 		float: left;
 		margin-bottom: 20px;
+
+		&:first-child:before{
+			content: ' ';
+			height: 110%;
+			position: absolute;
+			left: 0;
+			top:-5%;
+			width: 10px;
+			z-index: 2; //over yellow border up top
+			//border-left: 1px solid $lightGrey;
+			
+			@include box-shadow-multiple(inset 4px 1px 8px -4px $grey);
+
+		}
 	} //group of lists
 	.lists{
 		clear: both;
@@ -103,30 +200,55 @@
 	} // list title
 
 	.ad{
+		
 
+		//text-align:right;
 		.content{
 			position: absolute;
-			right: 100px;
+			right: 20px;
 			bottom: 100px;
 			z-index: 1;
 			color: black;
 			text-decoration: none;
+			max-width: 300px;
+			font-size: 13px;
 		}
 
 		.name{
+			
+			float: left;
+			clear: both;
 			font-size: 13px;
+			&:before{
+				content: ' '; 
+				display: block; 
+				width: 0; 
+				height: 0;
+				position: absolute;
+				z-index: 2;
+				border: px(12px) inset transparent;
+				//background-color: red;
+				border-bottom: px(12px) solid black; 
+				right: 30px;
+				top: -30px;
+			}
 		}
 		.price{
 
 			background-color: $yellow;
 			padding: 7px 10px;
 			display: block;
-			margin-top: 10px;
+			margin-top: 5px;
 			@include border-radius(5px);
 			float: left;
+			clear: both;
 			position: relative;
+			font-size: 13px;
+
+			
 
 			.productGrouping{
+				font-size: 11px;
 				position: absolute;
 				bottom: 3px;
 				right: -155px;
@@ -136,5 +258,10 @@
 			}
 		}
 
-	} // ad
+		&:hover{
+			.name:before{
+				border-bottom-color: $yellow;
+			}
+		}
+	}
 }

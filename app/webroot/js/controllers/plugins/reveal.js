@@ -24,7 +24,7 @@
 						$('*[data-reveal-children]', data.selector).bind('click', function(e){
 
 							// On click - fire the click event
-							_this.toggle(_this.buildChildrenSelector(this));
+							_this.toggle(_this.buildChildrenSelector(this), !$(this).hasClass('reveal-noAnimation'));
 
 							// We don't want to propagate default browser events
 							e.stopPropagation();
@@ -68,11 +68,11 @@
 				if(doAnimations){
 					children.slideDown(400, 'swing');
 				}else{
-					children.slideDown(0, 'swing');
+					//children.slideDown(0, 'swing');
 				}
 				children.each(function(index, child){
 					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
-				});
+				}).addClass('reveal-isOpen');
 
 			},
 			close : function(children, doAnimations){
@@ -82,11 +82,11 @@
 				if(doAnimations){
 					children.slideUp(400, 'swing');
 				}else{
-					children.slideUp(0, 'swing');
+					//children.slideUp(0, 'swing');
 				}
 				children.each(function(index, child){
 					$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
-				});
+				}).removeClass('reveal-isOpen');
 			},
 			toggle : function(children, doAnimations){
 				if(children.is(':visible')){
