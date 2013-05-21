@@ -63,6 +63,7 @@
 				// to force it open from elsewhere (like on the home page)
 				_flyoutControlButton.on('mouseenter.flyout', function(e){ _this.openFlyout(); });
 				$('.wrapper', _flyout).bind('mouseleave.flyout', function(e){ _this.closeFlyout(); });
+				//test
 			},
 
 			detachMenu : function(){
