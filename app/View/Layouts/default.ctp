@@ -12,7 +12,7 @@
 
 
     <script type='text/javascript' src='js/vendors/jquery/jquery-1.9.1.js'></script>
-    <script type='text/javascript' src='js/vendors/menu-aim/jquery.menu-aim.js'></script>
+    <script type='text/javascript' src='js/vendors/menu-aim/menu-aim.js'></script>
     <script type='text/javascript' src='js/vendors/touch_carousel/jquery.touchcarousel-1.2.js'></script>
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
     <script type='text/javascript' src='js/vendors/form2js/form2js.js'></script>
