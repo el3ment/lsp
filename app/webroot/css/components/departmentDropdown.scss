@@ -1,14 +1,14 @@
 .departmentDropdown{ display: none; }
 .departmentDropdown.active{	display: block; }
 .departmentDropdown{
-	//position:absolute;
+	
 	width:100%;
 	top: 218px;
 	left: 0;
 	position: absolute;
 	z-index: 99; // In front of everything!
 
-	.container{
+	.wrapper{
 		margin: auto;
 		//background-color:white;
 		float: none;
@@ -48,7 +48,11 @@
 			height: 60px;
 			left: 0;
 			content: ' ';
-			background-color: transparent;
+
+			// IE dosen't maintain event bubbling for transparent background
+			// divs - so we use a transparent only part of the sprite image
+			@include lsp-sprite-background();
+			background-position: -200px -373px;
 		}
 
 
@@ -98,13 +102,13 @@
 			.flyout{
 				display: block;
 			}
-			
-		}
+	}
 	.flyoutTitle{
 		
 		padding: 7px;
 		position: relative;
 		z-index:1;
+		border-right: 1px solid $lightGrey;
 		//height: 30px;
 
 
@@ -114,26 +118,43 @@
 		}
 
 		.details{ margin: 0; }
-		
 	} //toplevel titles
 	.flyout{
-		padding: 10px;
-		padding-right: 150px;
-		padding-left: 25px;
+		
 		position: absolute;
 		top: 0;
 		left: 220px;
 		margin-left:0;
 		height: 100%;
-		overflow: hidden;
-		width: 720px; // 9 columns designed width
-		padding-right: ;
 		border: 1px solid $lightGrey;
 		border-left: 0;
-		border-top:0;
+		border-top: 0;
 		background-color:white;
 		z-index: 0;
+		display:none;
+		//max-width: 720px;
 
+		.container{
+			position: relative; // give the image something to grab-on to
+			width: 720px; // 9 columns designed width
+			height: 100%;
+			padding: 10px;
+			padding-right: 150px;
+			padding-left: 25px;
+			@media (max-width: 979px) and (min-width: 768px){
+				width: 505px;
+				padding-right: 25px;
+			}
+			@media (min-width: 1200px){
+				width: 950px;
+				padding-right: 300px;
+			}
+			@include box-sizing();
+		}
+
+		@include box-sizing();
+		@include box-shadow-multiple(4px 5px 9px -7px $grey, 2px -3px 8px -5px $grey);
+		
 		&:before{
 			height: 10px;
 			content: ' ';
@@ -145,30 +166,27 @@
 			left: 0;
 			background-color: $yellow; // the shadow on the left side of the border
 		};
-
-		@include box-sizing();
-		@include box-shadow-multiple(4px 5px 9px -7px $grey, 2px -3px 8px -5px $grey);
-
-		display:none;
-
 		.productImage{
 			position: absolute;
-			right: 0;
+			right: -75px;
 			top: 0;
+			max-height: 100%;
 		}
-
 	} // panel
+
 	.group{
 		float: left;
 		margin-bottom: 20px;
 
+		// the shadow between left bar and content
 		&:first-child:before{
 			content: ' ';
-			height: 110%;
+			height: 100%;
 			position: absolute;
 			left: 0;
-			top:-5%;
+			top:0;
 			width: 10px;
+			//border-left: 1px solid $superLightGrey;
 			z-index: 2; //over yellow border up top
 			//border-left: 1px solid $lightGrey;
 			
@@ -262,6 +280,224 @@
 			.name:before{
 				border-bottom-color: $yellow;
 			}
+		}
+
+		@media (max-width: 979px) and (min-width: 768px){
+			display: none;
+		}
+	}
+}
+
+
+@media (max-width: 767px){
+
+	// Reset Styles
+	.departmentDropdown{
+		position: static;
+
+		.wrapper{
+			margin: 0;
+			float: none;
+			//position: static;
+		}
+		.topLevel{
+			float: none;
+			width: inherit;
+			border: 0;
+			background-color:transparent;
+			@include box-shadow-multiple(none);
+			//display: block;
+			// The :before element covers the shadow (little yellow strip)
+			// It needs to have similar styling to a button
+			&:before,
+			&:after{
+				display: none;
+			}
+
+			.collection:first-child{
+				border-top: 0;
+			}
+
+			.collection.active{ 
+				
+				.flyoutTitle{
+					border-right: 0;
+					background-color: transparent; 
+					
+					.h3{ color: black; }
+				
+					position: relative;
+					
+					// black triangle
+					&:after,
+					.details:after{
+						display: none;
+					}
+				}
+
+				//.flyout{
+				//	display: block;
+				//}
+			}
+		}
+		.flyoutTitle{
+			
+			padding: 0;
+			position: static;
+			z-index:0;
+			//height: 30px;
+
+
+			.h3{ 
+				font-size: inherit;
+				//margin-top: 7px;
+			}
+
+			.details{ margin: 0; }
+		} //toplevel titles
+		.flyout{
+			
+			position: static;
+			//margin-left:0;
+			//height: 100%;
+			border: 0;
+			//border-left: 0;
+			//border-top: 0;
+			background-color:transparent;
+			//z-index: 0;
+			//overflow: hidden;
+			//display:none;
+			//max-width: 720px;
+
+			.container{
+			//	position: relative; // give the image something to grab-on to
+				width: inherit; // 9 columns designed width
+				height: inherit;
+				padding: 0;
+			}
+
+			//@include box-sizing();
+			@include box-shadow-multiple(none);
+			
+			&:before{
+				display: none;
+			};
+		} // panel
+		.group{
+			float: none;
+			margin-bottom: 0;
+
+			&:first-child:before{
+				display:none;
+			}
+		} //group of lists
+		.lists{
+			//clear: both;
+			float: none;
+			//position:relative;
+			//z-index:1;
+		}
+		.list{
+			width: inherit;
+			float: none;
+		} // group of links
+		.h1{
+			//position:relative;
+			//z-index:1;
+		}
+		.h2{ 
+			float: none;
+			//margin-bottom: 10px;
+			//position:relative;
+			//z-index:1;
+		} // group title
+		.ad{
+			display: none;
+		}
+	}
+
+
+	// New Menu Style
+	.departmentDropdown{
+
+		padding: 0 10px;
+		@include box-sizing();
+		// No subtext on mobile
+		.flyoutTitle .details{ display: none; }
+
+		// Style the menu
+		.h2, .h3, .link a{
+			padding: 20px;
+			border-bottom: 1px solid $lightGrey;
+			width: 100%;
+			margin: 0;
+			display: block;
+			font-family: 'Open Sans', Arial, Verdana;
+			font-size: 14px;
+			line-height: 14px;
+			font-weight: bold;
+			text-transform: uppercase;
+			text-decoration: none;
+			color: black;
+			@include box-sizing();
+		}
+		.collection:first-child .flyoutTitle .h3{
+			border-top: 1px solid $lightGrey;
+		}
+		.h2, .h3{
+			
+			position: relative;
+			padding-right: 35px;
+
+			&:after{
+				
+				@include rotate(90deg);
+
+				content: ' ';
+				display: block;
+				@include lsp-sprite-background();
+				width: 24px;
+				height: 24px;
+				background-position: -99px -405px;
+				position: absolute;
+				top: 50%;
+				margin-top: -12px;
+				right: 10px;
+			}
+		}
+		.link a{
+			position: relative;
+			padding-right: 35px;
+			//padding-left: 40px;
+	
+			// This could have been done with a class (icon-24-chevronRight)  but
+			// this menu is included on every page, and there will be a TON of links
+			// so the addition of pageweight wouldn't be trivial.
+			// This is a case of performance > maintainability
+			&:after{
+				content: ' ';
+				display: block;
+				@include lsp-sprite-background();
+				width: 24px;
+				height: 24px;
+				background-position: -99px -405px;
+				position: absolute;
+				top: 50%;
+				margin-top: -12px;
+				right: 10px;
+			}
+		}
+		.group{
+			margin-left: 20px;
+			background-color: $superLightGrey;
+		}
+		.list{
+			margin-left: 20px;
+			background-color: white;
+		}
+		.links{
+			margin-left: 20px;
+			background-color: $superLightGrey;
 		}
 	}
 }

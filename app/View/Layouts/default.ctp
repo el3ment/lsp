@@ -2,7 +2,7 @@
 <html>
 <head>
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<?php
         echo $this->Html->css(array('vendors/bootstrap/bootstrap','complete'));

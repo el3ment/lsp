@@ -6,10 +6,33 @@
 		var _this = {};
 		var _app = window.LSP;
 		var _assets = _app.assets;
+		var _context;
 
 		_this =  {
 			events : { 
 				application : {
+					onResize : function(e, data){
+						var width = $(window).width();
+						var newContext;
+
+						if(width >= 1200){
+							newContext = 'largeDesktop';
+						}else if(width > 979){
+							newContext = 'desktop';
+						}else if(width > 768){
+							newContext = 'tablet';
+						}else{
+							newContext = 'phone';
+						}
+
+						if(newContext !== _context){
+							$(_this).triggerHandler('onContextChange', {context : _context});
+							$(_this).triggerHandler(_util.camelCase('onContextChangeLeave-' + _context), {context : _context});
+							$(_this).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : _context});
+							console.log('Leaving ' + _context + ' entering ' + newContext);
+							_context = newContext;
+						}
+					},
 					onAttachEvents : function(e, data){
 						
 						// This is a helper event attacher, it looks for all
@@ -81,6 +104,10 @@
 			},
 			
 			assets : {},
+
+			getContext : function(){
+				return _context;
+			},
 			
 			// Fire all attach events event
 			attachEvents : function(selector){
@@ -151,11 +178,29 @@
 					$(controllerObj).triggerHandler('onLoaded');
 				}
 				
+
+				$(window).resize(
+					// We don't want to fire the onResize event every few miliseconds
+					// so we use a timer - the anynomus function helps keep scope.
+					(function(){
+						var resizeTimer;
+						return function(e, data){
+
+							if(resizeTimer){ clearTimeout(resizeTimer);	}
+							
+							resizeTimer = setTimeout(function() { 
+								$(_this).triggerHandler('onResize');
+							}, 100);
+
+						};
+					})()
+				);
+
+				// Fire the onReady and onResize events to initialize anything that relies on them
 				$(document).ready(function(){ 
-					$(_this).triggerHandler('onReady');
-				});
-				$(window).resize(function(){
 					$(_this).triggerHandler('onResize');
+					$(_this).triggerHandler('onReady');
+					$(_this).triggerHandler('onAfterReady');
 				});
 			}
 

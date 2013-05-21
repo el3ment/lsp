@@ -24,7 +24,7 @@
 	</div> 
 	
 	<ul class='shopbar span12'> 
-		<li class='departments'><a id='flyoutControlButton' class='b1 icon-24-star-black highlight-icon dropdown'>Shop By <strong>Department</strong></a></li>
+		<li class='departments'><a id='flyoutControlButton' data-reveal-children='mainFlyout' class='b1 icon-24-star-black highlight-icon dropdown reveal-waitToInitialize'>Shop By <strong>Department</strong></a></li>
 		<li class='cart'><a class='b3 icon-24-cart-white highlight-icon'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
 		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon'><strong>Wish</strong> List</a></li>
 		<li id='searchBar' class='search'>
@@ -48,74 +48,42 @@
 </div>
 
 <div id='mainFlyout' class='departmentDropdown'>
-	<div class='container span12'>
+	<div class='wrapper container span12'>
 		<ul class='topLevel'>
 			<?php for($i = 0; $i < 12; $i++){ ?>
 			<li class='collection'>
-				<div class='flyoutTitle'>
+				<div class='flyoutTitle' data-reveal-children='flyout-<?php echo $i ?>'>
 					<div class='h3'>Sticks &amp; Mallets</div>
 					<?php if($i > 6 ){ ?> <div class='details'>Subtext</div> <?php } ?>
 				</div>
-				<div class='flyout'>
-					<div class='group'>
-						<span class='h2'>Group Name <?php echo $i; ?></span>
-						<ul class='lists'>
-							<li class='list'>
-								<span class='h3'>List Name</span>
-								<ul class='links'>
-									<li><a href=''>Link 1</a></li>
-									<li><a href=''>Link 1</a></li>
-								</ul>
-							</li>
-							<li class='list'>
-								<span class='h3'>List Name</span>
-								<ul class='links'>
-									<li><a href=''>Link 1</a></li>
-									<li><a href=''>Link 1</a></li>
-								</ul>
-							</li>
-							<li class='list'>
-								<span class='h3'>List Name</span>
-								<ul class='links'>
-									<li><a href=''>Link 1</a></li>
-									<li><a href=''>Link 1</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<div class='group'>
-						<span class='h2'>Group Name</span>
-						<ul class='lists'>
-							<li class='list'>
-								<span class='h3'>List Name</span>
-								<ul class='links'>
-									<li><a href=''>Link 1</a></li>
-									<li><a href=''>Link 1</a></li>
-								</ul>
-							</li>
-							<li class='list'>
-								<span class='h3'>List Name</span>
-								<ul class='links'>
-									<li><a href=''>Link 1</a></li>
-									<li><a href=''>Link 1</a></li>
-								</ul>
-							</li>
-							<li class='list'>
-								<span class='h3'>List Name</span>
-								<ul class='links'>
-									<li><a href=''>Link 1</a></li>
-									<li><a href=''>Link 1</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<a href='' class='ad'>
-						<div class='content'>
-							<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
-							<div class='price h3'>$79.00 <span class='productGrouping details'>per pair</span></div>
-						</div>
-						<img class='productImage' src='http://s4.lonestarpercussion.com/resize/images/product-image/Innovative-IP240.jpg.500x500' />
-					</a>
+				<div id='flyout-<?php echo $i ?>' class='flyout'>
+					<ul class='container'>
+						<?php for($k = 0; $k < 3; $k++){ ?>
+						<li class='group'>
+							<div class='h2' data-reveal-children='flyout-<?php echo $i.'-'.$k; ?>'>Group Name <?php echo $i; ?></div>
+							<ul id='flyout-<?php echo $i.'-'.$k; ?>' class='lists'>
+								<?php for($j = 0; $j < 3; $j++){ ?>
+								<li class='list'>
+									<span class='h3' data-reveal-children='flyout-<?php echo $i.'-'.$k.'-'.$j; ?>'>List Name</span>
+									<ul id='flyout-<?php echo $i.'-'.$k.'-'.$j; ?>' class='links'>
+										<li class='link'><a href=''>Link 1</a></li>
+										<li class='link'><a href=''>Link 1</a></li>
+									</ul>
+								</li>
+								<?php } ?>
+							</ul>
+						</li>
+						<?php } ?>
+						<li class='advertisement'>
+							<a href='' class='ad'>
+								<div class='content'>
+									<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
+									<div class='price h3'>$79.00 <span class='productGrouping details'>per pair</span></div>
+								</div>
+								<img class='productImage' src='http://th08.deviantart.net/fs71/PRE/f/2010/006/8/e/Jester_Transparent_PNG_by_AbsurdWordPreferred.png'/>
+							</a>
+						</li>
+					</ul>
 				</div>
 			</li>
 			<?php } ?>
