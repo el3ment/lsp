@@ -74,7 +74,7 @@
 \******************************************************/
 
 /* arrow hitstate and icon holder */
-.touchcarousel .arrow-holder {
+/*touchcarousel .arrow-holder {
 	height: 100%;
 	width: 45px;
 	position: absolute;
@@ -90,7 +90,7 @@
 	right: 0;
 }
 
-/* arrow icons */
+ arrow icons 
 .touchcarousel .arrow-icon{		
 	width: 45px;
 	height: 90px;
@@ -101,7 +101,7 @@
 }
 .touchcarousel .arrow-icon.left { }
 .touchcarousel .arrow-icon.right { }
-.touchcarousel .arrow-holder:hover .arrow-icon { }
+.touchcarousel .arrow-holder:hover .arrow-icon { }*/
 .touchcarousel .arrow-holder.disabled { cursor: default; }
 .touchcarousel .arrow-holder.disabled .arrow-icon { cursor: default; }
 

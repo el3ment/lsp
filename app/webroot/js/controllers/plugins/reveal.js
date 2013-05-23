@@ -43,12 +43,11 @@
 
 				// Mouseover reveals
 				$('.reveal-showOnMouseover', parent).off('mouseenter.reveal').on('mouseenter.reveal', function(e){
-					
 					_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
-					return true;
+					//return true;
 				}).off('mouseleave.reveal').on('mouseleave.reveal', function(e){
 					_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
-					return true;
+					//return true;
 				});
 			},
 
@@ -67,15 +66,17 @@
 			open : function(children, doAnimations){
 				
 				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
+				var addClass = function(){
+					children.each(function(index, child){
+						$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
+					}).addClass('reveal-isOpen');
+				};
 
 				if(doAnimations){
-					children.slideDown({duration : 400, easing : 'swing'});
+					children.css('display', '').slideDown({duration : 400, easing : 'swing', complete : addClass});
 				}else{
-					//children.slideDown(0, 'swing');
+					addClass();
 				}
-				children.each(function(index, child){
-					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
-				}).addClass('reveal-isOpen');
 
 			},
 
@@ -83,17 +84,17 @@
 			close : function(children, doAnimations){
 				
 				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
-				
+				var clearClass = function(){
+					children.each(function(index, child){
+							$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
+						}).removeClass('reveal-isOpen');
+				};
+
 				if(doAnimations){
-					children.slideUp({duration : 400, easing : 'swing', complete : function(e){
-						$(this).css('display', '');
-					}});
+					children.css('display', 'block').slideUp({duration : 400, easing : 'swing', complete : clearClass});
 				}else{
-					//children.slideUp(0, 'swing');
+					clearClass();
 				}
-				children.each(function(index, child){
-					$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
-				}).removeClass('reveal-isOpen');
 			},
 			toggle : function(children, doAnimations){
 				if(children.is(':visible')){

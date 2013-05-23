@@ -77,11 +77,11 @@ h2, .h2{ font-size: px($h2FontSize); line-height: 28px; }
 /* Captialized, Bigger, Bold */
 h3, .h3, h4, .h4{ 
 	//margin-top:2px;
-	font-size: 15px; 
+	font-size: 14px; 
 	text-transform:uppercase;
 	font-weight: bold;
 	//margin-top: -5px;
-	line-height: 14px;
+	line-height: 18px;
 	margin-bottom: 2px;
 }
 
@@ -117,6 +117,10 @@ ul.list li,
 .productDescription ul li{
 	//padding-left: 5px;
 	list-style: square inside;
+	line-height:18px;
+	text-indent: -15px;
+	margin-left: 18px;
+	margin-bottom: 3px;
 }
 
 .withChevron{
@@ -132,6 +136,7 @@ ul.list li,
 			top: 50%;
 			margin-top: -11px;
 			left: -10px;
+			text-decoration: none;
 		}
 	}
 
@@ -160,7 +165,7 @@ ul.list li,
 	position: relative;
 	border: 1px solid $lightGrey;
 	@include border-radius(px($borderRadius));
-	padding: px($paddingUnit) px($paddingUnit * 2) 0;
+	padding: px($paddingUnit + 3) px($paddingUnit * 2) 0;
 	
 	@include box-sizing();
 	
@@ -184,6 +189,7 @@ ul.list li,
 /* An engaged panel has a yellow highlight on top */
 .panel.engaged{
 	border-top: px($paddingUnit) solid $yellow;
+	padding-top: 5px;
 }
 
 /* Disengaged panels are grey */
@@ -192,9 +198,18 @@ ul.list li,
 	padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
 }
 
+.panel.clean{
+	background-color: transparent;
+	@include box-shadow-multiple(none);
+	border-color: transparent;
+	padding-top: px((2 * $paddingUnit) - 2px);
+	padding-right: 0;
+	padding-left: 0;
+}
+
 /* Common Properties */
 /* Details are subtext */
-.details{ color: $grey; font-size: 13px; line-height: 14px; }
+.details{ color: $grey; font-size: 13px; line-height: 18px; }
 
 /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
 .productAvailability .status,
@@ -241,6 +256,7 @@ ul.list li,
 			margin: px($paddingUnit+3) px($paddingUnit) 0 0;
 			display: inline; /* IE */
 			display: inline-block;
+			//float: left;
 		}
 		input, select{
 			width: 60%;
@@ -260,6 +276,7 @@ ul.list li,
 	.productAvailability{
 		.status{
 			font-weight: bold;
+			font-size: 13px;
 			color: black;
 			background-color: transparent;
 			padding-left: 0;
@@ -280,11 +297,14 @@ ul.list li,
 	}
 	.price{ 
 		background-color: white;
-		.productGrouping{ color: $grey; }
+		.productGrouping{ 
+			color: $grey;
+			font-size: 13px;
+		}
 		.details{ display: block; }
 	}
 	.quantity{
-		input{ float: none; width: px(50px); }
+		input{ float: none; width: px(70px); }
 	}
 	.productAvailability{ background-color: white; }
 	.action{
@@ -604,14 +624,15 @@ ul.list li,
  * will be populated with the definition data, and get a little lightning bolt icon */
 *[data-def]{
 	margin-right: 0;
-	
+	color: black;
+	position: relative;
+	padding-right: px(21px);
 	dl{ display: none; }
 
 	@media (min-width: 767px){
 		
 		position: relative;
 		display:inline-block;
-		margin-right: px(2px);
 	
 		&:hover:before;{
 			content:' ';
@@ -640,12 +661,13 @@ ul.list li,
 			}
 		}
 		&:after{
-			content: '';
+			content: ' ';
 			width: px(16px);
 			height: px(16px);
 			display:inline-block;
 			margin: 0 px(2px) 0 px(3px);
-			position:relative;
+			position:absolute;
+			right: 0;
 			top: px(4px);
 			
 			background-color: $lightGrey;
@@ -751,39 +773,6 @@ ul.list li,
 	display: none;
 }
 
-/* Aggregate reviews are basically just the 5 star rating, it uses the old-school sliding doors method */
-.aggregateReviews{
-	
-	width: px(180px);
-	@include lsp-sprite-background();
-	background-position: -3px -384px;
-	display: inline-block;
-	margin-top: 5px;
-	overflow: hidden;
-	height: 20px;
-	text-align:left;
-	.reviewAggregateRating{ 
-		@include lsp-sprite-background();
-		background-position: -3px -354px;
-		display: inline-block;
-		text-indent: $hideDistance;
-	}
-	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px); margin-right: 100px; }
-	.reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); margin-right: 80px; }
-	.reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); margin-right: 60px;}
-	.reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); margin-right: 40px;}
-	.reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); margin-right: 20px;}
-	.reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); margin-right: 0px;}
-	a{
-		position: relative;
-		top: -3px;
-	}
-	.reviewCountLabel{
-		&:before{ content: '('; }
-		&:after{ content: ')'; }
-	}
-}
-
 
 @media (max-width: 400px){
 	.hidden-iphone{ display: none !important; }
@@ -814,6 +803,8 @@ ul.list li,
 		width: 100%;
 	}
 	
+	
+	// Text links
 	a{
 		display: block;
 		font-size: 13px;
@@ -834,6 +825,9 @@ ul.list li,
 				left: -10px;
 			}
 		}
+
+		// The following class naming structure comes from NetSuite
+		// Active category
 		&.leftLinkBold{
 			font-weight: bold;
 			color: black;
@@ -845,6 +839,8 @@ ul.list li,
 				}
 			}
 		}
+
+		// 3rd level category
 		&.link3{
 			padding-left: 10px;
 			margin-left: 10px;
@@ -857,6 +853,7 @@ ul.list li,
 			//margin-top: 5px;
 		//}
 		
+		// 4th level category
 		&.link4{
 			padding-left: 10px;
 			margin-left: 30px;
@@ -867,7 +864,7 @@ ul.list li,
 		}
 	}
 	
-	// A division within the box, an attribute
+	// A division within the box aka, an attribute complete with title, collapse button, and content
 	.section{ 
 		
 		padding-bottom: 30px;
@@ -891,7 +888,7 @@ ul.list li,
 		h4{ 
 			float: left;
 			position:absolute;
-			top: px(-11px);
+			top: px(-10px);
 			left: 0;
 			background-color: $superLightGrey;
 			padding-right: px(6px);
@@ -950,13 +947,16 @@ ul.list li,
 				
 				label{ 
 					padding-left: 0px;
-					width: 88%;
+					overflow: hidden;
+					float: none;
+
 					@include box-sizing();
 					.details{
 						display: inline-block;
 					}
 					&:hover{
 						cursor: pointer;
+						text-decoration: underline;
 					}
 				}
 				&:first-child{

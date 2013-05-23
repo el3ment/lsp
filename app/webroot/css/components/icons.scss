@@ -1,28 +1,32 @@
-*[class*="icon-"]{
+.usesSprite{
+	
+}
 
-    position: relative;
-    
-    &:after{
-        content: ' ';
-        display: block;
-        @include lsp-sprite-background();
+*[class*="icon-"], .hasIcon{
+
+	position: relative;
+	
+	&:after{
+		content: ' ';
+		display: block;
+		@include lsp-sprite-background();
 		background-position: 0 0;
-        position: absolute;
-        top: 50%;
-        left: 2px;
-    }
+		position: absolute;
+		top: 50%;
+		left: 2px;
+	}
 }
 
 *[class*="icon-24-"]{
 	content: '  ';
-    
-    padding-left: 28px;
+	
+	padding-left: 28px;
 
-    &:after{
-        width: 24px;
-        height: 24px;
-        margin-top: -12px;
-    }
+	&:after{
+		width: 24px;
+		height: 24px;
+		margin-top: -12px;
+	}
 }
 
 .b1[class*="icon-24-"]{
@@ -33,26 +37,26 @@
 }
 
 *[class*="icon-16-"]{
-    
+	
 	content: '   ';
-    padding-left: 22px;
+	padding-left: 22px;
 
-    &:after{
-        width: 16px;
-        height: 16px;
-        margin-top: -8px;
-    }
+	&:after{
+		width: 16px;
+		height: 16px;
+		margin-top: -8px;
+	}
 }
 *[class*="icon-64-"]{
-    
+	
 	content: '  ';
-    padding-left: 72px;
+	padding-left: 72px;
 
-    &:after{
-        width: 64px;
-        height: 64px;
-        margin-top: -32px;
-    }
+	&:after{
+		width: 64px;
+		height: 64px;
+		margin-top: -32px;
+	}
 }
 
 .icon-16-heart-grey:after{
@@ -249,7 +253,7 @@
 .icon-24-chevronRight{
 
 	&:after{
-		background-position: -99px -405px;
+		background-position: -284px -352px;
 
 		right: 10px;
 		left: inherit;

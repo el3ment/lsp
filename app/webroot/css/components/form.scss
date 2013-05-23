@@ -32,7 +32,11 @@
 		height: px(40px, $inputFontSize);
 		width: 100%;
 	}
-	textarea{ width: 100%; height: px(100px, $inputFontSize); }
+	textarea{ 
+		width: 100%; 
+		height: px(100px, $inputFontSize);
+		max-width: 100%;
+	}
 	/* Type-specific styling */
 	input[type="checkbox"], input[type="radio"]{ 
 		margin : px($paddingUnit, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
@@ -97,7 +101,7 @@
 
 /* Button Styling */
 	/* Yellow, Uppercase */ 
-	.b1, .b2, .b3, .b4{ 
+	.b1, .b2, .b3, .b4, .yellowButton, .greyButton{ 
 		
 		@include gradient($lightYellow, $darkYellow);
 		@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
@@ -136,7 +140,7 @@
 	} 
 
 	/* Grey, Caps */
-	.b3, .b4{ 
+	.b3, .b4, .greyButton{ 
 		@include gradient($buttonLightGrey, $buttonDarkGrey); 
 		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
 		text-shadow : 0 1px $saturatedHighlightGrey;
@@ -217,4 +221,15 @@
 		  -moz-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
 		  box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
 	   }
+	}
+
+	.button-circle{ // Arrow-holder is for touch-carousel
+		@include border-radius(px(32px));
+		margin-top: px(2px) 2px 0;
+		height: px(32px);
+		width: px(32px);
+		text-indent: px(-$hideDistance);
+		overflow: hidden;
+		padding:0;
+		line-height: 30px;
 	}

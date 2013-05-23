@@ -212,8 +212,10 @@
     //Configure::write('Sass.style', 'compressed');
    Configure::write('Asset.filter.css', 'sass.php');
 	//Configure::write('Sass.style', 'compressed');
-	Configure::write('Sass.line_numbers', 'true');
-	Configure::write('Sass.always_update', 'true');
+	Configure::write('Sass.line_numbers', false);
+	Configure::write('Sass.debug_info', true);
+	Configure::write('Sass.debug', true);
+	Configure::write('Sass.always_update', true);
 	Configure::write('Sass.cache', 'false');
 /**
  * Plug in your own custom JavaScript compressor by dropping a script in your webroot to handle the

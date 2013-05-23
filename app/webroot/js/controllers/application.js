@@ -19,7 +19,7 @@
 							newContext = 'largeDesktop';
 						}else if(width > 979){
 							newContext = 'desktop';
-						}else if(width > 768){
+						}else if(width >= 768){
 							newContext = 'tablet';
 						}else{
 							newContext = 'phone';

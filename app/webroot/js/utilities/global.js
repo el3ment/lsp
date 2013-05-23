@@ -9,6 +9,8 @@
 		var _app = window.LSP;
 
 		_util = {
+
+			formToObject : window.form2js,
 			
 			// Pulled from jQuery as it's not in the public API
 			// identical to jQuery.camelCase();

@@ -136,8 +136,8 @@
 			<li class='specifications section'>
 				<button class='b3 icon-24-toggleHide' data-reveal-children='productSpecifications'>Toggle Section</button>
 				<h2 data-reveal-children='productSpecifications'>Specifications</h2>
-				<div id='productSpecifications'>
-					<table class='content'>
+				<div id='productSpecifications' class='content'>
+					<table class='specifications'>
 						<tr><td>hey</td></tr>
 						<tr><td>hey</td></tr>
 						<tr><td>hey</td></tr>
@@ -208,89 +208,113 @@
 		<button class='b1 hidden-phone' data-reveal-children='addReviewForm previewReview'>Write A Review</button>
 		<button class='b4 icon-24-toggleHide visible-phone' data-reveal-children='reviewEntries'>Toggle Section</button>
 		<div id='addReviewForm' class='add'>
-			<form class='row'>
-				<fieldset class='review panel disengaged span6'>
-					<h2>Your Review</h2>
-					<ul>
-						<li class='rating field'>
-							<label>Your Rating</label>
-						</li>
-						<li class='title field'>
-							<label>One Line Summary <span class='details'>(e.g., "One of the greatest ever!")</span></label>
-							<input type='text' name='title' />
-						</li>
-						<li class='pros field'>
-							<label>Pros</label>
-							<input type='text' name='pros' />
-						</li>
-						<li class='cons field'>
-							<label>Cons</label>
-							<input type='text' name='pros' />
-						</li>
-						<li class='summary field'>
-							<label>Summary <span class='details'>(A short review of your opinons and experiences)</span></label>
-							<textarea>hey!</textarea>
-						</li>
-					</ul>
+			<form id='reviews-inputForm' class='row' data-controller='reviews' data-action='save'>
+				<fieldset class='review span6'>
+					<div class='panel'>
+						<h2>Your Review</h2>
+						<ul class='row-fluid'>
+							<li class='rating field span12'>
+								<label>Your Rating</label>
+								<fieldset class="ratingInput">
+									<input type="radio" id="star5" name="rating" value="5" />
+									<label for="star5" title="Rocks!">5 stars</label>
+									
+									<input type="radio" id="star4" name="rating" value="4" />
+									<label for="star4" title="Pretty good">4 stars</label>
+									
+									<input type="radio" id="star3" name="rating" value="3" />
+									<label for="star3" title="Meh">3 stars</label>
+									
+									<input type="radio" id="star2" name="rating" value="2" />
+									<label for="star2" title="Kinda bad">2 stars</label>
+									
+									<input type="radio" id="star1" name="rating" value="1" />
+									<label for="star1" title="Sucks big time">1 star</label>
+								</fieldset>
+							</li>
+							<li class='title field span12'>
+								<label>One Line Summary <span class='details'>(e.g., "One of the greatest ever!")</span></label>
+								<input type='text' name='title' />
+							</li>
+							<li class='pros field span6'>
+								<label>Pros</label>
+								<input type='text' data-action='inputPro' name='pros[]' />
+								<input type='text' data-action='inputPro' name='pros[]' placeholder='(Optional)' />
+								<input type='text' data-action='inputPro' name='pros[]' placeholder='(Optional)' />
+							</li>
+							<li class='cons field span6'>
+								<label>Cons</label>
+								<input type='text' data-action='inputCon' name='cons[]' />
+								<input type='text' data-action='inputCon' name='cons[]' placeholder='(Optional)' />
+								<input type='text' data-action='inputCon' name='cons[]' placeholder='(Optional)' />
+							</li>
+							<li class='summary field span12'>
+								<label>Summary <span class='details'>(A short review of your opinons and experiences)</span></label>
+								<textarea name='body'>hey!</textarea>
+							</li>
+						</ul>
+					</div>
 				</fieldset>
 				<fieldset class='author section span6'>
-					<h2>Your Information</h2>
-					<ul class='row-fluid'>
-						<li class='email field span12'>
-							<label>Email <span class='details'>(Adds the "Verified Buyer" badge to your review)</span></label>
-							<input type='email' />
-						</li>
-						<li class='firstName field span9'>
-							<label>First Name</label>
-							<input type='text' name='firstName' />
-						</li>
-						<li class='lastInitial field span3'>
-							<label>Last Initial</label>
-							<input type='text' name='lastInitial' />
-						</li>
-						<li class='city field span12'>
-							<label>City</label>
-							<input type='text' name='city' />
-						</li>
-						<li class='state field span12'>
-							<label>State</label>
-							<select name='state'>
-								<option>Texas</option>
-							</select>
-						</li>
+					<div class='panel clean'>
+						<h2>Your Information</h2>
+						<ul class='row-fluid'>
+							<li class='email field span12'>
+								<label>Email <span class='details'>(Adds the "Verified Buyer" badge to your review)</span></label>
+								<input type='email' />
+							</li>
+							<li class='firstName field span9'>
+								<label>First Name</label>
+								<input type='text' name='firstName' />
+							</li>
+							<li class='lastInitial field span3'>
+								<label>Last Initial</label>
+								<input type='text' name='lastInitial' />
+							</li>
+							<li class='city field span6'>
+								<label>City</label>
+								<input type='text' name='city' />
+							</li>
+							<li class='state field span6'>
+								<label>State</label>
+								<select name='state'>
+									<option>Texas</option>
+								</select>
+							</li>
 
-						<li class='experience field'>
-							<label>Experience</label>
-							<ul>
-								<li class='drummer field'>
-									<input type='checkbox' data-reveal-children='drummerYearsPlaying' />
-									<label>Drummer</label>
-									<div id='drummerYearsPlaying' class='yearsPlaying'>
-										<input type='text' />
-										<label class='details'>Years</label>
-									</div>
-								</li>
-								<li class='teacher field'>
-									<input type='checkbox' data-reveal-children='teacherYearsPlaying' />
-									<label>Teacher</label>
-									<div id='teacherYearsPlaying' class='yearsPlaying'>
-										<input type='text' />
-										<label class='details'>Years</label>
-									</div>
-								</li>
-								<li class='student field'>
-									<input type='checkbox' data-reveal-children='studentYearsPlaying' />
-									<label>Student</label>
-									<div id='studentYearsPlaying' class='yearsPlaying'>
-										<input type='text' />
-										<label class='details'>Years</label>
-									</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
+							<li class='experience field'>
+								<label>Experience</label>
+								<ul>
+									<li class='drummer field'>
+										<input id='drummerProfile' name='custrecordreviewprofile[0].title' value='Drummer' type='checkbox' data-reveal-children='drummerYearsPlaying' />
+										<label for='drummerProfile'>Drummer</label>
+										<div id='drummerYearsPlaying' class='yearsPlaying'>
+											<input type='number' class='years' name='custrecordreviewprofile[0].time' />
+											<label class='details'>Years</label>
+										</div>
+									</li>
+									<li class='teacher field'>
+										<input id='teacherProfile' type='checkbox' name='custrecordreviewprofile[1].title' value='Teacher' data-reveal-children='teacherYearsPlaying' />
+										<label for='teacherProfile'>Teacher</label>
+										<div id='teacherYearsPlaying' class='yearsPlaying'>
+											<input type='number' class='years' name='custrecordreviewprofile[1].time' />
+											<label class='details'>Years</label>
+										</div>
+									</li>
+									<li class='student field'>
+										<input id='studentProfile' name='custrecordreviewprofile[2].title' value='Student' type='checkbox' data-reveal-children='studentYearsPlaying' />
+										<label for='studentProfile'>Student</label>
+										<div id='studentYearsPlaying' class='yearsPlaying'>
+											<input type='number' class='years' name='custrecordreviewprofile[2].time' />
+											<label class='details'>Years</label>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</fieldset>
-				<fieldset class='submit span12'>
+				<fieldset class='submit row span12'>
 					<button class='b1'>Submit Review</button>
 					<span class='details'>When you are satisfied with your review, click the submit review button &rarr;</span>
 				</fieldset>
@@ -349,4 +373,55 @@
 	</div>
 </div>
 
+<script type='text/html' id='templates-reviewEntry'>
+	<li id="previewReview" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row'>
+		<ul class='author offset1 span2 hidden-phone'>
+			<li class='thumbnail'><img itemprop='authorPhoto' src='http://www.gravatar.com/avatar/<#=_util.md5(email) #>.jpg?s=60' width='60' height='60' class='reviewAuthorPhoto' /></li>
+			<li itemprop="reviewer" class='reviewAuthor'><#=firstName #> <#=lastInitial #>.</li>
+			<li class='reviewLocation details'><#=city #>, <#=state #></li>
+			<li class='reviewProfile details'><#=profile #></li>
+		</ul>
+		<ul class='points span3'>
+			<li class='pros'>
+				<h3>Pros</h3>
+				<ul class='list'>
+					<# for(var i = 0; i < pros.length; i++){ #>
+						<# if(pros[i]){ #>
+							<li><#=pros[i] #></li>
+						<# } #>
+					<# } #>
+				</ul>
+			</li>
+			<li class='cons'>
+				<h3>Cons</h3>
+				<ul class='list'>
+					<# for(var i = 0; i < cons.length; i++){ #>
+						<# if(cons[i]){ #>
+							<li><#=cons[i] #></li>
+						<# } #>
+					<# } #>
+				</ul>
+			</li>
+			<li class='actions hidden-phone'>
+				<button class='b5 icon-24-voteUp' data-action='voteUp'>Vote Review as Helpful</button>
+				<button class='b5 icon-24-voteDown' data-action='voteDown'>Vote Review as Un-Helpful</button>
+			</li>
+		</ul>
+		<ul class='review'>
+			<li itemprop="itemreviewed" class='reviewItemReviewed'>Innovative IP240</li>
+			<li class='reviewReviewRating'>
+				<div class='aggregateReviews'>
+					<span itemprop="rating" data-reviews-aggregateRating='<#=(rating || '') #>' class='reviewAggregateRating'>3.5</span>
+				</div>
+			</li>
+			<li itemprop="summary" class='reviewTitle'><#=title #></li>
+			<li itemprop="dtreviewed" class='reviewDatePublished details'>December 1, 2012</li>
+			<li class='reviewAuthorName details'>by Robert P.</li>
+			<li itemprop="description" class='reviewReviewBody'>
+				<#=body #>
+			</li>
+			<li class='reviewInteractionCount hidden-phone' content='32:UserLikes'>32</li>
+		</ul>
+	</li>
+</script>
 

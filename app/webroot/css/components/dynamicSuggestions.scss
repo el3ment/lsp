@@ -2,72 +2,117 @@
  * like "People who bought this also bought" or "Similar items" */
 .dynamicItemSuggestions{
 
-    //height: 340px;
-	
+	//height: 340px;
+	position: relative;
+
 	.well{
 		//height: px(250px);
 		width: 100%;
 		overflow:hidden;
+		border-top: 1px solid $lightGrey;
+		border-bottom: 3px solid $lightGrey;
 	}
 	
 	.itemList{
-    
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border: 1px solid $lightGrey;
-        border-width: 1px 0 3px 0;
+	
+		margin-bottom: 0;
+		padding-bottom: 0;
+		//border: 1px solid $lightGrey;
+		//border-width: 1px 0 3px 0;
 		width: 5000px;
 		
 		position:relative;
 		left:-200px; // This is the property to animate
 	
-        .productScope{
-        
-            border: 1px solid $lightGrey;
-            border-bottom-width: 0;
-            border-top-width: 0;
-            border-right-color: transparent;
-            float: left;
-            width: 180px;
-            position: relative;
-            display: block;
-            padding-bottom: px(2 * $paddingUnit);
-        
-            a{
-                width: 100%;
-                height: 100%;
-                display: block;
-                text-decoration: none;
-            }
-        
-            &:nth-child(1){
-                border-left-color: transparent;
-            }
-            &:last-child{
-                border-right-color: transparent;
-            }
-            img{ margin: px($paddingUnit + 2);}
-        
-            .productPrice{ 
-                font-weight: bold;
-                padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
-                text-decoration: none;
-                color: $black;
-            }
-            .productName{ 
-                display: block; 
-                padding: 0 px($paddingUnit + 2);
-                color: $black;
-            }
-            &:hover{
-                @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-                border: 1px solid $darkYellow;
-                border-bottom-width: 0;
-                border-top-width: 0;
-            }
-        }
-    
-        @include clearfix;
-    
-    }
+		.productScope{
+		
+			border: 1px solid $lightGrey;
+			border-bottom-width: 0;
+			border-top-width: 0;
+			border-right-color: transparent;
+			float: left;
+			width: 180px;
+			position: relative;
+			display: block;
+			padding-bottom: px(2 * $paddingUnit);
+		
+			a{
+				width: 100%;
+				height: 100%;
+				display: block;
+				text-decoration: none;
+			}
+		
+			&:nth-child(1){
+				border-left-color: transparent;
+			}
+			&:last-child{
+				border-right-color: transparent;
+			}
+			img{ margin: px($paddingUnit + 2);}
+		
+			.productPrice{ 
+				font-weight: bold;
+				padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
+				text-decoration: none;
+				color: $black;
+			}
+			.productName{ 
+				display: block; 
+				padding: 0 px($paddingUnit + 2);
+				color: $black;
+			}
+			&:hover{
+				@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+				border: 1px solid $darkYellow;
+				border-bottom-width: 0;
+				border-top-width: 0;
+				& + .productScope{
+					border-left-width: 0;
+					margin-left: 1px;
+				}
+			}
+		}
+	
+		@include clearfix;
+	
+	}
+}
+
+.touchcarousel .arrow-holder{
+
+	@extend .greyButton;
+	@extend .button-circle;
+
+	position: absolute;
+	top: 50%;
+	left: -21px;
+	margin-top: -16px;
+
+	&.disabled{
+		display: none;
+	}
+	&:hover{
+		@include gradient($hoverLightYellow, $darkYellow);
+	}
+	&.left:after,
+	&.right:after{
+		content: ' ';
+		display: block;
+		@include lsp-sprite-background();
+		background-position: -82px -256px;
+		position: absolute;
+		top: 50%;
+		left: 3px;
+		margin-top: -12px;
+		height: 24px;
+		width: 24px;
+	}
+	&.right{
+		right: -21px;
+		left: inherit;
+		&:after{
+			background-position: -117px -256px;
+		}
+	}
 }

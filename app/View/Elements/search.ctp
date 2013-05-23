@@ -64,9 +64,9 @@
 		            <li class='compare'><button class='b2' data-action='compare'>Compare <span class='count'>(2)</span></button></li>
             
 		            <li class='pagination'>
-		                <button class='b3 icon-24-leftArrow' data-action='previousPage'>Previous Page</button>
+		                <button class='b3 icon-24-leftArrow button-circle' data-action='previousPage'>Previous Page</button>
 		                <span class='pageCount details'>Page <span class='currentPage'>3</span> of <span class='totalPages'>8</span></span>
-		                <button class='b3 icon-24-rightArrow' data-action='nextPage'>Next Page</button>
+		                <button class='b3 icon-24-rightArrow button-circle' data-action='nextPage'>Next Page</button>
 		            </li>
 		            <li class='control-pagination-itemCount'>
 		                <label for='control-pagination-itemCount'>Items:</label>
@@ -144,9 +144,9 @@
 	                <li><button class='b2 compare' data-action='compare'>Compare <span class='count'>(2)</span></button></li>
                 
 	                 <li class='pagination'>
-	                    <button class='b3 icon-24-leftArrow' data-action='previousPage'>Previous Page</button>
+	                    <button class='b3 icon-24-leftArrow button-circle' data-action='previousPage'>Previous Page</button>
 	                    <span class='pageCount details'>Page <span class='currentPage'>3</span> of <span class='totalPages'>8</span></span>
-	                    <button class='b3 icon-24-rightArrow' data-action='nextPage'>Next Page</button>
+	                    <button class='b3 icon-24-rightArrow button-circle' data-action='nextPage'>Next Page</button>
 	                </li>
 	                <li class='control-pagination-itemCount'>
 	                    <label for='control-pagination-itemCount'>Items:</label>

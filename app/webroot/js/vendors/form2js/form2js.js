@@ -24,29 +24,28 @@
  * Time: 19:02:33
  */
 
-// Modified instantiation to protect global namespace and
-// universalize usage
-window.LSP = window.LSP || {};
-window.LSP.utilities = window.LSP.utilities || {};
-window.LSP.utilities.formToObject = (function()
-{
-    "use strict";
 
-    /**
+var form2js = (function()
+{
+	"use strict";
+
+	/**
 	 * Returns form values represented as Javascript object
 	 * "name" attribute defines structure of resulting object
 	 *
 	 * @param rootNode {Element|String} root form element (or it's id) or array of root elements
 	 * @param delimiter {String} structure parts delimiter defaults to '.'
 	 * @param skipEmpty {Boolean} should skip empty text values, defaults to true
+	 * @param emptyToNull {Boolean} should empty values be converted to null?
 	 * @param nodeCallback {Function} custom function to get node value
 	 * @param useIdIfEmptyName {Boolean} if true value of id attribute of field will be used if name of field is empty
 	 */
-	function form2js(rootNode, delimiter, skipEmpty, nodeCallback, useIdIfEmptyName)
+	function form2js(rootNode, delimiter, skipEmpty, emptyToNull, nodeCallback, useIdIfEmptyName)
 	{
 		if (typeof skipEmpty == 'undefined' || skipEmpty == null) skipEmpty = true;
+		if (typeof emptyToNull == 'undefined' || emptyToNull == null) emptyToNull = true;
 		if (typeof delimiter == 'undefined' || delimiter == null) delimiter = '.';
-		if (arguments.length < 5) useIdIfEmptyName = false;
+		if (arguments.length < 6) useIdIfEmptyName = false;
 
 		rootNode = typeof rootNode == 'string' ? document.getElementById(rootNode) : rootNode;
 
@@ -55,7 +54,7 @@ window.LSP.utilities.formToObject = (function()
 			i = 0;
 
 		/* If rootNode is array - combine values */
-		if (rootNode.constructor == Array || (typeof NodeList != "undefined" && rootNode.constructor == NodeList))
+		if (rootNode.constructor == Array || (typeof NodeList != 'undefined' && rootNode.constructor == NodeList))
 		{
 			while(currNode = rootNode[i++])
 			{
@@ -67,7 +66,7 @@ window.LSP.utilities.formToObject = (function()
 			formValues = getFormValues(rootNode, nodeCallback, useIdIfEmptyName);
 		}
 
-		return processNameValues(formValues, skipEmpty, delimiter);
+		return processNameValues(formValues, skipEmpty, emptyToNull, delimiter);
 	}
 
 	/**
@@ -76,7 +75,7 @@ window.LSP.utilities.formToObject = (function()
 	 * @param skipEmpty if true skips elements with value == '' or value == null
 	 * @param delimiter
 	 */
-	function processNameValues(nameValues, skipEmpty, delimiter)
+	function processNameValues(nameValues, skipEmpty, emptyToNull, delimiter)
 	{
 		var result = {},
 			arrays = {},
@@ -95,9 +94,12 @@ window.LSP.utilities.formToObject = (function()
 		{
 			value = nameValues[i].value;
 
+			if (emptyToNull && (value === '')) { value = null; }
 			if (skipEmpty && (value === '' || value === null)) continue;
 
 			name = nameValues[i].name;
+			if (typeof name === 'undefined') continue;
+
 			_nameParts = name.split(delimiter);
 			nameParts = [];
 			currResult = result;
@@ -226,7 +228,7 @@ window.LSP.utilities.formToObject = (function()
 	{
 		var result = [],
 			currentNode = rootNode.firstChild;
-
+		
 		while (currentNode)
 		{
 			result = result.concat(extractNodeValues(currentNode, nodeCallback, useIdIfEmptyName));
@@ -245,8 +247,11 @@ window.LSP.utilities.formToObject = (function()
             result = [callbackResult];
         }
         else if (fieldName != '' && node.nodeName.match(/INPUT|TEXTAREA/i)) {
-            fieldValue = getFieldValue(node);
-			result = [ { name: fieldName, value: fieldValue} ];
+            fieldValue = getFieldValue(node);   
+	        if (fieldValue == null && node.type == 'radio')
+                result = [];
+            else
+                result = [ { name: fieldName, value: fieldValue} ];
         }
         else if (fieldName != '' && node.nodeName.match(/SELECT/i)) {
 	        fieldValue = getFieldValue(node);
@@ -270,15 +275,13 @@ window.LSP.utilities.formToObject = (function()
 	function getFieldValue(fieldNode)
 	{
 		if (fieldNode.disabled) return null;
-
+		
 		switch (fieldNode.nodeName) {
 			case 'INPUT':
 			case 'TEXTAREA':
 				switch (fieldNode.type.toLowerCase()) {
 					case 'radio':
 					case 'checkbox':
-                        if (fieldNode.checked && fieldNode.value === "true") return true;
-                        if (!fieldNode.checked && fieldNode.value === "true") return false;
 						if (fieldNode.checked) return fieldNode.value;
 						break;
 
@@ -315,7 +318,7 @@ window.LSP.utilities.formToObject = (function()
 
 		if (!multiple) return selectNode.value;
 
-		for (options = selectNode.getElementsByTagName("option"), i = 0, l = options.length; i < l; i++)
+		for (options = selectNode.getElementsByTagName('option'), i = 0, l = options.length; i < l; i++)
 		{
 			if (options[i].selected) result.push(options[i].value);
 		}

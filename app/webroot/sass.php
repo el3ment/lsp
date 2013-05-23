@@ -23,7 +23,7 @@
  * @package			PHamlP
  * @subpackage	Cake
  */
-$sassOptions = array('style', 'property_syntax', 'cache', 'always_update', 'template_location', 'css_location', 'cache_location', 'load_paths', 'line', 'line_numbers');
+$sassOptions = array('debug', 'debug_info', 'style', 'property_syntax', 'cache', 'always_update', 'template_location', 'css_location', 'cache_location', 'load_paths', 'line', 'line_numbers');
 /**
  * @var array options
  * The following options are available:
@@ -108,6 +108,7 @@ if (file_exists($sassFile)) {
 		$_option = Configure::read("Sass.$option");
 		if (!is_null($_option)) {
 			$options[$option] = $_option;
+			//echo $option . ' - ' . $options[$option];
 		}
 	} // foreach
 	

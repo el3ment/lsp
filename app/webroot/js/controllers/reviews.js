@@ -2,43 +2,58 @@
 	
 	var _util = window.LSP.utilities;
 	
-	var reviews = function(){
+	_util.register('controller', 'reviews', (function(){
 		var _this = {};
 		var _lsp = window.LSP;
 		var _api = _lsp.models.lspapi;
 		var _settings = {
-			formSelector : 'form#reviews-inputForm',
-			profileTimeInputSelector : 'form#reviews-inputForm input.time',
-			profileTitleSelector : 'form#reviews-inputForm input[data-childid]'
+			formSelector : '#reviews-inputForm',
+			prosInputSelector : '#reviews-inputForm .pros input',
+			consInputSelector : '#reviews-inputForm .cons input',
+			reviewTemplateId : 'templates-reviewEntry',
+			previewSelector : '#previewReview'
 		};
 		
 		_this =  {
 			name : 'reviews',
 			events : {
+				reviews : {
+					onSave : function(e, data){
+						console.log(_this.parseForm(data.selector));
+					},
+					onProOrConInput : function(e){
+						// If there is something in the input, show the second one
+						if(e.currentTarget.value.length > 0){
+
+							$(e.currentTarget).next('input').show();
+
+						// If the current one is empty, AND the next one is too, hide the second one
+						}else if($(e.currentTarget).next('input').length && // another input exists
+							$(e.currentTarget).next('input')[0].value.length < 1){ // the previous one is empty
+
+							//debugger;
+							$(e.currentTarget).next('input').hide();
+
+						// If the current one is empty, and no longer has focus, and isn't the first one, hide it
+						}else if(!$(e.currentTarget).is(':focus') && !$(e.currentTarget).is(':nth-of-type(1)') && $(e.currentTarget).prev('input')[0].value.length < 1){
+							//debugger;
+							$(e.currentTarget).hide();
+						}
+					},
+					onRenderPreview : function(e){
+						$(_settings.previewSelector).html(_this.render(_this.parseForm(e.currentTarget.form)));
+					}
+				},
 				application : {
 					onAttachEvents : function(e, data){
-						// Hijack the submit event on any review forms
-						$(_settings.formSelector, data.selector)
-						.bind('submit', function(e){
-							e.preventDefault();
-							return false;
-						}).bind('afterValidation', function(e){
-							_this.save(this);
-							e.preventDefault();
-							return false;
-						});
-						
-						
-						$(_settings.profileTitleSelector, data.selector).change(function(e, data){
-							if($(this).prop('checked')){
-								$('#'+$(this).data('childid')).removeClass('hide');
-							}else{
-								$('#'+$(this).data('childid')).addClass('hide');
-							}
-						});
-						
-						
-						console.log('Reviews attached');
+						$(_settings.formSelector+' :input', data.selector)
+							.off('.reviews')
+							.on('keyup.lsp.reviews', _this.events.reviews.onRenderPreview)
+								.filter('input[type="checkbox"], input[type="radio"], select')
+								.on('click.lsp.reviews', _this.events.reviews.onRenderPreview);
+
+						$(_settings.prosInputSelector+', '+_settings.consInputSelector, data.selector)
+							.on('keyup.lsp.reviews blur.lsp.reviews', _this.events.reviews.onProOrConInput);
 					}
 				}
 			},
@@ -62,27 +77,33 @@
 				
 			},
 			
+			render : function(data){
+				var html = _util.parseMicroTemplate(_settings.reviewTemplateId, data);
+				return html;
+			},
+
 			// Take the form, JSON encode the profile section, perform
 			// other pre-save functions, and return the data
 			parseForm : function(element){
 				
 				var returnData;
+				var profile = [];
 				
-				returnData = _util.formToObject(element, null, true);
-				for(var i = 0; returnData.custrecordreviewprofile && i < returnData.custrecordreviewprofile.length; i++){
-					//returnData.custrecordreviewprofile[i] = JSON.stringify(returnData.custrecordreviewprofile[i]);
-					returnData.custrecordreviewprofile[i] = returnData.custrecordreviewprofile[i].title + 
-						(returnData.custrecordreviewprofile[i].time ? ' ('+ returnData.custrecordreviewprofile[i].time + 'yrs)' : '');
+				returnData = _util.formToObject(element, null, false);
+				for(var i = 0; i < returnData.custrecordreviewprofile.length; i++){
+					
+					if(returnData.custrecordreviewprofile[i].title){
+						profile.push(returnData.custrecordreviewprofile[i].title + 
+								(returnData.custrecordreviewprofile[i].time ? ' ('+ returnData.custrecordreviewprofile[i].time + 'yrs)' : ''));
+					}
 				}
-				returnData.custrecordreviewerprofile = (returnData.custrecordreviewprofile || []).join(', ');
+				returnData.profile = profile.join(', ');
 				
 				return returnData;
 			}
 		};
 
 		return _this;
-	};
-	
-	_util.register('controller', 'reviews', reviews);
+	})());
 	
 })();

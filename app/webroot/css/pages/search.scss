@@ -1,8 +1,8 @@
 /* Search Results */
 .page-search{
-    
-    .title{
-    	float:right;
+	
+	.title{
+		float:right;
 		text-align:left;
 		strong{ color: black; }
 		.details{
@@ -16,124 +16,109 @@
 				content: ' pages)';
 			}
 		}
-    }
+	}
 	
-    
+	
 	// Actual search results
-    .results{
+	.results{
 		
-        .tabs{
+		.tabs{
 			font-size: 13px;
-            margin-top: -1em;
-            margin-right: px($paddingUnit);
-            
+			margin-top: -1em;
+			margin-right: px($paddingUnit);
+			
 			li{
 				top: 1px;
-                float: right;
-                position:relative;
-            }
+				float: right;
+				position:relative;
+			}
 			
-            .b1, .b2, .b3, .b4, .b5, a{
-                
-                border: 1px solid $lightGrey;
-                @include border-radius(px($borderRadius) px($borderRadius) 0 0);
-                background-color: $white;
-                padding: px(2*$paddingUnit) px(4 * $paddingUnit) px(2*$paddingUnit) px(40px);
-                text-decoration: none;
-                
-                &:after{
-                    left: px(10px);
-                }
-                
-            }
+			.b1, .b2, .b3, .b4, .b5, a{
+				
+				border: 1px solid $lightGrey;
+				@include border-radius(px($borderRadius) px($borderRadius) 0 0);
+				background-color: $white;
+				padding: px(2*$paddingUnit) px(4 * $paddingUnit) px(2*$paddingUnit) px(40px);
+				text-decoration: none;
+				
+				&:after{
+					left: px(10px);
+				}
+				
+			}
 			
-            button[data-action="showCompact"],
+			button[data-action="showCompact"],
 			button[data-action="showDetails"]{
-                margin-left: -1px;
-            }
-        }
+				margin-left: -1px;
+			}
+		}
 		
-        
-        .controls{
-            
+		
+		.controls{
+			
 			z-index: 1;
-            border: 1px solid $lightGrey;
-            background-color: $superLightGrey;
-            border-width: 1px 0;
-            float: left;
-            width: 100%;
-            padding: px(2 * $paddingUnit) 0;
-            
-            li{
-                float: right;
-                margin-right: 50px;
-                @media (max-width: 979px){
+			border: 1px solid $lightGrey;
+			background-color: $superLightGrey;
+			border-width: 1px 0;
+			float: left;
+			width: 100%;
+			padding: px(2 * $paddingUnit) 0;
+			
+			li{
+				float: right;
+				margin-right: 50px;
+				@media (max-width: 979px){
 					margin-right: 25px;
 				}
-                &:first-child{
-                    float: left;
-                }
-                &.pagination{
-                    margin-right: px($paddingUnit);
-                }
-                
-            }
-            label{
-                float: left;
-                clear: none;
-                margin-top: .5em;
-                margin-right: px($paddingUnit);
+				&:first-child{
+					float: left;
+				}
+				&.pagination{
+					margin-right: px($paddingUnit);
+				}
+				
+			}
+			label{
+				float: left;
+				clear: none;
+				margin-top: .5em;
+				margin-right: px($paddingUnit);
 				font-weight: normal;
 				font-size: 13px;
 				@media (max-width: 979px){
 					display: none;
 				}
-            }
+			}
 			
-            select{
-                float: left;
-                clear: none;
-                font-weight: normal;
-                font-size: px(13px, $inputFontSize);
-                margin-top: px(1px);
-                height: px(35px);
+			select{
+				float: left;
+				clear: none;
+				font-weight: normal;
+				font-size: px(13px, $inputFontSize);
+				margin-top: px(1px);
+				height: px(35px);
 				width: inherit;
 				max-width:200px;
-                font-size: 13px;
-            }
+				font-size: 13px;
+			}
+
+			.pageCount{
+				font-style: italic;
+				color: $grey;
+			}
+			button[data-action='compare']{
+				margin-top: px(-1px);
+				.count{
+					font-weight: normal;
+				}
+			}
 			
-			
-            button[data-action='previousPage'], button[data-action='nextPage']{
-                
-                @include border-radius(px(32px));
-                
-                margin-top: px(2px);  
-				margin-left: 0; 
-                height: px(32px);
-                width: px(32px);
-                text-indent: px(-$hideDistance);
-                overflow: hidden;
-                padding:0;
-				line-height: 30px;
-                
-            }
-            .pageCount{
-                font-style: italic;
-                color: $grey;
-            }
-            button[data-action='compare']{
-                margin-top: px(-1px);
-                .count{
-                    font-weight: normal;
-                }
-            }
-			
-        }
+		}
 		
-        .foot .controls{
-            margin-top: -1px;
-        }
-        
+		.foot .controls{
+			margin-top: -1px;
+		}
+		
 		@media (max-width: 979px){
 			.reviewCountLabel{
 				display: none;
@@ -141,85 +126,85 @@
 			}
 		}
 		
-        .searchResults{
-            
-            .entry{
-                position: relative;
-                display: block;
-                padding-top: px($gutterWidth / 2);
-                padding-bottom: px($gutterWidth);
-                border-bottom: 1px solid $lightGrey;
-                float:left;
+		.searchResults{
+			
+			.entry{
+				position: relative;
+				display: block;
+				padding-top: px($gutterWidth / 2);
+				padding-bottom: px($gutterWidth);
+				border-bottom: 1px solid $lightGrey;
+				float:left;
 				@media (max-width: 767px){
 					padding-bottom: 60px;
 				}
 				@media (max-width: 400px){
 					padding-bottom: 85px;
 				}
-            }
-            .productPrice{ font-size: px(19px); }
-            .productName{ 
-                font-size: px(15px);
-            }
+			}
+			.productPrice{ font-size: px(19px); }
+			.productName{ 
+				font-size: px(15px);
+			}
 		
 			.features .list{
 				color: black;
 			}
 		
-        }
-    }
+		}
+	}
 
-    // Two Styles of views
+	// Two Styles of views
 	.listView{
-        
-        .listScope{
-            clear: both;
-            display: block;
-            float: left;
-        }
+		
+		.listScope{
+			clear: both;
+			display: block;
+			float: left;
+		}
 		
 		// The list tab - make it look 'active'
 		.tabs .icon-24-list{
-	        border-bottom: 1px solid $superLightGrey;
-	        background-color: $superLightGrey;
+			border-bottom: 1px solid $superLightGrey;
+			background-color: $superLightGrey;
 			color: black;	
 		}
 		
-        .entry{
-            padding-left: 165px;
+		.entry{
+			padding-left: 165px;
 			
 			@media (min-width: 1200px){
 				padding-left: px(columns(3));
 			}
 			
-            float: left; 
+			float: left; 
 
 			width: 100%;
 			@include box-sizing();
 			
-            &:last-child{
-                border-bottom: none;   
-            }
+			&:last-child{
+				border-bottom: none;   
+			}
 			
-        }
-        .model{
-            display:block;
-            margin-bottom: px($paddingUnit * 2);
+		}
+		.model{
+			display:block;
+			margin-bottom: px($paddingUnit * 2);
 			@media (max-width: 979px){
 				margin-bottom:0;
 			}
-        }
-        .aggregateReviews{
-            margin-bottom: px($paddingUnit * 2);
-        }
+		}
+		.aggregateReviews{
+			margin-bottom: px($paddingUnit * 2);
+		}
 		.thumbnail{
-            float: left;
-            margin-right: px($paddingUnit);
-            position: absolute;
-            top: 10px;
-            left: 0;
-            width: 160px;
-            height: 160px;
+			float: left;
+			margin-right: px($paddingUnit);
+			position: absolute;
+			top: 10px;
+			left: 0;
+			width: 160px;
+			height: 160px;
 			img{
 				width: 100%;
 			}
@@ -228,28 +213,28 @@
 			}
 			
 		}
-        .searchResults .compare{
-            position: absolute;
-            top: px(170px);
-            left: px(10px);
+		.searchResults .compare{
+			position: absolute;
+			top: px(170px);
+			left: px(10px);
 			@media (min-width: 1200px){
 				top: px(columns(3));
 			}
 			.b5{
 				margin-top:2px;
 			}
-        }
-        .addToCart{
-            
-            float: right;
+		}
+		.addToCart{
+			
+			float: right;
 			width: 40%;
 			min-width: 170px;
-            margin-left: px(2 * $paddingUnit);
-            margin-bottom: 0;
-            
-            .status{ display: inline; }
-            .method{ display: block; }
-            .option, .quantity, .action{ text-align:right; }
+			margin-left: px(2 * $paddingUnit);
+			margin-bottom: 0;
+			
+			.status{ display: inline; }
+			.method{ display: block; }
+			.option, .quantity, .action{ text-align:right; }
 			
 			@media (max-width: 979px) and (min-width: 768px){
 				.productAvailability .details,
@@ -257,60 +242,60 @@
 					display:none;
 				}
 			}
-        }
-    }
+		}
+	}
 	
 	.gridView{
-        
-        $_topOfPrice : 350px;
-        
-        .listScope{
-            clear: both;
-            display: block;
-            float: left;
-        }
+		
+		$_topOfPrice : 350px;
+		
+		.listScope{
+			clear: both;
+			display: block;
+			float: left;
+		}
 		
 		// Make the grid tab look active
 		.tabs .icon-24-compact{
-	        border-bottom: 1px solid $superLightGrey;
-	        background-color: $superLightGrey;
+			border-bottom: 1px solid $superLightGrey;
+			background-color: $superLightGrey;
 			color: black;	
 		}
 		
-        .entry{
-            clear:none;
-            padding: 0 px(7px);
-            width: 33%;
+		.entry{
+			clear:none;
+			padding: 0 px(7px);
+			width: 33%;
 			@include box-sizing();
 			
 			@media (min-width: 1200px){
 				width: 25%;
 			}
 			
-            height: px(500px);
-            border: 1px solid $lightGrey;
-            border-top: none;
-            border-left: none;
-            margin-bottom: 0;
-            left: -1px;
-           
-		   	@media (min-width: 767px) and (max-width: 1199px){
-	            &:nth-child(3n - 2){
-	                border-left-color: transparent;
-	            }
-	            &:nth-child(3n + 3){
-	                border-right-color: transparent;
-	            }
+			height: px(500px);
+			border: 1px solid $lightGrey;
+			border-top: none;
+			border-left: none;
+			margin-bottom: 0;
+			left: -1px;
+		   
+			@media (min-width: 767px) and (max-width: 1199px){
+				&:nth-child(3n - 2){
+					border-left-color: transparent;
+				}
+				&:nth-child(3n + 3){
+					border-right-color: transparent;
+				}
 			}
 			@media (min-width: 1200px){
-	            &:nth-child(4n - 3){
-	                border-left-color: transparent;
-	            }
-	            &:nth-child(4n + 4){
-	                border-right-color: transparent;
-	            }
+				&:nth-child(4n - 3){
+					border-left-color: transparent;
+				}
+				&:nth-child(4n + 4){
+					border-right-color: transparent;
+				}
 			}
-        }
+		}
 		img{
 			width: 100%;
 			/*
@@ -319,59 +304,59 @@
 				height: 200px;
 			}*/
 		}
-        .compare{
-            float: none;
-        }
-        .aggregateReviews{
-            position: absolute;
-            top: px($_topOfPrice + 50px);
-            left: $paddingUnit;
+		.compare{
+			float: none;
+		}
+		.aggregateReviews{
+			position: absolute;
+			top: px($_topOfPrice + 50px);
+			left: $paddingUnit;
 			
-        }
-        .productName{
-            height: 6em;
-            text-overflow: ellipsis;
-        }
-        .model, .features{
-            display: none;
-        }
-        .addToCart{
-            
-            position: absolute; 
-            top: 0;
-            left: -$hideDistance;
-            margin:0;
-            
-            .productPrice{
-                font-size: px(17px);
-                position: absolute;
-                top: px($_topOfPrice, 17px);
-                left: $hideDistance + $paddingUnit + 2px;
-            }
-            .shortStatus{
-                display: block;
-                font-size: px(13px);
-                position: absolute;
-                top: px($_topOfPrice + 18px);
-                left: ($hideDistance + $paddingUnit + 2);
-                width: px(columns(3));
-                color: $grey;
-            }
-            .scroller{
-                position: absolute;
-                top: px($_topOfPrice + 90px, $inputFontSize);
-                left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
-            }
-            .b1{
-                position: absolute;
-                top: px($_topOfPrice + 90px, $boldAllCapsH4);
-                left: px($hideDistance + 2 * $paddingUnit + 50px + 7px, $b1FontSize);
-                width: px(135px, $b1FontSize);
+		}
+		.productName{
+			height: 6em;
+			text-overflow: ellipsis;
+		}
+		.model, .features{
+			display: none;
+		}
+		.addToCart{
+			
+			position: absolute; 
+			top: 0;
+			left: -$hideDistance;
+			margin:0;
+			
+			.productPrice{
+				font-size: px(17px);
+				position: absolute;
+				top: px($_topOfPrice, 17px);
+				left: $hideDistance + $paddingUnit + 2px;
+			}
+			.shortStatus{
+				display: block;
+				font-size: px(13px);
+				position: absolute;
+				top: px($_topOfPrice + 18px);
+				left: ($hideDistance + $paddingUnit + 2);
+				width: px(columns(3));
+				color: $grey;
+			}
+			.scroller{
+				position: absolute;
+				top: px($_topOfPrice + 90px, $inputFontSize);
+				left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
+			}
+			.b1{
+				position: absolute;
+				top: px($_topOfPrice + 90px, $boldAllCapsH4);
+				left: px($hideDistance + 2 * $paddingUnit + 50px + 7px, $b1FontSize);
+				width: px(135px, $b1FontSize);
 					@media (max-width: 979px) and (min-width: 768px){
 						left: px($hideDistance + 2 * $paddingUnit + 12px, $b1FontSize);
 					}
-            }
-        }
+			}
+		}
 		@media (max-width: 979px) and (min-width: 768px){
 			.entry{
 				height: 455px;
@@ -386,8 +371,8 @@
 				}
 			}
 		}
-        
-    }
+		
+	}
 	
 	// Design of the entries on mobile
 	// This conceptually should be up within the .results section
@@ -463,10 +448,10 @@
 			
 			h2{ display: none; }
 			.b3{
-	            margin-right: 10px;
-	            text-indent: px(-$hideDistance);
-	            width: px(32px);
-	            height: px(32px);
+				margin-right: 10px;
+				text-indent: px(-$hideDistance);
+				width: px(32px);
+				height: px(32px);
 				padding: 0;
 				position: relative;
 				margin-left: 0;
@@ -623,42 +608,42 @@
 			margin: 0;
 			height: 0;
 		}
-        .addToCart{
+		.addToCart{
 			
-            position: absolute; 
-            bottom: 0;
-            right: -$hideDistance;
-            margin:0;
-            
-            .productPrice{
-                font-size: px(17px);
-                position: absolute;
-                bottom: 80px;
-                right: $hideDistance + $paddingUnit + 2px;
-            }
-            .shortStatus{
-                display: block;
-                font-size: px(13px);
-                position: absolute;
-                bottom: 60px;
-                right: ($hideDistance + $paddingUnit + 2);
-                color: $grey;
+			position: absolute; 
+			bottom: 0;
+			right: -$hideDistance;
+			margin:0;
+			
+			.productPrice{
+				font-size: px(17px);
+				position: absolute;
+				bottom: 80px;
+				right: $hideDistance + $paddingUnit + 2px;
+			}
+			.shortStatus{
+				display: block;
+				font-size: px(13px);
+				position: absolute;
+				bottom: 60px;
+				right: ($hideDistance + $paddingUnit + 2);
+				color: $grey;
 				width: 300px;
 				text-align:right;
-            }
-            .scroller{
-                position: absolute;
-                top: px($_topOfPrice + 90px, $inputFontSize);
-                right: px($hideDistance + $paddingUnit + 14px, $inputFontSize);
-            }
-            .b1{
-                position: absolute;
-                bottom: 10px;
-                right: px($hideDistance, $b1FontSize);
-                width: px(135px, $b1FontSize);
+			}
+			.scroller{
+				position: absolute;
+				top: px($_topOfPrice + 90px, $inputFontSize);
+				right: px($hideDistance + $paddingUnit + 14px, $inputFontSize);
+			}
+			.b1{
+				position: absolute;
+				bottom: 10px;
+				right: px($hideDistance, $b1FontSize);
+				width: px(135px, $b1FontSize);
 				display: block;
-            }
-        }
+			}
+		}
 		
 	}
 	

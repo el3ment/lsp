@@ -1,0 +1,475 @@
+.aggregateReviews{
+	
+	width: px(180px);
+	@include lsp-sprite-background();
+	background-position: -3px -384px;
+	display: inline-block;
+	margin-top: 5px;
+	overflow: hidden;
+	height: 20px;
+	text-align:left;
+	.reviewAggregateRating{ 
+		@include lsp-sprite-background();
+		background-position: -3px -354px;
+		display: inline-block;
+		text-indent: $hideDistance;
+		overflow: hidden;
+	}
+	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px); margin-right: 100px; }
+	.reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); margin-right: 80px; }
+	.reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); margin-right: 60px;}
+	.reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); margin-right: 40px;}
+	.reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); margin-right: 20px;}
+	.reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); margin-right: 0px;}
+	a{
+		position: relative;
+		top: -3px;
+	}
+	.reviewCountLabel{
+		&:before{ content: '('; }
+		&:after{ content: ')'; }
+	}
+}
+
+.reviews{
+
+	//border-top: 1px solid $lightGrey;
+	
+	&.section h2{
+		margin:0;
+		padding: 20px 16px 15px 0;
+		float:left;
+	}
+	
+	> .aggregateReviews{
+		
+		float: left; 
+		position: relative;
+		margin: 21px 0 0 px(10px);
+		width: 105px;
+		
+		label{
+			position: absolute;
+			left: 100%;
+			top:-1px;
+			width: px(200px);
+			font-style: italic;
+			font-weight: normal;
+			
+			@media (max-width: 475px){
+				display: none;
+			}
+		}
+	}
+	.icon-24-toggleHide{
+		margin-top:17px;
+		margin-right: px(2 * $paddingUnit);
+		overflow: hidden;
+		float:left;
+		text-indent: px(-$hideDistance);
+		width: px(32px);
+		height: px(32px);
+		padding: 0;
+		float: right;
+	}
+	.b1{
+		margin-top:10px;
+		float: right;
+	}
+	.add{
+		//display: block;
+		clear: both;
+		border-top: 1px solid $lightGrey;
+		padding: 0 10px;
+		background-color: $superLightGrey;
+		
+		h2{ padding: 0; }
+		.span6{
+			
+		}
+		.panel{ 
+			margin-top: 10px;
+			margin-bottom: 0;
+			width: 100%;
+		}
+
+		label .details{
+			display: inline-block;
+		}
+
+		.review{
+			//float: left;
+			//width: 100%;
+			margin-bottom: 1em;
+			
+		
+			.pros, .cons{
+				label + input ~ input{ display: none; } // hide 2nd, and 3rd
+			}
+			.pros{
+				float: left;
+				margin-right: $fluidGutterPercentage;
+			}
+			.cons{
+				clear: none;
+				margin-right: 0;
+			}
+			.panel{ margin-right: 10px; }
+			//textarea{ width: px(columns(5) + $gutterWidth + 10); }
+		}
+		.author{
+			//float: left;
+			clear: none;
+			//width: px(columns(5));
+			//margin-left: px($gutterWidth);
+			margin-bottom: 1em;
+			margin-left: 0;
+			border-top: 0;
+			padding-bottom: 0;
+			margin-bottom:0;
+
+			.panel{ 
+				margin-left: 10px;
+				margin-right: 15px;
+				padding-right: 10px;
+				padding-bottom: 0;
+			}
+			.firstName{
+				float: left;
+				//label, input{ width: px(200px); }
+			}
+			.lastInitial{
+				float: left;
+				clear: none;
+				margin-left: $fluidGutterPercentage;
+				@media (max-width: 767px){
+					margin-left: 0;
+				}
+			}
+			.city{
+				float: left;
+				margin-right: $fluidGutterPercentage;
+				//input{ width: px(200px); }
+			}
+			.state{
+				float:left;
+				clear:none;
+				margin-right: 0;
+				//select{ width: px(100px); }
+			}
+			.experience{
+				/* IE7 */
+				width: 100%; ul{ width: 100%; li{ width: 100%; }}
+					
+				.field{
+					
+					position: relative;
+					margin-top: px($paddingUnit);                    
+					
+					.yearsPlaying{
+
+						clear: both;
+						margin-left: 17px;
+						float: left;
+						
+						label{
+							margin-top: 10px;
+							margin-left: 5px;
+							float: left;
+							color: black;
+						}
+						.years{ 
+							float: left;
+							width: px(75px);
+						}
+					}
+				}
+			}
+			
+		}
+		.submit{
+			
+			padding: 0 0 15px 0;
+			clear: both;
+			.b1{
+				margin-top:0;
+				float: right;
+			}
+			.details{
+				margin-top:16px;
+				height:1em;
+				top:-.5em;
+				position: relative;
+				float: right;
+			}
+		}
+		@include clearfix;
+		
+	}
+
+	// When the add block is open, fade out the reviews
+	.add.reveal-isOpen ~ .entries .entry li{
+		@include opacity(.25);
+	}
+	.add.reveal-isOpen ~ .entries .entry li li,
+	.add.reveal-isOpen ~ .entries .preview li{
+		@include opacity(1); 
+	}
+
+	.entries{
+		
+		clear: both;
+			
+		.entry:last-child{
+			border-bottom: 0;
+		}
+		.entry{
+			
+			padding: px($gutterWidth / 2) 0;
+			border-bottom: 1px solid $lightGrey;
+			float: left;
+			position: relative;
+			overflow: hidden;
+			clear: both;
+			width: 100%;
+			
+			@media (max-width: 767px){
+				display: table;
+			}
+			
+			&.preview{
+
+				background-color: white;
+				padding: 10px;
+				border: 15px solid $superLightGrey;
+				border-top: 0;
+				@include box-shadow-multiple(inset 0 0 0 1px $lightGrey);
+				@include box-sizing();
+
+				&.reveal-isOpen{
+					@media (max-width: 767px){
+						display: table !important; /* !important is to fix the hiding/showing problems because I was too lazy */
+					}
+				}
+				&:before{ /* Two colons to hide from IE8 */
+
+					overflow: hidden;
+					padding: px($paddingUnit * 2) 0;
+					width: 100%;
+					display: block;
+					top: px(-$paddingUnit);
+					font-weight: 800;
+					text-align: center;
+					content: 'Preview';
+					color: $superDarkGrey;
+					letter-spacing: px(1px);
+					text-transform: uppercase;
+					text-shadow : 0 1px $saturatedHighlightGrey;
+					border : 1px solid $lightGrey;
+					border-width: 1px 0;
+					margin: 0 0 px($gutterWidth / 2) 0;
+					line-height:1emboss;
+					background-color: $superLightGrey;
+				}
+				&::before{ /* Only rotate for IE9 */
+					position: absolute;
+					top: px(15px);
+					left: px(-40px);
+					width: px(150px);
+					@include rotate(-45deg);
+				}
+				.points .actions button[data-action="voteDown"],
+				.points .actions button[data-action="voteUp"],
+				.reviewInteractionCount{ display: none; }
+
+				& + li{
+					border-top: 1px solid $lightGrey;
+				}
+			}
+			
+			button[data-action="voteUp"],
+			button[data-action="voteDown"],
+			.reviewInteractionCount{
+				position: absolute;
+				top: 0;
+				left: $fluidGutterPercentage / 2;
+				margin-left: 10px;
+			}
+			button[data-action="voteUp"],
+			button[data-action="voteDown"]{ 
+				top: px(20px);
+				width: px(32px);
+				height: px(32px);
+				@include border-radius(px(32px));
+				//background-color: $lightGrey;
+				text-indent: px(-1000px);
+				&:hover{
+					background-color: $yellow;
+				}
+			}
+			.reviewInteractionCount{ 
+				
+				top: px(60px, 14px);
+				border: 1px solid $lightGrey;
+				font-weight: bold;
+				font-style: italic;
+				font-size: px(14px);
+				padding: 0 px($paddingUnit);
+				color: $grey;
+				background-color: $superLightGrey;
+				width: 20px;
+				text-align: center;
+				
+				@include box-shadow-multiple(0 0 px(2px) 0 $lightGrey inset);
+				
+			}
+			button[data-action="voteDown"]{ top: px(90px); }
+			
+			.author{
+				
+				@include box-sizing();
+				padding-right: 5px;
+				float:left;
+				margin-left: px(columns(1) + $gutterWidth);
+				
+				.reviewAuthorPhoto{ @include border-radius(px(32px)); }
+				.reviewAuthor{font-weight:bold;}
+				.reviewLocation{text-transform: uppercase; }
+				.reviewProfile{font-style:italic;}
+			}
+			
+			.review{
+				
+				float: none;
+				overflow: hidden;
+				margin-left: px($gutterWidth);
+				
+				@media (max-width: 767px){
+					display: table-caption;
+					margin-left: 0;
+					margin-top: 10px;
+				}
+				
+				.reviewItemReviewed{
+					display: none; /* We don't need to show this to users, but we need it for microdata */
+				}
+				.reviewReviewRating,
+				.reviewTitle,
+				.reviewDatePublished,
+				.reviewReviewBody{
+					width: 100%;
+					max-width: px(700px);
+					float: left;
+					clear: left;
+				}
+				.reviewDatePublished{
+					padding-bottom: 10px;
+				}
+				.reviewDatePublished, .reviewAuthorName{
+					color: $grey; font-style: italic;
+					@media (max-width: 767px){
+						width: inherit;
+						float: left;
+					}
+				} 
+				.reviewTitle{
+					
+					font-weight:bold;
+					&:after, &:before{ content: '"'; }
+				
+				}
+				.reviewAuthorName{
+					display: none;
+					margin-left: 5px;
+					@media (max-width: 767px){
+						display: block;
+					}
+				}
+			}
+			
+			.points{
+				
+				float:right;
+				margin-left: px($gutterWidth);
+				
+				@media (max-width: 767px){
+					display: table-footer-group;
+				}
+				li{
+					padding-right: px($paddingUnit);
+				}
+				.pros, .cons{
+					margin-bottom: $paddingUnit * 2;
+					@media (max-width: 767px){
+						float: left;
+						width: 45%;
+					}
+				}
+			}
+		}
+	}
+} /* End Reviews */
+
+.ratingInput {
+	float:left;
+	margin-bottom: 5px;
+	margin-top: 5px;
+
+	/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+	   follow these rules. Every browser that supports :checked also supports :not(), so
+	   it doesn’t make the test unnecessarily selective */
+	&:not(:checked){
+		label{
+			float:right;
+			width:1em;
+			padding:0 .1em;
+			overflow:hidden;
+			white-space:nowrap;
+			cursor:pointer;
+			font-size:200%;
+			line-height:1.2;
+			color: $lightGrey;
+		}
+		> input{
+			position:absolute;
+			top:-9999px;
+			clip:rect(0,0,0,0);
+		}
+		
+		> label{
+			&:before {
+				content: '★ ';
+			}
+			&:hover,
+			&:hover ~ label{
+				color: $yellow;
+			}
+		}
+	}
+
+	> input:checked ~ label {
+		// Selected, not hovered
+		color: $yellow;
+		//text-shadow:1px 1px #c60;
+	}
+	
+	> input:checked + label:hover,
+	> input:checked + label:hover ~ label,
+	> input:checked ~ label:hover,
+	> input:checked ~ label:hover ~ label,
+	> label:hover ~ input:checked ~ label {
+		// Selected, hovered
+		color: $yellow;
+		//text-shadow:0px 0px 2px brown;
+	}
+
+	&:hover > input ~ label{ // "Reset" the color
+		color: $lightGrey;
+	}
+
+	> input ~ label:active,
+	> input ~ label:active ~ label{
+		text-shadow: 0px 0px 1px red;
+	}
+}
+

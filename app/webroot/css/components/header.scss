@@ -456,6 +456,7 @@
 				width: 64px;
 				height: 64px;
 				text-indent: -$hideDistance;
+				overflow: hidden;
 				background: transparent;
 				@include lsp-sprite-background();
 				filter: none;
