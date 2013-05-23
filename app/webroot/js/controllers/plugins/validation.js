@@ -78,6 +78,16 @@
 				
 				return (elementMessage ? elementMessage : defaultMessage);
 			},
+			getPattern : function(validationType){
+				if(!!_patterns[validationType]){
+					return _patterns[validationType];
+				}else{
+					throw new Error(validationType + ' is an invalid validation type');
+				}
+			},
+			isValid : function(string, validationType){
+				return _this.getPattern(validationType).pattern.test(string);
+			},
 			
 			// Parse, then display any validating messages
 			validate : function(element){
@@ -98,11 +108,10 @@
 				for(var i = 0; i < validationTypes.length; i++){
 					
 					var validationType = validationTypes[i].replace('validation-', '');
+					var patternObj = _this.getPattern(validationType);
 					// Unless it's required, allow a empty string to validate
-					if(_patterns[validationType]){
-						if(!value.match(_patterns[validationType].pattern) && ((value !== '' && validationType !== 'required') || validationType === 'required')){
-							invalidTypes.push(validationType);
-						}
+					if(!value.match(patternObj.pattern) && ((value !== '' && validationType !== 'required') || validationType === 'required')){
+						invalidTypes.push(validationType);
 					}
 				}
 				

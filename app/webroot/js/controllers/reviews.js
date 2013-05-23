@@ -48,9 +48,9 @@
 					onAttachEvents : function(e, data){
 						$(_settings.formSelector+' :input', data.selector)
 							.off('.reviews')
-							.on('keyup.lsp.reviews', _this.events.reviews.onRenderPreview)
+							.on('keyup.lsp.reviews change.lsp.reviews', _this.events.reviews.onRenderPreview)
 								.filter('input[type="checkbox"], input[type="radio"], select')
-								.on('click.lsp.reviews', _this.events.reviews.onRenderPreview);
+								.on('click.lsp.reviews change.lsp.reviews', _this.events.reviews.onRenderPreview);
 
 						$(_settings.prosInputSelector+', '+_settings.consInputSelector, data.selector)
 							.on('keyup.lsp.reviews blur.lsp.reviews', _this.events.reviews.onProOrConInput);

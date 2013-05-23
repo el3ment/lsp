@@ -250,7 +250,7 @@
 							</li>
 							<li class='summary field span12'>
 								<label>Summary <span class='details'>(A short review of your opinons and experiences)</span></label>
-								<textarea name='body'>hey!</textarea>
+								<textarea name='body'></textarea>
 							</li>
 						</ul>
 					</div>
@@ -261,7 +261,7 @@
 						<ul class='row-fluid'>
 							<li class='email field span12'>
 								<label>Email <span class='details'>(Adds the "Verified Buyer" badge to your review)</span></label>
-								<input type='email' />
+								<input type='email' name='email' />
 							</li>
 							<li class='firstName field span9'>
 								<label>First Name</label>
@@ -376,18 +376,29 @@
 <script type='text/html' id='templates-reviewEntry'>
 	<li id="previewReview" itemscope itemtype="http://data-vocabulary.org/Review" class='entry reviewScope span12 row'>
 		<ul class='author offset1 span2 hidden-phone'>
-			<li class='thumbnail'><img itemprop='authorPhoto' src='http://www.gravatar.com/avatar/<#=_util.md5(email) #>.jpg?s=60' width='60' height='60' class='reviewAuthorPhoto' /></li>
-			<li itemprop="reviewer" class='reviewAuthor'><#=firstName #> <#=lastInitial #>.</li>
-			<li class='reviewLocation details'><#=city #>, <#=state #></li>
-			<li class='reviewProfile details'><#=profile #></li>
+			<li class='thumbnail'><img itemprop='authorPhoto' src='http://www.gravatar.com/avatar/<#=(_controllers.validation.isValid(this.email, 'emailAddress') ? _util.md5(email) : '') #>.jpg?s=60&d=identicon' width='60' height='60' class='reviewAuthorPhoto' /></li>
+			<li itemprop="reviewer" class='reviewAuthor'>
+				<#=(this.firstName ? /* If they've typed a first name */
+						firstName+' '+
+							(this.lastInitial ? 
+								_util.cleanTrailing(lastInitial)
+								+ (lastInitial.length == 1 ? '.' : '') /* If they've typed more than one letter, don't show the period */
+							: '') /* if no last initial */
+						: '') /* if no first name */
+				#>
+			</li>
+			<li class='reviewLocation details'>
+				<#=(this.city && this.state ? city+', '+state : '') #>
+			</li>
+			<li class='reviewProfile details'><#=this.profile #></li>
 		</ul>
 		<ul class='points span3'>
 			<li class='pros'>
 				<h3>Pros</h3>
 				<ul class='list'>
-					<# for(var i = 0; i < pros.length; i++){ #>
-						<# if(pros[i]){ #>
-							<li><#=pros[i] #></li>
+					<# for(var i = 0; i < this.pros.length; i++){ #>
+						<# if(this.pros[i]){ #>
+							<li><#=this.pros[i] #></li>
 						<# } #>
 					<# } #>
 				</ul>
@@ -395,9 +406,9 @@
 			<li class='cons'>
 				<h3>Cons</h3>
 				<ul class='list'>
-					<# for(var i = 0; i < cons.length; i++){ #>
-						<# if(cons[i]){ #>
-							<li><#=cons[i] #></li>
+					<# for(var i = 0; i < this.cons.length; i++){ #>
+						<# if(this.cons[i]){ #>
+							<li><#=this.cons[i] #></li>
 						<# } #>
 					<# } #>
 				</ul>
@@ -411,10 +422,10 @@
 			<li itemprop="itemreviewed" class='reviewItemReviewed'>Innovative IP240</li>
 			<li class='reviewReviewRating'>
 				<div class='aggregateReviews'>
-					<span itemprop="rating" data-reviews-aggregateRating='<#=(rating || '') #>' class='reviewAggregateRating'>3.5</span>
+					<span itemprop="rating" data-reviews-aggregateRating='<#=(this.rating || '') #>' class='reviewAggregateRating'>3.5</span>
 				</div>
 			</li>
-			<li itemprop="summary" class='reviewTitle'><#=title #></li>
+			<li itemprop="summary" class='reviewTitle'><#=this.title #></li>
 			<li itemprop="dtreviewed" class='reviewDatePublished details'>December 1, 2012</li>
 			<li class='reviewAuthorName details'>by Robert P.</li>
 			<li itemprop="description" class='reviewReviewBody'>

@@ -23,6 +23,10 @@
 				};
 				return string.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, fcamelCase ).replace(/^([A-Z]){1}/, fLowerCase);  
 			},
+
+			cleanTrailing : function(string){
+				return (string || '').replace(/^[.\s]+|[.\s]+$/g, '');
+			},
 			
 			// Adapted from http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values?page=1&tab=votes#tab-top
 			// getURLParameters : function(){
@@ -60,7 +64,7 @@
 								"var p=[],print=function(){p.push.apply(p,arguments);};" +
 								
 								// Introduce the data as local variables using with(){}
-								"with(obj){var _util=window.LSP.utilities;p.push('" +
+								"with(obj){var _util=window.LSP.utilities,_controllers=window.LSP.controllers;p.push('" +
 								
 								// Convert the template into pure JavaScript
 								str.replace(/[\r\t\n]/g, " ")
@@ -217,5 +221,7 @@
 		return _util;
 	
 	}()));
+
+
 	
 }());
