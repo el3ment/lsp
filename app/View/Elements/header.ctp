@@ -53,27 +53,83 @@
 			<?php for($i = 0; $i < 12; $i++){ ?>
 			<li class='collection'>
 				<div class='flyoutTitle' data-reveal-children='flyout-<?php echo $i ?>'>
-					<div class='h3'>Sticks &amp; Mallets</div>
+					<div class='h3'>Stands &amp; Hardware</div>
 					<?php if($i > 6 ){ ?> <div class='details'>Subtext</div> <?php } ?>
 				</div>
 				<div id='flyout-<?php echo $i ?>' class='flyout'>
 					<ul class='container'>
-						<?php for($k = 0; $k < 3; $k++){ ?>
+						
 						<li class='group'>
-							<div class='h2' data-reveal-children='flyout-<?php echo $i.'-'.$k; ?>'>Group Name <?php echo $i; ?></div>
-							<ul id='flyout-<?php echo $i.'-'.$k; ?>' class='lists'>
-								<?php for($j = 0; $j < 3; $j++){ ?>
+							<div class='h2' data-reveal-children='flyout-standsAndHardware'>Stands &amp; Hardware</div>
+							<ul id='flyout-standsAndHardware' class='lists'>
 								<li class='list'>
-									<span class='h3' data-reveal-children='flyout-<?php echo $i.'-'.$k.'-'.$j; ?>'>List Name</span>
-									<ul id='flyout-<?php echo $i.'-'.$k.'-'.$j; ?>' class='links'>
-										<li class='link'><a href=''>Link 1</a></li>
-										<li class='link'><a href=''>Link 1</a></li>
+									<span class='h3' data-reveal-children='flyout-standsAndHardware-cymbalStands'>Stands</span>
+									<ul id='flyout-standsAndHardware-cymbalStands' class='links'>
+										<li class='link'><a href=''>Cymbal Straight Stands</a></li>
+										<li class='link'><a href=''>Cymbal Boom Stands</a></li>
+										<li class='link'><a href=''>Hi Hat Stands</a></li>
+										<li class='link'><a href=''>Snare Drum Stands</a></li>
+										<li class='link'><a href=''>Tom Stands</a></li>
+										<li class='link'><a href=''>Conga Stands</a></li>
+										<li class='link'><a href=''>Bongo Stands</a></li>
+										<li class='link'><a href=''>Music Stands</a></li>
+										<li class='link'><a href=''>Trap Tables</a></li>
+										<li class='link'><a href=''>All Stands</a></li>
 									</ul>
 								</li>
-								<?php } ?>
+								<li class='list'>
+									<span class='h3' data-reveal-children='flyout-standsAndHardware-cymbalStands'>Hardware</span>
+									<ul id='flyout-standsAndHardware-cymbalStands' class='links'>
+										<li class='link'><a href=''>Bass Drum Pedals</a></li>
+										<li class='link'><a href=''>Thrones</a></li>
+										<li class='link'><a href=''>Carts, Racks & Frames</a></li>
+										<li class='link'><a href=''>Adapters</a></li>
+										<li class='link'><a href=''>Cymbal Mounts</a></li>
+										<li class='link'><a href=''>Tom Mounts</a></li>
+										<li class='link'><a href=''>Cowbell Mounts</a></li>
+										<li class='link'><a href=''>Djembe Mounts</a></li>
+										<li class='link'><a href=''>Cuica Mounts</a></li>
+										<li class='link'><a href=''>All Mounts</a></li>
+									</ul>
+								</li>
+								<li class='list'>
+									<span class='h3' data-reveal-children='flyout-standsAndHardware-cymbalStands'>Live Sound & Recording</span>
+									<ul id='flyout-standsAndHardware-cymbalStands' class='links'>
+										<li class='link'><a href=''>Speakers</a></li>
+										<li class='link'><a href=''>Consoles & Mixers</a></li>
+										<li class='link'><a href=''>Cables</a></li>
+										<li class='link'><a href=''>Microphones</a></li>
+										<li class='link'><a href=''>Monitors</a></li>
+										<li class='link'><a href=''>Subwoofers</a></li>
+										<li class='link'><a href=''>Tweeters</a></li>
+										<li class='link'><a href=''>Skypers</a></li>
+										<li class='link'><a href=''>Karaoke Machines</a></li>
+										<li class='link'><a href=''>All Live Sound & Recording</a></li>
+									</ul>
+								</li>
+								<li class='list'>
+									<span class='h3' data-reveal-children='flyout-standsAndHardware-cymbalStands'>Replacement Parts</span>
+									<ul id='flyout-standsAndHardware-cymbalStands' class='links'>
+										<li class='link'><a href=''>Cymbal Felts</a></li>
+										<li class='link'><a href=''>Cymbal Washers</a></li>
+										<li class='link'><a href=''>Cymbal Sleeves</a></li>
+										<li class='link'><a href=''>Cymbal Wingnuts</a></li>
+										<li class='link'><a href=''>Hoops & Rims</a></li>
+										<li class='link'><a href=''>Tension Rods & Lugs</a></li>
+										<li class='link'><a href=''>Snare Wires</a></li>
+										<li class='link'><a href=''>Snare Strainers & Throws</a></li>
+										<li class='link'><a href=''>Cuica Rods</a></li>
+										<li class='link'><a href=''>All Replacement Parts</a></li>
+									</ul>
+								</li>
 							</ul>
 						</li>
-						<?php } ?>
+						
+
+
+
+
+						
 						<li class='advertisement'>
 							<a href='' class='ad'>
 								<div class='content'>

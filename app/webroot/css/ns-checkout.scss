@@ -1,0 +1,227 @@
+// This file contains CSS nessesary only for native netsuite cart and checkout
+// It should be expected that this file will eventually disapear
+
+// #carttable{
+// 	outline: 1px solid green;
+// }
+
+// input[name="new"] + input[name="review"] + table{
+// 	outline: 1px solid red;
+// }
+
+// #newcust{
+// 	outline: 1px solid blue;
+// }
+
+// #main_form table{
+// 	background-color: purple;
+// }
+
+
+body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
+	
+	td{
+		vertical-align: top;
+	}
+
+	.bgbutton, .nlbutton{
+		@include gradient($lightYellow, $darkYellow);
+		@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
+		
+		cursor: pointer;
+		
+		border : 1px solid $brownYellow;
+		border-radius : px($borderRadius);
+		color : black;
+		text-shadow : 0 1px $saturatedHighlightYellow;
+		
+		padding : px(10px, 14px) px(14px, 14px);
+		font-family : 'Open Sans', sans-serif;
+		font-size : px(14px);
+		font-weight : 800;
+		text-transform : uppercase;
+		text-decoration: none;
+		text-align : center;
+		line-height: 1.3em;
+		display: inline-block;
+		margin : 0 px($paddingUnit);
+		
+		&:hover, &.active{
+			@include gradient($hoverLightYellow, $darkYellow);
+		}
+	}
+
+	.nlbutton{
+		@include gradient($buttonLightGrey, $buttonDarkGrey); 
+		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
+		text-shadow : 0 1px $saturatedHighlightGrey;
+		border : 1px solid $darkGrey;
+	}
+
+
+	#carttableheader, #carttableheader + tr{
+		font-size: 13px;
+	}
+	// Cart Header
+	#carttableheader td{
+		border: 1px solid $lightGrey !important;
+		border-right: 0 !important;
+		border-left-width: 1px !important;
+		padding: 10px !important;
+		text-align: center;
+
+		&:first-child{
+			border-left: 0 !important;
+		}
+	}
+
+	// Cart Item Rows
+	// use table again to ensure we are working with
+	// netsuite's nested table and not accidentally one of ours
+	#carttablerow0, #carttablerow0 ~ tr{
+
+		td{ 
+			border-bottom: 1px solid $lightGrey;
+			padding: 10px;
+			font-size: 13px;
+		}
+
+		// Image
+		td:first-child{
+			img{ 
+				width: 64px;
+				height: 64px;
+			}
+			text-align: center;
+		}
+
+		// Item Name
+		td:first-child + td{
+			a{
+				text-decoration: none;
+				font-size: 15px;
+				font-weight: 600;
+				color: black;
+			}
+		}
+
+		// Description
+		td:first-child + td + td{
+			//background-color: white;
+		}
+
+		// Options
+		td:first-child + td + td + td{
+			//background-color: red;
+		}
+
+		// Quantity
+		td:first-child + td + td + td + td{
+			min-width: 50px;
+		}
+
+		// Price
+		td:first-child + td + td + td + td + td{
+			//background-color: red;
+			//display: none;
+			//width: 1%;
+			text-align: center;	
+		}
+
+		// Amount
+		td:first-child + td + td + td + td + td + td{
+			//background-color: red;
+			text-align:right;
+			font-size: 21px;
+			font-weight: 600;
+			width: 200%;
+		}
+
+		// Remove
+		td:first-child + td + td + td + td + td + td + td{
+			//background-color: red;
+			text-align: center;
+			a{
+				img{ display: none; }
+				&:before{
+					content: 'Remove'
+				}
+			}
+		}
+
+	}
+
+	// Cart Footer
+	#ordersummary_estship, #ordersummary_estship ~ tr{
+
+		> td.texttable[colspan="6"]{ // Overqualified to overcome selector specificity
+			
+			text-align: right;
+			position: relative;
+			color: $grey;
+			padding-top: 30px;
+
+			&:after{
+				content: ' click to change';
+			}
+			a{
+				text-decoration: none;
+				font-size: 14px;
+				font-weight: 600;
+				color: black;
+				padding-bottom: 30px;
+				z-index: 1;
+				top: 10px;
+				display: block;
+				padding-left: 100px;
+				position: absolute;
+				right: 10px;
+				&:after{
+					content: '';
+					display: block;
+				}
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+
+
+		// Subtotal amount
+		td[colspan="6"] + td.texttablert{
+			font-size: 21px;
+			font-weight: 600;
+			text-align: right;
+			vertical-align: middle;
+		}
+	}
+
+	#ordersummary_estship + tr td{
+		border-bottom: 0;
+	}
+
+	// The button row
+	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table{
+		float: right;
+		margin-top: 10px;
+		td{
+			display: block;
+			float: right !important;
+		}
+		#tbl_cancel{
+			display: none;
+		}
+	}
+	.checkoutprogresstext{
+		background-color: orange;
+	}
+	#paymeth{
+		background-color: red;
+	}
+	@media (max-width: 767px){
+		table, tr, td, tbody{
+			display: block !important;
+			width: 100% !important;
+		}
+	}
+}
