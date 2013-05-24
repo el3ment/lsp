@@ -30,7 +30,7 @@
 		<li id='searchBar' class='search'>
 			<div id='searchBarContainer' class='reveal-openOnlyDesktop'>
 				<div>
-					<input type='text' class='autocomplete search' placeholder='e.g. Sticks, Pearl, 16" Drum Head"'/>
+					<input type='text' class='clearable autocomplete search' placeholder='e.g. Sticks, Pearl, 16" Drum Head"'/>
 					<button class='b2 icon-24-magnify-black icon-only'>Search</button>
 				</div>
 			</div>

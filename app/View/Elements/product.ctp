@@ -238,15 +238,15 @@
 							</li>
 							<li class='pros field span6'>
 								<label>Pros</label>
-								<input type='text' data-action='inputPro' name='pros[]' />
-								<input type='text' data-action='inputPro' name='pros[]' placeholder='(Optional)' />
-								<input type='text' data-action='inputPro' name='pros[]' placeholder='(Optional)' />
+								<input type='text' data-action='inputPro' name='pros[]' class='clearable'/>
+								<input type='text' data-action='inputPro' name='pros[]' placeholder='(Optional)' class='clearable'/>
+								<input type='text' data-action='inputPro' name='pros[]' placeholder='(Optional)' class='clearable'/>
 							</li>
 							<li class='cons field span6'>
 								<label>Cons</label>
-								<input type='text' data-action='inputCon' name='cons[]' />
-								<input type='text' data-action='inputCon' name='cons[]' placeholder='(Optional)' />
-								<input type='text' data-action='inputCon' name='cons[]' placeholder='(Optional)' />
+								<input type='text' data-action='inputCon' name='cons[]' class='clearable'/>
+								<input type='text' data-action='inputCon' name='cons[]' placeholder='(Optional)' class='clearable'/>
+								<input type='text' data-action='inputCon' name='cons[]' placeholder='(Optional)' class='clearable' class='clearable'/>
 							</li>
 							<li class='summary field span12'>
 								<label>Summary <span class='details'>(A short review of your opinons and experiences)</span></label>
@@ -271,17 +271,10 @@
 								<label>Last Initial</label>
 								<input type='text' name='lastInitial' />
 							</li>
-							<li class='city field span6'>
-								<label>City</label>
-								<input type='text' name='city' />
+							<li class='location field span12'>
+								<label>Location</label>
+								<input type='text' name='location' placeholder='e.g. Dallas, TX or Paris, France' />
 							</li>
-							<li class='state field span6'>
-								<label>State</label>
-								<select name='state'>
-									<option>Texas</option>
-								</select>
-							</li>
-
 							<li class='experience field'>
 								<label>Experience</label>
 								<ul>
@@ -289,7 +282,7 @@
 										<input id='drummerProfile' name='custrecordreviewprofile[0].title' value='Drummer' type='checkbox' data-reveal-children='drummerYearsPlaying' />
 										<label for='drummerProfile'>Drummer</label>
 										<div id='drummerYearsPlaying' class='yearsPlaying'>
-											<input type='number' class='years' name='custrecordreviewprofile[0].time' />
+											<input type='number' min='0' class='years' name='custrecordreviewprofile[0].time' />
 											<label class='details'>Years</label>
 										</div>
 									</li>
@@ -297,7 +290,7 @@
 										<input id='teacherProfile' type='checkbox' name='custrecordreviewprofile[1].title' value='Teacher' data-reveal-children='teacherYearsPlaying' />
 										<label for='teacherProfile'>Teacher</label>
 										<div id='teacherYearsPlaying' class='yearsPlaying'>
-											<input type='number' class='years' name='custrecordreviewprofile[1].time' />
+											<input type='number' min='0' class='years' name='custrecordreviewprofile[1].time' />
 											<label class='details'>Years</label>
 										</div>
 									</li>
@@ -305,7 +298,7 @@
 										<input id='studentProfile' name='custrecordreviewprofile[2].title' value='Student' type='checkbox' data-reveal-children='studentYearsPlaying' />
 										<label for='studentProfile'>Student</label>
 										<div id='studentYearsPlaying' class='yearsPlaying'>
-											<input type='number' class='years' name='custrecordreviewprofile[2].time' />
+											<input type='number' min='0' class='years' name='custrecordreviewprofile[2].time' />
 											<label class='details'>Years</label>
 										</div>
 									</li>
@@ -359,10 +352,9 @@
 						<li itemprop="summary" class='reviewTitle'>I love this stand!</li>
 						<li itemprop="dtreviewed" class='reviewDatePublished details'>December 1, 2012</li>
 						<li class='reviewAuthorName details'>by Robert P.</li>
-						<li itemprop="description" class='reviewReviewBody'>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-							Magna esse consectetur fugiat voluptate in esse tempor dolore pariatur. aliquip consequat. aute voluptate Lorem nulla labore dolore do elit, deserunt quis est velit mollit do ex irure pariatur. dolor voluptate ad aute id Duis voluptate exercitation eiusmod sint deserunt exercitation qui cillum laborum. pariatur. cupidatat ad sed undefined culpa elit, fugiat consequat. fugiat Duis cillum do et in Ut ut adipisicing deserunt aute ipsum adipisicing.
-							Laboris reprehenderit cupidatat eiusmod et esse ullamco dolore sed aute ut nisi labore qui commodo Excepteur aliqua. aliquip deserunt et tempor sunt velit laboris est non irure ea elit, elit, culpa sunt sed ea culpa sint sit Ut Excepteur reprehenderit elit, enim esse Excepteur laborum. in ex in dolore ea laborum. laboris sed voluptate ea do Ut dolore officia amet, laboris est.
+						<li itemprop="description" class='reviewReviewBody'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Magna esse consectetur fugiat voluptate in esse tempor dolore pariatur. aliquip consequat. aute voluptate Lorem nulla labore dolore do elit, deserunt quis est velit mollit do ex irure pariatur. dolor voluptate ad aute id Duis voluptate exercitation eiusmod sint deserunt exercitation qui cillum laborum. pariatur. cupidatat ad sed undefined culpa elit, fugiat consequat. fugiat Duis cillum do et in Ut ut adipisicing deserunt aute ipsum adipisicing.
+Laboris reprehenderit cupidatat eiusmod et esse ullamco dolore sed aute ut nisi labore qui commodo Excepteur aliqua. aliquip deserunt et tempor sunt velit laboris est non irure ea elit, elit, culpa sunt sed ea culpa sint sit Ut Excepteur reprehenderit elit, enim esse Excepteur laborum. in ex in dolore ea laborum. laboris sed voluptate ea do Ut dolore officia amet, laboris est.
 						</li>
 						<li class='reviewInteractionCount hidden-phone' content='32:UserLikes'>32</li>
 					</ul>
@@ -388,11 +380,12 @@
 				#>
 			</li>
 			<li class='reviewLocation details'>
-				<#=(this.city && this.state ? city+', '+state : '') #>
+				<#=this.location #>
 			</li>
 			<li class='reviewProfile details'><#=this.profile #></li>
 		</ul>
 		<ul class='points span3'>
+			<# if((this.pros || {}).length){ #>
 			<li class='pros'>
 				<h3>Pros</h3>
 				<ul class='list'>
@@ -403,6 +396,8 @@
 					<# } #>
 				</ul>
 			</li>
+			<# } #>
+			<# if((this.cons || {}).length){ #>
 			<li class='cons'>
 				<h3>Cons</h3>
 				<ul class='list'>
@@ -413,6 +408,7 @@
 					<# } #>
 				</ul>
 			</li>
+			<# } #>
 			<li class='actions hidden-phone'>
 				<button class='b5 icon-24-voteUp' data-action='voteUp'>Vote Review as Helpful</button>
 				<button class='b5 icon-24-voteDown' data-action='voteDown'>Vote Review as Un-Helpful</button>
@@ -428,9 +424,7 @@
 			<li itemprop="summary" class='reviewTitle'><#=this.title #></li>
 			<li itemprop="dtreviewed" class='reviewDatePublished details'>December 1, 2012</li>
 			<li class='reviewAuthorName details'>by Robert P.</li>
-			<li itemprop="description" class='reviewReviewBody'>
-				<#=body #>
-			</li>
+			<li itemprop="description" class='reviewReviewBody'><#=this.body #></li>
 			<li class='reviewInteractionCount hidden-phone' content='32:UserLikes'>32</li>
 		</ul>
 	</li>

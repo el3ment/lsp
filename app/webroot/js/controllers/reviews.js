@@ -24,22 +24,35 @@
 					onProOrConInput : function(e){
 						// If there is something in the input, show the second one
 						if(e.currentTarget.value.length > 0){
-
-							$(e.currentTarget).next('input').show();
+							$(e.currentTarget).parent().next().show();
 
 						// If the current one is empty, AND the next one is too, hide the second one
-						}else if($(e.currentTarget).next('input').length && // another input exists
-							$(e.currentTarget).next('input')[0].value.length < 1){ // the previous one is empty
+						}else if($(e.currentTarget).parent().next().length &&
+								$(e.currentTarget).parent().next().children('input').val().length < 1){ // the previous one is empty
 
-							//debugger;
-							$(e.currentTarget).next('input').hide();
+							$(e.currentTarget).parent().next().hide();
 
 						// If the current one is empty, and no longer has focus, and isn't the first one, hide it
-						}else if(!$(e.currentTarget).is(':focus') && !$(e.currentTarget).is(':nth-of-type(1)') && $(e.currentTarget).prev('input')[0].value.length < 1){
-							//debugger;
-							$(e.currentTarget).hide();
+						}else if(!$(e.currentTarget).is(':focus') &&
+								!$(e.currentTarget).parent().is(':nth-of-type(1)') &&
+								$(e.currentTarget).parent().prev().children().val().length < 1){
+							$(e.currentTarget).parent().hide();
 						}
 					},
+					// onAddedBodyContent : function(){
+						
+					//	var startHeight = $(this).height();
+					//	return function(e){
+					//		var textHeight = $(this).scrollTop();
+					//		var newHeight = $(this).height() + textHeight;
+					//		if(newHeight > startHeight){
+					//			$(this).css('height',(newHeight + 'px'));
+					//		}else{
+					//			$(this).css('height', startHeight);
+					//		}
+						
+					//	};
+					// },
 					onRenderPreview : function(e){
 						$(_settings.previewSelector).html(_this.render(_this.parseForm(e.currentTarget.form)));
 					}
@@ -52,8 +65,11 @@
 								.filter('input[type="checkbox"], input[type="radio"], select')
 								.on('click.lsp.reviews change.lsp.reviews', _this.events.reviews.onRenderPreview);
 
+						// $(_settings.formSelector+' textarea', data.selector)
+						//	.on('keyup.lsp.reviews', _this.events.reviews.onAddedBodyContent()); // returns a function
+
 						$(_settings.prosInputSelector+', '+_settings.consInputSelector, data.selector)
-							.on('keyup.lsp.reviews blur.lsp.reviews', _this.events.reviews.onProOrConInput);
+							.on('keyup.lsp.reviews change.lsp.reviews', _this.events.reviews.onProOrConInput);
 					}
 				}
 			},
@@ -89,16 +105,21 @@
 				var returnData;
 				var profile = [];
 				
-				returnData = _util.formToObject(element, null, false);
-				for(var i = 0; i < returnData.custrecordreviewprofile.length; i++){
+				returnData = _util.formToObject(element, null, true);
+
+				for(var i = 0; i < ((returnData || {}).custrecordreviewprofile || {}).length; i++){
 					
 					if(returnData.custrecordreviewprofile[i].title){
-						profile.push(returnData.custrecordreviewprofile[i].title + 
-								(returnData.custrecordreviewprofile[i].time ? ' ('+ returnData.custrecordreviewprofile[i].time + 'yrs)' : ''));
+						var years = '';
+						if(returnData.custrecordreviewprofile[i].time > 0){
+							var pluralString = (returnData.custrecordreviewprofile[i].time > 1 ? 's' : '');
+							years = '&nbsp;('+ returnData.custrecordreviewprofile[i].time + '&nbsp;yr' + pluralString + ')';
+						}
+						profile.push(returnData.custrecordreviewprofile[i].title + years);
 					}
 				}
 				returnData.profile = profile.join(', ');
-				
+				console.log(returnData);
 				return returnData;
 			}
 		};

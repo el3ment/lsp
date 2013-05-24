@@ -114,6 +114,12 @@
 				$(_this).triggerHandler('onAttachEvents', {selector : selector});
 			},
 
+			createHandlerBridge : function(controller, eventName, passthrough){
+				return function(e){
+					$(controller).triggerHandler(_util.camelCase('on-'+eventName), {selector : this, passthrough : passthrough});
+				};
+			},
+
 			init : function(){
 				
 				console.log('Application Init');

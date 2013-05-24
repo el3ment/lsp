@@ -311,7 +311,11 @@
 			float: none;
 			margin-left: 0;
 			
-			button { /* Magnifying glass button */
+			.clearContents{ // Clearcontents button
+				right: 57px;
+			}
+			
+			.b2 { /* Magnifying glass button */
 				width: px(44px);
 				height: px(44px);
 				position: absolute;

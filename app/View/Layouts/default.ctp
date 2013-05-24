@@ -33,6 +33,7 @@
     <script type='text/javascript' src='js/controllers/plugins/badges.js'></script>
     <script type='text/javascript' src='js/controllers/plugins/compare.js'></script>
     <script type='text/javascript' src='js/controllers/plugins/definitions.js'></script>
+    <script type='text/javascript' src='js/controllers/plugins/clearable.js'></script>
     
     <script type='text/javascript' src='js/controllers/plugins/validation.js'></script>
     

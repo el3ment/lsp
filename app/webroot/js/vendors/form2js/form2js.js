@@ -277,8 +277,11 @@ var form2js = (function()
 		if (fieldNode.disabled) return null;
 		
 		switch (fieldNode.nodeName) {
-			case 'INPUT':
+			
 			case 'TEXTAREA':
+				return $('<div/>').text(fieldNode.value).html(); // Escapes the textarea
+				break;
+			case 'INPUT':
 				switch (fieldNode.type.toLowerCase()) {
 					case 'radio':
 					case 'checkbox':
