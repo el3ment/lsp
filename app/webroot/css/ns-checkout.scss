@@ -17,9 +17,42 @@
 // 	background-color: purple;
 // }
 
+@mixin panel(){
+	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
+	background-color: $white;
+	display: inline-block;
+	position: relative;
+	border: 1px solid $lightGrey;
+	@include border-radius(px($borderRadius));
+	padding: px($paddingUnit + 3) px($paddingUnit * 2) px($paddingUnit * 2) !important;
+	
+	@include box-sizing();
+	
+	margin-bottom: 17px !important;
+	color: $black;
+	.greytitle{
+		margin-top:6px;
+		font-size: 28px;
+		line-height: 28px;
+		padding-bottom: 10px !important;
+	}
+	@include clearfix();
+}
+
+@mixin engaged(){
+	border-top: px($paddingUnit) solid $yellow;
+	padding-top: 5px;
+}
+
+@mixin disengaged(){
+	background-color: $superLightGrey;
+	padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
+}
 
 body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	
+	position: relative;
+
 	td{
 		vertical-align: top;
 	}
@@ -33,7 +66,8 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
-	.bgbutton, .nlbutton{
+	#tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
+	#tbl_checkout{
 		@include gradient($lightYellow, $darkYellow);
 		@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
 		
@@ -43,8 +77,6 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		border-radius : px($borderRadius);
 		color : black;
 		text-shadow : 0 1px $saturatedHighlightYellow;
-		
-		padding : px(10px, 14px) px(14px, 14px);
 		font-family : 'Open Sans', sans-serif;
 		font-size : px(14px);
 		font-weight : 800;
@@ -54,13 +86,22 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		line-height: 1.3em;
 		display: inline-block;
 		margin : 0 px($paddingUnit);
+		input{
+			text-transform: uppercase;
+			display: inline;
+			border: 0;
+			background-color: transparent;
+			padding : px(10px, 14px) px(14px, 14px);
+		}
+		
 		
 		&:hover, &.active{
 			@include gradient($hoverLightYellow, $darkYellow);
 		}
+
 	}
 
-	.nlbutton{
+	 #tbl_applygift, #tbl_applycoupon, #tbl_recalc{
 		@include gradient($buttonLightGrey, $buttonDarkGrey); 
 		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
 		text-shadow : 0 1px $saturatedHighlightGrey;
@@ -377,6 +418,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table{
 		float: right;
 		margin-top: 10px !important;
+		//background-color: pink;
 		
 
 		@media (max-width: 767px){
@@ -395,11 +437,429 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			display: none;
 		}
 	}
-	.checkoutprogresstext{
-		background-color: orange;
+
+
+	// Form Labels
+	.smalltextnolink[align="right"]{
+		font-weight: bold;
+		text-align: right;
+		line-height: 0;
+		padding-right: 5px;
+		@media (max-width: 767px){
+			text-align: left;
+		}
+
+		a{ color: black; line-height: 22px; }
+
+		// Required Icon
+		.required_icon{
+			//background-color: red;
+			display: none
+		}
+		
+		.required_icon + a{
+			&:after{
+				content: 'Required';
+				color: $grey;
+				display: block;
+				font-weight: normal;
+				//text-align: right;
+				font-size: 13px;
+				line-height: 18px;
+				width: 100%;
+				@media (max-width: 767px){
+					content: ' (required)';
+					display: inline;
+				}
+			}
+		}
 	}
+
+	.smalltextnolink{
+		color: black;
+	}
+
+	// Not all labels have an "a" tag
+	// We need to back out of our line-height
+	// fix from above
 	#paymeth{
-		background-color: red;
+		.smalltextnolink[align="right"]{
+			line-height: 22px;
+		}
+	}
+
+	// Form Fields
+	.smalltextnolink[align="right"] + td{
+		padding-bottom: 10px !important;
+	}
+
+	.smalltext{
+		color: $grey;
+		font-size: 13px;
+	}
+
+	.greytitle{
+		line-height: 43px;
+		font-size: 2.9em;
+		font-family: "League Gothic", sans-serif;
+		text-transform: uppercase;
+		color: $black; 
+		-webkit-font-smoothing: antialiased;
+		margin-top:10px;
+	}
+
+
+	// Customer Sign In
+	> tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > input[name="new"] ~ table{
+		
+		
+		> tbody > tr{
+			display: block;
+			float: left;
+			width: 50% - $fluidGutterPercentage / 2;
+		}
+
+ 		> tbody{
+			// New Customers
+			> tr:first-child{
+				background-color: teal;
+				@include panel();
+				@include engaged();
+				#tbl_register{
+					margin-top: 10px;
+					input{ padding-right: 0; }
+					&:after{
+						padding-right: 10px;
+						content: ' As Guest';
+					}
+				}
+			}
+			
+			// Returning Customers
+			> tr:first-child + tr + tr + tr{
+				margin-left: $fluidGutterPercentage;
+				@include panel();
+				@include disengaged();
+
+				// Password Field
+				> td > table > tbody > tr:first-child + tr > td > table > tbody > tr:first-child + tr > td:first-child + td{
+					padding-bottom: 0 !important;
+				}
+
+				// Login Button
+				#tbl_submitter{
+					margin-top:10px;
+					position: relative;
+					input{ padding-right: 55px; text-indent:-150px; }
+					&:after{
+						position: absolute;
+						left: 12px;
+						top: 9px;
+						content: 'Login';
+					}
+				}
+			}
+
+
+			// Blank lines between sections
+			> tr:first-child + tr,
+			> tr:first-child + tr + tr,
+			> tr:first-child + tr + tr + tr > td > table > tbody > tr:first-child + tr + tr + tr{
+				display: none !important;
+			}
+		}
+	}
+
+	// "Register > Address > Shipping > Payment > Review & Submit" map
+	// The path to them is different on each page.. why? I have no clue.
+	input[name="category"] ~ table > tbody > tr:first-child > td > table > tbody > tr:first-child,
+	.portletHandle:first-child,
+	> tbody > tr:first-child + tr > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child[height="25"] {
+		background-color: orange;
+		position:absolute;
+		top: -50px;
+		left: 0;
+
+	}
+
+	#paymeth > table{
+		@include panel();
+		@include engaged();
+		
+		select[name="sExpMo"],
+		select[name="sExpYr"]{
+			width: 100px;
+		}
+		select[name="sExpMo"]{
+			float: left;
+		}
+		
+		// Payment Method
+		#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child{
+			
+			position: relative;
+			top: -5px;
+
+			&:after{
+				// Not sure why I need this - but this one was too close to the radio buttons
+				margin-right: 5px;
+			}
+			table{
+				float: right;
+			}
+		}
+		#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr > td:first-child,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr > td:first-child,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr > td:first-child,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child{
+			//background-color: pink;
+			&:after{
+				content: 'Required ';
+				padding-right: 5px;
+				display:block;
+				text-align:right;
+				font-weight: normal;
+				color: $grey !important;
+				font-size: 13px;
+				line-height: 18px;
+				@media (max-width: 767px){
+					content: ' (required)';
+					display: inline;
+				}
+			}
+		}
+
+		#paymethhider > table > tbody > tr:first-child + tr + tr{
+			.smalltext{ color: black; }
+		}
+
+		// CSC row
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
+			input{
+				float: left;
+			}
+
+			// Our own CSC example image
+			&:after{
+				content : 'Example Image';
+				width: 190px;
+				height: 115px;
+				outline: 1px solid blue;
+				display: block;
+				margin-left: 5px;
+				float: left;
+			}
+		}
+		
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
+			padding-left: 62px !important;
+			clear: both;
+			@include box-sizing();
+		}
+		
+		// Save My Credit Card Information
+		#paymethhider input[name="sValidFromYr"] + tr{
+			&:before{
+				display: table-cell;
+				content: ' ';
+			}
+			td{
+				padding-top: 10px !important;
+			}
+		}
+
+		// Gift Card Title
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr{
+			.greytitle{
+				font-size: $h2FontSize;
+			}
+		}
+
+		// Apply Gift Card row
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr{
+			line-height: 0; // &nbsp; fix
+			@media (max-width: 767px){
+				td{ 
+					float: left !important;
+					width: auto !important;
+				}
+			}
+		}
+
+		// If you have a gift card... cells
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr td{
+			position: relative;
+			top: -10px;
+			clear: both;
+			@media (max-width: 767px){
+				&:first-child{ display: none !important; }
+			}
+		}
+
+		// Continue button container
+		> tbody > tr:first-child + tr + tr table{
+			float: right;
+			width: auto !important;
+			position: absolute;
+			bottom: -50px;
+			right: 0;
+		}
+
+		
+		// Blank row and netsuite's example CSC image
+		#paymethhider > table > tbody > tr:first-child,
+		#paymethhider > table > tbody > tr:first-child + tr,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+			display: none !important;
+		}
+	}
+
+	#main_form{
+		font-size: inherit !important;
+		padding-bottom: 0 !important;
+		width: 100% !important;
+	}
+
+
+	// Shipping
+
+	.portletHandle:first-child + tr + tr + tr + tr.portletHandle{
+		width: 100%;
+		@include panel();
+		@include engaged();
+		.checkboximage{ display: none; }
+		td:first-child input[type="checkbox"]{
+			float:right;
+			@media (max-width: 767px){
+				float: left;
+			}
+		}
+		#main_form > table > tbody > tr:first-child + tr + tr > td{
+			
+			padding-bottom: 0 !important;
+
+			// Button
+			table{
+				//background-color: red;
+				margin-right: 0;
+				float: right;
+				position: absolute;
+				bottom: -50px;
+				right: 0;
+			}
+		}
+
+		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr + tr + tr + tr + tr{
+			display: none !important;
+		}
+
+	}
+
+	// Shipping Method
+	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+		@include panel();
+		@include engaged();
+
+		br{ display: none !important; }
+
+		// Shipping Method Label
+		.smalltext b{
+			display: none !important;
+		}
+
+		// Carrier
+		#shippingmethodtable > tbody > tr:first-child + tr{
+			> td > table > tbody > tr:first-child td{
+				// The label isn't wrapped in an element, so we need to 
+				// apply label styling and back out of them for children
+				font-weight: bold;
+				color: black;
+				padding-left: 8px;
+				font-size: 0;
+
+				&:before{
+					font-size: 14px;
+					content: 'Shipping Carrier';
+					position: relative;
+					top: -9px;
+				}
+				&:after{
+					color: $grey;
+					font-weight: normal;
+					font-size: 13px;
+					width: 100%;
+					display: block;
+					line-height: 18px;
+					text-align:right;
+					content: 'Select UPS for Overnight or Second Day Air Options';
+					padding-left: 128px;
+					text-align: left;
+					padding-bottom: 20px;
+				}
+				#shippingcarrierselect{
+					width: 100px;
+					display: inline-block;
+					margin-left: 10px;
+					position: relative;
+					top: -3px;
+				}
+			}
+			> td > table > tbody > tr:first-child + tr > td{
+				
+				padding-left: 138px;
+				position: relative;
+
+				&:before{
+					content: 'Shipping Method';
+					position: absolute;
+					left: 13px;
+					color: black;
+					font-weight: bold;
+				}
+			}
+		}
+
+		> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody{
+			
+			.smalltextnolink{ 
+				line-height: 18px;
+			}
+
+			> tr:first-child + tr > td{
+				padding-top: 20px;
+			}
+
+			> tr:first-child + tr > td:first-child{
+				width: 131px;
+			}
+
+			> tr:first-child + tr > td:first-child + td{
+				line-height: 0; // &nbsp; fix
+				padding-bottom: 0 !important;
+			}
+
+			> tr:first-child{
+				display: none !important;
+			}
+		}
+		
+		// Blank row
+		> tbody > tr:first-child + tr{
+			display: none !important;
+		}
+
+	}
+
+	// Button Bar
+	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr{
+		table{ 
+			float: right;
+			position: relative;
+			top: -5px;
+		}
 	}
 
 }
