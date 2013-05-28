@@ -20,7 +20,7 @@
 @mixin panel(){
 	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
 	background-color: $white;
-	display: inline-block;
+	display: block;
 	position: relative;
 	border: 1px solid $lightGrey;
 	@include border-radius(px($borderRadius));
@@ -106,6 +106,30 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
 		text-shadow : 0 1px $saturatedHighlightGrey;
 		border : 1px solid $darkGrey;
+	}
+
+	// Linky button
+	#tbl_change{
+		overflow : visible; /* Shrinkwrap the text in IE7- */
+		margin : 0 10px 0 0;
+		padding : 0 !important;
+		border : 0;
+		color : $grey;
+		background : transparent !important;
+		font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
+		line-height : normal; /* Override line-height to avoid spacing issues */
+		text-decoration : underline; /* Make it look linky */
+		cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
+		-moz-user-select: text; /* Make button text selectable in Gecko */
+		input{
+			background-color: transparent;
+			padding: 0;
+			border: 0;
+			color: $grey;
+			margin: 0;
+			@include border-radius(0);
+			font-weight: normal;
+		}
 	}
 
 
@@ -749,6 +773,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				position: absolute;
 				bottom: -50px;
 				right: 0;
+				width: auto !important;
 			}
 		}
 
@@ -763,7 +788,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		@include panel();
 		@include engaged();
 
-		br{ display: none !important; }
+		br:first-child, script + br{ display: none !important; }
 
 		// Shipping Method Label
 		.smalltext b{
@@ -777,14 +802,21 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				// apply label styling and back out of them for children
 				font-weight: bold;
 				color: black;
-				padding-left: 8px;
+				padding-left: 8px !important;
 				font-size: 0;
+
+				@media (max-width: 767px){
+					padding-left: 0 !important;
+				}
 
 				&:before{
 					font-size: 14px;
 					content: 'Shipping Carrier';
 					position: relative;
 					top: -9px;
+					@media (max-width: 767px){
+						display: block;
+					}
 				}
 				&:after{
 					color: $grey;
@@ -795,22 +827,33 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 					line-height: 18px;
 					text-align:right;
 					content: 'Select UPS for Overnight or Second Day Air Options';
-					padding-left: 128px;
+					padding-left: 128px !important;
 					text-align: left;
-					padding-bottom: 20px;
+					padding-bottom: 20px !important;
+					@media (max-width: 767px){
+						padding-left: 0 !important;
+					}
+
 				}
 				#shippingcarrierselect{
 					width: 100px;
 					display: inline-block;
-					margin-left: 10px;
+					margin-left: 10px !important;
 					position: relative;
 					top: -3px;
+					@media (max-width: 767px){
+						margin-left: 0 !important;
+					}
 				}
 			}
 			> td > table > tbody > tr:first-child + tr > td{
 				
-				padding-left: 138px;
+				padding-left: 138px !important;
 				position: relative;
+				@media (max-width: 767px){
+					display: block;
+					padding-left: 0 !important;
+				}
 
 				&:before{
 					content: 'Shipping Method';
@@ -818,31 +861,65 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 					left: 13px;
 					color: black;
 					font-weight: bold;
+
+					@media (max-width: 767px){
+						left: 0;
+						display: block;
+						position: static;
+					}
 				}
 			}
 		}
 
+		// Coupon Code Table
 		> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody{
 			
 			.smalltextnolink{ 
 				line-height: 18px;
 			}
 
+			// Coupon Code row cells
 			> tr:first-child + tr > td{
-				padding-top: 20px;
+				padding-top: 20px !important;
+				
 			}
 
+			// Coupon Code Label
 			> tr:first-child + tr > td:first-child{
 				width: 131px;
+				text-align: right;
+				@media (max-width: 767px){
+					text-align: left;
+				}
 			}
 
+			// Input box field
 			> tr:first-child + tr > td:first-child + td{
 				line-height: 0; // &nbsp; fix
 				padding-bottom: 0 !important;
+				> table > tbody > tr > td:first-child{
+					float: left !important;
+					width: auto !important;
+				}
+				@media (max-width: 767px){
+					padding-top: 0 !important;
+				}
 			}
 
 			> tr:first-child{
 				display: none !important;
+			}
+			@media (max-width: 767px){
+				// Blank cell
+				> tr:first-child + tr + tr > td:first-child{
+					//background-color: red;
+					display: none !important;
+				}
+
+				// If you have a coupon... cell
+				> tr:first-child + tr + tr > td:first-child + td{
+					clear: both;
+				}
 			}
 		}
 		
@@ -850,6 +927,9 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		> tbody > tr:first-child + tr{
 			display: none !important;
 		}
+
+
+
 
 	}
 
@@ -859,7 +939,261 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			float: right;
 			position: relative;
 			top: -5px;
+			width: auto !important;
 		}
+	}
+
+
+	> tbody > tr.portletHandle + .noprint + .portletHandle{
+		
+		@include panel();
+		@include disengaged();
+
+		width: 100%;
+
+		// Title
+		#address > tbody{
+			// Label
+			> tr:first-child > .smalltext b{
+				font-weight: normal !important;
+			}
+
+			// Value
+			> tr:first-child + tr > .smalltext{
+				font-weight: bold;
+				padding-bottom: 10px !important;
+				color: black;
+
+				br:first-child{ display: none; }
+
+			}
+			@media (max-width: 767px){
+				> tr:first-child + tr + tr td{
+					float: left !important;
+					width: auto !important;
+				}
+			}
+		}
+
+		// Bug fix
+		tr[height]{
+			height: auto !important;
+		}
+
+		// Blank rows
+		tr:first-child + tr + tr + tr,
+		> td > table > tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr + tr{
+			display: none !important;
+		}
+
+		// All buttons
+		input[type="button"]{
+			overflow : visible; /* Shrinkwrap the text in IE7- */
+			margin : 0 10px 0 0;
+			padding : 0;
+			border : 0;
+			color : $grey;
+			background : transparent;
+			font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
+			line-height : normal; /* Override line-height to avoid spacing issues */
+			text-decoration : underline; /* Make it look linky */
+			cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
+			-moz-user-select: text; /* Make button text selectable in Gecko */
+		}
+
+		// Just the edit button
+		#tbl_edit{
+			position: absolute;
+			top: 10px;
+			right: 10px;
+		}
+	}
+
+	#submitordertable{
+
+		table,
+		> tbody,
+		> tbody > tr,
+		> tbody > tr > td{
+			display: block;
+			float: left !important;
+		}
+
+		// Container!
+		> tbody{
+			width: 100%;
+		}
+
+		// The Shipping / Billing address row
+		> tbody > tr:first-child{
+			width: 66%;
+		}
+		> tbody > tr:first-child + tr{
+			width: 33%;
+		}
+
+
+
+		// We hide this label on the shipping address table, back out of display: none
+		#shippingaddress .smalltext b,
+		#billingaddress .smalltext b,
+		#paymentmethodtable .smalltext b{
+			display: block !important;
+			color: $grey;
+			font-weight: normal;
+		}
+		#shippingaddress .smalltext,
+		#billingaddress .smalltext,
+		#paymentmethodtable .smalltext{
+			color: black;
+			font-weight: bold;
+		}
+
+		// These labels aren't wrapped in the "a" tag, so we have to back out of our &nbsp; fix from before
+		.smalltextnolink[align="right"]{
+			line-height: 22px;
+		}
+
+		> tbody > tr:first-child + tr + tr{
+			clear: both;
+		}
+
+		#additionalfieldstable{
+			width: 100%;
+		}
+
+		// Normally we display: none things we want to hide
+		// but this time, there are fewer we want to show than hide
+		// so we display: none, and then display: table-row the one we want to show
+		#additionalfieldstable > tbody > tr{
+			display: none !important;
+		}
+		#additionalfieldstable > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr{
+			
+			display: block;
+			clear: both;
+
+			td{
+				padding-top: 20px !important;
+			}
+			td:first-child{
+				width: 160px;	
+			}
+		}
+
+		// Shipping Method block
+		> tbody > tr:first-child + tr > td:first-child{
+			display: none !important;
+		}
+
+		// Edit/Change buttons
+		input[type="button"]{
+			margin-top: 5px;
+			font-size: 13px;
+		}
+
+	}
+
+
+	// Order Review and Summary
+
+	input[name="total"] ~ table > tbody{
+		display: table;
+		width: 100%;
+	}
+
+	input[name="total"] ~ table #carttable > tbody > tr:first-child,
+	input[name="total"] ~ table #carttable > tbody > tr:first-child ~ tr{
+
+		// Quantity
+		> td:first-child + td + td + td + td{
+			//background-color:red;
+			width: auto !important;
+			margin-right: 10px !important;
+			&:before{
+				padding-top: 0 !important;
+			}
+		}
+
+		// Price
+		td:first-child + td + td + td + td + td + td{
+			top: 0;
+		}
+	}
+
+	// Order subtotals
+	tr#ordersummary_itemtotal, #ordersummary_itemtotal td,
+	tr#ordersummary_shipping, #ordersummary_shipping td,
+	{
+		border-bottom: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	// Labels
+	#ordersummary_tax td:first-child,
+	#ordersummary_itemtotal td:first-child,
+	#ordersummary_total td:first-child,
+	#ordersummary_shipping td:first-child{
+		text-align: right !important;
+	}
+
+
+	@media (max-width: 767px){
+		// The summary at the bottom of the table
+		#ordersummary_tax,
+		#ordersummary_itemtotal,
+		#ordersummary_total,
+		#ordersummary_shipping{
+			
+			text-align: right !important;
+
+			// Both cells
+			td:first-child.texttablert,
+			td:first-child ~ td.texttablert{ 
+				display: inline !important;
+				float: none !important;
+			}
+
+			// Value
+			td:first-child + td{
+				font-weight: bold;
+				padding-right: 10px !important;
+			}
+		}
+	}
+
+
+	// Order Total
+	#ordersummary_total{
+		background-color: $superLightGrey;
+
+		// Label
+		&:first-child{
+			text-align: right;
+		}
+	}
+
+	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
+		
+		position: absolute;
+		bottom: -50px;
+		width: auto;
+		right: 0px;
+
+		td{
+			float: right !important;
+			#tbl_submitter{
+				float: right;
+			}
+		}
+	}
+
+	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr{
+		display: none !important;
+	}
+
+	#tbl_change{
+		display: none;
 	}
 
 }
