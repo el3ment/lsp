@@ -50,22 +50,28 @@
 }
 
 body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
-	
 	position: relative;
 
-	td{
-		vertical-align: top;
-	}
+	// General bug/cleanup/fixes for rouge elements
+	td{ vertical-align: top; }
+	td[nowrap]{ white-space: normal; }
+	tr[height="25"]{ height: 0; }
 
 	@media (max-width: 767px){
-		table, tr, td, tbody{
+		&, table, tr, td, tbody{
 			display: block !important;
 			width: 100% !important;
 			padding: 0 !important;
 			margin: 0 !important;
 		}
 	}
+	#main_form{
+		font-size: inherit !important;
+		padding-bottom: 0 !important;
+		width: 100% !important;
+	}
 
+	// Basic Button Styling (Yellow)
 	#tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
 	#tbl_checkout{
 		@include gradient($lightYellow, $darkYellow);
@@ -101,6 +107,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 	}
 
+	// Grey Button styling
 	 #tbl_applygift, #tbl_applycoupon, #tbl_recalc{
 		@include gradient($buttonLightGrey, $buttonDarkGrey); 
 		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
@@ -133,6 +140,9 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 
+/*
+ *   Cart
+ */ 
 	#carttableheader, #carttableheader + tr{
 		font-size: 13px;
 	}
@@ -464,6 +474,10 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 
+
+/*
+ *  Generic Stylings
+ */
 	// Form Labels
 	.smalltextnolink[align="right"]{
 		font-weight: bold;
@@ -533,8 +547,9 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		margin-top:10px;
 	}
 
-
-	// Customer Sign In
+/*
+ *  Customer Sign In
+ */
 	> tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > input[name="new"] ~ table{
 		
 		
@@ -595,19 +610,38 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
+/*
+ * Timeline
+ */
 	// "Register > Address > Shipping > Payment > Review & Submit" map
 	// The path to them is different on each page.. why? I have no clue.
 	input[name="category"] ~ table > tbody > tr:first-child > td > table > tbody > tr:first-child,
 	.portletHandle:first-child,
 	> tbody > tr:first-child + tr > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child[height="25"] {
-		background-color: orange;
-		display: none !important;
-		position:absolute;
-		top: -50px;
-		left: 0;
+		//background-color: red;
+		height: 0 !important;
+		.checkoutprogresstext{
+			font-size: 0;
+			//position:absolute;
+			//top: -120px;
+			left: 0;
+			//width: 100%;
+			width: 100%;
+		}
 
+		.steps{
+			
+			font-size: 14px;
+			@media (max-width: 767px){
+				top: -100px;
+			}
+		}
 	}
 
+
+/*
+ * Payment Method
+ */
 	#paymeth > table{
 		@include panel();
 		@include engaged();
@@ -743,15 +777,12 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
-	#main_form{
-		font-size: inherit !important;
-		padding-bottom: 0 !important;
-		width: 100% !important;
-	}
 
 
-	// Shipping
 
+/*
+ * Shipping
+ */
 	.portletHandle:first-child + tr + tr + tr + tr.portletHandle{
 		width: 100%;
 		@include panel();
@@ -789,6 +820,12 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 		@include panel();
 		@include engaged();
+
+		// Space for steps
+		// margin-top: 140px;
+		// @media (max-width: 767px){
+		// 	margin-top: 100px !important;
+		// }
 
 		br:first-child, script + br{ display: none !important; }
 
@@ -946,10 +983,17 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 
+	// Shipping
 	> tbody > tr.portletHandle + .noprint + .portletHandle{
 		
 		@include panel();
 		@include disengaged();
+		
+		//Space for steps
+		// margin-top: 140px;
+		// @media (max-width: 767px){
+		// 	margin-top: 100px !important;
+		// }
 
 		width: 100%;
 

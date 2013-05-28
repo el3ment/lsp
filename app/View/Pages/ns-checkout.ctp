@@ -159,7 +159,14 @@ Subtotal
 <input type="hidden" name="cktime" value="114321">
 <input type="hidden" name="cart" value="328279">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
-<tbody><tr><td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment <img src="/c.665798/site/images-site/icon_speeding_cart.gif" border="0" align="absmiddle"> &nbsp; » &nbsp; Review &amp; Submit</td></tr><tr><td class="greytitle">Payment Information</td></tr></tbody></table></td></tr>
+<tbody><tr><td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment <div id='stepSlider' class='steps'>
+		<ul>
+			<li class='start completed active'><span class='label icon-24-user'>Start</span></li>
+			<li class='shipping'><span class='label icon-24-box'>Shipping</span></li>
+			<li class='billing'><span class='label icon-24-card'>Payment</span></li>
+			<li class='review'><span class='label icon-24-check'>Review &amp; Place Order</span></li>
+		</ul>
+	</div> &nbsp; » &nbsp; Review &amp; Submit</td></tr><tr><td class="greytitle">Payment Information</td></tr></tbody></table></td></tr>
 <tr>
 <td class="text">
 <table border="0" cellpadding="0" cellspacing="2">
@@ -337,7 +344,14 @@ Apply a Gift Card
 <h1>---</h1>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody><tr class="portletHandle">
-<td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address <img src="/c.665798/site/images-site/icon_speeding_cart.gif" border="0" align="absmiddle"> &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr></tbody></table></td>
+<td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address <div id='stepSlider' class='steps'>
+		<ul>
+			<li class='start completed active'><span class='label icon-24-user'>Start</span></li>
+			<li class='shipping'><span class='label icon-24-box'>Shipping</span></li>
+			<li class='billing'><span class='label icon-24-card'>Payment</span></li>
+			<li class='review'><span class='label icon-24-check'>Review &amp; Place Order</span></li>
+		</ul>
+	</div> &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr></tbody></table></td>
 
 </tr>
 <tr class="noprint">
@@ -891,7 +905,14 @@ Apply a Gift Card
 <tbody><tr>
 <td valign="top">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
-<tbody><tr><td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; Shipping <img src="/c.665798/site/images-site/icon_speeding_cart.gif" border="0" align="absmiddle"> &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr><tr><td class="greytitle"><div class="text-descyw"><h2>For Expedited Shipping Options, Please Select UPS from the Carrier Drop-Down List</h2></div></td></tr></tbody></table></td></tr>
+<tbody><tr><td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; Shipping <div id='stepSlider' class='steps'>
+		<ul>
+			<li class='start completed active'><span class='label icon-24-user'>Start</span></li>
+			<li class='shipping'><span class='label icon-24-box'>Shipping</span></li>
+			<li class='billing'><span class='label icon-24-card'>Payment</span></li>
+			<li class='review'><span class='label icon-24-check'>Review &amp; Place Order</span></li>
+		</ul>
+	</div> &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr><tr><td class="greytitle"><div class="text-descyw"><h2>For Expedited Shipping Options, Please Select UPS from the Carrier Drop-Down List</h2></div></td></tr></tbody></table></td></tr>
 <tr><td class="smalltext">&nbsp;</td></tr>
 <tr>
 <td valign="top" class="text">
@@ -1103,7 +1124,14 @@ return true;}</script>
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody><tr class="portletHandle">
-<td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address <img src="/c.665798/site/images-site/icon_speeding_cart.gif" border="0" align="absmiddle"> &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr></tbody></table></td>
+<td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address <div id='stepSlider' class='steps'>
+		<ul>
+			<li class='start completed active'><span class='label icon-24-user'>Start</span></li>
+			<li class='shipping'><span class='label icon-24-box'>Shipping</span></li>
+			<li class='billing'><span class='label icon-24-card'>Payment</span></li>
+			<li class='review'><span class='label icon-24-check'>Review &amp; Place Order</span></li>
+		</ul>
+	</div> &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr></tbody></table></td>
 
 </tr>
 <tr class="noprint">
@@ -1676,7 +1704,14 @@ return true;}</script>
 <input type="hidden" name="hash" value="3598edc0cc64d415c72f276deac3ee39b0425afb">
 <input type="hidden" name="shiptotal" value="4.49">
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
-<tbody><tr><td colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit <img src="/c.665798/site/images-site/icon_speeding_cart.gif" border="0" align="absmiddle"></td></tr><tr><td class="greytitle">Review and Submit Your Order</td></tr></tbody></table></td></tr>
+<tbody><tr><td colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; Shipping &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit <div id='stepSlider' class='steps'>
+		<ul>
+			<li class='start completed active'><span class='label icon-24-user'>Start</span></li>
+			<li class='shipping'><span class='label icon-24-box'>Shipping</span></li>
+			<li class='billing'><span class='label icon-24-card'>Payment</span></li>
+			<li class='review'><span class='label icon-24-check'>Review &amp; Place Order</span></li>
+		</ul>
+	</div></td></tr><tr><td class="greytitle">Review and Submit Your Order</td></tr></tbody></table></td></tr>
 <tr><td class="smalltext">&nbsp;</td></tr>
 <tr>
 <td valign="top" class="text">
