@@ -19,6 +19,7 @@
 	
 	<script type='text/javascript' src='js/controllers/plugins/reveal.js'></script>
 	<script type='text/javascript' src='js/controllers/plugins/suggestions.js'></script>
+	<script type='text/javascript' src='js/controllers/search.js'></script>
 	<script type='text/javascript' src='js/models/cart.js'></script>
         
     
