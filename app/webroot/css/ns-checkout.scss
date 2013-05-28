@@ -226,6 +226,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		// Quantity
 		td:first-child + td + td + td + td{
 			min-width: 50px;
+			text-align: center;
 
 			@media (max-width: 767px){
 				float: left !important;
@@ -600,6 +601,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	.portletHandle:first-child,
 	> tbody > tr:first-child + tr > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child[height="25"] {
 		background-color: orange;
+		display: none !important;
 		position:absolute;
 		top: -50px;
 		left: 0;
@@ -1129,13 +1131,31 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		padding-bottom: 0 !important;
 	}
 
-	// Labels
-	#ordersummary_tax td:first-child,
-	#ordersummary_itemtotal td:first-child,
-	#ordersummary_total td:first-child,
-	#ordersummary_shipping td:first-child{
-		text-align: right !important;
+	// Labels and Values for Order Summary Table
+	#ordersummary_tax,
+	#ordersummary_itemtotal,
+	#ordersummary_total,
+	#ordersummary_shipping{
+
+		// Labels
+		td:first-child{
+			text-align: right !important;
+		}
+
+		// Values
+		td:first-child + td{
+			font-weight: bold;
+			text-align: right;
+			font-size: 14px;
+			padding-right: 10px !important;
+		}
+	} 
+
+	// Just the overall total value
+	#ordersummary_total td:first-child + td{
+		font-size: 21px;
 	}
+
 
 
 	@media (max-width: 767px){
@@ -1196,4 +1216,8 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		display: none;
 	}
 
+}
+
+select option:last-child:before{
+	content: 'hey';
 }
