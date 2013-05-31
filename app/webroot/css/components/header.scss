@@ -374,6 +374,10 @@
 			
 			float: left;
 			
+			a, .b5{
+				display:inline-block;
+			}
+
 			&:after{
 				content: '→';
 				padding:0 px(5px);
@@ -382,10 +386,13 @@
 				content: ' ';
 			}
 			
-			&.active a{
+			&.active a, &.active .b5{
 				text-decoration: none; 
 				color: $black;
 				font-weight: bold;
+				float: left;
+				position: relative;
+				top: 2px;
 			}
 		}
 	}

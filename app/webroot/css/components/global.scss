@@ -803,7 +803,46 @@ ul.list li,
 		width: 100%;
 	}
 	
-	
+	.indent a, .indent .b5{ 
+		text-indent: 0;
+		padding-left: 10px;
+		position: relative;
+		left: -10px;
+	}
+
+	li.indent:first-child + .indent{ padding-left: 0px; }
+	li.indent ~ .indent{
+		
+		a, .b5{
+			&:before,
+			.leftLinkBold:before{
+				display: block;
+				content : '↳';
+				position: static;
+				color: $lightGrey;
+				float:left;
+				padding-right: 2px;
+			}
+			&:hover{
+				&:before{
+					color: black;
+				}
+			}
+		}
+	}
+
+	// Don't bold the first listed category
+	li.indent:first-child{
+		a, .b5{
+			font-weight: normal;
+		}
+	}
+
+	li.indent:first-child + .indent + .indent{ padding-left: 5px; }
+	li.indent:first-child + .indent + .indent + .indent{ padding-left: 10px; }
+	li.indent:first-child + .indent + .indent + .indent + .indent{ padding-left: 15px; }
+	li{ clear: both; }
+
 	// Text links
 	a, .b5{
 		display: block;
@@ -818,13 +857,19 @@ ul.list li,
 		
 		&:hover{
 			//color: blue;
-			text-decoration: underline;
+			text-decoration: none;
 			//padding-left: 10px;
 			&:before{
 				color: $grey;
 				content: '›';
 				position: absolute;
 				left: 0px;
+			}
+			.label{
+				text-decoration: underline;
+			}
+			.details{
+				text-decoration: none;
 			}
 		}
 
@@ -834,7 +879,6 @@ ul.list li,
 			font-weight: bold;
 			color: black;
 			&:hover{
-				padding-left: 0;
 				text-decoration: none;
 				&:before{
 					display: none;
@@ -843,27 +887,14 @@ ul.list li,
 		}
 
 		// 3rd level category
-		&.link3{
-			padding-left: 10px;
-			margin-left: 10px;
-			border-left: 1px solid $lightGrey;
-			//&:hover{
-			//	padding-left: 20px;
-			//}
+		&.link2, &.link3, &.link4, &.link5, &.link6{
+			position:relative;
+			left: 10px;
 		}
-		//.link3 + .link2{ // The first link after a sub section
-			//margin-top: 5px;
-		//}
-		
-		// 4th level category
-		&.link4{
-			padding-left: 10px;
-			margin-left: 30px;
-			border-left: 1px solid $lightGrey;
-			//&:hover{
-			//	padding-left: 20px;
-			//}
-		}
+		&.link3{ left: 20px; }
+		&.link4{ left: 30px; }
+		&.link5{ left: 40px; }
+		&.link6{ left: 50px; }
 	}
 	
 	// A division within the box aka, an attribute complete with title, collapse button, and content
@@ -968,12 +999,32 @@ ul.list li,
 			}
 		}
 		
+		ul:first-child .field:first-child{
+			margin-top:10px;
+		}
+
+		// The 'more' section's list dosen't need a top margin
+		.more ul .field:first-child{
+			margin-top:0;
+		}
+		
 		.loadMore{
 			clear: both;
 			float: left;
-			position: relative;
-			left: px(25px);
-			top: px(-5px);
+			color: $grey;
+			&:hover:before{
+				content: '';
+			}
+
+			.more{ display: none; }
+			.less{ display: none; }
+			&.reveal-open{
+				.less{ display: block; }
+			}
+			&.reveal-closed{
+				.more{ display: block; }
+			}
+			// top: px(-5px);
 		}
 		&.links .loadMore{
 			left: 0px;
@@ -997,6 +1048,7 @@ ul.list li,
 			padding-bottom: 12px;
 			padding-top: 3px;
 			padding-left: 32px;
+			text-indent: 0;
 			
 			@media (min-width: 768px){
 				padding-bottom: 10px;
@@ -1006,17 +1058,29 @@ ul.list li,
 				color: black;
 			}
 		}
+
+		a, .b5{
+			&:hover{
+				&:before{
+					content: '';
+				}
+			}
+		}
 		
 		button[data-action='clearAllRefinements']{
 			float: right;
 			margin-top: px(5px);
 			margin-bottom: px(5px);
+
 		}
 		
 		.section{
-			margin-top: px($paddingUnit);
+			margin-top: 0;
+			//margin-top: px($paddingUnit);
 			border-top: none;
 			padding-bottom:0;
+			top: 5px;
+			margin-bottom: 0;
 		}
 	}
 }

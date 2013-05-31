@@ -26,6 +26,9 @@
 						_state.page = data.response.source.products.itemDescription.currentPage;
 						_app.controllers.application.pushState(_this, _state);
 					},
+					onAfterAPICallFailure : function(e, data){
+						alert('error');
+					},
 					onRemoveFilter : function(e, data){
 						_this.removePathNode(
 							decodeURIComponent($(data.selector).data('previousnodepath')) // navNode's paths are URI encoded
@@ -40,7 +43,12 @@
 					},
 					onLoadCategory : function(e, data){
 						// .data() works best with lowercase names
-						_this.loadCategory($(data.selector).data('categoryid'));
+						if($(data.selector).data('categoryid')){
+							_this.loadCategory($(data.selector).data('categoryid'));
+						}else if($(data.selector).data('path')){
+							_this.loadCategory($(data.selector).data('path'), true);
+						}
+
 					},
 					onNextPage : function(e, data){
 						_this.paginate('next');
@@ -66,6 +74,7 @@
 				application : {
 
 					onHashChange : function(e, data){
+						console.log('hashchange');
 						$.extend(_state, _app.controllers.application.pullState(_this));
 						_this.loadCategory();
 					},
@@ -113,13 +122,20 @@
 					});
 			},
 
-			loadCategory : function(categoryPath){
+			loadCategory : function(categoryPath, isAtomic){
 				
 				var payload = {
-					path : categoryPath,
 					RequestAction : 'advisor',
 					RequestData : 'CA_CategoryExpand'
 				};
+
+				// If isAtomic is false (default) then it appends categoryPath to the current path
+				// if it's true, then it uses the entire path
+				if(isAtomic){
+					payload.CatPath = categoryPath;
+				}else{
+					payload.path = categoryPath;
+				}
 
 				return _api.request(_this, 'loadCategory', payload)
 					.done(function(data){
@@ -215,16 +231,30 @@
 				var path = easyAskDataObject.navPath.pureCategoryPath;
 				var categories = path.split('////');
 				var currentCategory = categories[categories.length - 1];
+				var currentPageNumber = easyAskDataObject.products.itemDescription.currentPage;
+				var totalPages = easyAskDataObject.products.itemDescription.pageCount;
 
 				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', easyAskDataObject);
 
-				$('.currentPageNumber').html(easyAskDataObject.products.itemDescription.currentPage);
-				$('.totalPages').html(easyAskDataObject.products.itemDescription.pageCount);
+				$('.currentPageNumber').html(currentPageNumber);
+				$('.totalPages').html(totalPages);
 				$('.numberOfResults').html(easyAskDataObject.products.itemDescription.totalItems);
 				$('#pageName').html(currentCategory);
 
 				$('select[data-action="sort"]').val(easyAskDataObject.products.itemDescription.sortOrder);
 				$('select[data-action="itemsPerPage"]').val(easyAskDataObject.products.itemDescription.resultsPerPage);
+
+				if(currentPageNumber === 1){
+					$('*[data-action="previousPage"]').css('visibility', 'hidden');
+				}else{
+					$('*[data-action="previousPage"]').css('visibility', 'visible');
+				}
+
+				if(currentPageNumber === totalPages){
+					$('*[data-action="nextPage"]').css('visibility', 'hidden');
+				}else{
+					$('*[data-action="nextPage"]').css('visibility', 'visible');
+				}
 
 				_app.controllers.application.attachEvents($('#breadcrumbs').html(breadcrumbHTML));
 

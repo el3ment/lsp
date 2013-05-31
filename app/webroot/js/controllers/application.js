@@ -147,8 +147,12 @@
 				var statePath = _this.buildStateString(controller, snapshot);
 				_state[controller.name] = snapshot;
 				
-				_isPushingState = true; // Don't fire the onHashChange event
-				window.location.hash = statePath;
+				// Setting window.location.hash to the same path does not cause hashchange to fire
+				// which would leave isPushingState true until the next go around, a strange bug
+				if(window.location.hash !== '#' + statePath){
+					_isPushingState = true; // Don't fire the onHashChange event
+					window.location.hash = statePath;
+				}
 
 			},
 
@@ -287,6 +291,7 @@
 				);
 
 				$(window).on('hashchange', function(e){
+					console.log('raw change');
 					if(_isPushingState){
 						_isPushingState = false; // Apparently we've pushed, so unset it
 						return;

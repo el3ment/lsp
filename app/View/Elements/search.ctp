@@ -99,28 +99,18 @@
 <script id='templates-search-breadcrumbs' type='text/html'>
 	<ul class="span12 breadcrumbLinks">
 		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
-			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'><a href="#<#=this.navPath._lsp.categoryNodes.url #>"><#=this.navPath._lsp.categoryNodes[i].value #></a></li>
+			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'>
+				<button class='b5' data-action='loadCategory' data-controller='search' data-path='<#=this.navPath._lsp.categoryNodes[i].purePath #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
+			</li>
 		<# } #>
 	</ul>
 </script>
 
 <script id='templates-search-selectedRefinements' type='text/html'>
+	<# if(this.navPath.navPathNodeList.length - this.navPath._lsp.categoryNodes.length > 0){ #>
 	<div class='selectedFilters panel engaged'>
 		<h2>Youve Selected</h2>
 		<ul class='section'>
-
-			<#	/* Print just the last category */
-				for(var i = this.navPath.navPathNodeList.length - 1; i >= 1; i--){ #>
-				<# if(this.navPath.navPathNodeList[i].navNodePathType === 1){ #>
-					<li>
-						<button class='b5 icon-24-close category' data-action='removeFilter' data-previousNodePath='<#=this.navPath.navPathNodeList[i-1].path #>'>
-							<#=this.navPath.navPathNodeList[i].value #>
-						</button>
-					</li>
-					<# break; #>
-				<# } #>
-			<# } #>
-
 			<#	/* Just the attributes */
 				for(var i = 0; i < this.navPath.navPathNodeList.length; i++){ #>
 				<# if(this.navPath.navPathNodeList[i].navNodePathType !== 1){ #>
@@ -134,24 +124,74 @@
 		</ul>
 		<button class='b5' data-action='clearAllRefinements'>Clear All Selected</button>
 	</div>
+	<# } #>
 </script>
 
 <script id='templates-search-checkboxListEntry' type='text/html'>
-	<li class='field'>
-		<input 
-			data-action='filterAttribute' 
-			name='<#=this.section.name #>[]' 
-			value='<#=this.item.attributeValue #>' 
-			id='refinement-<#=this.section.name #>-<#=this.itemIndex #>' type='checkbox' />
+	<ul>
+		<# for(var i = 0; i < this.initialListSize; i++){ #>
+			<li class='field'>
+				<input 
+				data-action='filterAttribute' 
+				name='<#=this.section.name #>[]' 
+				value='<#=this.entries[i].attributeValue #>' 
+				id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' />
 		
-		<label for='refinement-<#=this.section.name #>-<#=this.itemIndex #>'><#=this.item.attributeValue #>&nbsp;<span class='details'>(<#=this.item.productCount #>)</span></label>
-	</li>
+				<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
+			</li>
+		<# } #>
+	</ul>
+	<div id='refinement-<#=this.id #>-more' class='reveal-closed more'>
+		<ul>
+			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
+				<li class='field'>
+					<input 
+					data-action='filterAttribute' 
+					name='<#=this.section.name #>[]' 
+					value='<#=this.entries[i].attributeValue #>' 
+					id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' />
+			
+					<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
+				</li>
+			<# } #>
+		</ul>
+	</div>
+	<# if(this.entries.length - this.initialListSize > 0){ #>
+		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'><span class='more'>See More (<#=this.entries.length - this.initialListSize #>)</span><span class='less'>Less</span></button>
+	<# } #>
 </script>
 
+
+
 <script id='templates-search-categoryListEntry' type='text/html'>
-	<li>
-		<button class='b5' data-action='loadCategory' data-categoryId='<#=this.item.name #>'><#=this.item.name #></button>
-	</li>
+	<ul>
+		<# var categories = this.responseObject.navPath._lsp.categoryNodes; #>
+		<# var depth = this.responseObject.navPath._lsp.categoryNodes.length; #>
+		<# for(var i = 1; i < categories.length; i++){ #>
+			
+			<li class='indent'>
+				<button data-action='loadCategory' data-path='<#=categories[i].purePath #>' class='b5 <#=(i === categories.length - 1 ? 'leftLinkBold' : '') #>'>
+					<#=categories[i].value #>
+				</button>
+			</li>
+		<# } #>
+
+		<# for(var i = 0; i < this.initialListSize; i++){ #>
+			<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-categoryId='<#=this.entries[i].name #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
+		<# } #>
+	</ul>
+
+	<div id='refinement-<#=this.id #>-more' class='reveal-closed more'>
+		<ul>
+			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
+				<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-categoryId='<#=this.entries[i].name #>'><#=this.entries[i].name #> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
+			<# } #>
+		</ul>
+	</div>
+	<# if((this.entries || {}).length - this.initialListSize > 0){ #>
+		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>
+		<span class='more'>See More (<#=this.entries.length - this.initialListSize #>)</span><span class='less'>Less</span></button>
+	<# } #>
 </script>
 
 <script id='templates-search-refinementSection' type='text/html'>
@@ -164,34 +204,22 @@
 			<button class='b4 icon-16-toggleHide reveal-closed-phone <#=revealState #>' data-reveal-children='refinement-<#=this.id #>-container'>Toggle Refinement Group</button>
 		</div>
 		<div id='refinement-<#=this.id #>-container' class='content reveal-closed-phone <#=revealState #>'>
-			<ul>
-				<# for(var i = 0; i < initialListSize; i++){ #>
-					<#=_util.parseMicroTemplate(this.entryTemplateId, {
-						section : this,
-						itemIndex : i,
-						item : this.entries[i]}) #>
-				<# } #>
-			</ul>
-			<div id='refinement-<#=this.id #>-more' class='reveal-closed'>
-				<ul>
-					<# for(var i = initialListSize; i < this.entries.length; i++){ #>
-						<#=_util.parseMicroTemplate(this.entryTemplateId, {
-							section : this,
-							itemIndex : i,
-							item : this.entries[i]}) #>
-					<# } #>
-				</ul>
-			</div>
-			<# if(this.entries.length - this.initialListSize > 0){ #>
-				<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>See More (<#=this.entries.length - this.initialListSize #>)</button>
-			<# } #>
+
+			<#=_util.parseMicroTemplate(this.entryTemplateId, {
+				section : this,
+				entries : this.entries,
+				initialListSize : this.initialListSize,
+				responseObject : this.responseObject,
+				id : this.id
+			}) #>
+		
 		</div>
 	</div>
 </script>
 
 <script id='templates-search-refinements' type='text/html'>
 	<#	if(this.categories){ #>
-		<#	var initialSize = (this.categories.isInitDispLimited ? this.categories.initialCategoryList.length : this.categories.categoryList.length); #>
+		<#	var initialSize = (this.categories.isInitDispLimited ? (this.categories.initialCategoryList || {}).length : (this.categories.categoryList || {}).length); #>
 
 		<#=_util.parseMicroTemplate('templates-search-refinementSection', {
 			name : 'Categories',
@@ -199,13 +227,14 @@
 			isOpen : true,
 			entries : categories.categoryList,
 			initialListSize : initialSize,
-			entryTemplateId : 'templates-search-categoryListEntry'
+			entryTemplateId : 'templates-search-categoryListEntry',
+			responseObject : this
 		}) #>
 
 	<# } #>
 	
 
-	<# for(var i = 0; i < this.attributes.attribute.length; i++){ #>
+	<# for(var i = 0; i < ((this.attributes || {}).attribute || {}).length; i++){ #>
 	
 		<# var attribute = this.attributes.attribute[i]; #>
 		<# var initialSize = (attribute.isInitDispLimited ? attribute.initDispLimit : attribute.attributeValueList.length); #>
@@ -216,7 +245,8 @@
 			isOpen : true,
 			entries : attribute.attributeValueList,
 			initialListSize : initialSize,
-			entryTemplateId : 'templates-search-checkboxListEntry'
+			entryTemplateId : 'templates-search-checkboxListEntry',
+			responseObject : this
 		}) #>
 
 	<# } #>

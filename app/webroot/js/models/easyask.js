@@ -6,8 +6,9 @@
 	_util.register('model', 'easyask', (function(){
 
 		var _dictionary = 'nslonestarpercussion';
-		var _dictionary = 'EcomDemo';
-		var _hostname = 'http://easyaskqa.easyaskondemand.com';
+		//var _dictionary = 'EcomDemo';
+		//var _hostname = 'http://easyaskqa.easyaskondemand.com';
+		var _hostname = 'http://gooasdfadfsd.com';
 		
 		var _this = $.extend({}, _models.api);
 
