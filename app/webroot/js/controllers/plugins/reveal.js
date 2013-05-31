@@ -4,13 +4,26 @@
 
 	var reveal = (function(){
 		var _this = {};
-		var _lsp = window.LSP;
+		var _app = window.LSP;
 
 		_this =  {
 			name : 'reveal',
 			events : {
 				reveal : {},
 				application : {
+					onContextChange : function(e, data){
+						$('.reveal-closed-'+ data.previousContext)
+							.removeClass('reveal-closed')
+							.addClass('reveal-open');
+
+						$('.reveal-closed-'+ data.context)
+							.removeClass('reveal-open')
+							.addClass('reveal-closed');
+
+						$('.reveal-context-' + data.previousContext)
+							.removeClass('reveal-open')
+							.removeClass('reveal-closed');
+					},
 					onAttachEvents : function(e, data){
 						_this.bindEvents(data.selector);
 					}
@@ -20,6 +33,7 @@
 			assets : {},
 
 			bindEvents : function(parent){
+			
 				$('*[data-reveal-children]', parent).off('click.reveal').on('click.reveal', function(e){
 
 					// On click - fire the click event
@@ -29,17 +43,7 @@
 					e.stopPropagation();
 					return true;
 
-				}).each(function(index, element){
-
-					// Mark all children as children
-					_this.buildChildrenSelector(this).addClass('reveal-child');
-
-					// If we ask it to start open, toggle the children
-					//if($(this).hasClass('reveal-ispen')){
-					//	$(_this.buildChildrenSelector(this)).addClass('reveal-isOpen');
-					//}
-				}).addClass('reveal-parent');
-
+				});
 
 				// Mouseover reveals
 				$('.reveal-showOnMouseover', parent).off('mouseenter.reveal').on('mouseenter.reveal', function(e){
@@ -54,8 +58,6 @@
 
 			unbindEvents : function(parent){
 				$('*[data-reveal-children]', parent).off('.reveal');
-				$('.reveal-child', parent).removeClass('reveal-child');
-				$('.reveal-parent', parent).removeClass('reveal-parent');
 			},
 
 
@@ -66,45 +68,67 @@
 			open : function(children, doAnimations){
 				
 				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
-				var addClass = function(){
-					children.each(function(index, child){
-						$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-isOpen');
-					}).addClass('reveal-isOpen');
-				};
+
+				// Mark Parents as Open
+				children.each(function(index, child){
+					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-open').removeClass('reveal-closed');
+				})
 
 				if(doAnimations){
-					children.css('display', '').slideDown({duration : 400, easing : 'swing', complete : addClass});
+					children
+						.css('display', 'none')
+						.slideDown({
+							duration : 300,
+							easing : 'swing',
+							complete : function(){
+								children
+									.addClass('reveal-open')
+									.css('display', '')
+									.removeClass('reveal-closed');
+							}
+						});
 				}else{
-					addClass();
+					children.addClass('reveal-open').removeClass('reveal-closed');
 				}
 
 			},
-
 
 			close : function(children, doAnimations){
 				
 				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
-				var clearClass = function(){
-					children.each(function(index, child){
-							$('*[data-reveal-children*="' + child.id + '"] ').removeClass('reveal-isOpen');
-						}).removeClass('reveal-isOpen');
-				};
+
+				// Mark Parents as Open
+				children.each(function(index, child){
+					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-closed').removeClass('reveal-open');
+				});
 
 				if(doAnimations){
-					children.css('display', 'block').slideUp({duration : 400, easing : 'swing', complete : clearClass});
+					children
+						.css('display', 'block')
+						.slideUp({
+							duration : 300,
+							easing : 'swing',
+							complete : function(){
+								$(this)
+									.removeClass('reveal-open')
+									.addClass('reveal-closed')
+									.css('display', '');
+							}
+						});
 				}else{
-					clearClass();
-				}
-			},
-			toggle : function(children, doAnimations){
-				if(children.is(':visible')){
-					_this.close(children, doAnimations);
-				}else{
-					_this.open(children, doAnimations);
+					children.addClass('reveal-closed').removeClass('reveal-open');
 				}
 
-				// They've made a decision - so let's remove our start-only helpers
-				children.removeClass('reveal-openOnlyMobile reveal-openOnlyDesktop');
+			},
+
+			toggle : function(children, doAnimations){
+
+				var context = _app.controllers.application.getContext();
+				var openChildren = children.filter('.reveal-open:not(*[class*="reveal-context"]), .reveal-open.reveal-context-' + context);
+				var closedChildren = children.filter('.reveal-closed:not(*[class*="reveal-context"]), .reveal-open.reveal-context-' + context);
+
+				_this.close(openChildren, doAnimations);
+				_this.open(closedChildren, doAnimations);
 
 			}
 		};

@@ -138,7 +138,7 @@
 	font-weight: normal;
 	text-align:center;
 }
-.icon-24-toggleHide.reveal-isOpen:after{
+.icon-24-toggleHide.reveal-open:after{
 	content: '-' !important;
 }
 .icon-16-toggleHide:after{
@@ -152,7 +152,7 @@
 	text-align:center;
 	left: 0;
 }
-.icon-16-toggleHide.reveal-isOpen:after{
+.icon-16-toggleHide.reveal-open:after{
 	content: '-' !important;
 	line-height: 15px;
 }

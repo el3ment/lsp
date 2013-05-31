@@ -12,20 +12,21 @@
     <script type='text/javascript' src='js/vendors/jquery/jquery-1.9.1.js'></script>
     <script type='text/javascript' src='js/vendors/menu-aim/menu-aim.js'></script>
     <script type='text/javascript' src='js/vendors/touch_carousel/jquery.touchcarousel-1.2.js'></script>
+    <script type='text/javascript' src='js/vendors/jcookie/jcookie.js'></script>
     <script type='text/javascript' src='js/vendors/json2/json2.js'></script>
     <script type='text/javascript' src='js/vendors/form2js/form2js.js'></script>
     <script type='text/javascript' src='js/vendors/md5/md5.js'></script>
+
     <script type='text/javascript' src='js/utilities/global.js'></script>
 	
+	<script type='text/javascript' src='js/models/api.js'></script>
+	<script type='text/javascript' src='js/models/netsuite.js'></script>
+	<script type='text/javascript' src='js/models/easyask.js'></script>
+
 	<script type='text/javascript' src='js/controllers/plugins/reveal.js'></script>
 	<script type='text/javascript' src='js/controllers/plugins/suggestions.js'></script>
+
 	<script type='text/javascript' src='js/controllers/search.js'></script>
-	<script type='text/javascript' src='js/models/cart.js'></script>
-        
-    
-	
-	<script type='text/javascript' src='js/vendors/jcookie/jcookie.js'></script>
-	<script type='text/javascript' src='js/models/api.js'></script>
 		
 	<script type='text/javascript' src='js/assets/history.js'></script>
     <script type='text/javascript' src='js/assets/listEncoder.js'></script>
@@ -37,7 +38,6 @@
     <script type='text/javascript' src='js/controllers/plugins/clearable.js'></script>
     
     <script type='text/javascript' src='js/controllers/plugins/validation.js'></script>
-    
     
     <script type='text/javascript' src='js/controllers/reviews.js'></script>
     <script type='text/javascript' src='js/controllers/shipping.js'></script>

@@ -8,15 +8,20 @@
 		var _assets = _app.assets;
 		var _context;
 
+		var _state = {};
+
+		var _isPushingState;
+
 		_this =  {
 			events : { 
 				application : {
 					onResize : function(e, data){
 						var width = $(window).width();
 						var newContext;
+						var oldContext = _context;
 
 						if(width >= 1200){
-							newContext = 'largeDesktop';
+							newContext = 'desktop'; // could be largeDesktop
 						}else if(width > 979){
 							newContext = 'desktop';
 						}else if(width >= 768){
@@ -25,11 +30,13 @@
 							newContext = 'phone';
 						}
 
-						if(newContext !== _context){
-							$(_this).triggerHandler('onContextChange', {context : _context});
-							$(_this).triggerHandler(_util.camelCase('onContextChangeLeave-' + _context), {context : _context});
-							$(_this).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : _context});
-							console.log('Leaving ' + _context + ' entering ' + newContext);
+						if(newContext !== oldContext){
+							console.log('Leaving ' + oldContext + ' entering ' + newContext);
+							
+							$(_this).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
+							$(_this).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
+							$(_this).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
+							
 							_context = newContext;
 						}
 					},
@@ -69,8 +76,12 @@
 									}
 								}
 								
+
 								if(controller && action && !asset){
 									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
+
+										console.log('Event : ' + controller + '.events.' + action + ' fired.');
+
 										$(_app.controllers[controller]).
 											triggerHandler(_util.camelCase('on-'+action), 
 												{selector : element});
@@ -81,6 +92,9 @@
 								
 								}else if(controller && action && asset){
 									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
+
+										console.log('Event : ' + controller + '.events.' + action + ' fired.');
+
 										$(_app.controllers[controller].assets[asset]).
 											triggerHandler(_util.camelCase('on-'+action), 
 												{selector : element});
@@ -92,14 +106,18 @@
 							});
 						});
 					},
+
 					onReady : function(e, data){
 
 						_this.attachEvents($('html'));
 						
 						// Add pagetype to the body tag for CSS styling
-						$('body').data('pagetype', $('*[data-pagetype]:first').data('pagetype'));
+						//$('body').data('pagetype', $('*[data-pagetype]:first').data('pagetype'));
 					},
-					onInit : function(e, data){}
+
+					onInit : function(e, data){
+						_state = _this.pullState();
+					}
 				}
 			},
 			
@@ -118,6 +136,72 @@
 				return function(e){
 					$(controller).triggerHandler(_util.camelCase('on-'+eventName), {selector : this, passthrough : passthrough});
 				};
+			},
+
+
+			// Push / Pull state take snapshots sent from controllers, stringify them
+			// and then push that to the hash. It would have been possible to use JSON
+			// but the slashes look much prettier
+			pushState : function(controller, snapshot){
+				
+				var statePath = _this.buildStateString(controller, snapshot);
+				_state[controller.name] = snapshot;
+				
+				_isPushingState = true; // Don't fire the onHashChange event
+				window.location.hash = statePath;
+
+			},
+
+			buildStateString : function(controller, snapshot){
+
+				var statePath = '';
+				
+				$.each(_state, function(controllerName, snapshot){
+					statePath = statePath + '/~' + encodeURIComponent(controllerName);
+					$.each(snapshot, function(variable, value){
+
+						// For simple objects use the value, complex objects get JSON-ified
+						value = (typeof value === 'object' ? JSON.stringify(value) : value);
+						
+						statePath += '/' + encodeURIComponent(variable) + '/' + encodeURIComponent(value).replace(/%20/g, '+');
+					
+					});
+				});
+
+				return statePath;
+			},
+
+			pullState : function(controller){
+				
+				var statePath = window.location.hash;
+				var controllers = statePath.split('/~');
+				var state = {};
+
+				$.each(controllers, function(index, controllerPath){
+
+					// Grab the controller name
+					var controllerStatePath = controllerPath.split('/');
+					var controllerName = controllerStatePath[0];
+					
+					// Loop through the key/value pairs by 2s
+					for(var i = 1; i < controllerStatePath.length; i = i + 2){
+						
+						state[controllerName] = state[controllerName] || {};
+
+						// Assume the value is a simple object
+						state[controllerName][controllerStatePath[i]] = decodeURIComponent(controllerStatePath[i + 1]).replace(/\+/g, ' ');
+						
+						// Try and decode the JSON - if it's successful, replace the stringified version
+						try{
+							var object = $.parseJSON(state[controllerName][controllerStatePath[i]]);
+							state[controllerName][controllerStatePath[i]] = object;
+						}catch(e){ }
+					}
+				});
+
+				// If they asked for a controller, just send that data, otherwise you get the whole object
+				return (controller ? state[controller.name] : state);
+
 			},
 
 			init : function(){
@@ -202,11 +286,22 @@
 					})()
 				);
 
+				$(window).on('hashchange', function(e){
+					if(_isPushingState){
+						_isPushingState = false; // Apparently we've pushed, so unset it
+						return;
+					}
+					_isPushingState = false;
+
+					$(_this).triggerHandler('onHashChange', e);
+				});
+
 				// Fire the onReady and onResize events to initialize anything that relies on them
-				$(document).ready(function(){ 
-					$(_this).triggerHandler('onResize');
-					$(_this).triggerHandler('onReady');
-					$(_this).triggerHandler('onAfterReady');
+				$(document).ready(function(e){ 
+					$(_this).triggerHandler('onHashChange', e);
+					$(_this).triggerHandler('onResize', e);
+					$(_this).triggerHandler('onReady', e);
+					$(_this).triggerHandler('onAfterReady', e);
 				});
 			}
 

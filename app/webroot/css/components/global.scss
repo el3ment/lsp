@@ -744,24 +744,27 @@ ul.list li,
 
 /* Data-Reveal Children Plugin */
 *[data-reveal-children]{ cursor: pointer; }
-.reveal-child{ display: none; }
-.reveal-isOpen{ display: inherit; }
-
-// Don't force hidden open parents to show.. we'll let the cascade determine that
-.reveal-parent.reveal-isOpen{ display: inherit; }
-
-.reveal-openOnlyDesktop{ display: inherit; }
-
-@media (min-width: 768px){
-	.reveal-child.reveal-openAlwaysDesktop{ display: inherit; }
+.reveal-closed { display: none; }
+.reveal-open{ display: block; }
+.reveal-closed[data-reveal-children]{
+	display: block;
 }
 
+// .reveal-child.reveal-isClosed{ display: none !important; } // Closed
+// .reveal-child.reveal-isOpen{ display: inherit !important; } // Open
+// .reveal-child.reveal-isOpen.reveal-isClosed{ display: block !important; } // In Transition
+
+// // Don't force hidden open parents to show.. we'll let the cascade determine that
+// .reveal-parent.reveal-isOpen{ display: inherit; }
+
+// .reveal-openOnlyDesktop{ display: inherit; }
+
 @media (max-width: 767px){
-	.reveal-child.reveal-openOnlyDesktop{
+	.reveal-closed.reveal-closed-phone{
 		display: none;
 	}
-	.reveal-child.reveal-openOnlyDesktop.reveal-isOpen{
-		display: inherit;
+	.reveal-closed.reveal-closed-phone[data-reveal-children]{
+		display: block;
 	}
 }
 
@@ -790,10 +793,7 @@ ul.list li,
 	
 	// The actual box
 	.panel{
-		//width: 100%;
-	   // float: left;
-		//display: block;
-		//clear: both;
+		width: 100%;
 	}
 	
 	// "Refine Your Results"
@@ -805,13 +805,15 @@ ul.list li,
 	
 	
 	// Text links
-	a{
+	a, .b5{
 		display: block;
 		font-size: 13px;
 		text-decoration: none;
 		color: black;
-		padding-left: 0;
 		padding-bottom: 2px;
+		text-align:left;
+		text-indent: -10px;
+		padding-left: 10px;
 		//@include transition(padding-left .1s, color .1s);
 		
 		&:hover{
@@ -822,7 +824,7 @@ ul.list li,
 				color: $grey;
 				content: '›';
 				position: absolute;
-				left: -10px;
+				left: 0px;
 			}
 		}
 
@@ -936,12 +938,13 @@ ul.list li,
 		ul{ 
 			
 			display: block;
-			float:left;
+			//float:left;
 			width: 100%;
 			
 			// Each attribute type
 			.field{ 
 				clear: both;
+				float: none;
 				margin-left: px($paddingUnit);
 				width: 100%;
 				
@@ -971,6 +974,9 @@ ul.list li,
 			position: relative;
 			left: px(25px);
 			top: px(-5px);
+		}
+		&.links .loadMore{
+			left: 0px;
 		}
 	}
 	.selectedFilters{

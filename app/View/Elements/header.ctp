@@ -5,9 +5,9 @@
 			<li><a class="b5 icon-24-box-grey" href="#">track order</a></li>
 			<li><a class="b5 icon-24-card-grey" href="#">gift cards</a></li>
 			<li><a class="b5 icon-24-chat-grey" href="#">contact us</a></li>
-			<li data-reveal-children='accountFlyout' class='reveal-showOnMouseover reveal-noAnimation'>
+			<li data-reveal-children='accountFlyout' class='reveal-closed reveal-showOnMouseover reveal-noAnimation'>
 				<a class="b5 icon-24-account-grey" href="#">hi, username</a>
-				<ul id='accountFlyout' class='sublist'>
+				<ul id='accountFlyout' class='sublist reveal-closed'>
 					<li><a href=''>My Account <span class='details'>Subtext</span></a></li>
 					<li><a href=''>My Account <span class='details'>Subtext</span></a></li>
 					<li class='last'><a href=''>My Account <span class='details'>Subtext</span></a></li>
@@ -24,21 +24,23 @@
 	</div> 
 	
 	<ul class='shopbar span12'> 
-		<li class='departments'><a id='flyoutControlButton' data-reveal-children='mainFlyout' class='b1 icon-24-star-black highlight-icon dropdown reveal-waitToInitialize'>Shop By <strong>Department</strong></a></li>
+		<li class='departments'><a id='flyoutControlButton' data-reveal-children='mainFlyout' class='reveal-context-phone reveal-closed b1 icon-24-star-black highlight-icon dropdown'>Shop By <strong>Department</strong></a></li>
 		<li class='cart'><a class='b3 icon-24-cart-white highlight-icon'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
 		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon'><strong>Wish</strong> List</a></li>
 		<li id='searchBar' class='search'>
-			<div id='searchBarContainer' class='reveal-openOnlyDesktop'>
+			<div id='searchBarContainer' class='reveal-closed-phone'>
 				<div>
 					<input type='text' class='clearable autocomplete search' placeholder='e.g. Sticks, Pearl, 16" Drum Head"'/>
 					<button class='b2 icon-24-magnify-black icon-only'>Search</button>
 				</div>
 			</div>
 		</li>
-		<li class='mobileSearch visible-phone'><button class='b3' data-reveal-children='searchBarContainer'>Toggle Search</button></li>
+		<li class='mobileSearch visible-phone'>
+			<button class='b3 reveal-closed-phone' data-reveal-children='searchBarContainer'>Toggle Search</button>
+		</li>
 	</ul>
 
-	<div class='breadcrumbs'>
+	<div id='breadcrumbs' class='breadcrumbs'>
 		<ul class='span12 breadcrumbLinks'>
 			<li><a href='#'>Sticks &amp; Mallets</a></li>
 			<li><a href='#'>Mallets</a></li>
@@ -47,7 +49,7 @@
 	</div>
 </div>
 
-<div id='mainFlyout' class='departmentDropdown'>
+<div id='mainFlyout' class='departmentDropdown reveal-closed'>
 	<div class='wrapper container span12'>
 		<ul class='topLevel'>
 			<?php for($i = 0; $i < 12; $i++){ ?>

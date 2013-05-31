@@ -1,5 +1,6 @@
 .departmentDropdown{ display: none; }
-.departmentDropdown.active{	display: block; }
+.departmentDropdown.active,
+.departmentDropdown.reveal-open{ display: block; }
 .departmentDropdown{
 	
 	width:100%;

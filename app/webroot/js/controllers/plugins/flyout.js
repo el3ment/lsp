@@ -66,7 +66,6 @@
 			},
 
 			detachMenu : function(){
-
 				// If the flyout exists, destroy it
 				if(_flyout){
 					_this.closeFlyout();

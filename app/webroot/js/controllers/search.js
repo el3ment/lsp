@@ -5,70 +5,153 @@
 	_util.register('controller', 'search', (function(){
 		var _this = {};
 		var _app = window.LSP;
+		var _api = _app.models.easyask;
 
-		var _current = {
-			page : '',
-			sort : '',
-			path : 'Start'
+		var _state = {
+			resultsPerPage : '20',
+			page : 'first',
+			sort : '-default-',
+			path : 'All Products'
 		};
 
 		_this = {
 			events : {
+				search : {
+					// onBeforeAPICall : function(e, data){
+					// 	_state.path = data.xhrData.data.CatPath;
+					// 	_app.controllers.application.pushState(_this, _state);
+					// },
+					onAfterAPICallSuccess : function(e, data){
+						_state.path = data.response.source.navPath.pureCategoryPath;
+						_state.page = data.response.source.products.itemDescription.currentPage;
+						_app.controllers.application.pushState(_this, _state);
+					},
+					onRemoveFilter : function(e, data){
+						_this.removePathNode(
+							decodeURIComponent($(data.selector).data('previousnodepath')) // navNode's paths are URI encoded
+							.replace(/\+/g, ' ') // URI Decode leaves +'s
+						);
+					},
+					onFilterAttribute : function(e, data){
+						_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+					},
+					onClearAllFilters : function(e, data){
+
+					},
+					onLoadCategory : function(e, data){
+						// .data() works best with lowercase names
+						_this.loadCategory($(data.selector).data('categoryid'));
+					},
+					onNextPage : function(e, data){
+						_this.paginate('next');
+					},
+					onPreviousPage : function(e, data){
+						_this.paginate('prev');
+					},
+					onSort : function(e, data){
+						_state.sort = $(data.selector).val();
+						_this.paginate('first');
+					},
+					onItemsPerPage : function(e, data){
+						_state.resultsPerPage = $(data.selector).val();
+						_this.paginate('first');
+					},
+					onShowCompactView : function(e, data){
+						$('#resultsContainer').addClass('gridView').removeClass('listView');
+					},
+					onShowDetailsView : function(e, data){
+						$('#resultsContainer').addClass('listView').removeClass('gridView');
+					}
+				},
 				application : {
 
+					onHashChange : function(e, data){
+						$.extend(_state, _app.controllers.application.pullState(_this));
+						_this.loadCategory();
+					},
+
 					onReady : function(e, data){
-						console.log(_this.search('red'));
+
 					},
 					
-					onInit : function(e, data){ }
+					onInit : function(e, data){
+						
+					}
 				}
 			},
 			
 			assets : {},
+			getCurrentPage : function(){
+				return _state.page;
+			},
 
-			// Adds basic items to query string
-			buildRequest: function(query){
-				var request = {
-					resultsPerPage : 50,
-					defSortCols : (_current.sort === '-default-' ? '' : _current.sort),
-					catPath : _current.path
-				};
-				
-				$.extend(request, query);
+			getSort : function(){
+				return _state.sort;
+			},
+			
+			getResultsPerPage : function(){
+				return _state.resultsPerPage;
+			},
 
-				return request;
+			getPath : function(){
+				return _state.path;
 			},
 
 			// By keyword
 			search : function(keywords){
 				//var path = ;
-				var request = {
+				var payload = {
 					requestAction : 'advisor',
 					requestData : 'CA_Search',
 					q : keywords,
 					catPath : 'All Products'
 				};
 
-				return _this.buildRequest(request);
+				return _api.request(_this, 'search', payload)
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
 			},
 
 			loadCategory : function(categoryPath){
-				var request = {
-					catPath : categoryPath,
-					requestAction : 'advisor',
-					requestData : 'CA_CategoryExpand'
+				
+				var payload = {
+					path : categoryPath,
+					RequestAction : 'advisor',
+					RequestData : 'CA_CategoryExpand'
 				};
+
+				return _api.request(_this, 'loadCategory', payload)
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
 			},
 
-			filterWithAttribute : function(attr, val){
+			filterWithAttributes : function(attributeHashMap){
 
 				// TODO : attribsel escape bugs (like, an equals in the val, or quotes, etc)
 
-				var request = {
-					requestAction : 'advisor',
-					requestData : 'CA_AttributeSelected',
-					attribSel : attr + ' = ' + val
+				// Merge attributes into name=value format, 
+				var attributes = [];
+				$.each(attributeHashMap, function(name, valueArray){
+					$.each(valueArray, function(index, selectedValue){
+						// Fully qualify each selected option
+						attributes.push(name + ' = \'' + selectedValue + '\'');
+					});
+				});
+
+				console.log(attributes);
+
+				var payload = {
+					RequestAction : 'advisor',
+					RequestData : 'CA_AttributeSelected',
+					AttribSel : attributes.join(';;;;') // Merge into name=value;;;;name=value
 				};
+
+				return _api.request(_this, 'filter', payload)
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
 			},
 
 			// breadcrumbClick : function(bc){
@@ -81,20 +164,85 @@
 			// },
 
 			loadPage : function(pageName){
-				var request = {
+				var payload = {
 					requestAction : 'navbar',
 					requestData : 'page' + pageName
 				};
+
+				return _api.request(_this, 'loadPage', payload);
 			},
 
-			// Pagination 
-			//  @val = [first, last, next, prev]
-			paginate: function(val){
-				var request = {
-					requestAction : 'navbar',
-					requestData : val,
-					currentPage : _current.page
+			// Direction can be [first, last, next, prev]
+			paginate: function(direction){
+
+				var payload = {
+					RequestAction : 'navbar',
+					RequestData : ($.isNumeric(direction) ? 'page' + direction : direction),
+					currentpage : _state.page
 				};
+
+				return _api.request(_this, 'paginate', payload)
+					.done(function(data){
+						_this.renderSummary(data.response.source);
+						_this.renderProducts(data.response.source);
+					});
+
+			},
+
+			removePathNode : function(path){
+				
+				var payload = {
+					CatPath : path,
+					RequestAction : 'advisor',
+					RequestData : 'CA_BreadcrumbRemove'
+				};
+
+				return _api.request(_this, 'paginate', payload)
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
+
+			renderPage : function(easyAskDataObject){
+				_this.renderSummary(easyAskDataObject);
+				_this.renderSelectedRefinements(easyAskDataObject);
+				_this.renderRefinements(easyAskDataObject);
+				_this.renderProducts(easyAskDataObject);
+			},
+
+			renderSummary : function(easyAskDataObject){
+
+				var path = easyAskDataObject.navPath.pureCategoryPath;
+				var categories = path.split('////');
+				var currentCategory = categories[categories.length - 1];
+
+				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', easyAskDataObject);
+
+				$('.currentPageNumber').html(easyAskDataObject.products.itemDescription.currentPage);
+				$('.totalPages').html(easyAskDataObject.products.itemDescription.pageCount);
+				$('.numberOfResults').html(easyAskDataObject.products.itemDescription.totalItems);
+				$('#pageName').html(currentCategory);
+
+				$('select[data-action="sort"]').val(easyAskDataObject.products.itemDescription.sortOrder);
+				$('select[data-action="itemsPerPage"]').val(easyAskDataObject.products.itemDescription.resultsPerPage);
+
+				_app.controllers.application.attachEvents($('#breadcrumbs').html(breadcrumbHTML));
+
+			},
+
+			renderSelectedRefinements : function(easyAskDataObject){
+				var selectedHTML = _util.parseMicroTemplate('templates-search-selectedRefinements', easyAskDataObject);
+				_app.controllers.application.attachEvents($('#selectedRefinements').html(selectedHTML));
+			},
+
+			renderRefinements : function(easyAskDataObject){
+				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', easyAskDataObject);
+				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML));
+			},
+
+			renderProducts : function(easyAskDataObject){
+				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', easyAskDataObject);
+				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
 			}
 		};
 		
@@ -103,3 +251,10 @@
 	})());
 
 })();
+
+
+//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191007177389645949006_1369866039734&ResultsPerPage=20&defsortcols=&CatPath=All%252BProducts&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=EcomDemo&RequestAction=advisor&RequestData=CA_AttributeSelected&AttribSel=&_=1369866039737
+
+//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19105919753389898688_1369851007751&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=EcomDemo&resultsPerPage=1&defSortCols=&catPath=All+Products&CatPath=Beauty+%26+Fragrance&RequestAction=advisor&RequestData=CA_CategoryExpand&_=1369851007754
+//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?indexed=1&rootprods=1&oneshot=1&defarrangeby=///NONE///&disp=json&dct=EcomDemo&ResultsPerPage=16&defsortcols=&RequestAction=advisor&RequestData=CA_BreadcrumbClick&CatPath=All%20Products&callback=processResults&_=1369848043142
+//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?indexed=1&rootprods=1&oneshot=1&defarrangeby=///NONE///&disp=json&dct=EcomDemo&resultsPerPage=50&defSortCols=&catPath=Beauty+%26+Fragrance&requestAction=advisor&requestData=CA_CategoryExpand&_=1369847843141
