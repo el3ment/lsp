@@ -178,6 +178,11 @@
 		}
 	} // panel
 
+	.column{
+		height: 100%;
+		float: left;
+		margin-right:10px;
+	}
 	.group{
 		float: left;
 		margin-bottom: 20px;
@@ -205,9 +210,12 @@
 		z-index:1;
 	}
 	.list{
-		width: 200px;
-		float: left;
+		margin-top: 20px;
+		width: 190px;
 	} // group of links
+	.list:first-child{
+		margin-top: 10px;
+	}
 	.h1{
 		position:relative;
 		z-index:1;
