@@ -26,21 +26,27 @@
 						_state.page = data.response.source.products.itemDescription.currentPage;
 						_app.controllers.application.pushState(_this, _state);
 					},
+
 					onAfterAPICallFailure : function(e, data){
-						alert('error');
+						console.error('Network Error', data);
+						_this.renderFatalError();
 					},
+
 					onRemoveFilter : function(e, data){
 						_this.removePathNode(
 							decodeURIComponent($(data.selector).data('previousnodepath')) // navNode's paths are URI encoded
 							.replace(/\+/g, ' ') // URI Decode leaves +'s
 						);
 					},
+
 					onFilterAttribute : function(e, data){
 						_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
 					},
+
 					onClearAllFilters : function(e, data){
 
 					},
+
 					onLoadCategory : function(e, data){
 						// .data() works best with lowercase names
 						if($(data.selector).data('categoryid')){
@@ -48,25 +54,30 @@
 						}else if($(data.selector).data('path')){
 							_this.loadCategory($(data.selector).data('path'), true);
 						}
-
 					},
+
 					onNextPage : function(e, data){
 						_this.paginate('next');
 					},
+
 					onPreviousPage : function(e, data){
 						_this.paginate('prev');
 					},
+
 					onSort : function(e, data){
 						_state.sort = $(data.selector).val();
 						_this.paginate('first');
 					},
+
 					onItemsPerPage : function(e, data){
 						_state.resultsPerPage = $(data.selector).val();
 						_this.paginate('first');
 					},
+
 					onShowCompactView : function(e, data){
 						$('#resultsContainer').addClass('gridView').removeClass('listView');
 					},
+
 					onShowDetailsView : function(e, data){
 						$('#resultsContainer').addClass('listView').removeClass('gridView');
 					}
@@ -74,7 +85,6 @@
 				application : {
 
 					onHashChange : function(e, data){
-						console.log('hashchange');
 						$.extend(_state, _app.controllers.application.pullState(_this));
 						_this.loadCategory();
 					},
@@ -273,6 +283,14 @@
 			renderProducts : function(easyAskDataObject){
 				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', easyAskDataObject);
 				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
+			},
+
+			renderFatalError : function(){
+				var errorHTML = _util.parseMicroTemplate('templates-error', {
+					title : 'Something Big Has Happened',
+					message : 'Sorry about that, but something has gone seriously wrong.'
+				});
+				_app.controllers.application.attachEvents($('.page-search').html(errorHTML));
 			}
 		};
 		

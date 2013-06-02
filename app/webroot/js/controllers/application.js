@@ -291,7 +291,6 @@
 				);
 
 				$(window).on('hashchange', function(e){
-					console.log('raw change');
 					if(_isPushingState){
 						_isPushingState = false; // Apparently we've pushed, so unset it
 						return;

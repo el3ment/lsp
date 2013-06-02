@@ -1,3 +1,7 @@
+function processResults(a, b, c){
+	alert('hey!');
+	debugger;
+}
 (function(){
 	
 	var _app = window.LSP;
@@ -5,15 +9,18 @@
 	
 
 	// This is a generic API model that can be extended to overwrite : 
-	//		_url - returns the url for the service
-	// 		_payload - formats the payload as nessesary
-	//		_isSuccess - often services will not use HTTP status codes to
-	//					 return actual request success/failure - you can write custom
-	//					 logic here that will 'fail' a successful query
+	//      _url - returns the url for the service
+	//      _payload - formats the payload as nessesary
+	//      _isSuccess - often services will not use HTTP status codes to
+	//                   return actual request success/failure - you can write custom
+	//                   logic here that will 'fail' a successful query
 	//
 	// Use like : $.extend({ _url : function(payload){ console.log('custom code'); }, _app.models.api)
 
 	_util.register('model', 'api', {
+		
+		_timeout : 2000,
+
 		_url : function(payload){
 			return '';
 		},
@@ -26,7 +33,7 @@
 		_afterSuccess : function(responseData){
 			// noop;
 		},
-		_request : function(type, controller, eventName, payload){
+		_request : function(type, dataType, controller, eventName, payload){
 		
 			var result = $.Deferred();
 			var eventData = {};
@@ -35,40 +42,42 @@
 				url : this._url(controller, payload),
 				data : this._payload(controller, payload),
 				crossDomain : true,
-				dataType : 'jsonp',
-				context : this
+				dataType : dataType,
+				context : this,
+				timeout : this._timeout
 			};
+			
+			// TODO : use $.extend
+
 			for(var key in payload){
 				if(payload.hasOwnProperty(key)){ eventData.xhrData.data[key] = payload[key]; } 
 			} // Merge objects
 			
-			// $('body').addClass(controller.name + '-downloadWaiting');
-			// $('body').removeClass(controller.name + '-downloadSuccess'); // In case we are resubmitting
-			// $('body').removeClass(controller.name + '-downloadFailure'); // In case we are resubmitting
-
 			console.log('API Request Sent via ' + eventName, eventData.xhrData);
 			
 			$(_app.controllers.application).triggerHandler('onBeforeAPICall', eventData);
 			$(controller).triggerHandler('onBeforeAPICall', eventData);
 			$(controller).triggerHandler(_util.camelCase('on-Before-API-'+eventName+'-call'), eventData);
-				
+
 			$.ajax(eventData.xhrData).done(function(responseData){
-				 
+				
 				eventData.serverResponse = responseData; // raw response needs a differnt property name
 				try{
 					eventData.response = $.parseJSON(responseData);
 				}catch(e){
 					eventData.response = responseData;
-				}	
+				}   
 
 				if(this._isSuccess(responseData)){
 					eventData.response = this._afterSuccess(eventData.response);
 					result.resolve(eventData);
 				}else{
+					eventData.error = 'invalidFormat';
 					result.reject(eventData);
 				}
 				
 			}).fail(function(responseData){
+
 				// jQuery dosen't auto-parse JSON data for failures
 				eventData.serverResponse = responseData; // raw response needs a differnt property name
 				try{
@@ -82,8 +91,8 @@
 			}).always(function(){
 				console.log('API Response Recieved via ' + eventName, eventData);
 			});
-			
-			
+
+
 			// By seperating the logic like this -- it allows us to "fail" a success HTTP response (see the .done() method above)
 			$.when(result).done(function(responseData){
 				
@@ -99,6 +108,7 @@
 				// Fire onAfterMethodFailure event
 				// Fire mb.controllers.application's onAfterAPICallFailure
 				$(_app.controllers.application).triggerHandler('onAfterAPICallFailure', responseData);
+				$(controller).triggerHandler('onAfterAPICallFailure', responseData);
 				$(controller).triggerHandler(_util.camelCase('on-after-API-'+eventName+'-failure'), responseData);
 				// $('body').addClass(controller.name + '-downloadFailure');
 				
@@ -114,7 +124,7 @@
 		},
 
 		request : function(controller, eventName, method, data){
-			return this._request('GET', controller, eventName, method, data);
+			return this._request('GET', 'jsonp', controller, eventName, method, data);
 		}
 	});
 	

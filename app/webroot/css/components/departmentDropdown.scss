@@ -1,6 +1,9 @@
 .departmentDropdown{ display: none; }
 .departmentDropdown.active,
 .departmentDropdown.reveal-open{ display: block; }
+@media (max-width: 767px){
+	.departmentDropdown .reveal-open.flyout{ display: block; }
+}
 .departmentDropdown{
 	
 	width:100%;
@@ -196,13 +199,13 @@
 		}
 	} //group of lists
 	.lists{
-		clear: both;
+		//clear: both;
 		float: left;
 		position:relative;
 		z-index:1;
 	}
 	.list{
-		width: 120px;
+		width: 200px;
 		float: left;
 	} // group of links
 	.h1{

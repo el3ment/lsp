@@ -125,7 +125,7 @@
 
 				var context = _app.controllers.application.getContext();
 				var openChildren = children.filter('.reveal-open:not(*[class*="reveal-context"]), .reveal-open.reveal-context-' + context);
-				var closedChildren = children.filter('.reveal-closed:not(*[class*="reveal-context"]), .reveal-open.reveal-context-' + context);
+				var closedChildren = children.filter('.reveal-closed:not(*[class*="reveal-context"]), .reveal-closed.reveal-context-' + context +', .reveal-context-' + context + ':not(.reveal-open)');
 
 				_this.close(openChildren, doAnimations);
 				_this.open(closedChildren, doAnimations);

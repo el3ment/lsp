@@ -254,6 +254,11 @@
 
 <script id='templates-search-entries' type='text/html'>
 	<ul class='listScope'>
+	<# if(!this.products || this.products.items.length === 0){ #>
+		<li class='noresults'>
+			Sorry buddy, there are no results
+		</li>
+	<# } #>
 	<# for(var i = 0; i < this.products.items.length; i++){ #>
 	<# var item = this.products.items[i]; #>
 		<li class='entry productScope'>
@@ -314,4 +319,11 @@
 		</li>
 	<# } #>
 	</ul>
+</script>
+
+<script id='templates-error' type='text/html'>
+	<div class='fatalError'>
+		<strong><#=title #></strong>
+		<span class='details'><#=message #></span>
+	</div>
 </script>

@@ -160,7 +160,7 @@
 		.listScope{
 			clear: both;
 			display: block;
-			float: left;
+			//float: left;
 		}
 		
 		// The list tab - make it look 'active'
@@ -253,6 +253,7 @@
 			clear: both;
 			display: block;
 			float: left;
+			width: 100%;
 		}
 		
 		// Make the grid tab look active
