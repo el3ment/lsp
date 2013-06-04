@@ -20,12 +20,20 @@
 				return _hostname + '/EasyAsk/apps/Advisor.jsp';
 			},
 			_payload : function(controller, payload){
-				return $.extend({
-					currentpage : controller.getCurrentPage(),
+
+				// payload : 
+				// 	{sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
+				
+				var fullPath = _util.cleanArray([payload.category, this.buildAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('////');
+
+				return {
+					RequestAction : payload.action,
+					RequestData : payload.method,
+					currentpage : payload.page,
 					forcepage : 1,
-					ResultsPerPage : controller.getResultsPerPage(),
-					defsortcols : (controller.getSort() === '-default-' ? '' : controller.getSort()),
-					CatPath : (payload.path ? [controller.getPath(), payload.path].join('////') : controller.getPath()),
+					ResultsPerPage : payload.resultsPerPage,
+					defsortcols : payload.sort,
+					CatPath : fullPath,
 					indexed : 1, 
 					rootprods : 1,
 					oneshot : 0,
@@ -33,7 +41,7 @@
 					defarrangeby : '///NONE///',
 					disp : 'json',
 					dct : _dictionary
-				}, payload);
+				};
 			},
 			_isSuccess : function(responseData){
 				return (responseData || {}).returnCode === 0;
@@ -43,8 +51,36 @@
 				
 				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
 				responseData.source.navPath._lsp.categoryNodes = _this.getCategoryNodes(responseData.source);
+				responseData.source.navPath._lsp.refinementNodes = _this.getRefinementNodes(responseData.source);
 
 				return responseData;
+			},
+
+			buildKeywordString : function(keywords){
+				return (keywords ? 'UserSearch1=' + keywords : null);
+			},
+
+			buildAttributeString : function(attributeHashMap){
+				
+				var attributes = [];
+
+				if(attributeHashMap){
+					$.each(attributeHashMap, function(name, valueArray){
+
+						var selections = [];
+
+						$.each(valueArray, function(index, selectedValue){
+							// If index is null (it's the first index) add attribSel to the name
+							selections.push((index ? name : 'AttribSelect='+ name) + ' = \'' + selectedValue + '\'');
+						});
+
+						attributes.push(selections.join(';;;;'));
+
+					});
+				}
+
+				return _util.cleanArray(attributes).join('////');
+
 			},
 
 			getCategoryNodes : function(easyAskDataSourceObject){
@@ -59,6 +95,35 @@
 
 				return categoryNodes;
 
+			},
+
+			getRefinementNodes : function(easyAskDataSourceObject){
+				var attributeNodes = [];
+
+				// Splits the attributes up one-by-one and stores them in a convinent object
+
+				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
+					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 2){
+						
+						var node = easyAskDataSourceObject.navPath.navPathNodeList[i];
+						var attributeNode = node.englishName.substring(1, node.englishName.length - 2).split('\' or ');
+						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
+
+						for(var j = 0; j < attributeNode.length; j++){
+							var attribute = attributeNode[j];
+							attribute = attribute.split(' = \'');
+							attributeNodes.push({
+								attribute : attribute[0],
+								value : attribute[1],
+
+								// removePath is the path without the attribute
+								removePath : fullPath.replace(attribute[0] + ' = \'' + attribute[1]+ '\'', '')
+							});
+						}
+					}
+				}
+
+				return attributeNodes;
 			}
 		});
 

@@ -30,8 +30,10 @@
 		<li id='searchBar' class='search'>
 			<div id='searchBarContainer' class='reveal-closed-phone'>
 				<div>
-					<input type='text' class='clearable autocomplete search' placeholder='e.g. Sticks, Pearl, 16' Drum Head''/>
-					<button class='b2 icon-24-magnify-black icon-only'>Search</button>
+					<form action='search' method='GET'>
+						<input id='searchQuery' name='searchQuery' type='text' class='clearable autocomplete search' placeholder='e.g. Sticks, Pearl, 16' Drum Head''/>
+						<button type='submit' class='b2 icon-24-magnify-black icon-only' data-action='search'>Search</button>
+					</form>
 				</div>
 			</div>
 		</li>
@@ -764,19 +766,6 @@
 								<li class='link'><a href=''>All Cymbals</a></li>
 							</ul>
 						</div>
-						
-						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cymbals_Gongs-Accessories'>Accessories</span>
-							<ul id='flyout-Cymbals_Gongs-Accessories' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Felts</a></li>
-								<li class='link'><a href=''>Sleeves</a></li>
-								<li class='link'><a href=''>Pads</a></li>
-								<li class='link'><a href=''>Straps</a></li>
-								<li class='link'><a href=''>Polish</a></li>
-								<li class='link'><a href=''>Sizzles</a></li>
-								<li class='link'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
-							</ul>
-						</div>
 					</li>
 					<li class='column'>
 						<div class='list'>
@@ -789,6 +778,18 @@
 								<li class='link'><a href=''>Gong Sheets</a></li>
 								<li class='link'><a href=''>Decorative Gongs</a></li>
 								<li class='link'><a href=''>All Gongs</a></li>
+							</ul>
+						</div>
+						<div class='list'>
+							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cymbals_Gongs-Accessories'>Accessories</span>
+							<ul id='flyout-Cymbals_Gongs-Accessories' class='links reveal-closed-phone reveal-open'>
+								<li class='link'><a href=''>Felts</a></li>
+								<li class='link'><a href=''>Sleeves</a></li>
+								<li class='link'><a href=''>Pads</a></li>
+								<li class='link'><a href=''>Straps</a></li>
+								<li class='link'><a href=''>Polish</a></li>
+								<li class='link'><a href=''>Sizzles</a></li>
+								<li class='link'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
 							</ul>
 						</div>
 					</li>

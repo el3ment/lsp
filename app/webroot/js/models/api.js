@@ -1,7 +1,3 @@
-function processResults(a, b, c){
-	alert('hey!');
-	debugger;
-}
 (function(){
 	
 	var _app = window.LSP;
@@ -19,7 +15,7 @@ function processResults(a, b, c){
 
 	_util.register('model', 'api', {
 		
-		_timeout : 2000,
+		_timeout : 5000,
 
 		_url : function(payload){
 			return '';
@@ -49,9 +45,9 @@ function processResults(a, b, c){
 			
 			// TODO : use $.extend
 
-			for(var key in payload){
-				if(payload.hasOwnProperty(key)){ eventData.xhrData.data[key] = payload[key]; } 
-			} // Merge objects
+			// for(var key in payload){
+			// 	if(payload.hasOwnProperty(key)){ eventData.xhrData.data[key] = payload[key]; } 
+			// } // Merge objects
 			
 			console.log('API Request Sent via ' + eventName, eventData.xhrData);
 			
@@ -115,6 +111,7 @@ function processResults(a, b, c){
 			}).always(function(responseData){
 				
 				$(_app.controllers.application).triggerHandler('onAfterAPICall', responseData);
+				$(controller).triggerHandler('onAfterAPICall', responseData);
 				$(controller).triggerHandler(_util.camelCase('on-after-API-'+eventName), responseData);
 				// $('body').removeClass(controller.name + '-downloadWaiting');
 				

@@ -1,4 +1,4 @@
- <div class='page-search span12 container'>
+ <div class='page-search span12 container loading'>
 	<div class='title span9'>
 		<h1 id='pageName'>Vibraphone Mallets</h1>
 		<span class='details'>
@@ -107,19 +107,17 @@
 </script>
 
 <script id='templates-search-selectedRefinements' type='text/html'>
-	<# if(this.navPath.navPathNodeList.length - this.navPath._lsp.categoryNodes.length > 0){ #>
+	<# if(this.navPath._lsp.refinementNodes.length){ #>
 	<div class='selectedFilters panel engaged'>
 		<h2>Youve Selected</h2>
 		<ul class='section'>
 			<#	/* Just the attributes */
-				for(var i = 0; i < this.navPath.navPathNodeList.length; i++){ #>
-				<# if(this.navPath.navPathNodeList[i].navNodePathType !== 1){ #>
+				for(var i = 0; i < this.navPath._lsp.refinementNodes.length; i++){ #>
 					<li>
-						<button class='b5 icon-24-close attribute' data-action='removeFilter' data-path='<#=this.navPath.navPathNodeList[i].path #>'>
-							<#=this.navPath.navPathNodeList[i].value #>
+						<button class='b5 icon-24-close attribute' data-action='removeFilter' data-attribute='<#=this.navPath._lsp.refinementNodes[i].attribute #>' data-value='<#=this.navPath._lsp.refinementNodes[i].value #>'>
+							<#=this.navPath._lsp.refinementNodes[i].attribute #>: <#=this.navPath._lsp.refinementNodes[i].value #>
 						</button>
 					</li>
-				<# } #>
 			<# } #>
 		</ul>
 		<button class='b5' data-action='clearAllRefinements'>Clear All Selected</button>
@@ -305,7 +303,23 @@
 					<a href='#' class='reviewCountLabel details'><span class='reviewReviewCount'><#=item.number_of_reviews #></span> reviews</a>
 				</div>
 			<# } #>
-			<div class='features details'>
+			<#
+				var count = 0;
+				if(item.Feature6){
+					count = 6;
+				}else if(item.Feature5){
+					count = 5;
+				}else if(item.Feature4){
+					count = 4;
+				}else if(item.Feature3){
+					count = 3;
+				}else if(item.Feature2){
+					count = 2;
+				}else if(item.Feature1){
+					count = 1;
+				}
+			#>
+			<div class='features details show<#=count #>Elements'>
 				<h6>Overview</h6>
 				<ul class='list'>
 					<li><#=item.Feature1 #></li>

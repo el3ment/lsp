@@ -277,12 +277,24 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			}
 		}
 
-		// Remove
+		// Remove - it's dumb, but the action is on the image, not on the link
 		td:first-child + td + td + td + td + td + td + td{
 			//background-color: red;
 			text-align: center;
 			a{
-				img{ display: none; }
+				position: relative;
+
+				img{
+					width: 0;
+					height: 0;
+					padding-left: 100%;
+					padding-top: 50%;
+					background-color: white;
+					@include opacity(.0001);
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
 				&:before{
 					content: 'Remove'
 				}

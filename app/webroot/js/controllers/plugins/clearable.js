@@ -39,7 +39,8 @@
 					.off('.clearable')
 					.on('keyup.lsp.clearable change.lsp.clearable', _lsp.controllers.application.createHandlerBridge(_this, 'showHideButton', {targetInput : element}))
 					.wrap('<div class="clearableContainer" />')
-					.after(button);
+					.after(button)
+					.change();
 
 				_lsp.controllers.application.attachEvents(element);
 			},

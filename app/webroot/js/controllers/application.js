@@ -163,12 +163,12 @@
 				$.each(_state, function(controllerName, snapshot){
 					statePath = statePath + '/~' + encodeURIComponent(controllerName);
 					$.each(snapshot, function(variable, value){
-
+					
 						// For simple objects use the value, complex objects get JSON-ified
 						value = (typeof value === 'object' ? JSON.stringify(value) : value);
 						
 						statePath += '/' + encodeURIComponent(variable) + '/' + encodeURIComponent(value).replace(/%20/g, '+');
-					
+				
 					});
 				});
 
@@ -290,6 +290,12 @@
 					})()
 				);
 
+				var eventData = {
+					filename : document.location.pathname.replace(/^.*(\\|\/|\:)/, ''),
+					queryParameters : _util.getURLParameters()
+				};
+
+				console.log(eventData.filename);
 				$(window).on('hashchange', function(e){
 					if(_isPushingState){
 						_isPushingState = false; // Apparently we've pushed, so unset it
@@ -297,15 +303,23 @@
 					}
 					_isPushingState = false;
 
-					$(_this).triggerHandler('onHashChange', e);
+					eventData.error = e;
+
+					$(_this).triggerHandler('onHashChange', eventData);
+					$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
 				});
 
 				// Fire the onReady and onResize events to initialize anything that relies on them
-				$(document).ready(function(e){ 
-					$(_this).triggerHandler('onHashChange', e);
-					$(_this).triggerHandler('onResize', e);
-					$(_this).triggerHandler('onReady', e);
-					$(_this).triggerHandler('onAfterReady', e);
+				$(document).ready(function(e){
+
+					eventData.error = e;
+					
+					$(_this).triggerHandler('onHashChange', eventData);
+					$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
+
+					$(_this).triggerHandler('onResize', eventData);
+					$(_this).triggerHandler('onReady', eventData);
+					$(_this).triggerHandler('onAfterReady', eventData);
 				});
 			}
 

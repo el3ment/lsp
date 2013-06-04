@@ -10,7 +10,35 @@
 
 		_util = {
 
+			getURLParameters : (function(){
+
+				var vars = [], hash;
+				var href = window.location.href + '#'; // Add the hash so indexOf will have something
+				var hashes = href.slice(href.indexOf('?') + 1, href.indexOf('#')).split('&');
+				
+				for(var i = 0; i < hashes.length; i++)
+				{
+					hash = hashes[i].split('=');
+					vars.push(hash[0]);
+					vars[hash[0]] = decodeURIComponent(hash[1]).replace(/\+/g, ' ');
+				}
+
+				return function(){
+					return vars;
+				}
+			}()),
+
 			formToObject : window.form2js,
+
+			cleanArray : function(array){
+				for(var i = 0; i < array.length; i++){
+					if(array[i] === undefined || (array[i] || {}).length < 1 || array[i] === null){
+						array.splice(i, 1);
+						i--;
+					}
+				}
+				return array;
+			},
 			
 			// Pulled from jQuery as it's not in the public API
 			// identical to jQuery.camelCase();

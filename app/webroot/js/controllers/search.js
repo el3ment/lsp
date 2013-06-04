@@ -10,9 +10,12 @@
 		var _state = {
 			resultsPerPage : '20',
 			page : 'first',
-			sort : '-default-',
-			path : 'All Products'
+			sort : '',
+			category : 'All Products',
+			keywords : ''
 		};
+
+		// {sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
 
 		_this = {
 			events : {
@@ -21,10 +24,20 @@
 					// 	_state.path = data.xhrData.data.CatPath;
 					// 	_app.controllers.application.pushState(_this, _state);
 					// },
+
+					onBeforeAPICall : function(e, data){
+						$('.page-search').addClass('loading');
+					},
+					onAfterAPICall : function(e, data){
+						$('.page-search').removeClass('loading');
+					},
 					onAfterAPICallSuccess : function(e, data){
-						_state.path = data.response.source.navPath.pureCategoryPath;
-						_state.page = data.response.source.products.itemDescription.currentPage;
-						_app.controllers.application.pushState(_this, _state);
+
+						//var navPathNodeList = data.response.source.navPath.navPathNodeList
+						//_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
+						_state.category = data.response.source.navPath.pureCategoryPath;
+						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
+						_this.pushState();
 					},
 
 					onAfterAPICallFailure : function(e, data){
@@ -33,10 +46,13 @@
 					},
 
 					onRemoveFilter : function(e, data){
-						_this.removePathNode(
-							decodeURIComponent($(data.selector).data('previousnodepath')) // navNode's paths are URI encoded
-							.replace(/\+/g, ' ') // URI Decode leaves +'s
-						);
+						
+						// Uncheck the option
+						$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
+
+						// Send the request
+						_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+
 					},
 
 					onFilterAttribute : function(e, data){
@@ -75,79 +91,70 @@
 					},
 
 					onShowCompactView : function(e, data){
-						$('#resultsContainer').addClass('gridView').removeClass('listView');
+						_this.changeView('gridView');
+						_this.pushState(_this, _state);
 					},
 
 					onShowDetailsView : function(e, data){
-						$('#resultsContainer').addClass('listView').removeClass('gridView');
+						_this.changeView('listView');
+						_this.pushState(_this, _state);
 					}
 				},
 				application : {
 
-					onHashChange : function(e, data){
-						$.extend(_state, _app.controllers.application.pullState(_this));
-						_this.loadCategory();
+					onSearchHashChange : function(e, data){
+						var pulledState = _app.controllers.application.pullState(_this) || {};
+						//pulledState.searchQuery = data.queryParameters.searchQuery; // add the query if it exists
+						
+						$.extend(_state, pulledState);
+
+						_this.search(data.queryParameters.searchQuery);
+						_this.changeView(_state.view);
+
 					},
 
 					onReady : function(e, data){
-
+						$('#searchQuery').val(data.queryParameters.searchQuery).change();
 					},
 					
 					onInit : function(e, data){
-						
+
 					}
 				}
 			},
 			
 			assets : {},
-			getCurrentPage : function(){
-				return _state.page;
-			},
 
-			getSort : function(){
-				return _state.sort;
-			},
-			
-			getResultsPerPage : function(){
-				return _state.resultsPerPage;
-			},
-
-			getPath : function(){
-				return _state.path;
+			pushState : function(){
+				//return _app.controllers.application.pushState(_this, _state);
 			},
 
 			// By keyword
 			search : function(keywords){
-				//var path = ;
+
 				var payload = {
-					requestAction : 'advisor',
-					requestData : 'CA_Search',
-					q : keywords,
-					catPath : 'All Products'
+					action : 'advisor',
+					method : 'CA_Search',
+					keywords : keywords
 				};
 
-				return _api.request(_this, 'search', payload)
+				return _api.request(_this, 'search', $.extend(_state, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
 			},
 
 			loadCategory : function(categoryPath, isAtomic){
-				
+
 				var payload = {
-					RequestAction : 'advisor',
-					RequestData : 'CA_CategoryExpand'
+					action : 'advisor',
+					method : 'CA_CategoryExpand',
+					path : (isAtomic ? categoryPath : _state.category + '////' + categoryPath)
 				};
 
-				// If isAtomic is false (default) then it appends categoryPath to the current path
-				// if it's true, then it uses the entire path
-				if(isAtomic){
-					payload.CatPath = categoryPath;
-				}else{
-					payload.path = categoryPath;
-				}
+				// TODO : rename path to addedPath or something similar
 
-				return _api.request(_this, 'loadCategory', payload)
+				return _api.request(_this, 'loadCategory', $.extend(_state, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -155,28 +162,17 @@
 
 			filterWithAttributes : function(attributeHashMap){
 
-				// TODO : attribsel escape bugs (like, an equals in the val, or quotes, etc)
-
-				// Merge attributes into name=value format, 
-				var attributes = [];
-				$.each(attributeHashMap, function(name, valueArray){
-					$.each(valueArray, function(index, selectedValue){
-						// Fully qualify each selected option
-						attributes.push(name + ' = \'' + selectedValue + '\'');
-					});
-				});
-
-				console.log(attributes);
-
 				var payload = {
-					RequestAction : 'advisor',
-					RequestData : 'CA_AttributeSelected',
-					AttribSel : attributes.join(';;;;') // Merge into name=value;;;;name=value
+					action : 'advisor',
+					method : 'CA_AttributeSelected',
+					attributes : attributeHashMap
 				};
 
-				return _api.request(_this, 'filter', payload)
+				return _api.request(_this, 'filter', $.extend(_state, payload))
 					.done(function(data){
-						_this.renderPage(data.response.source);
+						_this.renderProducts(data.response.source);
+						_this.renderSummary(data.response.source);
+						_this.renderSelectedRefinements(data.response.source);
 					});
 			},
 
@@ -191,8 +187,8 @@
 
 			loadPage : function(pageName){
 				var payload = {
-					requestAction : 'navbar',
-					requestData : 'page' + pageName
+					RequestAction : 'navbar',
+					RequestData : 'page' + pageName
 				};
 
 				return _api.request(_this, 'loadPage', payload);
@@ -227,6 +223,17 @@
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
+			},
+
+			changeView : function(viewType){
+				if(viewType === 'gridView' || viewType === 'listView'){
+					$('#resultsContainer')
+						.removeClass('gridView')
+						.removeClass('listView')
+						.addClass(viewType);
+
+					_state.view = viewType;
+				}
 			},
 
 			renderPage : function(easyAskDataObject){
@@ -282,15 +289,17 @@
 
 			renderProducts : function(easyAskDataObject){
 				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', easyAskDataObject);
+				$('')
 				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
 			},
 
 			renderFatalError : function(){
-				var errorHTML = _util.parseMicroTemplate('templates-error', {
-					title : 'Something Big Has Happened',
-					message : 'Sorry about that, but something has gone seriously wrong.'
-				});
-				_app.controllers.application.attachEvents($('.page-search').html(errorHTML));
+				console.error('Fatal Error');
+				// var errorHTML = _util.parseMicroTemplate('templates-error', {
+				// 	title : 'Something Big Has Happened',
+				// 	message : 'Sorry about that, but something has gone seriously wrong.'
+				// });
+				// _app.controllers.application.attachEvents($('.page-search').html(errorHTML));
 			}
 		};
 		
@@ -299,6 +308,10 @@
 	})());
 
 })();
+
+
+//http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19106945341844111681_1370270730241&currentpage=first&forcepage=1&ResultsPerPage=20&defsortcols=&CatPath=All+Products&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&requestAction=advisor&requestData=CA_Search&q=red&_=1370270730242
+//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?indexed=1&rootprods=1&oneshot=1&defarrangeby=///NONE///&disp=json&dct=EcomDemo&ResultsPerPage=16&defsortcols=&RequestAction=advisor&RequestData=CA_Search&q=red&CatPath=All%20Products&callback=processResults&_=1370270814733
 
 
 //http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191007177389645949006_1369866039734&ResultsPerPage=20&defsortcols=&CatPath=All%252BProducts&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=EcomDemo&RequestAction=advisor&RequestData=CA_AttributeSelected&AttribSel=&_=1369866039737

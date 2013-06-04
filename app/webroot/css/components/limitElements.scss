@@ -1,0 +1,13 @@
+// This allows you to show only a certian number of direct list elements
+// This is useful for features, videos, audio, and other lists.
+
+.show0Elements{ display: none; }
+.show0Elements, .show2Elements, .show3Elements , .show4Elements, .show5Elements, .show6Elements{
+	> ul.list > li{ display: none; }
+} 
+.show1Elements > ul.list > li:first-child{ display: list-item; }
+.show2Elements > ul.list > li:first-child + li{ display: list-item; }
+.show3Elements > ul.list > li:first-child + li + li{ display: list-item; }
+.show4Elements > ul.list > li:first-child + li + li + li{ display: list-item; }
+.show5Elements > ul.list > li:first-child + li + li + li + li{ display: list-item; }
+.show6Elements > ul.list > li:first-child + li + li + li + li + li{ display: list-item; }
