@@ -100,7 +100,7 @@
 	<ul class="span12 breadcrumbLinks">
 		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
 			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'>
-				<button class='b5' data-action='loadCategory' data-controller='search' data-path='<#=this.navPath._lsp.categoryNodes[i].purePath #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
+				<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].postFixCategories #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
 			</li>
 		<# } #>
 	</ul>
@@ -168,7 +168,7 @@
 		<# for(var i = 1; i < categories.length; i++){ #>
 			
 			<li class='indent'>
-				<button data-action='loadCategory' data-path='<#=categories[i].purePath #>' class='b5 <#=(i === categories.length - 1 ? 'leftLinkBold' : '') #>'>
+				<button data-action='removeCategory' data-removePath='<#=categories[i].postFixCategories #>' class='b5 <#=(i === categories.length - 1 ? 'leftLinkBold' : '') #>'>
 					<#=categories[i].value #>
 				</button>
 			</li>

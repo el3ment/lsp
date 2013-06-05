@@ -23,24 +23,24 @@
 
 				// payload : 
 				// 	{sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
-				
-				var fullPath = _util.cleanArray([payload.category, this.buildAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('////');
 
 				return {
 					RequestAction : payload.action,
 					RequestData : payload.method,
+					AttribSel : this.buildAttributeString(payload.attributes),
 					currentpage : payload.page,
 					forcepage : 1,
 					ResultsPerPage : payload.resultsPerPage,
 					defsortcols : payload.sort,
-					CatPath : fullPath,
+					CatPath : payload.category,
 					indexed : 1, 
 					rootprods : 1,
 					oneshot : 0,
 					sessionID : _sessionId,
 					defarrangeby : '///NONE///',
 					disp : 'json',
-					dct : _dictionary
+					dct : _dictionary,
+					q : payload.keywords
 				};
 			},
 			_isSuccess : function(responseData){
@@ -71,7 +71,7 @@
 
 						$.each(valueArray, function(index, selectedValue){
 							// If index is null (it's the first index) add attribSel to the name
-							selections.push((index ? name : 'AttribSelect='+ name) + ' = \'' + selectedValue + '\'');
+							selections.push(name + ' = \'' + selectedValue + '\'');
 						});
 
 						attributes.push(selections.join(';;;;'));
@@ -86,10 +86,17 @@
 			getCategoryNodes : function(easyAskDataSourceObject){
 				
 				var categoryNodes = [];
+				var pureCategoryPath = easyAskDataSourceObject.navPath.pureCategoryPath;
 
 				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
 					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 1){
-						categoryNodes.push(easyAskDataSourceObject.navPath.navPathNodeList[i]);
+						
+						var len = categoryNodes.push(easyAskDataSourceObject.navPath.navPathNodeList[i]);
+						var newCategoryName = categoryNodes[len - 1].value;
+
+						// Grab the stuff after newCategoryName
+						categoryNodes[len - 1].postFixCategories = pureCategoryPath.substr(pureCategoryPath.indexOf(newCategoryName) + newCategoryName.length, pureCategoryPath.length);
+
 					}
 				}
 

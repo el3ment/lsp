@@ -28,14 +28,17 @@
 					onBeforeAPICall : function(e, data){
 						$('.page-search').addClass('loading');
 					},
+					
 					onAfterAPICall : function(e, data){
 						$('.page-search').removeClass('loading');
 					},
+
 					onAfterAPICallSuccess : function(e, data){
 
-						//var navPathNodeList = data.response.source.navPath.navPathNodeList
-						//_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
-						_state.category = data.response.source.navPath.pureCategoryPath;
+						var navPathNodeList = data.response.source.navPath.navPathNodeList
+						_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
+
+						// _state.category = data.response.source.navPath.pureCategoryPath;
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						_this.pushState();
 					},
@@ -48,15 +51,19 @@
 					onRemoveFilter : function(e, data){
 						
 						// Uncheck the option
-						$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
+						//$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
 
 						// Send the request
-						_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+						//_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+
+						_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'')
 
 					},
 
 					onFilterAttribute : function(e, data){
-						_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+						//_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+						var name = $(data.selector).attr('name');
+						_this.filterWithAttribute(name.substr(0, name.length - 2), $(data.selector).val());
 					},
 
 					onClearAllFilters : function(e, data){
@@ -70,6 +77,20 @@
 						}else if($(data.selector).data('path')){
 							_this.loadCategory($(data.selector).data('path'), true);
 						}
+					},
+
+					onRemoveCategory : function(e, data){
+						var path = _state.category;
+						var categoriesToRemove = $(data.selector).data('removepath').split('////');
+
+						// Loop through and remove the sub categories
+						for(var i = 0; i < categoriesToRemove.length; i++){
+							if(categoriesToRemove[i].length > 0){
+								path = path.replace('////' + categoriesToRemove[i], '');
+							}
+						}
+						_this.loadCategory(path, true);
+
 					},
 
 					onNextPage : function(e, data){
@@ -125,6 +146,10 @@
 			
 			assets : {},
 
+			getState : function(){
+				return _state;
+			},
+
 			pushState : function(){
 				//return _app.controllers.application.pushState(_this, _state);
 			},
@@ -149,7 +174,7 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_CategoryExpand',
-					path : (isAtomic ? categoryPath : _state.category + '////' + categoryPath)
+					category : (isAtomic ? categoryPath : _state.category + '////' + categoryPath)
 				};
 
 				// TODO : rename path to addedPath or something similar
@@ -160,19 +185,35 @@
 					});
 			},
 
-			filterWithAttributes : function(attributeHashMap){
+			// filterWithAttributes : function(attributeHashMap){
 
+			// 	var payload = {
+			// 		action : 'advisor',
+			// 		method : 'CA_AttributeSelected',
+			// 		attributes : attributeHashMap
+			// 	};
+
+			// 	return _api.request(_this, 'filter', $.extend(_state, payload))
+			// 		.done(function(data){
+			// 			_this.renderProducts(data.response.source);
+			// 			_this.renderSummary(data.response.source);
+			// 			_this.renderSelectedRefinements(data.response.source);
+			// 		});
+			// },
+
+			filterWithAttribute : function(attribute, value){
 				var payload = {
 					action : 'advisor',
 					method : 'CA_AttributeSelected',
-					attributes : attributeHashMap
+					attributes : {}
 				};
+
+				// Utilizing the attribute object notation in the api bridge
+				payload.attributes[attribute] = [value];
 
 				return _api.request(_this, 'filter', $.extend(_state, payload))
 					.done(function(data){
-						_this.renderProducts(data.response.source);
-						_this.renderSummary(data.response.source);
-						_this.renderSelectedRefinements(data.response.source);
+						_this.renderPage(data.response.source);
 					});
 			},
 
@@ -211,15 +252,15 @@
 
 			},
 
-			removePathNode : function(path){
+			removePathNode : function(node){
 				
 				var payload = {
-					CatPath : path,
+					category : _state.category.replace('////' + node, ''),
 					RequestAction : 'advisor',
 					RequestData : 'CA_BreadcrumbRemove'
 				};
 
-				return _api.request(_this, 'paginate', payload)
+				return _api.request(_this, 'removeNode', payload)
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
