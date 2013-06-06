@@ -977,6 +977,8 @@ ul.list li,
 				float: none;
 				margin-left: px($paddingUnit);
 				width: 100%;
+
+
 				
 				label{ 
 					padding-left: 0px;
@@ -996,15 +998,16 @@ ul.list li,
 					margin-top: px($paddingUnit);
 				}
 			}
+
 		}
 		
-		ul:first-child .field:first-child{
-			margin-top:10px;
+		ul:first-child{
+			padding-top:10px;
 		}
 
-		// The 'more' section's list dosen't need a top margin
-		.more ul .field:first-child{
-			margin-top:0;
+		// The 'more' section's list dosen't need padding
+		.more ul{
+			padding-top:0;
 		}
 		
 		.loadMore{
@@ -1028,6 +1031,19 @@ ul.list li,
 		&.links .loadMore{
 			left: 0px;
 		}
+
+		// Hide static elements, show them if checked
+		// This is part of the 'history' module of search
+		.displayState-static li{
+			display: none;
+			&.isChecked{
+				display: block;
+				.details{
+					display: none;
+				}
+			}
+		}
+
 	}
 	.selectedFilters{
 		

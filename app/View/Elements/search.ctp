@@ -1,9 +1,9 @@
  <div class='page-search span12 container loading'>
 	<div class='title span9'>
-		<h1 id='pageName'>Vibraphone Mallets</h1>
+		<h1 id='pageName'></h1>
 		<span class='details'>
-			<strong><span class='numberOfResults'>302</span> Items</strong>
-			<span class='totalPages'>8</span>
+			<strong><span class='numberOfResults'></span> Items</strong>
+			<span class='totalPages'></span>
 		</span>
 	</div>
 	<div class='searchRefinementsAndResults' data-controller='search'>
@@ -49,7 +49,7 @@
 					<li class='control-pagination-sort'>
 						<label for='control-pagination-sort-top'>Sort:</label>
 						<select id='control-pagination-sort-top' data-action='sort'>
-							<option selected="selected" value="-default-">Recommended</option>
+							<option selected="selected" value="default">Recommended</option>
 							<option value="Store Description,t">Name (A-Z)</option>
 							<option value="Store Description,f">Name (Z-A)</option>
 							<option value="Online Price,t">Price ($-$$$)</option>
@@ -100,7 +100,7 @@
 	<ul class="span12 breadcrumbLinks">
 		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
 			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'>
-				<button class='b5' data-action='removeCategory' data-controller='search' data-removeP ath='<#=this.navPath._lsp.categoryNodes[i].postFixCategories #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
+				<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].postFixCategories #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
 			</li>
 		<# } #>
 	</ul>
@@ -126,9 +126,22 @@
 </script>
 
 <script id='templates-search-checkboxListEntry' type='text/html'>
+
+	<#
+		/* If there are any hidden selected options, move them to the bottom of the initial list*/
+		var hasHiddenSelected = false;
+		for(var i = initialListSize; i < this.entries.length; i++){
+			if(this.entries[i].selected){
+				this.entries.splice(initialListSize, 0, this.entries[i]);
+				this.entries.splice(i, 1);
+				initialListSize++;
+			}
+		}
+	#>
+
 	<ul>
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li class='field'>
+			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #>'>
 				<input 
 				data-action='filterAttribute' 
 				name='<#=this.section.name #>[]' 
@@ -139,22 +152,22 @@
 			</li>
 		<# } #>
 	</ul>
-	<div id='refinement-<#=this.id #>-more' class='reveal-closed more'>
+	<div id='refinement-<#=this.id #>-more' class='more <#=(this.section.displayState === 'static' ? 'reveal-open' : 'reveal-closed') #>'>
 		<ul>
 			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
-				<li class='field'>
+				<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #>'>
 					<input 
 					data-action='filterAttribute' 
 					name='<#=this.section.name #>[]' 
 					value='<#=this.entries[i].attributeValue #>' 
-					id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' />
+					id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' <#=(this.entries[i].selected ? 'checked' : '') #>/>
 			
 					<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
 				</li>
 			<# } #>
 		</ul>
 	</div>
-	<# if(this.entries.length - this.initialListSize > 0){ #>
+	<# if(this.entries.length - this.initialListSize > 0 && this.section.displayState !== 'static'){ #>
 		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'><span class='more'>See More (<#=this.entries.length - this.initialListSize #>)</span><span class='less'>Less</span></button>
 	<# } #>
 </script>
@@ -201,7 +214,7 @@
 		<div class='toggleRefinements'>
 			<button class='b4 icon-16-toggleHide reveal-closed-phone <#=revealState #>' data-reveal-children='refinement-<#=this.id #>-container'>Toggle Refinement Group</button>
 		</div>
-		<div id='refinement-<#=this.id #>-container' class='content reveal-closed-phone <#=revealState #>'>
+		<div id='refinement-<#=this.id #>-container' class='content reveal-closed-phone <#=revealState #> displayState-<#=(this.displayState ? this.displayState : 'normal') #>'>
 
 			<#=_util.parseMicroTemplate(this.entryTemplateId, {
 				section : this,
@@ -216,7 +229,7 @@
 </script>
 
 <script id='templates-search-refinements' type='text/html'>
-	<#	if(this.categories){ #>
+	<#	if(this.categories && (this.navPath._lsp.categoryNodes.length + ((this.categories || {}).categoryList || {}).length) > 1){ #>
 		<#	var initialSize = (this.categories.isInitDispLimited ? (this.categories.initialCategoryList || {}).length : (this.categories.categoryList || {}).length); #>
 
 		<#=_util.parseMicroTemplate('templates-search-refinementSection', {
@@ -241,6 +254,7 @@
 			name : attribute.name,
 			id : 'refinement-' + i,
 			isOpen : true,
+			displayState : attribute.displayState,
 			entries : attribute.attributeValueList,
 			initialListSize : initialSize,
 			entryTemplateId : 'templates-search-checkboxListEntry',
@@ -257,7 +271,7 @@
 			Sorry buddy, there are no results
 		</li>
 	<# } #>
-	<# for(var i = 0; i < this.products.items.length; i++){ #>
+	<# for(var i = 0; i < ((this.products || {}).items || {}).length; i++){ #>
 	<# var item = this.products.items[i]; #>
 		<li class='entry productScope'>
 			<form>

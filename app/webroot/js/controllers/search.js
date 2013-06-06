@@ -12,9 +12,8 @@
 		var _state = {
 			resultsPerPage : '20',
 			page : 'first',
-			sort : '',
-			category : 'All Products',
-			keywords : ''
+			sort : 'default',
+			category : 'All Products'
 		};
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
@@ -43,7 +42,7 @@
 							var navPathNodeList = data.response.source.navPath.navPathNodeList
 							_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
 						}else{
-							_state.category = data.response.source.navPath.pureCategoryPath
+							_state.category = _api.parseCategoriesFromPath(data.response.source.navPath.fullPath);
 						}
 
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
@@ -61,41 +60,70 @@
 							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'');
 						}else{
 							// Uncheck the option
-							$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
-
-							// Send the request
-							_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+							$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]')
+								.attr('checked', false)
+								.change();
 						}
 						
 					},
 
 					onFilterAttribute : function(e, data){
 						
-						var name = $(data.selector).attr('name');
+						var name = $(data.selector).attr('name').replace('[]', '');
 
 						if(IS_SINGLE_SELECT){
-							_this.filterWithAttribute(name.substr(0, name.length - 2), $(data.selector).val());
+							_this.filterWithAttribute(name, $(data.selector).val());
 						}else{
 
-							// If it's not part of the history, add it
-							if((_attributeHistory[_attributeHistory.length - 1] || {}).name !== name){
-								_attributeHistory.push({name : name, state : 'temporary'});
+							// The basic idea here is, the first time you check a box it gets
+							// added to the history, to account unchecking we make sure
+							// all of the elements in history are present as checked boxes in the form
+
+							// On the retuning request, the attributes will be marked as "static" or "temporary"
+							// and will consequently be rendered differently.
+
+							var formObject = _this.getSelectedAttributes();
+
+							// If it's not part of the history (first time it's been checked), add it to the history
+							// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
+							// paths will never happen because we will be hiding them
+
+							// If we have unselected another attribute (different from the last selected) then we need to
+							// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
+							// unselecting a "Color" and "Artist" should "collapse" into it's static form 
+							var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length
+							if(!isInHistory){
+								_attributeHistory.push({name : name, displayState : 'temporary'});
+							}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
+								_attributeHistory[_attributeHistory.length - 1].displayState = 'static';
 							}
 
 							// Mark everything not curent as static
 							for(var i = 0; i < _attributeHistory.length - 1; i++){
-								_attributeHistory[i].state = 'static';
+								_attributeHistory[i].displayState = 'static';
 							}
 
-							console.error(_attributeHistory);
+							// Clear unnessesary history elements
+							for(var i = 0; i < _attributeHistory.length; i++){
 
-							_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));	
+								// Chop off the last two characters "[]"
+								var attributeName = _attributeHistory[i].name;
+
+								// If the history element isn't in the form it means nothing is selected for
+								// that attribute any longer
+								if(!formObject[attributeName]){
+									_attributeHistory.splice(i, 1);
+								}
+							}
+
+							_this.filterWithAttributes(formObject);	
 						}
 						
 					},
 
-					onClearAllFilters : function(e, data){
-
+					onClearAllRefinements : function(e, data){
+						_attributeHistory = [];
+						_this.filterWithAttributes({});	
 					},
 
 					onLoadCategory : function(e, data){
@@ -178,8 +206,15 @@
 				return _state;
 			},
 
+			getSelectedAttributes : function(){
+				return _util.formToObject($('#refinementForm')[0]);
+			},
+
 			pushState : function(){
-				//return _app.controllers.application.pushState(_this, _state);
+
+				console.log(_state);
+
+				return _app.controllers.application.pushState(_this, _state);
 			},
 
 			// By keyword
@@ -191,7 +226,7 @@
 					keywords : keywords
 				};
 
-				return _api.request(_this, 'search', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -202,12 +237,13 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_CategoryExpand',
-					category : (isAtomic ? categoryPath : _state.category + '////' + categoryPath)
+					category : (isAtomic ? categoryPath : _state.category + '////' + categoryPath),
+					attributes : _this.getSelectedAttributes()
 				};
 
 				// TODO : rename path to addedPath or something similar
 
-				return _api.request(_this, 'loadCategory', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+				return _api.request(_this, 'loadCategory', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -221,7 +257,7 @@
 					attributes : attributeHashMap
 				};
 
-				return _api.request(_this, 'filter', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -237,7 +273,7 @@
 				// Utilizing the attribute object notation in the api bridge
 				payload.attributes[attribute] = [value];
 
-				return _api.request(_this, 'filter', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -252,25 +288,26 @@
 			//	//invoke(url);
 			// },
 
-			loadPage : function(pageName){
-				var payload = {
-					RequestAction : 'navbar',
-					RequestData : 'page' + pageName
-				};
+			// loadPage : function(pageName){
+			// 	var payload = {
+			// 		action : 'navbar',
+			// 		method : 'page' + pageName
+			// 	};
 
-				return _api.request(_this, 'loadPage', payload);
-			},
+			// 	return _api.request(_this, 'loadPage', $.extend({}, _state, payload));
+			// },
 
 			// Direction can be [first, last, next, prev]
 			paginate: function(direction){
 
 				var payload = {
-					RequestAction : 'navbar',
-					RequestData : ($.isNumeric(direction) ? 'page' + direction : direction),
-					currentpage : _state.page
+					action : 'navbar',
+					method : ($.isNumeric(direction) ? 'page' + direction : direction),
+					currentPage : _state.page,
+					attributes : _this.getSelectedAttributes()
 				};
 
-				return _api.request(_this, 'paginate', payload)
+				return _api.request(_this, 'paginate', $.extend({}, _state, payload))
 					.done(function(data){
 						_this.renderSummary(data.response.source);
 						_this.renderProducts(data.response.source);
@@ -278,19 +315,19 @@
 
 			},
 
-			removePathNode : function(node){
+			// removePathNode : function(node){
 				
-				var payload = {
-					category : _state.category.replace('////' + node, ''),
-					RequestAction : 'advisor',
-					RequestData : 'CA_BreadcrumbRemove'
-				};
+			// 	var payload = {
+			// 		category : _state.category.replace('////' + node, ''),
+			// 		RequestAction : 'advisor',
+			// 		RequestData : 'CA_BreadcrumbRemove'
+			// 	};
 
-				return _api.request(_this, 'removeNode', payload)
-					.done(function(data){
-						_this.renderPage(data.response.source);
-					});
-			},
+			// 	return _api.request(_this, 'removeNode', payload)
+			// 		.done(function(data){
+			// 			_this.renderPage(data.response.source);
+			// 		});
+			// },
 
 			changeView : function(viewType){
 				if(viewType === 'gridView' || viewType === 'listView'){
@@ -312,21 +349,21 @@
 
 			renderSummary : function(easyAskDataObject){
 
-				var path = easyAskDataObject.navPath.pureCategoryPath;
+				var path = _state.category;
 				var categories = path.split('////');
 				var currentCategory = categories[categories.length - 1];
-				var currentPageNumber = easyAskDataObject.products.itemDescription.currentPage;
-				var totalPages = easyAskDataObject.products.itemDescription.pageCount;
+				var currentPageNumber = ((easyAskDataObject.products || {}).itemDescription || {}).currentPage;
+				var totalPages = ((easyAskDataObject.products || {}).itemDescription || {}).pageCount;
 
 				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', easyAskDataObject);
 
 				$('.currentPageNumber').html(currentPageNumber);
 				$('.totalPages').html(totalPages);
-				$('.numberOfResults').html(easyAskDataObject.products.itemDescription.totalItems);
+				$('.numberOfResults').html(((easyAskDataObject.products || {}).itemDescription || {}).totalItems);
 				$('#pageName').html(currentCategory);
 
-				$('select[data-action="sort"]').val(easyAskDataObject.products.itemDescription.sortOrder);
-				$('select[data-action="itemsPerPage"]').val(easyAskDataObject.products.itemDescription.resultsPerPage);
+				$('select[data-action="sort"]').val(((easyAskDataObject.products || {}).itemDescription || {}).sortOrder);
+				$('select[data-action="itemsPerPage"]').val(((easyAskDataObject.products || {}).itemDescription || {}).resultsPerPage);
 
 				if(currentPageNumber === 1){
 					$('*[data-action="previousPage"]').css('visibility', 'hidden');
@@ -349,9 +386,22 @@
 				_app.controllers.application.attachEvents($('#selectedRefinements').html(selectedHTML));
 			},
 
+
 			renderRefinements : function(easyAskDataObject){
 
-				// mark _lsp attributes with _attributeHistory states
+				// Mark attributes._lsp.cached attributes with _attributeHistory states
+				// Loop through the history, then loop through the cached attributes
+				// looking to find the entry, and mark it with the saved state
+				for(var i = 0; i < _attributeHistory.length; i++){
+					for(var j = 0; j < easyAskDataObject.attributes._lsp.cached.length; j++){
+						var cachedAttribute = easyAskDataObject.attributes._lsp.cached[j];
+
+						if((_attributeHistory[i] || {}).name === cachedAttribute.name){
+							easyAskDataObject.attributes._lsp.cached[j].displayState = _attributeHistory[i].displayState;
+							break;
+						}
+					}
+				}
 
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', easyAskDataObject);
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML));
@@ -359,7 +409,6 @@
 
 			renderProducts : function(easyAskDataObject){
 				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', easyAskDataObject);
-				$('')
 				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
 			},
 

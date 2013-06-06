@@ -30,10 +30,10 @@
 				var formattedPayload = {
 					RequestAction : payload.action,
 					RequestData : payload.method,
-					currentpage : payload.page,
+					currentpage : payload.currentPage,
 					forcepage : 1,
 					ResultsPerPage : payload.resultsPerPage,
-					defsortcols : payload.sort,
+					defsortcols : (payload.sort === 'default' ? '' : payload.sort),
 					indexed : 1, 
 					rootprods : 1,
 					oneshot : 0,
@@ -51,6 +51,13 @@
 					// Build the category path by hand
 					formattedPayload.CatPath = _util.cleanArray([payload.category, this.buildMultiAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('////');
 				}
+
+				if($.isEmptyObject(payload.attributes) && payload.method === 'CA_AttributeSelected'){
+					payload.method = 'CA_CategoryExpand'; // If there are no attributes, just load the category
+				}
+
+				// As a form of cleanup - remove a trailing //// from a category request
+				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/\/\/\/$/, ''); // Remove trailing //// if it exists
 
 				return formattedPayload;
 			},
@@ -115,8 +122,6 @@
 					_attributeHistory[attribute.name] = attribute;
 					returnAttributeMap[attribute.name] = true; // Small lookup map
 				}
-
-				debugger;
 
 				// Clean cachedAttributes that shoudn't be there
 				$.each(_attributeHistory, function(i, cachedAttribute){
@@ -238,6 +243,22 @@
 				}
 
 				return attributeNodes;
+			},
+
+			parseCategoriesFromPath : function(path){
+
+				var parsedPath = decodeURIComponent(path).replace(/\+/g, ' ');
+
+				// Replace //// with a control charecter
+				// Remove Attributes
+				// Remove query
+				// Replace control charecter with ////
+				parsedPath = parsedPath.replace(/\/\/\/\//g, String.fromCharCode(1));
+				parsedPath = parsedPath.replace(/\x01AttribSelect=[^\x01]+/g, '');
+				parsedPath = parsedPath.replace(/UserSearch1=[^\x01]+/g, '');
+				parsedPath = parsedPath.replace(/\x01/g, '////');
+
+				return parsedPath;
 			}
 		});
 
