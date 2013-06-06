@@ -7,6 +7,8 @@
 		var _app = window.LSP;
 		var _api = _app.models.easyask;
 
+		var IS_SINGLE_SELECT = false;
+
 		var _state = {
 			resultsPerPage : '20',
 			page : 'first',
@@ -14,6 +16,8 @@
 			category : 'All Products',
 			keywords : ''
 		};
+
+		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
 
 		// {sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
 
@@ -35,10 +39,13 @@
 
 					onAfterAPICallSuccess : function(e, data){
 
-						var navPathNodeList = data.response.source.navPath.navPathNodeList
-						_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
+						if(IS_SINGLE_SELECT){
+							var navPathNodeList = data.response.source.navPath.navPathNodeList
+							_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
+						}else{
+							_state.category = data.response.source.navPath.pureCategoryPath
+						}
 
-						// _state.category = data.response.source.navPath.pureCategoryPath;
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						_this.pushState();
 					},
@@ -50,20 +57,41 @@
 
 					onRemoveFilter : function(e, data){
 						
-						// Uncheck the option
-						//$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
+						if(IS_SINGLE_SELECT){
+							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'');
+						}else{
+							// Uncheck the option
+							$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
 
-						// Send the request
-						//_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
-
-						_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'')
-
+							// Send the request
+							_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+						}
+						
 					},
 
 					onFilterAttribute : function(e, data){
-						//_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));
+						
 						var name = $(data.selector).attr('name');
-						_this.filterWithAttribute(name.substr(0, name.length - 2), $(data.selector).val());
+
+						if(IS_SINGLE_SELECT){
+							_this.filterWithAttribute(name.substr(0, name.length - 2), $(data.selector).val());
+						}else{
+
+							// If it's not part of the history, add it
+							if((_attributeHistory[_attributeHistory.length - 1] || {}).name !== name){
+								_attributeHistory.push({name : name, state : 'temporary'});
+							}
+
+							// Mark everything not curent as static
+							for(var i = 0; i < _attributeHistory.length - 1; i++){
+								_attributeHistory[i].state = 'static';
+							}
+
+							console.error(_attributeHistory);
+
+							_this.filterWithAttributes(_util.formToObject($('#refinementForm')[0]));	
+						}
+						
 					},
 
 					onClearAllFilters : function(e, data){
@@ -163,7 +191,7 @@
 					keywords : keywords
 				};
 
-				return _api.request(_this, 'search', $.extend(_state, payload))
+				return _api.request(_this, 'search', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -179,27 +207,25 @@
 
 				// TODO : rename path to addedPath or something similar
 
-				return _api.request(_this, 'loadCategory', $.extend(_state, payload))
+				return _api.request(_this, 'loadCategory', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
 			},
 
-			// filterWithAttributes : function(attributeHashMap){
+			filterWithAttributes : function(attributeHashMap){
 
-			// 	var payload = {
-			// 		action : 'advisor',
-			// 		method : 'CA_AttributeSelected',
-			// 		attributes : attributeHashMap
-			// 	};
+				var payload = {
+					action : 'advisor',
+					method : 'CA_AttributeSelected',
+					attributes : attributeHashMap
+				};
 
-			// 	return _api.request(_this, 'filter', $.extend(_state, payload))
-			// 		.done(function(data){
-			// 			_this.renderProducts(data.response.source);
-			// 			_this.renderSummary(data.response.source);
-			// 			_this.renderSelectedRefinements(data.response.source);
-			// 		});
-			// },
+				return _api.request(_this, 'filter', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
 
 			filterWithAttribute : function(attribute, value){
 				var payload = {
@@ -211,7 +237,7 @@
 				// Utilizing the attribute object notation in the api bridge
 				payload.attributes[attribute] = [value];
 
-				return _api.request(_this, 'filter', $.extend(_state, payload))
+				return _api.request(_this, 'filter', $.extend(_state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -324,6 +350,9 @@
 			},
 
 			renderRefinements : function(easyAskDataObject){
+
+				// mark _lsp attributes with _attributeHistory states
+
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', easyAskDataObject);
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML));
 			},

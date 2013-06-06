@@ -100,7 +100,7 @@
 	<ul class="span12 breadcrumbLinks">
 		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
 			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'>
-				<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].postFixCategories #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
+				<button class='b5' data-action='removeCategory' data-controller='search' data-removeP ath='<#=this.navPath._lsp.categoryNodes[i].postFixCategories #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
 			</li>
 		<# } #>
 	</ul>
@@ -133,7 +133,7 @@
 				data-action='filterAttribute' 
 				name='<#=this.section.name #>[]' 
 				value='<#=this.entries[i].attributeValue #>' 
-				id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' />
+				id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' <#=(this.entries[i].selected ? 'checked' : '') #>/>
 		
 				<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
 			</li>
@@ -232,9 +232,9 @@
 	<# } #>
 	
 
-	<# for(var i = 0; i < ((this.attributes || {}).attribute || {}).length; i++){ #>
+	<# for(var i = 0; i < (((this.attributes || {})._lsp || {}).cached || {}).length; i++){ #>
 	
-		<# var attribute = this.attributes.attribute[i]; #>
+		<# var attribute = this.attributes._lsp.cached[i]; #>
 		<# var initialSize = (attribute.isInitDispLimited ? attribute.initDispLimit : attribute.attributeValueList.length); #>
 	
 		<#=_util.parseMicroTemplate('templates-search-refinementSection', {

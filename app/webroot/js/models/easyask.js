@@ -5,14 +5,17 @@
 	
 	_util.register('model', 'easyask', (function(){
 
-		var _dictionary = 'nslonestarpercussion';
-		//var _dictionary = 'EcomDemo';
-		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
-		//var _hostname = 'http://easyaskqa.easyaskondemand.com';
-		
 		var _this = $.extend({}, _models.api);
 
+		//var _dictionary = 'EcomDemo';
+		//var _hostname = 'http://easyaskqa.easyaskondemand.com';
+		
+		var _dictionary = 'nslonestarpercussion';
+		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
+
 		var _sessionId;
+
+		var _attributeHistory = {};
 
 		// Extends the generic API
 		return $.extend(_this, {
@@ -24,15 +27,13 @@
 				// payload : 
 				// 	{sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
 
-				return {
+				var formattedPayload = {
 					RequestAction : payload.action,
 					RequestData : payload.method,
-					AttribSel : this.buildAttributeString(payload.attributes),
 					currentpage : payload.page,
 					forcepage : 1,
 					ResultsPerPage : payload.resultsPerPage,
 					defsortcols : payload.sort,
-					CatPath : payload.category,
 					indexed : 1, 
 					rootprods : 1,
 					oneshot : 0,
@@ -42,16 +43,33 @@
 					dct : _dictionary,
 					q : payload.keywords
 				};
+
+				if(payload.isSingleSelect){
+					formattedPayload.CatPath = payload.category;
+					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.attributes);
+				}else{
+					// Build the category path by hand
+					formattedPayload.CatPath = _util.cleanArray([payload.category, this.buildMultiAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('////');
+				}
+
+				return formattedPayload;
 			},
+
 			_isSuccess : function(responseData){
 				return (responseData || {}).returnCode === 0;
 			},
+
 			_afterSuccess : function(responseData){
 				_sessionId = responseData.sessionID;
 				
 				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
 				responseData.source.navPath._lsp.categoryNodes = _this.getCategoryNodes(responseData.source);
 				responseData.source.navPath._lsp.refinementNodes = _this.getRefinementNodes(responseData.source);
+				
+				this.cacheAttributes(responseData.source);
+				responseData.source.attributes = responseData.source.attributes || {};
+				responseData.source.attributes._lsp = responseData.source.attributes._lsp || {};
+				responseData.source.attributes._lsp.cached = _this.injectCachedAttributes(responseData.source);
 
 				return responseData;
 			},
@@ -60,7 +78,7 @@
 				return (keywords ? 'UserSearch1=' + keywords : null);
 			},
 
-			buildAttributeString : function(attributeHashMap){
+			buildMultiAttributeString : function(attributeHashMap){
 				
 				var attributes = [];
 
@@ -71,7 +89,7 @@
 
 						$.each(valueArray, function(index, selectedValue){
 							// If index is null (it's the first index) add attribSel to the name
-							selections.push(name + ' = \'' + selectedValue + '\'');
+							selections.push((index ? name : 'AttribSelect='+ name) + ' = \'' + selectedValue + '\'');
 						});
 
 						attributes.push(selections.join(';;;;'));
@@ -80,6 +98,95 @@
 				}
 
 				return _util.cleanArray(attributes).join('////');
+
+			},
+
+			buildSingleAttributeString : function(attributeHashMap){
+				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\/\/\/\/*/, '');
+			},
+
+			cacheAttributes : function(easyAskDataSourceObject){
+
+				var returnAttributeMap = {};
+
+				// Add all returned attributes to the cache
+				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
+					var attribute = easyAskDataSourceObject.attributes.attribute[i];
+					_attributeHistory[attribute.name] = attribute;
+					returnAttributeMap[attribute.name] = true; // Small lookup map
+				}
+
+				debugger;
+
+				// Clean cachedAttributes that shoudn't be there
+				$.each(_attributeHistory, function(i, cachedAttribute){
+					// If it's not been returned with Attributes
+					var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
+
+					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf('AttribSelect='+cachedAttribute.name) < 0){
+						// If it's neither returned, nor selected, it's ok to delete it from the cache						
+						delete _attributeHistory[cachedAttribute.name];
+					}
+				});
+
+				return returnAttributeMap;
+
+			},
+
+			injectCachedAttributes : function(easyAskDataSourceObject){
+				
+				var lspAttributes = [];
+
+				// Loop through cached attributes
+				// See if the attribute is in the response and use it
+				// if it's not - then use the cached version.
+
+				$.each(_attributeHistory, function(i, cachedAttribute){
+					
+					var found = false;
+					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
+						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.name){
+							found = true;
+							lspAttributes.push(easyAskDataSourceObject.attribute[j]);
+						}
+					}
+					if(!found){
+						lspAttributes.push(cachedAttribute);
+					}
+
+				});
+
+				return this.markSelectedAttributes(easyAskDataSourceObject, lspAttributes);
+			},
+
+			markSelectedAttributes : function(easyAskDataSourceObject, attributes){
+				
+				var attributes = $.extend(true, [], attributes); // attributes is a pointer, we need it passed as a value
+
+				$.each(((easyAskDataSourceObject.navPath || {})._lsp || {}).refinementNodes, function(j, refinementNode){
+
+					// Find the attribute
+					for(var i = 0; i < (attributes || {}).length; i++){
+						if((attributes[i] || {}).name === refinementNode.attribute){
+
+							// Find the matching value
+							for(var j = 0; j < (attributes[i].attributeValueList || {}).length; j++){
+
+								if(refinementNode.value === attributes[i].attributeValueList[j].attributeValue){
+									// Mark it as selected
+									attributes[i].attributeValueList[j].selected = true;
+									break;
+								}
+							}
+
+							break; // stop after the first attribute
+						}
+					}
+
+					
+				});
+
+				return attributes;
 
 			},
 

@@ -27,7 +27,7 @@
 			return typeof (responseData || {}).success !== 'undefined' || (responseData || {}).success === true;
 		},
 		_afterSuccess : function(responseData){
-			// noop;
+			return responseData;
 		},
 		_request : function(type, dataType, controller, eventName, payload){
 		
