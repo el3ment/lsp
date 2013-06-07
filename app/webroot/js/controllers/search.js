@@ -13,7 +13,7 @@
 			resultsPerPage : '20',
 			page : 'first',
 			sort : 'default',
-			category : 'All Products'
+			category : ''
 		};
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
@@ -38,11 +38,13 @@
 
 					onAfterAPICallSuccess : function(e, data){
 
+						var navPathNodeList = data.response.source.navPath.navPathNodeList
+
 						if(IS_SINGLE_SELECT){
-							var navPathNodeList = data.response.source.navPath.navPathNodeList
 							_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
 						}else{
-							_state.category = _api.parseCategoriesFromPath(data.response.source.navPath.fullPath);
+							// Remove everything except categories, then remove trailing /
+							_state.category = (_api.parseCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 						}
 
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
@@ -136,13 +138,13 @@
 					},
 
 					onRemoveCategory : function(e, data){
-						var path = _state.category;
-						var categoriesToRemove = $(data.selector).data('removepath').split('////');
+						var path = '/' + _state.category;
+						var categoriesToRemove = $(data.selector).data('removepath').split('/');
 
 						// Loop through and remove the sub categories
 						for(var i = 0; i < categoriesToRemove.length; i++){
 							if(categoriesToRemove[i].length > 0){
-								path = path.replace('////' + categoriesToRemove[i], '');
+								path = path.replace('/' + categoriesToRemove[i], ''); // Begins the phrase
 							}
 						}
 						_this.loadCategory(path, true);
@@ -169,12 +171,12 @@
 
 					onShowCompactView : function(e, data){
 						_this.changeView('gridView');
-						_this.pushState(_this, _state);
+						_this.pushState();
 					},
 
 					onShowDetailsView : function(e, data){
 						_this.changeView('listView');
-						_this.pushState(_this, _state);
+						_this.pushState();
 					}
 				},
 				application : {
@@ -183,7 +185,7 @@
 						var pulledState = _app.controllers.application.pullState(_this) || {};
 						//pulledState.searchQuery = data.queryParameters.searchQuery; // add the query if it exists
 						
-						$.extend(_state, pulledState);
+						_state = _this.formatPullState(pulledState);
 
 						_this.search(data.queryParameters.searchQuery);
 						_this.changeView(_state.view);
@@ -212,9 +214,21 @@
 
 			pushState : function(){
 
-				console.log(_state);
+				var pushedState = $.extend({}, _state);
+				pushedState.category = {value : pushedState.category.replace(/\//g, '|'), uriEncode : false};
 
-				return _app.controllers.application.pushState(_this, _state);
+				return _app.controllers.application.pushState(_this, pushedState);
+			},
+
+			getState : function(){
+				return _state;
+			},
+
+			formatPullState : function(state){
+				if(state.category){
+					state.category = state.category.replace(/\|/g, '/');
+				}
+				return _state;
 			},
 
 			// By keyword
@@ -237,7 +251,7 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_CategoryExpand',
-					category : (isAtomic ? categoryPath : _state.category + '////' + categoryPath),
+					category : (isAtomic ? categoryPath : _state.category.replace(/\/$/, '') + '/' + categoryPath),
 					attributes : _this.getSelectedAttributes()
 				};
 
@@ -350,17 +364,18 @@
 			renderSummary : function(easyAskDataObject){
 
 				var path = _state.category;
-				var categories = path.split('////');
-				var currentCategory = categories[categories.length - 1];
 				var currentPageNumber = ((easyAskDataObject.products || {}).itemDescription || {}).currentPage;
 				var totalPages = ((easyAskDataObject.products || {}).itemDescription || {}).pageCount;
 
 				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', easyAskDataObject);
 
+				var categories = easyAskDataObject.navPath._lsp.categoryNodes;
+				var currentCategory = categories[categories.length - 1].englishName;
+				$('#pageName').html(currentCategory);
+
 				$('.currentPageNumber').html(currentPageNumber);
 				$('.totalPages').html(totalPages);
 				$('.numberOfResults').html(((easyAskDataObject.products || {}).itemDescription || {}).totalItems);
-				$('#pageName').html(currentCategory);
 
 				$('select[data-action="sort"]').val(((easyAskDataObject.products || {}).itemDescription || {}).sortOrder);
 				$('select[data-action="itemsPerPage"]').val(((easyAskDataObject.products || {}).itemDescription || {}).resultsPerPage);

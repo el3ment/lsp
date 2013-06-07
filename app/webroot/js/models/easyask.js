@@ -49,15 +49,15 @@
 					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.attributes);
 				}else{
 					// Build the category path by hand
-					formattedPayload.CatPath = _util.cleanArray([payload.category, this.buildMultiAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('////');
+					formattedPayload.CatPath = _util.cleanArray([payload.category, this.buildMultiAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('/');
 				}
+
 
 				if($.isEmptyObject(payload.attributes) && payload.method === 'CA_AttributeSelected'){
-					payload.method = 'CA_CategoryExpand'; // If there are no attributes, just load the category
+					formattedPayload.RequestData = 'CA_CategoryExpand'; // If there are no attributes, just load the category
 				}
-
 				// As a form of cleanup - remove a trailing //// from a category request
-				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/\/\/\/$/, ''); // Remove trailing //// if it exists
+				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, ''); // Remove trailing //// if it exists
 
 				return formattedPayload;
 			},
@@ -96,15 +96,15 @@
 
 						$.each(valueArray, function(index, selectedValue){
 							// If index is null (it's the first index) add attribSel to the name
-							selections.push((index ? name : 'AttribSelect='+ name) + ' = \'' + selectedValue + '\'');
+							selections.push(selectedValue);
 						});
 
-						attributes.push(selections.join(';;;;'));
+						attributes.push(selections.join(';'));
 
 					});
 				}
 
-				return _util.cleanArray(attributes).join('////');
+				return _util.cleanArray(attributes).join('/');
 
 			},
 
@@ -198,16 +198,21 @@
 			getCategoryNodes : function(easyAskDataSourceObject){
 				
 				var categoryNodes = [];
-				var pureCategoryPath = easyAskDataSourceObject.navPath.pureCategoryPath;
+				var navPathNodeList = easyAskDataSourceObject.navPath.navPathNodeList;
+				var pureCategoryPath = this.parseCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath);
 
+				// Creates a list of just category nodes, and adds a convinient removePath property
 				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
-					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 1){
+					if(navPathNodeList[i].navNodePathType === 1){
 						
-						var len = categoryNodes.push(easyAskDataSourceObject.navPath.navPathNodeList[i]);
-						var newCategoryName = categoryNodes[len - 1].value;
+						navPathNodeList[i].englishName = navPathNodeList[i].englishName.replace(/\/$/, '');
+						navPathNodeList[i].englishName = (navPathNodeList[i].englishName === 'All-Products' ? 'All Products' : navPathNodeList[i].englishName);
+
+						var len = categoryNodes.push(navPathNodeList[i]);
+						var newCategoryName = categoryNodes[len - 1].seoPath;
 
 						// Grab the stuff after newCategoryName
-						categoryNodes[len - 1].postFixCategories = pureCategoryPath.substr(pureCategoryPath.indexOf(newCategoryName) + newCategoryName.length, pureCategoryPath.length);
+						categoryNodes[len - 1].removePath = pureCategoryPath.substr(pureCategoryPath.indexOf(newCategoryName) + newCategoryName.length, pureCategoryPath.length);
 
 					}
 				}
@@ -245,20 +250,36 @@
 				return attributeNodes;
 			},
 
-			parseCategoriesFromPath : function(path){
+			// parseCategoriesFromPath : function(path){
+			// 	debugger;
 
-				var parsedPath = decodeURIComponent(path).replace(/\+/g, ' ');
+			// 	var parsedPath = decodeURIComponent(path).replace(/\+/g, ' ');
 
-				// Replace //// with a control charecter
-				// Remove Attributes
-				// Remove query
-				// Replace control charecter with ////
-				parsedPath = parsedPath.replace(/\/\/\/\//g, String.fromCharCode(1));
-				parsedPath = parsedPath.replace(/\x01AttribSelect=[^\x01]+/g, '');
-				parsedPath = parsedPath.replace(/UserSearch1=[^\x01]+/g, '');
-				parsedPath = parsedPath.replace(/\x01/g, '////');
+			// 	// Replace //// with a control charecter
+			// 	// Remove Attributes
+			// 	// Remove query
+			// 	// Replace control charecter with ////
+			// 	parsedPath = parsedPath.replace(/\/\/\/\//g, String.fromCharCode(1));
+			// 	parsedPath = parsedPath.replace(/\x01AttribSelect=[^\x01]+/g, '');
+			// 	parsedPath = parsedPath.replace(/UserSearch1=[^\x01]+/g, '');
+			// 	parsedPath = parsedPath.replace(/\x01/g, '////');
 
-				return parsedPath;
+			// 	return parsedPath;
+			// },
+			parseCategoriesFromSEOPath : function(seoPath){
+
+				var seoPath = seoPath.split('/');
+
+				for(var i = 0; i < seoPath.length; i++){
+					if(seoPath[i].indexOf(':') > 0){
+						seoPath.splice(i, 1);
+						i--; // We just removed an element from the array
+					}
+				}
+				
+				console.log(seoPath.join('/'));
+
+				return seoPath.join('/');
 			}
 		});
 

@@ -100,7 +100,7 @@
 	<ul class="span12 breadcrumbLinks">
 		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
 			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'>
-				<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].postFixCategories #>'><#=this.navPath._lsp.categoryNodes[i].value #></button>
+				<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].removePath #>'><#=(this.navPath._lsp.categoryNodes[i].value === 'All-Products' ? 'All Products' : this.navPath._lsp.categoryNodes[i].englishName) #></button>
 			</li>
 		<# } #>
 	</ul>
@@ -145,7 +145,7 @@
 				<input 
 				data-action='filterAttribute' 
 				name='<#=this.section.name #>[]' 
-				value='<#=this.entries[i].attributeValue #>' 
+				value='<#=this.entries[i].nodeString #>'
 				id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' <#=(this.entries[i].selected ? 'checked' : '') #>/>
 		
 				<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
@@ -181,14 +181,14 @@
 		<# for(var i = 1; i < categories.length; i++){ #>
 			
 			<li class='indent'>
-				<button data-action='removeCategory' data-removePath='<#=categories[i].postFixCategories #>' class='b5 <#=(i === categories.length - 1 ? 'leftLinkBold' : '') #>'>
+				<button data-action='removeCategory' data-removePath='<#=categories[i].removePath #>' class='b5 <#=(i === categories.length - 1 ? 'leftLinkBold' : '') #>'>
 					<#=categories[i].value #>
 				</button>
 			</li>
 		<# } #>
 
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-categoryId='<#=this.entries[i].name #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
+			<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-categoryId='<#=this.entries[i].seoPath #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
 		<# } #>
 	</ul>
 
@@ -229,7 +229,7 @@
 </script>
 
 <script id='templates-search-refinements' type='text/html'>
-	<#	if(this.categories && (this.navPath._lsp.categoryNodes.length + ((this.categories || {}).categoryList || {}).length) > 1){ #>
+	<#	if(this.navPath._lsp.categoryNodes.length + (((this.categories || {}).categoryList || {}).length || 0)){ #>
 		<#	var initialSize = (this.categories.isInitDispLimited ? (this.categories.initialCategoryList || {}).length : (this.categories.categoryList || {}).length); #>
 
 		<#=_util.parseMicroTemplate('templates-search-refinementSection', {

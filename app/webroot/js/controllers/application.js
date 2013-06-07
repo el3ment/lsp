@@ -144,8 +144,9 @@
 			// but the slashes look much prettier
 			pushState : function(controller, snapshot){
 				
-				var statePath = _this.buildStateString(controller, snapshot);
-				_state[controller.name] = snapshot;
+				_state[controller.name] = snapshot; // Add it to the heap of other snapshots
+
+				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
 				// Setting window.location.hash to the same path does not cause hashchange to fire
 				// which would leave isPushingState true until the next go around, a strange bug
@@ -165,9 +166,15 @@
 					$.each(snapshot, function(variable, value){
 					
 						// For simple objects use the value, complex objects get JSON-ified
-						value = (typeof value === 'object' ? JSON.stringify(value) : value);
+						if(typeof value === 'object' && value.hasOwnProperty('value') && value.hasOwnProperty('uriEncode')){
+							value = value.value;
+						}else if(typeof value === 'object'){
+							value = encodeURIComponent(JSON.stringify(value));
+						}else{
+							value = encodeURIComponent(value).replace(/%20/g, '+');
+						}
 						
-						statePath += '/' + encodeURIComponent(variable) + '/' + encodeURIComponent(value).replace(/%20/g, '+');
+						statePath += '/' + encodeURIComponent(variable) + '/' + value;
 				
 					});
 				});
