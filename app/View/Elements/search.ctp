@@ -141,11 +141,14 @@
 	<#
 		/* If there are any hidden selected options, move them to the bottom of the initial list*/
 		var hasHiddenSelected = false;
-		for(var i = initialListSize; i < this.entries.length; i++){
+		for(var i = 0; i < this.entries.length; i++){
 			if(this.entries[i].selected){
-				this.entries.splice(initialListSize, 0, this.entries[i]);
-				this.entries.splice(i, 1);
-				initialListSize++;
+				
+				this.entries.splice(0, 0, this.entries.splice(i, 1)[0]);
+
+				if(i > initialListSize){
+					initialListSize++;
+				}
 			}
 		}
 	#>
@@ -162,7 +165,7 @@
 				<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
 			</li>
 		<# } #>
-	</ul><div id='refinement-<#=this.id #>-more' class='more <#=(this.section.displayState === 'static' ? 'reveal-open' : 'reveal-closed') #>'>
+	</ul><div id='refinement-<#=this.id #>-more' class='more <#=(this.section.displayState === 'static' ? 'reveal-closed' : 'reveal-closed') #>'>
 		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>Less</button>
 		<ul>
 			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
