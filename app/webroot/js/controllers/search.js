@@ -252,7 +252,7 @@
 
 				var payload = {
 					action : 'advisor',
-					method : 'CA_BreadcrumbClick',
+					method : 'CA_Search',
 					keywords : keywords
 				};
 

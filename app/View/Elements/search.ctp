@@ -155,7 +155,7 @@
 
 	<ul>
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #> <#=(this.entries[i].selected && !this.entries[i + 1].selected ? 'isLastChecked' : '') #>'>
+			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #> <#=(this.entries[i].selected && !((this.entries[i + 1] || {}).selected) ? 'isLastChecked' : '') #>'>
 				<input 
 				data-action='filterAttribute' 
 				name='<#=this.section.name #>[]' 

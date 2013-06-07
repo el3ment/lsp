@@ -7,8 +7,8 @@
 
 		var _this = $.extend({}, _models.api);
 
-		//var _dictionary = 'EcomDemo';
-		//var _hostname = 'http://easyaskqa.easyaskondemand.com';
+		// var _dictionary = 'EcomDemo';
+		// var _hostname = 'http://easyaskqa.easyaskondemand.com';
 		
 		var _dictionary = 'nslonestarpercussion';
 		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
