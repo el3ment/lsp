@@ -6,6 +6,8 @@
 		var _this = {};
 		var _app = window.LSP;
 
+		var ANIMATION_TIME = 300;
+
 		_this =  {
 			name : 'reveal',
 			events : {
@@ -78,7 +80,7 @@
 					children
 						.css('display', 'none')
 						.slideDown({
-							duration : 300,
+							duration : ANIMATION_TIME,
 							easing : 'swing',
 							complete : function(){
 								children
@@ -106,7 +108,7 @@
 					children
 						.css('display', 'block')
 						.slideUp({
-							duration : 300,
+							duration : ANIMATION_TIME,
 							easing : 'swing',
 							complete : function(){
 								$(this)

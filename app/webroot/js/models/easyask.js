@@ -49,7 +49,7 @@
 					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.attributes);
 				}else{
 					// Build the category path by hand
-					formattedPayload.CatPath = _util.cleanArray([payload.category, this.buildMultiAttributeString(payload.attributes), this.buildKeywordString(payload.keywords)]).join('/');
+					formattedPayload.CatPath = _util.cleanArray([payload.category, payload.attributes, this.buildKeywordString(payload.keywords)]).join('/');
 				}
 
 
@@ -72,6 +72,7 @@
 				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
 				responseData.source.navPath._lsp.categoryNodes = _this.getCategoryNodes(responseData.source);
 				responseData.source.navPath._lsp.refinementNodes = _this.getRefinementNodes(responseData.source);
+				responseData.source.navPath._lsp.searchNode = _this.getSearchNode(responseData.source);
 				
 				this.cacheAttributes(responseData.source);
 				responseData.source.attributes = responseData.source.attributes || {};
@@ -82,31 +83,31 @@
 			},
 
 			buildKeywordString : function(keywords){
-				return (keywords ? 'UserSearch1=' + keywords : null);
+				return (keywords ? ('-' + keywords).replace(/-{1,}/, '-') : null);
 			},
 
-			buildMultiAttributeString : function(attributeHashMap){
+			// buildMultiAttributeString : function(attributeHashMap){
 				
-				var attributes = [];
+			// 	var attributes = [];
 
-				if(attributeHashMap){
-					$.each(attributeHashMap, function(name, valueArray){
+			// 	if(attributeHashMap){
+			// 		$.each(attributeHashMap, function(name, valueArray){
 
-						var selections = [];
+			// 			var selections = [];
 
-						$.each(valueArray, function(index, selectedValue){
-							// If index is null (it's the first index) add attribSel to the name
-							selections.push(selectedValue);
-						});
+			// 			$.each(valueArray, function(index, selectedValue){
+			// 				// If index is null (it's the first index) add attribSel to the name
+			// 				selections.push(selectedValue);
+			// 			});
 
-						attributes.push(selections.join(';'));
+			// 			attributes.push(selections.join(';'));
 
-					});
-				}
+			// 		});
+			// 	}
 
-				return _util.cleanArray(attributes).join('/');
+			// 	return _util.cleanArray(attributes).join('/');
 
-			},
+			// },
 
 			buildSingleAttributeString : function(attributeHashMap){
 				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\/\/\/\/*/, '');
@@ -126,9 +127,11 @@
 				// Clean cachedAttributes that shoudn't be there
 				$.each(_attributeHistory, function(i, cachedAttribute){
 					// If it's not been returned with Attributes
-					var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
 
-					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf('AttribSelect='+cachedAttribute.name) < 0){
+					var fullPath = $(easyAskDataSourceObject.navPath.navPathNodeList).last()[0].seoPath;
+					var attributeSEOName = cachedAttribute.attributeValueList[0].nodeString.replace(/:.*/, '');
+
+					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){
 						// If it's neither returned, nor selected, it's ok to delete it from the cache						
 						delete _attributeHistory[cachedAttribute.name];
 					}
@@ -143,7 +146,7 @@
 				var lspAttributes = [];
 
 				// Loop through cached attributes
-				// See if the attribute is in the response and use it
+				// See if the attribute came down in the response, if it is then use it
 				// if it's not - then use the cached version.
 
 				$.each(_attributeHistory, function(i, cachedAttribute){
@@ -199,7 +202,7 @@
 				
 				var categoryNodes = [];
 				var navPathNodeList = easyAskDataSourceObject.navPath.navPathNodeList;
-				var pureCategoryPath = this.parseCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath);
+				var pureCategoryPath = this.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath);
 
 				// Creates a list of just category nodes, and adds a convinient removePath property
 				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
@@ -221,65 +224,102 @@
 
 			},
 
+			getSearchNode : function(easyAskDataSourceObject){
+				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
+					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 3){ 
+						return easyAskDataSourceObject.navPath.navPathNodeList[i];
+					}
+				}
+			},
+
 			getRefinementNodes : function(easyAskDataSourceObject){
 				var attributeNodes = [];
 
 				// Splits the attributes up one-by-one and stores them in a convinent object
 
 				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
-					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 2){
+					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 2){ // Refinement
 						
 						var node = easyAskDataSourceObject.navPath.navPathNodeList[i];
-						var attributeNode = node.englishName.substring(1, node.englishName.length - 2).split('\' or ');
 						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
 
-						for(var j = 0; j < attributeNode.length; j++){
-							var attribute = attributeNode[j];
-							attribute = attribute.split(' = \'');
-							attributeNodes.push({
-								attribute : attribute[0],
-								value : attribute[1],
+						var groups = node.englishName.substring(1, node.englishName.length - 2); // Remove starting and trailing parens
+						groups = groups.split('\'); (');
 
-								// removePath is the path without the attribute
-								removePath : fullPath.replace(attribute[0] + ' = \'' + attribute[1]+ '\'', '')
-							});
+						for(var k = 0; k < groups.length; k++){
+							
+							var attributeNode = groups[k].split('\' or ');
+
+							for(var j = 0; j < attributeNode.length; j++){
+								var attribute = attributeNode[j];
+								attribute = attribute.split(' = \'');
+								attributeNodes.push({
+									attribute : attribute[0],
+									value : attribute[1],
+									nodeString : this.convertToSEOString(attribute[0], attribute[1])
+									// removePath is the path without the attribute
+									//removePath : fullPath.replace(attribute[0] + ' = \'' + attribute[1]+ '\'', '')
+								});
+							}
 						}
+
+						
 					}
 				}
 
 				return attributeNodes;
 			},
 
-			// parseCategoriesFromPath : function(path){
-			// 	debugger;
 
-			// 	var parsedPath = decodeURIComponent(path).replace(/\+/g, ' ');
+			// If value is null or empty, then you'l just SEO convert a string (useful for search queries)
+			convertToSEOString : function(name, value){
+				
+				name = name.replace(/[^A-Za-z0-9]/g, '-').replace(/-{1,}/, '-');
+				value = (value || '').replace(/[^A-Za-z0-9]/g, '-').replace(/-{1,}/, '-');
+				
+				return name.replace(/-$/, '') + (value ? ':' + value.replace(/-$/, '') : '');
 
-			// 	// Replace //// with a control charecter
-			// 	// Remove Attributes
-			// 	// Remove query
-			// 	// Replace control charecter with ////
-			// 	parsedPath = parsedPath.replace(/\/\/\/\//g, String.fromCharCode(1));
-			// 	parsedPath = parsedPath.replace(/\x01AttribSelect=[^\x01]+/g, '');
-			// 	parsedPath = parsedPath.replace(/UserSearch1=[^\x01]+/g, '');
-			// 	parsedPath = parsedPath.replace(/\x01/g, '////');
+			},
 
-			// 	return parsedPath;
-			// },
-			parseCategoriesFromSEOPath : function(seoPath){
+			getCategoriesFromSEOPath : function(seoPath){
 
 				var seoPath = seoPath.split('/');
 
 				for(var i = 0; i < seoPath.length; i++){
-					if(seoPath[i].indexOf(':') > 0){
+					if(seoPath[i].indexOf(':') > 0 || seoPath[i].indexOf('-') === 0){
 						seoPath.splice(i, 1);
 						i--; // We just removed an element from the array
 					}
 				}
 				
-				console.log(seoPath.join('/'));
-
 				return seoPath.join('/');
+			},
+
+			getRefinementsFromSEOPath : function(seoPath){
+
+				var seoPath = seoPath.split('/');
+
+				for(var i = 0; i < seoPath.length; i++){
+					if(seoPath[i].indexOf(':') < 0 || seoPath[i].indexOf('-') === 0){
+						seoPath.splice(i, 1);
+						i--; // We just removed an element from the array
+					}
+				}
+				
+				return seoPath.join('/');
+			},
+
+			getKeywordsFromSEOPath : function(seoPath){
+
+				var seoPath = seoPath.split('/');
+
+				for(var i = 0; i < seoPath.length; i++){
+					if(seoPath[i].indexOf('-') === 0){
+						return seoPath[i];
+					}
+				}
+
+				return '';
 			}
 		});
 

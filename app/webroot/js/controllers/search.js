@@ -13,7 +13,8 @@
 			resultsPerPage : '20',
 			page : 'first',
 			sort : 'default',
-			category : ''
+			category : '',
+			attributes : ''
 		};
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
@@ -44,9 +45,10 @@
 							_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
 						}else{
 							// Remove everything except categories, then remove trailing /
-							_state.category = (_api.parseCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.attributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.keywords = (_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 						}
-
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						_this.pushState();
 					},
@@ -61,12 +63,14 @@
 						if(IS_SINGLE_SELECT){
 							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'');
 						}else{
-							// Uncheck the option
-							$('#refinementForm input[type="checkbox"][name="' + $(data.selector).data('attribute') + '[]"][value="' + $(data.selector).data('value') + '"]')
-								.attr('checked', false)
-								.change();
+							_this.removeFilterAttribute($(data.selector).data('value'));
 						}
 						
+					},
+
+					onRemoveSearch : function(e, data){
+						_this.search('');
+						$('#searchQuery').val('').change();
 					},
 
 					onFilterAttribute : function(e, data){
@@ -84,7 +88,7 @@
 							// On the retuning request, the attributes will be marked as "static" or "temporary"
 							// and will consequently be rendered differently.
 
-							var formObject = _this.getSelectedAttributes();
+							var formObject = _util.formToObject($('#refinementForm')[0]);
 
 							// If it's not part of the history (first time it's been checked), add it to the history
 							// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
@@ -118,14 +122,22 @@
 								}
 							}
 
-							_this.filterWithAttributes(formObject);	
+							if($(data.selector).is(':checked')){
+								_this.addFilterAttribute($(data.selector).val());
+							}else{
+								_this.removeFilterAttribute($(data.selector).val());
+							}
 						}
 						
 					},
 
 					onClearAllRefinements : function(e, data){
+
 						_attributeHistory = [];
-						_this.filterWithAttributes({});	
+						_state.attributes = '';
+						_state.keywords = '';
+						_this.loadCategory(_state.category);
+
 					},
 
 					onLoadCategory : function(e, data){
@@ -208,27 +220,31 @@
 				return _state;
 			},
 
-			getSelectedAttributes : function(){
-				return _util.formToObject($('#refinementForm')[0]);
-			},
-
 			pushState : function(){
 
 				var pushedState = $.extend({}, _state);
 				pushedState.category = {value : pushedState.category.replace(/\//g, '|'), uriEncode : false};
+				pushedState.attributes = {value : pushedState.attributes.replace(/\//g, '|'), uriEncode : false};
+
+				if(pushedState.category.value.length === 0){
+					delete pushedState.category;
+				}
+				
+				if(pushedState.attributes.value.length === 0){
+					delete pushedState.attributes;
+				}
+
+				delete pushedState.keywords; // Hide keywords from hash as they are found in query parameter
 
 				return _app.controllers.application.pushState(_this, pushedState);
 			},
 
-			getState : function(){
-				return _state;
-			},
-
 			formatPullState : function(state){
 				if(state.category){
-					state.category = state.category.replace(/\|/g, '/');
+					state.category = ((state || {}).category || '').replace(/\|/g, '/');
+					state.attributes = ((state || {}).attributes || '').replace(/\|/g, '/');
 				}
-				return _state;
+				return state;
 			},
 
 			// By keyword
@@ -237,7 +253,9 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_Search',
-					keywords : keywords
+					keywords : keywords,
+					category : _state.category,
+					attributes : _state.attributes
 				};
 
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -251,8 +269,7 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_CategoryExpand',
-					category : (isAtomic ? categoryPath : _state.category.replace(/\/$/, '') + '/' + categoryPath),
-					attributes : _this.getSelectedAttributes()
+					category : (isAtomic ? categoryPath : _state.category.replace(/\/$/, '') + '/' + categoryPath)
 				};
 
 				// TODO : rename path to addedPath or something similar
@@ -263,12 +280,12 @@
 					});
 			},
 
-			filterWithAttributes : function(attributeHashMap){
+			addFilterAttribute : function(attributeSlug){
 
 				var payload = {
 					action : 'advisor',
 					method : 'CA_AttributeSelected',
-					attributes : attributeHashMap
+					attributes : [_state.attributes, attributeSlug].join(';')
 				};
 
 				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -277,15 +294,12 @@
 					});
 			},
 
-			filterWithAttribute : function(attribute, value){
+			removeFilterAttribute : function(attributeSlug){
 				var payload = {
 					action : 'advisor',
 					method : 'CA_AttributeSelected',
-					attributes : {}
+					attributes : _state.attributes.replace(attributeSlug, '').replace(/;{1,}/, ';') // remove it, and remove leftover ;;
 				};
-
-				// Utilizing the attribute object notation in the api bridge
-				payload.attributes[attribute] = [value];
 
 				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
@@ -317,8 +331,7 @@
 				var payload = {
 					action : 'navbar',
 					method : ($.isNumeric(direction) ? 'page' + direction : direction),
-					currentPage : _state.page,
-					attributes : _this.getSelectedAttributes()
+					currentPage : _state.page
 				};
 
 				return _api.request(_this, 'paginate', $.extend({}, _state, payload))
@@ -371,7 +384,9 @@
 
 				var categories = easyAskDataObject.navPath._lsp.categoryNodes;
 				var currentCategory = categories[categories.length - 1].englishName;
-				$('#pageName').html(currentCategory);
+				var searchNode = easyAskDataObject.navPath._lsp.searchNode;
+				var pageTitle = (searchNode ? '"' + searchNode.englishName + '" in ' + currentCategory : currentCategory);
+				$('#pageName').html(pageTitle);
 
 				$('.currentPageNumber').html(currentPageNumber);
 				$('.totalPages').html(totalPages);

@@ -32,7 +32,7 @@
 
 			cleanArray : function(array){
 				for(var i = 0; i < array.length; i++){
-					if(array[i] === undefined || (array[i] || {}).length < 1 || array[i] === null){
+					if(array[i] === undefined || (array[i] || {}).length < 1 || array[i] === null || $.isEmptyObject(array[i])){
 						array.splice(i, 1);
 						i--;
 					}

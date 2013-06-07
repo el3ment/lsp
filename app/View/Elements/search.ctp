@@ -107,14 +107,25 @@
 </script>
 
 <script id='templates-search-selectedRefinements' type='text/html'>
-	<# if(this.navPath._lsp.refinementNodes.length){ #>
+	<# if(this.navPath._lsp.refinementNodes.length || this.navPath._lsp.searchNode){ #>
 	<div class='selectedFilters panel engaged'>
 		<h2>Youve Selected</h2>
 		<ul class='section'>
-			<#	/* Just the attributes */
+			<#	
+				/* Just the attributes */
+				if(this.navPath._lsp.searchNode){ #>
+					<li>
+						<button class='b5 icon-24-close attribute' data-action='removeSearch'>
+						<# console.log(this.navPath._lsp.searchNode.englishName); #>Keyword<#=(this.navPath._lsp.searchNode.englishName.split(' ').length > 1 ? 's' : '') #>: <#=this.navPath._lsp.searchNode.englishName #>
+						</button>
+					</li>
+
+				<# }
+
+				/* Just the attributes */
 				for(var i = 0; i < this.navPath._lsp.refinementNodes.length; i++){ #>
 					<li>
-						<button class='b5 icon-24-close attribute' data-action='removeFilter' data-attribute='<#=this.navPath._lsp.refinementNodes[i].attribute #>' data-value='<#=this.navPath._lsp.refinementNodes[i].value #>'>
+						<button class='b5 icon-24-close attribute' data-action='removeFilter' data-attribute='<#=this.navPath._lsp.refinementNodes[i].attribute #>' data-value='<#=this.navPath._lsp.refinementNodes[i].nodeString #>'>
 							<#=this.navPath._lsp.refinementNodes[i].attribute #>: <#=this.navPath._lsp.refinementNodes[i].value #>
 						</button>
 					</li>
@@ -151,15 +162,15 @@
 				<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
 			</li>
 		<# } #>
-	</ul>
-	<div id='refinement-<#=this.id #>-more' class='more <#=(this.section.displayState === 'static' ? 'reveal-open' : 'reveal-closed') #>'>
+	</ul><div id='refinement-<#=this.id #>-more' class='more <#=(this.section.displayState === 'static' ? 'reveal-open' : 'reveal-closed') #>'>
+		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>Less</button>
 		<ul>
 			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
 				<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #>'>
 					<input 
 					data-action='filterAttribute' 
 					name='<#=this.section.name #>[]' 
-					value='<#=this.entries[i].attributeValue #>' 
+					value='<#=this.entries[i].nodeString #>' 
 					id='refinement-<#=this.section.name #>-<#=i #>' type='checkbox' <#=(this.entries[i].selected ? 'checked' : '') #>/>
 			
 					<label for='refinement-<#=this.section.name #>-<#=i #>'><#=this.entries[i].attributeValue #>&nbsp;<span class='details'>(<#=this.entries[i].productCount #>)</span></label>
