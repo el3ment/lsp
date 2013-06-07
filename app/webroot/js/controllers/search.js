@@ -252,10 +252,8 @@
 
 				var payload = {
 					action : 'advisor',
-					method : 'CA_Search',
-					keywords : keywords,
-					category : _state.category,
-					attributes : _state.attributes
+					method : 'CA_BreadcrumbClick',
+					keywords : keywords
 				};
 
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -457,14 +455,3 @@
 	})());
 
 })();
-
-
-//http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19106945341844111681_1370270730241&currentpage=first&forcepage=1&ResultsPerPage=20&defsortcols=&CatPath=All+Products&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&requestAction=advisor&requestData=CA_Search&q=red&_=1370270730242
-//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?indexed=1&rootprods=1&oneshot=1&defarrangeby=///NONE///&disp=json&dct=EcomDemo&ResultsPerPage=16&defsortcols=&RequestAction=advisor&RequestData=CA_Search&q=red&CatPath=All%20Products&callback=processResults&_=1370270814733
-
-
-//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191007177389645949006_1369866039734&ResultsPerPage=20&defsortcols=&CatPath=All%252BProducts&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=EcomDemo&RequestAction=advisor&RequestData=CA_AttributeSelected&AttribSel=&_=1369866039737
-
-//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19105919753389898688_1369851007751&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=EcomDemo&resultsPerPage=1&defSortCols=&catPath=All+Products&CatPath=Beauty+%26+Fragrance&RequestAction=advisor&RequestData=CA_CategoryExpand&_=1369851007754
-//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?indexed=1&rootprods=1&oneshot=1&defarrangeby=///NONE///&disp=json&dct=EcomDemo&ResultsPerPage=16&defsortcols=&RequestAction=advisor&RequestData=CA_BreadcrumbClick&CatPath=All%20Products&callback=processResults&_=1369848043142
-//http://easyaskqa.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?indexed=1&rootprods=1&oneshot=1&defarrangeby=///NONE///&disp=json&dct=EcomDemo&resultsPerPage=50&defSortCols=&catPath=Beauty+%26+Fragrance&requestAction=advisor&requestData=CA_CategoryExpand&_=1369847843141

@@ -36,12 +36,12 @@
 					defsortcols : (payload.sort === 'default' ? '' : payload.sort),
 					indexed : 1, 
 					rootprods : 1,
-					oneshot : 0,
-					sessionID : _sessionId,
+					oneshot : 1,
+					//sessionID : _sessionId,
 					defarrangeby : '///NONE///',
 					disp : 'json',
-					dct : _dictionary,
-					q : payload.keywords
+					dct : _dictionary//,
+					//q : payload.keywords
 				};
 
 				if(payload.isSingleSelect){
@@ -49,7 +49,7 @@
 					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.attributes);
 				}else{
 					// Build the category path by hand
-					formattedPayload.CatPath = _util.cleanArray([payload.category, payload.attributes, this.buildKeywordString(payload.keywords)]).join('/');
+					formattedPayload.CatPath = _util.cleanArray([payload.category, (payload.attributes || '').replace(/^;/, ''), this.buildKeywordString(payload.keywords)]).join('/');
 				}
 
 
@@ -326,5 +326,11 @@
 	}()));
 	
 }())
+
+
+// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_Search&forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=-triangle&_=1370617021847
+// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_AttributeSelected&forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=Author%3ABeethoven-Ludwig-van%2F-triangle&_=1370617021848
+// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_CategoryExpand   &forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=-triangle&_=1370617021849
+// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_AttributeSelected&forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=Author%3ABeethoven-Ludwig-van%2F-triangle&_=1370617021850
 
 

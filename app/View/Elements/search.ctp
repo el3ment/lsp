@@ -116,7 +116,7 @@
 				if(this.navPath._lsp.searchNode){ #>
 					<li>
 						<button class='b5 icon-24-close attribute' data-action='removeSearch'>
-						<# console.log(this.navPath._lsp.searchNode.englishName); #>Keyword<#=(this.navPath._lsp.searchNode.englishName.split(' ').length > 1 ? 's' : '') #>: <#=this.navPath._lsp.searchNode.englishName #>
+							Keyword<#=(this.navPath._lsp.searchNode.englishName.split(' ').length > 1 ? 's' : '') #>: <#=this.navPath._lsp.searchNode.englishName #>
 						</button>
 					</li>
 
@@ -155,7 +155,7 @@
 
 	<ul>
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #>'>
+			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #> <#=(this.entries[i].selected && !this.entries[i + 1].selected ? 'isLastChecked' : '') #>'>
 				<input 
 				data-action='filterAttribute' 
 				name='<#=this.section.name #>[]' 
@@ -169,7 +169,7 @@
 		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>Less</button>
 		<ul>
 			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
-				<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #>'>
+				<li class='field'>
 					<input 
 					data-action='filterAttribute' 
 					name='<#=this.section.name #>[]' 
@@ -325,6 +325,7 @@
 			</span>
 			<span class='productName'><#=item.Featured_Description #></span>  
 			<span class='details model'>Model Number #<span class='productMpn'><#=item.model_number #></span></span>
+			<span class='netsuiteUrl'><a href='https://system.netsuite.com/app/common/item/item.nl?id=<#=item.Product_Id #>' target='_new'>See this product in NetSuite</a>
 			<# if(item.number_of_reviews){ #>
 				<div class='aggregateReviews'>
 					<span data-reviews-aggregateRating='3' class='reviewAggregateRating'><#=item.review_average #></span>
