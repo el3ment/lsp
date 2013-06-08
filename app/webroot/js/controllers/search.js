@@ -14,7 +14,7 @@
 			page : 'first',
 			sort : 'default',
 			category : '',
-			attributes : ''
+			allAttributes : ''
 		};
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
@@ -46,7 +46,7 @@
 						}else{
 							// Remove everything except categories, then remove trailing /
 							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-							_state.attributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 							_state.keywords = (_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 						}
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
@@ -134,19 +134,14 @@
 					onClearAllRefinements : function(e, data){
 
 						_attributeHistory = [];
-						_state.attributes = '';
+						_state.allAttributes = '';
 						_state.keywords = '';
 						_this.loadCategory(_state.category);
 
 					},
 
 					onLoadCategory : function(e, data){
-						// .data() works best with lowercase names
-						if($(data.selector).data('categoryid')){
-							_this.loadCategory($(data.selector).data('categoryid'));
-						}else if($(data.selector).data('path')){
-							_this.loadCategory($(data.selector).data('path'), true);
-						}
+						_this.loadCategory($(data.selector).data('path'), true);
 					},
 
 					onRemoveCategory : function(e, data){
@@ -224,14 +219,14 @@
 
 				var pushedState = $.extend({}, _state);
 				pushedState.category = {value : pushedState.category.replace(/\//g, '|'), uriEncode : false};
-				pushedState.attributes = {value : pushedState.attributes.replace(/\//g, '|'), uriEncode : false};
+				pushedState.allAttributes = {value : pushedState.allAttributes.replace(/\//g, '|'), uriEncode : false};
 
 				if(pushedState.category.value.length === 0){
 					delete pushedState.category;
 				}
 				
-				if(pushedState.attributes.value.length === 0){
-					delete pushedState.attributes;
+				if(pushedState.allAttributes.value.length === 0){
+					delete pushedState.allAttributes;
 				}
 
 				delete pushedState.keywords; // Hide keywords from hash as they are found in query parameter
@@ -242,7 +237,7 @@
 			formatPullState : function(state){
 				if(state.category){
 					state.category = ((state || {}).category || '').replace(/\|/g, '/');
-					state.attributes = ((state || {}).attributes || '').replace(/\|/g, '/');
+					state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
 				}
 				return state;
 			},
@@ -283,7 +278,7 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_AttributeSelected',
-					attributes : [_state.attributes, attributeSlug].join(';')
+					attribute : attributeSlug
 				};
 
 				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -293,10 +288,13 @@
 			},
 
 			removeFilterAttribute : function(attributeSlug){
+				
+				console.log('Removing ', attributeSlug, ' from ', _state.allAttributes);
+
 				var payload = {
 					action : 'advisor',
-					method : 'CA_AttributeSelected',
-					attributes : _state.attributes.replace(attributeSlug, '').replace(/;{1,}/, ';') // remove it, and remove leftover ;;
+					method : 'CA_BreadcrumbRemove',
+					allAttributes : _state.allAttributes.replace(attributeSlug, '').replace(/\/{1,}/, ';') // remove it, and remove leftover ;;
 				};
 
 				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))

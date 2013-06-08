@@ -202,7 +202,7 @@
 		<# } #>
 
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-categoryId='<#=this.entries[i].seoPath #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
+			<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-path='<#=this.entries[i].seoPath #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
 		<# } #>
 	</ul>
 

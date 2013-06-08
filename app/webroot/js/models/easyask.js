@@ -40,24 +40,24 @@
 					//sessionID : _sessionId,
 					defarrangeby : '///NONE///',
 					disp : 'json',
-					dct : _dictionary//,
-					//q : payload.keywords
+					dct : _dictionary,
+					q : payload.keywords,
+					AttribSel : _this.combineSimilarAttributesForRequest(payload.attribute, payload.allAttributes)
 				};
 
 				if(payload.isSingleSelect){
 					formattedPayload.CatPath = payload.category;
-					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.attributes);
+					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.allAttributes);
 				}else{
 					// Build the category path by hand
-					formattedPayload.CatPath = _util.cleanArray([payload.category, (payload.attributes || '').replace(/^;/, ''), this.buildKeywordString(payload.keywords)]).join('/');
+					formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)]).join('/');
 				}
 
-
-				if($.isEmptyObject(payload.attributes) && payload.method === 'CA_AttributeSelected'){
-					formattedPayload.RequestData = 'CA_CategoryExpand'; // If there are no attributes, just load the category
+				if($.isEmptyObject(payload.allAttributes) && !payload.attribute && payload.method === 'CA_AttributeSelected'){
+					formattedPayload.RequestData = 'CA_BreadcrumbClick'; // If there are no attributes, just load the category
 				}
-				// As a form of cleanup - remove a trailing //// from a category request
-				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, ''); // Remove trailing //// if it exists
+				// As a form of cleanup - remove a trailing / from a category request
+				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, ''); // Remove trailing / if it exists
 
 				return formattedPayload;
 			},
@@ -80,6 +80,53 @@
 				responseData.source.attributes._lsp.cached = _this.injectCachedAttributes(responseData.source);
 
 				return responseData;
+			},
+
+
+			// AttribSel needs to have all the options for a particular attribute
+			// in the same request -- some of those are contained in the path - so
+			// we need to remove them from the path, and add them to the AttribSel
+			// parameter - combineAndRemoveAllForPath removes them for the path
+			combineAndRemoveAllForPath : function(singleAttribute, allAttributes){
+				if(allAttributes && singleAttribute){
+
+					var singleAttributeName = singleAttribute.replace(/:.*/, '');
+					allAttributes = allAttributes.split('/');
+
+					for(var i = 0; i < allAttributes.length; i++){
+						if(allAttributes[i].replace(/:.*/, '') === singleAttributeName){
+							allAttributes.splice(i, 1);
+							i--;
+						}
+					}
+					return allAttributes;
+				}
+
+				return allAttributes;
+				
+			},
+
+			// AttribSel needs to have all the options for a particular attribute
+			// in the same request -- some of those are contained in the path - so
+			// we need to remove them from the path, and add them to the AttribSel
+			// parameter - combineSimilarAttributesForRequest combines them for
+			// the request
+			combineSimilarAttributesForRequest : function(singleAttribute, allAttributes){
+				if(allAttributes && singleAttribute){
+
+					var singleAttributeName = singleAttribute.replace(/:.*/, '');
+					allAttributes = allAttributes.split('/');
+
+					for(var i = 0; i < allAttributes.length; i++){
+						if(allAttributes[i].replace(/:.*/, '') === singleAttributeName){
+							singleAttribute += ';' + allAttributes[i];
+						}
+					}
+
+					return singleAttribute;
+				}
+
+				return singleAttribute;
 			},
 
 			buildKeywordString : function(keywords){
@@ -232,15 +279,21 @@
 				}
 			},
 
+
+			// Creates an array of refinement node objects
+			// and splits up each attribute selection into it's own
+			// node
+			// Is then accessible at .navPathNodeList._lsp
 			getRefinementNodes : function(easyAskDataSourceObject){
 				var attributeNodes = [];
 
-				// Splits the attributes up one-by-one and stores them in a convinent object
-
 				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
-					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 2){ // Refinement
-						
-						var node = easyAskDataSourceObject.navPath.navPathNodeList[i];
+					
+					var node = easyAskDataSourceObject.navPath.navPathNodeList[i];
+
+					if(node.navNodePathType === 2){ // Refinement
+
+
 						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
 
 						var groups = node.englishName.substring(1, node.englishName.length - 2); // Remove starting and trailing parens
@@ -251,14 +304,16 @@
 							var attributeNode = groups[k].split('\' or ');
 
 							for(var j = 0; j < attributeNode.length; j++){
-								var attribute = attributeNode[j];
-								attribute = attribute.split(' = \'');
+								var attribute = attributeNode[j].split(' = \'');
+								var start = node.seoPath.indexOf(this.convertToSEOString(attribute[0]+':'+attribute[1])); // +1 for the : seperator
+								var nodeString = node.seoPath.substr(start, (node.seoPath + ';').indexOf(';', start)); // added ; to insure indexOf always catches it
+								
+								debugger;
+
 								attributeNodes.push({
 									attribute : attribute[0],
 									value : attribute[1],
-									nodeString : this.convertToSEOString(attribute[0], attribute[1])
-									// removePath is the path without the attribute
-									//removePath : fullPath.replace(attribute[0] + ' = \'' + attribute[1]+ '\'', '')
+									nodeString : nodeString
 								});
 							}
 						}
@@ -271,14 +326,8 @@
 			},
 
 
-			// If value is null or empty, then you'l just SEO convert a string (useful for search queries)
-			convertToSEOString : function(name, value){
-				
-				name = name.replace(/[^A-Za-z0-9]/g, '-').replace(/-{1,}/, '-');
-				value = (value || '').replace(/[^A-Za-z0-9]/g, '-').replace(/-{1,}/, '-');
-				
-				return name.replace(/-$/, '') + (value ? ':' + value.replace(/-$/, '') : '');
-
+			convertToSEOString : function(string){
+				return string.replace(/[^A-Za-z0-9:]/g, '-').replace(/-{1,}/, '-').replace(/-$/, '');
 			},
 
 			getCategoriesFromSEOPath : function(seoPath){
@@ -328,9 +377,4 @@
 }())
 
 
-// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_Search&forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=-triangle&_=1370617021847
-// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_AttributeSelected&forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=Author%3ABeethoven-Ludwig-van%2F-triangle&_=1370617021848
-// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_CategoryExpand   &forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=-triangle&_=1370617021849
-// http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery191046352203213609755_1370617021846&RequestAction=advisor&RequestData=CA_AttributeSelected&forcepage=1&indexed=1&rootprods=1&oneshot=0&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&CatPath=Author%3ABeethoven-Ludwig-van%2F-triangle&_=1370617021850
-
-
+//http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19109178190503735095_1370632723193&RequestAction=advisor&RequestData=CA_CategoryExpand&forcepage=1&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&q=-triangle&AttribSel=Author%3ABarroso-Ary&CatPath=-triangle&_=1370632723195
