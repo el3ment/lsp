@@ -39,6 +39,12 @@
 				}
 				return array;
 			},
+
+			findBetween : function(front, back, string){
+				var start = string.indexOf(front) + front.length;
+				var end = string.indexOf(back, start);
+				return string.substr(start, end - start);
+			},
 			
 			// Pulled from jQuery as it's not in the public API
 			// identical to jQuery.camelCase();
@@ -79,10 +85,11 @@
 
 				var cache = {};
 				function tmpl(str, data){
-					
+
 					if(str){
 						// Figure out if we're getting a template, or if we need to
 						// load the template - and be sure to cache the result.
+						
 						var fn = /^[A-Za-z]{1}[-:A-Za-z0-9_]+$/.test(str) ? // if valid HTML id
 								cache[str] = cache[str] || tmpl(document.getElementById(str).innerHTML) :
 				
@@ -103,7 +110,7 @@
 									.split("<#").join("');")
 									.split("#>").join("p.push('") +
 									"');}return p.join('');");
-								
+
 						// Provide some basic currying to the user
 						return data ? fn.apply(data, [data]) : fn;
 					}

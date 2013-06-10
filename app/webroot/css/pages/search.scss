@@ -256,7 +256,7 @@
 			margin-bottom: 0;
 			
 			.status{ display: inline; }
-			.method{ display: block; }
+			//.method{ display: block; }
 			.option, .quantity, .action{ text-align:right; }
 			
 			@media (max-width: 979px) and (min-width: 768px){
@@ -370,6 +370,7 @@
 				position: absolute;
 				top: px($_topOfPrice + 90px, $inputFontSize);
 				left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
+				width: 48px;
 			}
 			.b1{
 				position: absolute;
@@ -422,7 +423,7 @@
 		.close,
 		.refinements .selectedFilters button[data-action='clearAllRefinements']{
 			float:right;
-			margin: 10px 10px 15px 0;
+			margin: 20px 10px 10px 0;
 		}
 		// +/- button for refinements
 		.refinements .refineResults{
@@ -513,6 +514,7 @@
 				margin-left: 10px;
 				@include box-shadow-multiple(none);
 			}
+
 		}
 		h1{
 			margin-bottom:10px;

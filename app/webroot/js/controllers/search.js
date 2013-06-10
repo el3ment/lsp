@@ -68,6 +68,12 @@
 						
 					},
 
+					onSearch : function(e, data){
+						var query = $(data.selector).data('query');
+						_this.search(query);
+						$('#searchQuery').val(query).change();
+					},
+
 					onRemoveSearch : function(e, data){
 						_this.search('');
 						$('#searchQuery').val('').change();
@@ -376,13 +382,11 @@
 				var currentPageNumber = ((easyAskDataObject.products || {}).itemDescription || {}).currentPage;
 				var totalPages = ((easyAskDataObject.products || {}).itemDescription || {}).pageCount;
 
-				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', easyAskDataObject);
+				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', $.extend({}, easyAskDataObject));
+				_app.controllers.application.attachEvents($('#breadcrumbs').html(breadcrumbHTML));
 
-				var categories = easyAskDataObject.navPath._lsp.categoryNodes;
-				var currentCategory = categories[categories.length - 1].englishName;
-				var searchNode = easyAskDataObject.navPath._lsp.searchNode;
-				var pageTitle = (searchNode ? '"' + searchNode.englishName + '" in ' + currentCategory : currentCategory);
-				$('#pageName').html(pageTitle);
+				var titleHTML = _util.parseMicroTemplate('templates-search-title', $.extend({}, easyAskDataObject));
+				_app.controllers.application.attachEvents($('#searchTitle').html(titleHTML));
 
 				$('.currentPageNumber').html(currentPageNumber);
 				$('.totalPages').html(totalPages);
@@ -403,12 +407,12 @@
 					$('*[data-action="nextPage"]').css('visibility', 'visible');
 				}
 
-				_app.controllers.application.attachEvents($('#breadcrumbs').html(breadcrumbHTML));
+				
 
 			},
 
 			renderSelectedRefinements : function(easyAskDataObject){
-				var selectedHTML = _util.parseMicroTemplate('templates-search-selectedRefinements', easyAskDataObject);
+				var selectedHTML = _util.parseMicroTemplate('templates-search-selectedRefinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#selectedRefinements').html(selectedHTML));
 			},
 
@@ -429,12 +433,12 @@
 					}
 				}
 
-				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', easyAskDataObject);
+				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML));
 			},
 
 			renderProducts : function(easyAskDataObject){
-				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', easyAskDataObject);
+				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
 			},
 

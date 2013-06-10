@@ -79,6 +79,9 @@
 				responseData.source.attributes._lsp = responseData.source.attributes._lsp || {};
 				responseData.source.attributes._lsp.cached = _this.injectCachedAttributes(responseData.source);
 
+				responseData.source._lsp = responseData.source._lsp || {};
+				responseData.source._lsp.query = _this.parseCommentaryForDidYouMean(responseData.source.commentary);
+
 				return responseData;
 			},
 
@@ -307,8 +310,6 @@
 								var attribute = attributeNode[j].split(' = \'');
 								var start = node.seoPath.indexOf(this.convertToSEOString(attribute[0]+':'+attribute[1])); // +1 for the : seperator
 								var nodeString = node.seoPath.substr(start, (node.seoPath + ';').indexOf(';', start)); // added ; to insure indexOf always catches it
-								
-								debugger;
 
 								attributeNodes.push({
 									attribute : attribute[0],
@@ -369,6 +370,22 @@
 				}
 
 				return '';
+			},
+			parseCommentaryForDidYouMean : function(commentaryString){
+				
+				var returnObject = {};
+
+				if(commentaryString.length > 0){
+					var spaced = commentaryString.split(' ');
+
+					returnObject.originalQuery = _util.findBetween('Corrected Word: ', ' is ', commentaryString);
+					returnObject.assumedQuery =  _util.findBetween(' is ', '; ', commentaryString);
+					returnObject.otherSuggestions = (_util.findBetween(' could be  ', '~END', commentaryString + '~END') || '').split(', ');
+
+				}
+				
+				return returnObject;
+
 			}
 		});
 

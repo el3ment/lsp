@@ -911,7 +911,7 @@ ul.list li,
 		@include prevent-word-breakouts();
 		
 		&.links .content{
-			top: 8px;
+			top: 0;
 			position: relative;
 			margin-left: 5px;
 		}
@@ -984,6 +984,10 @@ ul.list li,
 					margin-top:0;
 				}
 
+				// Selected Checkbox
+				&.isChecked label{
+					font-weight: bold;
+				}
 				
 				label{ 
 					padding-left: 0px;
@@ -992,6 +996,7 @@ ul.list li,
 
 					@include box-sizing();
 					.details{
+						font-weight: normal;
 						display: inline-block;
 					}
 					&:hover{
@@ -1007,7 +1012,7 @@ ul.list li,
 		}
 		
 		ul:first-child{
-			padding-top:10px;
+			padding-top:5px;
 		}
 
 		// The 'more' section's list dosen't need padding
@@ -1088,6 +1093,12 @@ ul.list li,
 			padding-top: 3px;
 			padding-left: 32px;
 			text-indent: 0;
+			font-weight: bold;
+
+			label{
+				font-weight: normal;
+				display: inline;
+			}
 			
 			@media (min-width: 768px){
 				padding-bottom: 10px;
@@ -1110,6 +1121,7 @@ ul.list li,
 			float: right;
 			margin-top: px(5px);
 			margin-bottom: px(5px);
+			font-weight: normal;
 
 		}
 		

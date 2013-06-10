@@ -28,6 +28,7 @@
 					},
 					onAttachEvents : function(e, data){
 						_this.bindEvents(data.selector);
+
 					}
 				}
 			},
@@ -55,6 +56,10 @@
 					_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
 					//return true;
 				});
+
+				$('.reveal-closed-'+ _app.controllers.application.getContext())
+					.removeClass('reveal-open')
+					.addClass('reveal-closed');
 			},
 
 

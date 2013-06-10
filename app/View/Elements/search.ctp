@@ -1,10 +1,6 @@
  <div class='page-search span12 container loading'>
-	<div class='title span9'>
-		<h1 id='pageName'></h1>
-		<span class='details'>
-			<strong><span class='numberOfResults'></span> Items</strong>
-			<span class='totalPages'></span>
-		</span>
+	<div id='searchTitle' class='title span9'>
+		<!-- Search Title -->
 	</div>
 	<div class='searchRefinementsAndResults' data-controller='search'>
 		<div id='refinementForm' class='refinements span3'>
@@ -82,7 +78,7 @@
 					</li>
 					<li class='control-pagination-sort'>
 						<label for='control-pagination-sort-bottom'>Sort:</label>
-						<select id='control-pagination-sort-bottom' data-action-'sort'>
+						<select id='control-pagination-sort-bottom' data-action='sort'>
 							<option selected="selected" value="-default-">Recommended</option>
 							<option value="Store_Description,t">Name (A-Z)</option>
 							<option value="Store_Description,f">Name (Z-A)</option>
@@ -96,6 +92,28 @@
 	</div>
 </div>
 
+<script id='templates-search-title' type='text/html'>
+	<#
+		var categories = this.navPath._lsp.categoryNodes;
+		var currentCategory = categories[categories.length - 1].englishName;
+		var searchNode = this.navPath._lsp.searchNode;
+		var pageTitle = (searchNode ? '"' + searchNode.englishName + '" in ' + currentCategory : currentCategory);
+	#>
+	<h1 id='pageName'><#=pageTitle #></h1>
+	<# if(this.commentary.length > 0){ #>
+		<div class='details didYouMean'>
+			We figured you meant "<#=this._lsp.query.assumedQuery #>". You might also try 
+			<# for(var i = 0; i < this._lsp.query.otherSuggestions.length; i++){ #>
+				<button class='b5' data-action='search' data-controller='search' data-query='<#=this._lsp.query.otherSuggestions[i] #>'><#=this._lsp.query.otherSuggestions[i]  #></button> 
+			<# } #>
+		</div>
+	<# } #>
+	<span class='details'>
+		<strong><span class='numberOfResults'><#=((this.products || {}).itemDescription || {}).totalItems #></span> Items</strong>
+		<span class='totalPages'><#=((this.products || {}).itemDescription || {}).pageCount #></span>
+	</span>
+</script>
+
 <script id='templates-search-breadcrumbs' type='text/html'>
 	<ul class="span12 breadcrumbLinks">
 		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
@@ -104,36 +122,6 @@
 			</li>
 		<# } #>
 	</ul>
-</script>
-
-<script id='templates-search-selectedRefinements' type='text/html'>
-	<# if(this.navPath._lsp.refinementNodes.length || this.navPath._lsp.searchNode){ #>
-	<div class='selectedFilters panel engaged'>
-		<h2>Youve Selected</h2>
-		<ul class='section'>
-			<#	
-				/* Just the attributes */
-				if(this.navPath._lsp.searchNode){ #>
-					<li>
-						<button class='b5 icon-24-close attribute' data-action='removeSearch'>
-							Keyword<#=(this.navPath._lsp.searchNode.englishName.split(' ').length > 1 ? 's' : '') #>: <#=this.navPath._lsp.searchNode.englishName #>
-						</button>
-					</li>
-
-				<# }
-
-				/* Just the attributes */
-				for(var i = 0; i < this.navPath._lsp.refinementNodes.length; i++){ #>
-					<li>
-						<button class='b5 icon-24-close attribute' data-action='removeFilter' data-attribute='<#=this.navPath._lsp.refinementNodes[i].attribute #>' data-value='<#=this.navPath._lsp.refinementNodes[i].nodeString #>'>
-							<#=this.navPath._lsp.refinementNodes[i].attribute #>: <#=this.navPath._lsp.refinementNodes[i].value #>
-						</button>
-					</li>
-			<# } #>
-		</ul>
-		<button class='b5' data-action='clearAllRefinements'>Clear All Selected</button>
-	</div>
-	<# } #>
 </script>
 
 <script id='templates-search-checkboxListEntry' type='text/html'>
@@ -155,7 +143,7 @@
 
 	<ul>
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #> <#=(this.entries[i].selected && !((this.entries[i + 1] || {}).selected) ? 'isLastChecked' : '') #>'>
+			<li class='field <#=(this.entries[i].selected ? 'isChecked' : '') #> <#=(this.entries[i].selected && !((this.entries[i + 1] || {}).selected) && i != this.entries.length - 1 ? 'isLastChecked' : '') #>'>
 				<input 
 				data-action='filterAttribute' 
 				name='<#=this.section.name #>[]' 
@@ -243,7 +231,7 @@
 </script>
 
 <script id='templates-search-refinements' type='text/html'>
-	<#	if(this.navPath._lsp.categoryNodes.length + (((this.categories || {}).categoryList || {}).length || 0)){ #>
+	<#	if(this.navPath._lsp.categoryNodes.length + (((this.categories || {}).categoryList || {}).length || 0) > 1){ #>
 		<#	var initialSize = (this.categories.isInitDispLimited ? (this.categories.initialCategoryList || {}).length : (this.categories.categoryList || {}).length); #>
 
 		<#=_util.parseMicroTemplate('templates-search-refinementSection', {
@@ -301,7 +289,7 @@
 							<span class='visible-desktop'>:</span>
 						</span>
 						<span class='shortStatus'>Two Finishes In Stock</span>
-						<span class='details'><#=item.stock_message #> <a href='#' class='method'>Standard Shipping</a></span>
+						<span class='details'><#=item.stock_message #> <a href='#' class='method'>Standard&nbsp;Shipping</a></span>
 					</li>
 					<li class='option'>
 						<label>Finish:</label>
@@ -369,4 +357,34 @@
 		<strong><#=title #></strong>
 		<span class='details'><#=message #></span>
 	</div>
+</script>
+
+<script id='templates-search-selectedRefinements' type='text/html'>
+	<# if(this.navPath._lsp.refinementNodes.length || this.navPath._lsp.searchNode){ #>
+	<div class='selectedFilters panel engaged'>
+		<h2>You've Selected</h2>
+		<ul class='section'>
+			<#	
+				/* Just the attributes */
+				if(this.navPath._lsp.searchNode){ #>
+					<li>
+						<button class='b5 icon-24-close attribute' data-action='removeSearch'>
+							<label>Keyword<#=(this.navPath._lsp.searchNode.englishName.split(' ').length > 1 ? 's' : '') #>:</label> <#=this.navPath._lsp.searchNode.englishName #>
+						</button>
+					</li>
+
+				<# }
+
+				/* Just the attributes */
+				for(var i = 0; i < this.navPath._lsp.refinementNodes.length; i++){ #>
+					<li>
+						<button class='b5 icon-24-close attribute' data-action='removeFilter' data-attribute='<#=this.navPath._lsp.refinementNodes[i].attribute #>' data-value='<#=this.navPath._lsp.refinementNodes[i].nodeString #>'>
+							<label><#=this.navPath._lsp.refinementNodes[i].attribute #>:</label> <#=this.navPath._lsp.refinementNodes[i].value #>
+						</button>
+					</li>
+			<# } #>
+		</ul>
+		<button class='b5' data-action='clearAllRefinements'>Clear All Selected</button>
+	</div>
+	<# } #>
 </script>
