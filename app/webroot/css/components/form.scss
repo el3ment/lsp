@@ -6,7 +6,7 @@
 	
 		font-family: 'Open Sans', san-serif;
 		border-radius : px($borderRadius, 16px);
-		padding : px($paddingUnit*2, $inputFontSize) px($inputPadding, $inputFontSize);
+		padding : 8px 7px;
 		line-height:1em;
 		border : 1px solid $lightGrey;
 		font-weight : bold;
@@ -46,6 +46,13 @@
 	}
 	input[type="text"], input[type="email"], input[type="tel"]{    
 		width : 100%;
+	}
+
+	input[disabled], select[disabled], textarea[disabled]{
+		background-color: $superLightGrey;
+		font-style: italic;
+		color: $grey;
+		font-weight: normal;
 	}
 	
 	.row-fluid .state.field[class*="span"],

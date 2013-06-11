@@ -1,4 +1,228 @@
 <div class='page-nscheckout span12 container'>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody><tr>
+<td width="0" height="0" align="left" valign="top" style="display:none">
+<form method="post" name="checkout" id="checkout" action="/s.nl">
+<input type="hidden" name="origsc" value="4">
+<input type="hidden" name="c" value="665798">
+<input type="hidden" name="n" value="1">
+<input type="hidden" name="sc" value="4">
+<input type="hidden" name="category" value="shipping">
+<input type="hidden" name="id" value="">
+<input type="hidden" name="it" value="A">
+<input type="hidden" name="vid" value="TLrOqRm-AXJ5x2wB">
+<input type="hidden" name="ck" value="TLrOqTy-AQ2qLdVv">
+<input type="hidden" name="cktime" value="114235">
+<input type="hidden" name="cart" value="328291">
+
+</form></td>
+</tr>
+<tr>
+<td valign="top" width="80%" colspan="2">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td valign="top">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody><tr><td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; <!-- Shipping -->
+<div id="stepSlider" class="steps">
+	<ul>
+		<li class="start completed"><span class="label icon-24-user">Start</span></li>
+		<li class="address completed"><span class="label icon-24-box">Address</span></li>
+                <li class="shipping completed active"><span class="label icon-24-box">Shipping</span></li>
+		<li class="billing"><span class="label icon-24-card">Payment</span></li>
+		<li class="review"><span class="label icon-24-check">Review &amp; Place Order</span></li>
+	</ul>
+</div> &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr><tr><td class="greytitle">Shipping Method</td></tr></tbody></table></td></tr>
+<tr><td class="smalltext">&nbsp;</td></tr>
+<tr>
+<td valign="top" class="text">
+<table border="0" cellpadding="0" cellspacing="2">
+<tbody>
+<tr>
+<td width="50%" valign="top">
+<table id="shippingmethodtable" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="smalltext"><b>Shipping Method</b></td>
+</tr>
+<tr>
+<td class="smalltext">
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td class="smalltext"><input type="radio" class="radio" name="sShipMeth" value="10517" checked="" onclick="document.location.href='/app/site/backend/setshipmeth.nl?c=665798&amp;n=1&amp;sShipCarrier=nonups&amp;sShipMeth=10517&amp;redirect=%2Fs.nl%3Fc%3D665798%26sc%3D4%26category%3Dshipping&amp;rh=37cf8f5cd2ae3af068fc5d31148d01f34c3fc88f';return true;">Freight (US Only)&nbsp;–&nbsp;$312.50</td></tr>
+<input type="hidden" name="continueclicked" value="T">
+</tbody></table>
+</td></tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table><table>
+<tbody><tr><td class="text">&nbsp;</td></tr>
+<tr>
+<td class="smalltextnolink" align="right"><b>Coupon Code</b>&nbsp;</td>
+<td>
+<table cellpadding="0" cellspacing="0" border="0">
+<tbody><tr><td>
+<input class="input" maxlength="40" name="kReferralCode" id="kReferralCode" size="15" value="" onchange="window.hasunappliedcoupon = this.value != '';">&nbsp;
+</td>
+<td><span id="tbl_applycoupon"><input type="button" class="nlbutton" style="" value="Apply" id="applycoupon" name="applycoupon" onclick="document.location.href='/app/site/backend/setpromocode.nl?c=665798&amp;n=1&amp;redirect=%2Fs.nl%3Fc%3D665798%26sc%3D4%26category%3Dshipping&amp;rh=37cf8f5cd2ae3af068fc5d31148d01f34c3fc88f&amp;kReferralCode='+encode(document.getElementById('kReferralCode').value); return false;"></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td class="smalltext">&nbsp;</td><td class="smalltext">If you have a coupon or promotion code, enter it here</td>
+</tr>
+
+</tbody></table>
+</td></tr></tbody> 
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table border="0" cellspacing="0" cellpadding="3">
+<tbody><tr>
+<td><span id="tbl_submitter"><input type="submit" class="bgbutton" style="" value="Continue Checkout" id="submitter" name="submitter"></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody><tr><td colspan="2">&nbsp;</td></tr>
+<tr><td><table border="0" cellspacing="5" cellpadding="5">
+
+</table></td></tr>
+</tbody></table>
+</td></tr></tbody></table>
+
+
+<h1>------------------</h1>
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody><tr>
+<td width="0" height="0" align="left" valign="top" style="display:none">
+<form method="post" name="checkout" id="checkout" action="/s.nl">
+<input type="hidden" name="origsc" value="4">
+<input type="hidden" name="c" value="665798">
+<input type="hidden" name="n" value="1">
+<input type="hidden" name="sc" value="4">
+<input type="hidden" name="category" value="shipping">
+<input type="hidden" name="id" value="">
+<input type="hidden" name="it" value="A">
+<input type="hidden" name="vid" value="TLrOqTy-AcGXWDuT">
+<input type="hidden" name="ck" value="TLrOqTy-AbqXWMzJ">
+<input type="hidden" name="cktime" value="114246">
+<input type="hidden" name="cart" value="328295">
+
+</form></td>
+</tr>
+<tr>
+<td valign="top" width="80%" colspan="2">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td valign="top">
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody><tr><td colspan="1"><table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody><tr height="25"><td class="checkoutprogresstext" valign="top">Register &nbsp; » &nbsp; Address &nbsp; » &nbsp; <!-- Shipping -->
+<div id="stepSlider" class="steps">
+	<ul>
+		<li class="start completed"><span class="label icon-24-user">Start</span></li>
+		<li class="address completed"><span class="label icon-24-box">Address</span></li>
+                <li class="shipping completed active"><span class="label icon-24-box">Shipping</span></li>
+		<li class="billing"><span class="label icon-24-card">Payment</span></li>
+		<li class="review"><span class="label icon-24-check">Review &amp; Place Order</span></li>
+	</ul>
+</div> &nbsp; » &nbsp; Payment &nbsp; » &nbsp; Review &amp; Submit</td></tr><tr><td class="greytitle">Shipping Method</td></tr></tbody></table></td></tr>
+<tr><td class="smalltext">&nbsp;</td></tr>
+<tr>
+<td valign="top" class="text">
+<table border="0" cellpadding="0" cellspacing="2">
+<tbody>
+<tr>
+<td width="50%" valign="top">
+<table id="shippingmethodtable" width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+<td class="smalltext"><b>Shipping Method</b></td>
+</tr>
+<tr>
+<td class="smalltext">
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td style="
+    padding-left: 135px;
+">
+<script>
+function shippingSelectOnChange()
+{
+	var dropdown = document.getElementById('shippingcarrierselect');
+	document.body.style.cursor = 'wait';
+	document.location.href='/app/site/backend/setshipmeth.nl?c=665798&n=1&sShipMeth=&redirect=%2Fs.nl%3Fc%3D665798%26sc%3D4%26category%3Dshipping&rh=37cf8f5cd2ae3af068fc5d31148d01f34c3fc88f&sShipCarrier='+dropdown.value; return true;
+}
+</script>
+<br style="
+">Carrier
+<select id="shippingcarrierselect" name="shippingcarrierselect" onchange="shippingSelectOnChange();" class="input" style="
+">
+<option value="ups">UPS
+</option><option value="nonups" selected="">More
+</option></select>
+
+</td></tr>
+<tr><td class="smalltext"><input type="radio" class="radio" name="sShipMeth" value="51489" checked="" onclick="document.location.href='/app/site/backend/setshipmeth.nl?c=665798&amp;n=1&amp;sShipCarrier=nonups&amp;sShipMeth=51489&amp;redirect=%2Fs.nl%3Fc%3D665798%26sc%3D4%26category%3Dshipping&amp;rh=37cf8f5cd2ae3af068fc5d31148d01f34c3fc88f';return true;" style="
+">Standard Shipping (2-6 days)&nbsp;–&nbsp;$4.49</td></tr>
+<input type="hidden" name="continueclicked" value="T">
+</tbody></table>
+</td></tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table><table>
+<tbody><tr><td class="text">&nbsp;</td></tr>
+<tr>
+<td class="smalltextnolink" align="right"><b>Coupon Code</b>&nbsp;</td>
+<td>
+<table cellpadding="0" cellspacing="0" border="0">
+<tbody><tr><td>
+<input class="input" maxlength="40" name="kReferralCode" id="kReferralCode" size="15" value="" onchange="window.hasunappliedcoupon = this.value != '';">&nbsp;
+</td>
+<td><span id="tbl_applycoupon"><input type="button" class="nlbutton" style="" value="Apply" id="applycoupon" name="applycoupon" onclick="document.location.href='/app/site/backend/setpromocode.nl?c=665798&amp;n=1&amp;redirect=%2Fs.nl%3Fc%3D665798%26sc%3D4%26category%3Dshipping&amp;rh=37cf8f5cd2ae3af068fc5d31148d01f34c3fc88f&amp;kReferralCode='+encode(document.getElementById('kReferralCode').value); return false;"></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td class="smalltext">&nbsp;</td><td class="smalltext">If you have a coupon or promotion code, enter it here</td>
+</tr>
+
+</tbody></table>
+</td></tr></tbody> 
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table border="0" cellspacing="0" cellpadding="3">
+<tbody><tr>
+<td><span id="tbl_submitter"><input type="submit" class="bgbutton" style="" value="Continue Checkout" id="submitter" name="submitter"></span></td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tbody><tr><td colspan="2">&nbsp;</td></tr>
+<tr><td><table border="0" cellspacing="5" cellpadding="5">
+
+</table></td></tr>
+</tbody></table>
+</td></tr></tbody></table>
+
+
+
+
+
+<h1>----------</h1>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 <tbody><tr>
 <td width="0" height="0" align="left" valign="top" style="display:none">

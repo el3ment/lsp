@@ -25,7 +25,7 @@
 	border: 1px solid $lightGrey;
 	@include border-radius(px($borderRadius));
 	padding: px($paddingUnit + 3) px($paddingUnit * 2) px($paddingUnit * 2) !important;
-	
+	margin: auto;
 	@include box-sizing();
 	
 	margin-bottom: 17px !important;
@@ -49,8 +49,155 @@
 	padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
 }
 
+// Crappy Netsuite Hack for their Error pages
+#div__body{
+	
+	width: 800px;
+	margin: auto !important;
+
+	@media (max-width: 979px){
+		width: 979px;
+	}
+	@media (max-width: 767px){
+		width: 100%;
+	}
+}
+// Also just for the error pages
+.medtextboldnolink{
+	font-weight: bold;
+}
+
+// Basic Button Styling (Yellow)
+#tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
+#tbl_checkout, #tbl_removecoupon, #tbl_cleargift, #tbl_fauxsubmit, #tbl_goback{
+	@include gradient($lightYellow, $darkYellow);
+	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
+	
+	cursor: pointer;
+	
+	input{
+		cursor: pointer;
+		position: relative; 
+		margin: 0;
+		text-shadow : 0 1px $saturatedHighlightYellow;
+	}
+	
+	border : 1px solid $brownYellow;
+	border-radius : px($borderRadius);
+	color : black;
+	text-shadow : 0 1px $saturatedHighlightYellow;
+	font-family : 'Open Sans', sans-serif;
+	font-size : px(14px);
+	font-weight : 800;
+	text-transform : uppercase;
+	text-decoration: none;
+	text-align : center;
+	line-height: 1.3em;
+	display: inline-block;
+	margin : 0 px($paddingUnit);
+	
+	input{
+		text-transform: uppercase;
+		display: inline;
+		border: 0;
+		background-color: transparent;
+		padding : px(10px, 14px) px(14px, 14px);
+	}
+	
+	position: absolute;
+	right: 0;
+	bottom: -50px;
+	
+	&:hover, &.active{
+		@include gradient($hoverLightYellow, $darkYellow);
+	}
+
+}
+
+
+// Grey Button styling
+ #tbl_applygift, #tbl_applycoupon, #tbl_recalc, #tbl_removecoupon, #tbl_cleargift{
+	@include gradient($buttonLightGrey, $buttonDarkGrey); 
+	@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
+	text-shadow : 0 1px $saturatedHighlightGrey;
+	input{
+		text-shadow: 0 1px $saturatedHighlightGrey;
+	}
+	border : 1px solid $darkGrey;
+	position: static; // Back out of global absolute position from line 118
+}
+
+// Linky button
+#tbl_change{
+	overflow : visible; /* Shrinkwrap the text in IE7- */
+	margin : 0 10px 0 0;
+	padding : 0 !important;
+	border : 0;
+	color : $grey;
+	background : transparent !important;
+	font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
+	line-height : normal; /* Override line-height to avoid spacing issues */
+	text-decoration : underline; /* Make it look linky */
+	cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
+	input{ cursor: pointer; }
+	-moz-user-select: text; /* Make button text selectable in Gecko */
+	input{
+		background-color: transparent;
+		padding: 0;
+		border: 0;
+		color: $grey;
+		margin: 0;
+		@include border-radius(0);
+		font-weight: normal;
+	}
+}
+
+#tbl_goback{
+	position: static;
+}
+
+// Limiting container for checkout that dosen't apply to cart
+body .span12.checkoutContainer > table[border="0"][cellspacing="0"][cellpadding="0"]{
+	width: 100%;
+}
+
 body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	position: relative;
+	width: 800px;
+	margin: auto;
+	
+	@media (max-width: 979px){
+		width: 100%;
+	}
+
+	.pic{ display: none !important; }
+	.checkoutwarning,
+	.errortext p,
+	.errortext.bglt{ 
+		color: #bb0000;
+		background-color: #ffe0e0;
+		margin-bottom: 10px;
+		position: relative;
+		top: -10px;
+		padding: 5px 10px !important;
+		
+		@include box-sizing();
+		@include border-radius(5px);
+
+		a{
+			color: #bb0000;
+			text-decoration: underline;
+		}
+
+	}
+	.errortext b{
+		display: none !important;
+	}
+
+	.errortext p,
+	.errortext.bglt{
+		top: 0;
+	}
 
 	// General bug/cleanup/fixes for rouge elements
 	td{ vertical-align: top; }
@@ -71,78 +218,39 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		width: 100% !important;
 	}
 
-	// Basic Button Styling (Yellow)
-	#tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
-	#tbl_checkout{
-		@include gradient($lightYellow, $darkYellow);
-		@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
-		
-		cursor: pointer;
-		
-		border : 1px solid $brownYellow;
-		border-radius : px($borderRadius);
-		color : black;
-		text-shadow : 0 1px $saturatedHighlightYellow;
-		font-family : 'Open Sans', sans-serif;
-		font-size : px(14px);
-		font-weight : 800;
-		text-transform : uppercase;
-		text-decoration: none;
-		text-align : center;
-		line-height: 1.3em;
-		display: inline-block;
-		margin : 0 px($paddingUnit);
-		input{
-			text-transform: uppercase;
-			display: inline;
-			border: 0;
-			background-color: transparent;
-			padding : px(10px, 14px) px(14px, 14px);
-		}
-		
-		
-		&:hover, &.active{
-			@include gradient($hoverLightYellow, $darkYellow);
-		}
-
-	}
-
-	// Grey Button styling
-	 #tbl_applygift, #tbl_applycoupon, #tbl_recalc{
-		@include gradient($buttonLightGrey, $buttonDarkGrey); 
-		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
-		text-shadow : 0 1px $saturatedHighlightGrey;
-		border : 1px solid $darkGrey;
-	}
-
-	// Linky button
-	#tbl_change{
-		overflow : visible; /* Shrinkwrap the text in IE7- */
-		margin : 0 10px 0 0;
-		padding : 0 !important;
-		border : 0;
-		color : $grey;
-		background : transparent !important;
-		font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
-		line-height : normal; /* Override line-height to avoid spacing issues */
-		text-decoration : underline; /* Make it look linky */
-		cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
-		-moz-user-select: text; /* Make button text selectable in Gecko */
-		input{
-			background-color: transparent;
-			padding: 0;
-			border: 0;
-			color: $grey;
-			margin: 0;
-			@include border-radius(0);
-			font-weight: normal;
-		}
-	}
+	
 
 
 /*
  *   Cart
  */ 
+
+ 	#carttable{
+ 		
+ 		margin-top: 70px;
+
+ 		&:before{
+	 		content: 'Your Cart';
+	 		display: block;
+	 		font-size: 30px;
+	 		line-height: 43px;
+			font-size: 2.9em;
+			font-family: "League Gothic", sans-serif;
+			text-transform: uppercase;
+			color: $black; 
+			-webkit-font-smoothing: antialiased;
+			margin-top:10px;
+			position:absolute;
+			top: 0;
+		}
+ 	}
+
+ 	// Hide the "Your Cart" title on the review page
+ 	input[name="total"] ~ table #carttable{ 
+ 		margin-top: 0;
+ 		&:before{ display: none; }
+ 	}
+
 	#carttableheader, #carttableheader + tr{
 		font-size: 13px;
 	}
@@ -164,10 +272,40 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
+	// An empty cart doesn't pass the "carttablerow#" id's down... so we can use that to style an empty cart
+	#carttableheader ~ tr{ display: none !important; }
+	
+	// Empty Cart
+	#carttableheader + tr{ 
+		display: block !important;
+		height: 200px;
+	}
+	#carttableheader + tr:before{
+		width: 100%;
+		display: block !important;
+		content: 'Empty Cart';
+		color: $grey;
+		position:absolute;
+		margin-top: 100px;
+		text-align:center;
+	}
+	#carttableheader + tr td{ display: none !important; }
+
+	// Back out of empty cart
+	#carttableheader + #carttablerow0{ height: auto; }
+	#carttableheader + #carttablerow0:before{ display: none !important; }
+	#carttableheader + #carttablerow0 td{ display: table-cell !important; }
+	#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{ display: table-row !important; }
+
+	@media (max-width: 767px){
+		#carttableheader + #carttablerow0 td{ display: block !important; }
+		#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{ display: block !important; }
+	}
+
 	// Cart Item Rows
 	// use table again to ensure we are working with
 	// netsuite's nested table and not accidentally one of ours
-	#carttablerow0, #carttablerow0 ~ tr{
+	#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{
 
 		@media (max-width: 767px){
 			border: 1px solid $lightGrey;
@@ -201,7 +339,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			text-align: center;
 
 			@media (max-width: 767px){
-				float: left !important;
+				//float: left !important;
 				width: auto !important;
 				padding-right: 10px !important;
 			}
@@ -248,6 +386,9 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 					content: 'Quantity: ';
 					float: left !important;
 				}
+			}
+			input[type="text"][value="0"][disabled]{
+				display: none;
 			}
 		}
 
@@ -336,7 +477,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 	@media (max-width: 767px){
-		#carttablerow0{
+		#carttableheader + #carttablerow0{ // Overspecified on purpose
 			border-top-width: 1px;
 		}
 	}
@@ -344,13 +485,15 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	// Cart Footer
 	#ordersummary_estship, #ordersummary_estship ~ tr{
 
+		padding: 10px 0 !important;
+
 		@media (max-width: 767px){
 	 		text-align: right !important;
 	 	}
 
 		> td.texttable[colspan="6"]{ // Overqualified to overcome selector specificity
 			
-			text-align: right;
+			text-align: right !important;
 			position: relative;
 			color: $grey;
 			padding-top: 30px;
@@ -369,20 +512,20 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				font-size: 14px;
 				font-weight: 600;
 				color: black;
-				padding-bottom: 30px;
+				//padding-bottom: 30px;
 				z-index: 1;
 				top: 10px;
-				display: block;
-				padding-left: 100px;
-				position: absolute;
-				right: 10px;
+				display: block !important;
+				//padding-left: 100px;
+				//position: absolute;
+				//right: 10px;
 
 				@media (max-width: 767px){
 					position: static;
 					padding-bottom: 0;
 					&:after{
 						content: ' ';
-						display: block;
+						display: block !important;
 						position:absolute;
 						width: 100%;
 						right: 0;
@@ -465,6 +608,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table{
 		float: right;
 		margin-top: 10px !important;
+
 		//background-color: pink;
 		
 
@@ -483,6 +627,14 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		#tbl_cancel{
 			display: none;
 		}
+
+		// Back-out of global styling. Right at the end I realized I couldn't be specific enough with a couple of buttons
+		// and thus we have two methods of positioning these buttons, generic and specific. Sorry.
+		#tbl_checkout, #tbl_cancel, #tbl_recalc{
+			position: relative;
+			right: auto;
+			bottom: auto;
+		}
 	}
 
 
@@ -496,6 +648,8 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		text-align: right;
 		line-height: 0;
 		padding-right: 5px;
+		width: 160px;
+
 		@media (max-width: 767px){
 			text-align: left;
 		}
@@ -565,31 +719,43 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	> tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > input[name="new"] ~ table{
 		
 		
-		> tbody > tr{
-			display: block;
-			float: left;
-			width: 50% - $fluidGutterPercentage / 2;
-		}
+		// > tbody > tr{
+		// 	display: block;
+		// 	float: left;
+		// 	width: 50% - $fluidGutterPercentage / 2;
+		// }
 
  		> tbody{
 			// New Customers
 			> tr:first-child{
-				background-color: teal;
+				
 				@include panel();
 				@include engaged();
+
+				margin-bottom: 80px !important;
+				//width: 100%;
+
 				#tbl_register{
 					margin-top: 10px;
-					input{ padding-right: 0; }
+					bottom: -50px;
+					// Enough padding for the extra content
+					input{ padding-right: 80px; }
 					&:after{
 						padding-right: 10px;
 						content: ' As Guest';
+						margin-left: -80px;
 					}
+				}
+
+				#tbl_submitter{
+					bottom: -50px;
 				}
 			}
 			
 			// Returning Customers
 			> tr:first-child + tr + tr + tr{
-				margin-left: $fluidGutterPercentage;
+				
+				//margin-left: $fluidGutterPercentage;
 				@include panel();
 				@include disengaged();
 
@@ -600,9 +766,9 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 				// Login Button
 				#tbl_submitter{
-					margin-top:10px;
-					position: relative;
-					input{ padding-right: 55px; text-indent:-150px; }
+
+					input{ padding-right: 55px; text-indent:-300px; }
+					
 					&:after{
 						position: absolute;
 						left: 12px;
@@ -622,14 +788,20 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
+	a[href*="login=T&reset=T"]{
+		position:relative;
+		top: -30px;
+		width: 800px;
+		margin: auto;
+		display:block;
+	}
+
 /*
  * Timeline
  */
 	// "Register > Address > Shipping > Payment > Review & Submit" map
 	// The path to them is different on each page.. why? I have no clue.
-	input[name="category"] ~ table > tbody > tr:first-child > td > table > tbody > tr:first-child,
-	.portletHandle:first-child,
-	> tbody > tr:first-child + tr > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr:first-child[height="25"] {
+	tr[height="25"] {
 		//background-color: red;
 		height: 0 !important;
 		.checkoutprogresstext{
@@ -645,10 +817,66 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			
 			font-size: 14px;
 			@media (max-width: 767px){
-				top: -100px;
+				top: 35px;
 			}
 		}
 	}
+/*
+ * Login / Register
+ */
+input[name="category"][value="login-register"] ~ table{
+	@include panel();
+	@include engaged();
+
+	margin-bottom: 0;
+	margin-top: 135px;
+	
+	tr[height="25"]{
+		
+		position: absolute;
+		top: -135px;
+		width: 100%;
+
+		.checkoutprogresstext{
+			width: 100%;
+			display: block;
+		}
+	}
+	input[type="checkbox"]{
+		float: right;
+		@media (max-width: 767px){
+			float: left;
+		}
+	}
+
+	// Blank rows
+	input[name="partner"] + tr{
+		display: none !important;
+	}
+
+	// Button row
+	> tbody > tr:first-child + tr + tr + tr + tr + tr{
+		
+		line-height: 0;
+
+		#tbl_submitter{
+			display: block;
+			position: absolute;
+			bottom: -50px;
+			right: 0px;
+		}
+		
+		td{ 
+			display: block; 
+			float: right;
+		}
+		
+		table{ 
+			float: right;
+		}
+	}
+}
+
 
 
 /*
@@ -657,6 +885,15 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	#paymeth > table{
 		@include panel();
 		@include engaged();
+
+		margin-top: 150px !important;
+		.checkoutprogresstext{
+			position: absolute;
+			top: -150px;
+		}
+		@media (max-width: 767px){
+			margin-top:100px !important;
+		}
 		
 		select[name="sExpMo"],
 		select[name="sExpYr"]{
@@ -665,12 +902,18 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		select[name="sExpMo"]{
 			float: left;
 		}
-		
+		.errortext p{
+			top: 0;
+		}
+		br{
+			display: none;
+		}
 		// Payment Method
 		#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child{
 			
 			position: relative;
 			top: -5px;
+
 
 			&:after{
 				// Not sure why I need this - but this one was too close to the radio buttons
@@ -722,6 +965,16 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				margin-left: 5px;
 				float: left;
 			}
+			&:before{
+				content : 'Norton Security';
+				width: 190px;
+				height: 115px;
+				outline: 1px solid red;
+				display: block;
+				position: absolute;
+				top: 0;
+				right: 0;
+			}
 		}
 		
 		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
@@ -732,13 +985,17 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		
 		// Save My Credit Card Information
 		#paymethhider input[name="sValidFromYr"] + tr{
-			&:before{
-				display: table-cell;
-				content: ' ';
-			}
-			td{
-				padding-top: 10px !important;
-			}
+			
+			// Decided to hide it
+			display: none !important;
+
+			// &:before{
+			// 	display: table-cell;
+			// 	content: ' ';
+			// }
+			// td{
+			// 	padding-top: 10px !important;
+			// }
 		}
 
 		// Gift Card Title
@@ -749,33 +1006,57 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 
 		// Apply Gift Card row
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr{
-			line-height: 0; // &nbsp; fix
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr,
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr,
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr + tr{
+
 			@media (max-width: 767px){
 				td{ 
 					float: left !important;
 					width: auto !important;
 				}
+
+				table td{
+					display: block;
+				}
+				.smalltextnolink,
+				.smalltextnolink + td{
+					clear: both;
+				}
+				.smalltext{
+					clear: both;
+				}
+				.smalltext:first-child{
+					display: none !important;
+				}
 			}
 		}
 
 		// If you have a gift card... cells
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr td{
-			position: relative;
-			top: -10px;
-			clear: both;
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr > td:first-child + td,
+		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr > td:first-child + td{
+			//position: relative;
+			//top: -10px;
+			//clear: both;
+			line-height: 14px; // &nbsp; fix
+			padding-bottom: 0 !important;
+			
 			@media (max-width: 767px){
 				&:first-child{ display: none !important; }
+			}
+			
+			#tbl_cleargift{
+				margin: 0;
 			}
 		}
 
 		// Continue button container
 		> tbody > tr:first-child + tr + tr table{
-			float: right;
-			width: auto !important;
-			position: absolute;
-			bottom: -50px;
-			right: 0;
+			// float: right;
+			// width: auto !important;
+			// position: absolute;
+			// bottom: -50px;
+			// right: 0;
 		}
 
 		
@@ -806,22 +1087,32 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				float: left;
 			}
 		}
+
+		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td{
+			width: 100%;
+
+			// A really stupid blank cell presumably used to make the form smaller in width
+			&[width="50%"]{
+				display: none !important;
+			}
+		}
+
 		#main_form > table > tbody > tr:first-child + tr + tr > td{
 			
 			padding-bottom: 0 !important;
 
 			// Button
-			table{
-				//background-color: red;
-				margin-right: 0;
-				float: right;
-				position: absolute;
-				bottom: -50px;
-				right: 0;
-				width: auto !important;
-			}
+			// table{
+			// 	//background-color: red;
+			// 	margin-right: 0;
+			// 	float: right;
+			// 	position: absolute;
+			// 	bottom: -50px;
+			// 	right: 0;
+			// 	width: auto !important;
+			// }
 		}
-
+x
 		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr + tr + tr + tr + tr{
 			display: none !important;
 		}
@@ -832,6 +1123,16 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 		@include panel();
 		@include engaged();
+
+		margin-top: 150px;
+
+		.checkoutprogresstext{
+			position: absolute;
+			top: -150px;
+		}
+		@media (max-width: 767px){
+			margin-top:100px !important;
+		}
 
 		// Space for steps
 		// margin-top: 140px;
@@ -846,83 +1147,85 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			display: none !important;
 		}
 
-		// Carrier
-		#shippingmethodtable > tbody > tr:first-child + tr{
-			> td > table > tbody > tr:first-child td{
-				// The label isn't wrapped in an element, so we need to 
-				// apply label styling and back out of them for children
-				font-weight: bold;
-				color: black;
-				padding-left: 8px !important;
-				font-size: 0;
-
-				@media (max-width: 767px){
-					padding-left: 0 !important;
-				}
-
-				&:before{
-					font-size: 14px;
-					content: 'Shipping Carrier';
-					position: relative;
-					top: -9px;
-					@media (max-width: 767px){
-						display: block;
-					}
-				}
-				&:after{
-					color: $grey;
-					font-weight: normal;
-					font-size: 13px;
-					width: 100%;
-					display: block;
-					line-height: 18px;
-					text-align:right;
-					content: 'Select UPS for Overnight or Second Day Air Options';
-					padding-left: 128px !important;
-					text-align: left;
-					padding-bottom: 20px !important;
+		// This is difficult - if there are no carrier options (like what happens in the case of freight)
+		// then we get a different HTML structure with no easy hooks
+		// The solution used here is taking advantage of the fact that .smalltext is used
+		// to identify the shipping method and the cell without smalltext is the carrier dropdown
+		#shippingmethodtable > tbody > tr:first-child ~ tr{
+			.smalltext{
+				// everything
+				td{
+					// The label isn't wrapped in an element, so we need to 
+					// apply label styling and back out of them for children
+					font-weight: bold;
+					color: black;
+					padding-left: 8px !important;
+					font-size: 0;
+					
 					@media (max-width: 767px){
 						padding-left: 0 !important;
 					}
-
-				}
-				#shippingcarrierselect{
-					width: 100px;
-					display: inline-block;
-					margin-left: 10px !important;
-					position: relative;
-					top: -3px;
-					@media (max-width: 767px){
-						margin-left: 0 !important;
+					&:before{
+						font-size: 14px;
+						content: 'Shipping Carrier';
+						position: relative;
+						top: -9px;
+						@media (max-width: 767px){
+							display: block;
+						}
+					}
+					&:after{
+						color: $grey;
+						font-weight: normal;
+						font-size: 13px;
+						width: 100%;
+						display: block;
+						line-height: 18px;
+						text-align:right;
+						content: 'Select UPS for Overnight or Second Day Air Options';
+						padding-left: 128px !important;
+						text-align: left;
+						padding-bottom: 20px !important;
+						@media (max-width: 767px){
+							padding-left: 0 !important;
+						}
+					}
+					#shippingcarrierselect{
+						width: 100px;
+						display: inline-block;
+						margin-left: 10px !important;
+						position: relative;
+						top: -3px;
+						@media (max-width: 767px){
+							margin-left: 0 !important;
+						}
 					}
 				}
-			}
-			> td > table > tbody > tr:first-child + tr > td{
-				
-				padding-left: 138px !important;
-				position: relative;
-				@media (max-width: 767px){
-					display: block;
-					padding-left: 0 !important;
-				}
+				td.smalltext{
+					// the shipping methods
+					font-size: 14px;
+					font-weight: normal;
 
-				&:before{
-					content: 'Shipping Method';
-					position: absolute;
-					left: 13px;
-					color: black;
-					font-weight: bold;
+					input[type="radio"]{
+						float: none;
+						display: inline-block;
+					}
 
-					@media (max-width: 767px){
-						left: 0;
-						display: block;
-						position: static;
+					&:before{
+						content: 'Shipping Method';
+						top: 0px;
+						margin-right: 10px;
+						font-weight: bold;
+					}
+					&:after{
+						content : '';
 					}
 				}
 			}
 		}
 
 		// Coupon Code Table
+		> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody,
 		> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody{
 			
 			.smalltextnolink{ 
@@ -936,7 +1239,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			}
 
 			// Coupon Code Label
-			> tr:first-child + tr > td:first-child{
+			td.smalltextnolink{
 				width: 131px;
 				text-align: right;
 				@media (max-width: 767px){
@@ -945,7 +1248,8 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			}
 
 			// Input box field
-			> tr:first-child + tr > td:first-child + td{
+			td.smalltextnolink + td{
+
 				line-height: 0; // &nbsp; fix
 				padding-bottom: 0 !important;
 				> table > tbody > tr > td:first-child{
@@ -972,12 +1276,15 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 					clear: both;
 				}
 			}
+			#tbl_removecoupon{
+				margin-left: 0;
+			}
 		}
 		
-		// Blank row
-		> tbody > tr:first-child + tr{
-			display: none !important;
-		}
+		// // Blank row
+		// > tbody > tr:first-child + tr{
+		// 	display: none !important;
+		// }
 
 
 
@@ -986,6 +1293,15 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 	// Button Bar
 	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr{
+		
+		// Back out of my global absolute positioning
+		#tbl_submitter,
+		#tbl_applycoupon{
+			position:relative;
+			right: auto;
+			bottom: auto;
+		}
+
 		table{ 
 			float: right;
 			position: relative;
@@ -1084,10 +1400,12 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 		// The Shipping / Billing address row
 		> tbody > tr:first-child{
-			width: 66%;
+			width: 50%; // ?
 		}
+
+		// The Carrier / Payment row
 		> tbody > tr:first-child + tr{
-			width: 33%;
+			width: 50%;
 		}
 
 
@@ -1126,14 +1444,33 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		#additionalfieldstable > tbody > tr{
 			display: none !important;
 		}
+
+		// Special Instructions
 		#additionalfieldstable > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr{
 			
-			display: block;
+			display: block !important;
 			clear: both;
+			width: 100%;
 
-			td{
-				padding-top: 20px !important;
+			@media (max-width: 767px){
+				margin-top: 20px !important;
 			}
+			
+			td{
+				//padding-top: 20px !important;
+				width: 100%;
+
+				@media (max-width: 767px){
+					padding-top:0 !important;
+				}
+			}
+
+			#custbody4_fs{
+				white-space: normal !important;
+				width: 100%;
+				display: block;
+			}
+
 			td:first-child{
 				width: 160px;	
 			}
@@ -1141,13 +1478,61 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 		// Shipping Method block
 		> tbody > tr:first-child + tr > td:first-child{
-			display: none !important;
+			display: block !important;
+			width: 50%; // overcome width attribute
+			float: left;
 		}
 
 		// Edit/Change buttons
 		input[type="button"]{
 			margin-top: 5px;
 			font-size: 13px;
+		}
+		
+		// Shipping Method
+		#shippingmethodtable{
+			margin-bottom: 20px !important;
+			.smalltext{
+				// everything
+				td{
+					padding-left: 0 !important;
+					&:before{
+						content: 'Shipping Carrier/Method';
+						top: 0;
+						font-weight: normal;
+						font-size: 13px;
+						color: $grey;
+					}
+					&:after{
+						display: none;
+						content: ''; // Select UPS for overnight message
+					}
+					#shippingcarrierselect{
+						margin-left: 0 !important;
+						margin-top: 5px;
+					}
+				}
+				td.smalltext{
+					// the shipping methods
+					font-size: 14px;
+					font-weight: normal;
+					padding-left: 2px !important;
+					padding-top: 10px !important;
+
+					input[type="radio"]{
+						float: none;
+						display: inline-block;
+					}
+
+					&:before{
+						content: ''; // Shipping Method
+						display: none;
+					}
+					&:after{
+						display: none;
+					}
+				}
+			}
 		}
 
 	}
@@ -1193,6 +1578,8 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	#ordersummary_total,
 	#ordersummary_shipping{
 
+
+
 		// Labels
 		td:first-child{
 			text-align: right !important;
@@ -1216,12 +1603,14 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 	@media (max-width: 767px){
 		// The summary at the bottom of the table
-		#ordersummary_tax,
-		#ordersummary_itemtotal,
-		#ordersummary_total,
-		#ordersummary_shipping{
+		// Overqualified for some CSS specificity problems with padding
+		#carttableheader + #carttablerow0 ~ #ordersummary_tax,
+		#carttableheader + #carttablerow0 ~ #ordersummary_itemtotal,
+		#carttableheader + #carttablerow0 ~ #ordersummary_total,
+		#carttableheader + #carttablerow0 ~ #ordersummary_shipping{
 			
 			text-align: right !important;
+			padding: 10px 0 !important;
 
 			// Both cells
 			td:first-child.texttablert,
@@ -1251,13 +1640,13 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
 		
-		position: absolute;
-		bottom: -50px;
-		width: auto;
-		right: 0px;
+		// position: absolute;
+		// bottom: -50px;
+		// width: auto;
+		// right: 0px;
 
 		td{
-			float: right !important;
+			//float: right !important;
 			#tbl_submitter{
 				float: right;
 			}
@@ -1268,12 +1657,17 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		display: none !important;
 	}
 
-	#tbl_change{
-		display: none;
+	tr + tr + tr + tr + tr td[align="right"] #tbl_change{
+		display: none !important;
 	}
 
-}
+	// #tbl_change{
+	// 	display: none;
+	// }
 
-select option:last-child:before{
-	content: 'hey';
+	// Legaleze UPS footer
+	#upsfooter, #fedexfooter{
+		display: none !important;
+	}
+
 }

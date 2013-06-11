@@ -1,6 +1,7 @@
 /* Checkout */
 
 // Globally accessible fancy timeline
+
 .steps{
 
 	/* The fancy timeline at the top of the cart 
@@ -22,8 +23,8 @@
 	&:before{
 		content: ' ';
 		height: 16px;
-		width: 75%;
-		margin-left: 12.5%;
+		width: 80%;
+		margin-left: 10%;
 		background-color: $superLightGrey;
 		display: block;
 		position: relative;
@@ -41,7 +42,7 @@
 		/* Circles */
 		li{
 			content: '  ';
-			width: 25%;
+			width: 20%;
 			vertical-align: bottom;
 			display: block;
 			float: left;
@@ -103,6 +104,7 @@
 			width: 0;
 			@include border-radius(0);
 			margin-left: 0;
+			z-index: 1;
 		}
 		
 		/* Grey Track */
@@ -117,20 +119,25 @@
 
 		/* Black Progress Bars */
 		li.active.start:after{ width: 0; }
-		li.active.shipping:after{
+		li.active.address:after{
 			content: '           ';
 			width: 100%;
 			left: -50%;
 		}
-		li.active.billing:after{
-			content: '       ';
+		li.active.shipping:after{
+			content: '           ';
 			width: 200%;
 			left: -150%;
 		}
+		li.active.billing:after{
+			content: '       ';
+			width: 300%;
+			left: -250%;
+		}
 		li.active.review:after{ 
 			content: '         ';
-			width: 300%;
-			left: -250%; 
+			width: 400%;
+			left: -350%; 
 		}
 		
 		/* Icons */
