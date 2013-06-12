@@ -916,6 +916,10 @@ ul.list li,
 			margin-left: 5px;
 		}
 		
+		a:first-child{
+			margin-top: 10px;
+		}
+
 		// The attribute titles
 		h4{ 
 			float: left;
@@ -960,9 +964,9 @@ ul.list li,
 			
 		} 
 		
-		.refinementList{
-			padding-top: 10px;
-		}
+		// .refinementList{
+		// 	padding-top: 10px;
+		// }
 		
 		// Actual container for each list element
 		ul{ 
@@ -972,13 +976,13 @@ ul.list li,
 			width: 100%;
 			
 			// Each attribute type
-			.field{ 
+			.field, li{ 
 				clear: both;
 				float: none;
 				margin-left: px($paddingUnit);
 				width: 100%;
-				margin-bottom: 5px;
-				margin-top:10px;
+				//margin-bottom: 5px;
+				margin-top:8px;
 
 				&:first-child{
 					margin-top:0;

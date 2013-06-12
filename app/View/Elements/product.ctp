@@ -134,9 +134,9 @@
 				</div>
 			</li>
 			<li class='specifications section'>
-				<button class='b3 icon-24-toggleHide' data-reveal-children='productSpecifications'>Toggle Section</button>
+				<button class='b3 icon-24-toggleHide reveal-closed' data-reveal-children='productSpecifications'>Toggle Section</button>
 				<h2 data-reveal-children='productSpecifications'>Specifications</h2>
-				<div id='productSpecifications' class='content'>
+				<div id='productSpecifications' class='content reveal-closed'>
 					<table class='specifications'>
 						<tr><td>hey</td></tr>
 						<tr><td>hey</td></tr>
@@ -147,16 +147,16 @@
 				</div>
 			</li>
 			<li class='returns section' data-reveal-children='returns'>
-				<button class='b3 icon-24-toggleHide' data-reveal-children='returns'>Toggle Section</button>
+				<button class='b3 icon-24-toggleHide reveal-closed' data-reveal-children='returns'>Toggle Section</button>
 				<h2 data-reveal-children='returns'>Returns &amp; Shipping</h2>
-				<div id='returns' class='content'>
+				<div id='returns' class='content reveal-closed'>
 					Paragraphs of data
 				</div>
 			</li>
 			<li class='addRelatedItems section'>
-				<button class='b3 icon-24-toggleHide visible-phone' data-reveal-children='suggestions'>Toggle Section</button>
+				<button class='b3 icon-24-toggleHide visible-phone reveal-open reveal-phone-closed' data-reveal-children='suggestions'>Toggle Section</button>
 				<h2 data-reveal-children='suggestions'>Our Staff Suggests</h2>
-				<div id='suggestions' class='content reveal-openOnlyDesktop reveal-openAlwaysDesktop'>
+				<div id='suggestions' class='content reveal-openOnlyDesktop reveal-openAlwaysDesktop reveal-open reveal-phone-closed'>
 					<div class='relatedItems'>
 						<div class='currentItem hidden-phone hidden-tablet'>
 								<label for='relatedItemsCurrentItem'>

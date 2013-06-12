@@ -105,8 +105,8 @@
 				</div>
 			</div>
 		</div>
-		<div class='refinements hidden-phone'>
-			<div class='span3 navigationLinks panel disengaged'>
+		<div class='refinements span3 hidden-phone'>
+			<div class='navigationLinks panel disengaged'>
 				<div class='section links'>
 					<h4 data-reveal-children='refinement-categories'>Categories</h4>
 					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-categories'>Toggle Refinement Group</button></div>

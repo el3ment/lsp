@@ -43,7 +43,7 @@
 			
 			getDefinitions : function(slugs){
 				if(slugs.length > 0){
-					return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
+					//return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
 				}
 			},
 			

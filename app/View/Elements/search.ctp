@@ -102,10 +102,10 @@
 	<h1 id='pageName'><#=pageTitle #></h1>
 	<# if(this.commentary.length > 0){ #>
 		<div class='details didYouMean'>
-			We figured you meant "<#=this._lsp.query.assumedQuery #>". You might also try 
-			<# for(var i = 0; i < this._lsp.query.otherSuggestions.length; i++){ #>
+			We figured you meant "<#=this._lsp.query.assumedQuery #>".
+			<# /* You might also try <# for(var i = 0; i < this._lsp.query.otherSuggestions.length; i++){ #>
 				<button class='b5' data-action='search' data-controller='search' data-query='<#=this._lsp.query.otherSuggestions[i] #>'><#=this._lsp.query.otherSuggestions[i]  #></button> 
-			<# } #>
+			<# } #> */ #>
 		</div>
 	<# } #>
 	<span class='details'>
