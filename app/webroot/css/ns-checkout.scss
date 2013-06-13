@@ -9,10 +9,6 @@
 // $('> tbody > tr:first-child', cartTable).attr('id', 'carttableheader');
 // $('> tbody > tr:first-child ~ tr', cartTable).not('tr[id]').each(function(i, e){ $(e).attr('id', 'carttablerow' + i); });
 
-tr:first-child{
-	outline: 1px solid red;
-}
-
 @mixin panel(){
 	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
 	background-color: $white;
@@ -806,12 +802,20 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
+	// Link at the bottom of the Login and Register page 
+	// that lets you switch context
+
+	// "Already a member - login here"
 	.changeContextLink{
 		position:relative;
 		top: -30px;
 		width: 800px;
 		margin: auto;
 		display:block;
+	}
+	// "New Customer? Create an account"
+	&.ns-login .changeContextLink{
+		top: -90px;
 	}
 
 /*
