@@ -1,21 +1,17 @@
 // This file contains CSS nessesary only for native netsuite cart and checkout
 // It should be expected that this file will eventually disapear
 
-// #carttable{
-// 	outline: 1px solid green;
-// }
+// Javascript Hooks
 
-// input[name="new"] + input[name="review"] + table{
-// 	outline: 1px solid red;
-// }
+// On the Receipt page, NetSuite doesn't include the id's for the carttable, so we add those
+// This avoids a giant mess, since the cart has some serious CSS happening
+// var cartTable = $('body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"] > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
+// $('> tbody > tr:first-child', cartTable).attr('id', 'carttableheader');
+// $('> tbody > tr:first-child ~ tr', cartTable).not('tr[id]').each(function(i, e){ $(e).attr('id', 'carttablerow' + i); });
 
-// #newcust{
-// 	outline: 1px solid blue;
-// }
-
-// #main_form table{
-// 	background-color: purple;
-// }
+tr:first-child{
+	outline: 1px solid red;
+}
 
 @mixin panel(){
 	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
@@ -69,7 +65,7 @@
 
 // Basic Button Styling (Yellow)
 #tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
-#tbl_checkout, #tbl_removecoupon, #tbl_cleargift, #tbl_fauxsubmit, #tbl_goback{
+#tbl_checkout, #tbl_removecoupon, #tbl_cleargift, #tbl_fauxsubmit, #tbl_goback, #tbl_continue{
 	@include gradient($lightYellow, $darkYellow);
 	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
 	
@@ -250,9 +246,14 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
  	}
 
- 	// Hide the "Your Cart" title on the review page
- 	input[name="total"] ~ table #carttable{ 
+ 	&.nscheckout-receipt #carttable{
  		margin-top: 0;
+ 	}
+
+ 	// Hide the "Your Cart" title on the review page
+ 	input[name="total"] ~ table #carttable,
+ 	&.nscheckout-receipt #carttable{ 
+ 		margin-top: 0 !important;
  		&:before{ display: none; }
  	}
 
@@ -337,11 +338,14 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 		// Image
 		td:first-child{
+			
+			text-align: center;
+			line-height: 0; // Hide &nbsp; nonsense when the photo isn't there
+
 			img{ 
 				width: 64px;
 				height: 64px;
 			}
-			text-align: center;
 
 			@media (max-width: 767px){
 				float: left !important;
@@ -352,10 +356,12 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 		// Item Name
 		td:first-child + td{
+			
+			font-size: 15px;
+			font-weight: 600;
+
 			a{
 				text-decoration: none;
-				font-size: 15px;
-				font-weight: 600;
 				color: black;
 			}
 		}
@@ -375,6 +381,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				border: 0;
 				padding: 0;
 				text-align: left;
+				line-height: 22px;
 			}
 			@media (max-width: 767px){
 				color: $grey;
@@ -621,7 +628,6 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 
 		//background-color: pink;
 		
-
 		@media (max-width: 767px){
 			tr, td{
 				width: auto !important;
@@ -729,14 +735,15 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	> tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > input[name="new"] ~ table{
 		
 		
-		// > tbody > tr{
-		// 	display: block;
-		// 	float: left;
-		// 	width: 50% - $fluidGutterPercentage / 2;
-		// }
+		> tbody > tr{
+			display: block;
+			float: left;
+			width: 50% - $fluidGutterPercentage / 2;
+		}
 
  		> tbody{
 			// New Customers
+
 			> tr:first-child{
 				
 				@include panel();
@@ -765,9 +772,10 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 			// Returning Customers
 			> tr:first-child + tr + tr + tr{
 				
-				//margin-left: $fluidGutterPercentage;
 				@include panel();
 				@include disengaged();
+
+				margin-left: $fluidGutterPercentage;
 
 				// Password Field
 				> td > table > tbody > tr:first-child + tr > td > table > tbody > tr:first-child + tr > td:first-child + td{
@@ -798,15 +806,12 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
-	a[href*="login=T&reset=T"]{
+	.changeContextLink{
 		position:relative;
 		top: -30px;
 		width: 800px;
 		margin: auto;
 		display:block;
-	}
-	a[href*="login=T&reset=T&newcust=T"]{
-		top: -90px;
 	}
 
 /*
@@ -1147,7 +1152,7 @@ input[name="category"][value="login-register"] ~ table{
 			// 	width: auto !important;
 			// }
 		}
-x
+
 		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr + tr + tr + tr + tr{
 			display: none !important;
 		}
@@ -1186,7 +1191,7 @@ x
 		// then we get a different HTML structure with no easy hooks
 		// The solution used here is taking advantage of the fact that .smalltext is used
 		// to identify the shipping method and the cell without smalltext is the carrier dropdown
-		#shippingmethodtable > tbody > tr:first-child ~ tr{
+		#shippingmethodtable > tbody > tr tr:first-child + tr{
 			.smalltext{
 				// everything
 				td{
@@ -1255,6 +1260,23 @@ x
 					&:after{
 						content : '';
 					}
+				}
+			}
+		}
+		#shippingmethodtable > tbody > tr tr:first-child + tr ~ tr{
+			td.smalltext:before{
+				color: white;
+			}
+			td.smalltext{
+				
+				padding-left: 140px !important;
+
+				&:before{
+					content: ''; // Shipping Method
+					display: none;
+				}
+				&:after{
+					display: none;
 				}
 			}
 		}
@@ -1599,21 +1621,28 @@ x
 		}
 	}
 
-	// Order subtotals
+	// Order subtotals -- _itemtotal is the same as _subtotal, they have two ids one for the cart and one for the reciept
 	tr#ordersummary_itemtotal, #ordersummary_itemtotal td,
 	tr#ordersummary_shipping, #ordersummary_shipping td,
+	tr#ordersummary_subtotal, #ordersummary_subtotal td
 	{
 		border-bottom: 0 !important;
 		padding-bottom: 0 !important;
 	}
 
 	// Labels and Values for Order Summary Table
+	// tax and Tax are intentional - the receipt uses a different ID
 	#ordersummary_tax,
+	#ordersummary_Tax,
 	#ordersummary_itemtotal,
+	#ordersummary_subtotal,
 	#ordersummary_total,
-	#ordersummary_shipping{
+	#ordersummary_shipping,
+	#ordersummary_estship{
 
-
+		td{
+			line-height: 22px !important;
+		}
 
 		// Labels
 		td:first-child{
@@ -1640,9 +1669,11 @@ x
 		// The summary at the bottom of the table
 		// Overqualified for some CSS specificity problems with padding
 		#carttableheader + #carttablerow0 ~ #ordersummary_tax,
+		#carttableheader + #carttablerow0 ~ #ordersummary_Tax,
 		#carttableheader + #carttablerow0 ~ #ordersummary_itemtotal,
 		#carttableheader + #carttablerow0 ~ #ordersummary_total,
-		#carttableheader + #carttablerow0 ~ #ordersummary_shipping{
+		#carttableheader + #carttablerow0 ~ #ordersummary_shipping,
+		#carttableheader + #carttablerow0 ~ #ordersummary_subtotal{
 			
 			text-align: right !important;
 			padding: 10px 0 !important;
@@ -1673,13 +1704,9 @@ x
 		}
 	}
 
-	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
-		
-		// position: absolute;
-		// bottom: -50px;
-		// width: auto;
-		// right: 0px;
 
+	// Shopping Cart on the Review Item Page
+	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
 		td{
 			//float: right !important;
 			#tbl_submitter{
@@ -1688,10 +1715,12 @@ x
 		}
 	}
 
+	// Blank line?
 	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr{
 		display: none !important;
 	}
 
+	// Change button for the cart?
 	tr + tr + tr + tr + tr td[align="right"] #tbl_change{
 		display: none !important;
 	}
@@ -1705,4 +1734,24 @@ x
 		display: none !important;
 	}
 
+	// The receipt dosen't have the timeline, so we need to remove the space above
+	// nscheckout-receipt class is added via javascript in the Thank You customize text
+	&.nscheckout-receipt > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+		margin-top: 0 !important;
+	}
+
+	// The login page by itself needs to be full width
+	&.ns-login > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr{
+		width: 100% !important;
+	}
+
+	// Remove the top margin for the naked signup page
+	&.ns-signup input[name="category"] ~ table{
+		margin-top: 0 !important;
+	}
+
+	// Put the margin back for the checkout process
+	&.ns-signup.nscheckout-register input[name="category"] ~ table{
+		margin-top: 135px !important;
+	}
 }
