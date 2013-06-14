@@ -302,7 +302,6 @@
 					queryParameters : _util.getURLParameters()
 				};
 
-				console.log(eventData.filename);
 				$(window).on('hashchange', function(e){
 					if(_isPushingState){
 						_isPushingState = false; // Apparently we've pushed, so unset it

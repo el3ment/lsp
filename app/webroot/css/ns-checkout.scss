@@ -41,11 +41,31 @@
 	padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
 }
 
+@mixin optionalLabel(){
+	&:after{
+		content: 'Optional';
+		color: $grey;
+		display: block;
+		font-weight: normal;
+		//text-align: right;
+		font-size: 13px;
+		line-height: 18px;
+		width: 100%;
+		@media (max-width: 767px){
+			content: ' (optional)';
+			display: inline;
+		}
+	}
+}
 // Crappy Netsuite Hack for their Error pages
 #div__body{
 	
 	width: 800px;
 	margin: auto !important;
+
+	.medtextboldnolink{
+		font-weight: bold;
+	}
 
 	@media (max-width: 979px){
 		width: 979px;
@@ -53,106 +73,30 @@
 	@media (max-width: 767px){
 		width: 100%;
 	}
-}
-// Also just for the error pages
-.medtextboldnolink{
-	font-weight: bold;
-}
-
-// Basic Button Styling (Yellow)
-#tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
-#tbl_checkout, #tbl_removecoupon, #tbl_cleargift, #tbl_fauxsubmit, #tbl_goback, #tbl_continue{
-	@include gradient($lightYellow, $darkYellow);
-	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
-	
-	cursor: pointer;
-	
-	input{
-		cursor: pointer;
-		position: relative; 
-		margin: 0;
-		text-shadow : 0 1px $saturatedHighlightYellow;
-	}
-	
-	border : 1px solid $brownYellow;
-	border-radius : px($borderRadius);
-	color : black;
-	text-shadow : 0 1px $saturatedHighlightYellow;
-	font-family : 'Open Sans', sans-serif;
-	font-size : px(14px);
-	font-weight : 800;
-	text-transform : uppercase;
-	text-decoration: none;
-	text-align : center;
-	line-height: 1.3em;
-	display: inline-block;
-	margin : 0 px($paddingUnit);
-	z-index: 99;
-	
-	input{
-		text-transform: uppercase;
-		display: inline;
-		border: 0;
-		background-color: transparent;
-		padding : px(10px, 14px) px(14px, 14px);
-	}
-	
-	position: absolute;
-	right: 0;
-	bottom: -50px;
-	
-	&:hover, &.active{
-		@include gradient($hoverLightYellow, $darkYellow);
-	}
 
 }
 
+@import "ns-checkout/buttons";
 
-// Grey Button styling
- #tbl_applygift, #tbl_applycoupon, #tbl_recalc, #tbl_removecoupon, #tbl_cleargift{
-	@include gradient($buttonLightGrey, $buttonDarkGrey); 
-	@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
-	text-shadow : 0 1px $saturatedHighlightGrey;
-	input{
-		text-shadow: 0 1px $saturatedHighlightGrey;
-	}
-	border : 1px solid $darkGrey;
-	position: static; // Back out of global absolute position from line 118
-}
+// Netsuite's checkout would look wierd to strech 100% of the page width - so we artificially limit it here
+// The three pages where this shouldn't apply are Cart, Review (because of the cart), and Thank You (also because of the cart)
+// The way we acheive this is set the limit here, and via custom tags or and customize text specific to a page, we inject
+// // the width:100% nessesary
+//
+// body .span12.checkoutContainer > table[border="0"][cellspacing="0"][cellpadding="0"]{
+// 	width: 100%;
+// }
 
-// Linky button
-#tbl_change{
-	overflow : visible; /* Shrinkwrap the text in IE7- */
-	margin : 0 10px 0 0;
-	padding : 0 !important;
-	border : 0;
-	color : $grey;
-	background : transparent !important;
-	font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
-	line-height : normal; /* Override line-height to avoid spacing issues */
-	text-decoration : underline; /* Make it look linky */
-	cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
-	input{ cursor: pointer; }
-	-moz-user-select: text; /* Make button text selectable in Gecko */
-	input{
-		background-color: transparent;
-		padding: 0;
-		border: 0;
-		color: $grey;
-		margin: 0;
-		@include border-radius(0);
-		font-weight: normal;
-	}
-}
 
-#tbl_goback{
-	position: static;
-}
+// NetSuite's crappy templating system does not use very many classes or IDs with which we can 'hook' styles
+// We overcome lots of those by being creative with our selector creation (which sometimes can be very long and confusing)
+// There are a few instances when we can't uniquely identify a particular element or page - some examples of that
+// are separating the login form design on within the checkout process (where it has the timeline up top) from the
+// login page you can get to by clicking "login" on the utility bar.
 
-// Limiting container for checkout that dosen't apply to cart
-body .span12.checkoutContainer > table[border="0"][cellspacing="0"][cellpadding="0"]{
-	width: 100%;
-}
+// We've overcome this uniqueness problem using css/javascript injection via the Customize Text - I've avoided that
+// where possible, trying to 
+
 
 body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	position: relative;
@@ -675,20 +619,20 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 		
 		.required_icon + a{
-			&:after{
-				content: 'Required';
-				color: $grey;
-				display: block;
-				font-weight: normal;
-				//text-align: right;
-				font-size: 13px;
-				line-height: 18px;
-				width: 100%;
-				@media (max-width: 767px){
-					content: ' (required)';
-					display: inline;
-				}
-			}
+			// &:after{
+			// 	content: 'Required';
+			// 	color: $grey;
+			// 	display: block;
+			// 	font-weight: normal;
+			// 	//text-align: right;
+			// 	font-size: 13px;
+			// 	line-height: 18px;
+			// 	width: 100%;
+			// 	@media (max-width: 767px){
+			// 		content: ' (required)';
+			// 		display: inline;
+			// 	}
+			// }
 		}
 	}
 
@@ -800,6 +744,12 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 				display: none !important;
 			}
 		}
+	
+	}
+
+	// Optional Fields (Password, etc)
+	#pwd_fs_lbl, #newpwd2_fs_lbl, #hint_fs_lbl{
+		@include optionalLabel();
 	}
 
 	// Link at the bottom of the Login and Register page 
@@ -973,20 +923,20 @@ input[name="category"][value="login-register"] ~ table{
 		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr > td:first-child,
 		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child{
 			//background-color: pink;
-			&:after{
-				content: 'Required ';
-				padding-right: 5px;
-				display:block;
-				text-align:right;
-				font-weight: normal;
-				color: $grey !important;
-				font-size: 13px;
-				line-height: 18px;
-				@media (max-width: 767px){
-					content: ' (required)';
-					display: inline;
-				}
-			}
+			// &:after{
+			// 	content: 'Required ';
+			// 	padding-right: 5px;
+			// 	display:block;
+			// 	text-align:right;
+			// 	font-weight: normal;
+			// 	color: $grey !important;
+			// 	font-size: 13px;
+			// 	line-height: 18px;
+			// 	@media (max-width: 767px){
+			// 		content: ' (required)';
+			// 		display: inline;
+			// 	}
+			// }
 		}
 
 		#paymethhider > table > tbody > tr:first-child + tr + tr{
@@ -1053,6 +1003,15 @@ input[name="category"][value="login-register"] ~ table{
 		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr,
 		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr,
 		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr + tr{
+			
+			// Label
+			.smalltextnolink:first-child{
+				@include optionalLabel();
+				&:after{
+					position: relative;
+					right: 9px;
+				}
+			}
 
 			@media (max-width: 767px){
 				td{ 
@@ -1073,6 +1032,8 @@ input[name="category"][value="login-register"] ~ table{
 				.smalltext:first-child{
 					display: none !important;
 				}
+
+
 			}
 		}
 
@@ -1118,7 +1079,7 @@ input[name="category"][value="login-register"] ~ table{
 
 
 /*
- * Shipping
+ * Shipping / Billing
  */
 	.portletHandle:first-child + tr + tr + tr + tr.portletHandle{
 		width: 100%;
@@ -1131,6 +1092,7 @@ input[name="category"][value="login-register"] ~ table{
 				float: left;
 			}
 		}
+
 
 		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td{
 			width: 100%;
@@ -1159,6 +1121,25 @@ input[name="category"][value="login-register"] ~ table{
 
 		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr + tr + tr + tr + tr{
 			display: none !important;
+		}
+
+		// Address 2
+		tr:first-child + tr + tr + tr{
+			td:first-child{ 
+				@include optionalLabel();
+			}
+
+			// Hiding a row in the disengaged saved address panel hides address2 accidentally
+			// so we need to show it, and handle the transition to block for mobile
+			display: table-row !important;
+			@media (max-width:767px){
+				display: block !important;
+			}
+		}
+		
+		// Company Name
+		#addressee_input_fs_lbl a{
+			@include optionalLabel();
 		}
 
 	}
@@ -1195,75 +1176,75 @@ input[name="category"][value="login-register"] ~ table{
 		// then we get a different HTML structure with no easy hooks
 		// The solution used here is taking advantage of the fact that .smalltext is used
 		// to identify the shipping method and the cell without smalltext is the carrier dropdown
-		#shippingmethodtable > tbody > tr tr:first-child + tr{
-			.smalltext{
-				// everything
-				td{
-					// The label isn't wrapped in an element, so we need to 
-					// apply label styling and back out of them for children
-					font-weight: bold;
-					color: black;
-					padding-left: 8px !important;
-					font-size: 0;
-					
+		#shippingmethodtable > tbody > tr tr{
+
+			td{
+
+				// The label isn't wrapped in an element, so we need to 
+				// apply label styling and back out of them for children
+				font-weight: bold;
+				color: black;
+				padding-left: 8px !important;
+				font-size: 0;
+				
+				@media (max-width: 767px){
+					padding-left: 0 !important;
+				}
+				&:before{
+					font-size: 14px;
+					content: 'Shipping Carrier';
+					position: relative;
+					top: -9px;
+					@media (max-width: 767px){
+						display: block;
+					}
+				}
+				&:after{
+					color: $grey;
+					font-weight: normal;
+					font-size: 13px;
+					width: 100%;
+					display: block;
+					line-height: 18px;
+					text-align:right;
+					content: 'Select UPS for Overnight or Second Day Air Options';
+					padding-left: 128px !important;
+					text-align: left;
+					padding-bottom: 20px !important;
 					@media (max-width: 767px){
 						padding-left: 0 !important;
 					}
-					&:before{
-						font-size: 14px;
-						content: 'Shipping Carrier';
-						position: relative;
-						top: -9px;
-						@media (max-width: 767px){
-							display: block;
-						}
-					}
-					&:after{
-						color: $grey;
-						font-weight: normal;
-						font-size: 13px;
-						width: 100%;
-						display: block;
-						line-height: 18px;
-						text-align:right;
-						content: 'Select UPS for Overnight or Second Day Air Options';
-						padding-left: 128px !important;
-						text-align: left;
-						padding-bottom: 20px !important;
-						@media (max-width: 767px){
-							padding-left: 0 !important;
-						}
-					}
-					#shippingcarrierselect{
-						width: 100px;
-						display: inline-block;
-						margin-left: 10px !important;
-						position: relative;
-						top: -3px;
-						@media (max-width: 767px){
-							margin-left: 0 !important;
-						}
+				}
+				#shippingcarrierselect{
+					width: 100px;
+					display: inline-block;
+					margin-left: 10px !important;
+					position: relative;
+					top: -3px;
+					@media (max-width: 767px){
+						margin-left: 0 !important;
 					}
 				}
-				td.smalltext{
-					// the shipping methods
-					font-size: 14px;
-					font-weight: normal;
+			}
+			td.smalltext{
+				// the shipping methods
+				font-size: 14px;
+				font-weight: normal;
+				color: black;
 
-					input[type="radio"]{
-						float: none;
-						display: inline-block;
-					}
+				input[type="radio"]{
+					float: none;
+					display: inline-block;
+				}
 
-					&:before{
-						content: 'Shipping Method';
-						top: 0px;
-						margin-right: 10px;
-						font-weight: bold;
-					}
-					&:after{
-						content : '';
-					}
+				&:before{
+					content: 'Shipping Method';
+					top: 0px;
+					margin-right: 10px;
+					font-weight: bold;
+				}
+				&:after{
+					content : '';
 				}
 			}
 		}
@@ -1303,6 +1284,9 @@ input[name="category"][value="login-register"] ~ table{
 			td.smalltextnolink{
 				width: 131px;
 				text-align: right;
+				
+				@include optionalLabel();
+
 				@media (max-width: 767px){
 					text-align: left;
 				}
@@ -1371,7 +1355,6 @@ input[name="category"][value="login-register"] ~ table{
 		}
 	}
 
-
 	// Shipping
 	> tbody > tr.portletHandle + .noprint + .portletHandle{
 		
@@ -1385,6 +1368,10 @@ input[name="category"][value="login-register"] ~ table{
 		// }
 
 		width: 100%;
+
+		#address{
+			margin-right: 20px;
+		}
 
 		// Title
 		#address > tbody{
@@ -1434,13 +1421,12 @@ input[name="category"][value="login-register"] ~ table{
 			text-decoration : underline; /* Make it look linky */
 			cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
 			-moz-user-select: text; /* Make button text selectable in Gecko */
+			font-size: 13px;
 		}
 
 		// Just the edit button
-		#tbl_edit{
-			position: absolute;
-			top: 10px;
-			right: 10px;
+		#tbl_edit, #edit{
+			display: none !important;
 		}
 	}
 
@@ -1511,7 +1497,8 @@ input[name="category"][value="login-register"] ~ table{
 			
 			display: block !important;
 			clear: both;
-			width: 100%;
+			width: 50%;
+			margin-top: 20px;
 
 			@media (max-width: 767px){
 				margin-top: 20px !important;
@@ -1552,11 +1539,14 @@ input[name="category"][value="login-register"] ~ table{
 		
 		// Shipping Method
 		#shippingmethodtable{
+
 			margin-bottom: 20px !important;
+
 			.smalltext{
 				// everything
 				td{
 					padding-left: 0 !important;
+					padding-right: 10px;
 					&:before{
 						content: 'Shipping Carrier/Method';
 						top: 0;
@@ -1600,6 +1590,10 @@ input[name="category"][value="login-register"] ~ table{
 
 
 	// Order Review and Summary
+
+	&.nscheckout-review{
+		width: 100% !important;
+	}
 
 	input[name="total"] ~ table > tbody{
 		display: table;
@@ -1714,6 +1708,8 @@ input[name="category"][value="login-register"] ~ table{
 		td{
 			//float: right !important;
 			#tbl_submitter{
+				padding: 5px 10px;
+				bottom: -60px;
 				float: right;
 			}
 		}
