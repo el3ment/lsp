@@ -29,16 +29,17 @@
 						}
 					},
 					onEnterShippingAddress : function(e, data){
-						$(_mainTable + ' > tbody > tr.portletHandle:first-child + .noprint + .portletHandle:not(:has(#address))').hide();
+						$(_mainTable + ' > tbody > tr.portletHandle:first-child + .noprint + .portletHandle:not(:has(#address))')
+							.attr('style', 'display: none !important;');
 					},
 					onEnterBillingAddress : function(e, data){
 
 					},
 					onEnterShippingMethod : function(e, data){
-
+						$('#kReferralCode, #applycoupon').attr('tabindex', -1);
 					},	
 					onEnterPayment : function(e, data){
-
+						$('input[name="gc"], #applygift').attr('tabindex', -1);
 					},
 					onEnterReview : function(e, data){
 

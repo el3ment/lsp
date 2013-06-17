@@ -21,11 +21,19 @@
 						}else{
 							input.next('button').fadeOut(200);
 						}
+					},
+					onSelectedInput : function(e, data){
+						$(data.selector).select();
 					}
 				},
 				application : {
 					onAttachEvents : function(e, data){
 						$('.clearable', data.selector).each(function(i, element){ _this.attach(element); });
+						$('input[type="text"]', data.selector)
+							.off('focusable')
+							.on('click.lsp.focusable', function(e){ 
+							$(_this).triggerHandler('onSelectedInput', {selector : $(this)});
+						});
 					}
 				}
 			},
