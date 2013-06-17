@@ -99,6 +99,23 @@ a, .b5{
 	color: $grey;
 	&:hover{ text-decoration: none; }
 }
+a.category, .flyout .link a{
+	color: black;
+	text-decoration: none;
+	position: relative;
+	padding-left: 10px;
+
+	&:hover{
+		&:before{
+			content: '›';
+			display: block;
+			position: absolute;
+			left: 0px;
+			color: $grey;
+		}
+		text-decoration: underline;
+	}
+}
 
 p{
 	margin-bottom: px(4 * $paddingUnit + 3);
@@ -787,7 +804,7 @@ ul.list li,
 // Left hand refinement block
 .refinements{
 	
-	margin-left:0;
+	// margin-left:0;
 	font-size: 13px;
 	
 	// The actual box
@@ -841,6 +858,20 @@ ul.list li,
 	li.indent:first-child + .indent + .indent + .indent{ padding-left: 10px; }
 	li.indent:first-child + .indent + .indent + .indent + .indent{ padding-left: 15px; }
 	li{ clear: both; }
+
+
+	// Line above gaps
+	.gapAbove:before{
+		content: 'hey';
+		display: block;
+		background-color: red;
+		height: 1px;
+		width: 75%;
+		margin-left: 12.5%;
+		padding-top: 5px;
+		margin-top: 5px;
+		border-top:1px solid $lightGrey;
+	}
 
 	// Text links
 	a, .b5{
@@ -1211,11 +1242,4 @@ ul.list li,
   .visible-desktopwide {
     display: none !important;
   }
-}
-
-
-.gapAbove{
-	padding-top: 5px;
-	margin-top: 5px;
-	border-top:1px solid $lightGrey;
 }

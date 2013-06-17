@@ -151,7 +151,7 @@
 			}
 			@media (min-width: 1200px){
 				width: 950px;
-				padding-right: 300px;
+				padding-right: 110px;
 			}
 			@include box-sizing();
 		}
@@ -298,6 +298,34 @@
 			display: none;
 		}
 	}
+	// Line above gaps
+	.gapAbove:before{
+		content: ' ';
+		display: block;
+		width: 75%;
+		margin-left: 12.5%;
+		padding-top: 5px;
+		margin-top: 5px;
+		border-top:1px solid $lightGrey;
+		border-right: 25% solid transparent;
+	}
+
+	// .collection.gapAbove{
+	// 	&:before{
+	// 		display: none;
+	// 	}
+	// 	.flyoutTitle:before{
+	// 		content: ' ';
+	// 		display: block;
+	// 		padding: 0;
+	// 		margin: 0;
+	// 		width: 75%;
+	// 		position: absolute;
+	// 		top: -1px;
+	// 		margin-left: 12.5%;
+	// 		border-top: 1px solid $lightGrey;
+	// 	}
+	// }
 }
 
 
@@ -424,6 +452,9 @@
 			//z-index:1;
 		} // group title
 		.ad{
+			display: none;
+		}
+		.gapAbove:before{
 			display: none;
 		}
 	}
