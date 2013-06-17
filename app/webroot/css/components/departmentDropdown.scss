@@ -310,10 +310,11 @@
 		border-right: 25% solid transparent;
 	}
 
-	// .collection.gapAbove{
-	// 	&:before{
-	// 		display: none;
-	// 	}
+	 .collection.gapAbove{
+		&:before{
+			display: none;
+		}
+	}
 	// 	.flyoutTitle:before{
 	// 		content: ' ';
 	// 		display: block;
