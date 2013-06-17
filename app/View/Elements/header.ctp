@@ -122,7 +122,7 @@
 							</ul>
 						</div>
 					</li>
-					<li class='column'>
+					<li class='column visible-desktopwide'>
 
 						<div class='list'>
 							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects-Shop_by_Region'>Shop by Region</span>
@@ -264,8 +264,7 @@
 								<li class='link'><a href=''>Timpani Method Books</a></li>
 								<li class='link'><a href=''>Latin &amp; World Method Books</a></li>
 								<li class='link'><a href=''>All Method Books</a></li>
-								<li class='link'><a href=''>----------------------------</a></li>
-								<li class='link'><a href=''>Sight-Reading Books</a></li>
+								<li class='link gapAbove'><a href=''>Sight-Reading Books</a></li>
 								<li class='link'><a href=''>Pedagogy &amp; Reference Books</a></li>
 								<li class='link'><a href=''>Orchestral Excerpt Books</a></li>
 								<li class='link'><a href=''>History Books</a></li>
@@ -279,8 +278,7 @@
 								<li class='link'><a href=''>Keyboard Duets</a></li>
 								<li class='link'><a href=''>Multi-Percussion Duets</a></li>
 								<li class='link'><a href=''>All Duets</a></li>
-								<li class='link'><a href=''>------------------------</a></li>
-								<li class='link'><a href=''>Full Percussion Ensembles</a></li>
+								<li class='link gapAbove'><a href=''>Full Percussion Ensembles</a></li>
 								<li class='link'><a href=''>Ensembles Without Keyboards</a></li>
 								<li class='link'><a href=''>Keyboard-Only Ensembles</a></li>
 								<li class='link'><a href=''>Ensembles w/Rhythm Section</a></li>
@@ -371,8 +369,7 @@
 								<li class='link'><a href=''>Rhythm Instruments</a></li>
 								<li class='link'><a href=''>Steel Drums (Pans)</a></li>
 								<li class='link'><a href=''>Sticks &amp; Mallets</a></li>
-								<li class='link'><a href=''>----------------------------</a></li>
-								<li class='link'><a href=''>Orff Drums</a></li>
+								<li class='link gapAbove'><a href=''>Orff Drums</a></li>
 								<li class='link'><a href=''>Orff Keyboards</a></li>
 								<li class='link'><a href=''>Orff Rhythm Instruments</a></li>
 								<li class='link'><a href=''>Orff Sticks &amp; Mallets</a></li>
@@ -751,16 +748,13 @@
 								<li class='link'><a href=''>Hi Hat Cymbals</a></li>
 								<li class='link'><a href=''>Crash/Ride Cymbals</a></li>
 								<li class='link'><a href=''>Boxed Sets</a></li>
-								<li class='link'><a href=''>--------------------------</a></li>
-								<li class='link'><a href=''>China Cymbals</a></li>
+								<li class='link gapAbove'><a href=''>China Cymbals</a></li>
 								<li class='link'><a href=''>Splash Cymbals</a></li>
 								<li class='link'><a href=''>Effect Cymbals</a></li>
 								<li class='link'><a href=''>Electronic Cymbals</a></li>
-								<li class='link'><a href=''>--------------------------</a></li>
-								<li class='link'><a href=''>Suspended Cymbals</a></li>
+								<li class='link gapAbove'><a href=''>Suspended Cymbals</a></li>
 								<li class='link'><a href=''>Orchestral Hand Cymbals</a></li>
-								<li class='link'><a href=''>--------------------------</a></li>
-								<li class='link'><a href=''>Marching Crash Cymbals</a></li>
+								<li class='link gapAbove'><a href=''>Marching Crash Cymbals</a></li>
 								<li class='link'><a href=''>Refurbished Cymbals</a></li>
 								<li class='link'><a href=''>Clearance Cymbals</a></li>
 								<li class='link'><a href=''>All Cymbals</a></li>
@@ -822,14 +816,27 @@
 								<li class='link'><a href=''>Drum Set Sticks</a></li>
 								<li class='link'><a href=''>Brushes</a></li>
 								<li class='link'><a href=''>Bundle Sticks</a></li>
-								<li class='link'><a href=''>---------------------------</a></li>
-								<li class='link'><a href=''>Concert Snare Drum Sticks</a></li>
+								<li class='link gapAbove'><a href=''>Concert Snare Drum Sticks</a></li>
 								<li class='link'><a href=''>Hybrid Sticks</a></li>
 								<li class='link'><a href=''>Jingle Sticks</a></li>
 								<li class='link'><a href=''>Practice Sticks</a></li>
 								<li class='link'><a href=''>Stick &amp; Mallet Bundles</a></li>
 							</ul>
 						</div>
+						<div class='list'>
+							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Marching_World'>Marching &amp; World</span>
+							<ul id='flyout-Sticks_Mallets-Marching_World' class='links reveal-closed-phone reveal-open'>
+								<li class='link'><a href=''>Marching Snare Drum Sticks</a></li>
+								<li class='link'><a href=''>Marching Tenor Sticks &amp; Mallets</a></li>
+								<li class='link'><a href=''>Marching Bass Drum Mallets</a></li>
+								<li class='link'><a href=''>Front Ensemble Keyboard Mallets</a></li>
+								<li class='link gapAbove'><a href=''>Timbale Sticks</a></li>
+								<li class='link'><a href=''>Steel Drum Mallets</a></li>
+								<li class='link'><a href=''>All World Sticks &amp; Mallets</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class='column'>
 						<div class='list'>
 							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Mallets'>Mallets</span>
 							<ul id='flyout-Sticks_Mallets-Mallets' class='links reveal-closed-phone reveal-open'>
@@ -839,29 +846,13 @@
 								<li class='link'><a href=''>Xylophone Mallets</a></li>
 								<li class='link'><a href=''>Bell/Xylophone Mallets</a></li>
 								<li class='link'><a href=''>All Keyboard Mallets</a></li>
-								<li class='link'><a href=''>--------------------------</a></li>
-								<li class='link'><a href=''>Timpani Mallets</a></li>
+								<li class='link gapAbove'><a href=''>Timpani Mallets</a></li>
 								<li class='link'><a href=''>Triangle Beaters</a></li>
 								<li class='link'><a href=''>Concert Bass Drum Mallets</a></li>
 								<li class='link'><a href=''>Gong (Tam-Tam Mallets)</a></li>
 								<li class='link'><a href=''>Chime Mallets</a></li>
 								<li class='link'><a href=''>Combination &amp; Specialty Mallets</a></li>
 								<li class='link'><a href=''>Stick &amp; Mallet Bundles</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class='column'>
-						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Marching_World'>Marching &amp; World</span>
-							<ul id='flyout-Sticks_Mallets-Marching_World' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Marching Snare Drum Sticks</a></li>
-								<li class='link'><a href=''>Marching Tenor Sticks &amp; Mallets</a></li>
-								<li class='link'><a href=''>Marching Bass Drum Mallets</a></li>
-								<li class='link'><a href=''>Front Ensemble Keyboard Mallets</a></li>
-								<li class='link'><a href=''>-----------------------------</a></li>
-								<li class='link'><a href=''>Timbale Sticks</a></li>
-								<li class='link'><a href=''>Steel Drum Mallets</a></li>
-								<li class='link'><a href=''>All World Sticks &amp; Mallets</a></li>
 							</ul>
 						</div>
 						<div class='list'>
@@ -913,29 +904,6 @@
 							</ul>
 						</div>
 						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Accessories'>Accessories</span>
-							<ul id='flyout-Accessories_Cases-Accessories' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Stick Tape</a></li>
-								<li class='link'><a href=''>Drum Keys</a></li>
-								<li class='link'><a href=''>Ear Protection</a></li>
-								<li class='link'><a href=''>All Performance Accessories</a></li>
-								<li class='link'><a href=''>------------------------------</a></li>
-								<li class='link'><a href=''>Bass Drum Head Patches</a></li>
-								<li class='link'><a href=''>Drum Rugs</a></li>
-								<li class='link'><a href=''>Drum Polish</a></li>
-								<li class='link'><a href=''>Mutes &amp; Muffles</a></li>
-								<li class='link'><a href=''>All Drum Set Accessories</a></li>
-								<li class='link'><a href=''>---------------------------------</a></li>
-								<li class='link'><a href=''>Cymbal Straps</a></li>
-								<li class='link'><a href=''>Quick-Release Toppers</a></li>
-								<li class='link'><a href=''>Cymbal Felts</a></li>
-								<li class='link'><a href=''>Cymbal Sleeves</a></li>
-								<li class='link'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class='column'>
-						<div class='list'>
 							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Bags_Soft_Cases_Covers'>Bags, Soft Cases &amp; Covers</span>
 							<ul id='flyout-Accessories_Cases-Bags_Soft_Cases_Covers' class='links reveal-closed-phone reveal-open'>
 								<li class='link'><a href=''>Stick &amp; Mallet Bags</a></li>
@@ -945,8 +913,27 @@
 								<li class='link'><a href=''>Cymbal Bags</a></li>
 								<li class='link'><a href=''>Hardware Bags</a></li>
 								<li class='link'><a href=''>All Soft Cases &amp; Bags</a></li>
-								<li class='link'><a href=''>-----------------------------</a></li>
-								<li class='link'><a href=''>Instrument Covers</a></li>
+								<li class='link gapAbove'><a href=''>Instrument Covers</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class='column'>
+						<div class='list'>
+							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Accessories'>Accessories</span>
+							<ul id='flyout-Accessories_Cases-Accessories' class='links reveal-closed-phone reveal-open'>
+								<li class='link'><a href=''>Stick Tape</a></li>
+								<li class='link'><a href=''>Drum Keys</a></li>
+								<li class='link'><a href=''>Ear Protection</a></li>
+								<li class='link'><a href=''>All Performance Accessories</a></li>
+								<li class='link gapAbove'><a href=''>Drum Rugs</a></li>
+								<li class='link'><a href=''>Drum Polish</a></li>
+								<li class='link'><a href=''>Mutes &amp; Muffles</a></li>
+								<li class='link'><a href=''>All Drum Set Accessories</a></li>
+								<li class='link gapAbove'><a href=''>Cymbal Straps</a></li>
+								<li class='link'><a href=''>Quick-Release Toppers</a></li>
+								<li class='link'><a href=''>Cymbal Felts</a></li>
+								<li class='link'><a href=''>Cymbal Sleeves</a></li>
+								<li class='link'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
 							</ul>
 						</div>
 						<div class='list'>

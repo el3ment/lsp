@@ -1175,3 +1175,47 @@ ul.list li,
 		}
 	}
 }
+
+/* New desktopwide Responsive Support
+/* https://github.com/twitter/bootstrap/issues/4220
+-------------------------------------------------- */
+.hidden-desktopwide {
+  display: none !important;
+}
+.visible-desktopwide {
+  display: inherit !important;
+}
+
+@media (min-width: 980px) and (max-width: 1200px) {
+  .hidden-desktopwide {
+    display: inherit !important;
+  }
+  .visible-desktopwide {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .hidden-desktopwide {
+    display: inherit !important;
+  }
+  .visible-desktopwide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hidden-desktopwide {
+    display: inherit !important;
+  }
+  .visible-desktopwide {
+    display: none !important;
+  }
+}
+
+
+.gapAbove{
+	padding-top: 5px;
+	margin-top: 5px;
+	border-top:1px solid $lightGrey;
+}
