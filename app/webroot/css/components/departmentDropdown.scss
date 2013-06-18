@@ -109,7 +109,7 @@
 	}
 	.flyoutTitle{
 		
-		padding: 7px;
+		padding: 4px 6px;
 		position: relative;
 		z-index:1;
 		border-right: 1px solid $lightGrey;
@@ -121,8 +121,11 @@
 			//margin-top: 7px;
 		}
 
-		.details{ margin: 0; }
+		.details{ margin-top: -3px; }
 	} //toplevel titles
+	// li:first-child .flyoutTitle{
+	// 	padding-top: 6px;
+	// }
 	.flyout{
 		
 		position: absolute;
@@ -310,10 +313,15 @@
 		border-right: 25% solid transparent;
 	}
 
-	 .collection.gapAbove{
+	.collection.gapAbove{
 		&:before{
 			display: none;
 		}
+	}
+
+	.allCategory a{
+		color: $grey;
+		text-decoration: underline;
 	}
 	// 	.flyoutTitle:before{
 	// 		content: ' ';

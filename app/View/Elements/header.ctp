@@ -84,7 +84,7 @@
 									<li class='link'><a href=''>Front Ensemble Keyboard Mallets</a></li>
 									<li class='link gapAbove'><a href=''>Timbale Sticks</a></li>
 									<li class='link'><a href=''>Steel Drum Mallets</a></li>
-									<li class='link'><a href=''>All World Sticks &amp; Mallets</a></li>
+									<li class='link allCategory'><a href=''>All World Sticks &amp; Mallets</a></li>
 								</ul>
 							</div>
 						</li>
@@ -97,7 +97,7 @@
 									<li class='link'><a href=''>Bell (Glockenspiel) Mallets</a></li>
 									<li class='link'><a href=''>Xylophone Mallets</a></li>
 									<li class='link'><a href=''>Bell/Xylophone Mallets</a></li>
-									<li class='link'><a href=''>All Keyboard Mallets</a></li>
+									<li class='link allCategory'><a href=''>All Keyboard Mallets</a></li>
 									<li class='link gapAbove'><a href=''>Timpani Mallets</a></li>
 									<li class='link'><a href=''>Triangle Beaters</a></li>
 									<li class='link'><a href=''>Concert Bass Drum Mallets</a></li>
@@ -180,7 +180,7 @@
 									<li class='link'><a href=''>Djembe Heads</a></li>
 									<li class='link'><a href=''>Brazilian (Samba) Heads</a></li>
 									<li class='link'><a href=''>Practice Heads</a></li>
-									<li class='link'><a href=''>All World &amp; Specialty Heads</a></li>
+									<li class='link allCategory'><a href=''>All World &amp; Specialty Heads</a></li>
 								</ul>
 							</div>
 						</li>
@@ -250,7 +250,7 @@
 									<li class='link'><a href=''>Timbales</a></li>
 									<li class='link'><a href=''>Steel Drums (Pans)</a></li>
 									<li class='link'><a href=''>Brazilian (Samba) Drums</a></li>
-									<li class='link'><a href=''>All Latin &amp; World Drums</a></li>
+									<li class='link allCategory'><a href=''>All Latin &amp; World Drums</a></li>
 								</ul>
 							</div>
 						</li>
@@ -294,7 +294,7 @@
 									<li class='link gapAbove'><a href=''>Marching Crash Cymbals</a></li>
 									<li class='link'><a href=''>Refurbished Cymbals</a></li>
 									<li class='link'><a href=''>Clearance Cymbals</a></li>
-									<li class='link'><a href=''>All Cymbals</a></li>
+									<li class='link allCategory'><a href=''>All Cymbals</a></li>
 								</ul>
 							</div>
 						</li>
@@ -308,7 +308,7 @@
 									<li class='link'><a href=''>Opera Gongs</a></li>
 									<li class='link'><a href=''>Gong Sheets</a></li>
 									<li class='link'><a href=''>Decorative Gongs</a></li>
-									<li class='link'><a href=''>All Gongs</a></li>
+									<li class='link allCategory'><a href=''>All Gongs</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -320,7 +320,7 @@
 									<li class='link'><a href=''>Straps</a></li>
 									<li class='link'><a href=''>Polish</a></li>
 									<li class='link'><a href=''>Sizzles</a></li>
-									<li class='link'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
+									<li class='link allCategory'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
 								</ul>
 							</div>
 						</li>
@@ -454,7 +454,7 @@
 									<li class='link'><a href=''>Claves</a></li>
 									<li class='link'><a href=''>Sleigh Bells</a></li>
 									<li class='link'><a href=''>Finger Cymbals</a></li>
-									<li class='link'><a href=''>All Auxiliary Instruments</a></li>
+									<li class='link allCategory'><a href=''>All Auxiliary Instruments</a></li>
 								</ul>
 							</div>
 						</li>
@@ -475,7 +475,7 @@
 			<li class='collection'>
 				<div class='flyoutTitle reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects'>
 					<div class='h3'>
-						Latin &amp; World &amp;
+						Latin &amp; World
 					</div>
 					<div class='details'>
 						Djembes, Cajons, Effects
@@ -524,7 +524,7 @@
 									<li class='link'><a href=''>Shekeres</a></li>
 									<li class='link'><a href=''>Caxixi</a></li>
 									<li class='link'><a href=''>Brazilian (Samba) Percussion</a></li>
-									<li class='link'><a href=''>All World Percussion</a></li>
+									<li class='link allCategory'><a href=''>All World Percussion</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -534,10 +534,10 @@
 									<li class='link'><a href=''>Finger Cymbals</a></li>
 									<li class='link'><a href=''>Wind Chimes</a></li>
 									<li class='link'><a href=''>Ribbon Crashers</a></li>
-									<li class='link'><a href=''>Wood Blocks</a></li>
+									<li class='link allCategory'><a href=''>All Metallic Sounds</a></li>
+									<li class='link gapAbove'><a href=''>Wood Blocks</a></li>
 									<li class='link'><a href=''>Whips (Slapsticks)</a></li>
-									<li class='link'><a href=''>All Metallic Sounds</a></li>
-									<li class='link'><a href=''>All Wooden Sounds</a></li>
+									<li class='link allCategory'><a href=''>All Wooden Sounds</a></li>
 								</ul>
 							</div>
 						</li>
@@ -602,7 +602,7 @@
 									<li class='link'><a href=''>Carts &amp; Field Frames</a></li>
 									<li class='link'><a href=''>Percussion Racks</a></li>
 									<li class='link'><a href=''>Hoops &amp; Rims</a></li>
-									<li class='link'><a href=''>All Marching Parts</a></li>
+									<li class='link allCategory'><a href=''>All Marching Parts</a></li>
 								</ul>
 							</div>
 						</li>
@@ -617,7 +617,7 @@
 									<li class='link'><a href=''>Stick Bags</a></li>
 									<li class='link'><a href=''>Hoop Guards</a></li>
 									<li class='link'><a href=''>Bass Muffle Strips</a></li>
-									<li class='link'><a href=''>All Marching Accessories</a></li>
+									<li class='link allCategory'><a href=''>All Marching Accessories</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -687,7 +687,7 @@
 									<li class='link'><a href=''>Rental Keyboards</a></li>
 									<li class='link'><a href=''>Bell Kits</a></li>
 									<li class='link'><a href=''>Snare Kits</a></li>
-									<li class='link'><a href=''>All Beginner Kits</a></li>
+									<li class='link allCategory'><a href=''>All Beginner Kits</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -722,7 +722,66 @@
 					</ul>
 				</div>
 			</li>
-			
+			<li class='collection'>
+				<div class='flyoutTitle reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases'>
+					<div class='h3'>
+						Cases &amp; Bags
+					</div>
+				</div>
+				<div id='flyout-Accessories_Cases' class='flyout reveal-closed-phone reveal-context-phone'>
+					<ul class='container'>
+						<li class='column'>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Instrument_Cases'>Instrument Cases</span>
+								<ul id='flyout-Accessories_Cases-Instrument_Cases' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Hard Snare Cases</a></li>
+									<li class='link'><a href=''>Hard Tom Cases</a></li>
+									<li class='link'><a href=''>Hard Bass Cases</a></li>
+									<li class='link'><a href=''>Hard Cymbal Cases</a></li>
+									<li class='link'><a href=''>Marching Drum Cases</a></li>
+									<li class='link allCategory'><a href=''>All Hard Cases</a></li>
+									<li class='link gapAbove'><a href=''>Soft Snare Cases</a></li>
+									<li class='link'><a href=''>Soft Tom Cases</a></li>
+									<li class='link'><a href=''>Soft Bass Cases</a></li>
+									<li class='link'><a href=''>Soft Cymbal Bags</a></li>
+									<li class='link allCategory'><a href=''>All Soft Cases</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class='column'>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Other_Cases_and_Bags'>Other Cases &amp; Bags</span>
+								<ul id='flyout-Cases_Other_Cases_and_Bags' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Stick &amp; Mallet Bags</a></li>
+									<li class='link'><a href=''>Hardware Cases</a></li>
+									<li class='link'><a href=''>Hardware Bags</a></li>
+									<li class='link'><a href=''>ATA Flight Cases</a></li>
+								</ul>
+							</div>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Other_Cases_and_Bags'>Covers</span>
+								<ul id='flyout-Cases_Other_Cases_and_Bags' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Timpani Covers</a></li>
+									<li class='link'><a href=''>Keyboard Instrument Covers</a></li>
+									<li class='link'><a href=''>Marching Drum Covers</a></li>
+									<li class='link allCategory'><a href=''>All Covers</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class='advertisement'>
+						<a href='' class='ad'>
+						<div class='content'>
+							<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
+							<div class='price h3'>
+								$79.00 <span class='productGrouping details'>per pair</span>
+							</div>
+						</div>
+						<img class='productImage' src='http://th08.deviantart.net/fs71/PRE/f/2010/006/8/e/Jester_Transparent_PNG_by_AbsurdWordPreferred.png'>
+						</a>
+						</li>
+					</ul>
+				</div>
+			</li>
 			<li class='collection'>
 				<div class='flyoutTitle reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Stands_Hardware'>
 					<div class='h3'>
@@ -747,7 +806,7 @@
 									<li class='link'><a href=''>Conga Stands</a></li>
 									<li class='link'><a href=''>Bongo Stands</a></li>
 									<li class='link'><a href=''>Trap Tables</a></li>
-									<li class='link'><a href=''>All Stands</a></li>
+									<li class='link allCategory'><a href=''>All Stands</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -775,7 +834,7 @@
 									<li class='link'><a href=''>Cowbell Mounts</a></li>
 									<li class='link'><a href=''>Latin, World &amp; Effect Mounts</a></li>
 									<li class='link'><a href=''>Microphone Mounts</a></li>
-									<li class='link'><a href=''>All Adapters &amp; Mounts</a></li>
+									<li class='link allCategory'><a href=''>All Adapters &amp; Mounts</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -786,7 +845,7 @@
 									<li class='link'><a href=''>Cables</a></li>
 									<li class='link'><a href=''>Microphones</a></li>
 									<li class='link'><a href=''>Audio Recorders</a></li>
-									<li class='link'><a href=''>All Live Sound &amp; Recording</a></li>
+									<li class='link allCategory'><a href=''>All Live Sound &amp; Recording</a></li>
 								</ul>
 							</div>
 						</li>
@@ -805,86 +864,66 @@
 				</div>
 			</li>
 			<li class='collection'>
-			<div class='flyoutTitle reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases'>
-				<div class='h3'>
-					Apparel &amp; Accessories
-				</div>
-				<div class='details'>
-					Shirts, Drum Keys, Stick Tape
-				</div>
-			</div>
-			<div id='flyout-Accessories_Cases' class='flyout reveal-closed-phone reveal-context-phone'>
-				<ul class='container'>
-					<li class='column'>
-						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Hard_Cases'>Hard Cases</span>
-							<ul id='flyout-Accessories_Cases-Hard_Cases' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Snare Drum Cases</a></li>
-								<li class='link'><a href=''>Tom Cases</a></li>
-								<li class='link'><a href=''>Bass Drum Cases</a></li>
-								<li class='link'><a href=''>Marching Drum Cases</a></li>
-								<li class='link'><a href=''>Cymbal Cases</a></li>
-								<li class='link'><a href=''>Hardware Cases</a></li>
-								<li class='link'><a href=''>All Hard Cases</a></li>
-							</ul>
-						</div>
-						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Bags_Soft_Cases_Covers'>Bags, Soft Cases &amp; Covers</span>
-							<ul id='flyout-Accessories_Cases-Bags_Soft_Cases_Covers' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Stick &amp; Mallet Bags</a></li>
-								<li class='link'><a href=''>Snare Drum Cases &amp; Bags</a></li>
-								<li class='link'><a href=''>Tom Cases &amp; Bags</a></li>
-								<li class='link'><a href=''>Bass Drum Cases &amp; Bags</a></li>
-								<li class='link'><a href=''>Cymbal Bags</a></li>
-								<li class='link'><a href=''>Hardware Bags</a></li>
-								<li class='link'><a href=''>All Soft Cases &amp; Bags</a></li>
-								<li class='link gapAbove'><a href=''>Instrument Covers</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class='column'>
-						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Accessories'>Accessories</span>
-							<ul id='flyout-Accessories_Cases-Accessories' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Stick Tape</a></li>
-								<li class='link'><a href=''>Drum Keys</a></li>
-								<li class='link'><a href=''>Ear Protection</a></li>
-								<li class='link'><a href=''>All Performance Accessories</a></li>
-								<li class='link gapAbove'><a href=''>Drum Rugs</a></li>
-								<li class='link'><a href=''>Drum Polish</a></li>
-								<li class='link'><a href=''>Mutes &amp; Muffles</a></li>
-								<li class='link'><a href=''>All Drum Set Accessories</a></li>
-								<li class='link gapAbove'><a href=''>Cymbal Straps</a></li>
-								<li class='link'><a href=''>Quick-Release Toppers</a></li>
-								<li class='link'><a href=''>Cymbal Felts</a></li>
-								<li class='link'><a href=''>Cymbal Sleeves</a></li>
-								<li class='link'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
-							</ul>
-						</div>
-						<div class='list'>
-							<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Apparel_Gifts'>Apparel &amp; Gifts</span>
-							<ul id='flyout-Accessories_Cases-Apparel_Gifts' class='links reveal-closed-phone reveal-open'>
-								<li class='link'><a href=''>Shirts</a></li>
-								<li class='link'><a href=''>Hoodies</a></li>
-								<li class='link'><a href=''>Hats, Gloves, &amp; Trinkets</a></li>
-								<li class='link'><a href=''>Gifts &amp; Novelties</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class='advertisement'>
-					<a href='' class='ad'>
-					<div class='content'>
-						<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
-						<div class='price h3'>
-							$79.00 <span class='productGrouping details'>per pair</span>
-						</div>
+				<div class='flyoutTitle reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases'>
+					<div class='h3'>
+						Apparel &amp; Accessories
 					</div>
-					<img class='productImage' src='http://th08.deviantart.net/fs71/PRE/f/2010/006/8/e/Jester_Transparent_PNG_by_AbsurdWordPreferred.png'>
-					</a>
-					</li>
-				</ul>
-			</div>
+					<div class='details'>
+						Shirts, Drum Keys, Stick Tape
+					</div>
+				</div>
+				<div id='flyout-Accessories_Cases' class='flyout reveal-closed-phone reveal-context-phone'>
+					<ul class='container'>
+						<li class='column'>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Accessories'>Accessories</span>
+								<ul id='flyout-Accessories_Cases-Accessories' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Stick Tape</a></li>
+									<li class='link'><a href=''>Drum Keys</a></li>
+									<li class='link'><a href=''>Ear Protection</a></li>
+									<li class='link allCategory'><a href=''>All Performance Accessories</a></li>
+									<li class='link gapAbove'><a href=''>Drum Rugs</a></li>
+									<li class='link'><a href=''>Drum Polish</a></li>
+									<li class='link'><a href=''>Mutes &amp; Muffles</a></li>
+									<li class='link allCategory'><a href=''>All Drum Set Accessories</a></li>
+									<li class='link gapAbove'><a href=''>Cymbal Straps</a></li>
+									<li class='link'><a href=''>Quick-Release Toppers</a></li>
+									<li class='link'><a href=''>Cymbal Felts</a></li>
+									<li class='link'><a href=''>Cymbal Sleeves</a></li>
+									<li class='link allCategory'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class='column'>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Apparel_Gifts'>Apparel &amp; Gifts</span>
+								<ul id='flyout-Accessories_Cases-Apparel_Gifts' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Shirts</a></li>
+									<li class='link'><a href=''>Hoodies</a></li>
+									<li class='link'><a href=''>Hats</a></li>
+									<li class='link'><a href=''>Gloves</a></li>
+									<li class='link'><a href=''>Trinkets</a></li>
+									<li class='link'><a href=''>Giant Sticks</a></li>
+									<li class='link'><a href=''>Miniature Drums</a></li>
+									<li class='link'><a href=''>Gifts &amp; Novelties</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class='advertisement'>
+						<a href='' class='ad'>
+						<div class='content'>
+							<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
+							<div class='price h3'>
+								$79.00 <span class='productGrouping details'>per pair</span>
+							</div>
+						</div>
+						<img class='productImage' src='http://th08.deviantart.net/fs71/PRE/f/2010/006/8/e/Jester_Transparent_PNG_by_AbsurdWordPreferred.png'>
+						</a>
+						</li>
+					</ul>
+				</div>
 			</li>
+			
 			<li class='collection'>
 				<div class='flyoutTitle reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books'>
 					<div class='h3'>
@@ -905,7 +944,7 @@
 									<li class='link'><a href=''>Snare Drum Solo Collections</a></li>
 									<li class='link'><a href=''>Timpani Solos</a></li>
 									<li class='link'><a href=''>Multi-Percussion Solos</a></li>
-									<li class='link'><a href=''>All Solos</a></li>
+									<li class='link allCategory'><a href=''>All Solos</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -916,7 +955,7 @@
 									<li class='link'><a href=''>Marimba Method Books</a></li>
 									<li class='link'><a href=''>Timpani Method Books</a></li>
 									<li class='link'><a href=''>Latin &amp; World Method Books</a></li>
-									<li class='link'><a href=''>All Method Books</a></li>
+									<li class='link allCategory'><a href=''>All Method Books</a></li>
 									<li class='link gapAbove'><a href=''>Sight-Reading Books</a></li>
 									<li class='link'><a href=''>Pedagogy &amp; Reference Books</a></li>
 									<li class='link'><a href=''>Orchestral Excerpt Books</a></li>
@@ -930,7 +969,7 @@
 								<ul id='flyout-Sheet_Music_Books-Duets_Ensembles' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Keyboard Duets</a></li>
 									<li class='link'><a href=''>Multi-Percussion Duets</a></li>
-									<li class='link'><a href=''>All Duets</a></li>
+									<li class='link allCategory'><a href=''>All Duets</a></li>
 									<li class='link gapAbove'><a href=''>Full Percussion Ensembles</a></li>
 									<li class='link'><a href=''>Ensembles Without Keyboards</a></li>
 									<li class='link'><a href=''>Keyboard-Only Ensembles</a></li>
@@ -938,7 +977,7 @@
 									<li class='link'><a href=''>Steel Band Ensembles</a></li>
 									<li class='link'><a href=''>Holiday Ensembles</a></li>
 									<li class='link'><a href=''>Novelty Ensembles</a></li>
-									<li class='link'><a href=''>All Ensembles</a></li>
+									<li class='link allCategory'><a href=''>All Ensembles</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -953,26 +992,19 @@
 							</div>
 						</li>
 						<li class='advertisement'>
-						<a href='' class='ad'>
-						<div class='content'>
-							<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
-							<div class='price h3'>
-								$79.00 <span class='productGrouping details'>per pair</span>
+							<a href='' class='ad'>
+							<div class='content'>
+								<span class='h3 name'>Innovative IP240 Marimba Mallets</span>
+								<div class='price h3'>
+									$79.00 <span class='productGrouping details'>per pair</span>
+								</div>
 							</div>
-						</div>
-						<img class='productImage' src='http://th08.deviantart.net/fs71/PRE/f/2010/006/8/e/Jester_Transparent_PNG_by_AbsurdWordPreferred.png'>
-						</a>
+							<img class='productImage' src='http://th08.deviantart.net/fs71/PRE/f/2010/006/8/e/Jester_Transparent_PNG_by_AbsurdWordPreferred.png'>
+							</a>
 						</li>
 					</ul>
 				</div>
 			</li>
-			
-			
-			
-			
-			
-			
-			
 			
 		</ul>
 	</div>
