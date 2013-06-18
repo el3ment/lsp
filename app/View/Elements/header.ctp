@@ -65,25 +65,25 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Sticks'>Sticks</span>
 								<ul id='flyout-Sticks_Mallets-Sticks' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Drum Set Sticks</a></li>
+									<li class='link'><a href=''>Drum Set</a></li>
 									<li class='link'><a href=''>Brushes</a></li>
 									<li class='link'><a href=''>Bundle Sticks</a></li>
-									<li class='link gapAbove'><a href=''>Concert Snare Drum Sticks</a></li>
-									<li class='link'><a href=''>Hybrid Sticks</a></li>
-									<li class='link'><a href=''>Jingle Sticks</a></li>
-									<li class='link'><a href=''>Practice Sticks</a></li>
+									<li class='link gapAbove'><a href=''>Concert Snare</a></li>
+									<li class='link'><a href=''>Hybrid</a></li>
+									<li class='link'><a href=''>Jingle</a></li>
+									<li class='link'><a href=''>Practice</a></li>
 									<li class='link'><a href=''>Stick &amp; Mallet Bundles</a></li>
 								</ul>
 							</div>
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Marching_World'>Marching &amp; World</span>
 								<ul id='flyout-Sticks_Mallets-Marching_World' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Marching Snare Drum Sticks</a></li>
-									<li class='link'><a href=''>Marching Tenor Sticks &amp; Mallets</a></li>
-									<li class='link'><a href=''>Marching Bass Drum Mallets</a></li>
-									<li class='link'><a href=''>Front Ensemble Keyboard Mallets</a></li>
-									<li class='link gapAbove'><a href=''>Timbale Sticks</a></li>
-									<li class='link'><a href=''>Steel Drum Mallets</a></li>
+									<li class='link'><a href=''>Marching Snare</a></li>
+									<li class='link'><a href=''>Marching Tenor</a></li>
+									<li class='link'><a href=''>Marching Bass</a></li>
+									<li class='link'><a href=''>Front Ensemble</a></li>
+									<li class='link gapAbove'><a href=''>Timbale</a></li>
+									<li class='link'><a href=''>Steel Drum</a></li>
 									<li class='link allCategory'><a href=''>All World Sticks &amp; Mallets</a></li>
 								</ul>
 							</div>
@@ -92,18 +92,18 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Mallets'>Mallets</span>
 								<ul id='flyout-Sticks_Mallets-Mallets' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Marimba Mallets</a></li>
-									<li class='link'><a href=''>Vibraphone Mallets</a></li>
-									<li class='link'><a href=''>Bell (Glockenspiel) Mallets</a></li>
-									<li class='link'><a href=''>Xylophone Mallets</a></li>
-									<li class='link'><a href=''>Bell/Xylophone Mallets</a></li>
+									<li class='link'><a href=''>Marimba</a></li>
+									<li class='link'><a href=''>Vibraphone</a></li>
+									<li class='link'><a href=''>Bell (Glockenspiel)</a></li>
+									<li class='link'><a href=''>Xylophone</a></li>
+									<li class='link'><a href=''>Bell/Xylophone</a></li>
 									<li class='link allCategory'><a href=''>All Keyboard Mallets</a></li>
-									<li class='link gapAbove'><a href=''>Timpani Mallets</a></li>
-									<li class='link'><a href=''>Triangle Beaters</a></li>
-									<li class='link'><a href=''>Concert Bass Drum Mallets</a></li>
-									<li class='link'><a href=''>Gong (Tam-Tam Mallets)</a></li>
-									<li class='link'><a href=''>Chime Mallets</a></li>
-									<li class='link'><a href=''>Combination &amp; Specialty Mallets</a></li>
+									<li class='link gapAbove'><a href=''>Timpani</a></li>
+									<li class='link'><a href=''>Triangle</a></li>
+									<li class='link'><a href=''>Concert Bass Drum</a></li>
+									<li class='link'><a href=''>Gong (Tam-Tam)</a></li>
+									<li class='link'><a href=''>Chime</a></li>
+									<li class='link'><a href=''>Combination &amp; Specialty</a></li>
 									<li class='link'><a href=''>Stick &amp; Mallet Bundles</a></li>
 								</ul>
 							</div>
@@ -141,45 +141,45 @@
 					<ul class='container'>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Drum_Set'>Drum Set</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Drum_Set'>Drum Set Heads</span>
 								<ul id='flyout-Drum_Heads-Drum_Set' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Snare Drum Heads</a></li>
-									<li class='link'><a href=''>Tom Heads</a></li>
-									<li class='link'><a href=''>Bass Drum Heads</a></li>
-									<li class='link'><a href=''>Drum Set Pre-Packs</a></li>
+									<li class='link'><a href=''>Snare</a></li>
+									<li class='link'><a href=''>Tom</a></li>
+									<li class='link'><a href=''>Bass</a></li>
+									<li class='link'><a href=''>Pre-Packs</a></li>
 								</ul>
 							</div>
 							
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Concert'>Concert</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Concert'>Concert Heads</span>
 								<ul id='flyout-Drum_Heads-Concert' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Concert Snare Drum Heads</a></li>
-									<li class='link'><a href=''>Concert Tom Heads</a></li>
-									<li class='link'><a href=''>Concert Bass Drum Heads</a></li>
-									<li class='link'><a href=''>Timpani Heads</a></li>
-									<li class='link'><a href=''>Tambourine Heads</a></li>
+									<li class='link'><a href=''>Snare</a></li>
+									<li class='link'><a href=''>Tom</a></li>
+									<li class='link'><a href=''>Bass</a></li>
+									<li class='link'><a href=''>Timpani</a></li>
+									<li class='link'><a href=''>Tambourine</a></li>
 								</ul>
 							</div>
 							
 						</li>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Marching'>Marching</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Marching'>Marching Heads</span>
 								<ul id='flyout-Drum_Heads-Marching' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Marching Snare Drum Heads</a></li>
-									<li class='link'><a href=''>Marching Tenor Heads</a></li>
-									<li class='link'><a href=''>Marching Bass Drum Heads</a></li>
+									<li class='link'><a href=''>Snare</a></li>
+									<li class='link'><a href=''>Tenor</a></li>
+									<li class='link'><a href=''>Bass</a></li>
 								</ul>
 							</div>
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-World_Specialty'>World &amp; Specialty</span>
 								<ul id='flyout-Drum_Heads-World_Specialty' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Bongo Heads</a></li>
-									<li class='link'><a href=''>Conga Heads</a></li>
-									<li class='link'><a href=''>Timbale Heads</a></li>
-									<li class='link'><a href=''>Djembe Heads</a></li>
-									<li class='link'><a href=''>Brazilian (Samba) Heads</a></li>
-									<li class='link'><a href=''>Practice Heads</a></li>
+									<li class='link'><a href=''>Bongo</a></li>
+									<li class='link'><a href=''>Conga</a></li>
+									<li class='link'><a href=''>Timbale</a></li>
+									<li class='link'><a href=''>Djembe</a></li>
+									<li class='link'><a href=''>Brazilian (Samba)</a></li>
+									<li class='link'><a href=''>Practice</a></li>
 									<li class='link allCategory'><a href=''>All World &amp; Specialty Heads</a></li>
 								</ul>
 							</div>
@@ -208,24 +208,24 @@
 					<ul class='container'>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Drum_Sets_Electronic_Drums'>Drum Sets &amp; Electronic Drums</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Drum_Sets_Electronic_Drums'>Drum Sets/Electronic</span>
 								<ul id='flyout-Drums_Drum_Sets-Drum_Sets_Electronic_Drums' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Drum Sets</a></li>
-									<li class='link'><a href=''>Junior Drum Sets</a></li>
-									<li class='link'><a href=''>Snare Drums</a></li>
+									<li class='link'><a href=''>Junior Sets</a></li>
+									<li class='link'><a href=''>Snares</a></li>
 									<li class='link'><a href=''>Toms</a></li>
 									<li class='link'><a href=''>Floor Toms</a></li>
 									<li class='link'><a href=''>Bass Drums</a></li>
-									<li class='link'><a href=''>Electronic Drums</a></li>
+									<li class='link'><a href=''>Electronic</a></li>
 								</ul>
 							</div>
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Concert_Drums'>Concert Drums</span>
 								<ul id='flyout-Drums_Drum_Sets-Concert_Drums' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Concert Snare Drums</a></li>
+									<li class='link'><a href=''>Snares</a></li>
 									<li class='link'><a href=''>Field Drums</a></li>
-									<li class='link'><a href=''>Concert Toms</a></li>
-									<li class='link'><a href=''>Concert Bass Drums</a></li>
+									<li class='link'><a href=''>Toms</a></li>
+									<li class='link'><a href=''>Bass Drums</a></li>
 									<li class='link'><a href=''>Timpani</a></li>
 								</ul>
 							</div>
@@ -234,10 +234,10 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Marching_Drums'>Marching Drums</span>
 								<ul id='flyout-Drums_Drum_Sets-Marching_Drums' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Marching Snare Drums</a></li>
-									<li class='link'><a href=''>Marching Tenors</a></li>
-									<li class='link'><a href=''>Marching Bass Drums</a></li>
-									<li class='link'><a href=''>Pipe Band Drums</a></li>
+									<li class='link'><a href=''>Snares</a></li>
+									<li class='link'><a href=''>Tenors</a></li>
+									<li class='link'><a href=''>Basses</a></li>
+									<li class='link'><a href=''>Pipe Band</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -249,7 +249,7 @@
 									<li class='link'><a href=''>Djembes</a></li>
 									<li class='link'><a href=''>Timbales</a></li>
 									<li class='link'><a href=''>Steel Drums (Pans)</a></li>
-									<li class='link'><a href=''>Brazilian (Samba) Drums</a></li>
+									<li class='link'><a href=''>Brazilian (Samba)</a></li>
 									<li class='link allCategory'><a href=''>All Latin &amp; World Drums</a></li>
 								</ul>
 							</div>
@@ -280,20 +280,20 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cymbals_Gongs-Cymbals'>Cymbals</span>
 								<ul id='flyout-Cymbals_Gongs-Cymbals' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Crash Cymbals</a></li>
-									<li class='link'><a href=''>Ride Cymbals</a></li>
-									<li class='link'><a href=''>Hi Hat Cymbals</a></li>
-									<li class='link'><a href=''>Crash/Ride Cymbals</a></li>
+									<li class='link'><a href=''>Crashes</a></li>
+									<li class='link'><a href=''>Rides</a></li>
+									<li class='link'><a href=''>Hi Hats</a></li>
+									<li class='link'><a href=''>Crash/Rides</a></li>
 									<li class='link'><a href=''>Boxed Sets</a></li>
-									<li class='link gapAbove'><a href=''>China Cymbals</a></li>
-									<li class='link'><a href=''>Splash Cymbals</a></li>
+									<li class='link gapAbove'><a href=''>Chinas</a></li>
+									<li class='link'><a href=''>Splashes</a></li>
 									<li class='link'><a href=''>Effect Cymbals</a></li>
 									<li class='link'><a href=''>Electronic Cymbals</a></li>
-									<li class='link gapAbove'><a href=''>Suspended Cymbals</a></li>
-									<li class='link'><a href=''>Orchestral Hand Cymbals</a></li>
-									<li class='link gapAbove'><a href=''>Marching Crash Cymbals</a></li>
-									<li class='link'><a href=''>Refurbished Cymbals</a></li>
-									<li class='link'><a href=''>Clearance Cymbals</a></li>
+									<li class='link gapAbove'><a href=''>Suspended</a></li>
+									<li class='link'><a href=''>Hand Crashes</a></li>
+									<li class='link gapAbove'><a href=''>Marching Crashes</a></li>
+									<li class='link'><a href=''>Refurbished</a></li>
+									<li class='link'><a href=''>Clearance</a></li>
 									<li class='link allCategory'><a href=''>All Cymbals</a></li>
 								</ul>
 							</div>
@@ -302,12 +302,12 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cymbals_Gongs-Gongs'>Gongs</span>
 								<ul id='flyout-Cymbals_Gongs-Gongs' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Symphonic Gongs (Tam-Tams)</a></li>
-									<li class='link'><a href=''>Wind Gongs</a></li>
-									<li class='link'><a href=''>Button Gongs</a></li>
-									<li class='link'><a href=''>Opera Gongs</a></li>
+									<li class='link'><a href=''>Symphonic (Tam-Tam)</a></li>
+									<li class='link'><a href=''>Wind (Feng)</a></li>
+									<li class='link'><a href=''>Button (Bao)</a></li>
+									<li class='link'><a href=''>Opera (Jin)</a></li>
 									<li class='link'><a href=''>Gong Sheets</a></li>
-									<li class='link'><a href=''>Decorative Gongs</a></li>
+									<li class='link'><a href=''>Decorative</a></li>
 									<li class='link allCategory'><a href=''>All Gongs</a></li>
 								</ul>
 							</div>
@@ -349,7 +349,7 @@
 					<ul class='container'>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Keyboard_Instruments-Keyboard_Instruments'>Keyboard Instruments</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Keyboard_Instruments-Keyboard_Instruments'>Instruments</span>
 								<ul id='flyout-Keyboard_Instruments-Keyboard_Instruments' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Marimbas</a></li>
 									<li class='link'><a href=''>Vibraphones</a></li>
@@ -369,15 +369,15 @@
 									<li class='link'><a href=''>Cases</a></li>
 									<li class='link'><a href=''>Covers</a></li>
 									<li class='link'><a href=''>Field Frames</a></li>
-									<li class='link'><a href=''>Keyboard Stands</a></li>
-									<li class='link'><a href=''>Keyboard Mounts</a></li>
-									<li class='link'><a href=''>Keyboard Parts</a></li>
+									<li class='link'><a href=''>Stands</a></li>
+									<li class='link'><a href=''>Mounts</a></li>
+									<li class='link'><a href=''>Parts</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Keyboard_Instruments-Practice_Beginning_Keyboards'>Practice &amp; Beginning Keyboards</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Keyboard_Instruments-Practice_Beginning_Keyboards'>Practice &amp; Beginner</span>
 								<ul id='flyout-Keyboard_Instruments-Practice_Beginning_Keyboards' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Beginner Bell Kits</a></li>
 									<li class='link'><a href=''>Practice Marimbas</a></li>
@@ -416,10 +416,10 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Concert-Drums'>Drums</span>
 								<ul id='flyout-Concert-Drums' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Concert Snare Drums</a></li>
+									<li class='link'><a href=''>Snares</a></li>
 									<li class='link'><a href=''>Field Drums</a></li>
-									<li class='link'><a href=''>Concert Toms</a></li>
-									<li class='link'><a href=''>Concert Bass Drums</a></li>
+									<li class='link'><a href=''>Toms</a></li>
+									<li class='link'><a href=''>Bass Drums</a></li>
 									<li class='link'><a href=''>Timpani</a></li>
 								</ul>
 							</div>
@@ -431,7 +431,7 @@
 									<li class='link'><a href=''>Beeswax</a></li>
 									<li class='link'><a href=''>Hand Cymbal Cradles</a></li>
 									<li class='link'><a href=''>Percussion Cabinets</a></li>
-									<li class='link'><a href=''>Concert Bass Drum Stands</a></li>
+									<li class='link'><a href=''>Bass Drum Stands</a></li>
 									<li class='link'><a href=''>Gong Stands</a></li>
 									<li class='link'><a href=''>Trap Tables</a></li>
 								</ul>
@@ -523,12 +523,12 @@
 									<li class='link'><a href=''>Steel Drums (Pans)</a></li>
 									<li class='link'><a href=''>Shekeres</a></li>
 									<li class='link'><a href=''>Caxixi</a></li>
-									<li class='link'><a href=''>Brazilian (Samba) Percussion</a></li>
+									<li class='link'><a href=''>Brazilian (Samba)</a></li>
 									<li class='link allCategory'><a href=''>All World Percussion</a></li>
 								</ul>
 							</div>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects-Metal_And_Wood_Sounds'>Metal And Wood Sounds</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects-Metal_And_Wood_Sounds'>Metal &amp; Wood Sounds</span>
 								<ul id='flyout-Latin_World_Effects-Metal_And_Wood_Sounds' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Tambourines</a></li>
 									<li class='link'><a href=''>Finger Cymbals</a></li>
@@ -546,13 +546,13 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects-Shop_by_Region'>Shop by Region</span>
 								<ul id='flyout-Latin_World_Effects-Shop_by_Region' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Latin/Afro-Cuban Percussion</a></li>
-									<li class='link'><a href=''>Brazilian (Samba) Percussion</a></li>
-									<li class='link'><a href=''>African Percussion</a></li>
-									<li class='link'><a href=''>Asian Percussion</a></li>
-									<li class='link'><a href=''>Middle Eastern Percussion</a></li>
-									<li class='link'><a href=''>Caribbean Percussion</a></li>
-									<li class='link'><a href=''>European Percussion</a></li>
+									<li class='link'><a href=''>Latin/Afro-Cuban</a></li>
+									<li class='link'><a href=''>Brazilian (Samba)</a></li>
+									<li class='link'><a href=''>African</a></li>
+									<li class='link'><a href=''>Asian</a></li>
+									<li class='link'><a href=''>Middle Eastern</a></li>
+									<li class='link'><a href=''>Caribbean</a></li>
+									<li class='link'><a href=''>European</a></li>
 								</ul>
 							</div>
 						</li>
@@ -588,10 +588,10 @@
 									<li class='link'><a href=''>Snare Drums</a></li>
 									<li class='link'><a href=''>Tenors</a></li>
 									<li class='link'><a href=''>Bass Drums</a></li>
-									<li class='link'><a href=''>Marching Cymbals</a></li>
+									<li class='link'><a href=''>Crash Cymbals</a></li>
 									<li class='link'><a href=''>Pipe Band Drums</a></li>
-									<li class='link'><a href=''>Marching Keyboards</a></li>
-									<li class='link'><a href=''>Marching Brass</a></li>
+									<li class='link'><a href=''>Keyboards</a></li>
+									<li class='link'><a href=''>Brass (Horns)</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -660,21 +660,21 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Practice_Classroom-Practice_Pads'>Practice Pads</span>
 								<ul id='flyout-Practice_Classroom-Practice_Pads' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Snare Practice Pads</a></li>
-									<li class='link'><a href=''>Tenor Practice Pads</a></li>
-									<li class='link'><a href=''>Marching Bass Practice Pads</a></li>
+									<li class='link'><a href=''>Snare (Standard)</a></li>
+									<li class='link'><a href=''>Tenor</a></li>
+									<li class='link'><a href=''>Marching Bass</a></li>
 									<li class='link'><a href=''>Practice Drum Sets</a></li>
-									<li class='link'><a href=''>Bass Pedal Practice Pads</a></li>
+									<li class='link'><a href=''>Bass Pedal</a></li>
 								</ul>
 							</div>
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Practice_Classroom-Practice_Gear'>Practice Gear</span>
 								<ul id='flyout-Practice_Classroom-Practice_Gear' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Metronomes &amp; Tuners</a></li>
-									<li class='link'><a href=''>Practice Sticks</a></li>
+									<li class='link'><a href=''>Sticks</a></li>
 									<li class='link'><a href=''>Pad Laminates</a></li>
 									<li class='link'><a href=''>Drum Set Mutes</a></li>
-									<li class='link'><a href=''>Silent Practice Heads</a></li>
+									<li class='link'><a href=''>Silent Heads</a></li>
 									<li class='link'><a href=''>Music Stands</a></li>
 								</ul>
 							</div>
@@ -734,16 +734,16 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Instrument_Cases'>Instrument Cases</span>
 								<ul id='flyout-Accessories_Cases-Instrument_Cases' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Hard Snare Cases</a></li>
-									<li class='link'><a href=''>Hard Tom Cases</a></li>
-									<li class='link'><a href=''>Hard Bass Cases</a></li>
-									<li class='link'><a href=''>Hard Cymbal Cases</a></li>
-									<li class='link'><a href=''>Marching Drum Cases</a></li>
+									<li class='link'><a href=''>Snare Drum (Hard)</a></li>
+									<li class='link'><a href=''>Tom (Hard)</a></li>
+									<li class='link'><a href=''>Bass Drum (Hard)</a></li>
+									<li class='link'><a href=''>Cymbal (Hard)</a></li>
+									<li class='link'><a href=''>Marching Drum</a></li>
 									<li class='link allCategory'><a href=''>All Hard Cases</a></li>
-									<li class='link gapAbove'><a href=''>Soft Snare Cases</a></li>
-									<li class='link'><a href=''>Soft Tom Cases</a></li>
-									<li class='link'><a href=''>Soft Bass Cases</a></li>
-									<li class='link'><a href=''>Soft Cymbal Bags</a></li>
+									<li class='link gapAbove'><a href=''>Snare Drum (Soft)</a></li>
+									<li class='link'><a href=''>Tom (Soft)</a></li>
+									<li class='link'><a href=''>Bass Drum (Soft)</a></li>
+									<li class='link'><a href=''>Cymbal (Soft)</a></li>
 									<li class='link allCategory'><a href=''>All Soft Cases</a></li>
 								</ul>
 							</div>
@@ -752,18 +752,18 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Other_Cases_and_Bags'>Other Cases &amp; Bags</span>
 								<ul id='flyout-Cases_Other_Cases_and_Bags' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Stick &amp; Mallet Bags</a></li>
-									<li class='link'><a href=''>Hardware Cases</a></li>
-									<li class='link'><a href=''>Hardware Bags</a></li>
+									<li class='link'><a href=''>Sticks &amp; Mallets</a></li>
+									<li class='link'><a href=''>Hardware (Hard)</a></li>
+									<li class='link'><a href=''>Hardware (Soft)</a></li>
 									<li class='link'><a href=''>ATA Flight Cases</a></li>
 								</ul>
 							</div>
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Other_Cases_and_Bags'>Covers</span>
 								<ul id='flyout-Cases_Other_Cases_and_Bags' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Timpani Covers</a></li>
-									<li class='link'><a href=''>Keyboard Instrument Covers</a></li>
-									<li class='link'><a href=''>Marching Drum Covers</a></li>
+									<li class='link'><a href=''>Timpani</a></li>
+									<li class='link'><a href=''>Keyboard</a></li>
+									<li class='link'><a href=''>Marching Drum</a></li>
 									<li class='link allCategory'><a href=''>All Covers</a></li>
 								</ul>
 							</div>
@@ -797,14 +797,14 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Stands_Hardware-Stands'>Stands</span>
 								<ul id='flyout-Stands_Hardware-Stands' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Cymbal Straight Stands</a></li>
-									<li class='link'><a href=''>Cymbal Boom Stands</a></li>
-									<li class='link'><a href=''>Hi Hat Stands</a></li>
-									<li class='link'><a href=''>Snare Drum Stands</a></li>
-									<li class='link'><a href=''>Tom Stands</a></li>
+									<li class='link'><a href=''>Straight Cymbal</a></li>
+									<li class='link'><a href=''>Boom Cymbal</a></li>
+									<li class='link'><a href=''>Hi Hat</a></li>
+									<li class='link'><a href=''>Snare Drum</a></li>
+									<li class='link'><a href=''>Tom</a></li>
 									<li class='link'><a href=''>Hardware Bundles</a></li>
-									<li class='link'><a href=''>Conga Stands</a></li>
-									<li class='link'><a href=''>Bongo Stands</a></li>
+									<li class='link'><a href=''>Conga</a></li>
+									<li class='link'><a href=''>Bongo</a></li>
 									<li class='link'><a href=''>Trap Tables</a></li>
 									<li class='link allCategory'><a href=''>All Stands</a></li>
 								</ul>
@@ -937,29 +937,29 @@
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-Solos'>Solos</span>
 								<ul id='flyout-Sheet_Music_Books-Solos' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Marimba Solos</a></li>
+									<li class='link'><a href=''>Marimba</a></li>
 									<li class='link'><a href=''>Marimba Solo Collections</a></li>
-									<li class='link'><a href=''>Vibraphone Solos</a></li>
-									<li class='link'><a href=''>Snare Drum Solos</a></li>
+									<li class='link'><a href=''>Vibraphone</a></li>
+									<li class='link'><a href=''>Snare Drum</a></li>
 									<li class='link'><a href=''>Snare Drum Solo Collections</a></li>
-									<li class='link'><a href=''>Timpani Solos</a></li>
-									<li class='link'><a href=''>Multi-Percussion Solos</a></li>
+									<li class='link'><a href=''>Timpani</a></li>
+									<li class='link'><a href=''>Multi-Percussion</a></li>
 									<li class='link allCategory'><a href=''>All Solos</a></li>
 								</ul>
 							</div>
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-Books'>Books</span>
 								<ul id='flyout-Sheet_Music_Books-Books' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Drum Set Method Books</a></li>
-									<li class='link'><a href=''>Snare Drum Method Books</a></li>
-									<li class='link'><a href=''>Marimba Method Books</a></li>
-									<li class='link'><a href=''>Timpani Method Books</a></li>
-									<li class='link'><a href=''>Latin &amp; World Method Books</a></li>
+									<li class='link'><a href=''>Drum Set</a></li>
+									<li class='link'><a href=''>Snare Drum</a></li>
+									<li class='link'><a href=''>Marimba</a></li>
+									<li class='link'><a href=''>Timpani</a></li>
+									<li class='link'><a href=''>Latin &amp; World</a></li>
 									<li class='link allCategory'><a href=''>All Method Books</a></li>
-									<li class='link gapAbove'><a href=''>Sight-Reading Books</a></li>
-									<li class='link'><a href=''>Pedagogy &amp; Reference Books</a></li>
-									<li class='link'><a href=''>Orchestral Excerpt Books</a></li>
-									<li class='link'><a href=''>History Books</a></li>
+									<li class='link gapAbove'><a href=''>Sight-Reading</a></li>
+									<li class='link'><a href=''>Pedagogy &amp; Reference</a></li>
+									<li class='link'><a href=''>Orchestral Excerpts</a></li>
+									<li class='link'><a href=''>History</a></li>
 								</ul>
 							</div>
 						</li>
@@ -971,12 +971,12 @@
 									<li class='link'><a href=''>Multi-Percussion Duets</a></li>
 									<li class='link allCategory'><a href=''>All Duets</a></li>
 									<li class='link gapAbove'><a href=''>Full Percussion Ensembles</a></li>
-									<li class='link'><a href=''>Ensembles Without Keyboards</a></li>
-									<li class='link'><a href=''>Keyboard-Only Ensembles</a></li>
-									<li class='link'><a href=''>Ensembles w/Rhythm Section</a></li>
-									<li class='link'><a href=''>Steel Band Ensembles</a></li>
-									<li class='link'><a href=''>Holiday Ensembles</a></li>
-									<li class='link'><a href=''>Novelty Ensembles</a></li>
+									<li class='link'><a href=''>No Keyboards</a></li>
+									<li class='link'><a href=''>Keyboard-Only</a></li>
+									<li class='link'><a href=''>With Rhythm Section</a></li>
+									<li class='link'><a href=''>Steel Band</a></li>
+									<li class='link'><a href=''>Holiday</a></li>
+									<li class='link'><a href=''>Novelty</a></li>
 									<li class='link allCategory'><a href=''>All Ensembles</a></li>
 								</ul>
 							</div>
