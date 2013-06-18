@@ -306,13 +306,15 @@
 					</li>
 				</ul>
 			</form>
-			<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=item.Image_1_URL #>.220x220' /></div>
-			<span class='field compare details'>
-				<input type='checkbox' />
-				<button class='b5'>Compare Now</button>
-			</span>
-			<span class='productName'><#=item.Featured_Description #></span>  
-			<span class='details model'>Model Number #<span class='productMpn'><#=item.model_number #></span></span>
+			<a href='#' class='productLink'>
+				<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=item.Image_1_URL #>.205x205' /></div>
+				<span class='field compare details'>
+					<input type='checkbox' />
+					<button class='b5'>Compare Now</button>
+				</span>
+				<span class='productName'><#=item.Featured_Description #></span>  
+				<span class='details model'>Model Number #<span class='productMpn'><#=item.model_number #></span></span>
+			</a>
 			<span class='netsuiteUrl'><a href='https://system.netsuite.com/app/common/item/item.nl?id=<#=item.Product_Id #>' target='_new'>See this product in NetSuite</a>
 			<# if(item.number_of_reviews){ #>
 				<div class='aggregateReviews'>

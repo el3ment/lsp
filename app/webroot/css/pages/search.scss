@@ -47,9 +47,29 @@
 		float: left;
 	}
 	
-	
 	// Actual search results
 	.results{
+
+		// The link that surrounds both the image and the title
+		.productLink{
+			
+			text-decoration: none;
+
+			.productName{
+				color: black;
+				font-weight: bold;
+			}
+
+			&:hover{
+				.productName{
+					text-decoration: underline;
+				}
+				.thumbnail{
+					@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+					outline: 1px solid $darkYellow;
+				}
+			}
+		}
 		
 		.tabs{
 			font-size: 13px;
@@ -232,13 +252,13 @@
 			position: absolute;
 			top: 10px;
 			left: 0;
-			width: 160px;
-			height: 160px;
+			width: 205px;
+			height: 205px;
+			line-height: 0;
+
 			img{
 				width: 100%;
-			}
-			@media (min-width: 1200px){
-				width: 203px;
+				display: block;
 			}
 			
 		}
