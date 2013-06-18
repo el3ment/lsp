@@ -7,16 +7,8 @@
 			<div id='selectedRefinements'>
 				<!-- You've Selected -->
 			</div>
-			<div class='refineResults panel disengaged'>
-				<button class='b3 icon-24-toggleHide visible-phone reveal-closed-phone' data-reveal-children='attributeList'>Toggle Refinement Panel</button>
-				<span class='toggleLabel visible-phone'>Refine Results:</span>
-				<h2 data-reveal-children='attributeList'>Refine <span class='hidden-tablet'>Your</span> Results</h2>
-				<div id='attributeList' class='reveal-closed-phone'>
-					<div id='searchRefinements'>
-						<!-- Refinements -->
-					</div>
-					<div data-reveal-children='attributeList' class='b1 close visible-phone reveal-closed-phone'>Apply Filters</div>
-				</div>
+			<div class='refineResults panel disengaged' id='searchRefinements'>
+				
 			</div>
 		</div>
 		<div id='resultsContainer' class='results listView span9'>
@@ -154,7 +146,7 @@
 			</li>
 		<# } #>
 	</ul><div id='refinement-<#=this.id #>-more' class='more <#=(this.section.displayState === 'static' ? 'reveal-closed' : 'reveal-closed') #>'>
-		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>Less</button>
+		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'>See Less</button>
 		<ul>
 			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
 				<li class='field'>
@@ -170,7 +162,7 @@
 		</ul>
 	</div>
 	<# if(this.entries.length - this.initialListSize > 0 && this.section.displayState !== 'static'){ #>
-		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'><span class='more'>See More (<#=this.entries.length - this.initialListSize #>)</span><span class='less'>Less</span></button>
+		<button class='b5 loadMore reveal-closed' data-reveal-children='refinement-<#=this.id #>-more'><span class='more'>See More (<#=this.entries.length - this.initialListSize #>)</span><span class='less'>See Less</span></button>
 	<# } #>
 </script>
 
@@ -208,7 +200,7 @@
 </script>
 
 <script id='templates-search-refinementSection' type='text/html'>
-	
+
 	<# var revealState = (this.isOpen ? 'reveal-open' : 'reveal-closed'); #>
 
 	<div class='section <#=(this.id === 'categories' ? 'links' : '') #>'>
@@ -231,38 +223,49 @@
 </script>
 
 <script id='templates-search-refinements' type='text/html'>
-	<#	if(this.navPath._lsp.categoryNodes.length + (((this.categories || {}).categoryList || {}).length || 0) > 1){ #>
-		<#	var initialSize = (this.categories.isInitDispLimited ? (this.categories.initialCategoryList || {}).length : (this.categories.categoryList || {}).length); #>
 
-		<#=_util.parseMicroTemplate('templates-search-refinementSection', {
-			name : 'Categories',
-			id : 'categories',
-			isOpen : true,
-			entries : categories.categoryList,
-			initialListSize : initialSize,
-			entryTemplateId : 'templates-search-categoryListEntry',
-			responseObject : this
-		}) #>
+	<# /* If categories, or attributes (using the cache) */ #>
+	<# if(this.navPath._lsp.categoryNodes.length + (((this.categories || {}).categoryList || {}).length || 0) > 1 || (((this.attributes || {})._lsp || {}).cached || {}).length){ #>
 
-	<# } #>
-	
+		<button class='b3 icon-24-toggleHide visible-phone reveal-closed-phone' data-reveal-children='attributeList'>Toggle Refinement Panel</button>
+		<span class='toggleLabel visible-phone'>Refine Results:</span>
+		<h2 data-reveal-children='attributeList'>Refine <span class='hidden-tablet'>Your</span> Results</h2>
+		<div id='attributeList' class='reveal-closed-phone'>
+		<#	if(this.navPath._lsp.categoryNodes.length + (((this.categories || {}).categoryList || {}).length || 0) > 1){ #>
+				<#	var initialSize = (this.categories.isInitDispLimited ? (this.categories.initialCategoryList || {}).length : (this.categories.categoryList || {}).length); #>
 
-	<# for(var i = 0; i < (((this.attributes || {})._lsp || {}).cached || {}).length; i++){ #>
-	
-		<# var attribute = this.attributes._lsp.cached[i]; #>
-		<# var initialSize = (attribute.isInitDispLimited ? attribute.initDispLimit : attribute.attributeValueList.length); #>
-	
-		<#=_util.parseMicroTemplate('templates-search-refinementSection', {
-			name : attribute.name,
-			id : 'refinement-' + i,
-			isOpen : true,
-			displayState : attribute.displayState,
-			entries : attribute.attributeValueList,
-			initialListSize : initialSize,
-			entryTemplateId : 'templates-search-checkboxListEntry',
-			responseObject : this
-		}) #>
+				<#=_util.parseMicroTemplate('templates-search-refinementSection', {
+					name : 'Categories',
+					id : 'categories',
+					isOpen : true,
+					entries : categories.categoryList,
+					initialListSize : initialSize,
+					entryTemplateId : 'templates-search-categoryListEntry',
+					responseObject : this
+				}) #>
 
+			<# } #>
+			
+
+			<# for(var i = 0; i < (((this.attributes || {})._lsp || {}).cached || {}).length; i++){ #>
+			
+				<# var attribute = this.attributes._lsp.cached[i]; #>
+				<# var initialSize = (attribute.isInitDispLimited ? attribute.initDispLimit : attribute.attributeValueList.length); #>
+			
+				<#=_util.parseMicroTemplate('templates-search-refinementSection', {
+					name : attribute.name,
+					id : 'refinement-' + i,
+					isOpen : true,
+					displayState : attribute.displayState,
+					entries : attribute.attributeValueList,
+					initialListSize : initialSize,
+					entryTemplateId : 'templates-search-checkboxListEntry',
+					responseObject : this
+				}) #>
+
+			<# } #>
+			<div data-reveal-children='attributeList' class='b1 close visible-phone reveal-closed-phone'>Apply Filters</div>
+		</div>
 	<# } #>
 </script>
 
@@ -307,7 +310,7 @@
 				</ul>
 			</form>
 			<a href='#' class='productLink'>
-				<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=item.Image_1_URL #>.205x205' /></div>
+				<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=item.Image_1_URL #>.200x200' width='200' height='200'/></div>
 				<span class='field compare details'>
 					<input type='checkbox' />
 					<button class='b5'>Compare Now</button>

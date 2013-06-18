@@ -65,8 +65,8 @@
 					text-decoration: underline;
 				}
 				.thumbnail{
-					@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-					outline: 1px solid $darkYellow;
+					// @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+					// outline: 1px solid $darkYellow;
 				}
 			}
 		}
@@ -257,11 +257,12 @@
 
 			img{
 				width: 100%;
+				height: 100%;
 			}
 
 			@media (min-width: 1200px){
-				width: 205px;
-				height: 205px;
+				width: 200px;
+				height: 200px;
 			}
 
 			@media (max-width: 979px) and (min-width: 768px){

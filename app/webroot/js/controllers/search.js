@@ -290,10 +290,6 @@
 				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
-
-						//var lastSelectedSection = $('input[type="checkbox"][value="' + attributeSlug + '"]').parents('.section');
-						var searchPage = $('.page-search');
-						_util.scrollTo(searchPage);
 					});
 			},
 
@@ -374,10 +370,17 @@
 			},
 
 			renderPage : function(easyAskDataObject){
+
+				// Render Sections
 				_this.renderSummary(easyAskDataObject);
 				_this.renderSelectedRefinements(easyAskDataObject);
 				_this.renderRefinements(easyAskDataObject);
 				_this.renderProducts(easyAskDataObject);
+
+				// Scroll To Top
+				var searchPage = $('.page-search');
+				_util.scrollTo(searchPage);
+
 			},
 
 			renderSummary : function(easyAskDataObject){
@@ -438,8 +441,7 @@
 				}
 
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
-				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML));
-
+				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
 				
 			
 			},

@@ -826,6 +826,13 @@ ul.list li,
 		left: -10px;
 	}
 
+	// Refinement Results Panel
+	.refineResults{
+		display: block;
+		width: 100%;
+		float: left;
+	}
+
 	li.indent:first-child + .indent{ padding-left: 0px; }
 	li.indent ~ .indent{
 		
@@ -1092,6 +1099,8 @@ ul.list li,
 			font-size: 7px;
 			letter-spacing: 2px;
 			line-height: 3px;
+			overflow-x: hidden;
+			white-space: nowrap;
 		}
 
 	}
