@@ -9,9 +9,6 @@
 	
 	background: url(../img/dark_pattern.jpg);
 	
-	.logo{
-		float: left; 
-	}
 	
 	.b3{ 
 		/* Other darker buttons like Wish List and Your Cart */
@@ -58,7 +55,6 @@
 			@media (max-width: 767px){
 				margin-top: 0;
 			}
-		
 		}
 		
 		.established{
@@ -81,6 +77,21 @@
 				color: inherit; 
 				text-decoration: none; 
 				&:hover{ color: $yellow; }
+			}
+		}
+
+		@media (max-height: 675px){
+			
+			height: 110px;
+
+			.logo{
+				width: 110px;
+				height: 110px;
+				outline: 1px solid red;
+			}
+
+			.established, .tagline{
+				margin-top: 40px;
 			}
 		}
 		

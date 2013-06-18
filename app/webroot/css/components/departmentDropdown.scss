@@ -7,10 +7,14 @@
 .departmentDropdown{
 	
 	width:100%;
-	top: 218px;
+	top: 215px;
 	left: 0;
 	position: absolute;
 	z-index: 99; // In front of everything!
+
+	@media (max-height: 675px){
+		top: 190px;
+	}
 
 	.wrapper{
 		margin: auto;
@@ -107,6 +111,7 @@
 				display: block;
 			}
 	}
+
 	.flyoutTitle{
 		
 		padding: 4px 6px;
@@ -122,10 +127,8 @@
 		}
 
 		.details{ margin-top: -3px; }
-	} //toplevel titles
-	// li:first-child .flyoutTitle{
-	// 	padding-top: 6px;
-	// }
+	}
+
 	.flyout{
 		
 		position: absolute;
@@ -150,7 +153,7 @@
 			padding-left: 25px;
 			@media (max-width: 979px) and (min-width: 768px){
 				width: 505px;
-				padding-right: 25px;
+				padding-right: 0px;
 			}
 			@media (min-width: 1200px){
 				width: 950px;
@@ -214,7 +217,7 @@
 	}
 	.list{
 		margin-top: 20px;
-		width: 230px;
+		width: 225px;
 	} // group of links
 	.list:first-child{
 		margin-top: 10px;
