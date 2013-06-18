@@ -291,8 +291,9 @@
 					.done(function(data){
 						_this.renderPage(data.response.source);
 
-						var lastSelectedSection = $('input[type="checkbox"][value="' + attributeSlug + '"]').parents('.section');
-						_util.scrollTo(lastSelectedSection);
+						//var lastSelectedSection = $('input[type="checkbox"][value="' + attributeSlug + '"]').parents('.section');
+						var searchPage = $('.page-search');
+						_util.scrollTo(searchPage);
 					});
 			},
 
