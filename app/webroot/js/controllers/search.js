@@ -290,6 +290,9 @@
 				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
+
+						var lastSelectedSection = $('input[type="checkbox"][value="' + attributeSlug + '"]').parents('.section');
+						_util.scrollTo(lastSelectedSection);
 					});
 			},
 
@@ -303,7 +306,7 @@
 					allAttributes : _state.allAttributes.replace(attributeSlug, '').replace(/\/{1,}/, ';') // remove it, and remove leftover ;;
 				};
 
-				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+				return _api.request(_this, 'removeFilter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -435,6 +438,9 @@
 
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML));
+
+				
+			
 			},
 
 			renderProducts : function(easyAskDataObject){

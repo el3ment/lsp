@@ -10,6 +10,21 @@
 
 		_util = {
 
+			scrollTo : function(element){
+				if(element){
+					var viewportHeight = $(window).height();
+					var scrollTop = $('body').scrollTop();
+					var elementPos = $(element).offset().top;
+
+					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
+						$('html, body').animate({ scrollTop: $(element).offset().top - 20});
+						console.log('scrolling...');
+					}else{
+						console.log('Already in view');
+					}
+				}
+			},
+
 			getURLParameters : (function(){
 
 				var vars = [], hash;

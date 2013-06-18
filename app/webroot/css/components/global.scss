@@ -859,20 +859,6 @@ ul.list li,
 	li.indent:first-child + .indent + .indent + .indent + .indent{ padding-left: 15px; }
 	li{ clear: both; }
 
-
-	// Line above gaps
-	.gapAbove:before{
-		content: 'hey';
-		display: block;
-		background-color: red;
-		height: 1px;
-		width: 75%;
-		margin-left: 12.5%;
-		padding-top: 5px;
-		margin-top: 5px;
-		border-top:1px solid $lightGrey;
-	}
-
 	// Text links
 	a, .b5{
 		display: block;
@@ -893,7 +879,7 @@ ul.list li,
 				color: $grey;
 				content: '›';
 				position: absolute;
-				left: 0px;
+				left: 5px;
 			}
 			.label{
 				text-decoration: underline;
@@ -1013,7 +999,7 @@ ul.list li,
 				margin-left: px($paddingUnit);
 				width: 100%;
 				//margin-bottom: 5px;
-				margin-top:8px;
+				margin-top:3px;
 
 				&:first-child{
 					margin-top:0;
