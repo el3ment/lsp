@@ -80,7 +80,7 @@
 			}
 		}
 
-		@media (max-height: 675px){
+		@media (min-width: 768px) and (max-height: 675px){
 			
 			height: 110px;
 

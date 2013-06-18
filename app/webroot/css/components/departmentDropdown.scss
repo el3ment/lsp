@@ -341,6 +341,7 @@
 }
 
 
+// Mobile Menu
 @media (max-width: 767px){
 
 	// Reset Styles
@@ -397,6 +398,7 @@
 			padding: 0;
 			position: static;
 			z-index:0;
+			border: 0;
 			//height: 30px;
 
 
@@ -435,6 +437,11 @@
 				display: none;
 			};
 		} // panel
+		.column{
+			float: none;
+			margin-right: 0;
+			height: auto;
+		}
 		.group{
 			float: none;
 			margin-bottom: 0;
@@ -449,9 +456,10 @@
 			//position:relative;
 			//z-index:1;
 		}
-		.list{
-			width: inherit;
+		.list, .list:first-child{
+			width: 100%;
 			float: none;
+			margin-top: 0;
 		} // group of links
 		.h1{
 			//position:relative;
@@ -475,7 +483,11 @@
 	// New Menu Style
 	.departmentDropdown{
 
+		margin-bottom: 40px;
 		padding: 0 10px;
+		position: relative;
+		top: -15px;
+
 		@include box-sizing();
 		// No subtext on mobile
 		.flyoutTitle .details{ display: none; }
@@ -497,7 +509,7 @@
 			@include box-sizing();
 		}
 		.collection:first-child .flyoutTitle .h3{
-			border-top: 1px solid $lightGrey;
+			//border-top: 1px solid $lightGrey;
 		}
 		.h2, .h3{
 			
@@ -513,7 +525,7 @@
 				@include lsp-sprite-background();
 				width: 24px;
 				height: 24px;
-				background-position: -99px -405px;
+				background-position: -284px -352px;
 				position: absolute;
 				top: 50%;
 				margin-top: -12px;
@@ -522,7 +534,7 @@
 		}
 		.link a{
 			position: relative;
-			padding-right: 35px;
+			padding-left: 35px;
 			//padding-left: 40px;
 	
 			// This could have been done with a class (icon-24-chevronRight)  but
@@ -535,24 +547,37 @@
 				@include lsp-sprite-background();
 				width: 24px;
 				height: 24px;
-				background-position: -99px -405px;
+				background-position: -284px -352px;
 				position: absolute;
 				top: 50%;
 				margin-top: -12px;
 				right: 10px;
 			}
+			&:hover{
+				text-decoration: none;
+				&:before{ // Normal Category chevron
+					display: none;
+				}
+			}
 		}
 		.group{
-			margin-left: 20px;
-			background-color: $superLightGrey;
+			//padding-left: 20px;
 		}
 		.list{
-			margin-left: 20px;
-			background-color: white;
+			//padding-left: 20px;
+			//background-color: white;
+			@include box-sizing();
+
+			.h3{
+				//border-left: 1px solid $lightGrey;
+				background-color: $superLightGrey;
+				padding-left: 40px;
+			}
 		}
+		
 		.links{
-			margin-left: 20px;
-			background-color: $superLightGrey;
+			//margin-left: 20px;
+			//background-color: white;
 		}
 	}
 }
