@@ -252,13 +252,21 @@
 			position: absolute;
 			top: 10px;
 			left: 0;
-			width: 205px;
-			height: 205px;
-			line-height: 0;
+			width: 160px;
+			height: 160px;
 
 			img{
 				width: 100%;
-				display: block;
+			}
+
+			@media (min-width: 1200px){
+				width: 205px;
+				height: 205px;
+			}
+
+			@media (max-width: 979px) and (min-width: 768px){
+				width: 160px;
+				height: 160px;
 			}
 			
 		}
