@@ -19,6 +19,7 @@
 
 		var OPEN_SPEED = 150;
 		var EXIT_TIMEOUT = 700;
+		var ENTER_TIMEOUT = 300;
 
 		_this =  {
 			name : 'flyout',
@@ -54,28 +55,38 @@
 				// Create the menu
 				_flyoutParent.menuAim({
 					activate: _this.showRow,
-					deactivate: _this.hideRow,
-					exitMenu : function(){ return true; }  // fired on row deactivation
+					deactivate: _this.hideRow
+					//exitMenu : function(){ return true; }  // hides the open menu on exit
 				});
 
 				// I'm using annynomus functions here to hide the event
 				// argument from the controller methods. You shouldn't expect
 				// openFlyout or closeFlyout to rely on the event - it's possible
 				// to force it open from elsewhere (like on the home page)
-				var timeout;
+				var closeTimeout;
+				var openTimeout;
 				
+				// Control Button
 				_flyoutControlButton.on('mouseenter.lsp.flyout', function(e){ 
-					clearTimeout(timeout);
-					_this.openFlyout(); 
+					openTimeout = setTimeout(_this.openFlyout, ENTER_TIMEOUT); // Start the timer
+				
+				}).on('mouseleave.lsp.flyout', function(e){
+					clearTimeout(openTimeout); // Clear timeout on exit
+
+				}).on('click.lsp.flyout', function(e){
+					clearTimeout(openTimeout); // Force open if clicked
+					_this.openFlyout();
 				});
 
-				$('#mainFlyout .container').on('mouseenter.lsp.flyout', function(e){
-					clearTimeout(timeout);
+				// Container
+				$('.container', _flyout).on('mouseenter.lsp.flyout', function(e){
+					clearTimeout(closeTimeout);
 				});
 
+				// Wrapper
 				$('.wrapper', _flyout).bind('mouseleave.lsp.flyout', function(e){
 					//clearTimeout(timeout);
-					timeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
+					closeTimeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
 				});
 			},
 
@@ -116,6 +127,7 @@
 
 				//_lsp.controllers.application.isMobile();
 				
+				// Reset the close timeout
 				element = $(element);
 
 				if(!_isOpen){
