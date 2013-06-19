@@ -68,11 +68,13 @@
 					deactivate : _this.hideRow,
 					exitTimeout : EXIT_TIMEOUT,
 					exitMenu : function(){ 
+						return true;
+					},
+					afterExitMenu : function(){
+						_isOpen = false;
 						_waitToOpen = _holdOpen;
 						clearTimeout(_topLevelTimeout);
-
-						return true;
-					}  // hides the open menu on exit
+					}
 				});
 
 				// I'm using annynomus functions here to hide the event
@@ -103,6 +105,7 @@
 				$('.wrapper', _flyout).bind('mouseleave.lsp.flyout', function(e){
 					//clearTimeout(timeout);
 					closeTimeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
+					clearTimeout(_topLevelTimeout);
 				});
 
 				// Trigger Event

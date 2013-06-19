@@ -12,7 +12,9 @@
 			events : {
 				flyout : {
 					onAfterAttach : function(e, data){
-						_app.controllers.flyout.openFlyout(true);
+						if(_app.controllers.application.getFilename() === 'home'){
+							_app.controllers.flyout.openFlyout(true);
+						}
 					}
 				},
 				application : {

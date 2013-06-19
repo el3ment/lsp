@@ -97,7 +97,8 @@
 				activate: $.noop,
 				deactivate: $.noop,
 				exitMenu: $.noop,
-				exitTimeout: 0
+				exitTimeout: 0, // NEW from LSP
+				afterExitMenu : $.noop // NEW from LSP
 			}, opts);
 
 		var MOUSE_LOCS_TRACKED = 3,  // number of past mouse locations to track
@@ -132,6 +133,7 @@
 						}
 
 						activeRow = null;
+						options.afterExitMenu();
 
 					}, options.exitTimeout);
 					

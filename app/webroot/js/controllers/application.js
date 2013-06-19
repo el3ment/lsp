@@ -126,6 +126,10 @@
 			getContext : function(){
 				return _context;
 			},
+
+			getFilename : function(){
+				return document.location.pathname.replace(/^.*(\\|\/|\:)/, '');
+			},
 			
 			// Fire all attach events event
 			attachEvents : function(selector){
@@ -298,7 +302,7 @@
 				);
 
 				var eventData = {
-					filename : document.location.pathname.replace(/^.*(\\|\/|\:)/, ''),
+					filename : _this.getFilename(),
 					queryParameters : _util.getURLParameters()
 				};
 
