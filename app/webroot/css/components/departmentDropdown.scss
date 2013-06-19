@@ -144,7 +144,7 @@
 		background-color:white;
 		z-index: 0;
 		display:none;
-		height: 491px;
+		height: $flyoutHeight;
 		//max-width: 720px;
 
 		.container{
@@ -312,7 +312,7 @@
 		content: ' ';
 		display: block;
 		width: 75%;
-		margin-left: 12.5%;
+		margin-left: 0;
 		padding-top: 5px;
 		margin-top: 5px;
 		border-top:1px solid $lightGrey;
