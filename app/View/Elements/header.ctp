@@ -68,7 +68,7 @@
 									<li class='link'><a href=''>Drum Set</a></li>
 									<li class='link'><a href=''>Brushes</a></li>
 									<li class='link'><a href=''>Bundle Sticks</a></li>
-									<li class='link gapAbove'><a href=''>Concert Snare</a></li>
+									<li class='link'><a href=''>Concert Snare</a></li>
 									<li class='link'><a href=''>Hybrid</a></li>
 									<li class='link'><a href=''>Jingle</a></li>
 									<li class='link'><a href=''>Practice</a></li>
@@ -82,7 +82,7 @@
 									<li class='link'><a href=''>Marching Tenor</a></li>
 									<li class='link'><a href=''>Marching Bass</a></li>
 									<li class='link'><a href=''>Front Ensemble</a></li>
-									<li class='link gapAbove'><a href=''>Timbale</a></li>
+									<li class='link'><a href=''>Timbale</a></li>
 									<li class='link'><a href=''>Steel Drum</a></li>
 									<li class='link allCategory'><a href=''>All World Sticks &amp; Mallets</a></li>
 								</ul>
@@ -208,7 +208,7 @@
 					<ul class='container'>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Drum_Sets_Electronic_Drums'>Drum Sets/Electronic</span>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Drum_Sets_Electronic_Drums'>Drum Sets</span>
 								<ul id='flyout-Drums_Drum_Sets-Drum_Sets_Electronic_Drums' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Drum Sets</a></li>
 									<li class='link'><a href=''>Junior Sets</a></li>
@@ -216,7 +216,7 @@
 									<li class='link'><a href=''>Toms</a></li>
 									<li class='link'><a href=''>Floor Toms</a></li>
 									<li class='link'><a href=''>Bass Drums</a></li>
-									<li class='link'><a href=''>Electronic</a></li>
+									<li class='link'><a href=''>Electronic Drums</a></li>
 								</ul>
 							</div>
 							<div class='list'>
@@ -285,13 +285,13 @@
 									<li class='link'><a href=''>Hi Hats</a></li>
 									<li class='link'><a href=''>Crash/Rides</a></li>
 									<li class='link'><a href=''>Boxed Sets</a></li>
-									<li class='link gapAbove'><a href=''>Chinas</a></li>
+									<li class='link'><a href=''>Chinas</a></li>
 									<li class='link'><a href=''>Splashes</a></li>
-									<li class='link'><a href=''>Effect Cymbals</a></li>
-									<li class='link'><a href=''>Electronic Cymbals</a></li>
-									<li class='link gapAbove'><a href=''>Suspended</a></li>
-									<li class='link'><a href=''>Hand Crashes</a></li>
-									<li class='link gapAbove'><a href=''>Marching Crashes</a></li>
+									<li class='link'><a href=''>Effects</a></li>
+									<li class='link'><a href=''>Electronic</a></li>
+									<li class='link'><a href=''>Suspended</a></li>
+									<li class='link'><a href=''>Hand Pairs</a></li>
+									<li class='link'><a href=''>Marching Pairs</a></li>
 									<li class='link'><a href=''>Refurbished</a></li>
 									<li class='link'><a href=''>Clearance</a></li>
 									<li class='link allCategory'><a href=''>All Cymbals</a></li>
@@ -503,13 +503,13 @@
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects-Special_Effects'>Special Effects</span>
 								<ul id='flyout-Latin_World_Effects-Special_Effects' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Whistles</a></li>
-									<li class='link'><a href=''>Bird Calls</a></li>
 									<li class='link'><a href=''>Ratchets</a></li>
-									<li class='link'><a href=''>Rainsticks</a></li>
-									<li class='link'><a href=''>Car Horns</a></li>
 									<li class='link'><a href=''>Vibraslaps &amp; Rattle Sounds</a></li>
-									<li class='link'><a href=''>Nature Sound Effects</a></li>
-									<li class='link'><a href=''>Industrial Sound Effects</a></li>
+									<li class='link allCategory'><a href=''>Industrial Sound Effects</a></li>
+									<li class='link gapAbove'><a href=''>Rainsticks</a></li>
+									<li class='link'><a href=''>Bird Calls</a></li>
+									<li class='link allCategory'><a href=''>Nature Sound Effects</a></li>
+									
 								</ul>
 							</div>
 						</li>
@@ -671,7 +671,7 @@
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Practice_Classroom-Practice_Gear'>Practice Gear</span>
 								<ul id='flyout-Practice_Classroom-Practice_Gear' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Metronomes &amp; Tuners</a></li>
-									<li class='link'><a href=''>Sticks</a></li>
+									<li class='link'><a href=''>Practice Sticks</a></li>
 									<li class='link'><a href=''>Pad Laminates</a></li>
 									<li class='link'><a href=''>Drum Set Mutes</a></li>
 									<li class='link'><a href=''>Silent Heads</a></li>
@@ -732,38 +732,40 @@
 					<ul class='container'>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Instrument_Cases'>Instrument Cases</span>
-								<ul id='flyout-Accessories_Cases-Instrument_Cases' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Snare Drum (Hard)</a></li>
-									<li class='link'><a href=''>Tom (Hard)</a></li>
-									<li class='link'><a href=''>Bass Drum (Hard)</a></li>
-									<li class='link'><a href=''>Cymbal (Hard)</a></li>
-									<li class='link'><a href=''>Marching Drum</a></li>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Hard_Cases'>Hard Cases</span>
+								<ul id='flyout-Accessories_Cases-Hard_Cases' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Snare Drum</a></li>
+									<li class='link'><a href=''>Tom</a></li>
+									<li class='link'><a href=''>Bass Drum</a></li>
+									<li class='link'><a href=''>Cymbal</a></li>
+									<li class='link'><a href=''>Marching</a></li>
+									<li class='link'><a href=''>Hardware</a></li>
+									<li class='link'><a href=''>ATA Flight Cases</a></li>
 									<li class='link allCategory'><a href=''>All Hard Cases</a></li>
-									<li class='link gapAbove'><a href=''>Snare Drum (Soft)</a></li>
-									<li class='link'><a href=''>Tom (Soft)</a></li>
-									<li class='link'><a href=''>Bass Drum (Soft)</a></li>
-									<li class='link'><a href=''>Cymbal (Soft)</a></li>
+								</ul>
+							</div>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone'
+								data-reveal-children='flyout-Accessories_Cases-Soft_Cases'>Soft Cases &amp; Bags</span>
+								<ul id='flyout-Accessories_Cases-Soft_Cases' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Stick &amp; Mallet</a></li>
+									<li class='link'><a href=''>Snare Drum</a></li>
+									<li class='link'><a href=''>Tom</a></li>
+									<li class='link'><a href=''>Bass Drum</a></li>
+									<li class='link'><a href=''>Cymbal</a></li>
 									<li class='link allCategory'><a href=''>All Soft Cases</a></li>
 								</ul>
 							</div>
 						</li>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Other_Cases_and_Bags'>Other Cases &amp; Bags</span>
-								<ul id='flyout-Cases_Other_Cases_and_Bags' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Sticks &amp; Mallets</a></li>
-									<li class='link'><a href=''>Hardware (Hard)</a></li>
-									<li class='link'><a href=''>Hardware (Soft)</a></li>
-									<li class='link'><a href=''>ATA Flight Cases</a></li>
-								</ul>
-							</div>
-							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Other_Cases_and_Bags'>Covers</span>
 								<ul id='flyout-Cases_Other_Cases_and_Bags' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Timpani</a></li>
 									<li class='link'><a href=''>Keyboard</a></li>
-									<li class='link'><a href=''>Marching Drum</a></li>
+									<li class='link'><a href=''>Marching Snare</a></li>
+									<li class='link'><a href=''>Marching Tenor</a></li>
+									<li class='link'><a href=''>Marching Bass</a></li>
 									<li class='link allCategory'><a href=''>All Covers</a></li>
 								</ul>
 							</div>
@@ -876,36 +878,52 @@
 					<ul class='container'>
 						<li class='column'>
 							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Accessories'>Accessories</span>
-								<ul id='flyout-Accessories_Cases-Accessories' class='links reveal-closed-phone reveal-open'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Performance_Accessories'>Performance Accessories</span>
+								<ul id='flyout-Accessories_Cases-Performance_Accessories' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Stick Tape</a></li>
 									<li class='link'><a href=''>Drum Keys</a></li>
 									<li class='link'><a href=''>Ear Protection</a></li>
+									<li class='link'><a href=''>Stick &amp; Mallet Holders</a></li>
+									<li class='link'><a href=''>Drummer Emergency Kits</a></li>
 									<li class='link allCategory'><a href=''>All Performance Accessories</a></li>
-									<li class='link gapAbove'><a href=''>Drum Rugs</a></li>
-									<li class='link'><a href=''>Drum Polish</a></li>
+								</ul>
+							</div>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Drum_Set_Accessories'>Drum Set Accessories</span>
+								<ul id='flyout-Accessories_Cases-Drum_Set_Accessories' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Rugs &amp; Mats</a></li>
+									<li class='link'><a href=''>Polish</a></li>
 									<li class='link'><a href=''>Mutes &amp; Muffles</a></li>
-									<li class='link allCategory'><a href=''>All Drum Set Accessories</a></li>
-									<li class='link gapAbove'><a href=''>Cymbal Straps</a></li>
-									<li class='link'><a href=''>Quick-Release Toppers</a></li>
-									<li class='link'><a href=''>Cymbal Felts</a></li>
-									<li class='link'><a href=''>Cymbal Sleeves</a></li>
-									<li class='link allCategory'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
+									<li class='link'><a href=''>Bass Drum Patches</a></li>
+									<li class='link'><a href=''>Bass Drum Decals</a></li>
+									<li class='link allCategory'><a href=''>All Drum Set Accessories</a></li>									
 								</ul>
 							</div>
 						</li>
 						<li class='column'>
 							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Cymbal_Gong_Accessories'>Cymbal &amp; Gong Accessories</span>
+								<ul id='flyout-Accessories_Cases-Cymbal_Gong_Accessories' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Straps</a></li>
+									<li class='link'><a href=''>Pads</a></li>
+									<li class='link'><a href=''>Quick-Release Toppers</a></li>
+									<li class='link'><a href=''>Felts</a></li>
+									<li class='link'><a href=''>Sleeves</a></li>
+									<li class='link'><a href=''>Wingnuts</a></li>
+									<li class='link'><a href=''>Washers</a></li>
+									<li class='link'><a href=''>Cleaners</a></li>
+									<li class='link allCategory'><a href=''>All Cymbal &amp; Gong Accessories</a></li>
+								</ul>
+							</div>
+							<div class='list'>								
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Apparel_Gifts'>Apparel &amp; Gifts</span>
 								<ul id='flyout-Accessories_Cases-Apparel_Gifts' class='links reveal-closed-phone reveal-open'>
 									<li class='link'><a href=''>Shirts</a></li>
-									<li class='link'><a href=''>Hoodies</a></li>
 									<li class='link'><a href=''>Hats</a></li>
-									<li class='link'><a href=''>Gloves</a></li>
-									<li class='link'><a href=''>Trinkets</a></li>
-									<li class='link'><a href=''>Giant Sticks</a></li>
+									<li class='link allCategory'><a href=''>All Apparel</a></li>
+									<li class='link gapAbove'><a href=''>Giant Sticks</a></li>
 									<li class='link'><a href=''>Miniature Drums</a></li>
-									<li class='link'><a href=''>Gifts &amp; Novelties</a></li>
+									<li class='link allCategory'><a href=''>All Gifts &amp; Novelties</a></li>
 								</ul>
 							</div>
 						</li>
@@ -971,9 +989,9 @@
 									<li class='link'><a href=''>Multi-Percussion Duets</a></li>
 									<li class='link allCategory'><a href=''>All Duets</a></li>
 									<li class='link gapAbove'><a href=''>Full Percussion Ensembles</a></li>
-									<li class='link'><a href=''>No Keyboards</a></li>
-									<li class='link'><a href=''>Keyboard-Only</a></li>
-									<li class='link'><a href=''>With Rhythm Section</a></li>
+									<li class='link'><a href=''>Unpitched Instruments</a></li>
+									<li class='link'><a href=''>Keyboards Only</a></li>
+									<li class='link'><a href=''>Has Rhythm Section</a></li>
 									<li class='link'><a href=''>Steel Band</a></li>
 									<li class='link'><a href=''>Holiday</a></li>
 									<li class='link'><a href=''>Novelty</a></li>
