@@ -496,7 +496,7 @@
 
 		// Style the menu
 		.h2, .h3, .link a{
-			padding: 20px;
+			padding: 18px;
 			border-bottom: 1px solid $lightGrey;
 			width: 100%;
 			margin: 0;
@@ -516,7 +516,8 @@
 		.h2, .h3{
 			
 			position: relative;
-			padding-right: 35px;
+			padding-right: 43px;
+			line-height: 20px;
 
 			&:after{
 				
@@ -540,11 +541,12 @@
 			background-color: black;
 			color: white;
 			border-bottom-color: black;
+			border-top-color: black;
 			z-index: 2;
 		}
 
 		// First top level, group, and link
-		.topLevel > li.collection:first-child > .flyoutTitle > .h3,
+		.topLevel > li.collection:first-child > .flyoutTitle.reveal-closed > .h3,
 		.column:first-child .list:first-child .h3,
 		.link:first-child{
 			@include box-shadow-multiple(0 2px 6px -3px $grey inset);
