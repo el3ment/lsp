@@ -665,7 +665,7 @@
 									<li class='link'><a href=''>Practice Sticks</a></li>
 									<li class='link'><a href=''>Pad Laminates</a></li>
 									<li class='link'><a href=''>Drum Set Mutes</a></li>
-									<li class='link'><a href=''>Silent Heads</a></li>
+									<li class='link'><a href=''>Mesh Heads</a></li>
 									<li class='link'><a href=''>Music Stands</a></li>
 								</ul>
 							</div>
@@ -874,7 +874,7 @@
 									<li class='link'><a href=''>Shirts</a></li>
 									<li class='link'><a href=''>Hats</a></li>
 									<li class='link'><a href=''>All Apparel</a></li>
-									<li class='link'><a href=''>Giant Sticks</a></li>
+									<li class='link gapAbove'><a href=''>Giant Sticks</a></li>
 									<li class='link'><a href=''>Miniature Drums</a></li>
 									<li class='link'><a href=''>All Gifts &amp; Novelties</a></li>
 								</ul>
@@ -958,22 +958,7 @@
 									<li class='link'><a href=''>Multi-Percussion Duets</a></li>
 									<li class='link allCategory'><a href=''>All Duets</a></li>
 								</ul>
-							</div>
-							<div class='list'>
-								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-Percussion_Ensembles'>Percussion Ensembles</span>
-								<ul id='flyout-Sheet_Music_Books-Percussion_Ensembles' class='links reveal-closed-phone reveal-open'>
-									<li class='link'><a href=''>Percussion Orchestra</a></li>
-									<li class='link'><a href=''>Rhythm Only</a></li>
-									<li class='link'><a href=''>Keyboards Only</a></li>
-									<li class='link'><a href=''>Pop/Groovy</a></li>
-									<li class='link'><a href=''>Steel Band</a></li>
-									<li class='link'><a href=''>Novelty</a></li>
-									<li class='link allCategory'><a href=''>All Percussion Ensembles</a></li>
-								</ul>
-							</div>										
-						</li>
-						<li class='column'>
-							
+							</div>	
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-Method_Books'>Method Books</span>
 								<ul id='flyout-Sheet_Music_Books-Method_Books' class='links reveal-closed-phone reveal-open'>
@@ -984,7 +969,23 @@
 									<li class='link'><a href=''>Sight-Reading</a></li>
 									<li class='link allCategory'><a href=''>All Method Books</a></li>
 								</ul>
-							</div>
+							</div>										
+						</li>
+						<li class='column'>
+							<div class='list'>
+								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-Percussion_Ensembles'>Percussion Ensembles</span>
+								<ul id='flyout-Sheet_Music_Books-Percussion_Ensembles' class='links reveal-closed-phone reveal-open'>
+									<li class='link'><a href=''>Original Compositions</a></li>
+									<li class='link'><a href=''>Non-Melodic</a></li>
+									<li class='link'><a href=''>Mallet Ensembles</a></li>
+									<li class='link'><a href=''>Classical Arrangements</a></li>
+									<li class='link'><a href=''>Ensembles with Rhythm Section</a></li>
+									<li class='link'><a href=''>Steel Band</a></li>
+									<li class='link'><a href=''>Novelty</a></li>
+									<li class='link allCategory'><a href=''>All Percussion Ensembles</a></li>
+								</ul>
+							</div>	
+							
 							<div class='list'>
 								<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-'>Specialty Books</span>
 								<ul id='flyout-Sheet_Music_Books-Books' class='links reveal-closed-phone reveal-open'>
