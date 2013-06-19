@@ -533,9 +533,21 @@
 			}
 		}
 
+		// Top Level Black on Click
 		.reveal-open > .h3{
 			background-color: black;
 			color: white;
+			border-bottom-color: black;
+			z-index: 2;
+		}
+		.column:first-child .list:first-child .h3,
+		.link:first-child{
+			@include box-shadow-multiple(0 2px 6px -3px $grey inset);
+		}
+		// Last element in open list
+		.column + .column .list:last-child .h3.reveal-closed,
+		.link:last-child{
+			@include box-shadow-multiple(0 -3px 6px -3px $grey inset);
 		}
 
 		.link a{
@@ -582,10 +594,10 @@
 				background-color: $superLightGrey;
 				padding-left: 40px;
 			}
-			.h3.reveal-open{
-				background-color: black;
-				color: white;
-			}
+			// .h3.reveal-open{
+			// 	// background-color: black;
+			// 	// color: white;
+			// }
 		}
 		
 		.links{
