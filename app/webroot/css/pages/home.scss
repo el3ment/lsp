@@ -1,5 +1,28 @@
 .page-home{
 
+	#mainSlider{
+		
+		overflow: hidden;
+		height: 450px;
+		margin-left: 270px;
+		width: 690px; // width + margin-left = pagewidth
+		position: relative;
+
+		.ad{
+			margin-left:0;
+			height: 450px;
+			width: 690px;
+			outline: 1px solid red;
+			float: left;
+		}
+
+		.ad:first-child{
+			background-color: $lightGrey;
+		}
+		.ad + .ad { background-color: pink; }
+		.ad + .ad + .ad{ background-color: orange; }
+	}
+
 	// Take the border off the bottom row
 	.category:first-child + .category + .category + .category 
 		+ .category + .category + .category + .category

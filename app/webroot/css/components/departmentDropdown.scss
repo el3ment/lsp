@@ -6,6 +6,7 @@
 }
 .departmentDropdown{
 	
+	height: 1px;
 	width:100%;
 	top: 215px;
 	left: 0;
@@ -19,6 +20,7 @@
 	.wrapper{
 		margin: auto;
 		//background-color:white;
+		height: 1px;
 		float: none;
 		position: relative; // origin for absolute positioning of the panel
 	}
@@ -142,6 +144,7 @@
 		background-color:white;
 		z-index: 0;
 		display:none;
+		height: 491px;
 		//max-width: 720px;
 
 		.container{
@@ -483,7 +486,7 @@
 	// New Menu Style
 	.departmentDropdown{
 
-		margin-bottom: 40px;
+		margin-bottom: 0;
 		padding: 0;
 		position: relative;
 		top: -47px;

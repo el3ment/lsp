@@ -14,6 +14,10 @@
 
 		var _isOpen = false;
 		var _currentFlyoutTween;
+		
+		var _holdOpen = false;
+		var _waitToOpen = false;
+		var _topLevelTimeout; // Used when _holdOpen is true, waits to open flyout
 
 		var _revealController = _lsp.controllers.reveal;
 
@@ -44,6 +48,11 @@
 
 
 			attachMenu : function(){
+
+				var _holdOpenFlyoutTimeout; // When the menu is holdOpen
+											// we need to wait to activate a row
+											// for the first time
+
 				_flyoutControlButton = $('#flyoutControlButton');
 				_flyout = $('#mainFlyout');
 				_flyoutParent = $('#mainFlyout .topLevel');
@@ -58,7 +67,12 @@
 					activate : _this.showRow,
 					deactivate : _this.hideRow,
 					exitTimeout : EXIT_TIMEOUT,
-					exitMenu : function(){ return true; }  // hides the open menu on exit
+					exitMenu : function(){ 
+						_waitToOpen = _holdOpen;
+						clearTimeout(_topLevelTimeout);
+
+						return true;
+					}  // hides the open menu on exit
 				});
 
 				// I'm using annynomus functions here to hide the event
@@ -90,6 +104,9 @@
 					//clearTimeout(timeout);
 					closeTimeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
 				});
+
+				// Trigger Event
+				$(this).triggerHandler('onAfterAttach', {selector : _flyout});
 			},
 
 			detachMenu : function(){
@@ -107,84 +124,109 @@
 				}
 
 			},
-			// Don't rely on 'this' for these functions
-			openFlyout : function(){
+			
+			// Opens the flyout, set holdOpen to true, and the menu will remain open
+			// even when mousing out. holdOpen will also add a timeout to row activation
+			// much in the same way there is a timeout on the main flyout button
+			openFlyout : function(holdOpen){
+				_holdOpen = holdOpen || false;
+				_waitToOpen = _holdOpen;
+
 				_flyout.addClass('active');
 				_flyoutControlButton.addClass('active');
 			},
+
 			closeFlyout : function(){
-				_flyout.removeClass('active');
-				_flyoutControlButton.removeClass('active');
-				$('li.collection.active', _flyout).removeClass('active');
 
-				// Finish any lingering animations
-				if(_currentFlyoutTween){
-					$(_currentFlyoutTween.elem).stop(true, true);
+				clearTimeout(_topLevelTimeout);
+
+				if(!_holdOpen){
+					_flyout.removeClass('active');
+					_flyoutControlButton.removeClass('active');
+					$('li.collection.active', _flyout).removeClass('active');
+
+					// Finish any lingering animations
+					if(_currentFlyoutTween){
+						$(_currentFlyoutTween.elem).stop(true, true);
+					}
+					_currentFlyoutTween = null;
+
+					_isOpen = false;
 				}
-				_currentFlyoutTween = null;
-
-				_isOpen = false;
 			},
 
-			showRow : function(element){
+			showRow : function(element, forceShow){
 
-				//_lsp.controllers.application.isMobile();
-				
-				// Reset the close timeout
-				element = $(element);
-
-				if(!_isOpen){
-
-					// Because the content windows are all unique
-					// we need to 'transfer' the animation to the new
-					// content window to create a seemless slide right
-
-					// We do this by storing the tween object, and hijacking it
-					// mid-animation -- there is a little cleanup work to be done
-					// after doing this
+				// We want to wait to open it if it's _holdOpen, and
+				// if it hasn't already been opened (_waitToOpen)
+				// forceShow is a way to avoid having two functions
+				// the timeout just calls itself again with the flag
+				if(_holdOpen && _waitToOpen && !forceShow){
 					
-					var flyout = $('.flyout', element);
+					clearTimeout(_topLevelTimeout);
 					
+					_topLevelTimeout = setTimeout(function(){
+						_this.showRow(element, true);
+					}, ENTER_TIMEOUT);
 
-					if(_currentFlyoutTween){
-						// Animation in progress, hijack it!
-						$(_currentFlyoutTween.elem).removeAttr('style'); // Cleanup!
-						$(flyout[0]).css({'width' : _currentFlyoutTween.now, 'overflow' : 'hidden'}); // we are likely between frames, this helps smooth the transition
-						_currentFlyoutTween.elem = flyout[0]; // Hijack it.
+				}else{
+								
+					// Reset the close timeout
+					element = $(element);
+					_waitToOpen = false;
 
-					}else{
+					if(!_isOpen){
 
-						var width = flyout.outerWidth();
+						// Because the content windows are all unique
+						// we need to 'transfer' the animation to the new
+						// content window to create a seemless slide right
+
+						// We do this by storing the tween object, and hijacking it
+						// mid-animation -- there is a little cleanup work to be done
+						// after doing this
 						
-						// No animation has started, so create one
-						flyout
-							.css({width : 0})
-							.animate({width: width}, {
-								duration : OPEN_SPEED,
-								easing : 'swing',
-								step : function(a, tween){
-									// on each frame, store the tween object
-									// we really only need to do this once (not every step)- but this is the
-									// only place I found we have access to the tween object
-									_currentFlyoutTween = tween;
-								},
-								always : function(e){
-									$('*[style]', _flyout).removeAttr('style'); // atomic cleanup
-									_currentFlyoutTween = null; // cleanup
-									_isOpen = true; // prevent the animation from happening again
-								}
-							});
+						var flyout = $('.flyout', element);
+						
+
+						if(_currentFlyoutTween){
+							// Animation in progress, hijack it!
+							$(_currentFlyoutTween.elem).removeAttr('style'); // Cleanup!
+							$(flyout[0]).css({'width' : _currentFlyoutTween.now, 'overflow' : 'hidden'}); // we are likely between frames, this helps smooth the transition
+							_currentFlyoutTween.elem = flyout[0]; // Hijack it.
+
+						}else{
+
+							var width = flyout.outerWidth();
+							
+							// No animation has started, so create one
+							flyout
+								.css({width : 0})
+								.animate({width: width}, {
+									duration : OPEN_SPEED,
+									easing : 'swing',
+									step : function(a, tween){
+										// on each frame, store the tween object
+										// we really only need to do this once (not every step)- but this is the
+										// only place I found we have access to the tween object
+										_currentFlyoutTween = tween;
+									},
+									always : function(e){
+										$('*[style]', _flyout).removeAttr('style'); // atomic cleanup
+										_currentFlyoutTween = null; // cleanup
+										_isOpen = true; // prevent the animation from happening again
+									}
+								});
+						}
+
 					}
 
+					// We have to use a class rather than just the :hover
+					// pesduo element because it's possible to
+					// hover an item but not be active (the whole reason
+					// we are using this plugin)
+					
+					element.addClass('active');
 				}
-
-				// We have to use a class rather than just the :hover
-				// pesduo element because it's possible to
-				// hover an item but not be active (the whole reason
-				// we are using this plugin)
-				
-				element.addClass('active');
-				
 			},
 			hideRow : function(element){
 				$(element).removeClass('active');

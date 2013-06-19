@@ -19,6 +19,9 @@
 
 		// Extends the generic API
 		return $.extend(_this, {
+			
+			_timeout : 5000,
+
 			_url : function(controller, payload){
 				return _hostname + '/EasyAsk/apps/Advisor.jsp';
 			},
