@@ -52,11 +52,13 @@
 				if(_revealController){
 					_revealController.unbindEvents(_flyoutParent);
 				}
+
 				// Create the menu
 				_flyoutParent.menuAim({
-					activate: _this.showRow,
-					deactivate: _this.hideRow
-					//exitMenu : function(){ return true; }  // hides the open menu on exit
+					activate : _this.showRow,
+					deactivate : _this.hideRow,
+					exitTimeout : EXIT_TIMEOUT,
+					exitMenu : function(){ return true; }  // hides the open menu on exit
 				});
 
 				// I'm using annynomus functions here to hide the event
@@ -113,6 +115,7 @@
 			closeFlyout : function(){
 				_flyout.removeClass('active');
 				_flyoutControlButton.removeClass('active');
+				$('li.collection.active', _flyout).removeClass('active');
 
 				// Finish any lingering animations
 				if(_currentFlyoutTween){

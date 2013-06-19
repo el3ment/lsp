@@ -86,6 +86,7 @@
 			mouseLocs = [],
 			lastDelayLoc = null,
 			timeoutId = null,
+			exitTimeoutId = null,
 			options = $.extend({
 				rowSelector: "> li",
 				submenuSelector: "*",
@@ -95,7 +96,8 @@
 				exit: $.noop,
 				activate: $.noop,
 				deactivate: $.noop,
-				exitMenu: $.noop
+				exitMenu: $.noop,
+				exitTimeout: 0
 			}, opts);
 
 		var MOUSE_LOCS_TRACKED = 3,  // number of past mouse locations to track
@@ -123,11 +125,16 @@
 				// If exitMenu is supplied and returns true, deactivate the
 				// currently active row on menu exit.
 				if (options.exitMenu(this)) {
-					if (activeRow) {
-						options.deactivate(activeRow);
-					}
+					
+					exitTimeoutId = setTimeout(function(){
+						if (activeRow) {
+							options.deactivate(activeRow);
+						}
 
-					activeRow = null;
+						activeRow = null;
+
+					}, options.exitTimeout);
+					
 				}
 			};
 
@@ -138,6 +145,9 @@
 				if (timeoutId) {
 					// Cancel any previous activation delays
 					clearTimeout(timeoutId);
+				}
+				if(exitTimeoutId){
+					clearTimeout(exitTimeoutId);
 				}
 
 				options.enter(this);
