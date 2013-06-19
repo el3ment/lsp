@@ -1,4 +1,15 @@
 <div class='page-home span12 container'>
+
+	<div class='row'>
+		<div id='mainSlider' class='touchcarousel'>
+			<ul class='touchcarousel-container'>
+				<li class='ad touchcarousel-item'>Product 1</li>
+				<li class='ad touchcarousel-item'>Product 2</li>
+				<li class='ad touchcarousel-item'>Product 3</li>
+			</ul>
+		</div>
+	</div>
+
 	<div class='row-fluid section'>
 		<a href='' class='productAd span6'>
 			<div class='productImage'> <!-- TODO : add badges -->

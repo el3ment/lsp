@@ -42,6 +42,7 @@
     <script type='text/javascript' src='js/controllers/reviews.js'></script>
     <script type='text/javascript' src='js/controllers/shipping.js'></script>
     <script type='text/javascript' src='js/controllers/account.js'></script>
+    <script type='text/javascript' src='js/controllers/home.js'></script>
     <script type='text/javascript' src='js/controllers/product.js'></script>
 	<script type='text/javascript' src='js/controllers/list.js'></script>
 	
