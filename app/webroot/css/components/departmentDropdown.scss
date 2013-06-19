@@ -484,7 +484,7 @@
 	.departmentDropdown{
 
 		margin-bottom: 40px;
-		padding: 0 10px;
+		padding: 0;
 		position: relative;
 		top: -15px;
 
@@ -540,12 +540,19 @@
 			border-bottom-color: black;
 			z-index: 2;
 		}
+
+		// First top level, group, and link
+		.topLevel > li.collection:first-child > .flyoutTitle > .h3,
 		.column:first-child .list:first-child .h3,
 		.link:first-child{
 			@include box-shadow-multiple(0 2px 6px -3px $grey inset);
 		}
-		// Last element in open list
+		// Last element in open list and last top level element
 		.column + .column .list:last-child .h3.reveal-closed,
+		.topLevel > li.collection:last-child > .flyoutTitle > .h3{
+			@include box-shadow-multiple(0 -2px 6px -3px $grey inset);
+		}
+		// Last Link
 		.link:last-child{
 			@include box-shadow-multiple(0 -3px 6px -3px $grey inset);
 		}
