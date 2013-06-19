@@ -532,6 +532,12 @@
 				right: 10px;
 			}
 		}
+
+		.reveal-open > .h3{
+			background-color: black;
+			color: white;
+		}
+
 		.link a{
 			position: relative;
 			padding-left: 20px;
@@ -575,6 +581,10 @@
 				//border-left: 1px solid $lightGrey;
 				background-color: $superLightGrey;
 				padding-left: 40px;
+			}
+			.h3.reveal-open{
+				background-color: black;
+				color: white;
 			}
 		}
 		

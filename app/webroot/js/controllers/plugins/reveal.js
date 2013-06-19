@@ -78,7 +78,9 @@
 
 				// Mark Parents as Open
 				children.each(function(index, child){
-					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-open').removeClass('reveal-closed');
+					// Find it as the only child, and also if it's space seperated
+					// Otherwise you'l find partials like id="states" would find "states-main"
+					$('*[data-reveal-children="' + child.id + '"], *[data-reveal-children*="' + child.id + ' "] ').addClass('reveal-open').removeClass('reveal-closed');
 				})
 
 				if(doAnimations){
