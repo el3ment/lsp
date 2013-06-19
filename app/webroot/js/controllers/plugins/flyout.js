@@ -18,6 +18,7 @@
 		var _revealController = _lsp.controllers.reveal;
 
 		var OPEN_SPEED = 150;
+		var EXIT_TIMEOUT = 700;
 
 		_this =  {
 			name : 'flyout',
@@ -61,8 +62,21 @@
 				// argument from the controller methods. You shouldn't expect
 				// openFlyout or closeFlyout to rely on the event - it's possible
 				// to force it open from elsewhere (like on the home page)
-				_flyoutControlButton.on('mouseenter.flyout', function(e){ _this.openFlyout(); });
-				$('.wrapper', _flyout).bind('mouseleave.flyout', function(e){ _this.closeFlyout(); });
+				var timeout;
+				
+				_flyoutControlButton.on('mouseenter.lsp.flyout', function(e){ 
+					clearTimeout(timeout);
+					_this.openFlyout(); 
+				});
+
+				$('#mainFlyout .container').on('mouseenter.lsp.flyout', function(e){
+					clearTimeout(timeout);
+				});
+
+				$('.wrapper', _flyout).bind('mouseleave.lsp.flyout', function(e){
+					//clearTimeout(timeout);
+					timeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
+				});
 			},
 
 			detachMenu : function(){
