@@ -486,7 +486,9 @@
 		margin-bottom: 40px;
 		padding: 0;
 		position: relative;
-		top: -15px;
+		top: -47px;
+		background-color: white;
+		z-index: 1;
 
 		@include box-sizing();
 		// No subtext on mobile

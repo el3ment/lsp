@@ -440,8 +440,8 @@
 				background: url(../img/dark_pattern.jpg);
 
 				width: 100%;
-				z-index: 1;
-				@include box-shadow-multiple(0 2px 3px #000); /* Top Highlight, Drop shadow */  
+				z-index: 2;
+				@include box-shadow-multiple(0 2px 3px -1px $grey); /* Top Highlight, Drop shadow */  
 											 
 				
 				
