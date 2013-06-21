@@ -329,6 +329,7 @@
 
 					$(_this).triggerHandler('onResize', eventData);
 					$(_this).triggerHandler('onReady', eventData);
+					//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
 					$(_this).triggerHandler('onAfterReady', eventData);
 				});
 			}
