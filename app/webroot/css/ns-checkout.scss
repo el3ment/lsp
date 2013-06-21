@@ -106,7 +106,7 @@
 // where possible, trying to 
 
 
-body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
+body .span12 > table{
 	position: relative;
 	width: 800px;
 	margin: auto;
@@ -647,7 +647,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 	// The button row for cart
-	&.nscheckout-cart > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table{
+	&.nscheckout-cart > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table{
 		float: right;
 		margin-top: 10px !important;
 
@@ -762,7 +762,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		padding-bottom: 80px !important;
 	}
 
-	> tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > input[name="new"] ~ table{
+	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table{
 		
 		
 		> tbody > tr{
@@ -938,62 +938,62 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 		}
 	}
 
-/*
- * Login / Register
- */
+	/*
+	 * Login / Register
+	 */
 
-input[name="category"][value="login-register"] ~ table{
-	@include panel();
-	@include engaged();
+	input[name="category"][value="login-register"] ~ table{
+		@include panel();
+		@include engaged();
 
-	margin-bottom: 0;
-	margin-top: 135px;
-	
-	tr[height="25"]{
+		margin-bottom: 0;
+		margin-top: 135px;
 		
-		position: absolute;
-		top: -140px;
-		width: 100%;
-
-		.checkoutprogresstext{
-			width: 100%;
-			display: block;
-		}
-	}
-	input[type="checkbox"]{
-		float: right;
-		@media (max-width: 767px){
-			float: left;
-		}
-	}
-
-	// Blank rows
-	input[name="partner"] + tr{
-		display: none !important;
-	}
-
-	// Button row
-	> tbody > tr:first-child + tr + tr + tr + tr + tr{
-		
-		line-height: 0;
-
-		#tbl_submitter{
-			display: block;
+		tr[height="25"]{
+			
 			position: absolute;
-			bottom: -50px;
-			right: 0px;
+			top: -140px;
+			width: 100%;
+
+			.checkoutprogresstext{
+				width: 100%;
+				display: block;
+			}
 		}
-		
-		td{ 
-			display: block; 
+		input[type="checkbox"]{
 			float: right;
+			@media (max-width: 767px){
+				float: left;
+			}
 		}
-		
-		table{ 
-			float: right;
+
+		// Blank rows
+		input[name="partner"] + tr{
+			display: none !important;
+		}
+
+		// Button row
+		> tbody > tr:first-child + tr + tr + tr + tr + tr{
+			
+			line-height: 0;
+
+			#tbl_submitter{
+				display: block;
+				position: absolute;
+				bottom: -50px;
+				right: 0px;
+			}
+			
+			td{ 
+				display: block; 
+				float: right;
+			}
+			
+			table{ 
+				float: right;
+			}
 		}
 	}
-}
 
 
 
@@ -1312,8 +1312,8 @@ input[name="category"][value="login-register"] ~ table{
 
 	}
 
-	// Shipping Method
-	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+	// Shipping Method & Review Order Panel
+	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 		@include panel();
 		@include engaged();
 
@@ -1509,13 +1509,10 @@ input[name="category"][value="login-register"] ~ table{
 		// 	display: none !important;
 		// }
 
-
-
-
 	}
 
-	// Button Bar
-	> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr{
+	// Button Bar for Shipping Method
+	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr{
 		
 		// Back out of my global absolute positioning
 		#tbl_submitter,
@@ -1534,7 +1531,7 @@ input[name="category"][value="login-register"] ~ table{
 	}
 
 	// Shipping
-	> tbody > tr.portletHandle + .noprint + .portletHandle{
+	tr.portletHandle + .noprint + .portletHandle{
 		
 		@include panel();
 		@include disengaged();
@@ -1996,7 +1993,7 @@ input[name="category"][value="login-register"] ~ table{
 			display: none !important;
 		}
 
-		> tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+		> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 			border: 0;
 			@include box-shadow-multiple(none);
 			width: 100%;
@@ -2016,12 +2013,12 @@ input[name="category"][value="login-register"] ~ table{
 
 	// The receipt dosen't have the timeline, so we need to remove the space above
 	// nscheckout-receipt class is added via javascript in the Thank You customize text
-	&.nscheckout-receipt > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+	&.nscheckout-receipt > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 		margin-top: 0 !important;
 	}
 
 	// The login page by itself needs to be full width
-	&.ns-login > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr{
+	&.ns-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr{
 		width: 600px !important;
 		margin: 0 100px !important;
 	}

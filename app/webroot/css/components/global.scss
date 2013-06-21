@@ -216,7 +216,7 @@ ul.list li,
 }
 
 .panel.clean{
-	background-color: transparent;
+	background-color: transparent;@
 	@include box-shadow-multiple(none);
 	border-color: transparent;
 	padding-top: px((2 * $paddingUnit) - 2px);
@@ -868,6 +868,7 @@ ul.list li,
 
 	// Text links
 	a, .b5{
+		position: relative;
 		display: block;
 		font-size: 13px;
 		text-decoration: none;
@@ -880,13 +881,13 @@ ul.list li,
 		
 		&:hover{
 			//color: blue;
-			text-decoration: none;
+			text-decoration: underline;
 			//padding-left: 10px;
 			&:before{
 				color: $grey;
 				content: '›';
 				position: absolute;
-				left: 5px;
+				left: 0;
 			}
 			.label{
 				text-decoration: underline;
@@ -898,7 +899,7 @@ ul.list li,
 
 		// The following class naming structure comes from NetSuite
 		// Active category
-		&.leftLinkBold{
+		&.textboldnolink{
 			font-weight: bold;
 			color: black;
 			&:hover{
@@ -940,7 +941,8 @@ ul.list li,
 			margin-left: 5px;
 		}
 		
-		a:first-child{
+		tr:first-child tr:first-child a,
+		.content > a:first-child{
 			margin-top: 10px;
 		}
 

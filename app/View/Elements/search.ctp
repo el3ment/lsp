@@ -309,7 +309,7 @@
 					</li>
 				</ul>
 			</form>
-			<a href='#' class='productLink'>
+			<a href='<#=item.Item_URL #>' class='productLink'>
 				<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=item.Image_1_URL #>.200x200' width='200' height='200'/></div>
 				<span class='field compare details'>
 					<input type='checkbox' />

@@ -18,26 +18,12 @@
 				<h2 class='hidden-phone'>Shop By Category</h2>
 				<div class='content'>
 					<ul>
-						<?php for($i = 0; $i < 20; $i++){ ?>
 						<li class='category'>
 							<a href='' class='title'>
-								<?php if($i % 2){ ?>
 									<img src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='120' height='120'>
-								<?php }else{ ?>
-									<img src='http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png' width='120' height='120'>
-								<?php } ?>
-								<h3 class='icon-24-chevronRight icon-mobileOnly'><?php if($i % 7){ ?> Mallets <?php }else{ ?> Percussion Ensembles with Rhythm Section <?php } ?></h3>
+									<h3 class='icon-24-chevronRight icon-mobileOnly'>Title</h3>
 							</a>
-							<!--<ul class='links'>
-								<li><a href=''>Sub Category</a></li>
-								<li><a href=''>Sub Category</a></li>
-								<li><a href=''>Sub Category</a></li>
-								<li><a href=''>Sub Category</a></li>
-								<li><a href=''>Sub Category</a></li>
-								<li class='more'><a href=''>View All</a></li>
-							</ul>-->
 						</li>
-						<?php } ?>
 					</ul>
 				</div>
 			</div>
@@ -105,65 +91,5 @@
 				</div>
 			</div>
 		</div>
-		<div class='refinements span3 hidden-phone'>
-			<div class='navigationLinks panel disengaged'>
-				<div class='section links'>
-					<h4 data-reveal-children='refinement-categories'>Categories</h4>
-					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-categories'>Toggle Refinement Group</button></div>
-					<div id='refinement-categories' class='content reveal-isOpen'>
-						<a href='' class='link2'>Combination & Specialty</a>
-						<a href='' class='link2'>Names of Another Category</a>
-						<a href='' class='link2'>Marching Equipment</a>
-						<a href='' class='link2'>Other Stuff</a>
-						<a href='' class='link2 leftLinkBold'>Category</a>
-						<a href='' class='link3'>These are sub categories</a>
-						<a href='' class='link3'>More Subcategories</a>
-						<a href='' class='link3'>The Who</a>
-						<a href='' class='link2'>Black Sabbath</a>
-						<a href='' class='link2'>Tool</a>
-						<a href='' class='link2'>Slayer</a>
-						<a href='' class='link2'>Backstreet Boys</a>
-						<a href='' class='link2'>It's My Jam</a>
-					</div>
-				</div>
-				<div class='section links'>
-					<h4 data-reveal-children='refinement-<?php echo $i; ?>'>Supplies</h4>
-					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide' data-reveal-children='refinement-brands'>Toggle Refinement Group</button></div>
-					<div id='refinement-brands' class='content'>
-						<a href='' class='link2'>Combination & Specialty</a>
-						<a href='' class='link2'>Names of Another Category</a>
-						<a href='' class='link2'>Marching Equipment</a>
-						<a href='' class='link2'>Other Stuff</a>
-					</div>
-				</div>
-				<div class='section brands'>
-					<h4 data-reveal-children='refinement-<?php echo $i; ?>'>Brands</h4>
-					<div class='toggleRefinements'><button class='b4 icon-16-toggleHide <?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>' data-reveal-children='refinement-<?php echo $i; ?>'>Toggle Refinement Group</button></div>
-					<div id='refinement-<?php echo $i; ?>' class='<?php echo ($i % 2) ? "reveal-isOpen" : ""; ?>'>
-						<div class="refinementList">
-							<ul>
-								<li class='field'>
-									<input id='refinement-<?php echo $i; ?>-0' type='checkbox' />
-									<label for='refinement-<?php echo $i; ?>-0'>Vibraphone Mallets With a Really Long Name&nbsp;<span class='details'>(22)</span></label>
-								</li>
-								<li class='field'>
-									<input id='refinement-<?php echo $i; ?>-1' type='checkbox' />
-									<label for='refinement-<?php echo $i; ?>-1'>Vibraphone Mallets <span class='details'>(22)</span></label>
-								</li>
-								<li class='field'>
-									<input id='refinement-<?php echo $i; ?>-2' type='checkbox' />
-									<label for='refinement-<?php echo $i; ?>-2'>Vibraphone Mallets <span class='details'>(22)</span></label>
-								</li>
-								<li class='field'>
-									<input id='refinement-<?php echo $i; ?>-3' type='checkbox' />
-									<label for='refinement-<?php echo $i; ?>-3'>Vibraphone Mallets <span class='details'>(22)</span></label>
-								</li>
-							</ul>
-						</div>
-						<button class='b5 loadMore'>See More (10)</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		
 </div>

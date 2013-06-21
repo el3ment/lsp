@@ -11,7 +11,7 @@
 		var _util = _app.utilities;
 		
 		var _state = {};
-		var _mainTable = 'body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]';
+		var _mainTable = 'body .span12 > table';
 		_this =  {
 			events : {
 				checkout : {
@@ -46,13 +46,15 @@
 					},
 					onEnterThankYou : function(e, data){
 
-						var cartTable = $('body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"] > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
+						// TODO : use _mainTable
+						
+						var cartTable = $('body .span12 > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
 						$('> tbody > tr:first-child', cartTable).attr('id', 'carttableheader');
 						$('> tbody > tr:first-child ~ tr', cartTable).not('tr[id]')
 							.each(function(i, e){ 
 								$(e).attr('id', 'carttablerow' + i); 
 							});
-						$('body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]').addClass('nscheckout-receipt'); // page-specific hook
+						$('body .span12 > table').addClass('nscheckout-receipt'); // page-specific hook
 					}
 				},
 				application : {
