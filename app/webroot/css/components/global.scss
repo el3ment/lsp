@@ -216,12 +216,12 @@ ul.list li,
 }
 
 .panel.clean{
-	background-color: transparent;@
-	@include box-shadow-multiple(none);
+	background-color: transparent;
 	border-color: transparent;
 	padding-top: px((2 * $paddingUnit) - 2px);
 	padding-right: 0;
 	padding-left: 0;
+	@include box-shadow-multiple(none);
 }
 
 /* Common Properties */
@@ -818,12 +818,26 @@ ul.list li,
 	#attributeList{
 		width: 100%;
 	}
-	
-	.indent a, .indent .b5{ 
-		text-indent: 0;
-		padding-left: 10px;
-		position: relative;
-		left: -10px;
+
+	// Netsuite Category Hacks
+	#refinement-categories{
+		table, tbody, tr, td{
+			display: block;
+		}
+		table table {
+			tr, td{
+				display: none;
+			}
+			
+			tr.currentCategory,
+			tr.openParentCategory{
+				display: table-row;
+			}
+
+			td[align="left"]{
+				display: block;
+			}
+		}
 	}
 
 	// Refinement Results Panel
@@ -833,38 +847,46 @@ ul.list li,
 		float: left;
 	}
 
-	li.indent:first-child + .indent{ padding-left: 0px; }
-	li.indent ~ .indent{
-		
-		a, .b5{
-			&:before,
-			.leftLinkBold:before{
-				display: block;
-				content : '↳';
-				position: static;
-				color: $lightGrey;
-				float:left;
-				padding-right: 2px;
-			}
-			&:hover{
-				&:before{
-					color: black;
-				}
-			}
-		}
-	}
+
 
 	// Don't bold the first listed category
-	li.indent:first-child{
+	li.indent:first-child,
+	li.firstParentCategory{
 		a, .b5{
 			font-weight: normal;
 		}
 	}
 
+	// I don't remember what this is for :(
 	li.indent:first-child + .indent + .indent{ padding-left: 5px; }
 	li.indent:first-child + .indent + .indent + .indent{ padding-left: 10px; }
 	li.indent:first-child + .indent + .indent + .indent + .indent{ padding-left: 15px; }
 	li{ clear: both; }
+
+
+	// Current list	
+	.currentCategory a{
+		padding-left: 15px;
+		border-left: 1px solid $lightGrey;
+	}
+
+	// Basic link style
+	.indent a, .indent .b5{ 
+		text-indent: 0;
+		padding-left: 10px;
+		position: relative;
+		left: -10px;
+	}
+
+	.level1 a{ margin-left: 10px; }
+	.level2 a{ margin-left: 20px; }
+	.level3 a{ margin-left: 30px; }
+	.level4 a{ margin-left: 40px; }
+	.level5 a{ margin-left: 50px; }
+	.level6 a{ margin-left: 60px; }
+	.level7 a{ margin-left: 70px; }
+	.level8 a{ margin-left: 80px; }
+	.level9 a{ margin-left: 90px; }
 
 	// Text links
 	a, .b5{
@@ -899,26 +921,39 @@ ul.list li,
 
 		// The following class naming structure comes from NetSuite
 		// Active category
-		&.textboldnolink{
+		.level0.openParentCategory ~ .openParentCategory{
 			font-weight: bold;
 			color: black;
+		}
+	}
+
+	// Parent Categories, overwrites the > character, skipping the first level
+	li.indent:first-child + .indent{ padding-left: 0px; }
+	li.indent ~ .indent,
+	.level0.openParentCategory ~ .openParentCategory{
+		
+		a, .b5{
+			
+			font-weight: bold;
+			position: relative;
+			left: -10px;
+
+			&:before,
+			.leftLinkBold:before{
+				display: block;
+				content : '↳';
+				position: static;
+				color: $lightGrey;
+				float: left;
+				padding-right: 2px;
+			}
 			&:hover{
-				text-decoration: none;
 				&:before{
-					display: none;
+					font-weight: normal;
+					color: black;
 				}
 			}
 		}
-
-		// 3rd level category
-		&.link2, &.link3, &.link4, &.link5, &.link6{
-			position:relative;
-			left: 10px;
-		}
-		&.link3{ left: 20px; }
-		&.link4{ left: 30px; }
-		&.link5{ left: 40px; }
-		&.link6{ left: 50px; }
 	}
 	
 	// A division within the box aka, an attribute complete with title, collapse button, and content
@@ -942,7 +977,8 @@ ul.list li,
 		}
 		
 		tr:first-child tr:first-child a,
-		.content > a:first-child{
+		.content > a:first-child,
+		.firstParentCategory a{
 			margin-top: 10px;
 		}
 

@@ -10,8 +10,12 @@
 	.head .aggregateReviews, .head > .details{
 		position: relative;
 		top: -10px;
-		
 	}
+    
+    .has0Reviews{
+        display: none !important;
+    }
+
 	.isAuthorized{
 		
 		&:after{
@@ -39,6 +43,12 @@
         margin: px($gutterWidth);
         margin-right: 0;
         line-height: 1.5em;
+
+        // If there isn't an author - hide it
+        &[data-author="none"]{
+            display: none !important;
+        }
+
         .author{
             font-size: 14px;
             text-transform: none;
@@ -129,13 +139,14 @@
 					position: absolute;
 					top: -1.5em;
 					height: 1.5em;
-                    margin: px($paddingUnit) 0;
+                    margin: px($paddingUnit) 0 0 50%;
 					text-align:center;
 					font-size:13px;
                     color: $grey;
 					padding-left: 23px;
 					@include lsp-sprite-background();
 					background-position: -71px -406px;
+                    left: -100px;
                 }
                 a{
 					vertical-align: bottom;
@@ -211,9 +222,9 @@
         
     }
 	
-	.addRelatedItems{
-		padding-bottom:0;
-	}
+	// .addRelatedItems{
+	// 	padding-bottom:0;
+	// }
 	
     .information{
         

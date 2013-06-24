@@ -253,6 +253,9 @@
 					// Add duplication validation if nessesary
 					window.LSP.controllers[name] = object;
 					
+					// Assumes application is the first loaded.
+					window.LSP.controllers.application.init(object);
+					
 					break;
 					
 				case 'asset' :

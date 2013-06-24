@@ -27,6 +27,17 @@
 		.panel{
 			padding-top: 13px;
 		}
+		#refinement-categories{
+			table table {
+				tr{
+					display: none;
+				}
+				tr.currentCategory,
+				tr.openParentCategory{
+					display: table-row;
+				}
+			}
+		}
 	}
 
 	.head{

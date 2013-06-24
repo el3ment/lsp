@@ -7,6 +7,7 @@
 		var _app = window.LSP;
 		var _assets = _app.assets;
 		var _context;
+		var _isReadyFired = false;
 
 		var _state = {};
 
@@ -109,6 +110,7 @@
 
 					onReady : function(e, data){
 
+						_isReadyFired = true;
 						_this.attachEvents($('html'));
 						
 						// Add pagetype to the body tag for CSS styling
@@ -142,7 +144,6 @@
 				};
 			},
 
-
 			// Push / Pull state take snapshots sent from controllers, stringify them
 			// and then push that to the hash. It would have been possible to use JSON
 			// but the slashes look much prettier
@@ -152,12 +153,19 @@
 
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
-				// Setting window.location.hash to the same path does not cause hashchange to fire
-				// which would leave isPushingState true until the next go around, a strange bug
-				if(window.location.hash !== '#' + statePath){
-					_isPushingState = true; // Don't fire the onHashChange event
-					window.location.hash = statePath;
+				// If pushState, push the path
+				if(!!(window.history && history.pushState)){
+					history.pushState({}, '', '/' + snapshot.path + '#' + statePath);
+				}else{
+					// Setting window.location.hash to the same path does not cause hashchange to fire
+					// which would leave isPushingState true until the next go around, a strange bug
+					if(window.location.hash !== '#' + statePath){
+						_isPushingState = true; // Don't fire the onHashChange event
+						window.location.hash = statePath;
+					}
 				}
+
+				
 
 			},
 
@@ -168,18 +176,21 @@
 				$.each(_state, function(controllerName, snapshot){
 					statePath = statePath + '/~' + encodeURIComponent(controllerName);
 					$.each(snapshot, function(variable, value){
-					
-						// For simple objects use the value, complex objects get JSON-ified
-						if(typeof value === 'object' && value.hasOwnProperty('value') && value.hasOwnProperty('uriEncode')){
-							value = value.value;
-						}else if(typeof value === 'object'){
-							value = encodeURIComponent(JSON.stringify(value));
-						}else{
-							value = encodeURIComponent(value).replace(/%20/g, '+');
-						}
 						
-						statePath += '/' + encodeURIComponent(variable) + '/' + value;
-				
+						// If pushState exists, we don't want to save the path in the hash - so skip it
+						if(variable !== 'path' && !!(window.history && history.pushState)){
+							// For simple objects use the value, complex objects get JSON-ified
+							if(typeof value === 'object' && value.hasOwnProperty('value') && value.hasOwnProperty('uriEncode')){
+								value = value.value;
+							}else if(typeof value === 'object'){
+								value = encodeURIComponent(JSON.stringify(value));
+							}else{
+								value = encodeURIComponent(value).replace(/%20/g, '+');
+							}
+							
+							statePath += '/' + encodeURIComponent(variable) + '/' + value;
+						}
+
 					});
 				});
 
@@ -219,74 +230,20 @@
 
 			},
 
-			init : function(){
-				
-				console.log('Application Init');
-				
-				var controller, subController, event, asset, controllerObj, subControllerObj;
-				
-				for (controller in _app.controllers) {
-					
-					controllerObj = _app.controllers[controller]; // Convience
-					
-					// Bind Events
-					// This binds all of the callbacks (eg. controller.events.onAfterLoginSuccess)
-					// to the event controller.onAfterLoginSuccess which is called by the API model object
-					for(subController in controllerObj.events){
-						
-						subControllerObj = _app.controllers[subController]; // Convience
-						
-						for(event in controllerObj.events[subController]){
-							if(event === 'self'){
-								event = subController;
-							}
-							if(event === 'assets'){
-								for(asset in controllerObj.events[subController].assets){
-									for(event in controllerObj.events[subController].assets[asset]){
-										// Attach the event to the asset
-										$(subControllerObj.assets[asset])
-											.bind(event, controllerObj.events[subController].assets[asset][event]); 
-									}
-								}
-							}else{
-							// attach the event to the subcontroller
-								$(subControllerObj)
-									.bind(event, controllerObj.events[subController][event]);
-							}
-						}
-					}
-					// bind asset events to controllers
-					for(asset in controllerObj.assets){
-						for(subController in controllerObj.assets[asset].events){
-							
-							subControllerObj = _app.controllers[subController]; // Convience
-							
-							for(event in controllerObj.assets[asset].events[subController]){
-								if(subController === 'self'){
-									// Assets will sometimes have their own events, like onSort, onClose, ect.
-									// so we need to attach the default function to the asset event
-									$(controllerObj.assets[asset])
-										.bind(event, controllerObj.assets[asset].events[subController][event]);
-								}else{
-									// Otherwise, the assets want to attach themselves
-									// to the normal controller.onMethod events
-									$(subControllerObj)
-										.bind(event, controllerObj.assets[asset].events[subController][event]);
-								}
-							}
-						}
-					}
-					
-					// Call onInit/onReady events, the when().then() functions
-					// ensure that all of the onInit functions finish, before firing
-					$(controllerObj).triggerHandler('onInit');
-					$(controllerObj).triggerHandler('onLoaded');
-				}
-				
+			_createGlobalEventObject : function(){
+				return eventData = {
+					filename : _this.getFilename(),
+					queryParameters : _util.getURLParameters()
+				};
+			},
+
+			initializeGlobalEvents : function(){
+
+				var eventData = _this._createGlobalEventObject();
 
 				$(window).resize(
 					// We don't want to fire the onResize event every few miliseconds
-					// so we use a timer - the anynomus function helps keep scope.
+					// so we use a timer - the function helps keep scope.
 					(function(){
 						var resizeTimer;
 						return function(e, data){
@@ -294,17 +251,12 @@
 							if(resizeTimer){ clearTimeout(resizeTimer);	}
 							
 							resizeTimer = setTimeout(function() { 
-								$(_this).triggerHandler('onResize');
+								$(_this).triggerHandler('onResize', eventData);
 							}, 100);
 
 						};
 					})()
 				);
-
-				var eventData = {
-					filename : _this.getFilename(),
-					queryParameters : _util.getURLParameters()
-				};
 
 				$(window).on('hashchange', function(e){
 					if(_isPushingState){
@@ -324,22 +276,107 @@
 
 					eventData.error = e;
 					
-					$(_this).triggerHandler('onHashChange', eventData);
-					$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
+					// $(_this).triggerHandler('onHashChange', eventData);
+					// $(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
 
 					$(_this).triggerHandler('onResize', eventData);
 					$(_this).triggerHandler('onReady', eventData);
 					//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
 					$(_this).triggerHandler('onAfterReady', eventData);
 				});
+			},
+
+			init : function(specificController){
+				
+				console.log('Initializing Events for ' + specificController.name);
+				
+				var controller, subController, event, asset, controllerObj, subControllerObj;
+				
+				for (controller in _app.controllers) {
+					
+					controllerObj = _app.controllers[controller]; // Convience
+					
+					// Bind Events
+					// This binds all of the callbacks (eg. controller.events.onAfterLoginSuccess)
+					// to the event controller.onAfterLoginSuccess which is called by the API model object
+					for(subController in controllerObj.events){
+						
+						subControllerObj = _app.controllers[subController]; // Convience
+						
+						for(event in controllerObj.events[subController]){
+							// Self event wasn't working right anyway, we just name it explicitly
+							// if(event === 'self'){
+							// 	event = subController;
+							// }
+							// Removing Assets - we don't use them in this project
+							// if(event === 'assets'){
+							// 	for(asset in controllerObj.events[subController].assets){
+							// 		for(event in controllerObj.events[subController].assets[asset]){
+							// 			// Attach the event to the asset
+							// 			$(subControllerObj.assets[asset])
+							// 				.bind(event, controllerObj.events[subController].assets[asset][event]); 
+							// 		}
+							// 	}
+							// }
+							// else{
+							// attach the event to the subcontroller
+
+							// If we've passed a specific controller - only bind that one, otherwise, in the darkness bind them (all of them)
+							if((specificController && (specificController === controllerObj || specificController === subControllerObj)) || !specificController){
+								$(subControllerObj)
+									.bind(event, controllerObj.events[subController][event]);
+							}
+
+							// }
+						}
+					}
+
+					debugger;
+					
+					// If the onReady events have already fired, then force this controller along individually
+					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
+						controllerObj.events.application.onReady(_this._createGlobalEventObject());
+					}
+
+					// bind asset events to controllers
+					// Removing Assets, we don't use them in this project
+					// for(asset in controllerObj.assets){
+					// 	for(subController in controllerObj.assets[asset].events){
+							
+					// 		subControllerObj = _app.controllers[subController]; // Convience
+							
+					// 		for(event in controllerObj.assets[asset].events[subController]){
+					// 			if(subController === 'self'){
+					// 				// Assets will sometimes have their own events, like onSort, onClose, ect.
+					// 				// so we need to attach the default function to the asset event
+					// 				$(controllerObj.assets[asset])
+					// 					.bind(event, controllerObj.assets[asset].events[subController][event]);
+					// 			}else{
+					// 				// Otherwise, the assets want to attach themselves
+					// 				// to the normal controller.onMethod events
+					// 				$(subControllerObj)
+					// 					.bind(event, controllerObj.assets[asset].events[subController][event]);
+					// 			}
+					// 		}
+					// 	}
+					// }
+					
+					// Call onInit/onReady events, the when().then() functions
+					// ensure that all of the onInit functions finish, before firing
+					// $(controllerObj).triggerHandler('onInit');
+					// $(controllerObj).triggerHandler('onLoaded');
+				}
+				
 			}
 
 		};
 		
 		return _this;
+
 	}());
 	
 	_util.register('controller', 'application', application);
-	window.LSP.controllers.application.init();
+
+	window.LSP.controllers.application.initializeGlobalEvents();
 
 }());

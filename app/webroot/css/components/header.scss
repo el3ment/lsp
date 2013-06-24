@@ -374,38 +374,47 @@
 		}
 		
 		.breadcrumbLinks{
+			
 			float: none;
 			margin: auto;
-			
-		}
-		
-		li{ 
-		  
-			/* Each item contains an A tag which contains the text of the category */
-			
-			float: left;
-			
-			a, .b5{
-				display:inline-block;
-			}
 
 			&:after{
-				content: '→';
-				padding:0 px(5px);
-			}
-			&.active:after{
+				background-color: $superLightGrey;
 				content: ' ';
+				display: inline-block;
+				position: relative;
+				height: 10px;
+				width: 10px;
+				left: -13px;
 			}
 			
-			&.active a, &.active .b5{
-				text-decoration: none; 
-				color: $black;
-				font-weight: bold;
-				float: left;
-				position: relative;
-				top: 2px;
+			a{ 
+			  
+				/* Each item contains an A tag which contains the text of the category */
+				
+				//float: left;
+				display:inline-block;
+
+				// &:before{
+				// 	content: '→';
+				// 	padding:0 px(5px);
+				// }
+				// &:first-child:before{
+				// 	content: ' ';
+				// }
+				
+				// &.active a, &.active .b5{
+				// 	text-decoration: none; 
+				// 	color: $black;
+				// 	font-weight: bold;
+				// 	float: left;
+				// 	position: relative;
+				// 	top: 2px;
+				// 
 			}
 		}
+		
+		
 	}
 	@media (min-width: 768px){
 		.search{

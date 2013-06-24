@@ -194,19 +194,14 @@
 				},
 				application : {
 
-					onSearchHashChange : function(e, data){
-						var pulledState = _app.controllers.application.pullState(_this) || {};
-						//pulledState.searchQuery = data.queryParameters.searchQuery; // add the query if it exists
-						
-						_state = _this.formatPullState(pulledState);
-
-						_this.search(data.queryParameters.searchQuery);
-						_this.changeView(_state.view);
-
+					onHashChange : function(e, data){
+						_this.loadState(_app.controllers.application.pullState(_this));
+						alert('hc');
 					},
 
 					onReady : function(e, data){
-						$('#searchQuery').val(data.queryParameters.searchQuery).change();
+						_this.loadState(_app.controllers.application.pullState(_this));
+						debugger;
 					},
 					
 					onInit : function(e, data){
@@ -224,28 +219,36 @@
 			pushState : function(){
 
 				var pushedState = $.extend({}, _state);
-				pushedState.category = {value : pushedState.category.replace(/\//g, '|'), uriEncode : false};
-				pushedState.allAttributes = {value : pushedState.allAttributes.replace(/\//g, '|'), uriEncode : false};
-
-				if(pushedState.category.value.length === 0){
-					delete pushedState.category;
-				}
 				
+				delete pushedState.category; // Remove Category from the hash (it's being 'saved' in the URL)
+				delete pushedState.keywords; // Hide keywords from hash as they are found in query parameter
+
+				pushedState.allAttributes = {value : pushedState.allAttributes.replace(/\//g, '|'), uriEncode : false};
+				pushedState.path = 'Categories/' + _state.category;
+
 				if(pushedState.allAttributes.value.length === 0){
 					delete pushedState.allAttributes;
 				}
 
-				delete pushedState.keywords; // Hide keywords from hash as they are found in query parameter
-
 				return _app.controllers.application.pushState(_this, pushedState);
 			},
 
-			formatPullState : function(state){
-				if(state.category){
-					state.category = ((state || {}).category || '').replace(/\|/g, '/');
-					state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
-				}
+			pullState : function(state){
+				
+				state = state || {};
+
+				state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
+				state.category = document.location.pathname;
+
+				_state = state;
+
 				return state;
+			},
+
+			loadState : function(state){
+				_this.pullState(_app.controllers.application.pullState(_this));
+				_this.search('');
+				_this.changeView(_state.view);
 			},
 
 			// By keyword

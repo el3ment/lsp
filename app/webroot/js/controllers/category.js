@@ -17,17 +17,29 @@
 			assets : {},
 			markNetSuiteCategoriesAsOpen : function(){
 
-				// var openRows = $('#refinement-categories > table table tr td[colspan!="10"]:not(:first-child)').parent('tr');
-				// openRows.addClass('openCategory').prev().first().addClass('openCategory');
-				
-				// $('#refinement-categories > table table tr td.textboldnolink').parent('tr').addClass('currentParent');
-				// $('.currentParent ~ tr.openCategory').addClass('currentCategory');
-
+				var maxDepth = 0;
 				$('#refinement-categories table table tr').each(function(i, element){
 					var row = $(element);
 					var depth = $('td:first-child', element).attr('colspan') || 0;
+					
+					maxDepth = (depth > maxDepth) ? depth : maxDepth;
+
 					row.addClass('level' + depth);
-				})
+				});
+
+				// Mark Parents as open
+				$('.level1:first, .level2:first, .level3:first, level4:first, .level5:first, .level6:first, .level7:first, .level8:first, .level9:first')
+					.prev()
+					.addClass('openParentCategory');
+
+				// Mark max
+				$('.level' + maxDepth).addClass('currentCategory');
+
+				// Mark current parent
+				$('.level' + maxDepth + ':first').prev().addClass('currentParentCategory');
+
+				// Mark first parent
+				$('.openParentCategory:first').addClass('firstParentCategory');
 
 			}
 		};

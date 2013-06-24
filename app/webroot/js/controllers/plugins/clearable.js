@@ -33,7 +33,7 @@
 							.off('focusable')
 							.on('click.lsp.focusable', function(e){ 
 							$(_this).triggerHandler('onSelectedInput', {selector : $(this)});
-						});
+						}).change();
 					}
 				}
 			},
