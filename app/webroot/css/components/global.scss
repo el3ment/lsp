@@ -1151,7 +1151,7 @@ ul.list li,
 		.isLastChecked:after{
 			display: block;
 			content: '............................................................';
-			color: $lightGrey;
+			color: #cfcfcf;
 			width: 100%;
 			margin: auto;
 			padding-top: 5px;
@@ -1159,7 +1159,10 @@ ul.list li,
 			letter-spacing: 2px;
 			line-height: 3px;
 			overflow-x: hidden;
+			overflow-y: hidden;
 			white-space: nowrap;
+			height: 100px;
+			height: 5px;
 		}
 
 	}
