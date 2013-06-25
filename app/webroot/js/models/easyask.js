@@ -289,7 +289,7 @@
 			// Creates an array of refinement node objects
 			// and splits up each attribute selection into it's own
 			// node
-			// Is then accessible at .navPathNodeList._lsp
+			// Is then accessible at .navPath._lsp
 			getRefinementNodes : function(easyAskDataSourceObject){
 				var attributeNodes = [];
 
@@ -297,11 +297,11 @@
 					
 					var node = easyAskDataSourceObject.navPath.navPathNodeList[i];
 
-					if(node.navNodePathType === 2){ // Refinement
-
+					if(node.navNodePathType === 2){ // If it is a refinement
 
 						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
 
+						// A group is a collection of refinements of the same type (two manufactuers, or three diameters)
 						var groups = node.englishName.substring(1, node.englishName.length - 2); // Remove starting and trailing parens
 						groups = groups.split('\'); (');
 
@@ -310,14 +310,17 @@
 							var attributeNode = groups[k].split('\' or ');
 
 							for(var j = 0; j < attributeNode.length; j++){
-								var attribute = attributeNode[j].split(' = \'');
-								var start = node.seoPath.indexOf(this.convertToSEOString(attribute[0]+':'+attribute[1])); // +1 for the : seperator
-								var nodeString = node.seoPath.substr(start, (node.seoPath + ';').indexOf(';', start)); // added ; to insure indexOf always catches it
+
+								// Easy ask will sometimes append random numbers to the end of node values, and since convertToSEOString
+								// can't figure it out - we need to search the seoPath, find and use the right nodeString
+								var attribute = attributeNode[j].split(' = \''); // Grab the name [0] and value [1] 
+								var initialNodeString = this.convertToSEOString(attribute[0]+':'+attribute[1]); // the part we know
+								var additionalText = _util.findBetween(initialNodeString, ';', node.seoPath); // the potential part we don't
 
 								attributeNodes.push({
 									attribute : attribute[0],
 									value : attribute[1],
-									nodeString : nodeString
+									nodeString : initialNodeString + additionalText
 								});
 							}
 						}
@@ -331,7 +334,10 @@
 
 
 			convertToSEOString : function(string){
-				return string.replace(/[^A-Za-z0-9:]/g, '-').replace(/-{1,}/, '-').replace(/-$/, '');
+				return string.replace(/[^A-Za-z0-9:]/g, '-') 
+					.replace(/-{1,}/, '-') // two or more -
+					.replace(/-$/, '') // end with -
+					.replace(/:-/, ':'); // remove starting - from any values
 			},
 
 			getCategoriesFromSEOPath : function(seoPath){

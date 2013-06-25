@@ -54,7 +54,7 @@
 
 			findBetween : function(front, back, string){
 				var start = string.indexOf(front) + front.length;
-				var end = string.indexOf(back, start);
+				var end = (string + back).indexOf(back, start); // returns to the end if back not present
 				return string.substr(start, end - start);
 			},
 			

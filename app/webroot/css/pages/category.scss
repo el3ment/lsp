@@ -458,7 +458,7 @@
 			//background-color:red;
 			border-right: 1px solid $lightGrey;
 			content: ' ';
-	}
+		}
 
 		// This hides the right border from the 3rd, 6th and 9th element
 		// with nth-of-type this wouldnt' be nessesary, but the + selector
@@ -590,51 +590,50 @@
 	}
 */
 
-	
-	img{
+		
+		img{
 
-		position: absolute;
-		bottom: 0px;
-		z-index: -1;
-		left: 50%;
-		margin-left: -60px;
+			position: absolute;
+			bottom: 0px;
+			z-index: -1;
+			left: 50%;
+			margin-left: -60px;
 
-		@include transition(bottom .1s);
+			@include transition(bottom .1s);
 
-	}
+		}
 
-	.links{
-		a{
-			
-			position: relative;
+		.links{
+			a{
+				
+				position: relative;
 
-			&:hover:before{
-				color: $grey;
-				font-size: 14px;
-				content : '›';
-				margin-bottom:1px;
-				position: absolute;
-				top: 50%;
-				margin-top: -13px;
-				left: -10px;
+				&:hover:before{
+					color: $grey;
+					font-size: 14px;
+					content : '›';
+					margin-bottom:1px;
+					position: absolute;
+					top: 50%;
+					margin-top: -13px;
+					left: -10px;
+				}
 			}
 		}
-	}
 
-	h3{
-		margin: (90px + $spaceBetweenRows) 20px 0; // Margin-top is the space between the picture and the title
-		background-color: $superLightGrey;
-		border: 1px solid $lightGrey;
-		padding: 5px 0;
-		text-align: center;
-		border-width: 1px 0;
-		z-index: 1;
-	}
+		h3{
+			margin: (90px + $spaceBetweenRows) 20px 0; // Margin-top is the space between the picture and the title
+			background-color: $superLightGrey;
+			border: 1px solid $lightGrey;
+			padding: 5px 0;
+			text-align: center;
+			border-width: 1px 0;
+			z-index: 1;
+		}
 
+	}
 }
 
-
-// This is the pagination loaded by default by NetSuite
 #handle_itemMainPortlet{
 	display: none;
 }
