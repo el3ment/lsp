@@ -929,7 +929,7 @@ ul.list li,
 
 		// The following class naming structure comes from NetSuite
 		// Active category
-		.level0.openParentCategory ~ .openParentCategory{
+		.level0.openParentCategory ~ .currentParentCategory{
 			font-weight: bold;
 			color: black;
 		}
@@ -962,6 +962,10 @@ ul.list li,
 				}
 			}
 		}
+	}
+
+	#refinement-categories-container ul li{
+		margin: 0;
 	}
 	
 	// A division within the box aka, an attribute complete with title, collapse button, and content
