@@ -29,7 +29,7 @@
 		_afterSuccess : function(responseData){
 			return responseData;
 		},
-		_request : function(type, dataType, controller, eventName, payload){
+		_request : function(type, dataType, controller, eventName, payload, passthrough){
 		
 			var result = $.Deferred();
 			var eventData = {};
@@ -40,7 +40,8 @@
 				crossDomain : true,
 				dataType : dataType,
 				context : this,
-				timeout : this._timeout
+				timeout : this._timeout,
+				passthrough : $.extend({}, passthrough)
 			};
 			
 			// TODO : use $.extend

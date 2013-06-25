@@ -865,7 +865,7 @@ ul.list li,
 
 
 	// Current list	
-	.currentCategory a{
+	.currentCategory a, .currentCategory button{
 		padding-left: 15px;
 		border-left: 1px solid $lightGrey;
 	}
@@ -878,15 +878,15 @@ ul.list li,
 		left: -10px;
 	}
 
-	.level1 a{ margin-left: 10px; }
-	.level2 a{ margin-left: 20px; }
-	.level3 a{ margin-left: 30px; }
-	.level4 a{ margin-left: 40px; }
-	.level5 a{ margin-left: 50px; }
-	.level6 a{ margin-left: 60px; }
-	.level7 a{ margin-left: 70px; }
-	.level8 a{ margin-left: 80px; }
-	.level9 a{ margin-left: 90px; }
+	.level1 a, .level1 button{ margin-left: 10px; }
+	.level2 a, .level2 button{ margin-left: 20px; }
+	.level3 a, .level3 button{ margin-left: 30px; }
+	.level4 a, .level4 button{ margin-left: 40px; }
+	.level5 a, .level5 button{ margin-left: 50px; }
+	.level6 a, .level6 button{ margin-left: 60px; }
+	.level7 a, .level7 button{ margin-left: 70px; }
+	.level8 a, .level8 button{ margin-left: 80px; }
+	.level9 a, .level9 button{ margin-left: 90px; }
 
 	// Text links
 	a, .b5{

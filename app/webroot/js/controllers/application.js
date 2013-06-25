@@ -8,6 +8,7 @@
 		var _assets = _app.assets;
 		var _context;
 		var _isReadyFired = false;
+		var _hasPushState = !!(window.history && history.pushState);
 
 		var _state = {};
 
@@ -147,15 +148,26 @@
 			// Push / Pull state take snapshots sent from controllers, stringify them
 			// and then push that to the hash. It would have been possible to use JSON
 			// but the slashes look much prettier
-			pushState : function(controller, snapshot){
+			pushState : function(controller, snapshot, useReplaceState){
 				
 				_state[controller.name] = snapshot; // Add it to the heap of other snapshots
 
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
 				// If pushState, push the path
-				if(!!(window.history && history.pushState)){
-					history.pushState({}, '', '/' + snapshot.path + '#' + statePath);
+				if(_hasPushState){
+					// To overcome an implementation problem with chrome/firefox where the popstate event 
+					// gets fired for onload - we use a workaround to look at history.state.
+					// this means the first argument (state) for history.pushState must ALWAYS be something
+					// that evaluates to true, {} would work too.
+					// check the event down below in initializeGlobalEvents to see more
+					if(!useReplaceState){
+						history.pushState(true, '', '/' + snapshot.path + '#' + statePath);
+					}else{
+						console.log('Replacing State');
+						history.replaceState(true, '', '/' + snapshot.path + '#' + statePath);
+					}
+
 				}else{
 					// Setting window.location.hash to the same path does not cause hashchange to fire
 					// which would leave isPushingState true until the next go around, a strange bug
@@ -178,7 +190,7 @@
 					$.each(snapshot, function(variable, value){
 						
 						// If pushState exists, we don't want to save the path in the hash - so skip it
-						if(variable !== 'path' && !!(window.history && history.pushState)){
+						if(variable !== 'path' && _hasPushState){
 							// For simple objects use the value, complex objects get JSON-ified
 							if(typeof value === 'object' && value.hasOwnProperty('value') && value.hasOwnProperty('uriEncode')){
 								value = value.value;
@@ -258,6 +270,23 @@
 					})()
 				);
 
+
+				if(_hasPushState){
+
+					// onPopstate has a wierd implemenation. On firefox it won't fire onPageLoad - but everywhere else
+					// it does. We don't want it on page load - and to make it consistant, we check to see if history.state has been
+					// set - if it has, then it's NOT a pageLoad. This means any time we call history.pushState, we MUST send some
+					// state (generally {} or true, or anything that will evaluate to true)
+					$(window).on('popstate', function(e){
+						if(history.state){
+							$(_this).triggerHandler('onStateChange', eventData);
+						}
+						//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
+					});
+
+				}
+
+				// Our HashChange fallback
 				$(window).on('hashchange', function(e){
 					if(_isPushingState){
 						_isPushingState = false; // Apparently we've pushed, so unset it
@@ -267,8 +296,14 @@
 
 					eventData.error = e;
 
-					$(_this).triggerHandler('onHashChange', eventData);
-					$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
+					if(!_hasPushState){
+						$(_this).triggerHandler('onStateChange', eventData);
+						$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
+					}else{
+
+						// hashchange events should 
+						//history.pushState({}, '', document.location.pathname + document.location.hash);
+					}
 				});
 
 				// Fire the onReady and onResize events to initialize anything that relies on them
@@ -331,8 +366,6 @@
 						}
 					}
 
-					debugger;
-					
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
 						controllerObj.events.application.onReady(_this._createGlobalEventObject());

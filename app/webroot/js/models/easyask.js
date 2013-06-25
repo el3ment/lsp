@@ -60,7 +60,7 @@
 					formattedPayload.RequestData = 'CA_BreadcrumbClick'; // If there are no attributes, just load the category
 				}
 				// As a form of cleanup - remove a trailing / from a category request
-				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, ''); // Remove trailing / if it exists
+				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
 
 				return formattedPayload;
 			},

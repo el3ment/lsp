@@ -17,10 +17,7 @@
 					var elementPos = $(element).offset().top;
 
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
-						$('html, body').animate({ scrollTop: $(element).offset().top - 20});
-						console.log('scrolling...');
-					}else{
-						console.log('Already in view');
+						return $('html, body').animate({ scrollTop: $(element).offset().top - 20});
 					}
 				}
 			},

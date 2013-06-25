@@ -9,6 +9,8 @@
 
 		var IS_SINGLE_SELECT = false;
 
+		var _isFirstRequest = true;
+
 		var _state = {
 			resultsPerPage : '20',
 			page : 'first',
@@ -35,6 +37,7 @@
 					
 					onAfterAPICall : function(e, data){
 						$('.page-search').removeClass('loading');
+						_isFirstRequest = false;
 					},
 
 					onAfterAPICallSuccess : function(e, data){
@@ -50,7 +53,16 @@
 							_state.keywords = (_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 						}
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
-						_this.pushState();
+						
+						if(!data.xhrData.passthrough.isFromHistory){
+
+							// If we don't scroll first - the scroll position will be saved
+							// and you will jump around when clicking the back button
+							$.when(_this.scrollToFirst()).done(function(){
+								_this.pushState();
+							});
+
+						}
 					},
 
 					onAfterAPICallFailure : function(e, data){
@@ -194,14 +206,12 @@
 				},
 				application : {
 
-					onHashChange : function(e, data){
-						_this.loadState(_app.controllers.application.pullState(_this));
-						alert('hc');
+					onStateChange : function(e, data){
+						_this.loadState(_app.controllers.application.pullState(_this), {isFromHistory : true});
 					},
 
 					onReady : function(e, data){
 						_this.loadState(_app.controllers.application.pullState(_this));
-						debugger;
 					},
 					
 					onInit : function(e, data){
@@ -230,7 +240,8 @@
 					delete pushedState.allAttributes;
 				}
 
-				return _app.controllers.application.pushState(_this, pushedState);
+				// if isFirstRequest is true, then app.pushState will use history.replaceState instead
+				return _app.controllers.application.pushState(_this, pushedState, _isFirstRequest);
 			},
 
 			pullState : function(state){
@@ -238,21 +249,21 @@
 				state = state || {};
 
 				state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
-				state.category = document.location.pathname;
+				state.category = document.location.pathname.replace('/Categories/', '');
 
-				_state = state;
+				$.extend(_state, state);
 
 				return state;
 			},
 
-			loadState : function(state){
+			loadState : function(state, passthrough){
 				_this.pullState(_app.controllers.application.pullState(_this));
-				_this.search('');
+				_this.search('', passthrough);
 				_this.changeView(_state.view);
 			},
 
 			// By keyword
-			search : function(keywords){
+			search : function(keywords, passthrough){
 
 				var payload = {
 					action : 'advisor',
@@ -260,7 +271,7 @@
 					keywords : keywords
 				};
 
-				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});
@@ -380,10 +391,12 @@
 				_this.renderRefinements(easyAskDataObject);
 				_this.renderProducts(easyAskDataObject);
 
+			},
+
+			scrollToFirst : function(){
 				// Scroll To Top
 				var searchPage = $('.page-search');
-				_util.scrollTo(searchPage);
-
+				return _util.scrollTo(searchPage);
 			},
 
 			renderSummary : function(easyAskDataObject){
@@ -416,6 +429,14 @@
 				}else{
 					$('*[data-action="nextPage"]').css('visibility', 'visible');
 				}
+
+				// Update Title
+				var refinements = [];
+				// Looping backwards so the refinements come out in a sort-of first-picked-first-in-list format
+				for(var i = easyAskDataObject.navPath._lsp.refinementNodes.length - 1; i >= 0 ; i--){
+					refinements.push(easyAskDataObject.navPath._lsp.refinementNodes[i].value);
+				}
+				document.title = (document.title.replace(/[\|:].*/, '') + (refinements.length ? ' : ' + refinements.join(', ') : '') + ' | Lone Star Percussion');
 
 				
 
