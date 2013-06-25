@@ -966,6 +966,7 @@ ul.list li,
 
 	#refinement-categories-container ul li{
 		margin: 0;
+		line-height: 22px;
 	}
 	
 	// A division within the box aka, an attribute complete with title, collapse button, and content
@@ -990,7 +991,8 @@ ul.list li,
 		
 		tr:first-child tr:first-child a,
 		.content > a:first-child,
-		.firstParentCategory a{
+		.firstParentCategory a,
+		.firstParentCategory button{
 			margin-top: 10px;
 		}
 
