@@ -820,7 +820,7 @@ ul.list li,
 	}
 
 	// Netsuite Category Hacks
-	#refinement-categories{
+	#refinement-categories-container{
 		table, tbody, tr, td{
 			display: block;
 		}
@@ -865,9 +865,17 @@ ul.list li,
 
 
 	// Current list	
-	.currentCategory a, .currentCategory button{
-		padding-left: 15px;
-		border-left: 1px solid $lightGrey;
+	.currentCategory{
+		a, button{
+			padding-left: 15px;
+			border-left: 1px solid $lightGrey;
+		}
+		&.level0, &.openParentCategory{
+			a, button{
+				border-left: 0;
+				padding-left: 0;
+			}
+		}
 	}
 
 	// Basic link style

@@ -18,7 +18,7 @@
 			markNetSuiteCategoriesAsOpen : function(){
 
 				var maxDepth = 0;
-				$('#refinement-categories table table tr').each(function(i, element){
+				$('#refinement-categories-container table table tr').each(function(i, element){
 					var row = $(element);
 					var depth = $('td:first-child', element).attr('colspan') || 0;
 					
