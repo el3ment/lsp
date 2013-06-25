@@ -998,6 +998,12 @@ ul.list li,
 			margin-top: 10px;
 		}
 
+		// Because the ul/li pattern is display:block - we don't need so much padding.
+		// this affects the top category on a search returned result
+		.firstParentCategory button{
+			margin-top: 5px;
+		}
+
 		// The attribute titles
 		h4{ 
 			float: left;
