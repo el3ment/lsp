@@ -907,6 +907,7 @@ ul.list li,
 		text-align:left;
 		text-indent: -10px;
 		padding-left: 10px;
+		line-height: 22px;
 		//@include transition(padding-left .1s, color .1s);
 		
 		&:hover{
@@ -964,9 +965,10 @@ ul.list li,
 		}
 	}
 
+	// Usually refinements need padding - but not categories, which apparently are using
+	// line height
 	#refinement-categories-container ul li{
 		margin: 0;
-		line-height: 22px;
 	}
 	
 	// A division within the box aka, an attribute complete with title, collapse button, and content
