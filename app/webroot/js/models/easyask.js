@@ -335,7 +335,7 @@
 
 			convertToSEOString : function(string){
 				return string.replace(/[^A-Za-z0-9:]/g, '-') 
-					.replace(/-{1,}/, '-') // two or more -
+					.replace(/-{1,}/g, '-') // two or more -
 					.replace(/-$/, '') // end with -
 					.replace(/:-/, ':'); // remove starting - from any values
 			},
