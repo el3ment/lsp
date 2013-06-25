@@ -54,15 +54,19 @@
 						}
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						
-						if(!data.xhrData.passthrough.isFromHistory){
+						// If we don't scroll first - the scroll position will be saved
+						// and you will jump around when clicking the back button
+						$.when(_this.scrollToFirst()).done(function(){
+							// onReady and onStateChange make use of preventPushState because those requests are
+							// administrative and shouldn't create new history entries
+							if(!data.xhrData.passthrough.preventPushState){
 
-							// If we don't scroll first - the scroll position will be saved
-							// and you will jump around when clicking the back button
-							$.when(_this.scrollToFirst()).done(function(){
+								
 								_this.pushState();
-							});
 
-						}
+							}
+							
+						});
 					},
 
 					onAfterAPICallFailure : function(e, data){
@@ -207,11 +211,13 @@
 				application : {
 
 					onStateChange : function(e, data){
-						_this.loadState(_app.controllers.application.pullState(_this), {isFromHistory : true});
+						_this.loadCurrentState();
 					},
 
 					onReady : function(e, data){
-						_this.loadState(_app.controllers.application.pullState(_this));
+						if(_app.controllers.application.pullState(_this)){
+							_this.loadCurrentState();
+						}						
 					},
 					
 					onInit : function(e, data){
@@ -221,6 +227,10 @@
 			},
 			
 			assets : {},
+
+			loadCurrentState : function(){
+				_this.loadState(_app.controllers.application.pullState(_this), {preventPushState : true});
+			},
 
 			getState : function(){
 				return _state;

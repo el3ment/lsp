@@ -11,13 +11,16 @@
 		_util = {
 
 			scrollTo : function(element){
+				
+				element = $(element);
+
 				if(element){
 					var viewportHeight = $(window).height();
 					var scrollTop = $('body').scrollTop();
-					var elementPos = $(element).offset().top;
+					var elementPos = (element.offset() || {}).top;
 
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
-						return $('html, body').animate({ scrollTop: $(element).offset().top - 20});
+						return $('html, body').animate({ scrollTop: element.offset().top - 20});
 					}
 				}
 			},

@@ -295,14 +295,10 @@
 					_isPushingState = false;
 
 					eventData.error = e;
-
+					
 					if(!_hasPushState){
 						$(_this).triggerHandler('onStateChange', eventData);
 						$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
-					}else{
-
-						// hashchange events should 
-						//history.pushState({}, '', document.location.pathname + document.location.hash);
 					}
 				});
 
