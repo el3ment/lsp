@@ -59,7 +59,7 @@
 								if(!controller){
 									// find the first parent with data-controller
 									// this allows a type of inheritance
-									controller = element.parents('*[data-controller]').first().data('controller');
+									controller = element.parents('*[data-controller]:first').data('controller');
 								}
 								var action = element.data('action');
 								var asset = element.data('asset');
@@ -82,10 +82,10 @@
 								if(controller && action && !asset){
 									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
 
-										console.log('Event : ' + controller + '.events.' + action + ' fired.');
+										console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
 
 										$(_app.controllers[controller]).
-											triggerHandler(_util.camelCase('on-'+action), 
+											triggerHandler(_util.camelCase('on-' + action), 
 												{selector : element});
 										if(e.data.preventDefault){
 											e.preventDefault();
@@ -95,10 +95,10 @@
 								}else if(controller && action && asset){
 									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
 
-										console.log('Event : ' + controller + '.events.' + action + ' fired.');
+										console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
 
 										$(_app.controllers[controller].assets[asset]).
-											triggerHandler(_util.camelCase('on-'+action), 
+											triggerHandler(_util.camelCase('on-' + action), 
 												{selector : element});
 										if(e.data.preventDefault){
 											e.preventDefault();
@@ -295,10 +295,12 @@
 					_isPushingState = false;
 
 					eventData.error = e;
-					
+
 					if(!_hasPushState){
 						$(_this).triggerHandler('onStateChange', eventData);
 						$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
+					}else{
+						
 					}
 				});
 

@@ -11,7 +11,7 @@
 		// var _hostname = 'http://easyaskqa.easyaskondemand.com';
 		
 		var _dictionary = 'nslonestarpercussion';
-		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
+		var _hostname = 'http://lonestarpercussion.easyaskondemand.com';
 
 		var _sessionId;
 
@@ -85,6 +85,13 @@
 				responseData.source._lsp = responseData.source._lsp || {};
 				responseData.source._lsp.query = _this.parseCommentaryForDidYouMean(responseData.source.commentary);
 
+				for(var i = 0; i < ((responseData.source.products || {}).items || {}).length; i++){
+					if(responseData.source.products.items[i].Matrix_Values){
+						var children = $.parseJSON(responseData.source.products.items[i].Matrix_Values);
+						responseData.source.products.items[i]._formattedMatrixObject = _this.parseMatrixChildren(children);
+					}
+				}
+
 				return responseData;
 			},
 
@@ -105,7 +112,7 @@
 							i--;
 						}
 					}
-					return allAttributes;
+					return allAttributes.join('/');
 				}
 
 				return allAttributes;
@@ -330,6 +337,71 @@
 				}
 
 				return attributeNodes;
+			},
+
+			parseMatrixChildren : function(easyAskMatrixArray){
+
+				var optionObject = {};
+				var productObject= {};
+				var easyAskMatrixArray = typeof easyAskMatrixArray === 'string' ? $.parseJSON(easyAskMatrixArray) : easyAskMatrixArray;
+				
+				for(var i = 0; i < easyAskMatrixArray.length; i++){
+					var id = easyAskMatrixArray[i][0],
+						item = easyAskMatrixArray[i][1].split('|'),
+						label = item[0],
+						value = item[1],
+						index = item[2];
+
+					optionObject[label] = optionObject[label] || {};
+					optionObject[label][value] = optionObject[label][value] || [];
+					optionObject[label][value].push(id);
+
+					productObject[id] = productObject[id] || {};
+					productObject[id][label] = value;
+
+				}
+
+				return {options : optionObject, products : productObject};
+			},
+
+			filterMatrixChildren : function(easyAskMatrixData, filters){
+				
+				var filteredOptionsObject = {};
+				var filteredProducts = {};
+				
+				$.each(easyAskMatrixData.products, function(id, options){
+					
+					// Loop through the products and check to see if any filters don't match
+					for(var key in filters){
+						if(filters.hasOwnProperty(key)){
+							if(options[key] && options[key] != filters[key]){
+								return;
+							}
+						}
+					}
+
+					// If we make it all the way through the filters, it means the product matches
+					filteredProducts[id] = options;
+
+				});
+
+				// Create the options from the products
+				$.each(filteredProducts, function(id, options){
+					$.each(options, function(label, value){
+
+						// If option isn't part of the filters
+						if(!filters[label]){
+							// We avoid adding filtered options here because 1) state dosen't change like it does
+							// for search refinements (where we WANT easyask to return selected attributes, but they don't)
+							// and 2) because it makes replacing them easier - just loop through the filteredOptions and if it exists in the object, it needs to get updated.
+							filteredOptionsObject[label] = filteredOptionsObject[label] || {};
+							filteredOptionsObject[label][value] = filteredOptionsObject[label][value] || [];
+							filteredOptionsObject[label][value].push(id);
+						}
+					});
+				});
+
+				return filteredOptionsObject;
 			},
 
 

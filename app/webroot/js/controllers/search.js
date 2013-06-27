@@ -21,6 +21,7 @@
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
 
+		var _activeDataObject = {};
 		// {sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
 
 		_this = {
@@ -54,6 +55,9 @@
 						}
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						
+						// Set the activeDataObject, used to rebuild matrix option selections
+						_activeDataObject = data;
+
 						// If we don't scroll first - the scroll position will be saved
 						// and you will jump around when clicking the back button
 						$.when(_this.scrollToFirst()).done(function(){
@@ -267,9 +271,14 @@
 			},
 
 			loadState : function(state, passthrough){
+				var tmpState = $.extend({}, _state);
 				_this.pullState(_app.controllers.application.pullState(_this));
-				_this.search('', passthrough);
-				_this.changeView(_state.view);
+				
+				// Load the state only if the new state is different from the old state (tmpState)
+				if(!_util.isEqual(tmpState, _state)){
+					_this.search('', passthrough);
+					_this.changeView(_state.view);
+				}
 			},
 
 			// By keyword
@@ -395,6 +404,13 @@
 
 			renderPage : function(easyAskDataObject){
 
+				// If the page hasn't been injected yet
+				if(!$('.page-search').length){
+					var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
+					$('.page-generic').after(pageHTML).hide();
+					_app.controllers.application.attachEvents($('.page-search'));
+				}
+
 				// Render Sections
 				_this.renderSummary(easyAskDataObject);
 				_this.renderSelectedRefinements(easyAskDataObject);
@@ -476,13 +492,13 @@
 
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
-				
 			
 			},
 
 			renderProducts : function(easyAskDataObject){
 				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
+				
 			},
 
 			renderFatalError : function(){

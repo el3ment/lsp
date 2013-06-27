@@ -1,4 +1,6 @@
- <div class='page-search span12 container loading'>
+<script id='templates-search-page' type='text/html'>
+<!-- Search / Item Result Template -->
+ <div class='page-search span12 container'>
 	<div id='searchTitle' class='title span9'>
 		<!-- Search Title -->
 	</div>
@@ -83,6 +85,7 @@
 		</div>
 	</div>
 </div>
+</script>
 
 <script id='templates-search-title' type='text/html'>
 	<#
@@ -107,11 +110,8 @@
 </script>
 
 <script id='templates-search-breadcrumbs' type='text/html'>
-	<ul class="span12 breadcrumbLinks">
-		<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
-			<li class='<#=(i === this.navPath._lsp.categoryNodes.length -1 ? 'active' : '') #>'>
-				<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].removePath #>'><#=(this.navPath._lsp.categoryNodes[i].value === 'All-Products' ? 'All Products' : this.navPath._lsp.categoryNodes[i].englishName) #></button>
-			</li>
+	<# for(var i = 0; i < this.navPath._lsp.categoryNodes.length; i++){ #>
+		<button class='b5' data-action='removeCategory' data-controller='search' data-removePath='<#=this.navPath._lsp.categoryNodes[i].removePath #>'><#=(this.navPath._lsp.categoryNodes[i].value === 'All-Products' ? 'All Products' : this.navPath._lsp.categoryNodes[i].englishName) #></button>&nbsp;&gt;&nbsp;
 		<# } #>
 	</ul>
 </script>
@@ -171,25 +171,24 @@
 <script id='templates-search-categoryListEntry' type='text/html'>
 	<ul>
 		<# var categories = this.responseObject.navPath._lsp.categoryNodes; #>
-		<# var depth = this.responseObject.navPath._lsp.categoryNodes.length; #>
+		<# var depth = this.responseObject.navPath._lsp.categoryNodes.length - 1; #>
 		<# for(var i = 1; i < categories.length; i++){ #>
-			
-			<li class='indent'>
-				<button data-action='removeCategory' data-removePath='<#=categories[i].removePath #>' class='b5 <#=(i === categories.length - 1 ? 'leftLinkBold' : '') #>'>
+			<li class='level<#=i-1 #> openParentCategory <#=(i === categories.length - 1 ? 'currentParentCategory' : '') #> <#=(i === 1 ? 'firstParentCategory' : '') #>'>
+				<button data-action='removeCategory' data-removePath='<#=categories[i].removePath #>' class='b5'>
 					<#=categories[i].value #>
 				</button>
 			</li>
 		<# } #>
 
 		<# for(var i = 0; i < this.initialListSize; i++){ #>
-			<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-path='<#=this.entries[i].seoPath #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
+			<li class='currentCategory level<#=depth #>'><button class='b5' data-action='loadCategory' data-path='<#=this.entries[i].seoPath #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
 		<# } #>
 	</ul>
 
 	<div id='refinement-<#=this.id #>-more' class='reveal-closed more'>
 		<ul>
 			<# for(var i = initialListSize; this.entries && i < this.entries.length; i++){ #>
-				<li><button class='b5 link<#=depth #>' data-action='loadCategory' data-categoryId='<#=this.entries[i].name #>'><#=this.entries[i].name #> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
+				<li class='currentCategory level<#=depth #>'><button class='b5' data-action='loadCategory' data-path='<#=this.entries[i].seoPath #>'><span class='label'><#=this.entries[i].name #></span> <span class='details'>(<#=this.entries[i].productCount #>)</span></button></li>
 			<# } #>
 		</ul>
 	</div>
@@ -294,12 +293,18 @@
 						<span class='shortStatus'>Two Finishes In Stock</span>
 						<span class='details'><#=item.stock_message #> <a href='#' class='method'>Standard&nbsp;Shipping</a></span>
 					</li>
-					<li class='option'>
-						<label>Finish:</label>
-						<select>
-							<option>Red</option>    
-						</select>
-					</li>
+					<# if(item._formattedMatrixObject){
+						$.each(item._formattedMatrixObject, function(key, value){ #>
+							<li class='option'>
+								<label><#=key #></label>
+								<select class='matrix-option' name=''>
+								<# for(var j = 0; j < value.length; j++){ #>
+									<option value='<#=value[j][0] #>'><#=value[j][1] #></option>
+								<# } #>
+								</select>
+							</li>
+						<# });
+					} #>
 					<li class='quantity hidden-phone'>
 						<label>Quantity:</label>
 						<input class='scroller' type='number' min='1' value='1' />
@@ -309,7 +314,7 @@
 					</li>
 				</ul>
 			</form>
-			<a href='<#=item.Item_URL #>' class='productLink'>
+			<a href='<#=item.Item_URL.replace('http://www.lonestarpercussion.com', 'http://lspsandbox.explorewebdev.com') #>' class='productLink'>
 				<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=item.Image_1_URL #>.200x200' width='200' height='200'/></div>
 				<span class='field compare details'>
 					<input type='checkbox' />
@@ -318,7 +323,7 @@
 				<span class='productName'><#=item.Featured_Description #></span>  
 				<span class='details model'>Model Number #<span class='productMpn'><#=item.model_number #></span></span>
 			</a>
-			<span class='netsuiteUrl'><a href='https://system.netsuite.com/app/common/item/item.nl?id=<#=item.Product_Id #>' target='_new'>See this product in NetSuite</a>
+			
 			<# if(item.number_of_reviews){ #>
 				<div class='aggregateReviews'>
 					<span data-reviews-aggregateRating='3' class='reviewAggregateRating'><#=item.review_average #></span>
