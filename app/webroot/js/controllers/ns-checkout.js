@@ -16,7 +16,9 @@
 			events : {
 				checkout : {
 					onEnterCart : function(e, data){
-
+						// Remove 'empty' links - they create a state in history
+						// that is annoying to overcome
+						$('a[href="#"]').attr('href', null);
 					},
 					onEnterRegister : function(e, data){
 

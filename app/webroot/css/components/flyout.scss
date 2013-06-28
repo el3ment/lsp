@@ -66,54 +66,67 @@
 		}
 
 
-		.collection:first-child{
-			border-top: 10px solid $yellow;
+		.collection{
+			// Line / Gap above top menu
+			// &.gapAbove{
+			// 	outline: 1px solid red;
+			// 	&:before{
+			// 		display: none;
+			// 	}
+			// }
+
+			// Yellow bar at the top of the department list
+			&:first-child{
+				border-top: 10px solid $yellow;
+			}
+
+			// Title for hovered/open flyout
+			&.active{ 
+
+				.flyoutTitle{
+					border-right: 1px solid $lightGrey;
+					background-color: black;
+					
+					.h3{ color: white; }
+				
+					position: relative;
+					
+					// black triangle
+					&:after{
+						content: ' ';
+						width: 0;
+						height: 0;
+						position: absolute;
+						right: -8px;
+						top: 50%;
+						margin-top: -15px;
+						border-top: 15px solid transparent;
+						border-left: 8px solid black;
+						border-bottom: 15px solid transparent;
+						z-index: 3; // in front of flyout shadow
+					}
+
+					.details:after{
+						right: -8px;
+						content: ' ';
+						position: absolute;
+						top: 50%; 
+						margin-top:-22px;
+						border-top: 22px solid transparent;
+						border-left: 8px solid black;
+						border-bottom: 22px solid transparent;
+					
+					}
+				}
+
+				.flyout{
+					display: block;
+				}
+			}
 		}
 	} //left nav
-	.collection.active{ 
-			
 
-			.flyoutTitle{
-				border-right: 1px solid $lightGrey;
-				background-color: black;
-				
-				.h3{ color: white; }
-			
-				position: relative;
-				
-				// black triangle
-				&:after{
-					content: ' ';
-					width: 0;
-					height: 0;
-					position: absolute;
-					right: -8px;
-					top: 50%;
-					margin-top: -15px;
-					border-top: 15px solid transparent;
-					border-left: 8px solid black;
-					border-bottom: 15px solid transparent;
-					z-index: 3; // in front of flyout shadow
-				}
-
-				.details:after{
-					right: -8px;
-					content: ' ';
-					position: absolute;
-					top: 50%; 
-					margin-top:-22px;
-					border-top: 22px solid transparent;
-					border-left: 8px solid black;
-					border-bottom: 22px solid transparent;
-				
-				}
-			}
-
-			.flyout{
-				display: block;
-			}
-	}
-
+	// Left hand Department label/container (Sticks & Mallets, Latin & World, etc)
 	.flyoutTitle{
 		
 		padding: 5px 6px;
@@ -122,15 +135,17 @@
 		border-right: 1px solid $lightGrey;
 		//height: 30px;
 
-
+		// Department Name
 		.h3{ 
 			font-size: 15px;
 			//margin-top: 7px;
 		}
 
+		// Subtext
 		.details{ margin-top: -3px; }
 	}
 
+	// Big open flyout container
 	.flyout{
 		
 		position: absolute;
@@ -145,8 +160,11 @@
 		z-index: 0;
 		display:none;
 		height: $flyoutHeight;
-		//max-width: 720px;
-
+		
+		@include box-sizing();
+		@include box-shadow-multiple(4px 5px 9px -7px $grey, 2px -3px 8px -5px $grey);
+		
+		// Without .container, the image would position to the right of the page
 		.container{
 			position: relative; // give the image something to grab-on to
 			width: 720px; // 9 columns designed width
@@ -165,9 +183,7 @@
 			@include box-sizing();
 		}
 
-		@include box-sizing();
-		@include box-shadow-multiple(4px 5px 9px -7px $grey, 2px -3px 8px -5px $grey);
-		
+		// The yellow bar at the top
 		&:before{
 			height: 10px;
 			content: ' ';
@@ -179,156 +195,168 @@
 			left: 0;
 			background-color: $yellow; // the shadow on the left side of the border
 		};
-		.productImage{
-			position: absolute;
-			right: -75px;
-			top: 0;
-			max-height: 100%;
-		}
-	} // panel
 
-	.column{
-		height: 100%;
-		float: left;
-		margin-right:10px;
-	}
-	.group{
-		float: left;
-		margin-bottom: 20px;
 
-		// the shadow between left bar and content
-		&:first-child:before{
-			content: ' ';
+		// A column of links
+		.column{
 			height: 100%;
-			position: absolute;
-			left: 0;
-			top:0;
-			width: 10px;
-			//border-left: 1px solid $superLightGrey;
-			z-index: 2; //over yellow border up top
-			//border-left: 1px solid $lightGrey;
-			
-			@include box-shadow-multiple(inset 4px 1px 8px -4px $grey);
-
-		}
-	} //group of lists
-	.lists{
-		//clear: both;
-		float: left;
-		position:relative;
-		z-index:1;
-	}
-	.list{
-		margin-top: 20px;
-		width: 225px;
-	} // group of links
-	.list:first-child{
-		margin-top: 10px;
-	}
-	.h1{
-		position:relative;
-		z-index:1;
-	}
-	.h2{ 
-		float: left;
-		margin-bottom: 10px;
-		position:relative;
-		z-index:1;
-	} // group title
-	.h3{
-	} // list title
-
-	.ad{
-		
-
-		//text-align:right;
-		.content{
-			position: absolute;
-			right: 20px;
-			bottom: 100px;
-			z-index: 1;
-			color: black;
-			text-decoration: none;
-			max-width: 300px;
-			font-size: 13px;
-		}
-
-		.name{
-			
 			float: left;
-			clear: both;
-			font-size: 13px;
-			&:before{
-				content: ' '; 
-				display: block; 
-				width: 0; 
-				height: 0;
+			margin-right:10px;
+		}
+
+		// A section within a column of links 
+		.group{
+			float: left;
+			margin-bottom: 20px;
+
+			// The shadow between left bar and content
+			&:first-child:before{
+				content: ' ';
+				height: 100%;
 				position: absolute;
-				z-index: 2;
-				border: px(12px) inset transparent;
-				//background-color: red;
-				border-bottom: px(12px) solid black; 
-				right: 30px;
-				top: -30px;
+				left: 0;
+				top:0;
+				width: 10px;
+				//border-left: 1px solid $superLightGrey;
+				z-index: 2; //over yellow border up top
+				//border-left: 1px solid $lightGrey;
+				
+				@include box-shadow-multiple(inset 4px 1px 8px -4px $grey);
+
 			}
 		}
-		.price{
 
-			background-color: $yellow;
-			padding: 7px 10px;
+		// List of links within a group, within a column
+		.list{
+			margin-top: 20px;
+			width: 225px;
+
+			&:first-child{
+				margin-top: 10px;
+			}
+		}
+
+		// Group Heading (unsused)
+		.h2{ 
+			float: left;
+			margin-bottom: 10px;
+			position:relative;
+			z-index:1;
+			outline: 1px solid red;
+		} // group title
+
+		// Product ad on the right
+		.ad{
+			
+			.content{
+				position: absolute;
+				right: 20px;
+				bottom: 100px;
+				z-index: 1;
+				color: black;
+				text-decoration: none;
+				max-width: 300px;
+				font-size: 13px;
+			}
+
+			// Product name
+			.name{
+				
+				float: left;
+				clear: both;
+				font-size: 13px;
+				&:before{
+					content: ' '; 
+					display: block; 
+					width: 0; 
+					height: 0;
+					position: absolute;
+					z-index: 2;
+					border: px(12px) inset transparent;
+					//background-color: red;
+					border-bottom: px(12px) solid black; 
+					right: 30px;
+					top: -30px;
+				}
+			}
+
+			.price{
+
+				background-color: $yellow;
+				padding: 7px 10px;
+				display: block;
+				margin-top: 5px;
+				@include border-radius(5px);
+				float: left;
+				clear: both;
+				position: relative;
+				font-size: 13px;
+
+				.productGrouping{
+					font-size: 11px;
+					position: absolute;
+					bottom: 3px;
+					right: -155px;
+					width: 150px;
+					top: 50%;
+					margin-top: -7px;
+				}
+			}
+
+			// Main ad image
+			.productImage{
+				position: absolute;
+				right: -75px;
+				top: 0;
+				max-height: 100%;
+			}
+
+			// Change arrow color to yellow
+			&:hover{
+				.name:before{
+					border-bottom-color: $yellow;
+				}
+			}
+
+			// Hide the ad for tablet
+			@media (max-width: 979px) and (min-width: 768px){
+				display: none;
+			}
+		}
+
+		// Line above gaps
+		.gapAbove:before{
+			content: ' ';
 			display: block;
+			width: 75%;
+			margin-left: 10px;
+			padding-top: 5px;
 			margin-top: 5px;
-			@include border-radius(5px);
-			float: left;
-			clear: both;
-			position: relative;
-			font-size: 13px;
-
-			
-
-			.productGrouping{
-				font-size: 11px;
-				position: absolute;
-				bottom: 3px;
-				right: -155px;
-				width: 150px;
-				top: 50%;
-				margin-top: -7px;
-			}
-		}
-
-		&:hover{
-			.name:before{
-				border-bottom-color: $yellow;
-			}
-		}
-
-		@media (max-width: 979px) and (min-width: 768px){
-			display: none;
-		}
-	}
-	// Line above gaps
-	.gapAbove:before{
-		content: ' ';
-		display: block;
-		width: 75%;
-		margin-left: 10px;
-		padding-top: 5px;
-		margin-top: 5px;
-		border-top:1px solid $lightGrey;
-		border-right: 25% solid transparent;
-	}
-
-	.collection.gapAbove{
-		&:before{
-			display: none;
+			border-top:1px solid $lightGrey;
+			border-right: 25% solid transparent;
 		}
 	}
 
-	.allCategory a{
-		// color: $grey;
-		// text-decoration: underline;
-	}
+
+	// // A sub-section within a group
+	// .lists{
+	// 	//clear: both;
+	// 	float: left;
+	// 	position:relative;
+	// 	z-index:1;
+
+	// }
+
+	// Flyout Title (unused)
+	// .h1{
+	// 	position:relative;
+	// 	z-index:1;
+	// }
+
+	// .allCategory a{
+	// 	// color: $grey;
+	// 	// text-decoration: underline;
+	// }
 	// 	.flyoutTitle:before{
 	// 		content: ' ';
 	// 		display: block;

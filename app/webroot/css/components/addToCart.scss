@@ -1,0 +1,86 @@
+/* The add-to-cart panel can be seen on the product-detail page and list-view search results */
+.addToCart{
+	
+	width: 100%;
+	padding: 0;
+	
+	li{
+		
+		padding: px($paddingUnit) px($paddingUnit * 2);
+		border-bottom:1px solid #dedcda;
+		border-top: 1px solid white;
+		background-color: $superLightGrey;
+		
+		&:first-child{
+			@include border-radius(px($borderRadius) px($borderRadius) 0 0);
+		}
+		&.action{ /* Handle the bottom border */
+			@include border-radius(0 0 px($borderRadius) px($borderRadius));
+			//.icon-16-heart-grey{
+				//margin-left: 11px; /* center the add to wish list button under the add to cart */
+				//}
+			border-bottom: 0;
+		}
+		label{
+			margin: px($paddingUnit+3) px($paddingUnit) 0 0;
+			display: inline; /* IE */
+			display: inline-block;
+			//float: left;
+		}
+		input, select{
+			width: 60%;
+			float: none;
+			display: inline;
+			display: inline-block;
+		}
+		@include clearfix;
+	}
+	.productPrice{ 
+		font-size: px(30px);
+		line-height: 1em;
+		font-weight: bold;
+	}
+	.productMsrp{ text-decoration: line-through; }
+	.productDiscount{ font-weight: bold; }
+	.productAvailability{
+		.status{
+			font-weight: bold;
+			font-size: 13px;
+			color: black;
+			background-color: transparent;
+			padding-left: 0;
+		}
+		.shortStatus{
+			display: none;
+		}
+		.details{
+			.method{    
+				&:before{
+					content: '(';
+				}
+				&:after{
+					content: ')';
+				}
+			}
+		}
+	}
+	.price{ 
+		background-color: white;
+		.productGrouping{ 
+			color: $grey;
+			font-size: 13px;
+		}
+		.details{ display: block; }
+	}
+	.quantity{
+		input{ float: none; width: px(70px); }
+	}
+	.productAvailability{ background-color: white; }
+	.action{
+		.b1{ 
+			margin-bottom: px($paddingUnit);
+			margin-left: 0;
+		}
+		a{ display:block; }
+	}
+}

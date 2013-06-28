@@ -70,6 +70,7 @@
 			},
 
 			_afterSuccess : function(responseData){
+				
 				_sessionId = responseData.sessionID;
 				
 				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
@@ -343,7 +344,7 @@
 
 				var optionObject = {};
 				var productObject= {};
-				var easyAskMatrixArray = typeof easyAskMatrixArray === 'string' ? $.parseJSON(easyAskMatrixArray) : easyAskMatrixArray;
+				var easyAskMatrixArray = (typeof easyAskMatrixArray === 'string' ? $.parseJSON(easyAskMatrixArray) : easyAskMatrixArray) || [];
 				
 				for(var i = 0; i < easyAskMatrixArray.length; i++){
 					var id = easyAskMatrixArray[i][0],

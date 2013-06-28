@@ -5,10 +5,9 @@
 	margin:0 auto px(15px);
 	position: relative;
 	width: 100%;
-	@include clearfix;
-	
 	background: url(../img/dark_pattern.jpg);
 	
+	@include clearfix;
 	
 	.b3{ 
 		/* Other darker buttons like Wish List and Your Cart */
@@ -17,6 +16,7 @@
 		text-shadow: -1px -1px #000000;
 		color: #fff;
 		border-color: $darkBrownBorder;
+		
 		@include gradient($brown, $darkBrown);
 		@include box-shadow-multiple(0 1px 0px #7b6d62 inset, 
 									 0 2px 3px #000); /* Top Highlight, Drop shadow */  
@@ -32,11 +32,12 @@
 		}
 	}
 	
+
+	// Contains the logo, the tagline, and the phone number
 	.well{
 		
-		$_taglineMarginTop : 60px;
-		/* This is the section between the nav bar and the shop bar */
-	   
+		$_taglineMarginTop : 60px; // The space between the utility bar and the tagline and the phone number
+
 		position: relative;
 		margin-top:-23px;
 		height: 136px;
@@ -97,6 +98,7 @@
 		
 	}
 	
+	// Somtimes called the Utility Bar, it's the links at the very top of the page
 	.navbar {
 		
 		/* The list of actions at the top of the page */
@@ -117,6 +119,17 @@
 			position: relative;
 		}
 
+		// If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
+		li[data-firstname*="Error processing dynamic tag"],
+		li[data-firstname] + li{
+			display: none;
+		}
+
+		// If it's an error, show the "Login" link
+		li[data-firstname*="Error processing dynamic tag"] + li{
+			display: block;
+		}
+
 		.sublist{
 			position: absolute;
 			top: 38px;
@@ -125,6 +138,9 @@
 			z-index: 1;
 			min-width: 250px;
 
+			// A spacer to keep the menu open while mousing between the
+			// utility bar and the manu. This technique is also used for
+			// the definitions
 			&:after{
 				content: ' ';
 				display: block;
@@ -154,14 +170,17 @@
 					@include box-shadow-multiple(0px -1px 0px 0px #19130e, $backgroundShadow);
 					border-top-color: #3a332c;
 				}
+
 				&:hover + li{
 					@include box-shadow-multiple(0px -1px 0px 0px #19130e, $backgroundShadow);
 					border-top-color: #322c26;
 				}
+
 				&:first-child:hover{
 					border-top-color: transparent; // We already have the little highlight on the list itself
 					@include box-shadow-multiple(none);
 				}
+
 				&.last{
 					@include border-radius(0 0 5px 5px);
 				}
@@ -175,6 +194,7 @@
 					display: block;
 					text-align: left;
 				}
+
 				.details{
 					display: block;
 					font-weight: normal;
@@ -183,6 +203,7 @@
 				}
 			}
 		}
+
 		.b5{
 			text-transform: uppercase;
 			text-decoration: none;
@@ -206,6 +227,7 @@
 				}
 			}
 		}
+
 		li:hover .b5, li.reveal-isOpen .b5{
 			background-color: #322c28;
 		}
@@ -260,21 +282,27 @@
 			}
 			
 		}
+
 		.wishlist{
+			
 			float: right;
+			
 			.b3{
 				width: px(20px);
 			}
 		}
+
 		.departments{
 			float: left;
 			margin-left: 0;  
 			margin-right: px($paddingUnit); 
 		}
+
 		.cart{
 			
 			float: right;
 		}
+
 		.b3{
 			width: px(63px);
 			padding-right: px(35px); /* Only if we are going to use the count */
@@ -308,6 +336,7 @@
 				@include gradient($lightYellow, $yellow);
 			}
 		}
+
 		input.search { /* Main Search bar */
 			
 			width: 100%;
@@ -317,6 +346,7 @@
 			padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
 			
 		}
+
 		.search{
 			overflow: hidden;
 			float: none;
@@ -344,6 +374,7 @@
 				}
 			}
 		}
+		
 		#searchBarContainer{
 			position: relative;
 			height: 51px;

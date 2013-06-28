@@ -2,245 +2,251 @@
 @import "functions";
 
 /* Standard Form Styling */
-	input, select, textarea{
-	
-		font-family: 'Open Sans', san-serif;
-		border-radius : px($borderRadius, 16px);
-		padding : 8px 7px;
-		line-height:1em;
-		border : 1px solid $lightGrey;
-		font-weight : bold;
-		font-size : px($inputFontSize);
-		color : $black;
-		margin : 0 px(2px, 16px) px(2px, 16px) 0;
-		display : block;
-		@include box-sizing();
-	
-		&:focus{
-			@include box-shadow-multiple(0 0 px(3px, $inputFontSize) 0 $darkYellow);
-			border-color: $darkYellow;
-		}
-	}
-	
-	::-webkit-input-placeholder { font-style: italic; color: $grey; line-height:22px; font-weight: 500; }
-	::-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* firefox 19+ */
-	:-ms-input-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* ie */
-	input:-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; }
-	
-	select{
-		padding: px($inputPadding - 1); /* Fix for unknown space on selects */
-		height: px(40px, $inputFontSize);
-		width: 100%;
-	}
-	textarea{ 
-		width: 100%; 
-		height: px(100px, $inputFontSize);
-		max-width: 100%;
-	}
-	/* Type-specific styling */
-	input[type="checkbox"], input[type="radio"]{ 
-		margin : px($paddingUnit, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
-		border: 0;
-		padding: 0;
-		border-radius: 0;
-	}
-	input[type="text"], input[type="email"], input[type="tel"]{    
-		width : 100%;
-	}
+input, select, textarea{
 
-	input[disabled], select[disabled], textarea[disabled]{
-		background-color: $superLightGrey;
-		font-style: italic;
-		color: $grey;
+	font-family: 'Open Sans', san-serif;
+	border-radius: px($borderRadius, 16px);
+	padding: 8px 7px;
+	line-height:1em;
+	border: 1px solid $lightGrey;
+	font-weight: bold;
+	font-size: px($inputFontSize);
+	color: $black;
+	margin: 0 px(2px, 16px) px(2px, 16px) 0;
+	display: block;
+	@include box-sizing();
+
+	&:focus{
+		@include box-shadow-multiple(0 0 px(3px, $inputFontSize) 0 $darkYellow);
+		border-color: $darkYellow;
+	}
+}
+
+::-webkit-input-placeholder { font-style: italic; color: $grey; line-height:22px; font-weight: 500; }
+::-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* firefox 19+ */
+:-ms-input-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* ie */
+input:-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; }
+
+select{
+	padding: px($inputPadding - 1); /* Fix for unknown space on selects */
+	height: px(40px, $inputFontSize);
+	width: 100%;
+}
+
+textarea{ 
+	width: 100%; 
+	height: px(100px, $inputFontSize);
+	max-width: 100%;
+}
+
+/* Type-specific styling */
+input[type="checkbox"], input[type="radio"]{ 
+	margin: px($paddingUnit, $inputFontSize) px($paddingUnit, $inputFontSize) 0 0;
+	border: 0;
+	padding: 0;
+	border-radius: 0;
+}
+
+input[type="text"], input[type="email"], input[type="tel"]{    
+	width: 100%;
+}
+
+input[disabled], select[disabled], textarea[disabled]{
+	background-color: $superLightGrey;
+	font-style: italic;
+	color: $grey;
+	font-weight: normal;
+}
+
+// Fields that are not full width need to float left because they are small
+// The field directly BEFORE this 'smaller' field needs the right margin
+.row-fluid .state.field[class*="span"],
+.row-fluid .creditCardNumber.field[class*="span"],
+.row-fluid .creditCardExpirationMonth.field[class*="span"]{ margin-right: $fluidGutterPercentage; }
+
+// Quantity scroller
+input.scroller{ width: px(50px); }
+
+label{
+	display: block; 
+	font-weight: bold;
+
+	.details {
+		display: block;
 		font-weight: normal;
 	}
-	
-	.row-fluid .state.field[class*="span"],
-	.row-fluid .creditCardNumber.field[class*="span"],
-	.row-fluid .creditCardExpirationMonth.field[class*="span"]{ margin-right: $fluidGutterPercentage; }
-	
-	
-	input.scroller{ width : px(50px); }
+}
 
-	/* Style labels */
-		label{
-			display: block; 
-			font-weight: bold;
+input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; font-weight: normal;}
 
-			.details {
-				display: block;
-				font-weight: normal;
-			}
-		}
-		input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; font-weight: normal;}
-
-	.field{
-		margin-bottom: px(10px);
-		display: block;
-		clear:left;
-		float:left; /* Otherwise our radio element fields lose layout */
-	}
-	.row-fluid .field[class*="span"]{
-		margin-left:0;
-	}
-	.field.zipcode, .field.creditCardType, .field.creditCardExpirationYear{
-		float: left;
-		clear:none;
-		margin-left: px(10px);
-	}
+.field{
+	margin-bottom: px(10px);
+	display: block;
+	clear:left;
+	float:left; /* Otherwise our radio element fields lose layout */
+}
+.row-fluid .field[class*="span"]{
+	margin-left:0;
+}
+.field.zipcode, .field.creditCardType, .field.creditCardExpirationYear{
+	float: left;
+	clear:none;
+	margin-left: px(10px);
+}
 
 /* Validation Plugin */
-	.validation-required,
-	.validation-alphaOnly,
-	.validation-numericOnly,
-	.validation-alphaNumeric,
-	.validation-emailAddress,
-	.validation-creditCardNumber{
-		border: 1px solid blue;
-	}
+.validation-required,
+.validation-alphaOnly,
+.validation-numericOnly,
+.validation-alphaNumeric,
+.validation-emailAddress,
+.validation-creditCardNumber{
+	border: 1px solid blue;
+}
 
-	.validation-invalid{
-		border:1px solid red;
-	}
-	.validation-valid{
-		border: 1px solid green;
-	}
+.validation-invalid{
+	border:1px solid red;
+}
+.validation-valid{
+	border: 1px solid green;
+}
 
 /* Button Styling */
-	/* Yellow, Uppercase */ 
-	.b1, .b2, .b3, .b4, .yellowButton, .greyButton{ 
-		
-		@include gradient($lightYellow, $darkYellow);
-		@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
-		
-		cursor: pointer;
-		
-		border : 1px solid $brownYellow;
-		border-radius : px($borderRadius);
-		color : black;
-		text-shadow : 0 1px $saturatedHighlightYellow;
-		
-		padding : px(10px, 14px) px(14px, 14px);
-		font-family : 'Open Sans', sans-serif;
-		font-size : px(14px);
-		font-weight : 800;
-		text-transform : uppercase;
-		text-decoration: none;
-		text-align : center;
-		line-height: 1.3em;
+/* Yellow, Uppercase */ 
+.b1, .b2, .b3, .b4, .yellowButton, .greyButton{ 
+	
+	@include gradient($lightYellow, $darkYellow);
+	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
+	
+	cursor: pointer;
+	
+	border: 1px solid $brownYellow;
+	border-radius: px($borderRadius);
+	color: black;
+	text-shadow: 0 1px $saturatedHighlightYellow;
+	
+	padding: px(10px, 14px) px(14px, 14px);
+	font-family: 'Open Sans', sans-serif;
+	font-size: px(14px);
+	font-weight: 800;
+	text-transform: uppercase;
+	text-decoration: none;
+	text-align: center;
+	line-height: 1.3em;
+	display: inline-block;
+	margin: 0 px($paddingUnit);
+	
+	&:hover, &.active{
+		@include gradient($hoverLightYellow, $darkYellow);
+	}
+}
+
+.b2, .b3, .b4, .b5{
+	font-size: px(13px);
+	padding: px(10px, 13px) px(7px, 13px);
+}
+
+/* Yellow, Normal  */  
+.b2{ 
+	text-transform: none; 
+} 
+
+/* Grey, Caps */
+.b3, .b4, .greyButton{ 
+	@include gradient($buttonLightGrey, $buttonDarkGrey); 
+	@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
+	text-shadow: 0 1px $saturatedHighlightGrey;
+	border: 1px solid $darkGrey;
+	
+	//&:hover{
+	//	@include gradient("b3hover", $buttonDarkGrey); 
+	//}
+} 
+
+/* Grey, Normal */
+.b4{  
+	text-transform: none;
+} 
+
+/* Link */ 
+.b5{ 
+	overflow: visible; /* Shrinkwrap the text in IE7- */
+	margin: 0;
+	padding: 0;
+	border: 0;
+	color: $grey;
+	background: transparent;
+	font: inherit; /* Inherit font settings (doesn’t work in IE7-) */
+	line-height: normal; /* Override line-height to avoid spacing issues */
+	text-decoration: underline; /* Make it look linky */
+	cursor: pointer; /* Buttons don’t make the cursor change in all browsers */
+	-moz-user-select: text; /* Make button text selectable in Gecko */
+}
+
+.b1.btn-strong, .b2.btn-strong{
+	padding: 11px 17px;
+	font-size: 14px;
+}
+
+/* Buttons that have the disc to highlight the icon */
+.b1.highlight-icon, .b2.highlight-icon, .b3.highlight-icon, .b4.highlight-icon, .b5.highlight-icon {
+
+	position: relative; /* To position the disc */
+	padding-left: 43px;
+	text-align: left;
+	font-weight: normal;
+
+	strong {
+		font-weight: bold;
+	}
+
+	&:before {
+		/* The generic disc */
+		content: "";
+		position: absolute;
+		top: 10px;
+		left: 5px;
+		width: 30px;
+		height: 30px;
 		display: inline-block;
-		margin : 0 px($paddingUnit);
-		
-		&:hover, &.active{
-			@include gradient($hoverLightYellow, $darkYellow);
-		}
-	}
-	
-	.b2, .b3, .b4, .b5{
-		font-size: px(13px);
-		padding : px(10px, 13px) px(7px, 13px);
-	}
-	
-	/* Yellow, Normal  */  
-	.b2{ 
-		text-transform: none; 
-	} 
-
-	/* Grey, Caps */
-	.b3, .b4, .greyButton{ 
-		@include gradient($buttonLightGrey, $buttonDarkGrey); 
-		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
-		text-shadow : 0 1px $saturatedHighlightGrey;
-		border : 1px solid $darkGrey;
-		
-		//&:hover{
-		//	@include gradient("b3hover", $buttonDarkGrey); 
-		//}
-	} 
-	
-	/* Grey, Normal */
-	.b4{  
-		text-transform: none;
-	} 
-	
-	/* Link */ 
-	.b5{ 
-		overflow : visible; /* Shrinkwrap the text in IE7- */
-		margin : 0;
-		padding : 0;
-		border : 0;
-		color : $grey;
-		background : transparent;
-		font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
-		line-height : normal; /* Override line-height to avoid spacing issues */
-		text-decoration : underline; /* Make it look linky */
-		cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
-		-moz-user-select: text; /* Make button text selectable in Gecko */
+		-webkit-border-radius: 45px;
+		-moz-border-radius: 45px;
+		border-radius: 45px;
 	}
 
-	.b1.btn-strong, .b2.btn-strong{
-		padding: 11px 17px;
-		font-size: 14px;
+	&:after{ /* Icon */
+	  left: 8px; 
+	  top: 25px;
 	}
+	}
+	.b1.highlight-icon, .b2.highlight-icon {
+
+	/* Color declarations for Yellow buttons with highlight disc*/
+	@include box-shadow-multiple(0 1px 0px #fdf8a6 inset, 0 -1px 0px #fdf8a6 inset, 0 2px 3px #000); /* Top/Bottom highlight, Drop shadow */
+
+	&:before {
+		background-color: #f6d54f;
+		background-color: transparent\9; /* Because IE8 dosen't have rounded borders, our little circle thing looks weird with a background color - so for < IE8 we will hide the background */
+
+		@include box-shadow-multiple( 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset);	
+	}
+}
+
+.button-circle{ // Arrow-holder is for touch-carousel
 	
-	.b1.highlight-icon, .b2.highlight-icon, .b3.highlight-icon, .b4.highlight-icon, .b5.highlight-icon {
-			
-		  /* Buttons that have the disc to highlight the icon */
-			
-		  position: relative; /* To position the disc */
-		  padding-left: 43px;
-		  text-align: left;
-		  font-weight: normal;
-		  
-		  strong {
-			  font-weight: bold;
-		  }
-		  
-		  &:before {
-			/* The generic disc */
-			content: "";
-			position: absolute;
-			top: 10px;
-			left: 5px;
-			width: 30px;
-			height: 30px;
-			display: inline-block;
-			-webkit-border-radius: 45px;
-			-moz-border-radius: 45px;
-			border-radius: 45px;
-		  }
-		  &:after{ /* Icon */
-			  left: 8px; 
-			  top: 25px;
-		  }
-	  }
-			  
-	  .b1.highlight-icon, .b2.highlight-icon {
-	   
-		/* Color declarations for Yellow buttons with highlight disc*/
-		@include box-shadow-multiple(0 1px 0px #fdf8a6 inset, 0 -1px 0px #fdf8a6 inset, 0 2px 3px #000); /* Top/Bottom highlight, Drop shadow */
-		&:before {
-		  
-		  background-color: #f6d54f;
-		  background-color: transparent\9; /* Because IE8 dosen't have rounded borders, our little circle thing looks weird with a background color - so for < IE8 we will hide the background */
-		  
-		  -webkit-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
-		  -moz-box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
-		  box-shadow: 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset;
-	   }
-	}
+	@include border-radius(px(32px));
+	
+	margin-top: px(2px) 2px 0;
+	height: px(32px);
+	width: px(32px);
+	text-indent: px(-$hideDistance);
+	overflow: hidden;
+	padding:0;
+	line-height: 30px;
+}
 
-	.button-circle{ // Arrow-holder is for touch-carousel
-		@include border-radius(px(32px));
-		margin-top: px(2px) 2px 0;
-		height: px(32px);
-		width: px(32px);
-		text-indent: px(-$hideDistance);
-		overflow: hidden;
-		padding:0;
-		line-height: 30px;
-	}
 
-	button label{
-		cursor: pointer;
-	}
+button label{
+	outline: 1px solid red;
+	cursor: pointer;
+}

@@ -1,6 +1,5 @@
 
 /* Fonts */
-  
 @font-face {
   font-family: "League Gothic";
   src: url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot');
@@ -10,55 +9,69 @@
 	   url('http://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-
 }
 
-/* Application Wide Styles */
 html{
-	
 	width: 100%;
 	font-size: 100%;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 }
 
+// Our page-level containers tend to use this pattern of being both a row, and a span12 container
 .row.span12{
-	margin-left:0;
+	margin-left: 0;
 }
 
 body{
-	
 	width: 100%;
-
-	@include box-sizing();
 	font-family: 'Open Sans', sans-serif;
 	color: black;
 	font-size: 14px;
 	line-height: px(22px);
+	
+	@include box-sizing();
 }
 
 /* Content Container */
 div[class|="page"]{
-	//overflow: hidden;
-	@media (max-width: 767px){
+	
+	float: none;
+	margin: auto;
 
+	// Add some extra padding on the outside of the
+	// panel border
+	@media (max-width: 767px){
 		border: 20px solid transparent;
 		border-width: 0 10px;
 		@include box-sizing();
 		
 	}
 }
-div[class|="page"],
-.header,
-.footer{
-	//margin: auto;
-	//max-width: px(940px);
-	//clear: both;
-	float: none;
-	margin: auto;
 
-	margin-bottom: 20px;
-}
+// div[class|="page"],
+// .header,
+// .footer{
+// 	//margin: auto;
+// 	//max-width: px(940px);
+// 	//clear: both;
+// 	float: none;
+// 	margin: auto;
+
+// 	margin-bottom: 20px;
+// }
+
+// div[class|="page"],
+// .header,
+// .footer{
+// 	//margin: auto;
+// 	//max-width: px(940px);
+// 	//clear: both;
+// 	float: none;
+// 	margin: auto;
+// 	margin-bottom: 20px;
+// }
+
 /* Page Title */
 h1, .h1, h2, .h2{
 	//margin-top: px($paddingUnit);
@@ -99,6 +112,8 @@ a, .b5{
 	color: $grey;
 	&:hover{ text-decoration: none; }
 }
+
+// Special category-style links that add a > when you hover
 a.category, .flyout .link a{
 	color: black;
 	text-decoration: none;
@@ -125,7 +140,6 @@ em{
 	font-style: italic;
 }
 
-/* General Tags */
 /* Normally the UL and LI tags are style-less - but in product descriptions we want them to have the bullets */
 .productDescription ul{
 	margin: px($paddingUnit) 0 px($paddingUnit) px(3 * $paddingUnit);
@@ -141,6 +155,8 @@ ul.list li,
 }
 
 .withChevron{
+
+	outline: 1px solid red;
 
 	a{
 		position: relative;
@@ -173,56 +189,7 @@ ul.list li,
 }
 */
 
-/* Panels */
-/* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
-.panel, a .panel{
-	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
-	background-color: $white;
-	display: inline-block;
-	position: relative;
-	border: 1px solid $lightGrey;
-	@include border-radius(px($borderRadius));
-	padding: px($paddingUnit + 3) px($paddingUnit * 2) 0;
-	
-	@include box-sizing();
-	
-	margin-bottom: 17px;
-	color: $black;
-	h2{
-		margin-top:6px;
-		//margin-bottom: px($paddingUnit);
-	}
-}
-
-/* A section is a broken division within a panel, generally titled by a header tag, it basically adds a line break and some margins */
-.section{
-	clear: both;
-	&:last-child{ border-bottom: 0; }
-	h2{
-		//margin-bottom: px($paddingUnit);
-	}
-}
-
-/* An engaged panel has a yellow highlight on top */
-.panel.engaged{
-	border-top: px($paddingUnit) solid $yellow;
-	padding-top: 5px;
-}
-
-/* Disengaged panels are grey */
-.panel.disengaged{
-	background-color: $superLightGrey;
-	padding-top: px((2 * $paddingUnit) - 2px); /* Make up for engaged's border-top */
-}
-
-.panel.clean{
-	background-color: transparent;
-	border-color: transparent;
-	padding-top: px((2 * $paddingUnit) - 2px);
-	padding-right: 0;
-	padding-left: 0;
-	@include box-shadow-multiple(none);
-}
+@import "panel.scss";
 
 /* Common Properties */
 /* Details are subtext */
@@ -246,93 +213,7 @@ ul.list li,
 	color: $white;
 }
 
-/* The add-to-cart panel can be seen on the product-detail page and list-view search results */
-.addToCart{
-	
-	width: 100%;
-	padding: 0;
-	
-	li{
-		
-		padding: px($paddingUnit) px($paddingUnit * 2);
-		border-bottom:1px solid #dedcda;
-		border-top: 1px solid white;
-		background-color: $superLightGrey;
-		
-		&:first-child{
-			@include border-radius(px($borderRadius) px($borderRadius) 0 0);
-		}
-		&.action{ /* Handle the bottom border */
-			@include border-radius(0 0 px($borderRadius) px($borderRadius));
-			//.icon-16-heart-grey{
-				//margin-left: 11px; /* center the add to wish list button under the add to cart */
-				//}
-			border-bottom: 0;
-		}
-		label{
-			margin: px($paddingUnit+3) px($paddingUnit) 0 0;
-			display: inline; /* IE */
-			display: inline-block;
-			//float: left;
-		}
-		input, select{
-			width: 60%;
-			float: none;
-			display: inline;
-			display: inline-block;
-		}
-		@include clearfix;
-	}
-	.productPrice{ 
-		font-size: px(30px);
-		line-height: 1em;
-		font-weight: bold;
-	}
-	.productMsrp{ text-decoration: line-through; }
-	.productDiscount{ font-weight: bold; }
-	.productAvailability{
-		.status{
-			font-weight: bold;
-			font-size: 13px;
-			color: black;
-			background-color: transparent;
-			padding-left: 0;
-		}
-		.shortStatus{
-			display: none;
-		}
-		.details{
-			.method{    
-				&:before{
-					content: '(';
-				}
-				&:after{
-					content: ')';
-				}
-			}
-		}
-	}
-	.price{ 
-		background-color: white;
-		.productGrouping{ 
-			color: $grey;
-			font-size: 13px;
-		}
-		.details{ display: block; }
-	}
-	.quantity{
-		input{ float: none; width: px(70px); }
-	}
-	.productAvailability{ background-color: white; }
-	.action{
-		.b1{ 
-			margin-bottom: px($paddingUnit);
-			margin-left: 0;
-		}
-		a{ display:block; }
-	}
-}
-
+@import "addToCart";
 
 /* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
  * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
@@ -349,6 +230,7 @@ ul.list li,
 		display: block;
 		clear: both;
 	}
+
 	&:before{
 		@include lsp-sprite-background();
 		background-position: -121px -325px;
@@ -367,423 +249,18 @@ ul.list li,
  * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page
  * 
  * There is a little fancy-css happening which changes the look of the list based on how many items are listed */
-.relatedItems{
-	
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	
-	.productPrice{ 
-		font-weight: 800;
-		font-size: 14px;
-		line-height: 22px;
-		//position: relative;
-		//left: 5px;
-	}
-	
-	label{
-		width: 100%;
-	}
-
-	.productName{ display:block; font-size: 13px; line-height: 19px; font-weight: normal; }
-	
-	img{ 
-		margin-bottom: px($paddingUnit);
-		border: 1px solid $lightGrey;
-	}
-
-	.currentItem{ 
-		 
-		position: absolute;
-		top:0;
-		left:0;
-		padding: px($gutterWidth / 2);
-		padding-top: px($gutterWidth + $gutterWidth / 2);
-		width: px(columns(2) - $gutterWidth);
-		
-		label{
-			font-weight: normal;
-		}
-		
-		.productName:before{ /* Because we can't display the overlay, add it to the name */
-			content : 'This Item: ';
-			font-weight: bold;
-		}
-		.productName::before{ /* Hide it from everything except IE8 */
-			display: none;
-		}
-		.productName{  }
-		
-		&::after{ /* Double colon to hide from IE8 - which renders the background color behind the image */
-			display: block;
-			content: 'This Item';
-			font-size: px(13px);
-			position: absolute;
-			top: px(60px);
-			background-color: $grey;
-			left: 50%;
-			color: white;
-			width: px(70px);
-			text-align: center;
-			margin-left: px(-35px, 13px);
-			
-		}
-		&:before{
-			content: '+';
-			text-align: right;
-			vertical-align: middle;
-			font-size: px(30px);
-			font-weight: bold;
-			position: absolute;
-			top: px(60px, 30px);
-			right: px(-5px, 30px);
-			
-		   
-		}
-		img{ 
-			border: 0;
-			margin: 0 px($gutterWidth);
-			@include opacity(.5);
-		}
-	}
-		
-	ul{ 
-		
-		display:inline-block;
-		width: 100%;
-		//background-color: $superLightGrey;
-		//-moz-background-clip: padding;     /* Firefox 3.6 */
-		//-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
-		//background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
-
-
-		
-		border-left: px(columns(2) + $gutterWidth) solid transparent;
-		@media (max-width: 979px){
-			border-left: 0;
-		}
-		
-
-		float:left;
-		
-		@include box-sizing();
-		
-		
-		/*.element{
-			background-color: $superLightGrey;
-			display:inline-block;
-			float:left;
-			border: px($gutterWidth / 2) solid $superLightGrey;
-			border-bottom-width: px($gutterWidth);
-			color: inherit;
-			text-decoration: none;
-			clear:both;
-	
-			width: 100%;
-			@include box-sizing();
-	
-			border-width: px($gutterWidth);
-			border-top-width: 0;
-			position: relative;
-			.image{
-				margin-left: px($paddingUnit);
-				margin-right: px($paddingUnit * 2);
-				float: left;
-				width: 80px;
-				height: 80px;
-				margin-bottom: 0;
-			}
-			img{
-				max-width: px(80px);
-				max-height: px(80px);
-			}
-			input[type="checkbox"]{
-				position: absolute;
-				top: 0;
-				left: 0;
-			}
-			.productPrice{
-				overflow: hidden;
-				left: 0;
-				display: block;
-			}
-			.productName{
-				overflow: hidden;
-		
-			}
-			
-			&:hover{
-				.image img{
-					@include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
-					border-color: $darkYellow;  
-				}
-			}
-			
-		}
-		li:first-child .element{
-			border-top-width: px($gutterWidth);
-		}
-		*/
-		
-		.productScope{
-			display: none;
-		}
-		
-		.productScope:first-child,
-		.productScope:first-child + .productScope{
-			display: block;
-			float:left;
-			width: 50%;
-		}
-		
-		
-		@media (min-width: 1200px){
-			.productScope:first-child,
-			.productScope:first-child + .productScope,
-			.productScope:first-child + .productScope + .productScope{
-				display: block;
-				float:left;
-				width: 33%;
-			}
-		}
-		
-		.element{
-			
-			// Grid View 
-			
-			background-color: $superLightGrey;
-			float:left;
-			border: px($gutterWidth / 2) solid $superLightGrey;
-			border-bottom-width: px($gutterWidth);
-			color: inherit;
-			text-decoration: none;
-			width: 100%;
-			@include box-sizing();
-	
-			border-width: px($gutterWidth);
-			border-top-width: 0;
-			position: relative;
-			
-			background-color: $superLightGrey;
-			display:inline-block;
-			float:left;
-			clear: none;
-			
-			height: 100%;
-			border: px($gutterWidth) solid $superLightGrey;
-			border-left-width: 0;
-			width: 100%;
-
-			.image{
-				float: none;
-				margin: 0;
-				width: 120px;
-				height: 120px;
-				margin-bottom: 10px;
-			}
-			img{
-				max-width: px(120px);
-				max-height: px(120px);
-			}
-			input[type="checkbox"]{
-				float: left;
-				position: relative;
-			}
-			&:first-child{
-				border-width: $gutterWidth;
-			}
-			
-		}
-		
-		/* When there are 3 or more items, then display it as a list */
-		
-		li.disengaged{
-			padding-top: 0;
-			.productPrice, .productName, img{ @include opacity(.4); }
-		}
-			
-	}
-	.addToCart{
-		
-		display: inline-block;
-		float: left;
-		clear: both;
-		margin-top:5px;
-		
-		.subtotal{
-			display: inline-block;
-			text-align: right;
-			float: right;
-			margin-right: px($paddingUnit);
-			line-height: 20px;
-			font-weight: 800;
-			font-size: 14px;
-			.details{
-				display:block;
-				font-weight: normal;
-			}
-		}
-		button{
-			display: block;
-			float: right;
-			position: relative;
-			margin-right: px($paddingUnit);
-		}
-		.subtotal, button{ margin-top: $paddingUnit; }
-	}
-}
-
+@import "relatedItems.scss";
 
 @import "dynamicSuggestions.scss";
 
 
 /* Definitions are marked with the attribute "data-def" - any text with this attribute
  * will be populated with the definition data, and get a little lightning bolt icon */
-*[data-def]{
-	margin-right: 0;
-	color: black;
-	position: relative;
-	padding-right: px(21px);
-	dl{ display: none; }
+@import "definitions.scss";
 
-	@media (min-width: 767px){
-		
-		position: relative;
-		display:inline-block;
-	
-		&:hover:before;{
-			content:' ';
-			background-color: rgba(0,0,0,0.0001);
-			width: 120%;
-			height: 100px;
-			position: absolute;
-			right: 0;
-			top: 0;
-			display: block;
-		}
-		dl{
-			display: none; 
-			position: absolute;
-			left: px(-1* (columns(2)) - 8px);
-			top: px(-4px);
-			width: px(columns(2));
-			border-left: px($paddingUnit) solid $yellow;
-			
-			@include panel-arrow(6px, 'right', $white, 20px);
-			
-			.details{
-				display: block;
-				margin: px($paddingUnit) 0;
-				float:right;
-			}
-		}
-		&:after{
-			content: ' ';
-			width: px(16px);
-			height: px(16px);
-			display:inline-block;
-			margin: 0 px(2px) 0 px(3px);
-			position:absolute;
-			right: 0;
-			top: px(4px);
-			
-			background-color: $lightGrey;
-			@include lsp-sprite-background();
-			background-position: -6px -410px;
-			
-			@include border-radius(px($borderRadius));
+@import "badges.scss";
 
-		}
-		&:hover:after{
-			background-color:$yellow;
-		}
-		&:hover{
-			dl{
-				display:block;
-			}
-		}
-	}
-}
-
-/* Badges */
-.badges-hasBadge{
-	position:relative;
-	display:inline-block;
-	zoom:1;
-	*display:inline; /* IE7 inline-block Fix */
-	/* Generic badge styling */
-	
-	.badges-badge{ 
-		position: absolute;
-		top: 5px;
-		left: 5px;
-		padding: px(1px) px(5px) px(0);
-		text-transform: uppercase;
-		font-weight: bold;
-		color: white;
-		font-size: 11px;
-		@include border-radius(px($borderRadius));
-		
-	}
-	
-	&.badges-text{
-		padding-top: 3px;
-		.badges-badge{
-			display: inline-block;
-			background-color: transparent;
-			color: $yellow;
-			position:relative;
-			top: -7px;
-			padding-left:2px;
-		}	
-	}
-
-	/* Individual Badges */
-	.badge-new{ background-color: red; }
-	&.badges-text .badge-new{ color: red; }
-	/*
-	&.badge-smallImage{
-		padding-top:10px;
-		
-		.badges-badge{
-			position:absolute;
-			top: 0;
-			left: 0;
-		}
-	}*/
-	
-	
-}
-
-
-
-
-
-/* Data-Reveal Children Plugin */
-*[data-reveal-children]{ cursor: pointer; }
-.reveal-closed { display: none; }
-.reveal-open{ display: block; }
-.reveal-closed[data-reveal-children]{
-	display: block;
-}
-// .reveal-child.reveal-isClosed{ display: none !important; } // Closed
-// .reveal-child.reveal-isOpen{ display: inherit !important; } // Open
-// .reveal-child.reveal-isOpen.reveal-isClosed{ display: block !important; } // In Transition
-
-// // Don't force hidden open parents to show.. we'll let the cascade determine that
-// .reveal-parent.reveal-isOpen{ display: inherit; }
-
-// .reveal-openOnlyDesktop{ display: inherit; }
-
-@media (max-width: 767px){
-	.reveal-closed.reveal-closed-phone{
-		display: none;
-	}
-	.reveal-closed.reveal-closed-phone[data-reveal-children]{
-		display: block;
-	}
-}
-
+@import "reveal.scss";
 
 
 
@@ -798,473 +275,8 @@ ul.list li,
 }
 
 
-
-// Refinements
-
-// Left hand refinement block
-.refinements{
-	
-	// margin-left:0;
-	font-size: 13px;
-	
-	// The actual box
-	.panel{
-		width: 100%;
-	}
-	
-	// "Refine Your Results"
-	h2{ margin-bottom: 10px; }
-	
-	#attributeList{
-		width: 100%;
-	}
-
-	// Netsuite Category Hacks
-	#refinement-categories-container{
-		table, tbody, tr, td{
-			display: block;
-		}
-		table table {
-			tr, td{
-				display: none;
-			}
-			
-			tr.currentCategory,
-			tr.openParentCategory{
-				display: table-row;
-			}
-
-			td[align="left"]{
-				display: block;
-			}
-		}
-	}
-
-	// Refinement Results Panel
-	.refineResults{
-		display: block;
-		width: 100%;
-		float: left;
-	}
-
-
-
-	// Don't bold the first listed category
-	li.indent:first-child,
-	li.firstParentCategory{
-		a, .b5{
-			font-weight: normal;
-		}
-	}
-
-	// I don't remember what this is for :(
-	li.indent:first-child + .indent + .indent{ padding-left: 5px; }
-	li.indent:first-child + .indent + .indent + .indent{ padding-left: 10px; }
-	li.indent:first-child + .indent + .indent + .indent + .indent{ padding-left: 15px; }
-	li{ clear: both; }
-
-
-	// Current list	
-	.currentCategory{
-		a, button{
-			padding-left: 15px;
-			border-left: 1px solid $lightGrey;
-		}
-		&.level0, &.openParentCategory{
-			a, button{
-				border-left: 0;
-			}
-		}
-	}
-
-	// Basic link style
-	.indent a, .indent .b5{ 
-		text-indent: 0;
-		padding-left: 10px;
-		position: relative;
-		left: -10px;
-	}
-
-	.level1 a, .level1 button{ margin-left: 10px; }
-	.level2 a, .level2 button{ margin-left: 20px; }
-	.level3 a, .level3 button{ margin-left: 30px; }
-	.level4 a, .level4 button{ margin-left: 40px; }
-	.level5 a, .level5 button{ margin-left: 50px; }
-	.level6 a, .level6 button{ margin-left: 60px; }
-	.level7 a, .level7 button{ margin-left: 70px; }
-	.level8 a, .level8 button{ margin-left: 80px; }
-	.level9 a, .level9 button{ margin-left: 90px; }
-
-	// Text links
-	a, .b5{
-		position: relative;
-		display: block;
-		font-size: 13px;
-		text-decoration: none;
-		color: black;
-		padding-bottom: 2px;
-		text-align:left;
-		text-indent: -10px;
-		padding-left: 10px;
-		line-height: 22px;
-		//@include transition(padding-left .1s, color .1s);
-		
-		&:hover{
-			//color: blue;
-			text-decoration: underline;
-			//padding-left: 10px;
-			&:before{
-				color: $grey;
-				content: '›';
-				position: absolute;
-				left: 0;
-			}
-			.label{
-				text-decoration: underline;
-			}
-			.details{
-				text-decoration: none;
-			}
-		}
-
-		// The following class naming structure comes from NetSuite
-		// Active category
-		.level0.openParentCategory ~ .currentParentCategory{
-			font-weight: bold;
-			color: black;
-		}
-	}
-
-	// Parent Categories, overwrites the > character, skipping the first level
-	li.indent:first-child + .indent{ padding-left: 0px; }
-	li.indent ~ .indent,
-	.level0.openParentCategory ~ .openParentCategory{
-		
-		a, .b5{
-			
-			font-weight: bold;
-			position: relative;
-			left: -10px;
-
-			&:before,
-			.leftLinkBold:before{
-				display: block;
-				content : '↳';
-				position: static;
-				color: $lightGrey;
-				float: left;
-				padding-right: 2px;
-			}
-			&:hover{
-				&:before{
-					font-weight: normal;
-					color: black;
-				}
-			}
-		}
-	}
-
-	// Usually refinements need padding - but not categories, which apparently are using
-	// line height
-	#refinement-categories-container ul li{
-		margin: 0;
-	}
-	
-	// A division within the box aka, an attribute complete with title, collapse button, and content
-	.section{ 
-		
-		padding-bottom: 30px;
-		float: left;
-		width: 100%; 
-		position: relative;
-		top: 10px;
-		border-top: 1px solid  $lightGrey;
-		box-shadow: inset 0 1px 0 white;
-		margin-bottom: 7px;
-		
-		@include prevent-word-breakouts();
-		
-		&.links .content{
-			top: 0;
-			position: relative;
-			margin-left: 5px;
-		}
-		
-		tr:first-child tr:first-child a,
-		.content > a:first-child,
-		.firstParentCategory a,
-		.firstParentCategory button{
-			margin-top: 10px;
-		}
-
-		// Because the ul/li pattern is display:block - we don't need so much padding.
-		// this affects the top category on a search returned result
-		.firstParentCategory button{
-			margin-top: 5px;
-		}
-
-		// The attribute titles
-		h4{ 
-			float: left;
-			position:absolute;
-			top: px(-10px);
-			left: 0;
-			background-color: $superLightGrey;
-			padding-right: px(6px);
-			height: 1.5em;
-			overflow: hidden;
-			
-		}
-		
-		// +/- button
-		.toggleRefinements{
-			
-			position:absolute;
-			top: px(-11px);
-			float: right;
-			right: 0;
-			background-color: $superLightGrey;
-			
-			// The hide/show button
-			button{ 
-				margin-right:0;
-				width: px(20px);
-				height: px(20px);
-				padding: 0;
-				text-indent: -$hideDistance;
-				overflow: hidden;
-
-				&:before{
-					content: ' ';
-					height: px(25px);
-					width: px($paddingUnit);
-					background-color: $superLightGrey;
-					position: absolute;
-					top:0;
-				}
-				&:before{
-					left:px(-($paddingUnit + 2));
-				}
-			}
-			
-		} 
-		
-		// .refinementList{
-		// 	padding-top: 10px;
-		// }
-		
-		// Actual container for each list element
-		ul{ 
-			
-			display: block;
-			//float:left;
-			width: 100%;
-			
-			// Each attribute type
-			.field, li{ 
-				clear: both;
-				float: none;
-				margin-left: px($paddingUnit);
-				width: 100%;
-				//margin-bottom: 5px;
-				margin-top:3px;
-
-				&:first-child{
-					margin-top:0;
-				}
-
-				// Selected Checkbox
-				&.isChecked label{
-					font-weight: bold;
-				}
-				
-				label{ 
-					padding-left: 0px;
-					overflow: hidden;
-					float: none;
-
-					@include box-sizing();
-					.details{
-						font-weight: normal;
-						display: inline-block;
-					}
-					&:hover{
-						cursor: pointer;
-						text-decoration: underline;
-					}
-				}
-				&:first-child{
-					margin-top: px($paddingUnit);
-				}
-			}
-
-		}
-		
-		ul:first-child{
-			padding-top:5px;
-		}
-
-		// The 'more' section's list dosen't need padding
-		.more ul{
-			padding-top:0;
-		}
-		
-		.loadMore{
-			clear: both;
-			float: left;
-			color: $grey;
-			&:hover:before{
-				content: '';
-			}
-			margin-left: 5px;
-			margin-top: 5px;
-
-			.more{ display: none; }
-			.less{ display: none; }
-			&.reveal-open{
-				.less{ display: block; }
-			}
-			&.reveal-closed{
-				.more{ display: block; }
-			}
-			// top: px(-5px);
-		}
-		&.links .loadMore{
-			left: 0px;
-		}
-
-		.more button:first-child{
-			margin-bottom: 5px;
-			margin-top: 0;
-		}
-
-		// Hide static elements, show them if checked
-		// This is part of the 'history' module of search
-		.displayState-static li{
-			display: none;
-			&.isChecked{
-				display: block;
-				.details{
-					display: none;
-				}
-			}
-		}
-
-		.isLastChecked:after{
-			display: block;
-			content: '............................................................';
-			color: #cfcfcf;
-			width: 100%;
-			margin: auto;
-			padding-top: 5px;
-			font-size: 7px;
-			letter-spacing: 2px;
-			line-height: 3px;
-			overflow-x: hidden;
-			overflow-y: hidden;
-			white-space: nowrap;
-			height: 100px;
-			height: 5px;
-		}
-
-	}
-	.selectedFilters{
-		
-		@include clearfix;
-		
-		li{ clear: both; float: left; }
-		
-		h2{ margin-bottom:0; }
-		
-		button.b5{ 
-			float: left;
-			margin: px(2px) 0 px(0px);
-			overflow: hidden;
-			text-decoration: none;
-			color: black;
-			text-align:left;
-			padding-bottom: 12px;
-			padding-top: 3px;
-			padding-left: 32px;
-			text-indent: 0;
-			font-weight: bold;
-
-			label{
-				font-weight: normal;
-				display: inline;
-			}
-			
-			@media (min-width: 768px){
-				padding-bottom: 10px;
-			}
-			
-			&:hover{
-				color: black;
-			}
-		}
-
-		a, .b5{
-			&:hover{
-				&:before{
-					content: '';
-				}
-			}
-		}
-		
-		button[data-action='clearAllRefinements']{
-			float: right;
-			margin-top: px(5px);
-			margin-bottom: px(5px);
-			font-weight: normal;
-
-		}
-		
-		.section{
-			margin-top: 0;
-			//margin-top: px($paddingUnit);
-			border-top: none;
-			padding-bottom:0;
-			top: 5px;
-			margin-bottom: 0;
-		}
-	}
-}
-
-.clearableContainer{
-	
-	position: relative;
-
-	.clearContents{
-		position: absolute;
-		right: 10px;
-		top: 50%;
-		margin-top: -12px;
-		text-indent: -$hideDistance;
-		overflow: hidden;
-		background-color: $lightGrey;
-		
-		height: 24px;
-		width: 24px;
-		@include border-radius(24px);
-
-		display: none; // hide to start
-
-		&:before{
-			content: 'x';
-			color: white;
-			display: inline-block;
-			position: absolute;
-			top: 0px;
-			left: 8px;
-			padding: 0;
-			font-weight: bold;
-			text-indent: 0;
-			margin: 0;
-			font-size: 14px;
-			line-height: 22px;
-		}
-	}
-}
+@import "refinements.scss";
+@import "clearable.scss";
 
 /* New desktopwide Responsive Support
 /* https://github.com/twitter/bootstrap/issues/4220
