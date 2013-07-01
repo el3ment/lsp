@@ -33,7 +33,16 @@
 					// },
 
 					onBeforeAPICall : function(e, data){
-						$('.page-search').addClass('loading');
+						var searchTemplate = $('#templates-search-page');
+						
+						if(searchTemplate.length){
+							$('.page-search').addClass('loading');
+						}else{
+							// If we can't load the results on this page, we'll need to redirect them to a page built for searching	
+							document.location = '/search.html#' + _app.controllers.application.buildStateString(_this, _this.getState());
+							
+							return false;
+						}
 					},
 					
 					onAfterAPICall : function(e, data){
@@ -51,7 +60,7 @@
 							// Remove everything except categories, then remove trailing /
 							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-							_state.keywords = (_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
 						}
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						
@@ -89,10 +98,23 @@
 					},
 
 					onSearch : function(e, data){
-						var query = $(data.selector).data('query');
-						_this.search(query);
-						$('#searchQuery').val(query).change();
+						var query = $('input[name="searchQuery"]').val();
+
+						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
+						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
+							_state.keywords = query; // usually we wait until the response to update the state
+													 // but search is unique because it's ubiquious and can be done from anywhere
+													 // we might need to redirect (via onBeforeAPICall) and we'll update the state string a little early
+							_this.search(query);
+						}
 					},
+
+					// Originally used for suggestions on "did you mean" - but deprecated now
+					// onSearch : function(e, data){
+					// 	var query = $(data.selector).data('query');
+					// 	_this.search(query);
+					// 	$('#searchQuery').val(query).change();
+					// },
 
 					onRemoveSearch : function(e, data){
 						_this.search('');
@@ -212,6 +234,7 @@
 						_this.pushState();
 					}
 				},
+
 				application : {
 
 					onStateChange : function(e, data){
@@ -237,22 +260,26 @@
 			},
 
 			getState : function(){
-				return _state;
+				
+				// This keeps other controllers from accidentially modifying state
+				var tmpState = $.extend({}, _state);
+				
+				delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
+
+				tmpState.allAttributes = {value : tmpState.allAttributes.replace(/\//g, '|'), uriEncode : false};
+				tmpState.path = 'Categories/' + _state.category;
+
+				if(tmpState.allAttributes.value.length === 0){
+					delete tmpState.allAttributes;
+				}
+
+				return tmpState;
+
 			},
 
 			pushState : function(){
 
-				var pushedState = $.extend({}, _state);
-				
-				delete pushedState.category; // Remove Category from the hash (it's being 'saved' in the URL)
-				delete pushedState.keywords; // Hide keywords from hash as they are found in query parameter
-
-				pushedState.allAttributes = {value : pushedState.allAttributes.replace(/\//g, '|'), uriEncode : false};
-				pushedState.path = 'Categories/' + _state.category;
-
-				if(pushedState.allAttributes.value.length === 0){
-					delete pushedState.allAttributes;
-				}
+				var pushedState = _this.getState();
 
 				// if isFirstRequest is true, then app.pushState will use history.replaceState instead
 				return _app.controllers.application.pushState(_this, pushedState, _isFirstRequest);
@@ -263,7 +290,11 @@
 				state = state || {};
 
 				state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
-				state.category = document.location.pathname.replace('/Categories/', '');
+				state.category = document.location.pathname.replace('/search.html', '').replace('/Categories/', '');
+				
+				if(state.keywords){
+					state.keywords = decodeURIComponent(state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
+				}
 
 				$.extend(_state, state);
 
@@ -274,9 +305,12 @@
 				var tmpState = $.extend({}, _state);
 				_this.pullState(_app.controllers.application.pullState(_this));
 				
+				// Populate the input with the search keywords
+				$('input[name="searchQuery"]').val(_state.keywords);
+
 				// Load the state only if the new state is different from the old state (tmpState)
 				if(!_util.isEqual(tmpState, _state)){
-					_this.search('', passthrough);
+					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}
 			},
@@ -287,7 +321,7 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_Search',
-					keywords : keywords
+					keywords : (keywords === null ? _state.keywords : keywords)
 				};
 
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
@@ -458,6 +492,10 @@
 
 				// Update Title
 				var refinements = [];
+				
+				if(easyAskDataObject.navPath._lsp.searchNode){
+					refinements.push('"' + easyAskDataObject.navPath._lsp.searchNode.englishName + '"');
+				}
 				// Looping backwards so the refinements come out in a sort-of first-picked-first-in-list format
 				for(var i = easyAskDataObject.navPath._lsp.refinementNodes.length - 1; i >= 0 ; i--){
 					refinements.push(easyAskDataObject.navPath._lsp.refinementNodes[i].value);

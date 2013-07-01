@@ -55,7 +55,7 @@
 			$(_app.controllers.application).triggerHandler('onBeforeAPICall', eventData);
 			$(controller).triggerHandler('onBeforeAPICall', eventData);
 			$(controller).triggerHandler(_util.camelCase('on-Before-API-'+eventName+'-call'), eventData);
-
+			
 			$.ajax(eventData.xhrData).done(function(responseData){
 				
 				eventData.serverResponse = responseData; // raw response needs a differnt property name

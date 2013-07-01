@@ -1,29 +1,29 @@
 /* Footer */
 .footer{
-    
-    $_bottomPadding : 20px;
-    
-    //margin: auto;
-    color: #b7aca4; /* Light brown */
-    
-    .rowContent{
-    	margin: auto;
+	
+	$_bottomPadding : 20px;
+	
+	//margin: auto;
+	color: #b7aca4; /* Light brown */
+	
+	.rowContent{
+		margin: auto;
 		float: none;
-    }
-    
-    .banner{
-       
-        /* The banner contains the picture and testimonial quote, as well as the mcafee and credit card security icons */
-       	
-        background-color: #f5f4f0;
-        position: relative;
-        padding: px($_bottomPadding) 0;
-        float:left;
+	}
+	
+	.banner{
+	   
+		/* The banner contains the picture and testimonial quote, as well as the mcafee and credit card security icons */
+		
+		background-color: #f5f4f0;
+		position: relative;
+		padding: px($_bottomPadding) 0;
+		float:left;
 		width: 100%;
 		min-height: 70px;
-        /* overflow: hidden; /* Stylistic decision */
-        margin-top: px(30px); /* 20px + 10 for the top of the profile image */
-        
+		/* overflow: hidden; /* Stylistic decision */
+		margin-top: px(30px); /* 20px + 10 for the top of the profile image */
+		
 		
 		@media (max-width: 767px){
 			min-height:100px;
@@ -33,18 +33,18 @@
 	
 		}
 		
-        .profile{
-            position: absolute;
-            height: px(140px);
-            width: px(140px);
+		.profile{
+			position: absolute;
+			height: px(140px);
+			width: px(140px);
 			top: px(-20px); 
 			@media (max-width: 767px) {
-	            height: px(110px);
-	            width: px(110px);
+				height: px(110px);
+				width: px(110px);
 				top: -3px;
 			}
-           
-            .profileImage{ 
+		   
+			.profileImage{ 
 				width: 100%;
 				height: 100%;
 				@include border-radius(px(150px));
@@ -52,40 +52,40 @@
 				background-position: -99px -1px;
 				background-image: url("http://i.imgur.com/vVXNu.jpg");
 			}
-        }
-        .content{
-            font-size: px(14px);
-            font-style: italic;
-            color: $darkGrey;
+		}
+		.content{
+			font-size: px(14px);
+			font-style: italic;
+			color: $darkGrey;
 			
 			
-            margin-left: px(160px, 16px);
-            
+			margin-left: px(160px, 16px);
+			
 			@media (max-width: 767px) {
 				margin-left:130px;
 			}
 			
 			overflow: hidden;
-            //width: px(460px, 16px);
-            line-height: 1.4em;
+			//width: px(460px, 16px);
+			line-height: 1.4em;
 			margin-right: px(2 * $paddingUnit);
-            
-            strong{
-                color: black;
-            }
-        }
-        .security{
-            
-            margin: px(20px) 0 0 px(20px);
-            float:right;
+			
+			strong{
+				color: black;
+			}
+		}
+		.security{
+			
+			margin: px(20px) 0 0 px(20px);
+			float:right;
 			
 			@media (max-width: 979px) and (min-width: 768px){
 				margin-top: 0px;
 			}
 			
-            li{
-                float: right;
-                margin-left: px(10px);
+			li{
+				float: right;
+				margin-left: px(10px);
 				@media (max-width: 979px) and (min-width: 768px){
 					clear:both;
 					margin-top: 20px;
@@ -97,7 +97,7 @@
 						margin-bottom: 0;
 					}
 				}
-            }
+			}
 			
 			.image-mcafee{
 				position:relative;
@@ -105,22 +105,22 @@
 			}
 			
 			
-        }
-    }
-    
-    .well{
-       
-        /* The space below the banner */
-       
-        width: 100%;
-        float: left;
-	    background: url(../img/dark_pattern.jpg);
-        padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
-        clear: both;
-        
+		}
+	}
+	
+	.well{
+	   
+		/* The space below the banner */
+	   
+		width: 100%;
+		float: left;
+		background: url(../img/dark_pattern.jpg);
+		padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
+		clear: both;
+		
 		@media (min-width: 768px) and (max-width: 979px) {
 			.span2{
-				width: 166px;
+				width: 146px;
 			}
 			.span4{
 				width: 724px;
@@ -128,30 +128,60 @@
 				margin-left: 0;
 			}
 		}
-		
-        h2, strong, em{
-            color: white;
-        }
-        h3{ /* h3 tags title each column of links */
-            font-weight: normal;
-            color: white;
-            margin-top: px(5px);
-            
-            strong{ font-weight: bold; }
-        }
+
+		@media(max-width: 979px){
+       		.sitemap-lists{
+       			padding: 0 0 0 10%;
+       			float: left;
+       		}
+		}
+
+		@media(max-width: 767px){
+			.sitemap-lists{
+				padding-left: 0;
+				margin-left: 48p	x;
+			}
+		}
+			
+		h2, strong, em{
+			color: white;
+		}
+		h2, .h2{ /* h2 tags title each column of links */
+			@media(max-width: 979px){
+				font-family: 'Open Sans', Sans-serif;
+				font-size: 14px;
+			}
+		}
+
+		// Title above Email Newsletter signup
+		h3{
+			font-weight: normal;
+			margin: 3px 0 5px;
+		}
+
 		li{
 			font-size: 13px;
 			@media (max-width: 979px){
 				font-size: 14px;
 			}
 		}
-        a{	
+		a{	
 			text-decoration: none;
 			position:relative;
-            &:hover{
-                color: $yellow;
-            }
-        }
+			&:hover{
+				color: $yellow;
+			}
+		}
+
+		// Link columns
+		li.span2{
+			margin-top: 10px;
+			@media (max-width: 768px){
+				margin-left: 35px;
+				margin-top: 0;
+			}
+		}
+		
 		.sitemap-lists a:hover:before{
 			content:'  ';
 			display:block;
@@ -174,14 +204,14 @@
 		.utilities a{
 			text-transform: none;
 		}
-        
+		
 		.first{
 			margin-left: 0;
 		}
 		
-        .static{
-           
-            /* The static block contains the newsletter sign up and company hours */
+		.static{
+		   
+			/* The static block contains the newsletter sign up and company hours */
 			margin-bottom: px(2 * $paddingUnit);
 			
 			@media (max-width: 979px){
@@ -195,53 +225,56 @@
 				}
 			}
 			
-            .newsletter{
+			.newsletter{
 				
 				h3{ margin: 10px 0 px(8px); }
 				
 				
-                .email{
-                    
+				.email{
 					
-                    position: relative;
-                    
-                    input{
-                        font-size: px($largeInputFontSize);
-                        padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
-                    }
-                    
-                    .b1{
-                        position: absolute;
-                        right: px(-3px);
-                        top: px(2px);
-                    }
-                }
-            }
+					
+					position: relative;
+					
+					input{
+						font-size: px($largeInputFontSize);
+						padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+					}
+					
+					.b1{
+						position: absolute;
+						right: px(-3px);
+						top: px(2px);
+					}
+				}
+			}
 			
-            .block{
-                background-color: #1f150d;
-                @include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
-                margin-top: px(20px);
-                padding: px(10px);
-                @include border-radius($borderRadius);
-                
-                em{
-                    font-style: normal;
-                }
-                
-                > li{
-                    margin: px(10px) 10px 10px 3px;
+			.block{
+				background-color: #1f150d;
+				@include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
+				margin-top: px(20px);
+				padding: px(10px);
+				@include border-radius($borderRadius);
+				
+				em{
+					font-style: normal;
+				}
+				
+				> li{
+					margin: px(10px) 10px 10px 3px;
 					padding-left: 38px;
-                }
-                .hours, .utilities {
-                    text-transform: uppercase;
-                }
-                *[class*="icon-"]:after{ /* Icons */
-                    top:0;
-                    margin-top:0;
-                }
-            }
-        }
+				}
+				.hours, .utilities {
+					text-transform: uppercase;
+				}
+				*[class*="icon-"]:after{ /* Icons */
+					top:0;
+					margin-top:0;
+				}
+				&.links .utilities{
+					margin-bottom: 0;
+				}
+			}
+		}
 
 		@media (min-width: 767px) and (max-width: 979px){
 			.static .block{
@@ -258,31 +291,31 @@
 		.static .links{
 			background-color: transparent;
 			padding-top: 0;
-            @include box-shadow-multiple(none); /* Intentionally 1px */
+			@include box-shadow-multiple(none); /* Intentionally 1px */
 		}
 
-        .logo{
-          
-            clear: both;
-            margin: auto;
-            text-align:center; /* It's just an img */
-            margin-top: px(40px);
-            float:left;
-            width: 100%;
-            *[class*='image']{
-                margin: auto;   
-            }
-        }
+		.logo{
+		  
+			clear: both;
+			margin: auto;
+			text-align:center; /* It's just an img */
+			margin-top: px(40px);
+			float:left;
+			width: 100%;
+			*[class*='image']{
+				margin: auto;   
+			}
+		}
 		
-        .copyright{
+		.copyright{
 			color: #493d35;
-          	font-size: 13px;
-            margin: px(40px) 0;
-            clear: both;
-            text-align: center;
-            float: left;
-            width: 100%;
-        }
-    }
-    
+			font-size: 13px;
+			margin: px(40px) 0;
+			clear: both;
+			text-align: center;
+			float: left;
+			width: 100%;
+		}
+	}
+	
 }

@@ -88,7 +88,7 @@
 			.logo{
 				width: 110px;
 				height: 110px;
-				outline: 1px solid red;
+				background-position: -334px -738px;
 			}
 
 			.established, .tagline{
@@ -259,7 +259,7 @@
 		
 		.b1{
 			
-			width: px(110px, $b1FontSize); /* Shop By Department */
+			width: px(166px, $b1FontSize); /* Shop By Department */
 			margin-left: 0;
 			padding-left: 40px;
 			padding-top: px(8px, 14px);
@@ -288,7 +288,7 @@
 			float: right;
 			
 			.b3{
-				width: px(20px);
+				width: px(100px);
 			}
 		}
 
@@ -304,7 +304,7 @@
 		}
 
 		.b3{
-			width: px(63px);
+			width: px(140px);
 			padding-right: px(35px); /* Only if we are going to use the count */
 			margin-left: 0; /* Generally we want the margin, so it's on the generic definition, but here we don't */
 			margin-right: 0;
@@ -550,4 +550,12 @@
 		}
 	}
 	
+	&.small{
+		.logo{
+			margin-top: 8px;
+		}
+		.established, .tagline{
+			margin-top: 55px;
+		}
+	}
 }

@@ -407,7 +407,10 @@
 				left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
 				width: 48px;
 			}
-			.b1{
+			// If hasOptions, hide all buttons, then just show customize
+			.b1.customize{ display: none; } // normally hide customize
+			.hasOptions .b1{ display: none; }
+			.b1, .hasOptions .b1.customize{
 				position: absolute;
 				top: px($_topOfPrice + 90px, $boldAllCapsH4);
 				left: px($hideDistance + 2 * $paddingUnit + 50px + 7px, $b1FontSize);
@@ -697,7 +700,12 @@
 				top: px($_topOfPrice + 90px, $inputFontSize);
 				right: px($hideDistance + $paddingUnit + 14px, $inputFontSize);
 			}
-			.b1{
+			
+			.b1.customize{ display: none; } // we defined this above, but selector specification requires it again
+			.hasOptions .b1{ display: none; }
+			
+			.b1,
+			.hasOptions .customize.b1{
 				position: absolute;
 				bottom: 10px;
 				right: px($hideDistance, $b1FontSize);

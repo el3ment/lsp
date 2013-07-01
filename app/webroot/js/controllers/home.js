@@ -12,9 +12,7 @@
 			events : {
 				flyout : {
 					onAfterAttach : function(e, data){
-						if(_app.controllers.application.getFilename() === 'home'){
-							_app.controllers.flyout.openFlyout(true);
-						}
+						_app.controllers.flyout.openFlyout(true);
 					}
 				},
 				application : {
@@ -43,11 +41,7 @@
 				}
 			},
 			
-			assets : {},
-			
-			getCurrentCustomerId : function(){
-				return 8989;
-			}
+			assets : {}
 		};
 		
 		return _this;

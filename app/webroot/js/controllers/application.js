@@ -15,8 +15,10 @@
 		var _isPushingState;
 
 		_this =  {
-			events : { 
+			events : {
+
 				application : {
+					
 					onResize : function(e, data){
 						var width = $(window).width();
 						var newContext;
@@ -150,8 +152,6 @@
 			// but the slashes look much prettier
 			pushState : function(controller, snapshot, useReplaceState){
 				
-				_state[controller.name] = snapshot; // Add it to the heap of other snapshots
-
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
 				// If pushState, push the path
@@ -184,6 +184,8 @@
 			buildStateString : function(controller, snapshot){
 
 				var statePath = '';
+				
+				_state[controller.name] = snapshot; // Add it to the heap of other snapshots
 				
 				$.each(_state, function(controllerName, snapshot){
 					statePath = statePath + '/~' + encodeURIComponent(controllerName);
@@ -296,12 +298,9 @@
 
 					eventData.error = e;
 
-					if(!_hasPushState){
-						$(_this).triggerHandler('onStateChange', eventData);
-						$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
-					}else{
-						
-					}
+					$(_this).triggerHandler('onStateChange', eventData);
+					$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
+				
 				});
 
 				// Fire the onReady and onResize events to initialize anything that relies on them

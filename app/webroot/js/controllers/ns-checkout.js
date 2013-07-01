@@ -11,7 +11,8 @@
 		var _util = _app.utilities;
 		
 		var _state = {};
-		var _mainTable = 'body .span12 > table';
+		var _mainTable = 'body .span12 > table > tbody > tr > td > table';
+		
 		_this =  {
 			events : {
 				checkout : {
@@ -50,13 +51,16 @@
 
 						// TODO : use _mainTable
 						
-						var cartTable = $('body .span12 > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
+						var cartTable = $(_mainTable + ' > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
+						
 						$('> tbody > tr:first-child', cartTable).attr('id', 'carttableheader');
+						
 						$('> tbody > tr:first-child ~ tr', cartTable).not('tr[id]')
 							.each(function(i, e){ 
 								$(e).attr('id', 'carttablerow' + i); 
 							});
-						$('body .span12 > table').addClass('nscheckout-receipt'); // page-specific hook
+
+						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
 					}
 				},
 				application : {

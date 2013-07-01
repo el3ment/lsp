@@ -2018,18 +2018,18 @@ body .span12 > table{
 	}
 
 	// The login page by itself needs to be full width
-	&.ns-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr{
+	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr{
 		width: 600px !important;
 		margin: 0 100px !important;
 	}
 
 	// Remove the top margin for the naked signup page
-	&.ns-signup input[name="category"] ~ table{
+	&.nscheckout-signup input[name="category"] ~ table{
 		margin-top: 0 !important;
 	}
 
 	// Put the margin back for the checkout process
-	&.ns-signup.nscheckout-register input[name="category"] ~ table{
+	&.nscheckout-signup.nscheckout-register input[name="category"] ~ table{
 		margin-top: 135px !important;
 	}
 }
