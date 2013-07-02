@@ -244,6 +244,12 @@ ul.list li,
 	}
 }
 
+/* Temporary hiding of compare functionality */
+
+.compare{
+	display: none !important;
+}
+
 
 /* Related items are the things-you-might need, hand selected products seen on product detail pages 
  * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page

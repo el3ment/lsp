@@ -130,6 +130,26 @@
 			display: block;
 		}
 
+		// Down arrow for navbar items with sublists
+		li[data-reveal-children]{ 
+
+			.b5{
+				padding-right: 30px;
+			}
+
+			&:after{
+				border-color: white transparent transparent transparent;
+				border-style:solid;
+				border-width: px(5px);
+				width:0;
+				height:0;
+				content: '';
+				position: absolute;
+				top: px(17px);
+				right: px(11px);
+			}
+		}
+
 		.sublist{
 			position: absolute;
 			top: 38px;
@@ -270,15 +290,15 @@
 			}
 			
 			strong:after{ /* We need .b1:after for the icon, so we'll use .b1 strong:after for the little down arrow */
-			  border-color: black transparent transparent transparent;
-			  border-style:solid;
-			  border-width: px(5px);
-			  width:0;
-			  height:0;
-			  content: '';
-			  position: absolute;
-			  top: px(23px);
-			  right: px(10px);
+				border-color: black transparent transparent transparent;
+				border-style:solid;
+				border-width: px(5px);
+				width:0;
+				height:0;
+				content: '';
+				position: absolute;
+				top: px(23px);
+				right: px(10px);
 			}
 			
 		}

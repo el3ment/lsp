@@ -83,7 +83,6 @@
 					},
 
 					onAfterAPICallFailure : function(e, data){
-						console.error('Network Error', data);
 						_this.renderFatalError();
 					},
 
@@ -102,6 +101,11 @@
 
 						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
 						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
+							
+							// Remove the delete statements if you want search to work within a category
+							delete _state.category;
+							delete _state.allAttributes;
+
 							_state.keywords = query; // usually we wait until the response to update the state
 													 // but search is unique because it's ubiquious and can be done from anywhere
 													 // we might need to redirect (via onBeforeAPICall) and we'll update the state string a little early
@@ -117,7 +121,9 @@
 					// },
 
 					onRemoveSearch : function(e, data){
-						_this.search('');
+
+						_this.removeSearch();
+
 						$('#searchQuery').val('').change();
 					},
 
@@ -249,6 +255,11 @@
 					
 					onInit : function(e, data){
 
+					},
+
+					onContextChangeEnterPhone : function(e, data){
+						_this.changeView('listView');
+
 					}
 				}
 			},
@@ -266,7 +277,7 @@
 				
 				delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
 
-				tmpState.allAttributes = {value : tmpState.allAttributes.replace(/\//g, '|'), uriEncode : false};
+				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\//g, '|'), uriEncode : false};
 				tmpState.path = 'Categories/' + _state.category;
 
 				if(tmpState.allAttributes.value.length === 0){
@@ -325,6 +336,20 @@
 				};
 
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
+			removeSearch : function(){
+
+				var payload = {
+					action : 'advisor',
+					method : 'CA_BreadcrumbRemove'
+				};
+
+				delete _state.keywords;
+
+				return _api.request(_this, 'removeSearch', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
 						_this.renderPage(data.response.source);
 					});

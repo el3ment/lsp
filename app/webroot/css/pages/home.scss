@@ -16,6 +16,28 @@
 			float: left;
 		}
 
+		// Ad width when large desktop
+		@media (min-width: 1200px){
+			
+			margin-left: 275px;
+
+			&, .ad{
+				width: 925px;
+			}
+		}
+
+		@media (min-width: 1200px){
+			&, .ad{
+				width: 930px;
+			}
+		}
+
+		@media (max-width: 979px) and (min-width: 768px){
+			&, .ad{
+				width: 475px;
+			}
+		}
+
 		.arrow-holder{
 			margin-top: -16px;
 		}

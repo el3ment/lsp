@@ -44,7 +44,7 @@
 					defarrangeby : '///NONE///',
 					disp : 'json',
 					dct : _dictionary,
-					q : payload.keywords,
+					q : (payload.keywords && payload.keywords.length) ? payload.keywords : undefined,
 					AttribSel : _this.combineSimilarAttributesForRequest(payload.attribute, payload.allAttributes)
 				};
 
@@ -58,6 +58,12 @@
 
 				if($.isEmptyObject(payload.allAttributes) && !payload.attribute && payload.method === 'CA_AttributeSelected'){
 					formattedPayload.RequestData = 'CA_BreadcrumbClick'; // If there are no attributes, just load the category
+				}
+
+				// If we are trying to remove the last breadcrumb - this was a weird bug, and I'm still not super sure if it's
+				// totally fixed.
+				if(formattedPayload.RequestData === 'CA_BreadcrumbRemove' && !formattedPayload.q && !formattedPayload.AttribSel){
+					formattedPayload.RequestData = 'CA_CategoryExpand';
 				}
 				// As a form of cleanup - remove a trailing / from a category request
 				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
