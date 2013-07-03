@@ -34,7 +34,7 @@
 							loopItems: true,
 
 							// Testing this out
-							useWebkit3d : true
+							//useWebkit3d : true
 						});
 					},
 					onInit : function(e, data){}

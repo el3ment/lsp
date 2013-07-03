@@ -529,15 +529,17 @@
 				this.carouselWidth = this.carouselRoot.width();
 
 				// Monkey Patch for Lone Star Percussion - calculates _itemsPerMove automatically
-					if(this.settings._calculatePageWidth){
-						this._itemsPerMove = Math.floor(this.carouselWidth / (this.items[0].width || 1));
-					}
+
 					// Update widths
 					this._totalItemsWidth = 0;
 					for(var i = 0; i < this.items.length; i++){
 						this.items[i].width = this.items[i].item.width();
 						this.items[i].posX = this.items[i].item.position().left;
 						this._totalItemsWidth = this.items[i].posX + this.items[i].width;
+					}
+
+					if(this.settings._calculatePageWidth){
+						this._itemsPerMove = Math.floor(this.carouselWidth / (this.items[0].width || 1)) || 1;
 					}
 				// End Monkey Patch
 
@@ -599,6 +601,10 @@
 					this.animateTo(newX, 300, "easeInOutSine");		
 				}
 				
+				// Additional Monkey Patch for Lone Star Percussion
+				// This re-adjusts the carosel when we resize it.
+				this.goTo(this._currPageId);
+				// End additional patch
 				
 			},
 			animateTo:function(pos, speed, easing, bounceAnim, endPos, bounceSpeed, bounceEasing) {		
