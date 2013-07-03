@@ -530,17 +530,29 @@
 
 				// Monkey Patch for Lone Star Percussion - calculates _itemsPerMove automatically
 
-					// Update widths
+					// Update widths of % based item widths
 					this._totalItemsWidth = 0;
 					for(var i = 0; i < this.items.length; i++){
 						this.items[i].width = this.items[i].item.width();
-						this.items[i].posX = this.items[i].item.position().left;
-						this._totalItemsWidth = this.items[i].posX + this.items[i].width;
+						this._totalItemsWidth += this.items[i].width;
 					}
 
+					// Reset Items Per Move
 					if(this.settings._calculatePageWidth){
 						this._itemsPerMove = Math.floor(this.carouselWidth / (this.items[0].width || 1)) || 1;
 					}
+
+					// Resize the container
+					this._dragContainer.css({
+						width: this._totalItemsWidth
+					});
+
+					// Update Positions - we need to do this after the widths because the positions
+					// have been altered, but we need totalItemsWidth before we can save positions
+					for(var i = 0; i < this.items.length; i++){
+						this.items[i].posX = this.items[i].item.position().left;
+					}
+
 				// End Monkey Patch
 
 				if(this.settings.scrollToLast) {

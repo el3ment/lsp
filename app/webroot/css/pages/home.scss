@@ -3,14 +3,14 @@
 	#mainSlider{
 		
 		overflow: hidden;
-		height: $flyoutHeight - 30px;
+		height: $flyoutHeight - 20;
 		margin-left: 270px;
 		width: 690px; // width + margin-left = pagewidth
 		position: relative;
 
 		.ad{
 			margin-left:0;
-			height: 440px;
+			height: 460px;
 			width: 690px;
 			outline: 1px solid red;
 			float: left;
@@ -23,12 +23,6 @@
 
 			&, .ad{
 				width: 925px;
-			}
-		}
-
-		@media (min-width: 1200px){
-			&, .ad{
-				width: 930px;
 			}
 		}
 
