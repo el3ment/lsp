@@ -43,22 +43,20 @@
 					onAttachEvents : function(e, data){
 			 
 						$(_settings.validationInputs, data.selector).each(function(index, element){
-							$(element).bind('keyup', function(e){
-								_this.validate(element);
+							$(element).off('validation').on('keyup.lsp.validation', function(e){
+								if(e.which !== 9 && e.which !== 16){
+									_this.validate(element);
+								}
+								return true;
 							});
-							_this.validate(element); // Not sure if we want to validate on page load or not yet.
+							//_this.validate(element); // Not sure if we want to validate on page load or not yet.
 						});
 						
-						$('form', data.selector).bind('submit', function(e){
-							var stop = false;
-							var inputs = $(_settings.validationInputs, this);
-							for(var i = 0; i < inputs.length; i++){
-								if(!_this.validate(inputs[i])){
-									stop = true;
-								}
-							}
+						$('form', data.selector).off('validation').on('submit.lsp.validation', function(e){
 							
-							if(stop){
+							var isValid = _this.validateForm($(this));
+							
+							if(!isValid){
 								e.preventDefault();
 								return false;
 							}
@@ -78,6 +76,7 @@
 				
 				return (elementMessage ? elementMessage : defaultMessage);
 			},
+
 			getPattern : function(validationType){
 				if(!!_patterns[validationType]){
 					return _patterns[validationType];
@@ -85,12 +84,31 @@
 					throw new Error(validationType + ' is an invalid validation type');
 				}
 			},
+			
 			isValid : function(string, validationType){
 				return _this.getPattern(validationType).pattern.test(string);
+			},
+
+			validateForm : function(form){
+				var stop = false;
+				var inputs = $(_settings.validationInputs, form);
+				for(var i = 0; i < inputs.length; i++){
+					if(!_this.validate(inputs[i])){
+						stop = true;
+					}
+				}
+
+				if(stop === true){
+					_util.scrollTo(form);
+				}
+				
+				return !stop;
 			},
 			
 			// Parse, then display any validating messages
 			validate : function(element){
+				$(element).removeClass('validation-valid', 'validation-invalid');
+
 				var invalidTypes = _this.parseInvalid($(element).val(), $(element).attr('class').split(/\s+/));
 				if(invalidTypes.length > 0){
 					_this.displayInvalid(element, invalidTypes);
@@ -104,14 +122,14 @@
 			// Create the list of invalid types
 			parseInvalid : function(value, validationTypes){
 				var invalidTypes = [];
-				
 				for(var i = 0; i < validationTypes.length; i++){
-					
-					var validationType = validationTypes[i].replace('validation-', '');
-					var patternObj = _this.getPattern(validationType);
-					// Unless it's required, allow a empty string to validate
-					if(!value.match(patternObj.pattern) && ((value !== '' && validationType !== 'required') || validationType === 'required')){
-						invalidTypes.push(validationType);
+					if(validationTypes[i].indexOf('validation-') > -1 && validationTypes[i] !== 'validation-valid' && validationTypes[i] !== 'validation-invalid') {
+						var validationType = validationTypes[i].replace('validation-', '');
+						var patternObj = _this.getPattern(validationType);
+						// Unless it's required, allow a empty string to validate
+						if(!value.match(patternObj.pattern) && ((value !== '' && validationType !== 'required') || validationType === 'required')){
+							invalidTypes.push(validationType);
+						}
 					}
 				}
 				
@@ -120,21 +138,26 @@
 			
 			displayInvalid : function(element, invalidTypes){
 				
-				$(element).removeClass('validation-valid');
-				$(element).addClass('validation-invalid');
-				
-				for(var i = 0; i < invalidTypes.length; i++){
-					console.log(_this.getValidationMessage(element, invalidTypes[i]));
+				var parent = $(element).parent('.validation-container');
+
+				if(!parent.length){
+					var parent = $(element).parent().addClass('validation-container');
+					//_app.controllers.application.attachEvents(parent);
 				}
+
+				parent.attr('data-validation-invalidTypes', invalidTypes.join(' '));
 			},
+
 			displayValid : function(element){
-				console.log('This is valid!');
-				$(element).removeClass('validation-invalid');
-				$(element).addClass('validation-valid');
+				$(element).parent('.validation-container').removeAttr('data-validation-invalidTypes');
+
+				// .removeClass('validation-invalid');
+				// $(element).addClass('validation-valid').parent('.validation-container').addClass('validation-valid');
 			}
 		};
 
 		return _this;
+
 	}());
 	
 	_util.register('controller', 'validation', validation);

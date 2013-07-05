@@ -430,3 +430,9 @@ Laboris reprehenderit cupidatat eiusmod et esse ullamco dolore sed aute ut nisi 
 	</li>
 </script>
 
+<script type='text/html' id='templates-definition'>
+<dl class='panel'>
+	<dt class='h3'><#=this.title #></dt>
+	<dd><#=this.definition <span class='details'>Click to learn more</span></dd>
+</dl>
+</script>

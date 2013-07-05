@@ -95,21 +95,43 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 }
 
 /* Validation Plugin */
-.validation-required,
-.validation-alphaOnly,
-.validation-numericOnly,
-.validation-alphaNumeric,
-.validation-emailAddress,
-.validation-creditCardNumber{
-	border: 1px solid blue;
+// .validation-required,
+// .validation-alphaOnly,
+// .validation-numericOnly,
+// .validation-alphaNumeric,
+// .validation-emailAddress,
+// .validation-creditCardNumber{
+// 	//border: 1px solid blue;
+// }
+
+.validation-container{
+
+	&[data-validation-invalidTypes*="required"]{
+		
+		position: relative;
+		
+		input, textarea, select{
+			background-color: #ffe0e0 !important;
+			&:focus{
+				@include box-shadow-multiple(0 0 px(3px, $inputFontSize) 0 #bb0000);
+				border-color: #bb0000;
+			}
+		}
+
+		&:after{
+			display: block;
+			content: 'Required';
+			font-size: 12px;
+			font-style: italic;
+			color: #bb0000;
+		}
+	}
+	
 }
 
-.validation-invalid{
-	border:1px solid red;
-}
-.validation-valid{
-	border: 1px solid green;
-}
+// .validation-valid{
+// 	//border: 1px solid green;
+// }
 
 /* Button Styling */
 /* Yellow, Uppercase */ 

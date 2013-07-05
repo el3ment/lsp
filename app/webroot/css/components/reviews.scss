@@ -37,7 +37,7 @@
 	
 	&.section h2{
 		margin:0;
-		padding: 20px 16px 15px 0;
+		padding: 20px 16px 15px 0 !important;
 		float:left;
 	}
 	
@@ -76,13 +76,26 @@
 		margin-top:10px;
 		float: right;
 	}
+	.b1.reveal-open{
+		@include gradient($buttonLightGrey, $buttonDarkGrey); 
+		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
+		text-shadow: 0 1px $saturatedHighlightGrey;
+		border: 1px solid $darkGrey;
+		text-indent: -145px;
+		padding-right: 0;
+		&:after{
+			content: 'Hide Form';
+			display: inline;
+			padding-left: 15px;
+		}
+	}
 	.add{
 		//display: block;
 		clear: both;
 		border-top: 1px solid $lightGrey;
 		padding: 0 10px;
 		background-color: $superLightGrey;
-		
+
 		h2{ padding: 0; }
 		.span6{
 			
@@ -233,6 +246,7 @@
 			overflow: hidden;
 			clear: both;
 			width: 100%;
+			min-height: 120px;
 			
 			@media (max-width: 767px){
 				display: table;
@@ -362,6 +376,7 @@
 					max-width: px(700px);
 					float: left;
 					clear: left;
+					padding-bottom: 10px;
 				}
 				.reviewReviewBody{
 					white-space: pre-wrap;
@@ -379,7 +394,7 @@
 				.reviewTitle{
 					
 					font-weight:bold;
-					&:after, &:before{ content: '"'; }
+					&:after, &:before{ content: '"'; } //"
 				
 				}
 				.reviewAuthorName{
@@ -476,4 +491,7 @@
 		text-shadow: 0px 0px 1px red;
 	}
 }
+
+// Temporary until we write the functionality for this
+.reviewInteractionCount, .actions{ display: none !important;  }
 

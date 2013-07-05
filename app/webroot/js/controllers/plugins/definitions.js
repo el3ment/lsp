@@ -5,7 +5,7 @@
 	var definitions = (function(){
 		var _this = {};
 		var _lsp = window.LSP;
-		var _api = _lsp.models.api;
+		var _api = _lsp.models.netsuite;
 		var _settings = {
 				sluglessSelector : '*[data-def]:not([data-definitions-slug]):not([data-definitions-definition])',
 				definitionlessSelector : '*[data-def][data-definitions-slug]:not([data-definitions-definition])',
@@ -15,6 +15,12 @@
 		_this =  {
 			name : 'definitions',
 			events : {
+				definitions : {
+					onAfterAPICallFailure : function(e, data){
+						// Remove the lightning bolt - there was a failure
+						$('*[data-def]').removeAttr('data-def');
+					}
+				},
 				application : {
 					onAttachEvents : function(e, data){
 						// Make our list of slugs to request
@@ -43,7 +49,7 @@
 			
 			getDefinitions : function(slugs){
 				if(slugs.length > 0){
-					//return _api.request(_this, 'getDefinitions', 'getDefinitions', {slugs : JSON.stringify(slugs)});
+					return _api.request(_this, 'getDefinitions', {method : 'getDefinitions', slugs : JSON.stringify(slugs)});
 				}
 			},
 			
@@ -54,13 +60,15 @@
 					for(var i = 0; i < definitions.length; i++){ // Loop, and add word/definition pairs to definition slugs
 						if(definitions[i].custrecordslug === $(this).data('definitions-slug')){
 							var selector = $(this);
-							selector.attr('data-definitions-word', definitions[i].name); // we are using attr and not data because they are CSS hooks
-							selector.attr('data-definitions-definition', definitions[i].custrecorddefinition);
-							selector.attr('data-definitions-url', definitions[i].custrecordurl);
+							selector.attr('data-definitions-title', definitions[i].name) // we are using attr and not data because they are CSS hooks
+								.attr('data-definitions-definition', definitions[i].custrecorddefinition)
+								.attr('data-definitions-url', definitions[i].custrecordurl)
+								.attr('data-definitions-imageurl', definitions[i].custrecordimageurl)
+								.append(_util.parseMicroTemplate('templates-definitons-display', selector.data()));
 							
-							selector.bind('mouseover', function(){
+							selector.bind('mouseenter', function(){
 								_this.showDefinition(this); 
-							}).bind('mouseout', function(){
+							}).bind('mouseleave', function(){
 								_this.hideDefinition(this);
 							});
 						}
@@ -69,11 +77,11 @@
 			},
 			
 			hideDefinition : function(element){
-				$('.definitions-display', element).remove();
+				$('.panel', element).hide();
 			}, // These work, but if we can do it in CSS with :hover -- all the better
 			
 			showDefinition : function(element){
-				$(element).append(_util.parseMicroTemplate('templates-definitons-display', $(element).data()));
+				$('.panel', element).show();
 			},
 			
 			makeSlug : function(content){

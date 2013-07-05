@@ -84,18 +84,26 @@
 				})
 
 				if(doAnimations){
-					children
-						.css('display', 'none')
-						.slideDown({
-							duration : ANIMATION_TIME,
-							easing : 'swing',
-							complete : function(){
-								children
-									.addClass('reveal-open')
-									.css('display', '')
-									.removeClass('reveal-closed');
-							}
+					var queue = $({});
+					children.each(function(i, child){
+						queue.queue(function(){
+							var control = $(this);
+							$(child)
+								.css('display', 'none')
+								.slideDown({
+									duration : ANIMATION_TIME,
+									easing : 'swing',
+									complete : function(){
+										$(child)
+											.addClass('reveal-open')
+											.css('display', '')
+											.removeClass('reveal-closed');
+										control.dequeue();
+									}
+								});
 						});
+					});
+					
 				}else{
 					children.addClass('reveal-open').removeClass('reveal-closed');
 				}
@@ -112,18 +120,29 @@
 				});
 
 				if(doAnimations){
-					children
-						.css('display', 'block')
-						.slideUp({
-							duration : ANIMATION_TIME,
-							easing : 'swing',
-							complete : function(){
-								$(this)
-									.removeClass('reveal-open')
-									.addClass('reveal-closed')
-									.css('display', '');
-							}
+					var queue = $({});
+
+					var children = children.toArray().reverse();
+
+					$.each(children, function(i, child){
+						queue.queue(function(){
+							var control = $(this);
+							$(child)
+								.css('display', 'block')
+								.slideUp({
+									duration : ANIMATION_TIME,
+									easing : 'swing',
+									complete : function(){
+										$(this)
+											.removeClass('reveal-open')
+											.addClass('reveal-closed')
+											.css('display', '');
+										control.dequeue();
+									}
+								});
 						});
+					});
+
 				}else{
 					children.addClass('reveal-closed').removeClass('reveal-open');
 				}

@@ -12,7 +12,7 @@
 		var _isFirstRequest = true;
 
 		var _state = {
-			resultsPerPage : '20',
+			resultsPerPage : '24',
 			page : 'first',
 			sort : 'default',
 			category : '',

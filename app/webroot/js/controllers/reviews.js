@@ -4,9 +4,10 @@
 	
 	_util.register('controller', 'reviews', (function(){
 		var _this = {};
-		var _lsp = window.LSP;
-		var _api = _lsp.models.lspapi;
+		var _app = window.LSP;
+		var _api = _app.models.netsuite;
 		var _settings = {
+			containerSelector : '#addReviewForm',
 			formSelector : '#reviews-inputForm',
 			prosInputSelector : '#reviews-inputForm .pros input',
 			consInputSelector : '#reviews-inputForm .cons input',
@@ -18,8 +19,23 @@
 			name : 'reviews',
 			events : {
 				reviews : {
+					onAfterAPICallSuccess : function(e, data){
+						$(_settings.formSelector).removeClass('loading');
+						$('#reviewEntries').removeClass('loading secondary');
+
+						// Close the add-review form
+						$('button.b1.reveal-open[data-reveal-children*="addReviewForm"]').trigger('click');
+
+					},
+					onBeforeAPICall : function(e, data){
+						$(_settings.formSelector).addClass('loading');
+						$('#reviewEntries').addClass('loading secondary');
+					},
 					onSave : function(e, data){
-						console.log(_this.parseForm(data.selector));
+						var form = data.selector[0];
+						if(_app.controllers.validation.validateForm(form)){
+							_this.save(_this.parseForm(form));
+						}
 					},
 					onProOrConInput : function(e){
 						// If there is something in the input, show the second one
@@ -59,6 +75,7 @@
 				},
 				application : {
 					onAttachEvents : function(e, data){
+
 						$(_settings.formSelector+' :input', data.selector)
 							.off('.reviews')
 							.on('keyup.lsp.reviews change.lsp.reviews', _this.events.reviews.onRenderPreview)
@@ -77,25 +94,43 @@
 			
 			// Send the form, and replace the form with the result from the 
 			// server.
-			save : function(formElement){
-				var data = _this.parseForm(formElement); // We have to parse the form before we disable the elements
-				$(':input', formElement).attr('disabled', true);
+			// save : function(formElement){
+			// 	var data = _this.parseForm(formElement); // We have to parse the form before we disable the elements
+			// 	$(':input', formElement).attr('disabled', true);
 				
-				var result = $.when(_api.request(_this, 'save', 'saveReview', data))
-				.done(function(data){
-					// don't forget to _util.attachEvents with the new HTML!
-					$(_settings.formSelector).replaceWith(JSON.stringify(data));
-				}).always(function(data){
-					$(':input', formElement).attr('disabled', false);
-				});
+			// 	var result = $.when(_api.request(_this, 'save', 'saveReview', data))
+			// 	.done(function(data){
+			// 		// don't forget to _util.attachEvents with the new HTML!
+			// 		$(_settings.formSelector).replaceWith(JSON.stringify(data));
+			// 	}).always(function(data){
+			// 		$(':input', formElement).attr('disabled', false);
+			// 	});
 				
-				return result;
+			// 	return result;
 				
+			// },
+
+			save : function(reviewData){
+				return _api.request(_this, 'saveReview', {method : 'saveReview', data : JSON.stringify(reviewData)})
+					.done(function(data){
+						_this.renderSavedReview(reviewData);
+					});
 			},
 			
 			render : function(data){
 				var html = _util.parseMicroTemplate(_settings.reviewTemplateId, data);
 				return html;
+			},
+
+			renderSavedReview : function(review){
+				
+				_util.scrollTo($('.reviews.section'));
+
+				$($.parseHTML(_this.render(review)))
+					.filter('li')
+					.hide()
+					.insertAfter('#reviewEntries li:first')
+					.fadeIn();
 			},
 
 			// Take the form, JSON encode the profile section, perform
@@ -107,6 +142,9 @@
 				
 				returnData = _util.formToObject(element, null, true);
 
+				// This is ancient code - the original plan was to store data in fields, and change
+				// the review script as little as possible - but now we use a json object to handle it
+				// so with some cleanup, this could be removed (move this logic to the template)
 				for(var i = 0; i < ((returnData || {}).custrecordreviewprofile || {}).length; i++){
 					
 					if(returnData.custrecordreviewprofile[i].title){
@@ -119,7 +157,7 @@
 					}
 				}
 				returnData.profile = profile.join(', ');
-				console.log(returnData);
+
 				return returnData;
 			}
 		};

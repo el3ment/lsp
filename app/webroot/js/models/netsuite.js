@@ -1,21 +1,32 @@
-// (function(){
+(function(){
 
-// 	var _util = window.LSP.utilities;
+	var _util = window.LSP.utilities;
+	var _models = window.LSP.models;
 	
-// 	_util.register('model', 'netsuite', (function(){
+	_util.register('model', 'netsuite', (function(){
 
-// 		var _this = new _app.models.Api;
-		
-// 		$.extends(_this, {
-// 			buildAPIRequestURL : function(method, data){
-// 				console.log('sup');
-// 				return 'http://google.com';
-// 			}
-// 		})
+		var _this = $.extend({}, _models.api);
 
-// 		return _this;
+		return $.extend(_this, {
+			_url : function(controller, payload){
+				var url = 'https://system.sandbox.netsuite.com/app/site/hosting/scriptlet.nl';
+				url = (payload.method.match('getUPS') ? 'http://static.lonestarpercussion.com/shipping/' + payload.method : url);
+				
+				return url;
+			},
+			_payload : function(controller, payload){
+				return $.extend(payload, {
+					method : payload.method,
+					deploy : 'customdeploy1',
+					script : 'customscriptlspapi'
+				});
+			},
+			request : function(controller, eventName, method, data){
+				return this._request('GET', 'jsonp', controller, eventName, method, data);
+			}
+		});
 
-// 	}()));
+	}()));
 	
 
-// }())
+}())

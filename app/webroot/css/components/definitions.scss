@@ -3,6 +3,9 @@
 	color: black;
 	position: relative;
 	padding-right: px(21px);
+	font-size: 13px;
+	font-style: normal;
+	
 	dl{ display: none; }
 
 	@media (min-width: 767px){
@@ -22,14 +25,20 @@
 		}
 		dl{
 			display: none; 
+			z-index: 99;
 			position: absolute;
-			left: px(-1* (columns(2)) - 8px);
+			left: px(-250 - 8px);
 			top: px(-4px);
-			width: px(columns(2));
+			width: px(250px);
 			border-left: px($paddingUnit) solid $yellow;
 			
 			@include panel-arrow(6px, 'right', $white, 20px);
 			
+			img{
+				float: left;
+				margin-right: 10px;
+			}
+
 			.details{
 				display: block;
 				margin: px($paddingUnit) 0;

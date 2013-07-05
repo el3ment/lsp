@@ -24,7 +24,7 @@
 			return payload;
 		},
 		_isSuccess : function(responseData){
-			return typeof (responseData || {}).success !== 'undefined' || (responseData || {}).success === true;
+			return (responseData || {}).success === true;
 		},
 		_afterSuccess : function(responseData){
 			return responseData;
