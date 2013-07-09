@@ -26,6 +26,8 @@
 						if(productPageForm){
 							_this.renderMatrixLists(productPageForm);
 						}
+
+						setTimeout(_this.removeEmptySpecificationsRows, 500);
 						
 					},
 					onInit : function(e, data){}
@@ -33,6 +35,10 @@
 			},
 			
 			assets : {},
+
+			removeEmptySpecificationsRows : function(){
+				$('tr[data-specifications-data*="!empty!"], tr[data-specifications-data*="!Unknown!"], tr[data-specifications-data*="!None!"]').remove();
+			},
 
 			renderMatrixLists : function(form){
 				
@@ -82,16 +88,42 @@
 
 				// Loop through the formattedMatrix (source of all attributes) and if we find an id that
 				// matches the filter criteria, then set the id
-				$.each(easyAskMatrixData.products, function(id, options){
-					for(var label in options){
-
+				$.each(easyAskMatrixData.products, function(id, productData){
+					for(var label in productData.options){
 						// If it's not present, or if it exists, but is another value
-						if(!selectedOptions[label] || selectedOptions[label] !== options[label])
-							return
+						if(!selectedOptions[label] || selectedOptions[label] !== productData.options[label])
+							return;
 					}
 
+
+					var entry = $(form).parent('.entry');
 					// If we've made it here, it's because we've found an ID that matches the filters
-					$('input[name="buyid"]', form).val(id); // Set the buyid
+					// Update all the changing nick nacks in the item listing
+					$('input[name="buyid"]', entry).val(id); // Set the buyid
+
+					// "You save $x" - we hide it if the save amount is < 0 (it would be an error, so this is just to be safe)
+					if(productData.data.msrp - productData.data.online_price <= 0){
+						$('.price .details', entry).hide();
+					}else{
+						$('.price .details', entry).show();
+						$('.productPrice', entry).html(_util.parseCurrency(productData.data.online_price));
+						$('.productMpn', entry).html(productData.data.mpn);
+						$('.productDiscount', entry).html(_util.parseCurrency(productData.data.msrp - productData.data.online_price));
+					}
+
+					var optionArray = [];
+					for(var label in productData.options){
+						if(productData.options.hasOwnProperty(label)){
+							optionArray.push(productData.options[label]);
+						}
+					}
+
+					$('.productName .options', entry).html(' : ' + optionArray.join(', '));
+
+					var width = $('.thumbnail img', entry).attr('width');
+					var height = $('.thumbnail img', entry).attr('height');
+					$('.thumbnail img', entry).attr('src', productData.data.imageUrl + '.' + width + 'x' + height);
+
 				})
 			},
 			

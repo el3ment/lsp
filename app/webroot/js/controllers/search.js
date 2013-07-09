@@ -250,7 +250,7 @@
 					onReady : function(e, data){
 						if(_app.controllers.application.pullState(_this)){
 							_this.loadCurrentState();
-						}						
+						}
 					},
 					
 					onInit : function(e, data){

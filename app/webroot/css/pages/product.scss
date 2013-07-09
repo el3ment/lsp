@@ -255,3 +255,27 @@
 		padding-left: 10px;
 	}
 }
+
+.specifications{
+    tr td{
+        padding: 2px 5px;
+        font-size: 13px;
+    }
+    td.data{
+        padding-left: 10px;
+    }
+    tr:first-child, 
+    tr:first-child + tr + tr,
+    tr:first-child + tr + tr + tr + tr,
+    tr:first-child + tr + tr + tr + tr + tr + tr,
+    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr,
+    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
+    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
+    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
+    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+        background-color: $superLightGrey;
+    }
+    tr[data-specifications-data*="!empty!"]{
+        display: none;
+    }
+}

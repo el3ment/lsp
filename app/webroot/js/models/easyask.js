@@ -11,7 +11,7 @@
 		// var _hostname = 'http://easyaskqa.easyaskondemand.com';
 		
 		var _dictionary = 'nslonestarpercussion';
-		var _hostname = 'http://lonestarpercussion.easyaskondemand.com';
+		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
 
 		var _sessionId;
 
@@ -357,14 +357,27 @@
 						item = easyAskMatrixArray[i][1].split('|'),
 						label = item[0],
 						value = item[1],
-						index = item[2];
+						index = item[2],
+						imageUrl = item[3],
+						mpn = item[4],
+						online_price = item[5],
+						msrp = item[6]
 
 					optionObject[label] = optionObject[label] || {};
 					optionObject[label][value] = optionObject[label][value] || [];
 					optionObject[label][value].push(id);
 
 					productObject[id] = productObject[id] || {};
-					productObject[id][label] = value;
+					productObject[id].options = productObject[id].options || {};
+					productObject[id].options[label] = productObject[id].options[label] || {};
+					productObject[id].options[label] = value;
+
+					productObject[id].data = productObject[id].data || {};
+					productObject[id].data.imageUrl = imageUrl;
+					productObject[id].data.mpn = mpn;
+					productObject[id].data.online_price = online_price;
+					productObject[id].data.msrp = msrp;
+
 
 				}
 
@@ -381,7 +394,7 @@
 					// Loop through the products and check to see if any filters don't match
 					for(var key in filters){
 						if(filters.hasOwnProperty(key)){
-							if(options[key] && options[key] != filters[key]){
+							if(options.options[key] && options.options[key] != filters[key]){
 								return;
 							}
 						}
@@ -394,7 +407,7 @@
 
 				// Create the options from the products
 				$.each(filteredProducts, function(id, options){
-					$.each(options, function(label, value){
+					$.each(options.options, function(label, value){
 
 						// If option isn't part of the filters
 						if(!filters[label]){

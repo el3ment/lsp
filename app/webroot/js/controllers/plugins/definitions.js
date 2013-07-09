@@ -63,8 +63,9 @@
 							selector.attr('data-definitions-title', definitions[i].name) // we are using attr and not data because they are CSS hooks
 								.attr('data-definitions-definition', definitions[i].custrecorddefinition)
 								.attr('data-definitions-url', definitions[i].custrecordurl)
-								.attr('data-definitions-imageurl', definitions[i].custrecordimageurl)
-								.append(_util.parseMicroTemplate('templates-definitons-display', selector.data()));
+								.attr('data-definitions-imageurl', definitions[i].custrecordimageurl);
+								
+							selector.append(_util.parseMicroTemplate('templates-definitons-display', selector.data()));
 							
 							selector.bind('mouseenter', function(){
 								_this.showDefinition(this); 
