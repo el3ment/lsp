@@ -283,7 +283,11 @@
 	
 	.gridView{
 		
-		$_topOfPrice : 350px;
+		$_topOfPrice : 325px;
+
+		.detailedDescription {
+			display: none;
+		}
 		
 		.listScope{
 			clear: both;
@@ -309,7 +313,7 @@
 				width: 25%;
 			}
 			
-			height: px(500px);
+			height: px(475px);
 			border: 1px solid $lightGrey;
 			border-top: none;
 			border-left: none;
@@ -334,7 +338,9 @@
 			}
 		}
 		img{
-			width: 100%;
+			max-width: 100%;
+			// This fixed max-height should be removed when dimensions are removed from image in markup
+			max-height: 163px;
 			/*
 			@media (min-width: 1200px){
 				width: 200px;
@@ -351,8 +357,10 @@
 			
 		}
 		.productName{
-			height: 6em;
+			max-height: 10em;
+			overflow: hidden;
 			text-overflow: ellipsis;
+			display: block;
 		}
 		.model, .features{
 			display: none;
@@ -399,10 +407,13 @@
 			}
 		}
 		@media (max-width: 979px) and (min-width: 768px){
-			.entry{
-				height: 455px;
+			.entry {
+				height: 435px;
 				.quantity{
 					display: none;
+				}
+				.productName {
+					max-height: 7.5em;
 				}
 				.productPrice,
 				.shortStatus,
