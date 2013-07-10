@@ -284,7 +284,6 @@
 	.gridView{
 		
 		$_topOfPrice : 325px;
-		
 		.listScope{
 			clear: both;
 			display: block;
@@ -335,8 +334,6 @@
 		}
 		img{
 			max-width: 100%;
-			// This fixed max-height should be removed when dimensions are removed from image in markup
-			max-height: 163px;
 			/*
 			@media (min-width: 1200px){
 				width: 200px;
@@ -358,7 +355,7 @@
 			text-overflow: ellipsis;
 			display: block;
 		}
-		.model, .features{
+		.model, .features, .detailedDescription{
 			display: none;
 		}
 		.addToCart{
@@ -409,7 +406,7 @@
 					display: none;
 				}
 				.productName {
-					max-height: 7.5em;
+					max-height: 7em;
 				}
 				.productPrice,
 				.shortStatus,

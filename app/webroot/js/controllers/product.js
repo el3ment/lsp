@@ -120,9 +120,8 @@
 
 					$('.productName .options', entry).html(' : ' + optionArray.join(', '));
 
-					var width = $('.thumbnail img', entry).attr('width');
-					var height = $('.thumbnail img', entry).attr('height');
-					$('.thumbnail img', entry).attr('src', productData.data.imageUrl + '.' + width + 'x' + height);
+					var size = $('.thumbnail img', entry).data('size');
+					$('.thumbnail img', entry).attr('src', productData.data.imageUrl + '.' + size + 'x' + size);
 
 				})
 			},

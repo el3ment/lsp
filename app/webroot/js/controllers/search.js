@@ -278,7 +278,7 @@
 				delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
 
 				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\//g, '|'), uriEncode : false};
-				tmpState.path = 'Categories/' + _state.category;
+				tmpState.path = _state.category;
 
 				if(tmpState.allAttributes.value.length === 0){
 					delete tmpState.allAttributes;
@@ -301,7 +301,7 @@
 				state = state || {};
 
 				state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
-				state.category = document.location.pathname.replace('/search.html', '').replace('/Categories/', '');
+				state.category = document.location.pathname.replace('/search.html', '');
 				
 				if(state.keywords){
 					state.keywords = decodeURIComponent(state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
