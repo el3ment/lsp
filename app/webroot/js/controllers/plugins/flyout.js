@@ -139,9 +139,15 @@
 				_flyoutControlButton.addClass('active');
 			},
 
-			closeFlyout : function(){
+			closeFlyout : function(reset){
 
 				clearTimeout(_topLevelTimeout);
+
+				// This is used to put the home page flyout back to normal
+				if(reset){
+					_holdOpen = false;
+					_waitToOpen = false;
+				}
 
 				if(!_holdOpen){
 					_flyout.removeClass('active');

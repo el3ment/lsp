@@ -12,6 +12,10 @@
 
 		_util = {
 
+			redirectTo : function(url){
+				document.location = url.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev');
+			},
+
 			// Adapted from http://jacwright.com/projects/javascript/date_format/
 			// For exact syntax - see link above (based on PHP's date formatter
 			formatDate : function(date, formatString){

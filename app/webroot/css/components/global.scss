@@ -179,6 +179,7 @@ ul.list li,
 .loading{
 
 	position: relative;
+	min-height: 200px;
 	
 	&:before{
 		display: block;
