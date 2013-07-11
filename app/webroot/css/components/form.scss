@@ -243,7 +243,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 
 	&:before {
 		/* The generic disc */
-		content: "";
+		content: " ";
 		position: absolute;
 		top: 10px;
 		left: 5px;
@@ -259,8 +259,8 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 	  left: 8px; 
 	  top: 25px;
 	}
-	}
-	.b1.highlight-icon, .b2.highlight-icon {
+}
+.b1.highlight-icon, .b2.highlight-icon {
 
 	/* Color declarations for Yellow buttons with highlight disc*/
 	@include box-shadow-multiple(0 1px 0px #fdf8a6 inset, 0 -1px 0px #fdf8a6 inset, 0 2px 3px #000); /* Top/Bottom highlight, Drop shadow */
@@ -269,10 +269,9 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 		background-color: #f6d54f;
 		background-color: transparent\9; /* Because IE8 dosen't have rounded borders, our little circle thing looks weird with a background color - so for < IE8 we will hide the background */
 
-		@include box-shadow-multiple( 0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset);	
+		@include box-shadow-multiple(0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset);	
 	}
 }
-
 .button-circle{ // Arrow-holder is for touch-carousel
 	
 	@include border-radius(px(32px));

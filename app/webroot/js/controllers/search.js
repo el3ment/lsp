@@ -34,7 +34,7 @@
 
 					onBeforeAPICall : function(e, data){
 						var searchTemplate = $('#templates-search-page');
-						
+
 						if(searchTemplate.length){
 							$('.page-search').addClass('loading');
 						}else{
@@ -240,10 +240,11 @@
 
 					onStateChange : function(e, data){
 						_this.loadCurrentState();
+						debugger;
 					},
 
 					onReady : function(e, data){
-						if(_app.controllers.application.pullState(_this)){
+						if(_app.controllers.application.pullState(_this) || $('.loading.search').length){
 							_this.loadCurrentState();
 						}
 					},
@@ -302,14 +303,14 @@
 					state.keywords = decodeURIComponent(state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
 				}
 
-				$.extend(_state, state);
+				_state = $.extend(_state, state);
 
 				return state;
 			},
 
 			loadState : function(state, passthrough){
 				var tmpState = $.extend({}, _state);
-				_this.pullState(_app.controllers.application.pullState(_this));
+				_this.pullState(state);
 				
 				// Populate the input with the search keywords
 				$('input[name="searchQuery"]').val(_state.keywords);

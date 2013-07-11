@@ -18,7 +18,7 @@
 			events : {
 
 				application : {
-					
+
 					onResize : function(e, data){
 						var width = $(window).width();
 						var newContext;
@@ -109,7 +109,19 @@
 								}
 							});
 						});
+
+						// $('a[href^="/"], a').off('click.lsp.pageController').on('click.lsp.pageController', function(e){
+						// 	if(_hasPushState){
+						// 		_this.loadPage($(this).attr('href'));
+						// 		e.preventDefault();
+						// 	} 
+						// });
 					},
+
+					// onStateChange : function(e, data){
+					// 	console.log('hey');
+					// 	console.log(e, data);
+					// },
 
 					onReady : function(e, data){
 
@@ -130,6 +142,16 @@
 
 			getContext : function(){
 				return _context;
+			},
+
+			loadPage : function(href){
+				$.ajax({url : href}).done(function(response){
+					var newPageHTML = _util.findBetween('<!-- CONTENT AREA BEGIN CUSTOM CODE -->', '<!-- CONTENT AREA END CUSTOM CODE -->', response);
+					_this.attachEvents($('.page-generic').replaceWith(newPageHTML));
+					_util.scrollTo($('.page-generic'));
+				});
+
+				history.pushState(true, 'page', href);
 			},
 
 			getFilename : function(){
