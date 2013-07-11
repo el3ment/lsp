@@ -167,9 +167,13 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 	line-height: 1.3em;
 	display: inline-block;
 	margin: 0 px($paddingUnit);
-	
+
 	&:hover, &.active{
 		@include gradient($hoverLightYellow, $darkYellow);
+	}
+	// Don't do the hover effect on disabled buttons
+	&.disabledByDefault:hover, &.active{
+		@include gradient($lightYellow, $darkYellow);
 	}
 }
 

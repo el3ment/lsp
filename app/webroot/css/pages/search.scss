@@ -163,9 +163,6 @@
 				border-bottom: 1px solid $lightGrey;
 				float:left;
 				@media (max-width: 767px){
-					padding-bottom: 60px;
-				}
-				@media (max-width: 400px){
 					padding-bottom: 85px;
 				}
 			}
@@ -407,11 +404,14 @@
 				display: block;
 
 				@media (max-width: 979px) and (min-width: 768px){
-					left: px($hideDistance + 2 * $paddingUnit + 12px, $b1FontSize);
+					left: px($hideDistance + 2 * $paddingUnit + 10px, $b1FontSize);
 				}
 			}
 			.hasOptions .b1.customize{
-				left: px($hideDistance + 2 * $paddingUnit + 20px + 7px, $b1FontSize);
+				left: px($hideDistance + 2 * $paddingUnit + 20px + 14px, $b1FontSize);
+				@media (max-width: 979px) and (min-width: 768px){
+					left: px($hideDistance + 2 * $paddingUnit + 20px - 9px, $b1FontSize);
+				}
 			}
 		}
 		@media (max-width: 979px) and (min-width: 768px){
@@ -679,7 +679,7 @@
 			.productPrice{
 				font-size: px(17px);
 				position: absolute;
-				bottom: 80px;
+				bottom: 65px;
 				right: $hideDistance + $paddingUnit + 2px;
 			}
 			.shortStatus{

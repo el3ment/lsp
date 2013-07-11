@@ -14,7 +14,7 @@
 
     // Show the disabled button on matrix parents, hide it on normal items
     &.matrixType-PARENT .action .b1, 
-    &.matrixType- .action .b1.disabledByDefault{ display: none; }
+    &.matrixType- .action .b1.disabledByDefault{ display: none; cursor: default; }
     &.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
 
     .has0Reviews{
@@ -180,6 +180,19 @@
 		
         padding-bottom: px(3 * $paddingUnit);
         border-top: 1px solid #dedcda;
+
+        // Will description always immediately follow shopping or could features be displayed? 
+        // If features or other elements can be displayed here, we'll need to use nth child or something instead of class names
+        &.shopping {
+            padding-bottom: 5px;
+        }
+        &.description {
+            border-top-width: 0;
+            h2 {
+                margin-top: 0;
+                padding-top: 0;
+            }
+        }
 		
 		&.dynamicItemSuggestions{
 			padding-bottom: 0;
@@ -217,7 +230,11 @@
             
         }
         .content{ 
-			padding-top: 10px;
+			// positioning this and moving it down to fix wonky animation on close/hide,
+            // this should be okay as long as no child elements need to be positioned relative to anything else
+            // padding-top: 10px;
+            position: relative;
+            top: 10px;
             clear: both;
             float: left;
             width: 100%;
@@ -237,7 +254,7 @@
 		margin-top: -1.5em;
 		
 		@media (max-width: 767px){
-			top: 0;
+			top: 5px;
 		}
 		
 		@media (min-width: 1200px){

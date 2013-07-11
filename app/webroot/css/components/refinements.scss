@@ -167,7 +167,7 @@
 	// Usually refinements need padding - but not categories, which apparently are using
 	// line height
 	#refinement-categories-container ul li{
-		margin: 0;
+		margin: 5px 0 0 0;
 	}
 	
 	// A division within the box aka, an attribute complete with title, collapse button, and content
@@ -395,7 +395,7 @@
 			}
 			
 			@media (min-width: 768px){
-				padding-bottom: 10px;
+				padding-bottom: 5px;
 			}
 			
 			&:hover{
@@ -413,7 +413,7 @@
 		
 		button[data-action='clearAllRefinements']{
 			float: right;
-			margin-top: px(5px);
+			margin-top: 0;
 			margin-bottom: px(5px);
 			font-weight: normal;
 
