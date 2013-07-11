@@ -55,34 +55,26 @@
 
 						var navPathNodeList = data.response.source.navPath.navPathNodeList;
 
-						// If there is just one product - redirect
-						if(((data.response.source.products || {}).items ||{}).length === 1){
-						
-							_util.redirectTo(data.response.source.products.items[0].Item_URL);
-						
-						}else{
+						// Remove everything except categories, then remove trailing /
+						_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+						_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+						_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
 
-							// Remove everything except categories, then remove trailing /
-							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
+						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
+						
+						// Set the activeDataObject, used to rebuild matrix option selections
+						_activeDataObject = data;
 
-							_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
+						// If we don't scroll first - the scroll position will be saved
+						// and you will jump around when clicking the back button
+						$.when(_this.scrollToFirst()).done(function(){
+							// onReady and onStateChange make use of preventPushState because those requests are
+							// administrative and shouldn't create new history entries
+							if(!data.xhrData.passthrough.preventPushState){
+								_this.pushState();
+							}
 							
-							// Set the activeDataObject, used to rebuild matrix option selections
-							_activeDataObject = data;
-
-							// If we don't scroll first - the scroll position will be saved
-							// and you will jump around when clicking the back button
-							$.when(_this.scrollToFirst()).done(function(){
-								// onReady and onStateChange make use of preventPushState because those requests are
-								// administrative and shouldn't create new history entries
-								if(!data.xhrData.passthrough.preventPushState){
-									_this.pushState();
-								}
-								
-							});
-						}
+						});
 					},
 
 					onAfterAPICallFailure : function(e, data){
@@ -466,26 +458,32 @@
 
 			renderPage : function(easyAskDataObject){
 
-				// If the page hasn't been injected yet
-				if(!$('.page-search').length){
-					var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
-					$('.page-generic').after(pageHTML).hide();
-					_app.controllers.application.attachEvents($('.page-search'));
-				}
+				// if(((easyAskDataObject.products || {}).items ||{}).length === 1){
+						
+				// 	_util.redirectTo(data.response.source.products.items[0].Item_URL);
+				
+				// }else{
 
-				// Render Sections
-				_this.renderSummary(easyAskDataObject);
-				_this.renderSelectedRefinements(easyAskDataObject);
-				_this.renderRefinements(easyAskDataObject);
-				_this.renderProducts(easyAskDataObject);
+					// If the page hasn't been injected yet
+					if(!$('.page-search').length){
+						var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
+						$('.page-generic').after(pageHTML).hide();
+						_app.controllers.application.attachEvents($('.page-search'));
+					}
 
-				// Make page full width if refinements aren't there.
-				if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
-					$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
-				}else{
-					$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
-				}
+					// Render Sections
+					_this.renderSummary(easyAskDataObject);
+					_this.renderSelectedRefinements(easyAskDataObject);
+					_this.renderRefinements(easyAskDataObject);
+					_this.renderProducts(easyAskDataObject);
 
+					// Make page full width if refinements aren't there.
+					if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
+						$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
+					}else{
+						$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
+					}
+				//}
 			},
 
 			scrollToFirst : function(){
@@ -567,7 +565,7 @@
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
 				
 				// If there aren't any attributes, hide the panel
-				if(!easyAskDataObject.attributes.attribute){
+				if(!(easyAskDataObject.attributes._lsp.cached || {}).length){
 					$('#searchRefinements').hide();
 				}else{
 					$('#searchRefinements').removeAttr('style');	
