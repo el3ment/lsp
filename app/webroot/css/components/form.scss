@@ -195,6 +195,10 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 	//}
 } 
 
+.b1[disabled], .b2[disabled], .b3[disabled], .b4[disabled]{
+	@include opacity(.3);
+}
+
 /* Grey, Normal */
 .b4{  
 	text-transform: none;

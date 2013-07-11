@@ -11,7 +11,12 @@
 		position: relative;
 		top: -10px;
 	}
-    
+
+    // Show the disabled button on matrix parents, hide it on normal items
+    &.matrixType-PARENT .action .b1, 
+    &.matrixType- .action .b1.disabledByDefault{ display: none; }
+    &.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
+
     .has0Reviews{
         display: none !important;
     }

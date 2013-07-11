@@ -360,8 +360,9 @@
 						index = item[2],
 						imageUrl = item[3],
 						mpn = item[4],
-						online_price = item[5],
-						msrp = item[6]
+						onlinePrice = item[5],
+						msrp = item[6],
+						stockMessage = item[7];
 
 					optionObject[label] = optionObject[label] || {};
 					optionObject[label][value] = optionObject[label][value] || [];
@@ -375,8 +376,9 @@
 					productObject[id].data = productObject[id].data || {};
 					productObject[id].data.imageUrl = imageUrl;
 					productObject[id].data.mpn = mpn;
-					productObject[id].data.online_price = online_price;
+					productObject[id].data.onlinePrice = onlinePrice;
 					productObject[id].data.msrp = msrp;
+					productObject[id].data.stockMessage = stockMessage;
 
 
 				}
@@ -409,7 +411,7 @@
 				$.each(filteredProducts, function(id, options){
 					$.each(options.options, function(label, value){
 
-						// If option isn't part of the filters
+						// // If option isn't part of the filters
 						if(!filters[label]){
 							// We avoid adding filtered options here because 1) state dosen't change like it does
 							// for search refinements (where we WANT easyask to return selected attributes, but they don't)

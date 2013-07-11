@@ -370,8 +370,12 @@
 				position: absolute;
 				top: px($_topOfPrice, 17px);
 				left: $hideDistance + $paddingUnit + 2px;
+				width: 100%;
 			}
-			.shortStatus{
+			.productAvailability{
+				background-color: transparent;
+				border: 0;
+				padding: 0;
 				display: block;
 				font-size: px(13px);
 				position: absolute;
@@ -379,12 +383,18 @@
 				left: ($hideDistance + $paddingUnit + 2);
 				width: px(columns(3));
 				color: $grey;
+				@media (max-width: 979px) and (min-width: 768px){
+					margin-top: -38px; // move it back up, smaller picture
+				}
 			}
 			.scroller{
 				position: absolute;
 				top: px($_topOfPrice + 90px, $inputFontSize);
 				left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
 				width: 48px;
+			}
+			.hasOptions.quantity{
+				display: none;
 			}
 			// If hasOptions, hide all buttons, then just show customize
 			.b1.customize{ display: none; } // normally hide customize
@@ -394,9 +404,14 @@
 				top: px($_topOfPrice + 90px, $boldAllCapsH4);
 				left: px($hideDistance + 2 * $paddingUnit + 50px + 7px, $b1FontSize);
 				width: px(135px, $b1FontSize);
-					@media (max-width: 979px) and (min-width: 768px){
-						left: px($hideDistance + 2 * $paddingUnit + 12px, $b1FontSize);
-					}
+				display: block;
+
+				@media (max-width: 979px) and (min-width: 768px){
+					left: px($hideDistance + 2 * $paddingUnit + 12px, $b1FontSize);
+				}
+			}
+			.hasOptions .b1.customize{
+				left: px($hideDistance + 2 * $paddingUnit + 20px + 7px, $b1FontSize);
 			}
 		}
 		@media (max-width: 979px) and (min-width: 768px){
