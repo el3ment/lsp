@@ -172,7 +172,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 		@include gradient($hoverLightYellow, $darkYellow);
 	}
 	// Don't do the hover effect on disabled buttons
-	&.disabledByDefault:hover, &.active{
+	&[disabled]:hover, &.active{
 		@include gradient($lightYellow, $darkYellow);
 	}
 }
@@ -201,6 +201,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 
 .b1[disabled], .b2[disabled], .b3[disabled], .b4[disabled]{
 	@include opacity(.3);
+	pointer: default;
 }
 
 /* Grey, Normal */
