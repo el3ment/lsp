@@ -14,3 +14,24 @@
     content: x($two: 'foo', bar) if(x($two: 'foo', bar) == bar foo, true, false);
     adjust-color: adjust-color(#00F, $blue: -15);
 }
+
+@mixin breakpoint($point) {
+  @if $point == superwide {
+    @media (min-width: 1200px) { @content; }
+  }
+  @else if $point == desktop {
+    @media (min-width: 980px) and (max-width: 1200px) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: 768px) and (max-width: 979px) { @content; }
+  }
+  @else if $point == tablet-and-up {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $point == tablet-and-below {
+    @media (max-width: 979px) { @content; }
+  }
+  @else if $point == phone {
+    @media (max-width: 767px)  { @content; }
+  }
+}

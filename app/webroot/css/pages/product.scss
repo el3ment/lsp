@@ -186,11 +186,14 @@
         &.shopping {
             padding-bottom: 5px;
         }
-        &.description {
-            border-top-width: 0;
-            h2 {
-                margin-top: 0;
-                padding-top: 0;
+
+        @media (max-width: 767px){
+            &.features, features.show0Elements + .description {
+                border-top: 0;
+                h2 {
+                    margin-top: 0;
+                    padding-top: 0;
+                }
             }
         }
 		

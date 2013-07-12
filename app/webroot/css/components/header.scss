@@ -283,7 +283,7 @@
 			margin-left: 0;
 			padding-left: 40px;
 			padding-top: px(8px, 14px);
-			padding-bottom: px(8px, 14px);
+			padding-bottom: px(6px, 14px);
 			
 			&:after{
 				left: 8px;
@@ -364,6 +364,7 @@
 			margin-right: 0;
 			font-size: px($largeInputFontSize);
 			padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+			line-height: 24px;
 			
 		}
 
@@ -432,7 +433,6 @@
 			&:after{
 				background-color: $superLightGrey;
 				content: ' ';
-				display: inline-block;
 				position: relative;
 				height: 10px;
 				width: 10px;
