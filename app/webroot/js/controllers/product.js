@@ -31,26 +31,18 @@
 
 						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
 
-							// head.js(
-							// 	'http://dev.lonestarpercussion.com/js/vendors/soundmanager2/script/soundmanager2.js',
-							// 	'http://dev.lonestarpercussion.com/js/vendors/360player/animator.js',
-							// 	'http://dev.lonestarpercussion.com/js/vendors/360player/360player.js',
-							// 	'http://dev.lonestarpercussion.com/js/vendors/360player/360player.css', function(){
-							// 		alert('sup?');
-							// 		try{
-							// 			soundManager.setup({
-							// 				useHTML5Audio : true,
-							// 				useConsole : true
-							// 			});
-
-							// 			soundManager.beginDelayedInit();
-
-							// 			threeSixtyPlayer.init();
-							// 		}catch(e){
-							// 			debugger;
-							// 		}
-							// 		alert('done');
-							// });
+							head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
+								alert('hey');
+								$(".audio.section a").jPlayer({
+									ready: function () {
+										$(this).jPlayer("setMedia", {
+												mp3: $(this).attr('href')
+											});
+										},
+									swfPath: "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
+									supplied: "mp3"
+								});	
+							});
 						}
 						
 					},

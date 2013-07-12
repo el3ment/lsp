@@ -17,9 +17,9 @@
 							zoomHeight: 500,
 							position: 'right',
 							preloadImages: true,
-							zoomType: 'standard',
-							showEffect: 'fadein',
-							fadeinSpeed: 'fast'
+							zoomType: 'standard'//,
+							// showEffect: 'fadein',
+							// fadeinSpeed: 'fast'
 						});
 					}
 				}
