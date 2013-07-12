@@ -64,6 +64,11 @@
 				if(formattedPayload.RequestData === 'CA_BreadcrumbRemove' && !formattedPayload.q && !formattedPayload.AttribSel){
 					formattedPayload.RequestData = 'CA_CategoryExpand';
 				}
+
+				if(formattedPayload.RequestData !== 'CA_Search'){
+					delete formattedPayload.q;
+				}
+				
 				// As a form of cleanup - remove a trailing / from a category request
 				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
 

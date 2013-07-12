@@ -56,37 +56,38 @@ function ThreeSixtyPlayer() {
 
   // 360player configuration options
 this.config = {
-	playNext: false,
-	autoPlay: false,
-	allowMultiple: false,
-	loadRingColor: '#ccc',
-	playRingColor: '#000',
-	backgroundRingColor: '#FFFFFF',
-	circleDiameter: 256,
-	circleRadius: 128,
-	animDuration: 500,
-	animTransition: Animator.tx.bouncy,
-	showHMSTime: true,
 
-	useWaveformData: true,
-	waveformDataColor: '#0099ff',
-	waveformDataDownsample: 3,
-	waveformDataOutside: false,
-	waveformDataConstrain: false,
-	waveformDataLineRatio: 0.64,
+  playNext: false,
+  autoPlay: false,
+  allowMultiple: false,
+  loadRingColor: '#ccc',
+  playRingColor: '#000',
+  backgroundRingColor: '#eee',
+  circleDiameter: 256,
+  circleRadius: 128,
+  animDuration: 500,
+  animTransition: Animator.tx.bouncy,
+  showHMSTime: true,
 
-	useEQData: true,
-	eqDataColor: '#339933',
-	eqDataDownsample: 1,
-	eqDataOutside: true,
-	eqDataLineRatio: 0.75,
+  useWaveformData: true,
+  waveformDataColor: '#0099ff',
+  waveformDataDownsample: 3,
+  waveformDataOutside: false,
+  waveformDataConstrain: false,
+  waveformDataLineRatio: 0.64,
 
-	usePeakData: true,
-	peakDataColor: '#ff33ff',
-	peakDataOutside: true,
-	peakDataLineRatio: 0.5,
+  useEQData: true,
+  eqDataColor: '#339933',
+  eqDataDownsample: 4,
+  eqDataOutside: true,
+  eqDataLineRatio: 0.54,
 
-	useAmplifier: true
+  usePeakData: true,
+  peakDataColor: '#ff33ff',
+  peakDataOutside: true,
+  peakDataLineRatio: 0.5,
+
+  useAmplifier: true
 
 }
 
@@ -996,6 +997,7 @@ this.config = {
   };
 
   this.init = function() {
+
 
     sm._writeDebug('threeSixtyPlayer.init()');
 

@@ -30,16 +30,27 @@
 						setTimeout(_this.removeEmptySpecificationsRows, 500);
 
 						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
-							head.js(
-								'http://dev.lonestarpercussion.com/js/vendors/soundmanager2/script/soundmanager2.js',
-								'http://dev.lonestarpercussion.com/js/vendors/360player/animator.js',
-								'http://dev.lonestarpercussion.com/js/vendors/360player/360player.js',
-								'http://dev.lonestarpercussion.com/js/vendors/360player/360player.css', function(){
-									soundManager.setup({
-										// path to directory containing SM2 SWF
-										url: 'http://dev.lonestarpercussion.com/js/vendors/soundmanager2/swf/'
-									});
-							});
+
+							// head.js(
+							// 	'http://dev.lonestarpercussion.com/js/vendors/soundmanager2/script/soundmanager2.js',
+							// 	'http://dev.lonestarpercussion.com/js/vendors/360player/animator.js',
+							// 	'http://dev.lonestarpercussion.com/js/vendors/360player/360player.js',
+							// 	'http://dev.lonestarpercussion.com/js/vendors/360player/360player.css', function(){
+							// 		alert('sup?');
+							// 		try{
+							// 			soundManager.setup({
+							// 				useHTML5Audio : true,
+							// 				useConsole : true
+							// 			});
+
+							// 			soundManager.beginDelayedInit();
+
+							// 			threeSixtyPlayer.init();
+							// 		}catch(e){
+							// 			debugger;
+							// 		}
+							// 		alert('done');
+							// });
 						}
 						
 					},

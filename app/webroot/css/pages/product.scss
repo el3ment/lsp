@@ -4,22 +4,22 @@
 		position: relative;
 		top: 3px;
 	}
-    .b3{
-        float: left;
-    }
+	.b3{
+		float: left;
+	}
 	.head .aggregateReviews, .head > .details{
 		position: relative;
 		top: -10px;
 	}
 
-    // Show the disabled button on matrix parents, hide it on normal items
-    &.matrixType-PARENT .action .b1, 
-    &.matrixType- .action .b1.disabledByDefault{ display: none; }
-    &.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
+	// Show the disabled button on matrix parents, hide it on normal items
+	&.matrixType-PARENT .action .b1, 
+	&.matrixType- .action .b1.disabledByDefault{ display: none; }
+	&.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
 
-    .has0Reviews{
-        display: none !important;
-    }
+	.has0Reviews{
+		display: none !important;
+	}
 
 	.isAuthorized{
 		
@@ -35,91 +35,98 @@
 				background-position: -254px -223px;
 			}	
 	}
-    
-    .byline{
-        float:right;
-        display: block;
-        color: $grey;
-        text-transform: uppercase;
-        text-align: right;
-        padding-right: px(columns(1) + $gutterWidth);
-        position: relative;
-        font-size: 12px;
-        margin: px($gutterWidth);
-        margin-right: 0;
-        line-height: 1.5em;
+	
+	.byline{
+		float:right;
+		display: block;
+		color: $grey;
+		text-transform: uppercase;
+		text-align: right;
+		padding-right: px(columns(1) + $gutterWidth);
+		position: relative;
+		font-size: 12px;
+		margin: px($gutterWidth);
+		margin-right: 0;
+		line-height: 1.5em;
 
-        // If there isn't an author - hide it
-        &[data-author="none"]{
-            display: none !important;
-        }
+		// If there isn't an author - hide it
+		&[data-author="none"]{
+			display: none !important;
+		}
 
-        .author{
-            font-size: 14px;
-            text-transform: none;
-            color: $black;
-            font-weight: bold;
-            display: block;
-            &:after{
-                @include border-radius(px(columns(1)));
-                content: ' ';
-                display: block;
-                position: absolute;
-                top: px(-$gutterWidth/2);
-                right: 0;
-                width: px(columns(1));
-                height: px(columns(1));
-            }
-            &[data-author="michael"]:after{ 
+		.author{
+			font-size: 14px;
+			text-transform: none;
+			color: $black;
+			font-weight: bold;
+			display: block;
+			&:after{
+				@include border-radius(px(columns(1)));
+				content: ' ';
+				display: block;
+				position: absolute;
+				top: px(-$gutterWidth/2);
+				right: 0;
+				width: px(columns(1));
+				height: px(columns(1));
+			}
+			&[data-author="michael"]:after{ 
 				background-image:url("http://www.gravatar.com/avatar/77940a61b2dec54ca9b1bdf8e17c10f5?s=64&d=identicon");
 			}
-        }
-    }
-    
-    .media{ 
-      
-      /* The left hand side containing giant picture, video and audio links */
-        
+		}
+	}
+	
+	.media{ 
+	  
+	  /* The left hand side containing giant picture, video and audio links */
+		
 		@media (min-width: 1200px){
 			/* Max width */
 			width: 460px;
 		}
-        
-        li{ 
-            display: block;
-            clear:both;
-            margin-top: px(2 * $paddingUnit);
-            @include clearfix;
-        }
-        .videos{
-            label{ 
-                display: inline-block;
-                position:relative; 
-                margin-left: px($paddingUnit);
-                left: px(32px + 2 * $paddingUnit);
-            }
-            label:before{
+		
+		li{ 
+			display: block;
+			clear:both;
+			margin-top: px(2 * $paddingUnit);
+			@include clearfix;
+		}
+		.audio{
+			.ui360-vis, .ui360-vis .sm2-360ui, .sm2-inline-list .ui360-vis {
+			  /* size of the container for the circle, etc. */
+			  width: 256px;
+			  height: 256px;
+			}
+		},
+		.videos{
+			label{ 
+				display: inline-block;
+				position:relative; 
+				margin-left: px($paddingUnit);
+				left: px(32px + 2 * $paddingUnit);
+			}
+			label:before{
 				@include lsp-sprite-background();
-                background-position: -8px -433px;
-                content: '';
-                display: inline-block;
-                position: absolute;
-                left: px(-(32px + ($paddingUnit * 2)));
-                top: px($paddingUnit);
-                width: px(32px);
-                height: px(32px);
-            }
-            .video{
-                //width: px(columns(6) - $gutterWidth);
+				background-position: -8px -433px;
+				content: '';
+				display: inline-block;
+				position: absolute;
+				left: px(-(32px + ($paddingUnit * 2)));
+				top: px($paddingUnit);
+				width: px(32px);
+				height: px(32px);
+			}
+			.video{
+				//width: px(columns(6) - $gutterWidth);
 				width: 100%;
-                padding: px(2* $paddingUnit);
-                border: 1px solid $lightGrey;
-                background-color: $superLightGrey;
-                label{ margin-top: px($paddingUnit); }
-                iframe{ width: 100%; }
-            }
-        }
-        .images{
+				padding: px(2* $paddingUnit);
+				border: 1px solid $lightGrey;
+				background-color: $superLightGrey;
+				label{ margin-top: px($paddingUnit); }
+				iframe{ width: 100%; }
+			}
+		}
+		.images{
 			
 			margin-top: 0;
 			padding-bottom: 25px;
@@ -128,89 +135,89 @@
 				border-bottom: 0;
 			}
 			
-            #zoom-mainImage{
+			#zoom-mainImage{
 				display: block;
-            }
-            .zoom-thumbnails{
+			}
+			.zoom-thumbnails{
 				position: relative;
-                &:before{
-					content : 'Hover over image to zoom';
+				&:before{
+					//content : 'Hover over image to zoom';
 					@media (max-width: 767px){
 						content : ' ';
 						display: none;
 					}
-                    font-style: italic;
-                    display: block;
+					font-style: italic;
+					display: block;
 					position: absolute;
 					top: -1.5em;
 					height: 1.5em;
-                    margin: px($paddingUnit) 0 0 50%;
+					margin: px($paddingUnit) 0 0 50%;
 					text-align:center;
 					font-size:13px;
-                    color: $grey;
+					color: $grey;
 					padding-left: 23px;
 					@include lsp-sprite-background();
 					background-position: -71px -406px;
-                    left: -100px;
-                }
-                a{
+					left: -100px;
+				}
+				a{
 					vertical-align: bottom;
 					
 					img{
-	                    border: 1px solid $lightGrey;
-	                    &:hover{
-	                        @include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
-	                        border-color: $darkYellow;   
-	                    }
-	                }	
-                }
-                li{ 
-                    display:inline-block;  
-                    margin-right: $gutterWidth;
-                    clear: none;
-                    float:left;
-                }
-                @include clearfix;
-            }
-        }
-        
-    }
-   
-    .section{
+						border: 1px solid $lightGrey;
+						&:hover{
+							@include box-shadow-multiple(0 0 px(3px) 0 $darkYellow);
+							border-color: $darkYellow;   
+						}
+					}	
+				}
+				li{ 
+					display:inline-block;  
+					margin-right: $gutterWidth;
+					clear: none;
+					float:left;
+				}
+				@include clearfix;
+			}
+		}
 		
-        padding-bottom: px(3 * $paddingUnit);
-        border-top: 1px solid #dedcda;
+	}
+   
+	.section{
+		
+		padding-bottom: px(3 * $paddingUnit);
+		border-top: 1px solid #dedcda;
 
-        // Will description always immediately follow shopping or could features be displayed? 
-        // If features or other elements can be displayed here, we'll need to use nth child or something instead of class names
-        &.shopping {
-            padding-bottom: 5px;
-        }
+		// Will description always immediately follow shopping or could features be displayed? 
+		// If features or other elements can be displayed here, we'll need to use nth child or something instead of class names
+		&.shopping {
+			padding-bottom: 5px;
+		}
 
-        @media (max-width: 767px){
-            &.features, features.show0Elements + .description {
-                border-top: 0;
-                h2 {
-                    margin-top: 0;
-                    padding-top: 0;
-                }
-            }
-        }
+		@media (max-width: 767px){
+			&.features, features.show0Elements + .description {
+				border-top: 0;
+				h2 {
+					margin-top: 0;
+					padding-top: 0;
+				}
+			}
+		}
 		
 		&.dynamicItemSuggestions{
 			padding-bottom: 0;
 		}
 		
-        &:first-child{ border-top-width: 0; }
-        
-        > .b3[data-reveal-children]{ /* The plus/minus toggle button */
-            margin-top: 10px;
+		&:first-child{ border-top-width: 0; }
+		
+		> .b3[data-reveal-children]{ /* The plus/minus toggle button */
+			margin-top: 10px;
 			margin-right: px(2 * $paddingUnit);
-            overflow: hidden;
-            float:left;
-            text-indent: px(-$hideDistance);
-            width: px(32px);
-            height: px(32px);
+			overflow: hidden;
+			float:left;
+			text-indent: px(-$hideDistance);
+			width: px(32px);
+			height: px(32px);
 			padding: 0;
 			position: relative;
 			margin-left:0;
@@ -220,40 +227,40 @@
 				float: right;
 			}
 			
-        }
-        > h2{  /* Section headers */
+		}
+		> h2{  /* Section headers */
 			padding-top: 3px;
 			margin-bottom: 0;
-        }
-        label{ 
-            //display: block;
-            //float: left;
+		}
+		label{ 
+			//display: block;
+			//float: left;
 			//line-height: 19px;
-            .details{ display: block; }
-            
-        }
-        .content{ 
+			.details{ display: block; }
+			
+		}
+		.content{ 
 			// positioning this and moving it down to fix wonky animation on close/hide,
-            // this should be okay as long as no child elements need to be positioned relative to anything else
-            // padding-top: 10px;
-            position: relative;
-            top: 10px;
-            clear: both;
-            float: left;
-            width: 100%;
+			// this should be okay as long as no child elements need to be positioned relative to anything else
+			// padding-top: 10px;
+			position: relative;
+			top: 10px;
+			clear: both;
+			float: left;
+			width: 100%;
 			@include box-sizing();
-        }
-        @include clearfix;
-        
-    }
+		}
+		@include clearfix;
+		
+	}
 	
 	// .addRelatedItems{
 	// 	padding-bottom:0;
 	// }
 	
-    .information{
-        
-        position: relative;
+	.information{
+		
+		position: relative;
 		margin-top: -1.5em;
 		
 		@media (max-width: 767px){
@@ -263,9 +270,9 @@
 		@media (min-width: 1200px){
 			width: 680px;
 		}
-        
-    }
-    .description{
+		
+	}
+	.description{
 		.content{ 
 			max-width: 550px; 
 		
@@ -274,33 +281,33 @@
 			}
 		
 		} // Maintains readability of text
-        @include clearfix;
-    }
+		@include clearfix;
+	}
 	.features .content{
 		padding-left: 10px;
 	}
 }
 
 .specifications{
-    tr td{
-        padding: 2px 5px;
-        font-size: 13px;
-    }
-    td.data{
-        padding-left: 10px;
-    }
-    tr:first-child, 
-    tr:first-child + tr + tr,
-    tr:first-child + tr + tr + tr + tr,
-    tr:first-child + tr + tr + tr + tr + tr + tr,
-    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr,
-    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
-    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
-    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
-    tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
-        background-color: $superLightGrey;
-    }
-    tr[data-specifications-data*="!empty!"]{
-        display: none;
-    }
+	tr td{
+		padding: 2px 5px;
+		font-size: 13px;
+	}
+	td.data{
+		padding-left: 10px;
+	}
+	tr:first-child, 
+	tr:first-child + tr + tr,
+	tr:first-child + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr, 
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+		background-color: $superLightGrey;
+	}
+	tr[data-specifications-data*="!empty!"]{
+		display: none;
+	}
 }

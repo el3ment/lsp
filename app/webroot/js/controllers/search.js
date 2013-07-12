@@ -47,7 +47,6 @@
 					
 					onAfterAPICall : function(e, data){
 						$('.page-search').removeClass('loading');
-						_app.controllers.flyout.closeFlyout(true);
 						_isFirstRequest = false;
 					},
 
@@ -314,7 +313,7 @@
 				$('input[name="searchQuery"]').val(_state.keywords);
 
 				// Load the state only if the new state is different from the old state (tmpState)
-				if(!_util.isEqual(tmpState, _state)){
+				if(!_util.isEqual(tmpState, _state) && (_state.category.indexOf('.html') === -1 && document.location.hash.indexOf('/~search'))){
 					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}

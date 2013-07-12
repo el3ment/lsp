@@ -6,13 +6,21 @@
 		var _this = {};
 		var _app = window.LSP;
 		var _assets = _app.assets;
-		
+		var _remainOpen = true;
+
 		_this = {
 			
 			events : {
+				search : {
+					onAfterAPICallSuccess : function(){
+						_this.closePermanentFlyout();
+					}
+				},
 				flyout : {
 					onAfterAttach : function(e, data){
-						_app.controllers.flyout.openFlyout(true);
+						if(_remainOpen){
+							_app.controllers.flyout.openFlyout(true);
+						}
 					}
 				},
 				application : {
@@ -41,7 +49,12 @@
 				}
 			},
 			
-			assets : {}
+			assets : {},
+			
+			closePermanentFlyout : function(){
+				_remainOpen = false;
+				_app.controllers.flyout.closeFlyout(true);
+			}
 		};
 		
 		return _this;

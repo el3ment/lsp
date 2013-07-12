@@ -185,19 +185,16 @@ ul.list li,
 		display: block;
 		width: 100%;
 		height: 100%;
-		@include box-sizing();
-
+		z-index: 99;
 		text-align: center;
-
-		@include opacity(.75);
 		background-color: white;
-		
 		position: absolute;
 		top: 0;
 		left: 0;
-		z-index: 1;
 		padding-top: 100px;
 		content: 'Loading...';
+		@include opacity(.75);
+		@include box-sizing();
 	}
 }
 
