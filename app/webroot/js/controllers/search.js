@@ -240,7 +240,6 @@
 
 					onStateChange : function(e, data){
 						_this.loadCurrentState();
-						debugger;
 					},
 
 					onReady : function(e, data){
@@ -299,6 +298,8 @@
 				state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
 				state.category = document.location.pathname.replace('/search.html', '');
 				
+				debugger;
+
 				if(state.keywords){
 					state.keywords = decodeURIComponent(state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
 				}

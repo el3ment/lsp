@@ -429,8 +429,12 @@
 			
 			float: none;
 			margin: auto;
+			position: relative; // Give the little box an origin
 
+			// This is a little square that hides the final > from the breadcrumbs.
+			// Why NetSuite does it this way is beyond me.
 			&:after{
+				display: inline-block;
 				background-color: $superLightGrey;
 				content: ' ';
 				position: relative;

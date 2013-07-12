@@ -12,7 +12,6 @@
 		
 		var _dictionary = 'nslonestarpercussion';
 		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
-
 		var _sessionId;
 
 		var _attributeHistory = {};
@@ -33,7 +32,7 @@
 				var formattedPayload = {
 					RequestAction : payload.action,
 					RequestData : payload.method,
-					currentpage : payload.currentPage,
+					currentpage : payload.page || 1,
 					forcepage : 1,
 					ResultsPerPage : payload.resultsPerPage,
 					defsortcols : (payload.sort === 'default' ? '' : payload.sort),

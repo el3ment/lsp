@@ -141,26 +141,28 @@
 
 			closeFlyout : function(reset){
 
-				clearTimeout(_topLevelTimeout);
+				if(_flyout){ // Only if attachMenu has been called
+					clearTimeout(_topLevelTimeout);
 
-				// This is used to put the home page flyout back to normal
-				if(reset){
-					_holdOpen = false;
-					_waitToOpen = false;
-				}
-
-				if(!_holdOpen){
-					_flyout.removeClass('active');
-					_flyoutControlButton.removeClass('active');
-					$('li.collection.active', _flyout).removeClass('active');
-
-					// Finish any lingering animations
-					if(_currentFlyoutTween){
-						$(_currentFlyoutTween.elem).stop(true, true);
+					// This is used to put the home page flyout back to normal
+					if(reset){
+						_holdOpen = false;
+						_waitToOpen = false;
 					}
-					_currentFlyoutTween = null;
 
-					_isOpen = false;
+					if(!_holdOpen){
+						_flyout.removeClass('active');
+						_flyoutControlButton.removeClass('active');
+						$('li.collection.active', _flyout).removeClass('active');
+
+						// Finish any lingering animations
+						if(_currentFlyoutTween){
+							$(_currentFlyoutTween.elem).stop(true, true);
+						}
+						_currentFlyoutTween = null;
+
+						_isOpen = false;
+					}
 				}
 			},
 
