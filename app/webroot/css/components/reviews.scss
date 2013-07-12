@@ -81,13 +81,15 @@
 		@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
 		text-shadow: 0 1px $saturatedHighlightGrey;
 		border: 1px solid $darkGrey;
-		text-indent: -145px;
+		text-indent: -152px;
 		padding-right: 0;
+		min-width: 115px;
 		&:after{
 			content: 'Hide Form';
 			display: inline;
-			padding-left: 15px;
+			padding-left: 20px;
 		}
+		padding-left: 8px; //ie8 hack
 	}
 	.add{
 		//display: block;
@@ -140,7 +142,7 @@
 			margin-left: 0;
 			border-top: 0;
 			padding-bottom: 0;
-			margin-bottom:0;
+			margin-bottom:10px;
 
 			.panel{ 
 				margin-left: 10px;

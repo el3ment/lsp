@@ -233,6 +233,7 @@
 				padding: 0;
 				text-indent: -$hideDistance;
 				overflow: hidden;
+				z-index: 2;
 
 				&:before{
 					content: ' ';
