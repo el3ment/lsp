@@ -24,7 +24,6 @@
 		margin-left: 0;
 		float: left;
 	}
-	
 	// Actual search results
 	.results{
 
@@ -718,6 +717,11 @@
 		.head .controls li.control-pagination-sort label{
 			display:none;
 		}
+	}
+
+	.noresults{
+		padding: 120px 0;
+		text-align: center;
 	}
 	
 }

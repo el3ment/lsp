@@ -34,12 +34,12 @@
 
 					onBeforeAPICall : function(e, data){
 						var searchTemplate = $('#templates-search-page');
-						
+
 						if(searchTemplate.length){
 							$('.page-search').addClass('loading');
 						}else{
 							// If we can't load the results on this page, we'll need to redirect them to a page built for searching	
-							document.location = '/search.html#' + _app.controllers.application.buildStateString(_this, _this.getState());
+							_util.redirectTo('/search.html#' + _app.controllers.application.buildStateString(_this, _this.getState()));
 							
 							return false;
 						}
@@ -47,21 +47,19 @@
 					
 					onAfterAPICall : function(e, data){
 						$('.page-search').removeClass('loading');
+						_app.controllers.flyout.closeFlyout(true);
 						_isFirstRequest = false;
 					},
 
 					onAfterAPICallSuccess : function(e, data){
 
-						var navPathNodeList = data.response.source.navPath.navPathNodeList
+						var navPathNodeList = data.response.source.navPath.navPathNodeList;
 
-						if(IS_SINGLE_SELECT){
-							_state.category = navPathNodeList[navPathNodeList.length - 1].purePath || 'All Products';
-						}else{
-							// Remove everything except categories, then remove trailing /
-							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
-						}
+						// Remove everything except categories, then remove trailing /
+						_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+						_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+						_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
+
 						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 						
 						// Set the activeDataObject, used to rebuild matrix option selections
@@ -73,10 +71,7 @@
 							// onReady and onStateChange make use of preventPushState because those requests are
 							// administrative and shouldn't create new history entries
 							if(!data.xhrData.passthrough.preventPushState){
-
-								
 								_this.pushState();
-
 							}
 							
 						});
@@ -245,10 +240,11 @@
 
 					onStateChange : function(e, data){
 						_this.loadCurrentState();
+						debugger;
 					},
 
 					onReady : function(e, data){
-						if(_app.controllers.application.pullState(_this)){
+						if(_app.controllers.application.pullState(_this) || $('.loading.search').length){
 							_this.loadCurrentState();
 						}
 					},
@@ -307,14 +303,14 @@
 					state.keywords = decodeURIComponent(state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
 				}
 
-				$.extend(_state, state);
+				_state = $.extend(_state, state);
 
 				return state;
 			},
 
 			loadState : function(state, passthrough){
 				var tmpState = $.extend({}, _state);
-				_this.pullState(_app.controllers.application.pullState(_this));
+				_this.pullState(state);
 				
 				// Populate the input with the search keywords
 				$('input[name="searchQuery"]').val(_state.keywords);
@@ -463,19 +459,32 @@
 
 			renderPage : function(easyAskDataObject){
 
-				// If the page hasn't been injected yet
-				if(!$('.page-search').length){
-					var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
-					$('.page-generic').after(pageHTML).hide();
-					_app.controllers.application.attachEvents($('.page-search'));
-				}
+				// if(((easyAskDataObject.products || {}).items ||{}).length === 1){
+						
+				// 	_util.redirectTo(data.response.source.products.items[0].Item_URL);
+				
+				// }else{
 
-				// Render Sections
-				_this.renderSummary(easyAskDataObject);
-				_this.renderSelectedRefinements(easyAskDataObject);
-				_this.renderRefinements(easyAskDataObject);
-				_this.renderProducts(easyAskDataObject);
+					// If the page hasn't been injected yet
+					if(!$('.page-search').length){
+						var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
+						$('.page-generic').after(pageHTML).hide();
+						_app.controllers.application.attachEvents($('.page-search'));
+					}
 
+					// Render Sections
+					_this.renderSummary(easyAskDataObject);
+					_this.renderSelectedRefinements(easyAskDataObject);
+					_this.renderRefinements(easyAskDataObject);
+					_this.renderProducts(easyAskDataObject);
+
+					// Make page full width if refinements aren't there.
+					if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
+						$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
+					}else{
+						$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
+					}
+				//}
 			},
 
 			scrollToFirst : function(){
@@ -555,6 +564,13 @@
 
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
+				
+				// If there aren't any attributes, hide the panel
+				if(!(easyAskDataObject.attributes._lsp.cached || {}).length){
+					$('#searchRefinements').hide();
+				}else{
+					$('#searchRefinements').removeAttr('style');	
+				}
 			
 			},
 

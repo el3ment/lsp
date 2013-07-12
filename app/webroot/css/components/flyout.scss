@@ -1,3 +1,7 @@
+
+a[href]{ outline: 1px solid red; }
+a[href*="_LSP"], a[href*="http://"],a[href*="https://"], a[href*=".html"]{ outline: none; }
+
 .departmentDropdown{ display: none; }
 .departmentDropdown.active,
 .departmentDropdown.reveal-open{ display: block; }

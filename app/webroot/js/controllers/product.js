@@ -59,7 +59,7 @@
 
 			updateMatrixLists : function(form){
 
-				var easyAskMatrixData = _api.parseMatrixChildren($('input[name="summaryString"]', form).val());
+				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', form).data('value'));
 				var selectedOptions = {};
 
 				// Create an object of currently selected options
@@ -92,7 +92,7 @@
 			
 			updateProduct : function(form){
 
-				var easyAskMatrixData = _api.parseMatrixChildren($('input[name="summaryString"]', form).val());
+				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', form).data('value'));
 				var selectedOptions = {};
 
 				// Create an object of selected options to test against the formattedObject (the source)
