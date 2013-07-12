@@ -9,7 +9,7 @@
 
 		return $.extend(_this, {
 			_url : function(controller, payload){
-				var url = 'https://system.sandbox.netsuite.com/app/site/hosting/scriptlet.nl';
+				var url = 'https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl';
 				url = (payload.method.match('getUPS') ? 'http://static.lonestarpercussion.com/shipping/' + payload.method : url);
 				
 				return url;
@@ -17,8 +17,10 @@
 			_payload : function(controller, payload){
 				return $.extend(payload, {
 					method : payload.method,
-					deploy : 'customdeploy1',
-					script : 'customscriptlspapi'
+					deploy : '1',
+					script : '25',
+					h : '55cda7fb2a0d8a937f00',
+					compid : '665798'
 				});
 			},
 			request : function(controller, eventName, method, data){
