@@ -294,19 +294,16 @@
 			pullState : function(state){
 				
 				state = state || {};
-
-				state.allAttributes = ((state || {}).allAttributes || '').replace(/\|/g, '/');
-				state.category = document.location.pathname.replace('/search.html', '');
-				
-				debugger;
-
-				if(state.keywords){
-					state.keywords = decodeURIComponent(state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
-				}
-
 				_state = $.extend(_state, state);
 
-				return state;
+				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
+				_state.category = document.location.pathname.replace('/search.html', '').replace(/^\/$/, '');
+
+				if(_state.keywords){
+					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
+				}
+
+				return _state;
 			},
 
 			loadState : function(state, passthrough){
