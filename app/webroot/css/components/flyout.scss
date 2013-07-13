@@ -251,11 +251,11 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 
 		// Product ad on the right
 		.ad{
-			
+
 			.content{
 				position: absolute;
 				right: 20px;
-				bottom: 100px;
+				top: 80px;
 				z-index: 1;
 				color: black;
 				text-decoration: none;
@@ -276,11 +276,74 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 					height: 0;
 					position: absolute;
 					z-index: 2;
+				}
+			}
+
+			&.top{
+				.content{
+					right: 20px;
+					top: 80px;
+				}
+				.name {
+					padding-right: 22px;
+				}
+				.name:before{
 					border: px(12px) inset transparent;
-					//background-color: red;
+					border-top: px(12px) solid black; 
+					top: 5px;
+					right: 0;
+				}
+
+				&:hover{
+					.name:before{
+						border: px(12px) inset transparent;
+						border-top: px(12px) solid $yellow; 
+					}
+				}
+			}
+
+			&.bottom{
+				.content{
+					right: 20px;
+					bottom: 10px;
+					top: auto
+				}
+				.name:before{
+					border: px(12px) inset transparent;
 					border-bottom: px(12px) solid black; 
-					right: 30px;
 					top: -30px;
+					right: 30px;
+				}
+
+				&:hover{
+					.name:before{
+						border: px(12px) inset transparent;
+						border-bottom: px(12px) solid $yellow; 
+					}
+				}
+			}
+
+			&.bottom-left{
+				.content{
+					right: 260px;
+					bottom: 10px;
+					top: auto;
+				}
+				.name {
+					padding-right: 22px;
+				}
+				.name:before{
+					border: px(12px) inset transparent;
+					border-left: px(12px) solid black; 
+					top: 5px;
+					right: 0;
+				}
+
+				&:hover{
+					.name:before{
+						border: px(12px) inset transparent;
+						border-left: px(12px) solid $yellow; 
+					}
 				}
 			}
 
