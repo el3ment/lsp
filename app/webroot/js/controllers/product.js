@@ -52,23 +52,24 @@
 			assets : {},
 
 			attachZoom : function(){
-
-				$('.zoomWindow').remove();
-				$('.zoomPup').remove();
-				$('.zoomPreload').remove();
-				$('.zoomPad img').unwrap();
-
-				$('a[data-asset="mouseoverZoom"]').removeData('jqzoom').off('jqzoom').jqzoom({
-					zoomWidth: $('.addToCart').width(),
-					zoomHeight: $('#zoom-mainImage').height(),
-					position: 'right',
-					preloadImages: true,
-					xOffset : parseInt($('.information.span6').css('margin-left'), 10),
-					yOffset : -20,
-					zoomType: 'standard'//,
-					// showEffect: 'fadein',
-					// fadeinSpeed: 'fast'
-				});
+				// If jqzoom, it's the product page.
+				if($.jqzoom){
+					$('.zoomWindow').remove();
+					$('.zoomPup').remove();
+					$('.zoomPreload').remove();
+					$('.zoomPad img').unwrap();
+					$('a[data-asset="mouseoverZoom"]').removeData('jqzoom').off('jqzoom').jqzoom({
+						zoomWidth: $('.addToCart').width(),
+						zoomHeight: $('#zoom-mainImage').height(),
+						position: 'right',
+						preloadImages: true,
+						xOffset : parseInt($('.information.span6').css('margin-left'), 10),
+						yOffset : -20,
+						zoomType: 'standard'//,
+						// showEffect: 'fadein',
+						// fadeinSpeed: 'fast'
+					});
+				}
 			},
 
 			removeEmptySpecificationsRows : function(){

@@ -74,6 +74,7 @@
 
 				return formattedPayload;
 
+				
 			},
 
 			_isSuccess : function(responseData){
@@ -192,7 +193,7 @@
 				// Add all returned attributes to the cache
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					var attribute = easyAskDataSourceObject.attributes.attribute[i];
-					_attributeHistory[attribute.name] = {attribute : attribute, index : i};
+					_attributeHistory[attribute.name] = attribute;
 					returnAttributeMap[attribute.name] = true; // Small lookup map
 				}
 
@@ -221,10 +222,9 @@
 				// See if the attribute came down in the response, if it is then use it
 				// if it's not - then use the cached version.
 
-				$.each(_attributeHistory, function(i, simpleCachedAttributeContainer){
-					var cachedAttribute = simpleCachedAttributeContainer.attribute;
+				$.each(_attributeHistory, function(i, cachedAttribute){
+					
 					var found = false;
-
 					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
 						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.name){
 							found = true;
