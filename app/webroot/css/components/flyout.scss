@@ -9,13 +9,16 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 	.departmentDropdown .reveal-open.flyout{ display: block; }
 }
 .departmentDropdown{
-	
 	height: 1px;
 	width:100%;
 	top: 215px;
 	left: 0;
 	position: absolute;
 	z-index: 99; // In front of everything!
+
+	&.reveal-open, &.reveal-open .wrapper {
+		height: auto;
+	}
 
 	@media (max-height: 675px){
 		top: 190px;
@@ -27,6 +30,9 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		height: 1px;
 		float: none;
 		position: relative; // origin for absolute positioning of the panel
+		@media (max-width: 767px) {
+			overflow: hidden;
+		}
 	}
 
 	.topLevel{
@@ -584,7 +590,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		margin-bottom: 0;
 		padding: 0;
 		position: relative;
-		top: -47px;
+		top: -15px;
 		background-color: white;
 		z-index: 1;
 

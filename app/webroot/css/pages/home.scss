@@ -6,6 +6,10 @@
 		height: $flyoutHeight - 20;
 		margin-left: 270px;
 		width: 690px; // width + margin-left = pagewidth
+		@media (max-width: 767px) {
+			margin-left: 0;
+			width: 100%;
+		}
 		position: relative;
 
 		.ad{
