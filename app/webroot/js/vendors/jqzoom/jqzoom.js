@@ -64,7 +64,7 @@
         var largeimage = new Largeimage();
         var loader = new Loader();
         //preventing default click,allowing the onclick event [exmple: lightbox]
-        $(el).bind('click', function (e) {
+        $(el).on('click.jqzoom', function (e) {
             e.preventDefault();
             return false;
         });
@@ -126,7 +126,7 @@
                         cursor: 'crosshair'
                     });
                 }
-                $(".zoomPad", el).bind('mouseenter mouseover', function (event) {
+                $(".zoomPad", el).on('mouseenter.jqzoom mouseover.jqzoom', function (event) {
                     img.attr('title', '');
                     $(el).attr('title', '');
                     el.zoom_active = true;
@@ -138,10 +138,10 @@
                         obj.load();
                     }
                 });
-                $(".zoomPad", el).bind('mouseleave', function (event) {
+                $(".zoomPad", el).bind('mouseleave.jqzoom', function (event) {
                     obj.deactivate();
                 });
-                $(".zoomPad", el).bind('mousemove', function (e) {
+                $(".zoomPad", el).bind('mousemove.jqzoom', function (e) {
 
                     //prevent fast mouse mevements not to fire the mouseout event
                     if (e.pageX > smallimage.pos.r || e.pageX < smallimage.pos.l || e.pageY < smallimage.pos.t || e.pageY > smallimage.pos.b) {
@@ -512,7 +512,7 @@
                     switch (settings.position) {
                     case "left":
                         this.node.leftpos = (smallimage.pos.l - smallimage.bleft - Math.abs(settings.xOffset) - settings.zoomWidth > 0) ? (0 - settings.zoomWidth - Math.abs(settings.xOffset)) : (smallimage.ow + Math.abs(settings.xOffset));
-                        this.node.toppos = Math.abs(settings.yOffset);
+                        this.node.toppos = settings.yOffset; // LSP Removed abs
                         break;
                     case "top":
                         this.node.leftpos = Math.abs(settings.xOffset);
@@ -524,7 +524,7 @@
                         break;
                     default:
                         this.node.leftpos = (smallimage.rightlimit + Math.abs(settings.xOffset) + settings.zoomWidth < screen.width) ? (smallimage.ow + Math.abs(settings.xOffset)) : (0 - settings.zoomWidth - Math.abs(settings.xOffset));
-                        this.node.toppos = Math.abs(settings.yOffset);
+                        this.node.toppos = settings.yOffset; // LSP Removed abs
                         break;
                     }
                 }

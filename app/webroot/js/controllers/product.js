@@ -20,6 +20,9 @@
 					}
 				},
 				application : {
+					onContextChange : function(e, data){
+						_this.attachZoom();
+					},
 					onReady : function(e, data){
 						
 						var productPageForm = $('.page-product form[action="/app/site/backend/additemtocart.nl"]')[0];
@@ -30,9 +33,7 @@
 						setTimeout(_this.removeEmptySpecificationsRows, 500);
 
 						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
-							alert('hey');
 							head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
-								alert('hey');
 								$('.audio.section a').jPlayer({
 									ready : function(){
 										$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
@@ -49,6 +50,26 @@
 			},
 			
 			assets : {},
+
+			attachZoom : function(){
+
+				$('.zoomWindow').remove();
+				$('.zoomPup').remove();
+				$('.zoomPreload').remove();
+				$('.zoomPad img').unwrap();
+
+				$('a[data-asset="mouseoverZoom"]').removeData('jqzoom').off('jqzoom').jqzoom({
+					zoomWidth: $('.addToCart').width(),
+					zoomHeight: $('#zoom-mainImage').height(),
+					position: 'right',
+					preloadImages: true,
+					xOffset : parseInt($('.information.span6').css('margin-left'), 10),
+					yOffset : -20,
+					zoomType: 'standard'//,
+					// showEffect: 'fadein',
+					// fadeinSpeed: 'fast'
+				});
+			},
 
 			removeEmptySpecificationsRows : function(){
 				$('tr[data-specifications-data*="!empty!"], tr[data-specifications-data*="!Unknown!"], tr[data-specifications-data*="!None!"]').remove();

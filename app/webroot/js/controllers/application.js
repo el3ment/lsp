@@ -25,7 +25,7 @@
 						var oldContext = _context;
 
 						if(width >= 1200){
-							newContext = 'desktop'; // could be largeDesktop
+							newContext = 'largeDesktop'; // could be largeDesktop
 						}else if(width > 979){
 							newContext = 'desktop';
 						}else if(width >= 768){
