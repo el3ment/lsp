@@ -54,15 +54,16 @@
 			attachZoom : function(context){
 				// If jqzoom, it's the product page.
 				if($.jqzoom){
-					$('[data-prezoomimage=".460x460"]').removeAttr('data-prezoomimage');
-					//$('[src=".460x460"]').removeAttr('data-prezoomimage');
+					
 					$('.zoomWindow').remove();
 					$('.zoomPup').remove();
 					$('.zoomPreload').remove();
 					$('.zoomPad img').unwrap();
+					
+					var html = $('.section.images').html();
+					$('.section.images').empty().html(html);
+
 					$('a[data-asset="mouseoverZoom"]')
-						.removeData('jqzoom')
-						.off('jqzoom')
 						.jqzoom({
 							zoomWidth: $('.addToCart').width(),
 							zoomHeight: $('#zoom-mainImage img').height(),
