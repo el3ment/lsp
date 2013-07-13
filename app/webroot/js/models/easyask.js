@@ -68,11 +68,12 @@
 				if(formattedPayload.RequestData !== 'CA_Search'){
 					delete formattedPayload.q;
 				}
-				
+
 				// As a form of cleanup - remove a trailing / from a category request
 				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
 
 				return formattedPayload;
+
 			},
 
 			_isSuccess : function(responseData){
@@ -191,7 +192,7 @@
 				// Add all returned attributes to the cache
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					var attribute = easyAskDataSourceObject.attributes.attribute[i];
-					_attributeHistory[attribute.name] = attribute;
+					_attributeHistory[attribute.name] = {attribute : attribute, index : i};
 					returnAttributeMap[attribute.name] = true; // Small lookup map
 				}
 
@@ -220,9 +221,10 @@
 				// See if the attribute came down in the response, if it is then use it
 				// if it's not - then use the cached version.
 
-				$.each(_attributeHistory, function(i, cachedAttribute){
-					
+				$.each(_attributeHistory, function(i, simpleCachedAttributeContainer){
+					var cachedAttribute = simpleCachedAttributeContainer.attribute;
 					var found = false;
+
 					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
 						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.name){
 							found = true;

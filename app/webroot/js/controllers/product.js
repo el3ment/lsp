@@ -30,17 +30,15 @@
 						setTimeout(_this.removeEmptySpecificationsRows, 500);
 
 						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
-
+							alert('hey');
 							head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
 								alert('hey');
-								$(".audio.section a").jPlayer({
-									ready: function () {
-										$(this).jPlayer("setMedia", {
-												mp3: $(this).attr('href')
-											});
-										},
-									swfPath: "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
-									supplied: "mp3"
+								$('.audio.section a').jPlayer({
+									ready : function(){
+										$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
+									},
+									swfPath : "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
+									supplied : "mp3"
 								});	
 							});
 						}
