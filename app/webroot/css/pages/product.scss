@@ -133,8 +133,14 @@
 				border-bottom: 0;
 			}
 			
-			#zoom-mainImage{
+			#zoom-mainImage, .zoomPad{
 				display: block;
+				float: none;
+			}
+			@media (max-width: 767px){
+				.zoomPup, .zoomWindow{
+					display: none !important;
+				}
 			}
 			.zoom-thumbnails{
 				position: relative;

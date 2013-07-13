@@ -758,7 +758,7 @@ body .span12 > table{
 /*
  *  Customer Sign In
  */
-	&.nscheckout-guestOrLogin input[name="new"] ~ table > tbody > tr:first-child{
+	&.nscheckout-guestOrLogin input[name="new"] ~ table > tbody > tr:first-child,{
 		padding-bottom: 80px !important;
 	}
 
