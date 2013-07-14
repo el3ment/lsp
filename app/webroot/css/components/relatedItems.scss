@@ -3,6 +3,10 @@
 	display: inline-block;
 	position: relative;
 	width: 100%;
+	@media (min-width: 980px) {
+		padding-left: px(columns(2) + $gutterWidth);
+	}
+	@include box-sizing();
 	
 	.productPrice{ 
 		font-weight: 800;
@@ -89,7 +93,8 @@
 
 
 		
-		border-left: px(columns(2) + $gutterWidth) solid transparent;
+		//border-left: px(columns(2) + $gutterWidth) solid transparent;
+		background-color: $superLightGrey;
 		@media (max-width: 979px){
 			border-left: 0;
 		}
@@ -182,7 +187,6 @@
 			
 			// Grid View 
 			
-			background-color: $superLightGrey;
 			float:left;
 			border: px($gutterWidth / 2) solid $superLightGrey;
 			border-bottom-width: px($gutterWidth);
