@@ -517,7 +517,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			
 			position: static;
 			//margin-left:0;
-			//height: 100%;
+			height: auto;
 			border: 0;
 			//border-left: 0;
 			//border-top: 0;
@@ -540,12 +540,20 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			&:before{
 				display: none;
 			};
+
+			.column{
+				float: none;
+				margin-right: 0;
+				height: auto;
+			}
+
+			.list, .list:first-child{
+				width: 100%;
+				float: none;
+				margin-top: 0;
+			} // group of links
 		} // panel
-		.column{
-			float: none;
-			margin-right: 0;
-			height: auto;
-		}
+		
 		.group{
 			float: none;
 			margin-bottom: 0;
@@ -560,11 +568,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			//position:relative;
 			//z-index:1;
 		}
-		.list, .list:first-child{
-			width: 100%;
-			float: none;
-			margin-top: 0;
-		} // group of links
+		
 		.h1{
 			//position:relative;
 			//z-index:1;
