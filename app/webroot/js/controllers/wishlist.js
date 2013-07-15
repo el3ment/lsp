@@ -1,0 +1,292 @@
+// Begin Suite Commerce Stuff
+function parsePrice(number,bool)	{
+	number = (Math.round(number*100))/100;
+	var aux1 = parseInt(number/1000), aux2 = Math.round((number%1000)*100)/100;
+	if(aux2 < 100)	{
+		if(aux2 < 10) aux2 = "00"+ aux2;
+		else aux2 = "0"+ aux2;
+	}
+	if(aux1 > 0)	{
+		aux1 = parsePrice(aux1,true);
+		number = aux1 +","+ aux2;
+	}
+	if(!bool){
+		number += "";
+		if (number.indexOf(".") != -1) {
+			var sigFig = number.substring(number.indexOf(".") + 1, number.length);
+			if (sigFig.length == 1)	number += "0";
+		}
+		else number += ".00";
+		return "$" + number;
+	}
+	return number;
+}
+function getNumber(string){
+	string += "";
+	if(string.indexOf("$") != -1) string = string.substring(string.indexOf("$") + 1).replace(",","").replace(" ","");
+	return parseFloat(string);
+}
+function calcSaves(list,sale)	{
+	var list = getNumber(list), sale = getNumber(sale), dif = list - sale, perDif = Math.round(dif*10000/list)/100;
+	if(dif > 0) return perDif + "%";
+	else return false;
+}
+function addToWishlist(config){
+	config.messages.hide();
+	if (config.customer != "")	{
+		var options = "";
+		if (config.options.length == config.options.filter("[value!='']").length) {
+			config.options.each(function(){
+				var optionValue = this.id, optionName = $(this).parent().parent().parent().find("a:first").text(),
+					selected = $(this).find("option:selected"), selectedValue = selected.val(), selectedLabel = selected.text();
+				options += optionValue + "=" + escape(optionName) + "==" + selectedValue + "=" + escape(selectedLabel) + ";";
+			});
+			var wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_add_item_wishlist&deploy=customdeploy_add_item_wishlist&i=" + config.item + "&j=" + config.customer + "&q=1&s=" + config.site + "&o=" + options;
+			$.getScript(wishUrl, function(){
+				$("#add-wishlist").hide();
+				config.messages.eq(0).show();
+				setTimeout(function(){
+					config.messages.eq(0).fadeOut();
+				}, 8000);
+			});
+		}
+		else {
+			$("#add-wishlist").removeClass("loading");
+			config.messages.eq(2).show();
+		}
+	}
+	else config.messages.eq(1).show();
+}
+function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn)	{
+	var templateData = {
+		id : itemId,
+		url : itemUrl,
+		thumbnailUrl : itemThumb,
+		name : unescape(itemName),
+		price : itemPrice,
+		quantity : itemQty,
+		options : unescape(itemOptions),
+		comments : unescape(itemComments),
+		msrp : baseprice,
+		stockMessage : unescape(stock),
+		mpn : mpn
+	};
+
+	// var options = unescape(itemOptions).split(";"), optionLabels = "",
+	// 	optionValues = "", template = $("#wish-item-template").html();
+	// for(var i = 0; i < options.length - 1; i++){
+	// 	var splitOptions = options[i].split("==");
+	// 	optionLabels+= splitOptions[0].split("=")[1] + ": " + splitOptions[1].split("=")[1] + "<br/>";
+	// 	optionValues+= "&" + splitOptions[0].split("=")[0] + "=" + splitOptions[1].split("=")[0];
+	// }
+	// template = template.replace(/_itemThumb/gi,itemThumb);
+	// template = template.replace(/_itemName/gi,unescape(itemName));
+	// template = template.replace(/_itemUrl/gi,itemUrl);
+	// template = template.replace(/_itemId/gi,itemId);
+	// template = template.replace(/_itemQty/gi,itemQty);
+	// template = template.replace(/_stock/gi,unescape(stock));
+	// template = template.replace(/_optionValues/gi,optionValues);
+	// template = template.replace(/_optionLabels/gi,optionLabels);
+	// template = template.replace(/_options/gi,itemOptions);
+	// template = template.replace(/_itemComments/gi,unescape(itemComments));
+	
+	// var savings = calcSaves(baseprice, itemPrice);
+	// if( savings )
+	// 	template = template.replace(/_itemPrice/gi,"MSRP: " + parsePrice(baseprice) + "<br />" + "Price: <span>" + parsePrice(itemPrice) + "</span> <br />" + "<span>You Save: " + savings + "</span>");
+	// else
+	// 	template = template.replace(/_itemPrice/gi,"Price: <span>" + parsePrice(itemPrice) + "</span>");
+
+	$("table.wishlist.table tbody").append(LSP.utilities.parseMicroTemplate('templates-wishlistItem', templateData));
+}
+function wishlistReady(bool)	{
+	if(document.location.href.indexOf("austintest") != -1) alert(bool);
+};
+function wishStatusText(public){
+	var status = $("#status"), antiStatus = $("#anti-status");
+	if(public == "T")	{
+		status.html("Public");
+		antiStatus.html("Private");
+	}
+	else	{
+		status.html("Private");
+		antiStatus.html("Public");
+	}
+}
+function myWishlist(config){
+	if (config.customer != "")	{
+		var today = new Date(),
+			myWishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + config.customer + "&s=" + config.site + "&random=" + (Math.random() * today.getTime());
+		$.getScript(myWishUrl,function(data){
+			$("#wish-info").show();
+			if (data == "") config.messages.eq(0).show();
+			else	{
+				var wishlist = $("#wishlist-wrapper tbody"),
+					wishMessages = $("#wishlist-messages p"),
+					publicWraper = $("#wish-pub"),
+					wait = null, 
+					public = data.substring(data.indexOf("Ready('") + 7);
+				public = public.substring(0,public.indexOf("'"));
+				wishStatusText(public);
+				publicWraper.find("input").attr("checked", (public == "T") ? true : false ).click(function(){
+					var status = ($(this).is(":checked") == true) ? "T" : "F";
+					if(wait) clearTimeout(wait);
+					var updateUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_public&deploy=customdeploy_update_wishlist_public&j=" + config.customer + "&p=" + status + "&random=" + (Math.random() * today.getTime());
+					$.getScript(updateUrl,function(){
+						wishStatusText(status);
+					});
+				});
+				wishlist.parent().parent().show();
+				$(function(){
+					wishlist.find(".wish-remove").click(function(){
+						var $this = $(this);
+						$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_remove_item_wishlist&deploy=customdeploy_remove_item_wishlist&j=" + config.customer + "&i=" + $this.next().val() + "&o=" + $this.next().next().val(), function(){
+							$this.closest("tr").fadeOut(function(){
+								$(this).remove();
+								if (wishlist.find(".wish-item").length == 0) {
+									wishMessages.filter(":first").show();
+									wishlist.closest("div").hide();
+								}
+							});
+						});
+						return false;
+					});
+					wishlist.find(".wish-update").click(function(){
+						var wishActions = $(this).parent(),
+						    itemId = wishActions.find(".wish-id").val(),
+							comments = escape(wishActions.parent().find("textarea").val()),
+							wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_comments&deploy=customdeploy_update_wishlist_comments&i=" + itemId + "&j=" + config.customer + "&t=" + comments + "&o=" + wishActions.find(".options").val();
+						$.getScript(wishUrl,function(){
+							var saveText = wishActions.parent().find(".wish-text-saved");
+							saveText.fadeIn(function(){
+								setTimeout(function(){
+									saveText.fadeOut();
+								},5000);
+							});
+						});
+						return false;
+					});
+					wishlist.find(".wish-add-cart").click(function(){
+						var wishActions = $(this).parent(),
+							itemId = wishActions.find(".wish-id").val(),
+						    itemOptions = wishActions.find(".wish-options-values").val(),
+							addUrl = "/app/site/backend/additemtocart.nl?c=" + config.account + "&buyid=" + itemId + "&qty=1" + itemOptions + "&continue=/My-Wishlist";
+						document.location = addUrl;
+						return false;
+					});
+					
+				});
+			}
+		});
+	}
+	else config.messages.filter(":last").show();
+}
+function addCustomer(customerId, customerName, customerLastName, customerEmail){
+	var template = 	"<div class='wish-result'>";
+	template +=			"<a href='#'>" + unescape(customerName) + " " + unescape(customerLastName) + " - " + customerEmail + "</a>";
+	template +=			"<input type='hidden' value='" + customerId + "' />";
+	template +=		"</div>";
+	$("#wish-search-results").append(template);
+}
+function searchWishlist(config){
+	var today = new Date();
+	$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_search_wishlist&deploy=customdeploy_search_wishlist&st=" + config.searchText + "&random=" + (Math.random() * today.getTime()), function(){
+		config.messages.hide();
+		$(function(){
+			var wishlist = $("#wishlist-wrapper"), wishResultsWrapper = $("#wish-search-results");
+			if (wishResultsWrapper.find(".wish-result").length == 0)
+				config.messages.eq(2).show();
+			else {
+				config.messages.eq(4).show();
+				wishResultsWrapper.find("a").click(function(){
+					config.messages.eq(7).hide();
+					$(this).parent().siblings().remove();
+					wishlist.hide().find("tbody tr:not(#wish-item-template)").remove();
+					var customerId = $(this).next().val();
+					$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + customerId + "&s=" + config.site, function(){
+						if(wishlist.find("tbody tr:not(#wish-item-template)").length > 0)	{
+							wishlist.show().find(".wish-add-cart").click(function(){
+								var wishActions = $(this).parent(), itemId = wishActions.find(".wish-id").val(), itemQty = wishActions.find(".wish-qty").val(), itemOptions = wishActions.find(".wish-options-values").val(), addUrl = "/app/site/backend/additemtocart.nl?c=" + config.account + "&buyid=" + itemId + "&qty=" + itemQty + itemOptions + "&continue=/Search-Wishlist?searchtext="+config.searchText;
+								document.location = addUrl;
+								return false;
+							});	
+						}
+						else config.messages.eq(7).show();
+					});
+					return false;
+				});
+				config.messages.eq(6).show();
+			}
+		});
+	});
+}
+
+// END SuiteCommerce stuff
+
+(function(){
+	
+	var _util = window.LSP.utilities;
+	
+	_util.register('controller', 'wishlist', (function(){
+		var _this = {};
+		var _lsp = window.LSP;
+		
+		_this =  {
+			name : 'wishlist',
+			events : {
+				application : {
+					onReady : function(e, data){
+						var searchButton = $("#search-wish"),
+							searchText = $("#search-wish-text"),
+							wishMessages = $("#wishlist-messages p");
+						searchText
+							.val("Enter name or e-mail")
+							.focus(function(){
+								var $this = $(this);
+								if( $this.val() == "Enter name or e-mail" )
+									$this.val("")
+							})
+							.blur(function(){
+								var $this = $(this);
+								if( $this.val() == "" )
+									$this.val("Enter name or e-mail")
+							})
+							.keyup(function(e){
+								if(e.keyCode == 13) searchButton.trigger("click");
+							});
+						searchButton.click(function(){
+							wishMessages.hide();
+							$("#wish-search-results").html("");
+							$("#wishlist-wrapper").hide().find("tbody tr:not(#wish-item-template)").remove();
+							if(searchText.val() != "")	{
+								if (searchText.val().length > 2) {
+									wishMessages.eq(1).show();
+									searchWishlist({
+										account : "665798",
+				            			messages: wishMessages,
+										searchText : searchText.val(),
+				            			site: 'lonestarpercussion'
+									});
+								}
+								else wishMessages.eq(5).show();
+							}
+							else wishMessages.eq(0).show();
+						});
+						var url = window.location.href;
+						if( url.indexOf("searchtext") != -1 ) {
+							var searched = url.substring( url.indexOf("searchtext") + 11 );
+							searched = searched.substring( 0, searched.indexOf("&") );
+							searchText.val( searched );
+							searchButton.click();
+						}
+					}
+				}
+			},
+			assets : {},
+
+		};
+
+		return _this;
+
+	}()));
+
+})();

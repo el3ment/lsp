@@ -1,0 +1,107 @@
+.page-wishlist{
+
+	// The top paragraphs and image, and search container -- all the stuff above the results table
+	.introduction{
+		margin: auto;
+		float: none;
+		width: 700px;
+
+		@media (max-width: 767px){
+			width: 100%;
+		}
+	}
+	// Paragraphs
+	.description{
+		margin: 0;
+	}
+
+	#wishlist-messages p{
+		display: none;
+		color: $grey;
+		margin: 0;
+
+		&.h2{
+			color: black;
+			margin-top: 20px;
+		}
+	}
+
+	.table.wishlist{
+		display: none;
+		margin-top: 20px;
+		float:left;
+	}
+
+	.wish-result{
+		margin-top: 5px;
+	}
+
+	// The create button
+	.create{
+		
+		width: 180px;
+		float: left;
+		margin: 0;
+		position: relative;
+		
+		&:after{
+			content: 'or';
+			display: block;
+			position: absolute;
+			right: -20px;
+			top: 10px;
+			color: $grey;
+		}
+
+		@media (max-width: 767px){
+			width: 100%;
+			&:after{
+				position: static;
+				margin: 10px;
+			}
+		}
+
+	}
+	// The search input
+	.search{
+		margin-left: 35px;
+		float: left;
+		width: 480px;
+		@media (max-width: 767px){
+			margin-left: 0;
+		}
+	}
+
+	.searchWishlists{
+		width: 75%;
+		float: left;
+	}
+
+	.thumbnail{
+		float: left;
+		padding-right: 10px;
+	}
+	.options, .model{
+		display: block;
+	}
+	.product{
+		width: 50%;
+	}
+	.comments{
+		width: 25%;
+	}
+	.productPrice{
+		font-size: 19px;
+	}
+	.scroller{
+		float: left;
+		margin-right: 10px;
+	}
+
+	.resultsHeader{
+		clear: both;
+		margin-top: 20px;
+		float: left;
+	}
+
+}

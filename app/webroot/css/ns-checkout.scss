@@ -106,7 +106,7 @@
 // where possible, trying to 
 
 
-body .span12 > table{
+body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	position: relative;
 	// This width is affecting the homepage on IE8 causing elements not to line up properly.
 	width: 800px;

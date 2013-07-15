@@ -33,6 +33,9 @@
 
 .reviews{
 
+	// Temporary until we write the functionality for this
+	.reviewInteractionCount, .actions{ display: none !important;  }
+
 	//border-top: 1px solid $lightGrey;
 	
 	&.section h2{
@@ -494,6 +497,4 @@
 	}
 }
 
-// Temporary until we write the functionality for this
-.reviewInteractionCount, .actions{ display: none !important;  }
 

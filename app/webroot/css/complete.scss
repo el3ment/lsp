@@ -12,6 +12,7 @@
 @import "components/flyout.scss";
 @import "components/footer";
 @import "components/limitElements";
+@import "components/table";
 @import "components/reviews"; // Moved from below pages
 
 @import "pages/cart";
@@ -19,6 +20,7 @@
 @import "pages/product";
 @import "pages/search";
 @import "pages/category";
+@import "pages/wishlist";
 @import "pages/home";
 
 @import "ns-checkout";

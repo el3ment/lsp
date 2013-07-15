@@ -1,0 +1,23 @@
+table.table{
+
+	width: 100%;
+
+	thead td{
+		
+		padding: 10px;
+		text-align: center;
+		color: $grey;
+		border: 1px solid $lightGrey;
+		border-width: 1px 0px 1px 1px;
+		
+		&:first-child{
+			border-left-width: 0px;
+			text-align: left;
+		}
+	}
+
+	tbody td{
+		border-bottom: 1px solid $lightGrey;
+		padding: 10px;
+	}
+}
