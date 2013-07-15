@@ -17,6 +17,17 @@
 					},
 					onMatrixOptionSelect : function(e, data){
 						_this.updateMatrixLists(data.selector[0].form);
+					},
+					onAddToWishlist : function(e, data){
+						_this.updateProduct();
+						addToWishlist({
+							customer: $('input[name="customer"]').val(),
+							item: $('.shopping.section input[name="itemid"]').val(),
+							site: 'lonestarpercussion',
+							options : $('.shopping.section select'),
+							qty: $('.shopping.section input[name="qty"]').val(),
+							messages: $("#wishlist-messages p")
+						});
 					}
 				},
 				application : {
@@ -55,13 +66,7 @@
 				// If jqzoom, it's the product page.
 				if($.jqzoom){
 					
-					$('.zoomWindow').remove();
-					$('.zoomPup').remove();
-					$('.zoomPreload').remove();
-					$('.zoomPad img').unwrap();
-					
-					var html = $('.section.images').html();
-					$('.section.images').empty().html(html);
+					_this.detachZoom();
 
 					$('a[data-asset="mouseoverZoom"]')
 						.jqzoom({
@@ -78,7 +83,13 @@
 				}
 			},
 			detachZoom : function(){
+				$('.zoomWindow').remove();
+				$('.zoomPup').remove();
+				$('.zoomPreload').remove();
+				$('.zoomPad img').unwrap();
 				
+				var html = $('.section.images').html();
+				$('.section.images').empty().html(html);
 			},
 
 			removeEmptySpecificationsRows : function(){
@@ -106,7 +117,7 @@
 				// Filter, and render newly updated options
 				var filteredOptions = _api.filterMatrixChildren(easyAskMatrixData, selectedOptions)
 				var unselectedOptionText = $('option[value=""]:first', form).text();
-		
+				
 				$.each(filteredOptions, function(label, options){
 					
 					var optionHTML = '<option value="">'+ unselectedOptionText +'</option>';
@@ -144,6 +155,7 @@
 							return;
 					}
 
+					_this.detachZoom();
 
 					var entry = $(form).parents('.entry');
 					// If we've made it here, it's because we've found an ID that matches the filters
@@ -172,9 +184,15 @@
 					$('.productName .options', entry).html(' : ' + optionArray.join(', '));
 
 					var size = $('.thumbnail img, #zoom-mainImage img', entry).width();
-					$('.thumbnail img, #zoom-mainImage img', entry).attr('src', productData.data.imageUrl + '.' + size + 'x' + size);
+					
+					var img = $('.thumbnail img, #zoom-mainImage img', entry)
+
+					img.attr('src', productData.data.imageUrl + '.' + size + 'x' + size);
+					
 
 					$('.productAvailability', entry).html(productData.data.stockMessage);
+					
+					_this.attachZoom();
 
 				})
 			},

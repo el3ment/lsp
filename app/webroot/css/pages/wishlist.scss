@@ -1,5 +1,7 @@
 .page-wishlist{
 
+	min-height: 250px;
+
 	// The top paragraphs and image, and search container -- all the stuff above the results table
 	.introduction{
 		margin: auto;
@@ -13,17 +15,6 @@
 	// Paragraphs
 	.description{
 		margin: 0;
-	}
-
-	#wishlist-messages p{
-		display: none;
-		color: $grey;
-		margin: 0;
-
-		&.h2{
-			color: black;
-			margin-top: 20px;
-		}
 	}
 
 	.table.wishlist{
@@ -98,10 +89,30 @@
 		margin-right: 10px;
 	}
 
+	.comments .wish-update{
+		display: none;
+	}
+
 	.resultsHeader{
 		clear: both;
 		margin-top: 20px;
 		float: left;
 	}
 
+	.b5{
+		font-size: 13px;
+	}
+
+}
+
+#wishlist-messages p,
+#wishlist-messages > div,
+.wish-text-saved{
+	display: none;
+	margin: 0;
+
+	&.h2{
+		color: black;
+		margin-top: 20px;
+	}
 }

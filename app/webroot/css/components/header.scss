@@ -31,7 +31,17 @@
 			@include box-shadow-multiple(0 -1px 0 #52483d inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #312a24 inset);
 		}
 	}
-	
+
+	// If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
+	li[data-firstname*="Error processing dynamic tag"],
+	li[data-firstname] + li{
+		display: none !important;
+	}
+
+	// If it's an error, show the "Login" link
+	li[data-firstname*="Error processing dynamic tag"] + li{
+		display: block !important;
+	}
 
 	// Contains the logo, the tagline, and the phone number
 	.well{
@@ -117,17 +127,6 @@
 			margin: 0;
 			float:right;
 			position: relative;
-		}
-
-		// If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
-		li[data-firstname*="Error processing dynamic tag"],
-		li[data-firstname] + li{
-			display: none;
-		}
-
-		// If it's an error, show the "Login" link
-		li[data-firstname*="Error processing dynamic tag"] + li{
-			display: block;
 		}
 
 		// Down arrow for navbar items with sublists

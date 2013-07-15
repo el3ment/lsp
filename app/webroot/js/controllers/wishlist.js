@@ -37,17 +37,17 @@ function addToWishlist(config){
 		var options = "";
 		if (config.options.length == config.options.filter("[value!='']").length) {
 			config.options.each(function(){
-				var optionValue = this.id, optionName = $(this).parent().parent().parent().find("a:first").text(),
+				var optionValue = this.id, optionName = $(this).attr('name'),
 					selected = $(this).find("option:selected"), selectedValue = selected.val(), selectedLabel = selected.text();
-				options += optionValue + "=" + escape(optionName) + "==" + selectedValue + "=" + escape(selectedLabel) + ";";
+				options += optionName + "=" + optionName + "==" + escape(selectedLabel) + "=" + escape(selectedLabel) + ";";
 			});
 			var wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_add_item_wishlist&deploy=customdeploy_add_item_wishlist&i=" + config.item + "&j=" + config.customer + "&q=1&s=" + config.site + "&o=" + options;
 			$.getScript(wishUrl, function(){
 				$("#add-wishlist").hide();
 				config.messages.eq(0).show();
-				setTimeout(function(){
-					config.messages.eq(0).fadeOut();
-				}, 8000);
+				// setTimeout(function(){
+				// 	config.messages.eq(0).fadeOut();
+				// }, 8000);
 			});
 		}
 		else {
@@ -58,6 +58,7 @@ function addToWishlist(config){
 	else config.messages.eq(1).show();
 }
 function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn)	{
+
 	var templateData = {
 		id : itemId,
 		url : itemUrl,
@@ -96,39 +97,44 @@ function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, 
 	// else
 	// 	template = template.replace(/_itemPrice/gi,"Price: <span>" + parsePrice(itemPrice) + "</span>");
 
-	$("table.wishlist.table tbody").append(LSP.utilities.parseMicroTemplate('templates-wishlistItem', templateData));
+	$("table.wishlist.table tbody")
+		.append(LSP.utilities.parseMicroTemplate('templates-wishlistItem', templateData))
+		.parent('table').show();
+	$('table.wishlist .comments textarea').off('keyup.wishlist').on('keyup.wishlist', function(){
+		if($(this).val().length > 0){
+			$('.wish-update', this.parentNode).fadeIn();
+			$('.wish-text-saved', this.parentNode).hide();
+		}
+	});
 }
 function wishlistReady(bool)	{
 	if(document.location.href.indexOf("austintest") != -1) alert(bool);
 };
 function wishStatusText(public){
-	var status = $("#status"), antiStatus = $("#anti-status");
 	if(public == "T")	{
-		status.html("Public");
-		antiStatus.html("Private");
-	}
-	else	{
-		status.html("Private");
-		antiStatus.html("Public");
+		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true)				
+	}else{
+		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true)		
 	}
 }
 function myWishlist(config){
-	if (config.customer != "")	{
+	if (config.customer != ""){
+		config.messages.filter('.loggedIn').show();
 		var today = new Date(),
-			myWishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + config.customer + "&s=" + config.site + "&random=" + (Math.random() * today.getTime());
+			myWishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + config.customer + "&s=lonestarpercussion&random=" + (Math.random() * today.getTime());
 		$.getScript(myWishUrl,function(data){
 			$("#wish-info").show();
-			if (data == "") config.messages.eq(0).show();
+			if (data == "") config.messages.filter('.emptyWishlist').show();
 			else	{
 				var wishlist = $("#wishlist-wrapper tbody"),
-					wishMessages = $("#wishlist-messages p"),
+					wishMessages = $("#wishlist-messages > div"),
 					publicWraper = $("#wish-pub"),
 					wait = null, 
 					public = data.substring(data.indexOf("Ready('") + 7);
 				public = public.substring(0,public.indexOf("'"));
 				wishStatusText(public);
-				publicWraper.find("input").attr("checked", (public == "T") ? true : false ).click(function(){
-					var status = ($(this).is(":checked") == true) ? "T" : "F";
+				$('input[type="radio"][name="isPublic"]').click(function(){
+					var status = $(this).val().substr(0, 1).toUpperCase();
 					if(wait) clearTimeout(wait);
 					var updateUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_public&deploy=customdeploy_update_wishlist_public&j=" + config.customer + "&p=" + status + "&random=" + (Math.random() * today.getTime());
 					$.getScript(updateUrl,function(){
@@ -139,12 +145,15 @@ function myWishlist(config){
 				$(function(){
 					wishlist.find(".wish-remove").click(function(){
 						var $this = $(this);
-						$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_remove_item_wishlist&deploy=customdeploy_remove_item_wishlist&j=" + config.customer + "&i=" + $this.next().val() + "&o=" + $this.next().next().val(), function(){
+						var id = $(this).data('id');
+						var options = $(this).data('options');
+
+						$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_remove_item_wishlist&deploy=customdeploy_remove_item_wishlist&j=" + config.customer + "&i=" + id + "&o=" + options, function(){
 							$this.closest("tr").fadeOut(function(){
 								$(this).remove();
-								if (wishlist.find(".wish-item").length == 0) {
-									wishMessages.filter(":first").show();
-									wishlist.closest("div").hide();
+								if (wishlist.find(".wishlistItem").length == 0) {
+									wishMessages.filter(".emptyWishlist").show();
+									wishlist.closest("table.wishlist").hide();
 								}
 							});
 						});
@@ -152,33 +161,23 @@ function myWishlist(config){
 					});
 					wishlist.find(".wish-update").click(function(){
 						var wishActions = $(this).parent(),
-						    itemId = wishActions.find(".wish-id").val(),
+						    itemId = $(this).data('id'),
 							comments = escape(wishActions.parent().find("textarea").val()),
-							wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_comments&deploy=customdeploy_update_wishlist_comments&i=" + itemId + "&j=" + config.customer + "&t=" + comments + "&o=" + wishActions.find(".options").val();
+							wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_comments&deploy=customdeploy_update_wishlist_comments&i=" + itemId + "&j=" + config.customer + "&t=" + comments + "&o=" + $(this).data('options');
 						$.getScript(wishUrl,function(){
 							var saveText = wishActions.parent().find(".wish-text-saved");
-							saveText.fadeIn(function(){
-								setTimeout(function(){
-									saveText.fadeOut();
-								},5000);
-							});
+							saveText.fadeIn();
+							$('.wish-update', wishActions).hide();
 						});
-						return false;
-					});
-					wishlist.find(".wish-add-cart").click(function(){
-						var wishActions = $(this).parent(),
-							itemId = wishActions.find(".wish-id").val(),
-						    itemOptions = wishActions.find(".wish-options-values").val(),
-							addUrl = "/app/site/backend/additemtocart.nl?c=" + config.account + "&buyid=" + itemId + "&qty=1" + itemOptions + "&continue=/My-Wishlist";
-						document.location = addUrl;
 						return false;
 					});
 					
 				});
 			}
 		});
-	}
-	else config.messages.filter(":last").show();
+	}else{
+		config.messages.hide().filter(":last").show();
+	} 
 }
 function addCustomer(customerId, customerName, customerLastName, customerEmail){
 	var template = 	"<div class='wish-result'>";

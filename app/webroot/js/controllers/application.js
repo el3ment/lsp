@@ -139,7 +139,7 @@
 			},
 			
 			assets : {},
-
+			
 			getContext : function(){
 				return _context;
 			},
