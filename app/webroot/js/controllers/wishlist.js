@@ -176,7 +176,7 @@ function myWishlist(config){
 			}
 		});
 	}else{
-		config.messages.hide().filter(":last").show();
+		config.messages.hide().filter(".notLoggedIn").show();
 	} 
 }
 function addCustomer(customerId, customerName, customerLastName, customerEmail){
