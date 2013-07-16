@@ -714,10 +714,39 @@
 
 	li[data-lifecyclestate="Discontinued"]{
 		
-		@include opacity(.25);
-
+		form{
+			@include opacity(.25);
+		}
 		.addToCart{
 			display: none !important;
+		}
+		
+		&:before{ /* Two colons to hide from IE8 */
+
+			overflow: hidden;
+			padding: px($paddingUnit * 2) 0;
+			width: 100%;
+			display: block;
+			top: px(-$paddingUnit);
+			font-weight: 800;
+			text-align: center;
+			content: 'Discontinued';
+			color: $superDarkGrey;
+			letter-spacing: px(1px);
+			text-transform: uppercase;
+			text-shadow : 0 1px $saturatedHighlightGrey;
+			border : 1px solid $lightGrey;
+			border-width: 1px 0;
+			margin: 0 0 px($gutterWidth / 2) 0;
+			line-height:1emboss;
+			background-color: $superLightGrey;
+		}
+		&::before{ /* Only rotate for IE9 */
+			position: absolute;
+			top: px(15px);
+			left: px(-40px);
+			width: px(150px);
+			@include rotate(-45deg);
 		}
 	}
 	
