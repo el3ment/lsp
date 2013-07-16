@@ -52,7 +52,7 @@
 
 					onAfterAPICallSuccess : function(e, data){
 
-						if(data.response.source.navPath){
+						if(data.response){
 
 							var navPathNodeList = data.response.source.navPath.navPathNodeList;
 
