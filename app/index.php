@@ -15,6 +15,6 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-error_reporting(E_ERROR);
+error_reporting(0);
  
 require 'webroot' . DIRECTORY_SEPARATOR . 'index.php';
