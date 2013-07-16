@@ -714,14 +714,15 @@
 
 	li[data-lifecyclestate="Discontinued"]{
 		
-		form{
+		> a, > div{
 			@include opacity(.25);
 		}
+		
 		.addToCart{
 			display: none !important;
 		}
 		
-		&:before{ /* Two colons to hide from IE8 */
+		&:after{ /* Two colons to hide from IE8 */
 
 			overflow: hidden;
 			padding: px($paddingUnit * 2) 0;
@@ -740,8 +741,9 @@
 			margin: 0 0 px($gutterWidth / 2) 0;
 			line-height:1emboss;
 			background-color: $superLightGrey;
+			z-index: 3;
 		}
-		&::before{ /* Only rotate for IE9 */
+		&::after{ /* Only rotate for IE9 */
 			position: absolute;
 			top: px(15px);
 			left: px(-40px);
