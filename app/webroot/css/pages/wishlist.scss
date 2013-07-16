@@ -11,16 +11,28 @@
 		@media (max-width: 767px){
 			width: 100%;
 		}
+
 	}
+
+
+
+
+	.findAnotherWishlist{
+		position: absolute;
+		top: 10px;
+		right: 10px;
+	}
+
 	// Paragraphs
 	.description{
 		margin: 0;
+		position: relative;
 	}
 
 	.table.wishlist{
 		display: none;
 		margin-top: 20px;
-		float:left;
+		float: left;
 	}
 
 	.wish-result{
@@ -71,22 +83,47 @@
 	.thumbnail{
 		float: left;
 		padding-right: 10px;
+		position: absolute;
+		left: 0;
+		top: 10px;
 	}
 	.options, .model{
 		display: block;
 	}
 	.product{
 		width: 50%;
+		padding-left: 110px;
+		position: relative;
+		min-height: 120px;
+		vertical-align: right;
 	}
 	.comments{
 		width: 25%;
 	}
+
+	form{
+		clear: both;
+		float: right;
+		.b1{
+			margin-right: 0;
+		}
+	}
 	.productPrice{
 		font-size: 19px;
+		float: right;
+	}
+	.productAvailability{
+		clear: both;
+		float: right;
+		margin-bottom: 10px;
 	}
 	.scroller{
 		float: left;
 		margin-right: 10px;
+	}
+
+	.remove{
+		text-align: right;
 	}
 
 	.comments .wish-update{
@@ -103,16 +140,17 @@
 		font-size: 13px;
 	}
 
+
 }
 
 #wishlist-messages p,
 #wishlist-messages > div,
+#isPrivate-saveMessage,
 .wish-text-saved{
 	display: none;
 	margin: 0;
 
 	&.h2{
-		color: black;
 		margin-top: 20px;
 	}
 }

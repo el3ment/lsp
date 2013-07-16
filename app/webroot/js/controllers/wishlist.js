@@ -112,9 +112,11 @@ function wishlistReady(bool)	{
 };
 function wishStatusText(public){
 	if(public == "T")	{
-		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true)				
+		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true);
+		$('#wishlistStatus').html('public');
 	}else{
-		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true)		
+		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true);
+		$('#wishlistStatus').html('private');	
 	}
 }
 function myWishlist(config){
