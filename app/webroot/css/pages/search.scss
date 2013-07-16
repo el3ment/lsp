@@ -714,10 +714,10 @@
 
 	li[data-lifecyclestate="Discontinued"]{
 		
-		> a, > div{
+		.thumbnail, .productName, .aggregateReviews, .features, .detailedDescription{
 			@include opacity(.25);
 		}
-		
+
 		.addToCart{
 			display: none !important;
 		}
@@ -745,9 +745,9 @@
 		}
 		&::after{ /* Only rotate for IE9 */
 			position: absolute;
-			top: px(15px);
-			left: px(-40px);
-			width: px(150px);
+			top: 29px;
+			left: -47px;
+			width: 196px;
 			@include rotate(-45deg);
 		}
 	}
