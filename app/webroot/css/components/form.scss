@@ -49,6 +49,9 @@ input[type="checkbox"], input[type="radio"]{
 
 input[type="text"], input[type="email"], input[type="tel"]{    
 	width: 100%;
+	padding: 13px;
+	position: relative;
+	top: -3px;
 }
 
 input[disabled], select[disabled], textarea[disabled]{
