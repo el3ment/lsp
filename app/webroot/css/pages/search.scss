@@ -714,7 +714,9 @@
 
 	li[data-lifecyclestate="Discontinued"]{
 		
-		.thumbnail, .productName, .aggregateReviews, .features, .detailedDescription{
+		overflow: hidden;
+
+		.thumbnail, .productName, .aggregateReviews, .features, .detailedDescription, .model{
 			@include opacity(.25);
 		}
 
