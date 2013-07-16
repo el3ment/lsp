@@ -14,7 +14,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 	top: 215px;
 	left: 0;
 	position: absolute;
-	z-index: 99; // In front of everything!
+	z-index: 200; // In front of everything!
 
 	&.reveal-open, &.reveal-open .wrapper {
 		height: auto;

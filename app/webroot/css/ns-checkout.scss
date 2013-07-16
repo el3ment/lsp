@@ -106,7 +106,7 @@
 // where possible, trying to 
 
 
-body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
+body .span12 > table{
 	position: relative;
 	// This width is affecting the homepage on IE8 causing elements not to line up properly.
 	width: 800px;
@@ -153,11 +153,13 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	tr[height="25"]{ height: 0; }
 
 	@media (max-width: 767px){
-		&, table, tr, td, tbody{
-			display: block !important;
-			width: 100% !important;
-			padding: 0 !important;
-			margin: 0 !important;
+		.portletHandle{
+			table, tr, td, tbody{
+				display: block !important;
+				width: 100% !important;
+				padding: 0 !important;
+				margin: 0 !important;
+			}
 		}
 	}
 	#main_form{
@@ -648,7 +650,7 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 	// The button row for cart
-	&.nscheckout-cart > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table{
+	#handle_cartMainPortlet > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table{
 		float: right;
 		margin-top: 10px !important;
 
@@ -880,8 +882,8 @@ body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"]{
 	}
 
 	&.nscheckout-register .changeContextLink{
-		//display: none;
-		outline: 1px solid red;
+		display: none;
+		//outline: 1px solid red;
 	}
 
 /*

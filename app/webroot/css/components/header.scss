@@ -364,7 +364,7 @@
 			font-size: px($largeInputFontSize);
 			padding : px($paddingUnit * 2+4, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
 			line-height: 24px;
-			
+			top: 0;
 		}
 
 		.search{
@@ -476,8 +476,8 @@
 		}
 	}
 	@media (max-width: 767px){
-		.established, .tagline, .wishlist{
-			display: none;
+		.established, .tagline, ul li.wishlist{
+			display: none !important; // important overrides login/logout detection
 		}
 		.image-logoCircle, .well{
 			width: 120px;

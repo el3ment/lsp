@@ -125,9 +125,19 @@
 
 	// Take the border off the bottom row
 	.category:first-child + .category + .category + .category 
-		+ .category + .category + .category + .category
+		+ .category + .category + .category + .category + .category
 		~ .category{
 			border-bottom-color: transparent;
+	}
+
+	@media (min-width: 1200px){
+		// at large desktop, we go 4 across, meaning we need to drop the 9th bottom border
+		.category:first-child + .category + .category + .category 
+			+ .category + .category + .category + .category
+			~ .category{
+				border-bottom-color: transparent;
+		}
+
 	}
 
 	@media (max-width: 979px) and (min-width: 768px){

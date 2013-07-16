@@ -221,6 +221,8 @@
 
 	.resultsContainer{
 		float: left;
+		clear: both;
+		width: 100%;
 	}
 
 	@media (max-width: 767px){
