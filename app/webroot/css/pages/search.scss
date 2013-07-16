@@ -711,6 +711,15 @@
 		}
 		
 	}
+
+	li[data-lifecyclestate="Discontinued"]{
+		
+		@include opacity(.25);
+
+		.addToCart{
+			display: none !important;
+		}
+	}
 	
 	@media (max-width: 400px){
 		// Hide the "Sort:" from the iphone - it's too skinny to fit
