@@ -333,7 +333,9 @@
 
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
 					.done(function(data){
-						_this.renderPage(data.response.source);
+						if(data.response){
+							_this.renderPage(data.response.source);
+						}
 					});
 			},
 			removeSearch : function(){
