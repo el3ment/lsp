@@ -8,16 +8,58 @@
 		width: 690px; // width + margin-left = pagewidth
 		@media (max-width: 767px) {
 			margin-left: 0;
-			width: 100%;
+			width: 90%;
 		}
 		position: relative;
 
 		.ad{
+			@include box-sizing();;
+			position: relateve;
 			margin-left:0;
+			padding: 20px 40px;
 			height: 460px;
 			width: 690px;
 			outline: 1px solid red;
 			float: left;
+
+			.banner {
+				position: absolute;
+				right: 0;
+				max-width: 100%;
+				z-index: 1;
+			}
+
+			.content {
+				position: relative;
+				width: 55%;
+				z-index: 2;
+
+				ul {
+					float: left;
+					width: 50%;
+					margin: 0;
+					padding: 0;
+				}
+			}
+
+			.description {
+				font-size: 1.25em;
+				line-height: 1.5em;
+			}
+
+			.list li {
+				margin-bottom: 1em;
+			}
+
+			.b2 {
+				float: left;
+				margin-top: 2em;
+				padding: 10px 15px;
+				clear: both;
+				&:after {
+					content: " \2192";
+				}
+			}
 		}
 
 		// Ad width when large desktop
@@ -36,12 +78,46 @@
 			}
 		}
 
+		@media (max-width: 767px){
+			&, .ad{
+				width: 727px;
+
+				.banner {
+					position: static;
+					max-height: 180px;
+				}
+			}
+		}
+
+		@media (max-width: 520px){
+			&, .ad{
+				width: 480px;
+
+				.banner {
+					position: static;
+					max-height: 140px;
+				}
+			}
+		}
+
+		@media (max-width: 400px){
+			&, .ad{
+				width: 360px;
+
+				.banner {
+					position: static;
+					max-height: 100px;
+				}
+			}
+		}
+
 		.arrow-holder{
 			margin-top: -16px;
+			z-index: 3;
 		}
 
 		.ad:first-child{
-			background-color: $lightGrey;
+			background-color: $white;
 		}
 		.ad + .ad { background-color: pink; }
 		.ad + .ad + .ad{ background-color: orange; }
