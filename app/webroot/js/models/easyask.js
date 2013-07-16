@@ -81,7 +81,16 @@
 				return (responseData || {}).returnCode === 0;
 			},
 
+			isRedirect : function(responseData){
+				return /((http|https)(:\/\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\/{1}[a-zA-Z0-9]+)*\/?/.test(responseData.errorMsg);
+			},
+
 			_afterSuccess : function(responseData){
+
+				if(_this.isRedirect(responseData)){
+					document.location = responseData.errorMsg;
+					return;
+				}
 				
 				_sessionId = responseData.sessionID;
 				
@@ -199,13 +208,13 @@
 
 				// Clean cachedAttributes that shoudn't be there
 				$.each(_attributeHistory, function(i, cachedAttribute){
+					
 					// If it's not been returned with Attributes
-
 					var fullPath = $(easyAskDataSourceObject.navPath.navPathNodeList).last()[0].seoPath;
 					var attributeSEOName = cachedAttribute.attributeValueList[0].nodeString.replace(/:.*/, '');
 
-					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){
-						// If it's neither returned, nor selected, it's ok to delete it from the cache						
+					// If it's neither returned, nor selected, it's ok to delete it from the cache	
+					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){					
 						delete _attributeHistory[cachedAttribute.name];
 					}
 				});
