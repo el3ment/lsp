@@ -52,28 +52,31 @@
 
 					onAfterAPICallSuccess : function(e, data){
 
-						var navPathNodeList = data.response.source.navPath.navPathNodeList;
+						if(data.response.source.navPath){
 
-						// Remove everything except categories, then remove trailing /
-						_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-						_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
-						_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
+							var navPathNodeList = data.response.source.navPath.navPathNodeList;
 
-						_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
-						
-						// Set the activeDataObject, used to rebuild matrix option selections
-						_activeDataObject = data;
+							// Remove everything except categories, then remove trailing /
+							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
 
-						// If we don't scroll first - the scroll position will be saved
-						// and you will jump around when clicking the back button
-						$.when(_this.scrollToFirst()).done(function(){
-							// onReady and onStateChange make use of preventPushState because those requests are
-							// administrative and shouldn't create new history entries
-							if(!data.xhrData.passthrough.preventPushState){
-								_this.pushState();
-							}
+							_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 							
-						});
+							// Set the activeDataObject, used to rebuild matrix option selections
+							_activeDataObject = data;
+
+							// If we don't scroll first - the scroll position will be saved
+							// and you will jump around when clicking the back button
+							$.when(_this.scrollToFirst()).done(function(){
+								// onReady and onStateChange make use of preventPushState because those requests are
+								// administrative and shouldn't create new history entries
+								if(!data.xhrData.passthrough.preventPushState){
+									_this.pushState();
+								}
+								
+							});
+						}
 					},
 
 					onAfterAPICallFailure : function(e, data){
