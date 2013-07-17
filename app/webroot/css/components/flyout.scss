@@ -345,29 +345,6 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				}
 			}
 
-			.price{
-
-				background-color: $yellow;
-				padding: 7px 10px;
-				display: block;
-				margin-top: 5px;
-				@include border-radius(5px);
-				float: left;
-				clear: both;
-				position: relative;
-				font-size: 13px;
-
-				.productGrouping{
-					font-size: 11px;
-					position: absolute;
-					bottom: 3px;
-					right: -155px;
-					width: 150px;
-					top: 50%;
-					margin-top: -7px;
-				}
-			}
-
 			// Main ad image
 			.productImage{
 				position: absolute;
