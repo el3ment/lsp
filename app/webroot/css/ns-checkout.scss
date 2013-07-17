@@ -2029,9 +2029,11 @@ body .span12 > table{
 	}
 
 	// The login page by itself needs to be full width
-	                   &.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr,
-	.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
-		width: 100% !important;
+	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
+		width: 600px !important;
+		margin-left: 50%;
+		position: relative;
+		left: -300px;
 	}
 
 	// Remove the top margin for the naked signup page
@@ -2045,6 +2047,23 @@ body .span12 > table{
 	}
 }
 
+// Login page by itself when not comming from a checkout screen
+.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
+	width: 600px;
+	margin-left: 50% !important;
+	position: relative !important;
+	left: -300px;
+	display: block;		
+
+	#tbl_submitter{
+		input{ padding-right: 153px; text-indent: -300px; z-index: 2; }
+		&:after{
+			padding-right: 10px;
+			content: ' Sign In';
+			margin-left: -165px;
+		}
+	}
+}
 
 // Hide the timeline from a normal login or a normal creation outside of checkout
 .header.large ~ .page-generic #newcust{
