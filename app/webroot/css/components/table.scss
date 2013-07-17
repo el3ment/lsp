@@ -20,4 +20,27 @@ table.table{
 		border-bottom: 1px solid $lightGrey;
 		padding: 10px;
 	}
+
+	@media (max-width: 767px){
+		thead{
+			display: none;
+		}
+		&, tr, td, tbody{
+			display: block !important;
+			@include box-sizing();
+		}
+		tbody td{
+			border-bottom: 0;
+			padding: 0;
+		}
+		tr{
+			padding: 10px 0;
+			border-bottom: 1px solid $lightGrey;
+			&:first-child{
+				border-top: 1px solid $lightGrey;
+			}
+		}
+	}
+
+
 }

@@ -112,9 +112,11 @@ function wishlistReady(bool)	{
 };
 function wishStatusText(public){
 	if(public == "T")	{
-		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true)				
+		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true);
+		$('#wishlistStatus').html('public');
 	}else{
-		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true)		
+		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true);
+		$('#wishlistStatus').html('private');	
 	}
 }
 function myWishlist(config){
@@ -124,7 +126,10 @@ function myWishlist(config){
 			myWishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + config.customer + "&s=lonestarpercussion&random=" + (Math.random() * today.getTime());
 		$.getScript(myWishUrl,function(data){
 			$("#wish-info").show();
-			if (data == "") config.messages.filter('.emptyWishlist').show();
+			if (data == ""){ 
+				config.messages.filter('.emptyWishlist').show();
+				$('#wishlistStatus').html('empty');	
+			}
 			else	{
 				var wishlist = $("#wishlist-wrapper tbody"),
 					wishMessages = $("#wishlist-messages > div"),
@@ -154,6 +159,7 @@ function myWishlist(config){
 								if (wishlist.find(".wishlistItem").length == 0) {
 									wishMessages.filter(".emptyWishlist").show();
 									wishlist.closest("table.wishlist").hide();
+									wishlist.closest("h2").hide();
 								}
 							});
 						});
@@ -176,7 +182,7 @@ function myWishlist(config){
 			}
 		});
 	}else{
-		config.messages.hide().filter(":last").show();
+		config.messages.hide().filter(".notLoggedIn").show();
 	} 
 }
 function addCustomer(customerId, customerName, customerLastName, customerEmail){
@@ -197,8 +203,17 @@ function searchWishlist(config){
 			else {
 				config.messages.eq(4).show();
 				wishResultsWrapper.find("a").click(function(){
+					
 					config.messages.eq(7).hide();
+
+					var resultNameAndTitle = $(this).text();
+					var name = LSP.utilities.cleanTrailing(resultNameAndTitle.substr(0, resultNameAndTitle.indexOf(' - ')));
+					if(name.length === 0){
+						name = resultNameAndTitle.substr(resultNameAndTitle.indexOf(' - ') + 3, 300);
+					}
 					$(this).parent().siblings().remove();
+					$('h2').html('Wishlist for ' + name).show();
+
 					wishlist.hide().find("tbody tr:not(#wish-item-template)").remove();
 					var customerId = $(this).next().val();
 					$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + customerId + "&s=" + config.site, function(){
@@ -236,24 +251,25 @@ function searchWishlist(config){
 					onReady : function(e, data){
 						var searchButton = $("#search-wish"),
 							searchText = $("#search-wish-text"),
-							wishMessages = $("#wishlist-messages p");
+							wishMessages = $("#wishlist-messages > div");
 						searchText
-							.val("Enter name or e-mail")
-							.focus(function(){
-								var $this = $(this);
-								if( $this.val() == "Enter name or e-mail" )
-									$this.val("")
-							})
-							.blur(function(){
-								var $this = $(this);
-								if( $this.val() == "" )
-									$this.val("Enter name or e-mail")
-							})
+							//.val("Enter name or e-mail")
+							// .focus(function(){
+							// 	var $this = $(this);
+							// 	// if( $this.val() == "Enter name or e-mail" )
+							// 	// 	$this.val("")
+							// })
+							// .blur(function(){
+							// 	var $this = $(this);
+							// 	// if( $this.val() == "" )
+							// 	// 	$this.val("Enter name or e-mail")
+							// })
 							.keyup(function(e){
 								if(e.keyCode == 13) searchButton.trigger("click");
 							});
 						searchButton.click(function(){
 							wishMessages.hide();
+							$('.resultsHeader').hide();
 							$("#wish-search-results").html("");
 							$("#wishlist-wrapper").hide().find("tbody tr:not(#wish-item-template)").remove();
 							if(searchText.val() != "")	{

@@ -275,13 +275,14 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				float: left;
 				clear: both;
 				font-size: 13px;
-				&:before{
+				&:after{
 					content: ' '; 
-					display: block; 
+					display: inline-block; 
 					width: 0; 
 					height: 0;
-					position: absolute;
 					z-index: 2;
+					position: relative;
+					top: 3px;
 				}
 			}
 
@@ -293,17 +294,14 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				.name {
 					padding-right: 22px;
 				}
-				.name:before{
-					border: px(12px) inset transparent;
-					border-top: px(12px) solid black; 
-					top: 5px;
-					right: 0;
+				.name:after{
+					border: 5px inset transparent;
+					border-top: 8px solid black;
 				}
 
 				&:hover{
-					.name:before{
-						border: px(12px) inset transparent;
-						border-top: px(12px) solid $yellow; 
+					.name:after{
+						border-top-color: $yellow; 
 					}
 				}
 			}
@@ -314,17 +312,14 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 					bottom: 10px;
 					top: auto
 				}
-				.name:before{
-					border: px(12px) inset transparent;
-					border-bottom: px(12px) solid black; 
-					top: -30px;
-					right: 30px;
+				.name:after{
+					border: px(5px) inset transparent;
+					border-bottom: px(8px) solid black; 
 				}
 
 				&:hover{
-					.name:before{
-						border: px(12px) inset transparent;
-						border-bottom: px(12px) solid $yellow; 
+					.name:after{
+						border-bottom-color: $yellow; 
 					}
 				}
 			}
@@ -338,17 +333,14 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				.name {
 					padding-right: 22px;
 				}
-				.name:before{
-					border: px(12px) inset transparent;
-					border-left: px(12px) solid black; 
-					top: 5px;
-					right: 0;
+				.name:after{
+					border: px(5px) inset transparent;
+					border-left: px(8px) solid black; 
 				}
 
 				&:hover{
-					.name:before{
-						border: px(12px) inset transparent;
-						border-left: px(12px) solid $yellow; 
+					.name:after{
+						border-left-color: $yellow; 
 					}
 				}
 			}
@@ -356,15 +348,20 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			// Main ad image
 			.productImage{
 				position: absolute;
-				right: -75px;
+				right: 0;
 				bottom: 0;
 				max-height: 100%;
-			}
 
-			// Change arrow color to yellow if hover over entire ad.
-			&:hover{
-				.name:before{
-					border-bottom-color: $yellow;
+				&.breakout{
+					right: -50px;
+				}
+
+				&.top{
+					top: 20px;
+				}
+
+				&.middle{
+					top: 50px;
 				}
 			}
 
