@@ -2044,3 +2044,16 @@ body .span12 > table{
 		margin-top: 135px !important;
 	}
 }
+
+
+// Hide the timeline from a normal login or a normal creation outside of checkout
+.header.large ~ .page-generic #newcust{
+
+	.checkoutprogresstext{
+		display: none;
+	}
+
+	> table{
+		margin-top: 20px;
+	}
+}
