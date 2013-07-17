@@ -5,6 +5,7 @@
 	margin:0 auto px(15px);
 	position: relative;
 	width: 100%;
+	float: none; // This is to fix a positioning bug in firefox
 	background: url(../img/dark_pattern.jpg);
 	
 	@include clearfix;
