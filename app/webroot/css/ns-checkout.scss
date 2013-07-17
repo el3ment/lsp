@@ -889,7 +889,7 @@ body .span12 > table{
 		display:block;
 	}
 	// "New Customer? Create an account"
-	&.ns-login .changeContextLink{
+	&.nscheckout-login .changeContextLink{
 		top: -45px;
 	}
 
@@ -2029,9 +2029,9 @@ body .span12 > table{
 	}
 
 	// The login page by itself needs to be full width
-	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr{
-		width: 600px !important;
-		margin: 0 100px !important;
+	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr,
+	.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr:first-child{
+		width: 100% !important;
 	}
 
 	// Remove the top margin for the naked signup page
