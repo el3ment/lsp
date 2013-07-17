@@ -121,7 +121,7 @@
 		padding-right: 10px;
 		position: absolute;
 		left: 0;
-		top: 10px;
+		//top: 10px; // commented out because firefox was positing it from the top of the table not the cell
 	}
 	.options, .model{
 		display: block;
