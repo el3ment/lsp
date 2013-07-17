@@ -1,3 +1,25 @@
+.ad .price{
+	background-color: $yellow;
+	padding: 7px 10px;
+	display: block;
+	margin-top: 5px;
+	@include border-radius(5px);
+	float: left;
+	clear: both;
+	position: relative;
+	font-size: 13px;
+
+	.productGrouping{
+		font-size: 11px;
+		position: absolute;
+		bottom: 3px;
+		right: -155px;
+		width: 150px;
+		top: 50%;
+		margin-top: -7px;
+	}
+}
+
 .page-home{
 
 	#mainSlider{
@@ -22,9 +44,9 @@
 			outline: 1px solid red;
 			float: left;
 
+
 			.banner {
 				position: absolute;
-				right: 0;
 				max-width: 100%;
 				z-index: 1;
 			}
@@ -39,6 +61,36 @@
 					width: 50%;
 					margin: 0;
 					padding: 0;
+				}
+			}
+
+			.price:before {
+				width: 0;
+			}
+
+			&.slide-banner-right {
+				.banner {
+					right: 0;
+				}
+				.price{
+					right: 75px;
+				}
+			}
+			&.slide-banner-left {
+				.content {
+					float: right;
+				}
+				.banner {
+					left: 0;
+				}
+				//These price labels will probably need to be updated on an image by image basis
+				.price{
+					left: 60px;
+					&:before{
+						border: px(8px) solid transparent;
+						border-top: px(8px) solid black; 
+						right: 0;
+					}
 				}
 			}
 
@@ -60,6 +112,16 @@
 					content: " \2192";
 				}
 			}
+
+			.price{
+				position: absolute;
+				z-index: 3;
+				&:before{
+					content: "";
+					position: absolute;
+				}
+			}
+
 		}
 
 		// Ad width when large desktop
@@ -69,33 +131,83 @@
 
 			&, .ad{
 				width: 925px;
-			}
-		}
-
-		@media (max-width: 979px) and (min-width: 768px){
-			&, .ad{
-				width: 475px;
-			}
-		}
-
-		@media (max-width: 767px){
-			&, .ad{
-				width: 727px;
-
-				.banner {
-					position: static;
-					max-height: 180px;
+				.content {
+					width: 60%;
+				}
+				.price {
+					top: 30px;
+					&:before{
+						border: px(8px) solid transparent;
+						border-top: px(8px) solid black; 
+						top: 40px;
+						left: 0;
+					}
 				}
 			}
 		}
 
+		@media (min-width: 980px) and (max-width: 1199px){
+			&, .ad{
+				.price {
+					top: 30px;
+					&:before{
+						border: px(8px) solid transparent;
+						border-top: px(8px) solid black; 
+						top: 40px;
+						left: 0;
+					}
+				}
+			}
+		}
+		@media (max-width: 979px) and (min-width: 768px){
+			&, .ad{
+				width: 475px;
+				padding: 10px;
+				.banner {
+					bottom: 50px;
+					max-width: 50%;
+				}
+				.content {
+					float: none;
+					width: 100%;
+				}
+				.features ul {
+					float: none;
+				}
+				.price {
+					bottom: 30px;
+					&:before{
+						border: px(8px) solid transparent;
+						border-bottom: px(8px) solid black; 
+						top: 0;
+						left: -20px;
+					}
+				}
+			}
+		}
+
+		// @media (max-width: 767px){
+		// 	We have more room here, so we just display as normal
+		// }
+
 		@media (max-width: 520px){
 			&, .ad{
 				width: 480px;
-
 				.banner {
 					position: static;
-					max-height: 140px;
+					max-width: 100%;
+					max-height: 200px;
+					float: right;
+				}
+				.content {
+					float: none;
+					width: 100%;
+				}
+				.description {
+					display: none;
+				}
+				.b2 {
+					margin-top: 0;
 				}
 			}
 		}
@@ -103,10 +215,21 @@
 		@media (max-width: 400px){
 			&, .ad{
 				width: 360px;
-
 				.banner {
 					position: static;
-					max-height: 100px;
+					max-width: 100%;
+					max-height: 200px;
+					float: right;
+				}
+				.content {
+					float: none;
+					width: 100%;
+				}
+				.description {
+					display: none;
+				}
+				.b2 {
+					margin-top: 0;
 				}
 			}
 		}
@@ -116,10 +239,6 @@
 			z-index: 3;
 		}
 
-		.ad:first-child{
-			background-color: $white;
-		}
-		.ad + .ad { background-color: pink; }
 		.ad + .ad + .ad{ background-color: orange; }
 	}
 
