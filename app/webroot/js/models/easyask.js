@@ -443,7 +443,8 @@
 
 
 			convertToSEOString : function(string){
-				return string.replace(/[^A-Za-z0-9:]/g, '-') 
+				return string.replace(/'/g, '') // remove apostrphes which are skipped by the next line
+					.replace(/[^A-Za-z0-9:]/g, '-') //Everything not a A-Z or 0-9
 					.replace(/-{1,}/g, '-') // two or more -
 					.replace(/-$/, '') // end with -
 					.replace(/:-/, ':'); // remove starting - from any values
