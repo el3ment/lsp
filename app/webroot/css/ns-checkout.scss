@@ -135,6 +135,18 @@ body .span12 > table{
 		a{
 			color: #bb0000;
 			text-decoration: underline;
+			
+			// Sometimes netsuite adds the .checkoutwarning class to a link in the warning
+			// so we need to back out of the key properties.
+			background-color: transparent !important;
+			position: static;
+			margin: 0;
+			padding: 0 !important;
+
+			&:hover{
+				text-decoration: none;
+			}
+
 		}
 
 	}
@@ -793,7 +805,7 @@ body .span12 > table{
 					right: 5px;
 
 					// Enough padding for the extra content
-					input{ padding-right: 160px; text-indent: -300px; }
+					input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
 					&:after{
 						padding-right: 10px;
 						content: ' Checkout As Guest';
@@ -832,7 +844,7 @@ body .span12 > table{
 					bottom:10px;
 					right: 5px;
 
-					input{ padding-right: 65px; text-indent:-300px; }
+					input{ padding-right: 65px; text-indent:-300px; z-index: 2;}
 					
 					&:after{
 						position: absolute;
@@ -1225,14 +1237,10 @@ body .span12 > table{
 	 		}
  		}
  		#tbl_submitter{
- 			// &:after{
- 			// 	content : 'Continue Checkout';
- 			// 	input{
- 			// 		text-indent: -400px;
- 			// 		padding-right: 100px;
- 			// 	}
- 			// }
- 			input{ padding-right: 160px; text-indent: -300px; }
+ 			
+ 			// TODO : move this code to a mixin
+
+ 			input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
 			&:after{
 				padding-right: 10px;
 				content: 'Continue Checkout';
