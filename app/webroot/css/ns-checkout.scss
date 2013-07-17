@@ -2029,8 +2029,8 @@ body .span12 > table{
 	}
 
 	// The login page by itself needs to be full width
-	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr,
-	.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr:first-child{
+	                   &.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody >tr > td > table > tbody > tr,
+	.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
 		width: 100% !important;
 	}
 
