@@ -2056,4 +2056,13 @@ body .span12 > table{
 	> table{
 		margin-top: 20px;
 	}
+
+	#tbl_submitter{
+		input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
+		&:after{
+			padding-right: 10px;
+			content: ' Create Account';
+			margin-left: -165px;
+		}
+	}
 }
