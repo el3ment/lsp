@@ -336,22 +336,24 @@
 				position: absolute;
 				font-weight: bold;
 				padding: px(3px) px(7px);
-				right: px(27px);
+				right: px(18px);
 				top: px(13px);
 				@include border-radius(px(3px));
 				text-shadow: 0 1px $saturatedHighlightYellow; /* Intentionally 1px, not in EMs */
 		
-				&:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
-				  border-color: white transparent transparent transparent;
-				  border-style:solid;
-				  border-width: px(5px);
-				  width:0;
-				  height:0;
-				  content: '';
-				  position: absolute;
-				  top: px(9px);
-				  right: px(-18px);
-				}
+				// NOT PERMANANT!
+				// Hide the down arrow for right now until we write the dropdown code
+				// &:after{ /* We need .b3:after for the icon, so we'll use .b3 count:after for the little down arrow */
+				//   border-color: white transparent transparent transparent;
+				//   border-style:solid;
+				//   border-width: px(5px);
+				//   width:0;
+				//   height:0;
+				//   content: '';
+				//   position: absolute;
+				//   top: px(9px);
+				//   right: px(-18px);
+				// }
 				@include box-shadow-multiple(0px 1px 1px 1px #25211c, 0 1px 1px 0px #fdf8a6 inset); /* Intentionally 1px */
 				@include gradient($lightYellow, $yellow);
 			}
