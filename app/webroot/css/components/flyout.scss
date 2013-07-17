@@ -265,7 +265,6 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				z-index: 1;
 				color: black;
 				text-decoration: none;
-				max-width: 300px;
 				font-size: 13px;
 			}
 
@@ -275,6 +274,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				float: left;
 				clear: both;
 				font-size: 13px;
+				
 				&:after{
 					content: ' '; 
 					display: inline-block; 
