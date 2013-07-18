@@ -33,6 +33,14 @@
 	}
 }
 
+/*firefox only hack*/
+@-moz-document url-prefix() { 
+  .aggregateReviews a{
+	left: 100px;
+	top: -7px;
+  }
+}
+
 .reviews{
 
 	// Temporary until we write the functionality for this
