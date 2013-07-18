@@ -22,11 +22,11 @@
 						_this.updateProduct();
 						addToWishlist({
 							customer: $('input[name="customer"]').val(),
-							item: $('.shopping.section input[name="itemid"]').val(),
+							item: $('.shopping.section input[name="itemid"]'),
 							site: 'lonestarpercussion',
 							options : $('.shopping.section select'),
-							qty: $('.shopping.section input[name="qty"]').val(),
-							messages: $("#wishlist-messages p")
+							qty: $('.shopping.section input[name="qty"]'),
+							messages: $("#wishlist-messages > div")
 						});
 					}
 				},
@@ -139,62 +139,68 @@
 				var selectedOptions = {};
 
 				// Create an object of selected options to test against the formattedObject (the source)
-				$('select', form)
+				var selects = $('select', form)
 					.each(function(i, element){
 						selectedOptions[$(element).attr('name')] = $(element).val();
 					});
 				
-				$('button.b1', form).attr('disabled', true);
+				if(selects.length){
+					$('button.b1', form).attr('disabled', true);
+					$('input[name="buyid"]', form).val('');
+					$('input[name="itemid"]', form).val('');
 
-				// Loop through the formattedMatrix (source of all attributes) and if we find an id that
-				// matches the filter criteria, then set the id
-				$.each(easyAskMatrixData.products, function(id, productData){
-					for(var label in productData.options){
-						// If it's not present, or if it exists, but is another value
-						if(!selectedOptions[label] || selectedOptions[label] !== productData.options[label])
-							return;
-					}
-
-					_this.detachZoom();
-
-					var entry = $(form).parents('.entry');
-					// If we've made it here, it's because we've found an ID that matches the filters
-					// Update all the changing nick nacks in the item listing
-					$('input[name="buyid"]', entry).val(id); // Set the buyid
-					$('button.b1', form).removeAttr('disabled');
-
-					// "You save $x" - we hide it if the save amount is < 0 (it would be an error, so this is just to be safe)
-					if(productData.data.msrp - productData.data.onlinePrice <= 0){
-						$('.price .details', entry).hide();
-					}else{
-						$('.price .details', entry).show();
-					}
-
-					$('.productPrice', entry).html(_util.parseCurrency(productData.data.onlinePrice));
-					$('.productMpn', entry).html(productData.data.mpn);
-					$('.productDiscount', entry).html(_util.parseCurrency(productData.data.msrp - productData.data.onlinePrice));
-
-					var optionArray = [];
-					for(var label in productData.options){
-						if(productData.options.hasOwnProperty(label)){
-							optionArray.push(productData.options[label]);
+					// Loop through the formattedMatrix (source of all attributes) and if we find an id that
+					// matches the filter criteria, then set the id
+					$.each(easyAskMatrixData.products, function(id, productData){
+						
+						for(var label in productData.options){
+							// If it's not present, or if it exists, but is another value
+							if(!selectedOptions[label] || selectedOptions[label] !== productData.options[label])
+								return;
 						}
-					}
 
-					$('.productName .options', entry).html(' : ' + optionArray.join(', '));
+						_this.detachZoom();
 
-					var size = $('.thumbnail img, #zoom-mainImage img', entry).width();
-					
-					var img = $('.thumbnail img, #zoom-mainImage img', entry)
+						var entry = $(form).parents('.entry');
+						// If we've made it here, it's because we've found an ID that matches the filters
+						// Update all the changing nick nacks in the item listing
+						$('input[name="buyid"]', form).val(id); // Set the buyid
+						$('input[name="itemid"]', form).val(id);
+						$('button.b1', form).removeAttr('disabled');
 
-					img.attr('src', productData.data.imageUrl + '.' + size + 'x' + size);
-					
+						// "You save $x" - we hide it if the save amount is < 0 (it would be an error, so this is just to be safe)
+						if(productData.data.msrp - productData.data.onlinePrice <= 0){
+							$('.price .details', entry).hide();
+						}else{
+							$('.price .details', entry).show();
+						}
 
-					$('.productAvailability', entry).html(productData.data.stockMessage);
-					
-					_this.attachZoom();
+						$('.productPrice', entry).html(_util.parseCurrency(productData.data.onlinePrice));
+						$('.productMpn', entry).html(productData.data.mpn);
+						$('.productDiscount', entry).html(_util.parseCurrency(productData.data.msrp - productData.data.onlinePrice));
 
-				})
+						var optionArray = [];
+						for(var label in productData.options){
+							if(productData.options.hasOwnProperty(label)){
+								optionArray.push(productData.options[label]);
+							}
+						}
+
+						$('.productName .options', entry).html(' : ' + optionArray.join(', '));
+
+						var size = $('.thumbnail img, #zoom-mainImage img', entry).width();
+						
+						var img = $('.thumbnail img, #zoom-mainImage img', entry)
+
+						img.attr('src', productData.data.imageUrl + '.' + size + 'x' + size);
+						
+
+						$('.productAvailability', entry).html(productData.data.stockMessage);
+						
+						_this.attachZoom();
+
+					})
+	}
 			},
 			
 			// Returns product specs

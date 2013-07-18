@@ -285,6 +285,16 @@ ol.list{
 		width: px(19px);
 		height: px(19px);
 	}
+
+	a{
+		color: black;
+	}
+	
+	.details{
+		a{
+			color: $grey;
+		}
+	}
 }
 
 /* Temporary hiding of compare functionality */

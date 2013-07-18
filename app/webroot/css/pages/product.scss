@@ -7,10 +7,6 @@
 	.b3{
 		float: left;
 	}
-	.head .aggregateReviews, .head > .details{
-		position: relative;
-		top: -10px;
-	}
 
 	// Show the disabled button on matrix parents, hide it on normal items
 	&.matrixType-PARENT .action .b1, 
@@ -34,6 +30,14 @@
 				@include lsp-sprite-background();
 				background-position: -254px -223px;
 			}	
+	}
+
+	#wishlist-messages{
+		margin-top:10px;
+		margin-bottom:0;
+		a{
+			display: inline;
+		}
 	}
 	
 	.byline{

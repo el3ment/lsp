@@ -82,7 +82,10 @@
 			margin-bottom: px($paddingUnit);
 			margin-left: 0;
 		}
-		.b5[data-action="addToWishlist"]{ display: block;}
+		.b5[data-action="addToWishlist"]{ 
+			display: block;
+			margin-top: 10px;
+		}
 		a{ display:block; }
 	}
 }

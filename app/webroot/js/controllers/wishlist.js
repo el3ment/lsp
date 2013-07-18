@@ -35,13 +35,13 @@ function addToWishlist(config){
 	config.messages.hide();
 	if (config.customer != "")	{
 		var options = "";
-		if (config.options.length == config.options.filter("[value!='']").length) {
+		if (config.options.length > 0 && config.options.find("option:selected").length === config.options.length && (config.item.val() || '').length > 0) {
 			config.options.each(function(){
 				var optionValue = this.id, optionName = $(this).attr('name'),
 					selected = $(this).find("option:selected"), selectedValue = selected.val(), selectedLabel = selected.text();
 				options += optionName + "=" + optionName + "==" + escape(selectedLabel) + "=" + escape(selectedLabel) + ";";
 			});
-			var wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_add_item_wishlist&deploy=customdeploy_add_item_wishlist&i=" + config.item + "&j=" + config.customer + "&q=1&s=" + config.site + "&o=" + options;
+			var wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_add_item_wishlist&deploy=customdeploy_add_item_wishlist&i=" + config.item.val() + "&j=" + config.customer + "&q=1&s=" + config.site + "&o=" + options;
 			$.getScript(wishUrl, function(){
 				$("#add-wishlist").hide();
 				config.messages.eq(0).show();
