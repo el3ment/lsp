@@ -3,10 +3,36 @@
 	display: inline-block;
 	position: relative;
 	width: 100%;
+	
 	@media (min-width: 980px) {
 		padding-left: px(columns(2) + $gutterWidth);
 	}
+
 	@include box-sizing();
+
+
+	// For the time being until we add functionality to add to car
+	input{ display: none; }
+	a{
+		&:hover{
+			.productName{
+				text-decoration: underline;
+			}
+		}
+		&:before{
+			content: ' ';
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-color: white;
+			position: absolute;
+			z-index: 2;
+			@include opacity(.01);
+			@include box-sizing();
+		}
+	}
+
+
 	
 	.productPrice{ 
 		font-weight: 800;
@@ -240,7 +266,11 @@
 	}
 	.addToCart{
 		
-		display: inline-block;
+
+		// hide until we add the functionality for this
+		//display: inline-block;
+		display: none;
+
 		float: left;
 		clear: both;
 		margin-top:5px;

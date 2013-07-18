@@ -19,6 +19,9 @@
 
 	.isAuthorized{
 		
+		position: relative;
+		top: -8px;
+
 		&:after{
 				content: ' ';
 				width: 141px;
