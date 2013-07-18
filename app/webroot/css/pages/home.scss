@@ -104,7 +104,7 @@
 			}
 
 			.b2 {
-				float: left;
+				float: right;
 				margin-top: 2em;
 				padding: 10px 15px;
 				clear: both;
@@ -157,6 +157,10 @@
 						left: 0;
 					}
 				}
+
+				.b2 {
+					margin: 55px 35px 0 0;
+				}
 			}
 		}
 		@media (max-width: 979px) and (min-width: 768px){
@@ -164,7 +168,7 @@
 				width: 475px;
 				padding: 10px;
 				.banner {
-					bottom: 50px;
+					bottom: 15px;
 					max-width: 50%;
 				}
 				.content {
@@ -175,20 +179,21 @@
 					float: none;
 				}
 				.price {
-					bottom: 30px;
-					&:before{
-						border: px(8px) solid transparent;
-						border-bottom: px(8px) solid black; 
-						top: 0;
-						left: -20px;
-					}
+					bottom: 0;
+				}
+
+				.b2 {
+					float: left;
 				}
 			}
 		}
 
-		// @media (max-width: 767px){
-		// 	We have more room here, so we just display as normal
-		// }
+		@media (max-width: 767px){
+			.ad .b2 {
+				margin-right: 35px;
+				margin-top: 45px;
+			}
+		}
 
 		@media (max-width: 520px){
 			&, .ad{
@@ -208,6 +213,15 @@
 				}
 				.b2 {
 					margin-top: 0;
+				}
+			}
+			.ad.slide-banner-right .price {
+				right: 65px;
+				top: 0;
+				&:before{
+					border: px(8px) solid transparent;
+					border-top: px(8px) solid black; 
+					left: -20px;
 				}
 			}
 		}
