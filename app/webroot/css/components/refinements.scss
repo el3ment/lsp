@@ -144,7 +144,8 @@
 			
 			font-weight: bold;
 			position: relative;
-			left: -10px;
+			//left: -10px;
+			padding-left: 13px;
 
 			&:before,
 			.leftLinkBold:before{
@@ -154,6 +155,8 @@
 				color: $lightGrey;
 				float: left;
 				padding-right: 2px;
+				position: absolute;
+				left: 0;
 			}
 			&:hover{
 				&:before{

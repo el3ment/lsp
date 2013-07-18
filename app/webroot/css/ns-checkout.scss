@@ -2031,8 +2031,8 @@ body .span12 > table{
 	// The login page by itself needs to be full width
 	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
 		width: 600px !important;
-		margin-left: 50%;
-		position: relative;
+		margin-left: 50% !important	;
+		position: relative !important;
 		left: -300px;
 	}
 
@@ -2048,7 +2048,7 @@ body .span12 > table{
 }
 
 // Login page by itself when not comming from a checkout screen
-.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
+.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr{
 	width: 600px;
 	margin-left: 50% !important;
 	position: relative !important;
