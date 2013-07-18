@@ -15,15 +15,15 @@
 		text-indent: $hideDistance;
 		overflow: hidden;
 	}
-	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px); margin-right: 100px; }
-	.reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px); margin-right: 80px; }
-	.reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px); margin-right: 60px;}
-	.reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px); margin-right: 40px;}
-	.reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px); margin-right: 20px;}
-	.reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px); margin-right: 0px;}
+	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px);}
+	.reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px);}
+	.reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px);}
+	.reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px);}
+	.reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px);}
+	.reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px);}
 	a{
-		position: relative;
-		top: -3px;
+		position: absolute;
+		left: 100px;
 	}
 	.reviewCountLabel{
 		padding-left: 100px; // Positioning in firefox
@@ -31,14 +31,6 @@
 		&:before{ content: '('; }
 		&:after{ content: ')'; }
 	}
-}
-
-/*firefox only hack*/
-@-moz-document url-prefix() { 
-  .aggregateReviews a{
-	left: 100px;
-	top: -7px;
-  }
 }
 
 .reviews{
