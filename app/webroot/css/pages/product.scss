@@ -14,7 +14,7 @@
 	&.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
 
 	.has0Reviews{
-		display: none !important;
+		visibility: hidden !important;
 	}
 
 	.isAuthorized{
