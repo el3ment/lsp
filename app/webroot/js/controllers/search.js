@@ -310,10 +310,13 @@
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
 				_state.category = path;
 				
+				// If the path has .html in it - remove the filename and use the category
 				if(path.indexOf('.html')){
 					_state.category = path.substring(0, path.lastIndexOf("/"));
 				}
-				_state.category = _state.category.replace(/^\/$/, '');
+
+				// if it's only a /
+				_state.category = (_state.category === '/' ? '' : _state.category);
 
 				if(_state.keywords){
 					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
