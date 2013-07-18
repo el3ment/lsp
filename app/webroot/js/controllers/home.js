@@ -18,7 +18,7 @@
 				},
 				flyout : {
 					onAfterAttach : function(e, data){
-						if(_remainOpen){
+						if(_remainOpen && document.location.hash.indexOf('/~search') === -1){
 							_app.controllers.flyout.openFlyout(true);
 						}
 					}

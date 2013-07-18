@@ -243,11 +243,16 @@
 				application : {
 
 					onStateChange : function(e, data){
-						_this.loadCurrentState();
+						if(_app.controllers.application.pullState(_this)){
+							_this.loadCurrentState();
+						}else{
+							// We must have gone back to a .html page
+							document.location.reload();		
+						}
 					},
 
 					onReady : function(e, data){
-						if(_app.controllers.application.pullState(_this) || $('.loading.search').length){
+						if(_app.controllers.application.pullState(_this)){
 							_this.loadCurrentState();
 						}
 					},
@@ -296,12 +301,19 @@
 			},
 
 			pullState : function(state){
-				
+
+				var path = document.location.pathname;
+
 				state = state || {};
 				_state = $.extend(_state, state);
 
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
-				_state.category = document.location.pathname.replace('/search.html', '').replace(/^\/$/, '');
+				_state.category = path;
+				
+				if(path.indexOf('.html')){
+					_state.category = path.substring(0, path.lastIndexOf("/"));
+				}
+				_state.category = _state.category.replace(/^\/$/, '');
 
 				if(_state.keywords){
 					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
@@ -316,9 +328,8 @@
 				
 				// Populate the input with the search keywords
 				$('input[name="searchQuery"]').val(_state.keywords);
-
 				// Load the state only if the new state is different from the old state (tmpState)
-				if(!_util.isEqual(tmpState, _state) && (_state.category.indexOf('.html') === -1 && document.location.hash.indexOf('/~search'))){
+				if(!_util.isEqual(tmpState, _state) && document.location.hash.indexOf('/~search')){
 					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}
