@@ -1,4 +1,17 @@
 
+// In the event that the page is going to change contexts, a script in the head
+// will add search-loading to the HTML element (the only parent avaliable) so we
+// can hide the default display elements
+// for example : visit a category page with a search keyword and the categories will be hidden
+// and the search result, when it finishes, will populate the page
+.search-loading{
+	.breadcrumbs{
+		display: none;
+	}
+	.page-generic{
+		visibility: hidden;
+	}
+}
 
 // Netsuite's crappy pagination
 #handle_itemMainPortlet{

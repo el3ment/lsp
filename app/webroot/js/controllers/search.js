@@ -36,6 +36,7 @@
 						var searchTemplate = $('#templates-search-page');
 
 						if(searchTemplate.length){
+							var height = $('.page-generic').height();
 							$('.page-search').addClass('loading');
 						}else{
 							// If we can't load the results on this page, we'll need to redirect them to a page built for searching	
@@ -46,7 +47,8 @@
 					},
 					
 					onAfterAPICall : function(e, data){
-						$('.page-search').removeClass('loading');
+						$('.page-search, .page-generic').removeClass('loading');
+						$('html').removeClass('search-loading');
 						_isFirstRequest = false;
 					},
 
@@ -469,8 +471,13 @@
 
 					// If the page hasn't been injected yet
 					if(!$('.page-search').length){
+						
+						// Doing it via a node rather than directly into the after()
+						// prevents the page from shrinking height while rendering
 						var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
-						$('.page-generic').after(pageHTML).hide();
+						var searchPageNode = $.parseHTML(pageHTML);
+						$('.page-generic').after(searchPageNode).hide();
+
 						_app.controllers.application.attachEvents($('.page-search'));
 					}
 
