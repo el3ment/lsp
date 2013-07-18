@@ -11,7 +11,7 @@
 		var _util = _app.utilities;
 		
 		var _state = {};
-		var _mainTable = 'body .span12 > table > tbody > tr > td > table';
+		var _mainTable = 'body .span12 > table';
 		
 		_this =  {
 			events : {
@@ -32,7 +32,7 @@
 						}
 					},
 					onEnterShippingAddress : function(e, data){
-						$(_mainTable + ' > tbody > tr.portletHandle:first-child + .noprint + .portletHandle:not(:has(#address))')
+						$(_mainTable + ' > tbody > tr > td > table > tbody > tr.portletHandle:first-child + .noprint + .portletHandle:not(:has(#address))')
 							.attr('style', 'display: none !important;');
 					},
 					onEnterBillingAddress : function(e, data){

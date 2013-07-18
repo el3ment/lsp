@@ -139,7 +139,7 @@
 			},
 			
 			assets : {},
-			
+
 			getContext : function(){
 				return _context;
 			},
@@ -271,6 +271,16 @@
 					filename : _this.getFilename(),
 					queryParameters : _util.getURLParameters()
 				};
+			},
+
+			requiresNetsuite : function(){
+				if(typeof debugAlert === 'undefined'){
+					_this.include('/js/vendors/netsuite/interface.js');
+				}
+			},
+
+			include : function(filename){
+				head.js('https://dev.lonestarpercussion.com' + filename);
 			},
 
 			initializeGlobalEvents : function(){

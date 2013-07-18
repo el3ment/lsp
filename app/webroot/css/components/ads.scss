@@ -31,9 +31,8 @@
 	}
 	.productImage{
 		position: absolute;
-		left: -10px;
-		top: 50%;
-		margin-top:-95px;
+		left: 0;
+		bottom: 0;
 	}
 	.description{
 		width: 100%;
@@ -47,7 +46,6 @@
 			width: 140px;
 			height: 140px;
 			margin-top: 0;
-			margin-left: 10px;
 			top: 0;
 
 			img{

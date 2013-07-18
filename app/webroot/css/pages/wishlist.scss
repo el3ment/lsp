@@ -54,6 +54,7 @@
 		display: none;
 		margin-top: 10px;
 		float: left;
+		width: 100%;
 	}
 
 	.wish-result{
@@ -120,7 +121,7 @@
 		padding-right: 10px;
 		position: absolute;
 		left: 0;
-		top: 10px;
+		//top: 10px; // commented out because firefox was positing it from the top of the table not the cell
 	}
 	.options, .model{
 		display: block;
@@ -221,6 +222,8 @@
 
 	.resultsContainer{
 		float: left;
+		clear: both;
+		width: 100%;
 	}
 
 	@media (max-width: 767px){

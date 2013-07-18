@@ -154,6 +154,22 @@ ul.list li,
 	margin-bottom: 3px;
 }
 
+ol.list{
+
+	margin-left: 18px;
+	margin-bottom: 10px;
+	
+	li{
+
+		list-style: decimal;
+		margin-left: 18px;
+
+		&.header{
+			list-style: none;
+		}
+	}
+}
+
 .withChevron{
 
 	outline: 1px solid red;

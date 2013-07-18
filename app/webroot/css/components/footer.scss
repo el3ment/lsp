@@ -22,7 +22,7 @@
 		width: 100%;
 		min-height: 70px;
 		/* overflow: hidden; /* Stylistic decision */
-		margin-top: px(30px); /* 20px + 10 for the top of the profile image */
+		margin-top: px(80px); /* 20px + 10 for the top of the profile image + extra*/
 		
 		
 		@media (max-width: 767px){
@@ -48,9 +48,7 @@
 				width: 100%;
 				height: 100%;
 				@include border-radius(px(150px));
-				background-size: 238%;
-				background-position: -99px -1px;
-				background-image: url("http://i.imgur.com/vVXNu.jpg");
+				background-image: url("http://s4.lonestarpercussion.com/resize/images/we-speak-drum-staff.png");
 			}
 		}
 		.content{

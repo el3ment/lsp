@@ -14,7 +14,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 	top: 215px;
 	left: 0;
 	position: absolute;
-	z-index: 99; // In front of everything!
+	z-index: 200; // In front of everything!
 
 	&.reveal-open, &.reveal-open .wrapper {
 		height: auto;
@@ -265,7 +265,6 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				z-index: 1;
 				color: black;
 				text-decoration: none;
-				max-width: 300px;
 				font-size: 13px;
 			}
 
@@ -275,6 +274,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				float: left;
 				clear: both;
 				font-size: 13px;
+				
 				&:after{
 					content: ' '; 
 					display: inline-block; 
@@ -291,9 +291,9 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 					right: 20px;
 					top: 80px;
 				}
-				.name {
-					padding-right: 22px;
-				}
+				// .name {
+				// 	padding-right: 22px;
+				// }
 				.name:after{
 					border: 5px inset transparent;
 					border-top: 8px solid black;
@@ -342,6 +342,29 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 					.name:after{
 						border-left-color: $yellow; 
 					}
+				}
+			}
+
+			.price{
+
+				background-color: $yellow;
+				padding: 7px 10px;
+				display: block;
+				margin-top: 5px;
+				@include border-radius(5px);
+				float: left;
+				clear: both;
+				position: relative;
+				font-size: 13px;
+
+				.productGrouping{
+					font-size: 11px;
+					position: absolute;
+					bottom: 3px;
+					right: -155px;
+					width: 150px;
+					top: 50%;
+					margin-top: -7px;
 				}
 			}
 

@@ -711,6 +711,48 @@
 		}
 		
 	}
+
+	li[data-lifecyclestate="Discontinued"]{
+		
+		overflow: hidden;
+
+		.thumbnail, .productName, .aggregateReviews, .features, .detailedDescription, .model{
+			@include opacity(.25);
+		}
+
+		.addToCart{
+			display: none !important;
+		}
+		
+		&:after{ /* Two colons to hide from IE8 */
+
+			overflow: hidden;
+			padding: px($paddingUnit * 2) 0;
+			width: 100%;
+			display: block;
+			top: px(-$paddingUnit);
+			font-weight: 800;
+			text-align: center;
+			content: 'Discontinued';
+			color: $superDarkGrey;
+			letter-spacing: px(1px);
+			text-transform: uppercase;
+			text-shadow : 0 1px $saturatedHighlightGrey;
+			border : 1px solid $lightGrey;
+			border-width: 1px 0;
+			margin: 0 0 px($gutterWidth / 2) 0;
+			line-height:1emboss;
+			background-color: $superLightGrey;
+			z-index: 3;
+		}
+		&::after{ /* Only rotate for IE9 */
+			position: absolute;
+			top: 29px;
+			left: -47px;
+			width: 196px;
+			@include rotate(-45deg);
+		}
+	}
 	
 	@media (max-width: 400px){
 		// Hide the "Sort:" from the iphone - it's too skinny to fit

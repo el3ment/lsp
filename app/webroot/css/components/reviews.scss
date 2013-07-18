@@ -26,6 +26,8 @@
 		top: -3px;
 	}
 	.reviewCountLabel{
+		padding-left: 100px; // Positioning in firefox
+		float: left; // Positioning in firefox
 		&:before{ content: '('; }
 		&:after{ content: ')'; }
 	}

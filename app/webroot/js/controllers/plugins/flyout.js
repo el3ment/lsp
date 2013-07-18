@@ -222,7 +222,7 @@
 										_currentFlyoutTween = tween;
 									},
 									always : function(e){
-										$('*[style]', _flyout).removeAttr('style'); // atomic cleanup
+										//$('*[style]', _flyout).removeAttr('style'); // atomic cleanup, why?
 										_currentFlyoutTween = null; // cleanup
 										_isOpen = true; // prevent the animation from happening again
 									}
@@ -248,3 +248,18 @@
 		
 	})());
 })();
+
+// CASE WHEN NVL({quantityavailable}, 0) > 0 
+//     THEN '<span itemprop="availability" class="status">In Stock<span class="hidden-iphone"> :</span></span> <span class="details">Ships next business day</span>' 
+//     ELSE 
+//          CASE WHEN NVL({outofstockmessage}, 'EMPTY') = 'EMPTY' THEN 
+//               CASE WHEN NVL({quantityonorder},0) > 0  AND NVL({quantityonorder}, 0) > NVL({quantitycommitted}, 0)
+//               THEN '<span itemprop="availability" class="status">In Stock Soon<span class="hidden-iphone"> :</span></span> <span class="details">More on the way. Order now!</span>'
+//               ELSE
+//                   CASE WHEN NVL({reorderpoint},0) > 0 
+//                   THEN '<span itemprop="availability" class="status">In Stock Soon<span class="hidden-iphone"> :</span></span> <span class="details">Call for estimated delivery date</span>' 
+//                   ELSE '<span itemprop="availability" class="status">Special Order<span class="hidden-iphone"> :</span></span> <span class="details">Allow additional time. Call for details.</span>' END
+//               END
+//          ELSE {outofstockmessage} 
+//          END
+// END
