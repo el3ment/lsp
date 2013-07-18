@@ -69,6 +69,10 @@
 					delete formattedPayload.q;
 				}
 
+				if(formattedPayload.ResultsPerPage > 96 || formattedPayload.ResultsPerPage.toLowerCase() === 'all'){
+					formattedPayload.ResultsPerPage = 96
+				}
+
 				// As a form of cleanup - remove a trailing / from a category request
 				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
 
@@ -511,6 +515,8 @@
 	}()));
 	
 }())
+
+
 
 
 //http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19109178190503735095_1370632723193&RequestAction=advisor&RequestData=CA_CategoryExpand&forcepage=1&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&q=-triangle&AttribSel=Author%3ABarroso-Ary&CatPath=-triangle&_=1370632723195
