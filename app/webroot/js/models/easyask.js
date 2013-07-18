@@ -69,7 +69,7 @@
 					delete formattedPayload.q;
 				}
 
-				if(formattedPayload.ResultsPerPage > 96 || formattedPayload.ResultsPerPage.toLowerCase() === 'all'){
+				if(formattedPayload.ResultsPerPage > 96 || (formattedPayload.ResultsPerPage + '' || '').toLowerCase() === 'all'){
 					formattedPayload.ResultsPerPage = 96
 				}
 
