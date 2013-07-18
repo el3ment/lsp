@@ -123,6 +123,8 @@
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
 						return $('html, body').animate({ scrollTop: element.offset().top - 20});
 					}
+				}else{
+					return $.Deferred().resolve()
 				}
 			},
 

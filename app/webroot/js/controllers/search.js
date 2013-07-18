@@ -243,16 +243,11 @@
 				application : {
 
 					onStateChange : function(e, data){
-						if(_app.controllers.application.pullState(_this)){
-							_this.loadCurrentState();
-						}else{
-							// We must have gone back to a .html page
-							document.location.reload();		
-						}
+						_this.loadCurrentState();
 					},
 
 					onReady : function(e, data){
-						if(_app.controllers.application.pullState(_this)){
+						if(_app.controllers.application.pullState(_this) || $('.loading.search').length){
 							_this.loadCurrentState();
 						}
 					},
@@ -301,22 +296,12 @@
 			},
 
 			pullState : function(state){
-
-				var path = document.location.pathname;
-
+				
 				state = state || {};
 				_state = $.extend(_state, state);
 
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
-				_state.category = path;
-				
-				// If the path has .html in it - remove the filename and use the category
-				if(path.indexOf('.html')){
-					_state.category = path.substring(0, path.lastIndexOf("/"));
-				}
-
-				// if it's only a /
-				_state.category = (_state.category === '/' ? '' : _state.category);
+				_state.category = document.location.pathname.replace('/search.html', '').replace(/^\/$/, '');
 
 				if(_state.keywords){
 					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
@@ -331,8 +316,9 @@
 				
 				// Populate the input with the search keywords
 				$('input[name="searchQuery"]').val(_state.keywords);
+
 				// Load the state only if the new state is different from the old state (tmpState)
-				if(!_util.isEqual(tmpState, _state) && document.location.hash.indexOf('/~search')){
+				if(!_util.isEqual(tmpState, _state) && (_state.category.indexOf('.html') === -1 && document.location.hash.indexOf('/~search'))){
 					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}
