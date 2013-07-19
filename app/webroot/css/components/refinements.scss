@@ -134,6 +134,10 @@
 			color: black;
 		}
 	}
+	.b5 {
+		text-indent: 8px;
+		text-decoration: underline;
+	}
 
 	// Parent Categories, overwrites the > character, skipping the first level
 	li.indent:first-child + .indent{ padding-left: 0px; }
@@ -420,6 +424,8 @@
 			margin-top: 0;
 			margin-bottom: px(5px);
 			font-weight: normal;
+			color: $grey;
+			text-decoration: underline;
 
 		}
 		
