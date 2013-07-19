@@ -117,11 +117,11 @@
 
 				if(element){
 					var viewportHeight = $(window).height();
-					var scrollTop = $('body').scrollTop();
+					var scrollTop = Math.max($('body').scrollTop(), $('html').scrollTop())
 					var elementPos = (element.offset() || {}).top;
 
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
-						return $('html, body').animate({ scrollTop: element.offset().top - 20});
+						return $('body, html').animate({ scrollTop: element.offset().top - 20});
 					}
 				}else{
 					return $.Deferred().resolve()
