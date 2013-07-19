@@ -35,13 +35,12 @@
 		position: relative;
 
 		.ad{
-			@include box-sizing();;
-			position: relateve;
+			@include box-sizing();
+			position: relative;
 			margin-left:0;
 			padding: 20px 40px;
 			height: 460px;
 			width: 690px;
-			outline: 1px solid red;
 			float: left;
 
 
@@ -67,6 +66,7 @@
 			.price:before {
 				width: 0;
 			}
+
 
 			&.slide-banner-right {
 				.banner {
