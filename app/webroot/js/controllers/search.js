@@ -259,7 +259,7 @@
 					
 					onInit : function(e, data){
 						// Initialize the state
-						_this.pullState(_app.controllers.application.pullState(_this));
+						//_this.pullState(_app.controllers.application.pullState(_this));
 					},
 
 					onContextChangeEnterPhone : function(e, data){
