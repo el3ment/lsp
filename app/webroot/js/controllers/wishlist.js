@@ -35,7 +35,7 @@ function addToWishlist(config){
 	config.messages.hide();
 	if (config.customer != "")	{
 		var options = "";
-		if (config.options.length > 0 && config.options.find("option:selected").length === config.options.length && (config.item.val() || '').length > 0) {
+		if (config.options.length === 0 || (config.options.length > 0 && config.options.find("option:selected").length === config.options.length && (config.item.val() || '').length > 0)) {
 			config.options.each(function(){
 				var optionValue = this.id, optionName = $(this).attr('name'),
 					selected = $(this).find("option:selected"), selectedValue = selected.val(), selectedLabel = selected.text();
