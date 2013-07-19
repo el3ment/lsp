@@ -13,7 +13,7 @@
 
 		var _state = {
 			resultsPerPage : '24',
-			page : 'first',
+			page : '1',
 			sort : 'default',
 			category : '',
 			allAttributes : ''
@@ -317,6 +317,7 @@
 
 				// if it's only a /
 				_state.category = (_state.category === '/' ? '' : _state.category);
+				_state.category = _state.category.replace(/^\//, '');
 
 				if(_state.keywords){
 					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
