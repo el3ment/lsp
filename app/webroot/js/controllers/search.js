@@ -258,7 +258,8 @@
 					},
 					
 					onInit : function(e, data){
-
+						// Initialize the state
+						_this.pullState(_app.controllers.application.pullState(_this));
 					},
 
 					onContextChangeEnterPhone : function(e, data){
@@ -274,6 +275,8 @@
 				_this.loadState(_app.controllers.application.pullState(_this), {preventPushState : true});
 			},
 
+
+			// Prepares the _state object for storing in the path
 			getState : function(){
 				
 				// This keeps other controllers from accidentially modifying state
@@ -292,6 +295,7 @@
 
 			},
 
+			// Convienice hook to application pushstate
 			pushState : function(){
 
 				var pushedState = _this.getState();
@@ -300,6 +304,7 @@
 				return _app.controllers.application.pushState(_this, pushedState, _isFirstRequest);
 			},
 
+			// Reads / parses state and changes the _state object
 			pullState : function(state){
 
 				var path = document.location.pathname;
@@ -318,6 +323,7 @@
 				// if it's only a /
 				_state.category = (_state.category === '/' ? '' : _state.category);
 				_state.category = _state.category.replace(/^\//, '');
+				_state.category = _state.category.replace(/\/$/, '');
 
 				if(_state.keywords){
 					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
@@ -334,7 +340,7 @@
 				$('input[name="searchQuery"]').val(_state.keywords);
 				// Load the state only if the new state is different from the old state (tmpState)
 				if(!_util.isEqual(tmpState, _state)){
-					console.log(_state, tmpState);
+					//console.log("_state", _state, " oldState", tmpState);
 					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}

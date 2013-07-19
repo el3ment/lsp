@@ -95,6 +95,11 @@
 	.level8 a, .level8 button{ margin-left: 80px; }
 	.level9 a, .level9 button{ margin-left: 90px; }
 
+	.b5 {
+		text-indent: 8px;
+		text-decoration: underline;
+	}
+
 	// Text links
 	a, .b5{
 		position: relative;
@@ -133,10 +138,6 @@
 			font-weight: bold;
 			color: black;
 		}
-	}
-	.b5 {
-		text-indent: 8px;
-		text-decoration: underline;
 	}
 
 	// Parent Categories, overwrites the > character, skipping the first level

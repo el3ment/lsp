@@ -425,8 +425,8 @@
 					
 					// Call onInit/onReady events, the when().then() functions
 					// ensure that all of the onInit functions finish, before firing
-					// $(controllerObj).triggerHandler('onInit');
-					// $(controllerObj).triggerHandler('onLoaded');
+					$(controllerObj).triggerHandler('onInit');
+					//$(controllerObj).triggerHandler('onLoaded');
 				}
 				
 			}
