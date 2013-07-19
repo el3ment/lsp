@@ -73,9 +73,9 @@
 							$.when(_this.scrollToFirst()).done(function(){
 								// onReady and onStateChange make use of preventPushState because those requests are
 								// administrative and shouldn't create new history entries
-								if(!data.xhrData.passthrough.preventPushState){
+								//if(!data.xhrData.passthrough.preventPushState){
 									_this.pushState();
-								}
+								//}
 								
 							});
 						}
@@ -311,7 +311,7 @@
 				_state.category = path;
 				
 				// If the path has .html in it - remove the filename and use the category
-				if(path.indexOf('.html')){
+				if(path.indexOf('.html') > -1){
 					_state.category = path.substring(0, path.lastIndexOf("/"));
 				}
 
@@ -332,7 +332,8 @@
 				// Populate the input with the search keywords
 				$('input[name="searchQuery"]').val(_state.keywords);
 				// Load the state only if the new state is different from the old state (tmpState)
-				if(!_util.isEqual(tmpState, _state) && document.location.hash.indexOf('/~search')){
+				if(!_util.isEqual(tmpState, _state)){
+					console.log(_state, tmpState);
 					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}

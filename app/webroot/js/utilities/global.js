@@ -93,7 +93,7 @@
 				var isEqual = true;
 
 				$.each(a, function(key, value){
-					if(!b.hasOwnProperty(key) || a[key] !== a[key]){
+					if(!b.hasOwnProperty(key) || a[key]+'' !== a[key]+''){
 						isEqual = false;
 						return false;
 					}
@@ -101,7 +101,7 @@
 
 				if(isEqual){
 					$.each(b, function(key, value){
-						if(!a.hasOwnProperty(key) || b[key] !== a[key]){
+						if(!a.hasOwnProperty(key) || b[key]+'' !== a[key]+''){
 							isEqual = false;
 							return false;
 						}
