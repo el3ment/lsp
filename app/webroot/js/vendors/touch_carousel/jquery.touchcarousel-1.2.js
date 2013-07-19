@@ -533,7 +533,7 @@
 					// Update widths of % based item widths
 					this._totalItemsWidth = 0;
 					for(var i = 0; i < this.items.length; i++){
-						this.items[i].width = this.items[i].item.width();
+						this.items[i].width = this.items[i].item.outerWidth();
 						this._totalItemsWidth += this.items[i].width;
 					}
 
