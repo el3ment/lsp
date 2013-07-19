@@ -117,11 +117,15 @@
 
 				if(element){
 					var viewportHeight = $(window).height();
+
+					// Firefox uses body, webkit uses html (or the other way around) -- one is always zero, so just pick the large of the two
 					var scrollTop = Math.max($('body').scrollTop(), $('html').scrollTop())
 					var elementPos = (element.offset() || {}).top;
 
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
+						// Firefox/webkit discrepency
 						return $('body, html').animate({ scrollTop: element.offset().top - 20});
+
 					}
 				}else{
 					return $.Deferred().resolve()
