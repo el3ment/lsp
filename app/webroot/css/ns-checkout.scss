@@ -1983,28 +1983,6 @@ body .span12 > table{
 		input{ display: none; }
 	}
 
-
-	 // Panel Widths
-	 input[name="category"] ~ table,
-	 .portletHandle:first-child,
-	 .portletHandle:first-child ~ tr{
-
-	 	// IE8 renders the html differently
-	 	&,
-	 	> td > form > table,
-	 	> td > table{
-		 	
-		 	width: 600px !important;
-
-		 	@media (max-width: 979px){
-		 		width: 100% !important;
-		 		.steps{
-		 			margin-left: 0;
-		 		}
-		 	}
-	 	}
-	 }
-
 	&.nscheckout-receipt{
 		width: 100%;
 
@@ -2091,5 +2069,28 @@ body .span12 > table{
 			content: ' Create Account';
 			margin-left: -165px;
 		}
+	}
+}
+
+
+.header.small ~ .page-generic{	 // Panel Widths, excluding cart
+	 input[name="category"] ~ table,
+	 .portletHandle:first-child,
+	 .portletHandle:first-child ~ tr{
+
+	 	// IE8 renders the html differently
+	 	&,
+	 	> td > form > table,
+	 	> td > table{
+		 	
+		 	width: 600px !important;
+
+		 	@media (max-width: 979px){
+		 		width: 100% !important;
+		 		.steps{
+		 			margin-left: 0;
+		 		}
+		 	}
+	 	}
 	}
 }
