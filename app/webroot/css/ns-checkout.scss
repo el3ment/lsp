@@ -661,8 +661,9 @@ body .span12 > table{
 		}
 	}
 
-	// The button row for cart
-	#handle_cartMainPortlet > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table{
+	// The button row for cart - second selector for ie8
+	#handle_cartMainPortlet > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table,
+	#cart tr:first-child + tr > td > table{
 		float: right;
 		margin-top: 10px !important;
 
@@ -777,9 +778,11 @@ body .span12 > table{
 		padding-bottom: 80px !important;
 	}
 
-	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table{
-		
-		
+
+	// In IE, they accept the poorly formmated HTML from the template so we need the #login reference as well
+	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table,
+	#login input[name="new"] ~ table{
+
 		> tbody > tr{
 			display: block;
 			float: left;
@@ -1249,7 +1252,8 @@ body .span12 > table{
  		}
  	}
 
-	.portletHandle:first-child + tr + tr + tr + tr.portletHandle{
+ 	// /findme/
+	.portletHandle ~ .portletHandle ~ .portletHandle > td > form > table {
 		width: 100%;
 		@include panel();
 		@include engaged();
@@ -1264,11 +1268,11 @@ body .span12 > table{
 
 		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td{
 			width: 100%;
+		}
 
-			// A really stupid blank cell presumably used to make the form smaller in width
-			&[width="50%"]{
-				display: none !important;
-			}
+		// A really stupid blank cell presumably used to make the form smaller in width
+		td[valign] + td[width]{
+			display: none;
 		}
 
 		#main_form > table > tbody > tr:first-child + tr + tr > td{
@@ -1323,8 +1327,9 @@ body .span12 > table{
 
 	}
 
-	// Shipping Method & Review Order Panel
-	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+	// Shipping Method & Review Order Panel, the second rule is for ie8, which renders the form element in a wierd
+	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+	#checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 		@include panel();
 		@include engaged();
 
@@ -1541,8 +1546,8 @@ body .span12 > table{
 		}
 	}
 
-	// Shipping
-	tr.portletHandle + .noprint + .portletHandle{
+	// Shipping  /findme/
+	tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 		
 		@include panel();
 		@include disengaged();
@@ -1602,7 +1607,7 @@ body .span12 > table{
 
 		// Blank rows
 		tr:first-child + tr + tr + tr,
-		> td > table > tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr + tr{
+		> tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr + tr{
 			display: none !important;
 		}
 
@@ -1981,19 +1986,22 @@ body .span12 > table{
 
 	 // Panel Widths
 	 input[name="category"] ~ table,
+	 .portletHandle:first-child,
 	 .portletHandle:first-child ~ tr{
-	 	
-	 	width: 600px !important;
 
-	 	.steps{
-	 		margin-left: -115px;
-	 	}
+	 	// IE8 renders the html differently
+	 	&,
+	 	> td > form > table,
+	 	> td > table{
+		 	
+		 	width: 600px !important;
 
-	 	@media (max-width: 979px){
-	 		width: 100% !important;
-	 		.steps{
-	 			margin-left: 0;
-	 		}
+		 	@media (max-width: 979px){
+		 		width: 100% !important;
+		 		.steps{
+		 			margin-left: 0;
+		 		}
+		 	}
 	 	}
 	 }
 
