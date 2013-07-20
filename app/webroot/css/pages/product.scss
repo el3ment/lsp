@@ -184,7 +184,7 @@
 					}	
 				}
 				li{ 
-					display:inline-block;  
+					display:inline-block;
 					margin-right: $gutterWidth;
 					clear: none;
 					float:left;
@@ -218,6 +218,15 @@
 		
 		&.dynamicItemSuggestions{
 			padding-bottom: 0;
+		}
+		&.customerPurchaseSuggestions .well{
+			height: 256px;
+			ul {
+				height: 100%;
+			}
+			.productScope {
+				100%;
+			}
 		}
 		
 		&:first-child{ border-top-width: 0; }
