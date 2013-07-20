@@ -1,12 +1,11 @@
+<FilesMatch "\.(ttf|otf|eot|woff)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
-
-<FilesMatch "\.(ttf|otf|eot|woff)$">
-  <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-  </IfModule>
-</FilesMatch>

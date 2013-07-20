@@ -54,6 +54,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			content: ' ';
 			background-color: #f1c331; // the last covered pixel for the button
 			border : 1px solid $brownYellow;
+			border-color: transparent\9;
 			border-width: 0px 1px;
 		}
 
