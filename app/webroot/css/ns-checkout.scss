@@ -188,8 +188,8 @@ body .span12 > table{
  *   Cart
  */ 
 
- 	&.nscheckout-cart{
- 		width: 100%;
+ 	#handle_cartMainPortlet > td > table, &.nscheckout-cart{
+ 		width: 100% !important; // overrides the code on "Panel Widths" near line 1998
  	}
 
  	#carttable{
@@ -925,7 +925,10 @@ body .span12 > table{
 			width: 800px;
 			float: none;
 			margin:auto;
-			padding: 60px 0 30px;
+			//padding: 60px 0 30px;
+			position: relative;
+			left: 50%;
+			margin-left: -410px;
 
 			@media (max-width: 979px){
 				width: 100%;
@@ -1114,14 +1117,18 @@ body .span12 > table{
 			}
 		}
 		
+		// Example CSC instructions
 		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
 			padding-left: 62px !important;
+			padding-left: 0px\9 !important;
 			clear: both;
 			@include box-sizing();
 		}
 		
-		// Save My Credit Card Information
-		#paymethhider input[name="sValidFromYr"] + tr{
+		// Save My Credit Card Information, second selector for ie
+		#paymethhider input[name="sValidFromYr"] + tr,
+		#paymethhider > table > tbody > tr > .smalltextnolink[colspan="2"]
+		{
 			
 			// Decided to hide it
 			display: none !important;
@@ -1334,6 +1341,7 @@ body .span12 > table{
 		@include panel();
 		@include engaged();
 
+		width: 100%;
 		margin-top: 150px;
 
 		.checkoutprogresstext{
@@ -1996,6 +2004,7 @@ body .span12 > table{
 	 	> td > table{
 		 	
 		 	width: 600px !important;
+		 	margin: auto;
 
 		 	@media (max-width: 979px){
 		 		width: 100% !important;
@@ -2005,6 +2014,10 @@ body .span12 > table{
 		 	}
 	 	}
 	 }
+
+	#handle_checkoutMainPortlet > td > table{
+		width: auto !important;
+	}
 
 	&.nscheckout-receipt{
 		width: 100%;

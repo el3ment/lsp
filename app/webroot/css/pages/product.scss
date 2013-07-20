@@ -152,7 +152,7 @@
 			.zoom-thumbnails{
 				position: relative;
 				&:before{
-					//content : 'Hover over image to zoom';
+					content : 'Hover over image to zoom';
 					@media (max-width: 767px){
 						content : ' ';
 						display: none;
@@ -170,6 +170,7 @@
 					@include lsp-sprite-background();
 					background-position: -71px -406px;
 					left: -100px;
+					z-index: 9999;
 				}
 				a{
 					vertical-align: bottom;

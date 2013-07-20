@@ -22,6 +22,10 @@ input, select, textarea{
 	}
 }
 
+input[type="checkbox"]:focus{
+	outline: 1px solid $darkYellow;
+}	
+
 ::-webkit-input-placeholder { font-style: italic; color: $grey; line-height:22px; font-weight: 500; }
 ::-moz-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* firefox 19+ */
 :-ms-input-placeholder { font-style: italic; color: $grey; line-height:22px;font-weight: 500; } /* ie */
@@ -56,7 +60,6 @@ input[type="text"], input[type="email"], input[type="tel"]{
 
 input[disabled], select[disabled], textarea[disabled]{
 	background-color: $superLightGrey;
-	font-style: italic;
 	color: $grey;
 	font-weight: normal;
 }

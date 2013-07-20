@@ -86,7 +86,7 @@
 			},
 
 			isRedirect : function(responseData){
-				return /((http|https)(:\/\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\/{1}[a-zA-Z0-9]+)*\/?/.test(responseData.errorMsg);
+				return /((http|https)(:\/\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\/{1}[a-zA-Z0-9]+)*\/?/.test(responseData.errorMsg) || /^\//.test(responseData.errorMsg); 
 			},
 
 			_afterSuccess : function(responseData){
