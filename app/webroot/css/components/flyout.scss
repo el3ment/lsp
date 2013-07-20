@@ -39,6 +39,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		float: left;
 		width: 220px;
 		border: 1px solid $lightGrey;
+		border-color: #666\9;
 		border-width: 0 0 1px 1px;
 		background-color:white;
 		@include box-shadow-multiple(0 0 10px -2px $grey);
@@ -164,6 +165,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		margin-left:0;
 		height: 100%;
 		border: 1px solid $lightGrey;
+		border-color: #666\9;
 		border-left: 0;
 		border-top: 0;
 		background-color:white;
