@@ -271,6 +271,9 @@
 			.option, .quantity, .action{ text-align:right; }
 			
 			@media (max-width: 979px) and (min-width: 768px){
+				.productAvailability .status > span {
+					display: none;
+				} 
 				.productAvailability .details,
 				.price .details{
 					display:none;
