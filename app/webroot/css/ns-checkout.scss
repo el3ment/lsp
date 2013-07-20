@@ -46,13 +46,14 @@
 	font-weight: normal;
 	position: relative;
 	top: -9px;
+	display: block;
 
 	&:after{
 		content: 'Optional';
 		color: $grey;
 		display: block;
 		font-weight: normal;
-		//text-align: right;
+		text-align: right;
 		font-size: 13px;
 		line-height: 18px;
 		width: 100%;
