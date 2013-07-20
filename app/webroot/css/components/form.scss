@@ -68,7 +68,12 @@ input[disabled], select[disabled], textarea[disabled]{
 .row-fluid .creditCardExpirationMonth.field[class*="span"]{ margin-right: $fluidGutterPercentage; }
 
 // Quantity scroller
-input.scroller{ width: px(50px); }
+input.scroller{
+	width: px(50px);
+	height: 40px;
+	line-height: 24px;
+	text-align: right;
+}
 
 label{
 	display: block; 
