@@ -445,14 +445,16 @@
 	   it doesn’t make the test unnecessarily selective */
 	&:not(:checked){
 		label{
+			position: relative;
 			float:right;
-			width:1em;
-			padding:0 .1em;
+			width:0;
+			padding:0 0 0 1.2em;
 			overflow:hidden;
 			white-space:nowrap;
 			cursor:pointer;
 			font-size:200%;
 			line-height:1.2;
+			text-indent: 3px;
 			color: $lightGrey;
 		}
 		> input{
@@ -464,6 +466,8 @@
 		> label{
 			&:before {
 				content: '★ ';
+				position: absolute;
+				left: 0;
 			}
 			&:hover,
 			&:hover ~ label{
