@@ -99,6 +99,8 @@
 				}
 				
 				_sessionId = responseData.sessionID;
+
+				responseData.source = _this.cleanRefinements(responseData.source);
 				
 				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
 				responseData.source.navPath._lsp.categoryNodes = _this.getCategoryNodes(responseData.source);
@@ -121,6 +123,37 @@
 				}
 
 				return responseData;
+			},
+
+			cleanRefinements : function(easyAskDataSourceObject){
+				var value;
+				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
+					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].attributeValueList || {}).length; j++){
+						value = easyAskDataSourceObject.attributes.attribute[i].attributeValueList[j].attributeValue
+						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
+							easyAskDataSourceObject.attributes.attribute[i].attributeValueList.splice(j, 1);
+							j--;
+						}
+					}
+					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList || {}).length; j++){
+						value = easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList[j].attributeValue;
+						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
+							easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList.splice(j, 1);
+							j--;
+						}
+					}
+					if(easyAskDataSourceObject.attributes.attribute[i].attributeValueList.length === 0){
+						easyAskDataSourceObject.attributes.attribute.splice(i, 1);
+						i--;
+					}
+				}
+
+				if(easyAskDataSourceObject.attributes.attribute.length === 0){
+					delete easyAskDataSourceObject.attributes;
+				}
+
+				return easyAskDataSourceObject;
+			
 			},
 
 
