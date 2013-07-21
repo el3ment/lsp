@@ -217,13 +217,13 @@ tr[height="25"]{ height: 0; }
 	}
 	}
 
-	.nscheckout-receipt #carttable{
+	html[data-path*="category=thanks"] .page-generic > table #carttable{
 		margin-top: 0;
 	}
 
 	// Hide the "Your Cart" title on the review page
 	input[name="total"] ~ table #carttable,
-	.nscheckout-receipt #carttable{ 
+	html[data-path*="category=thanks"] .page-generic > table #carttable{ 
 		margin-top: 0 !important;
 		&:before{ display: none; }
 	}
@@ -784,7 +784,8 @@ tr[height="25"]{ height: 0; }
 	margin-top:10px;
 }
 
-html[data-title*="Checkout"] #handle_loginMainPortlet > td > table{
+html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
+.nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
 	width: 800px !important;
 	margin-top: 60px;
 }
@@ -917,7 +918,8 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table{
 	display:block;
 }
 // "New Customer? Create an account" link on naked Returning Customers / Login page
-html[data-title*="Login"] .page-generic > table .changeContextLink a{
+html[data-title*="Login"] .page-generic > table .changeContextLink a,
+.nscheckout-login .changeContextLink a{
 	top: -30px;
 }
 
@@ -987,7 +989,8 @@ tr[height="25"] {
 
 // Because we style the panel using a tr tag, the td element can't be 100% - so we have to force it
 // this could have been avoided if we had applied the panel styling to the td tag... this is a hack. live and learn.
-html[data-title*="Shipping Method"] .checkoutprogresstext{
+html[data-title*="Shipping Method"] .checkoutprogresstext,
+.nscheckout-shippingMethod .checkoutprogresstext{
 	width: 600px;
 	margin-left: -12px; // account for padding.
 	margin-top: -30px;
@@ -1282,7 +1285,7 @@ input[name="category"][value="login-register"] ~ table{
 * Shipping / Billing
 */
 
-	html[data-title*="Address"]{
+	html[data-title*="Address"], .nscheckout-address{
 
 		.checkoutprogresstext{
 			top: -10px;
@@ -1459,6 +1462,7 @@ input[name="category"][value="login-register"] ~ table{
 				padding-left: 128px !important;
 				text-align: left;
 				padding-bottom: 20px !important;
+				padding-left: 0\9 !important; // move it for ie8
 				@media (max-width: 767px){
 					padding-left: 0 !important;
 				}
@@ -1899,6 +1903,7 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 
 // Order Review and Summary
 
+html[data-title*="Review"] .page-generic > table,
 .nscheckout-review{
 	width: 100% !important;
 	.steps{
@@ -2077,7 +2082,7 @@ tr + tr + tr + tr + tr td[align="right"] #tbl_change{
 	width: auto !important;
 }
 
-.nscheckout-receipt{
+html[data-path*="category=thanks"] .page-generic > table{
 	width: 100%;
 
 	#tbl_continue{
@@ -2105,12 +2110,13 @@ tr + tr + tr + tr + tr td[align="right"] #tbl_change{
 
 // The receipt dosen't have the timeline, so we need to remove the space above
 // nscheckout-receipt class is added via javascript in the Thank You customize text
-.nscheckout-receipt > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
-.nscheckout-receipt #checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+html[data-path*="category=thanks"] .page-generic > table > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+html[data-path*="category=thanks"] .page-generic > table #checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 	margin-top: 0 !important;
 }
 // The login page by itself needs to be full width
-html[data-title*="Login"]{
+html[data-title*="Login"],
+.nscheckout-login{
 	.page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
 		
 		width: 600px !important;
@@ -2118,7 +2124,7 @@ html[data-title*="Login"]{
 		margin-left: 0 \0/ !important;
 		position: relative !important;
 		left: -300px;
-		
+
 		@media (max-width: 979px){
 			width: 100% !important;
 			margin-left: 0 !important;
