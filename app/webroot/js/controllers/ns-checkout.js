@@ -100,6 +100,7 @@
 								var submit = $(element).find('#tbl_submitter input')[0];
 								if(submit){
 									submit.click();
+									e.stopPropagation();
 									return false;
 								}
 							})
