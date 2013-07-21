@@ -88,6 +88,26 @@
 
 				$(_this).triggerHandler(_util.camelCase('on-enter-' + pageName), {selector : $(document)});
 				$(_mainTable).addClass('nscheckout-' + pageName);
+				
+				_this.attachEnterKey();
+			},
+			attachEnterKey : function(){
+				$('div:has(input)').off('.submitter').on('keyup.lsp.submitter', function(e){
+					// If it's an enter key
+					switch(e.which){
+						case 13:
+							$(this).parents().each(function(i, element){
+								var submit = $(element).find('#tbl_submitter input')[0];
+								if(submit){
+									submit.click();
+									return false;
+								}
+							})
+						break;
+						default:
+					}
+
+				});
 			}
 
 		};

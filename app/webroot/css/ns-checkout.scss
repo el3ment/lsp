@@ -267,6 +267,7 @@ tr[height="25"]{ height: 0; }
 	> td:first-child,
 	> td:first-child + td + td + td + td + td + td + td{
 		color: transparent;
+		line-height: 0;
 	}
 }
 
@@ -533,9 +534,10 @@ tr[height="25"]{ height: 0; }
 	> td.texttable[colspan="6"]:first-child{ // Overqualified to overcome selector specificity
 		
 		text-align: right !important;
-		position: relative;
+		position: relative !important;
 		color: $grey;
-		padding: 30px 95px 10px 0 !important;
+		//padding: 30px 95px 10px 0 !important; // used when we add more functionality - gives space for United States
+		padding: 30px 10px 10px 0 !important;
 
 		@media (max-width: 767px){
 			position: absolute;
@@ -555,11 +557,15 @@ tr[height="25"]{ height: 0; }
 			top: 10px;
 			display: block !important;
 			//padding-left: 100px;
-			position: absolute;
+			//position: absolute;
 			right: 10px;
 			top: 10px;
+			margin-top: -20px;
 			
 			&:after{
+
+				visibility: hidden; // temporary
+
 				content: 'United States';
 				text-decoration: underline;
 				padding-left: 8px;
