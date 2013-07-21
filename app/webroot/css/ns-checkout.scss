@@ -1787,7 +1787,7 @@ body .span12 > table{
 			width: 58%; // overcome width attribute
 			float: left;
 			&:before{
-				content: 'Shipping Method Label';
+				content: 'Shipping Method';
 				display: block;
 				color: $grey;
 				font-size: 13px;
