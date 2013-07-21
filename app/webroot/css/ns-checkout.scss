@@ -189,7 +189,8 @@ tr[height="25"]{ height: 0; }
 *   Cart
 */ 
 
-	#handle_cartMainPortlet > td > table, html[data-path*="cart"] .page-generic > table{
+	#handle_cartMainPortlet > td > table,
+	html[data-path*="cart"] .page-generic > table{
 		width: 100% !important; // overrides the code on "Panel Widths" near line 1998
 	}
 
@@ -212,7 +213,7 @@ tr[height="25"]{ height: 0; }
 		top: 0;
 
 		@media (max-width: 767px){
-			top: -70px;
+			//top: -70px;
 		}
 	}
 	}
@@ -528,6 +529,7 @@ tr[height="25"]{ height: 0; }
 
 	@media (max-width: 767px){
  		text-align: right !important;
+ 		position: relative;
  	}
 
  	// Estimated Shipping Row
@@ -540,11 +542,11 @@ tr[height="25"]{ height: 0; }
 		padding: 30px 10px 10px 0 !important;
 
 		@media (max-width: 767px){
-			position: absolute;
+			position: absolute !important;
 			right: 130px;
-			top: 5px;
+			top: 23px;
 			width: 200px !important;
-			//padding-right: 10px;
+			padding: 10px !important;
 		}
 
 		// Label
