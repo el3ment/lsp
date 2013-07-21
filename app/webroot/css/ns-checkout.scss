@@ -1122,22 +1122,26 @@ body .span12 > table{
 
 			// Our own CSC example image
 			&:after{
-				content : 'Example Image';
+				content : ' ';
+				
+				@include lsp-sprite-background();
+				background-position: -15px -888px;
 				width: 190px;
-				height: 115px;
+				height: 80px;
 				display: block;
 				margin-left: 5px;
 				float: left;
 			}
 			&:before{
-				content : 'Norton Security';
-				width: 190px;
-				height: 115px;
-				outline: 1px solid red;
+				content : ' ';
+				@include lsp-sprite-background();
+				background-position: -283px -271px;
+				width: 130px;
+				height: 80px;
 				display: block;
 				position: absolute;
-				top: 0;
-				right: 0;
+				top: 15px;
+				right: 15px;
 			}
 		}
 		

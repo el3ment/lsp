@@ -67,19 +67,20 @@
 				if($.jqzoom){
 					
 					_this.detachZoom();
-
-					$('a[data-asset="mouseoverZoom"]')
-						.jqzoom({
-							zoomWidth: $('.addToCart').width(),
-							zoomHeight: $('#zoom-mainImage img').height(),
-							position: 'right',
-							preloadImages: (context !== 'phone' ? true : false),
-							xOffset : (context === 'phone' ? 1000 : parseInt($('.information.span6').css('margin-left'), 10)),
-							yOffset : -20,
-							zoomType: 'standard'//,
-							// showEffect: 'fadein',
-							// fadeinSpeed: 'fast'
-						});
+					if($('a[data-asset="mouseoverZoom"]').is(':not([href*="no-image"])')){
+						$('a[data-asset="mouseoverZoom"]')
+							.jqzoom({
+								zoomWidth: $('.addToCart').width(),
+								zoomHeight: $('#zoom-mainImage img').height(),
+								position: 'right',
+								preloadImages: (context !== 'phone' ? true : false),
+								xOffset : (context === 'phone' ? 1000 : parseInt($('.information.span6').css('margin-left'), 10)),
+								yOffset : -20,
+								zoomType: 'standard'//,
+								// showEffect: 'fadein',
+								// fadeinSpeed: 'fast'
+							});
+					}
 				}
 			},
 			detachZoom : function(){

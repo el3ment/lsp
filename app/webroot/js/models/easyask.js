@@ -500,7 +500,7 @@
 				
 				var returnObject = {};
 
-				if(commentaryString.length > 0){
+				if(commentaryString.length > 0 && commentaryString.indexOf('Corrected Word') > -1){
 					var spaced = commentaryString.split(' ');
 
 					returnObject.originalQuery = _util.findBetween('Corrected Word: ', ' is ', commentaryString);
