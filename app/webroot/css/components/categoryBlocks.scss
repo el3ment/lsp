@@ -25,11 +25,12 @@
 	}
 
 	.title{
-		overflow: hidden;
+		//overflow: hidden;
 		position: relative;
 		display: block;
 		text-decoration: none;
 		color: black;
+		z-index: 2;
 	}
 	.category{
 		
@@ -202,9 +203,7 @@
 			z-index: -1;
 			left: 50%;
 			margin-left: -60px;
-
-			@include transition(bottom .1s);
-
+			display: block;
 		}
 
 		.links{
@@ -232,7 +231,7 @@
 			padding: 5px 0;
 			text-align: center;
 			border-width: 1px 0;
-			z-index: 1;
+			z-index: 5;
 		}
 
 	}

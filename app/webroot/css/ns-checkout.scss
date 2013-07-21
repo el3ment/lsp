@@ -783,6 +783,10 @@ body .span12 > table{
 		margin-top:10px;
 	}
 
+	&.nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
+		width: 800px !important;
+	}
+
 /*
  *  Customer Sign In
  */

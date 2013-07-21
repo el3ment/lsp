@@ -78,13 +78,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 
 
 		.collection{
-			// Line / Gap above top menu
-			// &.gapAbove{
-			// 	outline: 1px solid red;
-			// 	&:before{
-			// 		display: none;
-			// 	}
-			// }
+			
+			cursor: pointer;
 
 			// Yellow bar at the top of the department list
 			&:first-child{
@@ -93,7 +88,6 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 
 			// Title for hovered/open flyout
 			&.active{ 
-				cursor: pointer;
 				.flyoutTitle{
 					border-right: 1px solid $lightGrey;
 					background-color: black;
