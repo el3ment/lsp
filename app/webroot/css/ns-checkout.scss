@@ -116,1373 +116,1760 @@ body .span12 > table{
 	@media (max-width: 979px){
 		width: 100%;
 	}
+}
 
-	.pic{ display: none !important; }
-	.checkoutwarning,
-	.errortext p,
-	.errortext.bglt{ 
-		color: #bb0000 !important;
-		background-color: #ffe0e0 !important;
-		margin-bottom: 10px;
-		position: relative;
-		top: -10px;
-		padding: 5px 10px !important;
-		font-size: 13px !important;
-		font-weight: normal;
+.pic{ display: none !important; }
+.checkoutwarning,
+.errortext p,
+.errortext.bglt{ 
+	color: #bb0000 !important;
+	background-color: #ffe0e0 !important;
+	margin-bottom: 10px;
+	position: relative;
+	top: -10px;
+	padding: 5px 10px !important;
+	font-size: 13px !important;
+	font-weight: normal;
+	
+	@include box-sizing();
+	@include border-radius(5px);
+
+	a{
+		color: #bb0000;
+		text-decoration: underline;
 		
-		@include box-sizing();
-		@include border-radius(5px);
+		// Sometimes netsuite adds the .checkoutwarning class to a link in the warning
+		// so we need to back out of the key properties.
+		background-color: transparent !important;
+		position: static;
+		margin: 0;
+		padding: 0 !important;
 
-		a{
-			color: #bb0000;
-			text-decoration: underline;
-			
-			// Sometimes netsuite adds the .checkoutwarning class to a link in the warning
-			// so we need to back out of the key properties.
-			background-color: transparent !important;
-			position: static;
-			margin: 0;
+		&:hover{
+			text-decoration: none;
+		}
+
+	}
+
+}
+.errortext b{
+	display: none !important;
+}
+
+.errortext p,
+.errortext.bglt{
+	top: 0;
+}
+
+// General bug/cleanup/fixes for rouge elements
+td{ vertical-align: top; }
+td[nowrap]{ white-space: normal; }
+tr[height="25"]{ height: 0; }
+
+@media (max-width: 767px){
+	.portletHandle{
+		table, tr, td, tbody{
+			display: block !important;
+			width: 100% !important;
 			padding: 0 !important;
-
-			&:hover{
-				text-decoration: none;
-			}
-
-		}
-
-	}
-	.errortext b{
-		display: none !important;
-	}
-
-	.errortext p,
-	.errortext.bglt{
-		top: 0;
-	}
-
-	// General bug/cleanup/fixes for rouge elements
-	td{ vertical-align: top; }
-	td[nowrap]{ white-space: normal; }
-	tr[height="25"]{ height: 0; }
-
-	@media (max-width: 767px){
-		.portletHandle{
-			table, tr, td, tbody{
-				display: block !important;
-				width: 100% !important;
-				padding: 0 !important;
-				margin: 0 !important;
-			}
+			margin: 0 !important;
 		}
 	}
-	#main_form{
-		font-size: inherit !important;
-		padding-bottom: 0 !important;
-		width: 100% !important;
-	}
+}
+#main_form{
+	font-size: inherit !important;
+	padding-bottom: 0 !important;
+	width: 100% !important;
+}
 
-	
-
-
-/*
- *   Cart
- */ 
-
- 	#handle_cartMainPortlet > td > table, &.nscheckout-cart{
- 		width: 100% !important; // overrides the code on "Panel Widths" near line 1998
- 	}
-
- 	#carttable{
- 		
- 		margin-top: 70px !important;
-
- 		&:before{
-	 		content: 'Your Cart';
-	 		display: block;
-	 		font-size: 30px;
-	 		line-height: 43px;
-			font-size: 2.9em;
-			font-family: "League Gothic", sans-serif;
-			text-transform: uppercase;
-			color: $black; 
-			-webkit-font-smoothing: antialiased;
-			margin-top:10px;
-			position:absolute;
-			top: 0;
-
-			@media (max-width: 767px){
-				top: -70px;
-			}
-		}
- 	}
-
- 	&.nscheckout-receipt #carttable{
- 		margin-top: 0;
- 	}
-
- 	// Hide the "Your Cart" title on the review page
- 	input[name="total"] ~ table #carttable,
- 	&.nscheckout-receipt #carttable{ 
- 		margin-top: 0 !important;
- 		&:before{ display: none; }
- 	}
-
-	#carttableheader, #carttableheader + tr{
-		font-size: 13px;
-	}
-
-	// Cart Header
-	#carttableheader td{
-		border: 1px solid $lightGrey !important;
-		border-right: 0 !important;
-		border-left-width: 1px !important;
-		padding: 10px !important;
-		text-align: center;
-		font-weight: normal !important;
-
-		&:first-child{
-			border-left: 0 !important;
-		}
-
-		@media (max-width: 767px){
-			display: none !important;
-		}
-	}
-
-	// Header Label hiding/positioning
-	#carttableheader{
-
-		// "Item"
-		> td:first-child + td{
-			border-left: 0px !important;
-			text-align: left;
-			div{
-				position: relative;
-				left: -50px;
-			}
-		}
-
-		// "Remove"
-		> td:first-child,
-		> td:first-child + td + td + td + td + td + td + td{
-			color: transparent;
-		}
-	}
-
-	// An empty cart doesn't pass the "carttablerow#" id's down... so we can use that to style an empty cart
-	#carttableheader ~ tr{ display: none !important; }
-	
-	// Empty Cart
-	#carttableheader + tr{ 
-		display: block !important;
-		height: 200px;
-	}
-	#carttableheader + tr:before{
-		width: 100%;
-		display: block !important;
-		content: 'Your Shopping Cart is Empty';
-		color: $grey;
-		position:absolute;
-		margin-top: 100px;
-		text-align:center;
-	}
-	#carttableheader + tr td{ display: none !important; }
-
-	// Back out of empty cart
-	#carttableheader + #carttablerow0{ height: auto; }
-	#carttableheader + #carttablerow0:before{ display: none !important; }
-	#carttableheader + #carttablerow0 td{ display: table-cell !important; }
-	#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{ display: table-row !important; }
-
-	@media (max-width: 767px){
-		#carttableheader + #carttablerow0 td{ display: block !important; }
-		#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{ display: block !important; }
-	}
-
-	// Cart Item Rows
-	// use table again to ensure we are working with
-	// netsuite's nested table and not accidentally one of ours
-	#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{
-
-		@media (max-width: 767px){
-			border: 1px solid $lightGrey;
-			border-width: 0 0 1px;
-			padding: 20px 0 !important;
-			position: relative;
-
-			#carttablerow0{
-				border-top-width: 1px;
-			}
-
-			@include clearfix();
-		}
-
-		td{ 
-			border-bottom: 1px solid $lightGrey;
-			padding: 10px;
-			font-size: 13px;
-
-			@media (max-width: 767px){
-				border: 0px
-			}
-		}
-
-		// Image
-		td:first-child{
-			
-			text-align: center;
-			line-height: 0; // Hide &nbsp; nonsense when the photo isn't there
-
-			img{ 
-				width: 64px;
-				height: 64px;
-			}
-
-			@media (max-width: 767px){
-				float: left !important;
-				width: auto !important;
-				padding-right: 10px !important;
-			}
-		}
-
-		// Item Name
-		td:first-child + td{
-			
-			font-size: 15px;
-			font-weight: 600;
-
-			a{
-				text-decoration: none;
-				color: black;
-			}
-		}
-
-		// Description
-		td:first-child + td + td{
-			//background-color: white;
-			@media (max-width: 767px){
-				color: $grey;
-			}
-		}
-
-		// Options
-		td:first-child + td + td + td{
-			//background-color: red;
-			td{ 
-				border: 0;
-				padding: 0;
-				text-align: left;
-				line-height: 22px;
-			}
-			@media (max-width: 767px){
-				color: $grey;
-			}
-		}
-
-		// Quantity
-		td:first-child + td + td + td + td{
-			min-width: 50px;
-			text-align: center;
-			margin-top: 10px;
-			padding-top: 18px; // Move down the text-only quantity (review/receipt pages)
-
-			input{ // Move the input back up
-				position: relative;
-				top: -7px;
-				z-index: 5;
-				@media (max-width: 767px){
-					top: 2px;
-				}
-			}
-
-			@media (max-width: 767px){
-				float: left !important;
-				width: 125px !important;
-				input{ width: 50px !important; }
-				&:before{
-					padding-top: 10px;
-					padding-right: 5px;
-					content: 'Quantity: ';
-					float: left !important;
-				}
-			}
-			input[type="text"][value="0"][disabled]{
-				display: none;
-			}
-		}
-
-		// Item Price
-		td:first-child + td + td + td + td + td{
-			//background-color: red;
-			//display: none;
-			//width: 1%;
-			text-align: center;
-			font-size: 15px;
-			position:relative;
-			padding-top: 18px;
-
-			@media (max-width: 767px){
-				display: none !important;
-			}
-		}
-
-		// Total Price
-		td:first-child + td + td + td + td + td + td{
-			//background-color: red;
-			text-align:right;
-			font-size: 24px;
-			font-weight: 600;
-			width: 200%;
-			padding-top: 18px;
-			padding-bottom: 7px;
-			@media (max-width: 767px){
-				position: relative;
-				top: 9px;
-				font-size: 18px;
-				text-align: left !important;
-			}
-		}
-
-		// Remove - it's dumb, but the action is on the image, not on the link
-		td:first-child + td + td + td + td + td + td + td{
-			//background-color: red;
-			text-align: center;
-			padding-top: 18px;
-			a{
-				position: relative;
-
-				img{
-					width: 70px;
-					height: 30px;
-					background-color: white;
-					@include opacity(.0001);
-					position: absolute;
-					top: 0;
-					left: 0;
-					outline: 1px solid red;
-					&:hover{
-						cursor: pointer;
-						cursor: hand;
-					}
-				}
-				
-				&:before{
-					content: 'Remove';
-					position: absolute;
-					top: 0;
-					left: 0;
-				}
-
-				&:hover:before{
-					text-decoration: underline;
-				}
-			}
-
-			@media (max-width: 767px){
-				a{
-					position: absolute;
-					top: 10px;
-					right: 10px;
-					text-decoration: none;
-
-					&:before{
-						content: 'x';
-						color: black;
-						line-height: 17px;
-						text-align: center;
-						font-size: 14px;
-						top: 0px;
-						font-weight: bold;
-						margin-top: 0;
-						border: 1px solid #cfcfcf;
-						width: 20px;
-						height: 20px;
-						display: block;
-						padding-left: 1px;
-						@include border-radius(16px);
-					}
-
-					&:hover:before{
-						background-color: red;
-						color: white;
-						border-color: transparent;
-					}
-				}
-			}
-		}
-
-	}
-
-	@media (max-width: 767px){
-		#carttableheader + #carttablerow0{ // Overspecified on purpose
-			border-top-width: 1px;
-		}
-	}
-
-	// Cart Footer
-	#carttableheader ~ #ordersummary_estship, #ordersummary_estship ~ tr{
-
-		padding: 10px 0 !important;
-
-		@media (max-width: 767px){
-	 		text-align: right !important;
-	 	}
-
-	 	// Estimated Shipping Row
-		> td.texttable[colspan="6"]:first-child{ // Overqualified to overcome selector specificity
-			
-			text-align: right !important;
-			position: relative;
-			color: $grey;
-			padding: 30px 95px 10px 0 !important;
-
-			@media (max-width: 767px){
-				position: absolute;
-				right: 130px;
-				top: 5px;
-				width: 200px !important;
-				//padding-right: 10px;
-			}
-
-			// Label
-			a{
-				text-decoration: none;
-				font-size: 13px;
-				font-weight: bold;
-				color: black;
-				z-index: 1;
-				top: 10px;
-				display: block !important;
-				//padding-left: 100px;
-				position: absolute;
-				right: 10px;
-				top: 10px;
-				
-				&:after{
-					content: 'United States';
-					text-decoration: underline;
-					padding-left: 8px;
-					position: absolute;
-					right: 0;
-					bottom: -21px;
-					color: $grey;
-					font-weight: normal;
-					font-size: 13px;
-					// @media (max-width: 700px){
-					// 	display: none;
-					// }
-				}
-
-				&:hover:after{
-					text-decoration: none;
-				}
-
-				@media (max-width: 767px){
-					position: absolute;
-					width: 100%;
-					&:after{
-						display: block !important;
-						position:absolute;
-						width: 100%;
-						bottom: -19px;
-						height: 20px;
-						//background-color: red;
-					}
-				}
-
-			}
-			@media (max-width: 450px){
-				padding-right: 10px !important;
-				a{
-					text-decoration: underline;
-					&:after{
-						display: none !important;
-					}
-				}
-			}
-		}
-
-
-		// Estimated Shipping amount
-		td[colspan="6"] + td.texttablert{
-			//font-weight: bold !important;
-			text-align: right;
-			font-size: 24px !important;
-			vertical-align: middle;
-
-			@media (max-width: 767px){
-				display: inline-block !important;
-	 			width: auto !important;
-	 			float: none !important;
-	 			margin-top: 10px !important;
-	 			margin-right: 10px !important;
-	 			width: 100px !important;
-			}
-		}
-		@media (max-width: 767px){
-			// Blank cell after subtotal
-			td[colspan="6"] + td.texttablert + td{
-				display: none !important;
-			}
-		}
-
-
-
-
-	}
-
-	// Order Subtotal
-	#ordersummary_estship + tr{
-		td{
-			border-bottom-width: 0 !important;
-			font-weight: bold;
-		}
-		.texttablert + .texttablert{
-			font-weight: bold !important;
-			font-size: 24px;
-		}
-	}
-	@media (max-width: 767px){
-		#ordersummary_estship + tr{
-
-			background-color: $superLightGrey;
-
-			// Blank cells
-			td:first-child,
-			td:first-child + td,
-			td:first-child + td + td,
-			td:first-child + td + td + td,
-			td:first-child + td + td + td + td,
-			td:first-child + td + td + td + td + td + td + td{
-				display: none !important;
-			}
-
-			// Label
-			td:first-child + td + td + td + td + td{
-				display: inline-block !important;
-				width: auto !important;
-				padding-right: 15px !important;
-			}
-			// Value
-			td:first-child + td + td + td + td + td + td{
-				display: inline-block !important;
-				width: 80px !important;
-				position: static !important;
-			}
-
-		}
-	}
-
-	// The button row for cart - second selector for ie8
-	#handle_cartMainPortlet > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table,
-	#cart tr:first-child + tr > td > table{
-		float: right;
-		margin-top: 10px !important;
-
-		//background-color: pink;
-		
-		@media (max-width: 767px){
-			tr, td{
-				width: auto !important;
-				float: right;
-			}
-		}
-
-		td{
-			display: block;
-			float: right !important;
-
-		}
-		#tbl_cancel{
-			display: none;
-		}
-
-		// Back-out of global styling. Right at the end I realized I couldn't be specific enough with a couple of buttons
-		// and thus we have two methods of positioning these buttons, generic and specific. Sorry.
-		#tbl_checkout, #tbl_cancel, #tbl_recalc{
-			position: relative;
-			right: auto;
-			bottom: auto;
-		}
-	}
 
 
 
 /*
- *  Generic Stylings
- */
-	// Form Labels
-	.smalltextnolink[align="right"]{
-		font-weight: bold;
-		text-align: right;
-		line-height: 0;
-		padding-right: 5px;
-		padding-top: 8px;
-		width: 160px;
+*   Cart
+*/ 
 
-		@media (max-width: 767px){
-			text-align: left;
-		}
+	#handle_cartMainPortlet > td > table, html[data-path*="cart"] .page-generic > table{
+		width: 100% !important; // overrides the code on "Panel Widths" near line 1998
+	}
 
-		a{ color: black; line-height: 22px; }
-
-		// Required Icon
-		.required_icon{
-			//background-color: red;
-			display: none
-		}
+	#carttable{
 		
-		.required_icon + a{
-			// &:after{
-			// 	content: 'Required';
-			// 	color: $grey;
-			// 	display: block;
-			// 	font-weight: normal;
-			// 	//text-align: right;
-			// 	font-size: 13px;
-			// 	line-height: 18px;
-			// 	width: 100%;
-			// 	@media (max-width: 767px){
-			// 		content: ' (required)';
-			// 		display: inline;
-			// 	}
-			// }
-		}
-	}
+		margin-top: 70px !important;
 
-	.smalltextnolink{
-		color: black;
-	}
-
-	// Not all labels have an "a" tag
-	// We need to back out of our line-height
-	// fix from above
-	#paymeth{
-		.smalltextnolink[align="right"]{
-			line-height: 22px;
-		}
-	}
-
-	// Form Fields
-	.smalltextnolink[align="right"] + td{
-		padding-bottom: 10px !important;
-	}
-
-	.smalltext{
-		color: $grey;
-		font-size: 13px;
-	}
-
-	.greytitle{
-		line-height: 43px;
+		&:before{
+ 		content: 'Your Cart';
+ 		display: block;
+ 		font-size: 30px;
+ 		line-height: 43px;
 		font-size: 2.9em;
 		font-family: "League Gothic", sans-serif;
 		text-transform: uppercase;
 		color: $black; 
 		-webkit-font-smoothing: antialiased;
 		margin-top:10px;
+		position:absolute;
+		top: 0;
+
+		@media (max-width: 767px){
+			top: -70px;
+		}
+	}
 	}
 
-	&.nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
-		width: 800px !important;
+	.nscheckout-receipt #carttable{
+		margin-top: 0;
 	}
 
-/*
- *  Customer Sign In
- */
+	// Hide the "Your Cart" title on the review page
+	input[name="total"] ~ table #carttable,
+	.nscheckout-receipt #carttable{ 
+		margin-top: 0 !important;
+		&:before{ display: none; }
+	}
 
-	// In IE, they accept the poorly formmated HTML from the template so we need the #login reference as well
-	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table,
-	#login input[name="new"] ~ table{
+#carttableheader, #carttableheader + tr{
+	font-size: 13px;
+}
 
-		> tbody > tr{
-			display: block;
-			float: left;
-			width: 50% - $fluidGutterPercentage / 2;
+// Cart Header
+#carttableheader td{
+	border: 1px solid $lightGrey !important;
+	border-right: 0 !important;
+	border-left-width: 1px !important;
+	padding: 10px !important;
+	text-align: center;
+	font-weight: normal !important;
+
+	&:first-child{
+		border-left: 0 !important;
+	}
+
+	@media (max-width: 767px){
+		display: none !important;
+	}
+}
+
+// Header Label hiding/positioning
+#carttableheader{
+
+	// "Item"
+	> td:first-child + td{
+		border-left: 0px !important;
+		text-align: left;
+		div{
+			position: relative;
+			left: -50px;
+		}
+	}
+
+	// "Remove"
+	> td:first-child,
+	> td:first-child + td + td + td + td + td + td + td{
+		color: transparent;
+	}
+}
+
+// An empty cart doesn't pass the "carttablerow#" id's down... so we can use that to style an empty cart
+#carttableheader ~ tr{ display: none !important; }
+
+// Empty Cart
+#carttableheader + tr{ 
+	display: block !important;
+	height: 200px;
+}
+#carttableheader + tr:before{
+	width: 100%;
+	display: block !important;
+	content: 'Your Shopping Cart is Empty';
+	color: $grey;
+	position:absolute;
+	margin-top: 100px;
+	text-align:center;
+}
+#carttableheader + tr td{ display: none !important; }
+
+// Back out of empty cart
+#carttableheader + #carttablerow0{ height: auto; }
+#carttableheader + #carttablerow0:before{ display: none !important; }
+#carttableheader + #carttablerow0 td{ display: table-cell !important; }
+#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{ display: table-row !important; }
+
+@media (max-width: 767px){
+	#carttableheader + #carttablerow0 td{ display: block !important; }
+	#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{ display: block !important; }
+}
+
+// Cart Item Rows
+// use table again to ensure we are working with
+// netsuite's nested table and not accidentally one of ours
+#carttableheader + #carttablerow0, #carttableheader + #carttablerow0 ~ tr{
+
+	@media (max-width: 767px){
+		border: 1px solid $lightGrey;
+		border-width: 0 0 1px;
+		padding: 20px 0 !important;
+		position: relative;
+
+		#carttablerow0{
+			border-top-width: 1px;
 		}
 
- 		> tbody{
-			// New Customers
+		@include clearfix();
+	}
 
-			> tr:first-child{
-				
-				@include panel();
-				@include engaged();
+	td{ 
+		border-bottom: 1px solid $lightGrey;
+		padding: 10px;
+		font-size: 13px;
 
-				// IE won't take the position:relative on the TR tag
-				> td{
-					position: relative;
-					//margin-bottom: 30px !important;
-					padding-bottom: 80px !important; // Space for button
-				}
+		@media (max-width: 767px){
+			border: 0px
+		}
+	}
 
-				
-				//width: 100%;
+	// Image
+	td:first-child{
+		
+		text-align: center;
+		line-height: 0; // Hide &nbsp; nonsense when the photo isn't there
 
-				#tbl_register{
-					
-					position: absolute;
-					bottom: 10px;
-					right: 5px;
+		img{ 
+			width: 64px;
+			height: 64px;
+		}
 
-					// Enough padding for the extra content
-					input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
-					&:after{
-						padding-right: 10px;
-						content: ' Checkout As Guest';
-						margin-left: -165px;
-					}
-				}
+		@media (max-width: 767px){
+			float: left !important;
+			width: auto !important;
+			padding-right: 10px !important;
+		}
+	}
 
-				#tbl_submitter{
-					bottom: -50px;
+	// Item Name
+	td:first-child + td{
+		
+		font-size: 15px;
+		font-weight: 600;
+
+		a{
+			text-decoration: none;
+			color: black;
+		}
+	}
+
+	// Description
+	td:first-child + td + td{
+		//background-color: white;
+		@media (max-width: 767px){
+			color: $grey;
+		}
+	}
+
+	// Options
+	td:first-child + td + td + td{
+		//background-color: red;
+		td{ 
+			border: 0;
+			padding: 0;
+			text-align: left;
+			line-height: 22px;
+		}
+		@media (max-width: 767px){
+			color: $grey;
+		}
+	}
+
+	// Quantity
+	td:first-child + td + td + td + td{
+		min-width: 50px;
+		text-align: center;
+		margin-top: 10px;
+		padding-top: 18px; // Move down the text-only quantity (review/receipt pages)
+
+		input{ // Move the input back up
+			position: relative;
+			top: -7px;
+			z-index: 5;
+			@media (max-width: 767px){
+				top: 2px;
+			}
+		}
+
+		@media (max-width: 767px){
+			float: left !important;
+			width: 125px !important;
+			input{ width: 50px !important; }
+			&:before{
+				padding-top: 10px;
+				padding-right: 5px;
+				content: 'Quantity: ';
+				float: left !important;
+			}
+		}
+		input[type="text"][value="0"][disabled]{
+			display: none;
+		}
+	}
+
+	// Item Price
+	td:first-child + td + td + td + td + td{
+		//background-color: red;
+		//display: none;
+		//width: 1%;
+		text-align: center;
+		font-size: 15px;
+		position:relative;
+		padding-top: 18px;
+
+		@media (max-width: 767px){
+			display: none !important;
+		}
+	}
+
+	// Total Price
+	td:first-child + td + td + td + td + td + td{
+		//background-color: red;
+		text-align:right;
+		font-size: 24px;
+		font-weight: 600;
+		width: 200%;
+		padding-top: 18px;
+		padding-bottom: 7px;
+		@media (max-width: 767px){
+			position: relative;
+			top: 9px;
+			font-size: 18px;
+			text-align: left !important;
+		}
+	}
+
+	// Remove - it's dumb, but the action is on the image, not on the link
+	td:first-child + td + td + td + td + td + td + td{
+		//background-color: red;
+		text-align: center;
+		padding-top: 18px;
+		a{
+			position: relative;
+
+			img{
+				width: 70px;
+				height: 30px;
+				background-color: white;
+				@include opacity(.0001);
+				position: absolute;
+				top: 0;
+				left: -10px;
+				outline: 1px solid red;
+				&:hover{
+					cursor: pointer;
+					cursor: hand;
 				}
 			}
 			
-			// Returning Customers
-			> tr:first-child + tr + tr + tr{
-				
-				@include panel();
-				@include disengaged();
-
-				margin-left: $fluidGutterPercentage;
-
-				// IE won't take position: relative; on the tr tag
-				> td{
-					position: relative;
-					padding-bottom: 60px !important; // Space for button
-				}
-
-
-				// Password Field
-				> td > table > tbody > tr:first-child + tr > td > table > tbody > tr:first-child + tr > td:first-child + td{
-					padding-bottom: 0 !important;
-				}
-
-				// Labels
-				.smalltextnolink{
-					width: 90px;
-				}
-
-				// Login Button
-				#tbl_submitter{
-
-					position:absolute;
-					bottom:10px;
-					right: 5px;
-
-					input{ padding-right: 65px; text-indent:-200px; z-index: 2;}
-					
-					&:after{
-						position: absolute;
-						left: 10px;
-						top: 9px;
-						content: 'Sign In';
-					}
-				}
+			&:before{
+				content: 'Remove';
+				position: absolute;
+				top: 0;
+				left: -10px;
 			}
 
-
-			// Blank lines between sections
-			> tr:first-child + tr,
-			> tr:first-child + tr + tr,
-			> tr:first-child + tr + tr + tr > td > table > tbody > tr:first-child + tr + tr + tr{
-				display: none !important;
+			&:hover:before{
+				text-decoration: underline;
 			}
 		}
-	
+
+		@media (max-width: 767px){
+			a{
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				text-decoration: none;
+
+				&:before{
+					content: 'x';
+					color: black;
+					line-height: 17px;
+					text-align: center;
+					font-size: 14px;
+					top: 0px;
+					font-weight: bold;
+					margin-top: 0;
+					border: 1px solid #cfcfcf;
+					width: 20px;
+					height: 20px;
+					display: block;
+					padding-left: 1px;
+					@include border-radius(16px);
+				}
+
+				&:hover:before{
+					background-color: red;
+					color: white;
+					border-color: transparent;
+				}
+			}
+		}
 	}
 
-	// Optional Fields (Password, etc)
-	&.nscheckout-register {
-		#pwd_fs_lbl, #newpwd2_fs_lbl, #hint_fs_lbl{
+}
+
+@media (max-width: 767px){
+	#carttableheader + #carttablerow0{ // Overspecified on purpose
+		border-top-width: 1px;
+	}
+}
+
+// Cart Footer
+#carttableheader ~ #ordersummary_estship, #ordersummary_estship ~ tr{
+
+	padding: 10px 0 !important;
+
+	@media (max-width: 767px){
+ 		text-align: right !important;
+ 	}
+
+ 	// Estimated Shipping Row
+	> td.texttable[colspan="6"]:first-child{ // Overqualified to overcome selector specificity
+		
+		text-align: right !important;
+		position: relative;
+		color: $grey;
+		padding: 30px 95px 10px 0 !important;
+
+		@media (max-width: 767px){
+			position: absolute;
+			right: 130px;
+			top: 5px;
+			width: 200px !important;
+			//padding-right: 10px;
+		}
+
+		// Label
+		a{
+			text-decoration: none;
+			font-size: 13px;
+			font-weight: bold;
+			color: black;
+			z-index: 1;
+			top: 10px;
+			display: block !important;
+			//padding-left: 100px;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			
+			&:after{
+				content: 'United States';
+				text-decoration: underline;
+				padding-left: 8px;
+				position: absolute;
+				right: 0;
+				bottom: -21px;
+				color: $grey;
+				font-weight: normal;
+				font-size: 13px;
+				// @media (max-width: 700px){
+				// 	display: none;
+				// }
+			}
+
+			&:hover:after{
+				text-decoration: none;
+			}
+
+			@media (max-width: 767px){
+				position: absolute;
+				width: 100%;
+				&:after{
+					display: block !important;
+					position:absolute;
+					width: 100%;
+					bottom: -19px;
+					height: 20px;
+					//background-color: red;
+				}
+			}
+
+		}
+		@media (max-width: 450px){
+			padding-right: 10px !important;
+			a{
+				text-decoration: underline;
+				&:after{
+					display: none !important;
+				}
+			}
+		}
+	}
+
+
+	// Estimated Shipping amount
+	td[colspan="6"] + td.texttablert{
+		//font-weight: bold !important;
+		text-align: right;
+		font-size: 24px !important;
+		vertical-align: middle;
+
+		@media (max-width: 767px){
+			display: inline-block !important;
+ 			width: auto !important;
+ 			float: none !important;
+ 			margin-top: 10px !important;
+ 			margin-right: 10px !important;
+ 			width: 100px !important;
+		}
+	}
+	@media (max-width: 767px){
+		// Blank cell after subtotal
+		td[colspan="6"] + td.texttablert + td{
+			display: none !important;
+		}
+	}
+
+
+
+
+}
+
+// Order Subtotal
+#ordersummary_estship + tr{
+	td{
+		border-bottom-width: 0 !important;
+		font-weight: bold;
+	}
+	.texttablert + .texttablert{
+		font-weight: bold !important;
+		font-size: 24px;
+	}
+}
+@media (max-width: 767px){
+	#ordersummary_estship + tr{
+
+		background-color: $superLightGrey;
+
+		// Blank cells
+		td:first-child,
+		td:first-child + td,
+		td:first-child + td + td,
+		td:first-child + td + td + td,
+		td:first-child + td + td + td + td,
+		td:first-child + td + td + td + td + td + td + td{
+			display: none !important;
+		}
+
+		// Label
+		td:first-child + td + td + td + td + td{
+			display: inline-block !important;
+			width: auto !important;
+			padding-right: 15px !important;
+		}
+		// Value
+		td:first-child + td + td + td + td + td + td{
+			display: inline-block !important;
+			width: 80px !important;
+			position: static !important;
+		}
+
+	}
+}
+
+// The button row for cart - second selector for ie8
+#handle_cartMainPortlet > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table,
+#cart tr:first-child + tr > td > table{
+	float: right;
+	margin-top: 10px !important;
+
+	//background-color: pink;
+	
+	@media (max-width: 767px){
+		tr, td{
+			width: auto !important;
+			float: right;
+		}
+	}
+
+	td{
+		display: block;
+		float: right !important;
+
+	}
+	#tbl_cancel{
+		display: none;
+	}
+
+	// Back-out of global styling. Right at the end I realized I couldn't be specific enough with a couple of buttons
+	// and thus we have two methods of positioning these buttons, generic and specific. Sorry.
+	#tbl_checkout, #tbl_cancel, #tbl_recalc{
+		position: relative;
+		right: auto;
+		bottom: auto;
+	}
+}
+
+
+
+/*
+*  Generic Stylings
+*/
+// Form Labels
+.smalltextnolink[align="right"]{
+	font-weight: bold;
+	text-align: right;
+	line-height: 0;
+	padding-right: 5px;
+	padding-top: 8px;
+	width: 160px;
+
+	@media (max-width: 767px){
+		text-align: left;
+	}
+
+	a{ color: black; line-height: 22px; }
+
+	// Required Icon
+	.required_icon{
+		//background-color: red;
+		display: none
+	}
+	
+	.required_icon + a{
+		// &:after{
+		// 	content: 'Required';
+		// 	color: $grey;
+		// 	display: block;
+		// 	font-weight: normal;
+		// 	//text-align: right;
+		// 	font-size: 13px;
+		// 	line-height: 18px;
+		// 	width: 100%;
+		// 	@media (max-width: 767px){
+		// 		content: ' (required)';
+		// 		display: inline;
+		// 	}
+		// }
+	}
+}
+
+.smalltextnolink{
+	color: black;
+}
+
+// Not all labels have an "a" tag
+// We need to back out of our line-height
+// fix from above
+#paymeth{
+	.smalltextnolink[align="right"]{
+		line-height: 22px;
+	}
+}
+
+// Form Fields
+.smalltextnolink[align="right"] + td{
+	padding-bottom: 10px !important;
+}
+
+.smalltext{
+	color: $grey;
+	font-size: 13px;
+}
+
+.greytitle{
+	line-height: 43px;
+	font-size: 2.9em;
+	font-family: "League Gothic", sans-serif;
+	text-transform: uppercase;
+	color: $black; 
+	-webkit-font-smoothing: antialiased;
+	margin-top:10px;
+}
+
+html[data-title*="Checkout"] #handle_loginMainPortlet > td > table{
+	width: 800px !important;
+	margin-top: 60px;
+}
+
+/*
+*  Customer Sign In
+*/
+
+// In IE, they accept the poorly formmated HTML from the template so we need the #login reference as well
+.page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table,
+#login input[name="new"] ~ table{
+
+	> tbody > tr{
+		display: block;
+		float: left;
+		width: 50% - $fluidGutterPercentage / 2;
+	}
+
+		> tbody{
+		// New Customers
+
+		> tr:first-child{
+			
+			@include panel();
+			@include engaged();
+
+			// IE won't take the position:relative on the TR tag
+			> td{
+				position: relative;
+				//margin-bottom: 30px !important;
+				padding-bottom: 80px !important; // Space for button
+			}
+			
+			//width: 100%;
+
+			#tbl_register{
+				
+				position: absolute;
+				bottom: 10px;
+				right: 5px;
+
+				// Enough padding for the extra content
+				input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
+				&:after{
+					padding-right: 10px;
+					content: ' Checkout As Guest';
+					margin-left: -165px;
+				}
+			}
+
+			#tbl_submitter{
+				bottom: -50px;
+			}
+		}
+		
+		// Returning Customers
+		> tr:first-child + tr + tr + tr{
+			
+			@include panel();
+			@include disengaged();
+
+			margin-left: $fluidGutterPercentage;
+
+			// IE won't take position: relative; on the tr tag
+			> td{
+				position: relative;
+				padding-bottom: 60px !important; // Space for button
+			}
+
+
+			// Password Field
+			> td > table > tbody > tr:first-child + tr > td > table > tbody > tr:first-child + tr > td:first-child + td{
+				padding-bottom: 0 !important;
+			}
+
+			// Labels
+			.smalltextnolink{
+				width: 90px;
+			}
+
+			// Login Button
+			#tbl_submitter{
+
+				position:absolute;
+				bottom:10px;
+				right: 5px;
+
+				input{ padding-right: 65px; text-indent:-200px; z-index: 2;}
+				
+				&:after{
+					position: absolute;
+					left: 10px;
+					top: 9px;
+					content: 'Sign In';
+				}
+			}
+		}
+
+
+		// Blank lines between sections
+		> tr:first-child + tr,
+		> tr:first-child + tr + tr,
+		> tr:first-child + tr + tr + tr > td > table > tbody > tr:first-child + tr + tr + tr{
+			display: none !important;
+		}
+	}
+
+}
+
+// Optional Fields (Password, etc)
+.nscheckout-register {
+	#pwd_fs_lbl, #newpwd2_fs_lbl, #hint_fs_lbl{
+		@include optionalLabel();
+
+		@media (max-width: 767px){
+			top: 0;
+		}
+	}
+}
+
+// Link at the bottom of the Login and Register page 
+// that lets you switch context
+
+// "Already a member - login here"
+.changeContextLink a{
+	position:relative;
+	top: -44px;
+	width: 600px;
+	margin: auto;
+	display:block;
+}
+// "New Customer? Create an account" link on naked Returning Customers / Login page
+html[data-title*="Login"] .page-generic > table .changeContextLink a{
+	top: -30px;
+}
+
+.nscheckout-register .changeContextLink{
+	display: none;
+	//outline: 1px solid red;
+}
+
+/*
+* Timeline
+*/
+// "Register > Address > Shipping > Payment > Review & Submit" map
+// The path to them is different on each page.. why? I have no clue.
+tr[height="25"] {
+	//background-color: red;
+	height: 0 !important;
+	.checkoutprogresstext{
+		font-size: 0;
+		position:absolute;
+		//top: -120px;
+		left: 0;
+		//width: 100%;
+		width: 100%;
+	}
+
+	.steps{
+		
+		font-size: 14px;
+		width: 800px;
+		float: none;
+		margin:auto;
+		//padding: 60px 0 30px;
+		position: relative;
+		left: 50%;
+		margin-left: -410px;
+
+		@media (max-width: 979px){
+			width: 100%;
+			left: 0;
+		}
+		@media (max-width: 767px){
+			top: 35px; // account for removed text
+		}
+
+		a{
+			
+			color: black;
+			text-decoration: none;
+
+			&:hover{
+				text-decoration: underline;
+			}
+
+			&:before{
+				content: ' ';
+				display: block;
+				position: absolute;
+				width: 100%;
+				height: 100px;
+				top: -70px;
+				z-index: 3;
+				color: black;
+			}
+		}
+	}
+}
+
+// Because we style the panel using a tr tag, the td element can't be 100% - so we have to force it
+// this could have been avoided if we had applied the panel styling to the td tag... this is a hack. live and learn.
+html[data-title*="Shipping Method"] .checkoutprogresstext{
+	width: 600px;
+	margin-left: -12px; // account for padding.
+	margin-top: -30px;
+	top: -160px !important;
+}
+
+/*
+ * Login / Register
+ */
+
+input[name="category"][value="login-register"] ~ table{
+	@include panel();
+	@include engaged();
+
+	margin-bottom: 0;
+	margin-top: 160px;
+
+
+	@media (max-width: 767px){
+		margin-top: 100px !important;
+	}
+	
+	tr[height="25"]{
+		
+		position: absolute;
+		top: -140px;
+		width: 100%;
+
+		.checkoutprogresstext{
+			width: 100%;
+			width: 600px \0/; // IE sucks
+			display: block;
+			top: -10px;
+		}
+	}
+	input[type="checkbox"]{
+		float: right;
+		@media (max-width: 767px){
+			float: left;
+		}
+	}
+
+	// Blank rows
+	input[name="partner"] + tr{
+		display: none !important;
+	}
+
+	// Button row
+	> tbody > tr:first-child + tr + tr + tr + tr + tr{
+		
+		line-height: 0;
+
+		#tbl_submitter{
+			display: block;
+			position: absolute;
+			bottom: -50px;
+			right: 0px;
+		}
+		
+		td{ 
+			display: block; 
+			float: right;
+		}
+		
+		table{ 
+			float: right;
+		}
+	}
+}
+
+
+
+/*
+* Payment Method
+*/
+#paymeth > table{
+	@include panel();
+	@include engaged();
+
+	margin-top: 160px !important;
+	.checkoutprogresstext{
+		position: absolute;
+		top: -170px;
+	}
+	@media (max-width: 767px){
+		margin-top:100px !important;
+	}
+	
+	select[name="sExpMo"],
+	select[name="sExpYr"]{
+		width: 100px;
+	}
+	select[name="sExpMo"]{
+		float: left;
+	}
+	.errortext p{
+		top: 0;
+	}
+	br{
+		display: none;
+	}
+	// Payment Method
+	#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child{
+		
+		position: relative;
+		top: -5px;
+
+
+		&:after{
+			// Not sure why I need this - but this one was too close to the radio buttons
+			margin-right: 5px;
+		}
+		table{
+			float: right;
+		}
+	}
+	#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr > td:first-child,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr > td:first-child,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr > td:first-child,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child{
+		//background-color: pink;
+		// &:after{
+		// 	content: 'Required ';
+		// 	padding-right: 5px;
+		// 	display:block;
+		// 	text-align:right;
+		// 	font-weight: normal;
+		// 	color: $grey !important;
+		// 	font-size: 13px;
+		// 	line-height: 18px;
+		// 	@media (max-width: 767px){
+		// 		content: ' (required)';
+		// 		display: inline;
+		// 	}
+		// }
+	}
+
+	#paymethhider > table > tbody > tr:first-child + tr + tr{
+		.smalltext{ color: black; }
+	}
+
+	// CSC row
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
+		input{
+			float: left;
+		}
+
+		// Our own CSC example image
+		&:after{
+			content : ' ';
+			
+			@include lsp-sprite-background();
+			background-position: -15px -888px;
+			width: 190px;
+			height: 80px;
+			display: block;
+			margin-left: 5px;
+			float: left;
+		}
+		&:before{
+			content : ' ';
+			@include lsp-sprite-background();
+			background-position: -283px -271px;
+			width: 130px;
+			height: 80px;
+			display: block;
+			position: absolute;
+			top: 15px;
+			right: 15px;
+		}
+	}
+	
+	// Example CSC instructions
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
+		padding-left: 62px !important;
+		padding-left: 0px\9 !important;
+		clear: both;
+		@include box-sizing();
+	}
+	
+	// Save My Credit Card Information, second selector for ie
+	#paymethhider input[name="sValidFromYr"] + tr,
+	#paymethhider > table > tbody > tr > .smalltextnolink[colspan="2"]
+	{
+		
+		// Decided to hide it
+		display: none !important;
+
+		// &:before{
+		// 	display: table-cell;
+		// 	content: ' ';
+		// }
+		// td{
+		// 	padding-top: 10px !important;
+		// }
+	}
+
+	// Gift Card Title
+	#paymethhider input[name="sValidFromYr"] + tr + tr + tr{
+		.greytitle{
+			font-size: $h2FontSize;
+		}
+	}
+
+	// Apply Gift Card row
+	#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr,
+	#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr,
+	#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr + tr{
+		
+		// Label
+		.smalltextnolink:first-child{
 			@include optionalLabel();
 
 			@media (max-width: 767px){
 				top: 0;
 			}
-		}
-	}
 
-	// Link at the bottom of the Login and Register page 
-	// that lets you switch context
-
-	// "Already a member - login here"
-	.changeContextLink a{
-		position:relative;
-		top: -44px;
-		width: 600px;
-		margin: auto;
-		display:block;
-	}
-	// "New Customer? Create an account"
-	&.nscheckout-login .changeContextLink a{
-		top: -35px;
-	}
-
-	&.nscheckout-register .changeContextLink{
-		display: none;
-		//outline: 1px solid red;
-	}
-
-/*
- * Timeline
- */
-	// "Register > Address > Shipping > Payment > Review & Submit" map
-	// The path to them is different on each page.. why? I have no clue.
-	tr[height="25"] {
-		//background-color: red;
-		height: 0 !important;
-		.checkoutprogresstext{
-			font-size: 0;
-			//position:absolute;
-			//top: -120px;
-			left: 0;
-			//width: 100%;
-			width: 100%;
-		}
-
-		.steps{
-			
-			font-size: 14px;
-			width: 800px;
-			float: none;
-			margin:auto;
-			//padding: 60px 0 30px;
-			position: relative;
-			left: 50%;
-			margin-left: -410px;
-
-			@media (max-width: 979px){
-				width: 100%;
-				left: 0;
-			}
-			@media (max-width: 767px){
-				top: 35px; // account for removed text
-			}
-
-			a{
-				
-				color: black;
-				text-decoration: none;
-
-				&:hover{
-					text-decoration: underline;
-				}
-
-				&:before{
-					content: ' ';
-					display: block;
-					position: absolute;
-					width: 100%;
-					height: 100px;
-					top: -70px;
-					z-index: 3;
-					color: black;
-				}
-			}
-		}
-	}
-
-	/*
-	 * Login / Register
-	 */
-
-	input[name="category"][value="login-register"] ~ table{
-		@include panel();
-		@include engaged();
-
-		margin-bottom: 0;
-		margin-top: 135px;
-		
-		tr[height="25"]{
-			
-			position: absolute;
-			top: -140px;
-			width: 100%;
-
-			.checkoutprogresstext{
-				width: 100%;
-				width: 600px \0/; // IE sucks
-				display: block;
-			}
-		}
-		input[type="checkbox"]{
-			float: right;
-			@media (max-width: 767px){
-				float: left;
+			b{ font-weight: normal; }
+			&:after{
+				position: relative;
+				right: 9px;
 			}
 		}
 
-		// Blank rows
-		input[name="partner"] + tr{
-			display: none !important;
-		}
-
-		// Button row
-		> tbody > tr:first-child + tr + tr + tr + tr + tr{
-			
-			line-height: 0;
-
-			#tbl_submitter{
-				display: block;
-				position: absolute;
-				bottom: -50px;
-				right: 0px;
-			}
-			
+		@media (max-width: 767px){
 			td{ 
-				display: block; 
-				float: right;
+				float: left !important;
+				width: auto !important;
 			}
-			
-			table{ 
-				float: right;
+
+			table td{
+				display: block;
 			}
+			.smalltextnolink,
+			.smalltextnolink + td{
+				clear: both;
+			}
+			.smalltext{
+				clear: both;
+			}
+			.smalltext:first-child{
+				display: none !important;
+			}
+
+
 		}
 	}
+
+	// If you have a gift card... cells
+	#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr > td:first-child + td,
+	#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr > td:first-child + td{
+		//position: relative;
+		//top: -10px;
+		//clear: both;
+		line-height: 14px; // &nbsp; fix
+		padding-bottom: 0 !important;
+		
+		@media (max-width: 767px){
+			&:first-child{ display: none !important; }
+		}
+		
+		#tbl_cleargift{
+			margin: 0;
+		}
+	}
+
+	// Continue button container
+	> tbody > tr:first-child + tr + tr table{
+		// float: right;
+		// width: auto !important;
+		// position: absolute;
+		// bottom: -50px;
+		// right: 0;
+	}
+
+	
+	// Blank row and netsuite's example CSC image
+	#paymethhider > table > tbody > tr:first-child,
+	#paymethhider > table > tbody > tr:first-child + tr,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+		display: none !important;
+	}
+}
+
 
 
 
 /*
- * Payment Method
- */
-	#paymeth > table{
-		@include panel();
-		@include engaged();
+* Shipping / Billing
+*/
 
-		margin-top: 150px !important;
+	html[data-title*="Address"]{
+
 		.checkoutprogresstext{
-			position: absolute;
-			top: -150px;
+			top: -10px;
 		}
 		@media (max-width: 767px){
-			margin-top:100px !important;
-		}
-		
-		select[name="sExpMo"],
-		select[name="sExpYr"]{
-			width: 100px;
-		}
-		select[name="sExpMo"]{
-			float: left;
-		}
-		.errortext p{
-			top: 0;
-		}
-		br{
-			display: none;
-		}
-		// Payment Method
-		#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child{
-			
-			position: relative;
-			top: -5px;
-
-
-			&:after{
-				// Not sure why I need this - but this one was too close to the radio buttons
-				margin-right: 5px;
-			}
-			table{
-				float: right;
-			}
-		}
-		#paymethhider > table > tbody > tr:first-child + tr + tr > td:first-child,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr > td:first-child,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr > td:first-child,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr > td:first-child,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child{
-			//background-color: pink;
-			// &:after{
-			// 	content: 'Required ';
-			// 	padding-right: 5px;
-			// 	display:block;
-			// 	text-align:right;
-			// 	font-weight: normal;
-			// 	color: $grey !important;
-			// 	font-size: 13px;
-			// 	line-height: 18px;
-			// 	@media (max-width: 767px){
-			// 		content: ' (required)';
-			// 		display: inline;
-			// 	}
-			// }
-		}
-
-		#paymethhider > table > tbody > tr:first-child + tr + tr{
-			.smalltext{ color: black; }
-		}
-
-		// CSC row
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
-			input{
-				float: left;
-			}
-
-			// Our own CSC example image
-			&:after{
-				content : ' ';
-				
-				@include lsp-sprite-background();
-				background-position: -15px -888px;
-				width: 190px;
-				height: 80px;
-				display: block;
-				margin-left: 5px;
-				float: left;
-			}
-			&:before{
-				content : ' ';
-				@include lsp-sprite-background();
-				background-position: -283px -271px;
-				width: 130px;
-				height: 80px;
-				display: block;
-				position: absolute;
-				top: 15px;
-				right: 15px;
-			}
-		}
-		
-		// Example CSC instructions
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
-			padding-left: 62px !important;
-			padding-left: 0px\9 !important;
-			clear: both;
-			@include box-sizing();
-		}
-		
-		// Save My Credit Card Information, second selector for ie
-		#paymethhider input[name="sValidFromYr"] + tr,
-		#paymethhider > table > tbody > tr > .smalltextnolink[colspan="2"]
-		{
-			
-			// Decided to hide it
-			display: none !important;
-
-			// &:before{
-			// 	display: table-cell;
-			// 	content: ' ';
-			// }
-			// td{
-			// 	padding-top: 10px !important;
-			// }
-		}
-
-		// Gift Card Title
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr{
-			.greytitle{
-				font-size: $h2FontSize;
-			}
-		}
-
-		// Apply Gift Card row
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr,
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr,
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr + tr{
-			
-			// Label
-			.smalltextnolink:first-child{
-				@include optionalLabel();
-
-				@media (max-width: 767px){
-					top: 0;
-				}
-
-				b{ font-weight: normal; }
-				&:after{
-					position: relative;
-					right: 9px;
-				}
-			}
-
-			@media (max-width: 767px){
-				td{ 
-					float: left !important;
-					width: auto !important;
-				}
-
-				table td{
-					display: block;
-				}
-				.smalltextnolink,
-				.smalltextnolink + td{
-					clear: both;
-				}
-				.smalltext{
-					clear: both;
-				}
-				.smalltext:first-child{
-					display: none !important;
-				}
-
-
-			}
-		}
-
-		// If you have a gift card... cells
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr > td:first-child + td,
-		#paymethhider input[name="sValidFromYr"] + tr + tr + tr + tr + tr > td:first-child + td{
-			//position: relative;
-			//top: -10px;
-			//clear: both;
-			line-height: 14px; // &nbsp; fix
-			padding-bottom: 0 !important;
-			
-			@media (max-width: 767px){
-				&:first-child{ display: none !important; }
-			}
-			
-			#tbl_cleargift{
-				margin: 0;
-			}
-		}
-
-		// Continue button container
-		> tbody > tr:first-child + tr + tr table{
-			// float: right;
-			// width: auto !important;
-			// position: absolute;
-			// bottom: -50px;
-			// right: 0;
-		}
-
-		
-		// Blank row and netsuite's example CSC image
-		#paymethhider > table > tbody > tr:first-child,
-		#paymethhider > table > tbody > tr:first-child + tr,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr,
-		#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
-			display: none !important;
-		}
-	}
-
-
-
-
-/*
- * Shipping / Billing
- */
-
- 	&.nscheckout-address{
- 		@media (max-width: 767px){
- 			tr[height="25"]{
+			tr[height="25"]{
 	 			height: 100px !important;
 	 			.steps{
-	 				top: -10px;
+	 				top: -20px;
 	 			}
 	 		}
- 		}
- 		#tbl_submitter{
- 			
- 			// TODO : move this code to a mixin
+		}
+		#tbl_submitter{
+			
+			// TODO : move this code to a mixin
 
- 			input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
+			input{ padding-right: 160px; text-indent: -300px; z-index: 2; }
 			&:after{
 				padding-right: 10px;
 				content: 'Continue Checkout';
 				margin-left: -165px;
 			}
- 		}
- 	}
+		}
+	}
 
- 	// /findme/
-	.portletHandle ~ .portletHandle ~ .portletHandle > td > form > table {
+
+.portletHandle ~ .portletHandle ~ .portletHandle > td > form > table {
+	width: 100%;
+	@include panel();
+	@include engaged();
+	.checkboximage{ display: none; }
+	td:first-child input[type="checkbox"]{
+		float:right;
+		@media (max-width: 767px){
+			float: left;
+		}
+	}
+
+
+	#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td{
 		width: 100%;
-		@include panel();
-		@include engaged();
-		.checkboximage{ display: none; }
-		td:first-child input[type="checkbox"]{
-			float:right;
-			@media (max-width: 767px){
-				float: left;
-			}
-		}
+	}
 
+	// A really stupid blank cell presumably used to make the form smaller in width
+	td[valign] + td[width]{
+		display: none;
+	}
 
-		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td{
-			width: 100%;
-		}
-
-		// A really stupid blank cell presumably used to make the form smaller in width
-		td[valign] + td[width]{
-			display: none;
-		}
-
-		#main_form > table > tbody > tr:first-child + tr + tr > td{
-			
-			padding-bottom: 0 !important;
-
-			// Button
-			// table{
-			// 	//background-color: red;
-			// 	margin-right: 0;
-			// 	float: right;
-			// 	position: absolute;
-			// 	bottom: -50px;
-			// 	right: 0;
-			// 	width: auto !important;
-			// }
-		}
-
-		#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr + tr + tr + tr + tr{
-			display: none !important;
-		}
-
-		// Address 2
-		tr:first-child + tr + tr + tr{
-			td:first-child{ 
-				@include optionalLabel();
-				@media (max-width: 767px){
-					top: 0;
-				}
-			}
-
-			// Hiding a row in the disengaged saved address panel hides address2 accidentally
-			// so we need to show it, and handle the transition to block for mobile
-			display: table-row !important;
-			@media (max-width:767px){
-				display: block !important;
-			}
-		}
+	#main_form > table > tbody > tr:first-child + tr + tr > td{
 		
-		// Company Name Row
-		> td > form > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr{
-			//outline: 1px solid red;
-			 display: none !important;
-		}
-		// Company Name Label
-		#addressee_input_fs_lbl a{
+		padding-bottom: 0 !important;
+
+		// Button
+		// table{
+		// 	//background-color: red;
+		// 	margin-right: 0;
+		// 	float: right;
+		// 	position: absolute;
+		// 	bottom: -50px;
+		// 	right: 0;
+		// 	width: auto !important;
+		// }
+	}
+
+	#main_form > table > tbody > tr:first-child + tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr + tr + tr + tr + tr{
+		display: none !important;
+	}
+
+	// Address 2
+	tr:first-child + tr + tr + tr{
+		td:first-child{ 
 			@include optionalLabel();
 			@media (max-width: 767px){
 				top: 0;
 			}
 		}
 
+		// Hiding a row in the disengaged saved address panel hides address2 accidentally
+		// so we need to show it, and handle the transition to block for mobile
+		display: table-row !important;
+		@media (max-width:767px){
+			display: block !important;
+		}
+	}
+	
+	// Company Name Row
+	> td > form > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr{
+		//outline: 1px solid red;
+		 display: none !important;
+	}
+	// Company Name Label
+	#addressee_input_fs_lbl a{
+		@include optionalLabel();
+		@media (max-width: 767px){
+			top: 0;
+		}
 	}
 
-	// Shipping Method & Review Order Panel, the second rule is for ie8, which renders the form element in a wierd
-	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
-	#checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
-		@include panel();
-		@include engaged();
+}
 
-		width: 100%;
-		margin-top: 150px;
+// Shipping Method & Review Order Panel, the second rule is for ie8, which renders the form element in a wierd
+.page-generic > table > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+#checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+	@include panel();
+	@include engaged();
 
-		.checkoutprogresstext{
-			position: absolute;
-			top: -150px;
-		}
+	width: 100%;
+	margin-top: 160px;
 
-		@media (max-width: 767px){
-			margin-top:100px !important;
-		}
+	.checkoutprogresstext{
+		position: absolute;
+		top: -180px;
+	}
+
+	@media (max-width: 767px){
+		margin-top:100px !important;
+	}
 
 
-		// IE can't add position relative to a table/tr tag, so we add it to the first td tag down the path to give the continue button something to grab on to
-		> tbody > tr > td{
-			position: relative;
-		}
+	// IE can't add position relative to a table/tr tag, so we add it to the first td tag down the path to give the continue button something to grab on to
+	> tbody > tr > td{
+		position: relative;
+	}
 
-		// Space for steps
-		// margin-top: 140px;
-		// @media (max-width: 767px){
-		// 	margin-top: 100px !important;
-		// }
+	// Space for steps
+	// margin-top: 140px;
+	// @media (max-width: 767px){
+	// 	margin-top: 100px !important;
+	// }
 
-		br:first-child, script + br{ display: none !important; }
+	br:first-child, script + br{ display: none !important; }
 
-		// Shipping Method Label
-		.smalltext b{
-			display: none !important;
-		}
+	// Shipping Method Label
+	.smalltext b{
+		display: none !important;
+	}
 
-		// This is difficult - if there are no carrier options (like what happens in the case of freight)
-		// then we get a different HTML structure with no easy hooks
-		// The solution used here is taking advantage of the fact that .smalltext is used
-		// to identify the shipping method and the cell without smalltext is the carrier dropdown
-		#shippingmethodtable > tbody > tr tr{
+	// This is difficult - if there are no carrier options (like what happens in the case of freight)
+	// then we get a different HTML structure with no easy hooks
+	// The solution used here is taking advantage of the fact that .smalltext is used
+	// to identify the shipping method and the cell without smalltext is the carrier dropdown
+	#shippingmethodtable > tbody > tr tr{
 
-			td{
+		td{
 
-				// The label isn't wrapped in an element, so we need to 
-				// apply label styling and back out of them for children
-				font-weight: bold;
-				color: black;
-				padding-left: 8px !important;
-				font-size: 0;
-				
+			// The label isn't wrapped in an element, so we need to 
+			// apply label styling and back out of them for children
+			font-weight: bold;
+			color: black;
+			padding-left: 8px !important;
+			font-size: 0;
+			
+			@media (max-width: 767px){
+				padding-left: 0 !important;
+			}
+			&:before{
+				font-size: 14px;
+				content: 'Shipping Carrier';
+				position: relative;
+				top: -9px;
+				@media (max-width: 767px){
+					display: block;
+				}
+			}
+			&:after{
+				color: $grey;
+				font-weight: normal;
+				font-size: 13px;
+				width: 100%;
+				display: block;
+				line-height: 18px;
+				text-align:right;
+				content: 'Select UPS for Overnight or Second Day Air Options';
+				padding-left: 128px !important;
+				text-align: left;
+				padding-bottom: 20px !important;
 				@media (max-width: 767px){
 					padding-left: 0 !important;
 				}
+			}
+			#shippingcarrierselect{
+				width: 100px;
+				display: inline-block;
+				margin-left: 10px !important;
+				position: relative;
+				top: -3px;
+				@media (max-width: 767px){
+					margin-left: 0 !important;
+				}
+			}
+		}
+		td.smalltext{
+			// the shipping methods
+			font-size: 14px;
+			font-weight: normal;
+			color: black;
+
+			input[type="radio"]{
+				float: none;
+				display: inline-block;
+			}
+
+			&:before{
+				content: 'Shipping Method';
+				top: 0px;
+				margin-right: 10px;
+				font-weight: bold;
+			}
+			&:after{
+				content : '';
+			}
+		}
+	}
+	#shippingmethodtable > tbody > tr tr:first-child + tr ~ tr{
+		td.smalltext:before{
+			color: white;
+		}
+		td.smalltext{
+			
+			padding-left: 140px !important;
+
+			&:before{
+				content: ''; // Shipping Method
+				display: none;
+			}
+			&:after{
+				display: none;
+			}
+		}
+	}
+
+	// Coupon Code Table
+	> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody,
+	> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody{
+		
+		.smalltextnolink{ 
+			line-height: 18px;
+		}
+
+		// Coupon Code row cells
+		> tr:first-child + tr > td{
+			padding-top: 20px !important;
+			
+		}
+
+		// Coupon Code Label
+		td.smalltextnolink{
+			
+			@include optionalLabel();
+
+			width: 131px;
+			text-align: right;
+			padding-top: 0;
+			
+			top: 0;
+			font-weight: normal;
+			b{ font-weight: normal; }
+
+			@media (max-width: 767px){
+				text-align: left;
+				top: 0px;
+			}
+		}
+
+		// Input box field
+		td.smalltextnolink + td{
+
+			line-height: 0; // &nbsp; fix
+			padding-bottom: 0 !important;
+			> table > tbody > tr > td:first-child{
+				float: left !important;
+				width: auto !important;
+			}
+			@media (max-width: 767px){
+				padding-top: 0 !important;
+			}
+		}
+
+		> tr:first-child{
+			display: none !important;
+		}
+		@media (max-width: 767px){
+			// Blank cell
+			> tr:first-child + tr + tr > td:first-child{
+				//background-color: red;
+				display: none !important;
+			}
+
+			// If you have a coupon... cell
+			> tr:first-child + tr + tr > td:first-child + td{
+				clear: both;
+			}
+		}
+		#tbl_removecoupon{
+			margin-left: 0;
+		}
+	}
+	
+	// // Blank row
+	// > tbody > tr:first-child + tr{
+	// 	display: none !important;
+	// }
+
+}
+
+// Button Bar for Shipping Method - second selector is for ie
+.page-generic > table > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr,
+.page-generic > table > tbody > tr > td #checkout > input[name="category"][value="shipping"] ~ tr > td > table:first-child > tbody > tr:first-child + tr{
+
+	// Back out of my global absolute positioning
+	#tbl_submitter,
+	#tbl_applycoupon{
+		position:relative;
+		right: auto;
+		bottom: auto;
+	}
+
+	table{ 
+		float: right;
+		position: relative;
+		top: -5px;
+		width: auto !important;
+	}
+}
+
+// Shipping 
+tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
+	
+	@include panel();
+	@include disengaged();
+	
+	//Space for steps
+	margin-top: 160px;
+	width: 100%;
+
+	@media (max-width: 767px){
+		margin-top: 0px !important;
+	}
+
+	#address{
+		margin-right: 80px;
+		clear: both;
+		padding-top: 20px !important;
+	}
+	
+	// Remove padding from first row, add it back to the second address
+	tr:first-child > td > #address{
+		padding-top: 0 !important;
+	}
+
+	@media (max-width: 767px){
+		tr:first-child > td:first-child + td > #address{
+		padding-top: 20px !important;
+		}
+	}
+	
+	// Title of Saved Address
+	#address > tbody{
+		// Label
+		> tr:first-child > .smalltext b{
+			font-weight: normal !important;
+		}
+
+		// Value
+		> tr:first-child + tr > .smalltext{
+			font-weight: bold;
+			//padding-bottom: 10px !important;
+			color: black;
+
+			br:first-child{ display: none; }
+
+		}
+		@media (max-width: 767px){
+			> tr:first-child + tr + tr td{
+				float: left !important;
+				width: auto !important;
+			}
+		}
+	}
+
+	// Bug fix
+	tr[height]{
+		height: auto !important;
+	}
+
+	// Blank rows
+	tr:first-child + tr + tr + tr,
+	> tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr + tr{
+		display: none !important;
+	}
+
+	// All buttons
+	input[type="button"]{
+		overflow : visible; /* Shrinkwrap the text in IE7- */
+		margin : 0 10px 0 0;
+		padding : 0;
+		border : 0;
+		color : $grey;
+		background : transparent;
+		font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
+		line-height : normal; /* Override line-height to avoid spacing issues */
+		text-decoration : underline; /* Make it look linky */
+		cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
+		-moz-user-select: text; /* Make button text selectable in Gecko */
+		font-size: 13px;	
+	}
+
+	// Just the edit button
+	#tbl_edit, #edit{
+		display: none !important;
+	}
+}
+
+#submitordertable{
+
+	table,
+	> tbody,
+	> tbody > tr,
+	> tbody > tr > td{
+		display: block;
+		float: left !important;
+	}
+
+	// Container!
+	> tbody{
+		width: 100%;
+	}
+
+	// The Shipping / Billing address row
+	> tbody > tr:first-child{
+		width: 45%; // ?
+	}
+
+	// The Carrier / Payment row
+	> tbody > tr:first-child + tr{
+		width: 55%;
+	}
+
+
+
+	// We hide this label on the shipping address table, back out of display: none
+	#shippingaddress .smalltext b,
+	#billingaddress .smalltext b,
+	#paymentmethodtable .smalltext b{
+		display: block !important;
+		color: $grey;
+		font-weight: normal;
+	}
+	#shippingaddress .smalltext,
+	#billingaddress .smalltext,
+	#paymentmethodtable .smalltext{
+		color: black;
+		font-weight: bold;
+	}
+
+	// These labels aren't wrapped in the "a" tag, so we have to back out of our &nbsp; fix from before
+	.smalltextnolink[align="right"]{
+		line-height: 22px;
+	}
+
+	> tbody > tr:first-child + tr + tr{
+		clear: both;
+	}
+
+	#additionalfieldstable{
+		width: 100%;
+	}
+
+	// Normally we display: none things we want to hide
+	// but this time, there are fewer we want to show than hide
+	// so we display: none, and then display: table-row the one we want to show
+	#additionalfieldstable > tbody > tr{
+		display: none !important;
+	}
+
+	// Special Instructions
+	#additionalfieldstable > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr{
+		
+		display: block !important;
+		clear: both;
+		width: 50%;
+		margin-top: 20px;
+
+		@media (max-width: 767px){
+			margin-top: 20px !important;
+		}
+		
+		td{
+			//padding-top: 20px !important;
+			width: 100%;
+
+			@media (max-width: 767px){
+				padding-top:0 !important;
+			}
+		}
+
+		// Label
+		#custbody4_fs_lbl{
+			@include optionalLabel();
+
+
+			@media (max-width: 767px){
+				top: 0;
+			}
+		}
+
+		// Input field
+		#custbody4_fs{
+			white-space: normal !important;
+			width: 100%;
+			
+			textarea{
+				height: 50px;
+			}
+
+			display: block;
+		}
+
+		td:first-child{
+			width: 160px;	
+		}
+	}
+
+	// Shipping Method block
+	> tbody > tr:first-child + tr > td:first-child{
+		display: block !important;
+		width: 58%; // overcome width attribute
+		float: left;
+		&:before{
+			content: 'Shipping Method';
+			display: block;
+			color: $grey;
+			font-size: 13px;
+		}
+	}
+	> tbody > tr:first-child + tr > td:first-child + td{
+		width: 42%;
+	}
+
+	// Edit/Change buttons
+	input[type="button"]{
+		margin-top: 5px;
+		font-size: 13px;
+		line-height: 22px;
+		text-decoration: underline;
+		&:hover{
+			text-decoration: none;
+		}
+	}
+	
+	// Shipping Method
+	#shippingmethodtable{
+
+		margin-bottom: 20px !important;
+
+		.smalltext{
+			// everything
+			line-height: 0;
+			padding-top: 5px;
+
+			td{
+				padding-left: 0 !important;
+				padding-right: 10px;
 				&:before{
-					font-size: 14px;
-					content: 'Shipping Carrier';
-					position: relative;
-					top: -9px;
-					@media (max-width: 767px){
-						display: block;
-					}
+					display: none; // Shipping Method -- we moved it because Freight was orphaned on the review page
 				}
 				&:after{
-					color: $grey;
-					font-weight: normal;
-					font-size: 13px;
-					width: 100%;
-					display: block;
-					line-height: 18px;
-					text-align:right;
-					content: 'Select UPS for Overnight or Second Day Air Options';
-					padding-left: 128px !important;
-					text-align: left;
-					padding-bottom: 20px !important;
-					@media (max-width: 767px){
-						padding-left: 0 !important;
-					}
+					display: none;
+					content: ''; // Select UPS for overnight message
 				}
 				#shippingcarrierselect{
-					width: 100px;
-					display: inline-block;
-					margin-left: 10px !important;
-					position: relative;
-					top: -3px;
-					@media (max-width: 767px){
-						margin-left: 0 !important;
-					}
+					margin-left: 0 !important;
+					margin-top: 5px;
 				}
 			}
 			td.smalltext{
 				// the shipping methods
-				font-size: 14px;
+				font-size: 13px;
+				line-height: 22px;
 				font-weight: normal;
-				color: black;
+				padding-left: 2px !important;
+				padding-top: 10px !important;
 
 				input[type="radio"]{
 					float: none;
 					display: inline-block;
 				}
-
-				&:before{
-					content: 'Shipping Method';
-					top: 0px;
-					margin-right: 10px;
-					font-weight: bold;
-				}
-				&:after{
-					content : '';
-				}
-			}
-		}
-		#shippingmethodtable > tbody > tr tr:first-child + tr ~ tr{
-			td.smalltext:before{
-				color: white;
-			}
-			td.smalltext{
-				
-				padding-left: 140px !important;
 
 				&:before{
 					content: ''; // Shipping Method
@@ -1493,626 +1880,268 @@ body .span12 > table{
 				}
 			}
 		}
-
-		// Coupon Code Table
-		> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody,
-		> tbody > tr:first-child + tr + tr > td > table:first-child + table > tbody{
+		.checkoutwarning{
 			
-			.smalltextnolink{ 
-				line-height: 18px;
-			}
+			font-weight: normal;
+			top: 3px;
 
-			// Coupon Code row cells
-			> tr:first-child + tr > td{
-				padding-top: 20px !important;
-				
-			}
-
-			// Coupon Code Label
-			td.smalltextnolink{
-				
-				@include optionalLabel();
-
-				width: 131px;
-				text-align: right;
-				padding-top: 0;
-				
-				top: 0;
-				font-weight: normal;
-				b{ font-weight: normal; }
-
-				@media (max-width: 767px){
-					text-align: left;
-					top: 0px;
-				}
-			}
-
-			// Input box field
-			td.smalltextnolink + td{
-
-				line-height: 0; // &nbsp; fix
-				padding-bottom: 0 !important;
-				> table > tbody > tr > td:first-child{
-					float: left !important;
-					width: auto !important;
-				}
-				@media (max-width: 767px){
-					padding-top: 0 !important;
-				}
-			}
-
-			> tr:first-child{
-				display: none !important;
-			}
-			@media (max-width: 767px){
-				// Blank cell
-				> tr:first-child + tr + tr > td:first-child{
-					//background-color: red;
-					display: none !important;
-				}
-
-				// If you have a coupon... cell
-				> tr:first-child + tr + tr > td:first-child + td{
-					clear: both;
-				}
-			}
-			#tbl_removecoupon{
-				margin-left: 0;
+			&:before, &:after{
+				display: none;
 			}
 		}
-		
-		// // Blank row
-		// > tbody > tr:first-child + tr{
-		// 	display: none !important;
-		// }
-
-	}
-
-	// Button Bar for Shipping Method - second selector is for ie
-	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr,
-	> tbody > tr > td #checkout > input[name="category"][value="shipping"] ~ tr > td > table:first-child > tbody > tr:first-child + tr{
-
-		// Back out of my global absolute positioning
-		#tbl_submitter,
-		#tbl_applycoupon{
-			position:relative;
-			right: auto;
-			bottom: auto;
-		}
-
-		table{ 
-			float: right;
-			position: relative;
-			top: -5px;
-			width: auto !important;
+		#shippingcarrierselect{
+			display:block;
 		}
 	}
 
-	// Shipping  /findme/
-	tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
-		
-		@include panel();
-		@include disengaged();
-		
-		//Space for steps
-		// margin-top: 140px;
-		// @media (max-width: 767px){
-		// 	margin-top: 100px !important;
-		// }
+}
 
-		width: 100%;
 
-		#address{
-			margin-right: 80px;
-			clear: both;
-			padding-top: 20px !important;
-		}
-		
-		// Remove padding from first row, add it back to the second address
-		tr:first-child > td > #address{
+// Order Review and Summary
+
+.nscheckout-review{
+	width: 100% !important;
+	.steps{
+		margin-left: 5%;
+	}
+	@media (max-width: 767px){
+		margin-left: 0;
+	}
+}
+
+input[name="total"] ~ table > tbody{
+	display: table;
+	width: 100%;
+}
+
+input[name="total"] ~ table #carttable > tbody > tr:first-child,
+input[name="total"] ~ table #carttable > tbody > tr:first-child ~ tr{
+
+	// Quantity
+	> td:first-child + td + td + td + td{
+		//background-color:red;
+		//width: auto !important;
+		margin-right: 10px !important;
+		font-weight: bold;
+
+		&:before{
 			padding-top: 0 !important;
-		}
-		@media (max-width: 767px){
-			tr:first-child > td:first-child + td > #address{
-			padding-top: 20px !important;
-			}
-		}
-		
-		// Title of Saved Address
-		#address > tbody{
-			// Label
-			> tr:first-child > .smalltext b{
-				font-weight: normal !important;
-			}
-
-			// Value
-			> tr:first-child + tr > .smalltext{
-				font-weight: bold;
-				//padding-bottom: 10px !important;
-				color: black;
-
-				br:first-child{ display: none; }
-
-			}
-			@media (max-width: 767px){
-				> tr:first-child + tr + tr td{
-					float: left !important;
-					width: auto !important;
-				}
-			}
-		}
-
-		// Bug fix
-		tr[height]{
-			height: auto !important;
-		}
-
-		// Blank rows
-		tr:first-child + tr + tr + tr,
-		> tbody > tr:first-child > td > table > tbody > tr:first-child > td > table > tbody > tr + tr{
-			display: none !important;
-		}
-
-		// All buttons
-		input[type="button"]{
-			overflow : visible; /* Shrinkwrap the text in IE7- */
-			margin : 0 10px 0 0;
-			padding : 0;
-			border : 0;
-			color : $grey;
-			background : transparent;
-			font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
-			line-height : normal; /* Override line-height to avoid spacing issues */
-			text-decoration : underline; /* Make it look linky */
-			cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
-			-moz-user-select: text; /* Make button text selectable in Gecko */
-			font-size: 13px;	
-		}
-
-		// Just the edit button
-		#tbl_edit, #edit{
-			display: none !important;
-		}
-	}
-
-	#submitordertable{
-
-		table,
-		> tbody,
-		> tbody > tr,
-		> tbody > tr > td{
-			display: block;
-			float: left !important;
-		}
-
-		// Container!
-		> tbody{
-			width: 100%;
-		}
-
-		// The Shipping / Billing address row
-		> tbody > tr:first-child{
-			width: 45%; // ?
-		}
-
-		// The Carrier / Payment row
-		> tbody > tr:first-child + tr{
-			width: 55%;
-		}
-
-
-
-		// We hide this label on the shipping address table, back out of display: none
-		#shippingaddress .smalltext b,
-		#billingaddress .smalltext b,
-		#paymentmethodtable .smalltext b{
-			display: block !important;
-			color: $grey;
 			font-weight: normal;
 		}
-		#shippingaddress .smalltext,
-		#billingaddress .smalltext,
-		#paymentmethodtable .smalltext{
-			color: black;
-			font-weight: bold;
-		}
 
-		// These labels aren't wrapped in the "a" tag, so we have to back out of our &nbsp; fix from before
-		.smalltextnolink[align="right"]{
-			line-height: 22px;
-		}
-
-		> tbody > tr:first-child + tr + tr{
-			clear: both;
-		}
-
-		#additionalfieldstable{
-			width: 100%;
-		}
-
-		// Normally we display: none things we want to hide
-		// but this time, there are fewer we want to show than hide
-		// so we display: none, and then display: table-row the one we want to show
-		#additionalfieldstable > tbody > tr{
-			display: none !important;
-		}
-
-		// Special Instructions
-		#additionalfieldstable > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr{
-			
-			display: block !important;
-			clear: both;
-			width: 50%;
-			margin-top: 20px;
-
-			@media (max-width: 767px){
-				margin-top: 20px !important;
-			}
-			
-			td{
-				//padding-top: 20px !important;
-				width: 100%;
-
-				@media (max-width: 767px){
-					padding-top:0 !important;
-				}
-			}
-
-			// Label
-			#custbody4_fs_lbl{
-				@include optionalLabel();
-
-
-				@media (max-width: 767px){
-					top: 0;
-				}
-			}
-
-			// Input field
-			#custbody4_fs{
-				white-space: normal !important;
-				width: 100%;
-				
-				textarea{
-					height: 50px;
-				}
-
-				display: block;
-			}
-
-			td:first-child{
-				width: 160px;	
-			}
-		}
-
-		// Shipping Method block
-		> tbody > tr:first-child + tr > td:first-child{
-			display: block !important;
-			width: 58%; // overcome width attribute
-			float: left;
-			&:before{
-				content: 'Shipping Method';
-				display: block;
-				color: $grey;
-				font-size: 13px;
-			}
-		}
-		> tbody > tr:first-child + tr > td:first-child + td{
-			width: 42%;
-		}
-
-		// Edit/Change buttons
-		input[type="button"]{
-			margin-top: 5px;
-			font-size: 13px;
-			line-height: 22px;
-			text-decoration: underline;
-			&:hover{
-				text-decoration: none;
-			}
-		}
-		
-		// Shipping Method
-		#shippingmethodtable{
-
-			margin-bottom: 20px !important;
-
-			.smalltext{
-				// everything
-				line-height: 0;
-				padding-top: 5px;
-
-				td{
-					padding-left: 0 !important;
-					padding-right: 10px;
-					&:before{
-						display: none; // Shipping Method -- we moved it because Freight was orphaned on the review page
-					}
-					&:after{
-						display: none;
-						content: ''; // Select UPS for overnight message
-					}
-					#shippingcarrierselect{
-						margin-left: 0 !important;
-						margin-top: 5px;
-					}
-				}
-				td.smalltext{
-					// the shipping methods
-					font-size: 13px;
-					line-height: 22px;
-					font-weight: normal;
-					padding-left: 2px !important;
-					padding-top: 10px !important;
-
-					input[type="radio"]{
-						float: none;
-						display: inline-block;
-					}
-
-					&:before{
-						content: ''; // Shipping Method
-						display: none;
-					}
-					&:after{
-						display: none;
-					}
-				}
-			}
-			.checkoutwarning{
-				
-				font-weight: normal;
-				top: 3px;
-
-				&:before, &:after{
-					display: none;
-				}
-			}
-			#shippingcarrierselect{
-				display:block;
-			}
-		}
-
-	}
-
-
-	// Order Review and Summary
-
-	&.nscheckout-review{
-		width: 100% !important;
-		.steps{
-			margin-left: 5%;
-		}
 		@media (max-width: 767px){
-			margin-left: 0;
+			padding-top: 10px !important;
 		}
 	}
 
-	input[name="total"] ~ table > tbody{
-		display: table;
-		width: 100%;
+	// Price
+	td:first-child + td + td + td + td + td + td{
+		top: 0;
+	}
+}
+
+// Order subtotals -- _itemtotal is the same as _subtotal, they have two ids one for the cart and one for the reciept
+tr#ordersummary_itemtotal, #ordersummary_itemtotal td,
+tr#ordersummary_shipping, #ordersummary_shipping td,
+tr#ordersummary_subtotal, #ordersummary_subtotal td
+{
+	border-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+// Labels and Values for Order Summary Table
+// tax and Tax are intentional - the receipt uses a different ID
+#ordersummary_tax,
+#ordersummary_Tax,
+#ordersummary_itemtotal,
+#ordersummary_subtotal,
+#ordersummary_total,
+#ordersummary_shipping,
+#ordersummary_estship{
+
+	td{
+		line-height: 22px !important;
 	}
 
-	input[name="total"] ~ table #carttable > tbody > tr:first-child,
-	input[name="total"] ~ table #carttable > tbody > tr:first-child ~ tr{
-
-		// Quantity
-		> td:first-child + td + td + td + td{
-			//background-color:red;
-			//width: auto !important;
-			margin-right: 10px !important;
-			font-weight: bold;
-
-			&:before{
-				padding-top: 0 !important;
-				font-weight: normal;
-			}
-
-			@media (max-width: 767px){
-				padding-top: 10px !important;
-			}
-		}
-
-		// Price
-		td:first-child + td + td + td + td + td + td{
-			top: 0;
-		}
+	// Labels
+	td:first-child{
+		text-align: right !important;
 	}
 
-	// Order subtotals -- _itemtotal is the same as _subtotal, they have two ids one for the cart and one for the reciept
-	tr#ordersummary_itemtotal, #ordersummary_itemtotal td,
-	tr#ordersummary_shipping, #ordersummary_shipping td,
-	tr#ordersummary_subtotal, #ordersummary_subtotal td
-	{
-		border-bottom: 0 !important;
-		padding-bottom: 0 !important;
+	// Values
+	td:first-child + td{
+		font-weight: bold;
+		text-align: right;
+		font-size: 14px;
+		padding-right: 10px !important;
 	}
+} 
 
-	// Labels and Values for Order Summary Table
-	// tax and Tax are intentional - the receipt uses a different ID
-	#ordersummary_tax,
-	#ordersummary_Tax,
-	#ordersummary_itemtotal,
-	#ordersummary_subtotal,
-	#ordersummary_total,
-	#ordersummary_shipping,
-	#ordersummary_estship{
+// Just the overall total value
+#ordersummary_total td:first-child + td{
+	font-size: 21px;
+}
 
-		td{
-			line-height: 22px !important;
+
+
+@media (max-width: 767px){
+	// The summary at the bottom of the table
+	// Overqualified for some CSS specificity problems with padding
+	#carttableheader + #carttablerow0 ~ #ordersummary_tax,
+	#carttableheader + #carttablerow0 ~ #ordersummary_Tax,
+	#carttableheader + #carttablerow0 ~ #ordersummary_itemtotal,
+	#carttableheader + #carttablerow0 ~ #ordersummary_total,
+	#carttableheader + #carttablerow0 ~ #ordersummary_shipping,
+	#carttableheader + #carttablerow0 ~ #ordersummary_subtotal{
+		
+		text-align: right !important;
+		padding: 10px 0 !important;
+
+		// Both cells
+		td:first-child.texttablert,
+		td:first-child ~ td.texttablert{ 
+			display: inline !important;
+			float: none !important;
 		}
 
-		// Labels
-		td:first-child{
-			text-align: right !important;
-		}
-
-		// Values
+		// Value
 		td:first-child + td{
 			font-weight: bold;
-			text-align: right;
-			font-size: 14px;
 			padding-right: 10px !important;
 		}
-	} 
-
-	// Just the overall total value
-	#ordersummary_total td:first-child + td{
-		font-size: 21px;
 	}
+}
 
 
+// Order Total
+#ordersummary_total{
+	background-color: $superLightGrey;
 
-	@media (max-width: 767px){
-		// The summary at the bottom of the table
-		// Overqualified for some CSS specificity problems with padding
-		#carttableheader + #carttablerow0 ~ #ordersummary_tax,
-		#carttableheader + #carttablerow0 ~ #ordersummary_Tax,
-		#carttableheader + #carttablerow0 ~ #ordersummary_itemtotal,
-		#carttableheader + #carttablerow0 ~ #ordersummary_total,
-		#carttableheader + #carttablerow0 ~ #ordersummary_shipping,
-		#carttableheader + #carttablerow0 ~ #ordersummary_subtotal{
-			
-			text-align: right !important;
-			padding: 10px 0 !important;
+	// Label
+	&:first-child{
+		text-align: right;
+		font-size: 13px;
+	}
+}
 
-			// Both cells
-			td:first-child.texttablert,
-			td:first-child ~ td.texttablert{ 
-				display: inline !important;
-				float: none !important;
-			}
 
-			// Value
-			td:first-child + td{
-				font-weight: bold;
-				padding-right: 10px !important;
+// Shopping Cart on the Review Item Page
+input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
+	td{
+		//float: right !important;
+		#tbl_submitter{
+			bottom: -90px;
+			float: right;
+			input{
+				font-size: 16px;
+				padding: 13px 20px;
 			}
 		}
 	}
+}
 
+// Blank line?
+input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr{
+	//display: none !important;
+}
 
-	// Order Total
-	#ordersummary_total{
-		background-color: $superLightGrey;
+// Change button for the cart
+tr + tr + tr + tr + tr td[align="right"] #tbl_change{
+	display: none !important;
+	input{ display: none; }
+}
 
-		// Label
-		&:first-child{
-			text-align: right;
-			font-size: 13px;
-		}
-	}
+ // Panel Widths
+ input[name="category"] ~ table,
+ .portletHandle:first-child,
+ .portletHandle:first-child ~ tr{
 
+ 	// IE8 renders the html differently
+ 	&,
+ 	> td > form > table,
+ 	> td > table{
+	 	
+	 	width: 600px !important;
+	 	margin: auto;
 
-	// Shopping Cart on the Review Item Page
-	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
-		td{
-			//float: right !important;
-			#tbl_submitter{
-				bottom: -90px;
-				float: right;
-				input{
-					font-size: 16px;
-					padding: 13px 20px;
-				}
-			}
-		}
-	}
-
-	// Blank line?
-	input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr{
-		//display: none !important;
-	}
-
-	// Change button for the cart
-	tr + tr + tr + tr + tr td[align="right"] #tbl_change{
-		display: none !important;
-		input{ display: none; }
-	}
-
-	 // Panel Widths
-	 input[name="category"] ~ table,
-	 .portletHandle:first-child,
-	 .portletHandle:first-child ~ tr{
-
-	 	// IE8 renders the html differently
-	 	&,
-	 	> td > form > table,
-	 	> td > table{
-		 	
-		 	width: 600px !important;
-		 	margin: auto;
-
-		 	@media (max-width: 979px){
-		 		width: 100% !important;
-		 		.steps{
-		 			margin-left: 0;
-		 		}
-		 	}
+	 	@media (max-width: 979px){
+	 		width: 100% !important;
+	 		.steps{
+	 			margin-left: 0;
+	 		}
 	 	}
-	 }
+ 	}
+ }
 
-	#handle_checkoutMainPortlet > td > table{
-		width: auto !important;
-	}
+#handle_checkoutMainPortlet > td > table{
+	width: auto !important;
+}
 
-	&.nscheckout-receipt{
-		width: 100%;
+.nscheckout-receipt{
+	width: 100%;
 
-		#tbl_continue{
-			display: none !important;
-		}
-
-		> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
-		#checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
-			border: 0;
-			@include box-shadow-multiple(none);
-			width: 100%;
-			display: table;
-		}
-	}
-
-	// &.nscheckout-review #tbl_change{
-	// 	outline: 1px solid red;
-	// 	display: none !important;
-	// }
-
-	// Legaleze UPS footer
-	#upsfooter, #fedexfooter{
+	#tbl_continue{
 		display: none !important;
 	}
 
-	// The receipt dosen't have the timeline, so we need to remove the space above
-	// nscheckout-receipt class is added via javascript in the Thank You customize text
-	&.nscheckout-receipt > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
-	&.nscheckout-receipt #checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
-		margin-top: 0 !important;
+	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+	#checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+		border: 0;
+		@include box-shadow-multiple(none);
+		width: 100%;
+		display: table;
 	}
+}
 
-	// The login page by itself needs to be full width
-	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
+// &.nscheckout-review #tbl_change{
+// 	outline: 1px solid red;
+// 	display: none !important;
+// }
+
+// Legaleze UPS footer
+#upsfooter, #fedexfooter{
+	display: none !important;
+}
+
+// The receipt dosen't have the timeline, so we need to remove the space above
+// nscheckout-receipt class is added via javascript in the Thank You customize text
+.nscheckout-receipt > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+.nscheckout-receipt #checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+	margin-top: 0 !important;
+}
+// The login page by itself needs to be full width
+html[data-title*="Login"]{
+	.page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
+		
 		width: 600px !important;
 		margin-left: 50% !important	;
 		margin-left: 0 \0/ !important;
 		position: relative !important;
 		left: -300px;
-	}
-
-	// #handle_loginMainPortlet{
-	//	width: auto;
-	// }
-
-	// Remove the top margin for the naked signup page
-	&.nscheckout-signup input[name="category"] ~ table{
-		margin-top: 0 !important;
-	}
-
-	// Put the margin back for the checkout process
-	&.nscheckout-signup.nscheckout-register input[name="category"] ~ table{
-		margin-top: 135px !important;
+		
+		@media (max-width: 979px){
+			width: 100% !important;
+			margin-left: 0 !important;
+			left: 0 !important;
+		}
 	}
 }
 
+// #handle_loginMainPortlet{
+//	width: auto;
+// }
+
+// Remove the top margin for the naked (timeline-less) signup page
+html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"] ~ table{
+	margin-top: 0 !important;
+}
+
+// Put the margin back for the checkout process
+//.nscheckout-signup.nscheckout-register input[name="category"] ~ table{
+//	margin-top: 135px !important;
+//}
+
+/*
 // Login page by itself when not comming from a checkout screen
 .header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr,
 .header.large ~ .page-generic table table table table input[name="new"] ~ table > tbody > tr{
@@ -2143,6 +2172,7 @@ body .span12 > table{
 		}
 	}
 }
+*/
 
 // Hide the timeline from a normal login or a normal creation outside of checkout
 .header.large ~ .page-generic #newcust{

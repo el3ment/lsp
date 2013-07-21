@@ -110,6 +110,10 @@ h6, .h6{ color: $grey; font-size: 13px; }
 a, .b5{
 	color: $grey;
 	&:hover{ text-decoration: none; }
+	&:active{
+		background-color: transparent;
+		text-decoration: underline;
+	}
 }
 
 // Special category-style links that add a > when you hover

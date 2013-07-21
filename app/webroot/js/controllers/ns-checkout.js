@@ -33,7 +33,8 @@
 					},
 					onEnterShippingAddress : function(e, data){
 						$(_mainTable + ' > tbody > tr > td > table > tbody > tr.portletHandle:first-child + .noprint + .portletHandle:not(:has(#address))')
-							.attr('style', 'display: none !important;');
+							.css({height : '0px', visibility : 'hidden'}); // we do this rather than display: none because 
+																		   // we need the margin-top to still work to make space for the timeline
 					},
 					onEnterBillingAddress : function(e, data){
 
