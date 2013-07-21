@@ -2022,7 +2022,6 @@ body .span12 > table{
 		input{ display: none; }
 	}
 
-
 	 // Panel Widths
 	 input[name="category"] ~ table,
 	 .portletHandle:first-child,
@@ -2158,7 +2157,24 @@ body .span12 > table{
 	}
 }
 
-.nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
-	width: 100% !important;
-}
+.header.small ~ .page-generic{	 // Panel Widths, excluding cart
+	 input[name="category"] ~ table,
+	 .portletHandle:first-child,
+	 .portletHandle:first-child ~ tr{
 
+	 	// IE8 renders the html differently
+	 	&,
+	 	> td > form > table,
+	 	> td > table{
+		 	
+		 	width: 600px !important;
+
+		 	@media (max-width: 979px){
+		 		width: 100% !important;
+		 		.steps{
+		 			margin-left: 0;
+		 		}
+		 	}
+	 	}
+	}
+}

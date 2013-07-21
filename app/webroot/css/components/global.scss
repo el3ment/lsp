@@ -119,6 +119,10 @@ a.category, .flyout .link a{
 	position: relative;
 	padding-left: 10px;
 
+	&:before{
+		text-decoration: none !important;
+	}
+
 	&:hover{
 		&:before{
 			content: '›';

@@ -332,10 +332,10 @@
 			.more{ display: none; }
 			.less{ display: none; }
 			&.reveal-open{
-				.less{ display: block; }
+				.less{ display: block; padding-left: 16px;}
 			}
 			&.reveal-closed{
-				.more{ display: block; }
+				.more{ display: block; padding-left: 16px;}
 			}
 			// top: px(-5px);
 		}
