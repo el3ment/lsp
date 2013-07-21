@@ -1076,6 +1076,11 @@ input[name="category"][value="login-register"] ~ table{
 	@include panel();
 	@include engaged();
 
+	.errortext{
+		padding-right: 150px !important;
+		@include box-sizing();
+	}
+
 	margin-top: 160px !important;
 	.checkoutprogresstext{
 		position: absolute;
@@ -1157,6 +1162,8 @@ input[name="category"][value="login-register"] ~ table{
 			margin-left: 5px;
 			float: left;
 		}
+
+		// Norton Image
 		&:before{
 			content : ' ';
 			@include lsp-sprite-background();
@@ -1912,9 +1919,6 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 html[data-title*="Review"] .page-generic > table,
 .nscheckout-review{
 	width: 100% !important;
-	.steps{
-		margin-left: 5%;
-	}
 	@media (max-width: 767px){
 		margin-left: 0;
 	}
