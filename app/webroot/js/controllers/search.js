@@ -250,7 +250,7 @@
 							_this.loadCurrentState();
 						}else{
 							// We must have gone back to a .html page
-							document.location.reload();		
+							document.location.reload();
 						}
 					},
 
@@ -500,6 +500,11 @@
 
 					// If the page hasn't been injected yet
 					if(!$('.page-search').length){
+
+						// These are error pages, they don't get the <div class=''
+						if(!$('.page-generic').length){
+							$('#div__body').addClass('page-generic');
+						}
 						
 						// Doing it via a node rather than directly into the after()
 						// prevents the page from shrinking height while rendering
