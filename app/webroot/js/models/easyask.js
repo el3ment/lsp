@@ -34,7 +34,7 @@
 					RequestData : payload.method,
 					currentpage : payload.page || 1,
 					forcepage : 1,
-					ResultsPerPage : payload.resultsPerPage,
+					ResultsPerPage : payload.resultsPerPage || 24,
 					defsortcols : (payload.sort === 'default' ? '' : payload.sort),
 					indexed : 1, 
 					rootprods : 1,
@@ -47,13 +47,15 @@
 					AttribSel : _this.combineSimilarAttributesForRequest(payload.attribute, payload.allAttributes)
 				};
 
-				if(payload.isSingleSelect){
-					formattedPayload.CatPath = payload.category;
-					formattedPayload.AttribSel = this.buildSingleAttributeString(payload.allAttributes);
-				}else{
-					// Build the category path by hand
-					formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)]).join('/');
-				}
+				// if(payload.isSingleSelect){
+				// 	formattedPayload.CatPath = payload.category;
+				// 	formattedPayload.AttribSel = this.buildSingleAttributeString(payload.allAttributes);
+				// }else{
+				// 	// Build the category path by hand
+				formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)])
+					.join('/')
+					.replace(/^\/-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
+				//}
 
 				if($.isEmptyObject(payload.allAttributes) && !payload.attribute && payload.method === 'CA_AttributeSelected'){
 					formattedPayload.RequestData = 'CA_BreadcrumbClick'; // If there are no attributes, just load the category

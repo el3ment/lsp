@@ -61,7 +61,6 @@ input[type="text"], input[type="email"], input[type="tel"]{
 input[disabled], select[disabled], textarea[disabled]{
 	background-color: $superLightGrey;
 	color: $grey;
-	font-weight: normal;
 }
 
 // Fields that are not full width need to float left because they are small

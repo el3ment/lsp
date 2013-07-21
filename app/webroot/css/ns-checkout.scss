@@ -452,18 +452,29 @@ body .span12 > table{
 				position: relative;
 
 				img{
-					width: 0;
-					height: 0;
-					padding-left: 100%;
-					padding-top: 50%;
+					width: 70px;
+					height: 30px;
 					background-color: white;
 					@include opacity(.0001);
 					position: absolute;
 					top: 0;
 					left: 0;
+					outline: 1px solid red;
+					&:hover{
+						cursor: pointer;
+						cursor: hand;
+					}
 				}
+				
 				&:before{
-					content: 'Remove'
+					content: 'Remove';
+					position: absolute;
+					top: 0;
+					left: 0;
+				}
+
+				&:hover:before{
+					text-decoration: underline;
 				}
 			}
 
@@ -775,10 +786,6 @@ body .span12 > table{
 /*
  *  Customer Sign In
  */
-	&.nscheckout-guestOrLogin input[name="new"] ~ table > tbody > tr:first-child,{
-		padding-bottom: 80px !important;
-	}
-
 
 	// In IE, they accept the poorly formmated HTML from the template so we need the #login reference as well
 	> tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table,
@@ -798,8 +805,14 @@ body .span12 > table{
 				@include panel();
 				@include engaged();
 
-				margin-bottom: 30px !important;
-				// padding-bottom: 80px !important; // Space for button
+				// IE won't take the position:relative on the TR tag
+				> td{
+					position: relative;
+					//margin-bottom: 30px !important;
+					padding-bottom: 80px !important; // Space for button
+				}
+
+				
 				//width: 100%;
 
 				#tbl_register{
@@ -829,7 +842,13 @@ body .span12 > table{
 				@include disengaged();
 
 				margin-left: $fluidGutterPercentage;
-				padding-bottom: 60px !important; // Space for button
+
+				// IE won't take position: relative; on the tr tag
+				> td{
+					position: relative;
+					padding-bottom: 60px !important; // Space for button
+				}
+
 
 				// Password Field
 				> td > table > tbody > tr:first-child + tr > td > table > tbody > tr:first-child + tr > td:first-child + td{
@@ -848,11 +867,11 @@ body .span12 > table{
 					bottom:10px;
 					right: 5px;
 
-					input{ padding-right: 65px; text-indent:-300px; z-index: 2;}
+					input{ padding-right: 65px; text-indent:-200px; z-index: 2;}
 					
 					&:after{
 						position: absolute;
-						left: 12px;
+						left: 10px;
 						top: 9px;
 						content: 'Sign In';
 					}
@@ -885,16 +904,16 @@ body .span12 > table{
 	// that lets you switch context
 
 	// "Already a member - login here"
-	.changeContextLink{
+	.changeContextLink a{
 		position:relative;
-		top: -30px;
+		top: -44px;
 		width: 600px;
 		margin: auto;
 		display:block;
 	}
 	// "New Customer? Create an account"
-	&.nscheckout-login .changeContextLink{
-		top: -45px;
+	&.nscheckout-login .changeContextLink a{
+		top: -35px;
 	}
 
 	&.nscheckout-register .changeContextLink{
@@ -932,6 +951,7 @@ body .span12 > table{
 
 			@media (max-width: 979px){
 				width: 100%;
+				left: 0;
 			}
 			@media (max-width: 767px){
 				top: 35px; // account for removed text
@@ -979,6 +999,7 @@ body .span12 > table{
 
 			.checkoutprogresstext{
 				width: 100%;
+				width: 600px \0/; // IE sucks
 				display: block;
 			}
 		}
@@ -1100,7 +1121,6 @@ body .span12 > table{
 				content : 'Example Image';
 				width: 190px;
 				height: 115px;
-				outline: 1px solid blue;
 				display: block;
 				margin-left: 5px;
 				float: left;
@@ -1354,6 +1374,10 @@ body .span12 > table{
 		}
 
 
+		// IE can't add position relative to a table/tr tag, so we add it to the first td tag down the path to give the continue button something to grab on to
+		> tbody > tr > td{
+			position: relative;
+		}
 
 		// Space for steps
 		// margin-top: 140px;
@@ -1536,9 +1560,10 @@ body .span12 > table{
 
 	}
 
-	// Button Bar for Shipping Method
-	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr{
-		
+	// Button Bar for Shipping Method - second selector is for ie
+	> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child + tr,
+	> tbody > tr > td #checkout > input[name="category"][value="shipping"] ~ tr > td > table:first-child > tbody > tr:first-child + tr{
+
 		// Back out of my global absolute positioning
 		#tbl_submitter,
 		#tbl_applycoupon{
@@ -1633,7 +1658,7 @@ body .span12 > table{
 			text-decoration : underline; /* Make it look linky */
 			cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
 			-moz-user-select: text; /* Make button text selectable in Gecko */
-			font-size: 13px;
+			font-size: 13px;	
 		}
 
 		// Just the edit button
@@ -1772,6 +1797,11 @@ body .span12 > table{
 		input[type="button"]{
 			margin-top: 5px;
 			font-size: 13px;
+			line-height: 22px;
+			text-decoration: underline;
+			&:hover{
+				text-decoration: none;
+			}
 		}
 		
 		// Shipping Method
@@ -1971,11 +2001,11 @@ body .span12 > table{
 		td{
 			//float: right !important;
 			#tbl_submitter{
-				padding: 3px 8px;
-				bottom: -60px;
+				bottom: -90px;
 				float: right;
 				input{
 					font-size: 16px;
+					padding: 13px 20px;
 				}
 			}
 		}
@@ -2026,7 +2056,8 @@ body .span12 > table{
 			display: none !important;
 		}
 
-		> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+		> tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+		#checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 			border: 0;
 			@include box-shadow-multiple(none);
 			width: 100%;
@@ -2046,7 +2077,8 @@ body .span12 > table{
 
 	// The receipt dosen't have the timeline, so we need to remove the space above
 	// nscheckout-receipt class is added via javascript in the Thank You customize text
-	&.nscheckout-receipt > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
+	&.nscheckout-receipt > tbody > tr > td > table > tbody > tr:first-child + tr > td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table,
+	&.nscheckout-receipt #checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 		margin-top: 0 !important;
 	}
 
@@ -2054,9 +2086,14 @@ body .span12 > table{
 	&.nscheckout-login > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
 		width: 600px !important;
 		margin-left: 50% !important	;
+		margin-left: 0 \0/ !important;
 		position: relative !important;
 		left: -300px;
 	}
+
+	// #handle_loginMainPortlet{
+	//	width: auto;
+	// }
 
 	// Remove the top margin for the naked signup page
 	&.nscheckout-signup input[name="category"] ~ table{
@@ -2070,19 +2107,32 @@ body .span12 > table{
 }
 
 // Login page by itself when not comming from a checkout screen
-.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr{
-	width: 600px;
+.header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr,
+.header.large ~ .page-generic table table table table input[name="new"] ~ table > tbody > tr{
+	width: 600px !important;
 	margin-left: 50% !important;
+	margin-left: 0 \0/ !important; // IE 8/9 can't render table rows as blocks, so let's fix that
 	position: relative !important;
 	left: -300px;
-	display: block;		
+	display: block;
+
+	// Because IE 8/9 can't add position relative to the TR tag, we need to add it to the next table down so the sign in button has something to hook into
+	> td > table{
+		position: relative;
+		width: 100%; // forced into it, account for padding
+	}
 
 	#tbl_submitter{
-		input{ padding-right: 153px; text-indent: -300px; z-index: 2; }
+
+		bottom: -60px; // How far it is from the panel
+		right: -5px;
+		input{ padding-right: 88px; text-indent: -300px; z-index: 2; }
+	
 		&:after{
 			padding-right: 10px;
 			content: ' Sign In';
-			margin-left: -165px;
+			margin-left: -90px;
+			left:0
 		}
 	}
 }
@@ -2107,3 +2157,8 @@ body .span12 > table{
 		}
 	}
 }
+
+.nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
+	width: 100% !important;
+}
+

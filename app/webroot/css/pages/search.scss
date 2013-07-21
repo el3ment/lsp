@@ -24,6 +24,13 @@
 		margin-left: 0;
 		float: left;
 	}
+
+	// This solves a IE bug where the second fetched set of results is not floated any longer
+	.searchRefinementsAndResults{
+		display: inline;
+	}
+
+
 	// Actual search results
 	.results{
 
@@ -790,4 +797,48 @@
 		text-align: center;
 	}
 	
+}
+
+
+// In the event that the page is going to change contexts, a script in the head
+// will add search-loading to the HTML element (the only parent avaliable) so we
+// can hide the default display elements
+// for example : visit a category page with a search keyword and the categories will be hidden
+// and the search result, when it finishes, will populate the page
+.search-loading{
+	.breadcrumbs{
+		display: none;
+	}
+	.page-generic table ~ *{
+		visibility: hidden;
+	}
+}
+
+.loading, .search-loading .page-generic{
+
+	position: relative;searchRefinementsAndResults
+	min-height: 800px;
+
+	> div{
+		@include opacity(.25);
+		display: none\9 !important; // something is wierd here, ie8 wasn't making them all transparent even if the property was applied
+	}
+	
+	&:before{
+		content: ' ';
+		display: block;
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		left: 50%;
+		top: 100px;
+		margin-left: -16px;
+		background-image: url(../img/loading.gif);
+		z-index: 99;
+		@include box-sizing();
+	}
+}
+
+.loading.secondary:before{
+	content: ' ';
 }

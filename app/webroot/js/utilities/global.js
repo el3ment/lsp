@@ -90,10 +90,10 @@
 			// Simple shallow comparison.
 			isEqual : function(a, b){
 				
-				var isEqual = true;
+				var isEqual = (!!a && !!b);
 
 				$.each(a, function(key, value){
-					if(!b.hasOwnProperty(key) || a[key]+'' !== a[key]+''){
+					if((!b.hasOwnProperty(key) && (a[key]+''.length) > 0) || a[key]+'' !== a[key]+''){
 						isEqual = false;
 						return false;
 					}
@@ -101,7 +101,7 @@
 
 				if(isEqual){
 					$.each(b, function(key, value){
-						if(!a.hasOwnProperty(key) || b[key]+'' !== a[key]+''){
+						if((!a.hasOwnProperty(key) && (b[key]+''.length) > 0) || b[key]+'' !== a[key]+''){
 							isEqual = false;
 							return false;
 						}
@@ -154,7 +154,7 @@
 
 			cleanArray : function(array){
 				for(var i = 0; i < array.length; i++){
-					if(array[i] === undefined || (array[i] || {}).length < 1 || array[i] === null || $.isEmptyObject(array[i])){
+					if(array[i] === undefined || (array[i] || '').length < 1 || array[i] === null || (typeof array[i] === 'object' && $.isEmptyObject(array[i]))){
 						array.splice(i, 1);
 						i--;
 					}

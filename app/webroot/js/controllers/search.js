@@ -11,13 +11,14 @@
 
 		var _isFirstRequest = true;
 
-		var _state = {
-			resultsPerPage : '24',
-			page : '1',
-			sort : 'default',
-			category : '',
-			allAttributes : ''
+		var _defaultState = {
+			// resultsPerPage : '24',
+			page : '1'
+			// sort : 'default',
+			// category : '',
+			// allAttributes : ''
 		};
+		var _state = {};
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
 
@@ -73,9 +74,9 @@
 							$.when(_this.scrollToFirst()).done(function(){
 								// onReady and onStateChange make use of preventPushState because those requests are
 								// administrative and shouldn't create new history entries
-								//if(!data.xhrData.passthrough.preventPushState){
+								if(!data.xhrData.passthrough.preventPushState){
 									_this.pushState();
-								//}
+								}
 								
 							});
 						}
@@ -96,6 +97,7 @@
 					},
 
 					onSearch : function(e, data){
+
 						var query = $('input[name="searchQuery"]').val();
 
 						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
@@ -104,6 +106,7 @@
 							// Remove the delete statements if you want search to work within a category
 							delete _state.category;
 							delete _state.allAttributes;
+							_isFirstRequest = false;
 
 							_state.keywords = query; // usually we wait until the response to update the state
 													 // but search is unique because it's ubiquious and can be done from anywhere
@@ -272,7 +275,8 @@
 			assets : {},
 
 			loadCurrentState : function(){
-				_this.loadState(_app.controllers.application.pullState(_this), {preventPushState : true});
+				// We need to push a state on to the beginning of the stack
+				_this.loadState(_app.controllers.application.pullState(_this), {preventPushState : !_isFirstRequest});
 			},
 
 
@@ -282,7 +286,10 @@
 				// This keeps other controllers from accidentially modifying state
 				var tmpState = $.extend({}, _state);
 				
-				delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
+				// If it has push state, delete category, otherwise we need to store it in the hash
+				if(_app.controllers.application.hasPushState()){
+					delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
+				}
 
 				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\//g, '|'), uriEncode : false};
 				tmpState.path = _state.category;
@@ -309,11 +316,13 @@
 
 				var path = document.location.pathname;
 
-				state = state || {};
-				_state = $.extend(_state, state);
+				_state = $.extend({}, _defaultState, (state || {}));
 
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
-				_state.category = path;
+				
+				if(!_state.category || _app.controllers.application.hasPushState()){
+					_state.category = path;
+				}
 				
 				// If the path has .html in it - remove the filename and use the category
 				if(path.indexOf('.html') > -1){
@@ -340,7 +349,7 @@
 				$('input[name="searchQuery"]').val(_state.keywords);
 				// Load the state only if the new state is different from the old state (tmpState)
 				if(!_util.isEqual(tmpState, _state)){
-					//console.log("_state", _state, " oldState", tmpState);
+					console.log("_state", _state, " oldState", tmpState);
 					_this.search(null, passthrough);
 					_this.changeView(_state.view);
 				}
@@ -384,8 +393,6 @@
 					method : 'CA_CategoryExpand',
 					category : (isAtomic ? categoryPath : _state.category.replace(/\/$/, '') + '/' + categoryPath)
 				};
-
-				// TODO : rename path to addedPath or something similar
 
 				return _api.request(_this, 'loadCategory', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
 					.done(function(data){
@@ -509,7 +516,7 @@
 					_this.renderRefinements(easyAskDataObject);
 					_this.renderProducts(easyAskDataObject);
 
-					// Make page full width if refinements aren't there.
+					//Make page full width if refinements aren't there.
 					if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
 						$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
 					}else{
@@ -565,7 +572,7 @@
 				for(var i = easyAskDataObject.navPath._lsp.refinementNodes.length - 1; i >= 0 ; i--){
 					refinements.push(easyAskDataObject.navPath._lsp.refinementNodes[i].value);
 				}
-				document.title = (document.title.replace(/[\|:].*/, '') + (refinements.length ? ' : ' + refinements.join(', ') : '') + ' | Lone Star Percussion');
+				document.title = ($('#pageName').text() + (refinements.length ? ' : ' + refinements.join(', ') : '') + ' | Lone Star Percussion');
 
 				
 

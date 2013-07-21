@@ -48,10 +48,9 @@
 
 					},
 					onEnterThankYou : function(e, data){
-
-						// TODO : use _mainTable
 						
-						var cartTable = $(_mainTable + ' > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
+						var cartTable = $(_mainTable + ' > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table,'
+										+ '#checkout table table table > tbody > tr:first-child + tr > td > table:not(.texttable table)').attr('id', 'carttable') // IE selector
 						
 						$('> tbody > tr:first-child', cartTable).attr('id', 'carttableheader');
 						

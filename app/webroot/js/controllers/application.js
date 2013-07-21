@@ -169,15 +169,21 @@
 				};
 			},
 
+			hasPushState : function(){
+				return _hasPushState;
+			},
+
 			// Push / Pull state take snapshots sent from controllers, stringify them
 			// and then push that to the hash. It would have been possible to use JSON
 			// but the slashes look much prettier
 			pushState : function(controller, snapshot, useReplaceState){
 				
+				console.log('pushing state');
+
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
 				// If pushState, push the path
-				if(_hasPushState){
+				if(_this.hasPushState()){
 					// To overcome an implementation problem with chrome/firefox where the popstate event 
 					// gets fired for onload - we use a workaround to look at history.state.
 					// this means the first argument (state) for history.pushState must ALWAYS be something
@@ -191,9 +197,10 @@
 					}
 
 				}else{
+
 					// Setting window.location.hash to the same path does not cause hashchange to fire
 					// which would leave isPushingState true until the next go around, a strange bug
-					if(window.location.hash !== '#' + statePath){
+					if(!useReplaceState && window.location.hash !== '#' + statePath){
 						_isPushingState = true; // Don't fire the onHashChange event
 						window.location.hash = statePath;
 					}
@@ -214,7 +221,7 @@
 					$.each(snapshot, function(variable, value){
 						
 						// If pushState exists, we don't want to save the path in the hash - so skip it
-						if(variable !== 'path' && _hasPushState){
+						if(variable !== 'path'){
 							// For simple objects use the value, complex objects get JSON-ified
 							if(typeof value === 'object' && value.hasOwnProperty('value') && value.hasOwnProperty('uriEncode')){
 								value = value.value;
@@ -224,7 +231,9 @@
 								value = encodeURIComponent(value).replace(/%20/g, '+');
 							}
 							
-							statePath += '/' + encodeURIComponent(variable) + '/' + value;
+							if(value.length > 0){
+								statePath += '/' + encodeURIComponent(variable) + '/' + value;
+							}
 						}
 
 					});
@@ -305,7 +314,7 @@
 				);
 
 
-				if(_hasPushState){
+				if(_this.hasPushState()){
 
 					// onPopstate has a wierd implemenation. On firefox it won't fire onPageLoad - but everywhere else
 					// it does. We don't want it on page load - and to make it consistant, we check to see if history.state has been

@@ -30,10 +30,13 @@
 
 	input{
 		text-transform: uppercase;
-		display: inline;
+		display: inline-block;
 		border: 0;
 		background-color: transparent;
+		background-image: url('data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
 		padding : px(10px, 14px) px(14px, 14px);
+		z-index: 5;
+		position: relative;
 
 		&[disabled]{
 			background-color: white;
