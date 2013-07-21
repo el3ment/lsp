@@ -151,6 +151,7 @@
 			}
 			.zoom-thumbnails{
 				position: relative;
+				top: 25px;
 				&:before{
 					content : 'Hover over image to zoom';
 					@media (max-width: 767px){
@@ -160,7 +161,7 @@
 					font-style: italic;
 					display: block;
 					position: absolute;
-					top: -1.5em;
+					top: -28px;
 					height: 1.5em;
 					margin: px($paddingUnit) 0 0 50%;
 					text-align:center;

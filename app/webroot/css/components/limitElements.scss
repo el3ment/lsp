@@ -2,9 +2,7 @@
 // This is useful for features, videos, audio, and other lists.
 
 .show0Elements{ display: none !important; }
-// .show0Elements, .show2Elements, .show3Elements , .show4Elements, .show5Elements, .show6Elements{
-// 	> ul.list > li{ display: none; }
-// } 
+
 .show1Elements > ul.list > li:first-child ~ li,
 .show1Elements > li:first-child ~ li{ display: none !important; }
 
@@ -20,5 +18,5 @@
 .show5Elements > ul.list > li:first-child + li + li + li + li ~ li,
 .show5Elements > li:first-child + li + li + li + li ~ li{ display: none !important; }
 
-.show6Elements > ul.list > li:first-child + li + li + li + li + li ~ li
+.show6Elements > ul.list > li:first-child + li + li + li + li + li ~ li,
 .show6Elements > li:first-child + li + li + li + li + li ~ li{ display: none !important; }
