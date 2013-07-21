@@ -70,8 +70,8 @@
 					if($('a[data-asset="mouseoverZoom"]').is(':not([href*="no-image"])')){
 						$('a[data-asset="mouseoverZoom"]')
 							.jqzoom({
-								zoomWidth: $('.addToCart').width(),
-								zoomHeight: $('#zoom-mainImage img').height(),
+								zoomWidth: 480,
+								zoomHeight: 480,
 								position: 'right',
 								preloadImages: (context !== 'phone' ? true : false),
 								xOffset : (context === 'phone' ? 1000 : parseInt($('.information.span6').css('margin-left'), 10)),
@@ -189,12 +189,11 @@
 
 						$('.productName .options', entry).html(' : ' + optionArray.join(', '));
 
+						// Update the active thumbnail
 						var size = $('.thumbnail img, #zoom-mainImage img', entry).width();
-						
-						var img = $('.thumbnail img, #zoom-mainImage img', entry)
-
-						img.attr('src', productData.data.imageUrl + '.' + size + 'x' + size);
-						
+						var img = $('.thumbnail img, #zoom-mainImage img', entry);
+						var productImageLink = $('#zoom-mainImage').attr('href',  productData.data.imageUrl);
+						img.attr('src',  productData.data.imageUrl + '.' + size + 'x' + size);
 
 						$('.productAvailability', entry).html(productData.data.stockMessage);
 						
