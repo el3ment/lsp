@@ -139,6 +139,7 @@
 						value = easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList[j].attributeValue;
 						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
 							easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList.splice(j, 1);
+							easyAskDataSourceObject.attributes.attribute[i].initDispLimit--;
 							j--;
 						}
 					}

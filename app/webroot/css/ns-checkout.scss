@@ -203,6 +203,11 @@ tr[height="25"]{ height: 0; }
 		
 		margin-top: 70px !important;
 
+		input[type="number"]{
+			width: 100%;
+			padding: 13px 8px;
+		}
+
 		&:before{
 	 		content: 'Your Cart';
 	 		display: block;
@@ -361,7 +366,7 @@ tr[height="25"]{ height: 0; }
 	td:first-child + td{
 		
 		font-size: 15px;
-		font-weight: 600;
+		font-weight: bold;
 
 		a{
 			text-decoration: none;
@@ -2187,9 +2192,12 @@ html[data-path*="category=thanks"] .page-generic > table > tbody > tr > td > tab
 html[data-path*="category=thanks"] .page-generic > table #checkout td[colspan="2"][valign="top"] > table:first-child > tbody > tr:first-child > td > table{
 	margin-top: 0 !important;
 }
+
 // The login page by itself needs to be full width
 html[data-title*="Login"],
 .nscheckout-login{
+
+	#login input[name="new"] ~ table > tbody > tr,
 	.page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
 		
 		width: 600px !important;
