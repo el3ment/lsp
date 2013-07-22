@@ -12,7 +12,7 @@
 		var _patterns = {
 			required : {
 				defaultMessage : 'This field is required',
-				pattern : /^.+$/
+				pattern : /^.+/
 			},
 			alphaOnly : {
 				defaultMessage : 'Letters only',
@@ -44,7 +44,7 @@
 			 
 						$(_settings.validationInputs, data.selector).each(function(index, element){
 							$(element).off('validation').on('keyup.lsp.validation', function(e){
-								if(e.which !== 9 && e.which !== 16){
+								if(e.which !== 9 && e.which !== 16 && e.which !== 13){
 									_this.validate(element);
 								}
 								return true;

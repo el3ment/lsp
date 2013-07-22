@@ -1446,6 +1446,12 @@ input[name="category"][value="login-register"] ~ table{
 
 	br:first-child, script + br{ display: none !important; }
 
+	#shippingaddress, #billingaddress{
+		br:first-child{
+			display: block !important;
+		}
+	}
+
 	// Shipping Method Label
 	.smalltext b{
 		display: none !important;
@@ -1684,7 +1690,7 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 			//padding-bottom: 10px !important;
 			color: black;
 
-			br:first-child{ display: none; }
+			//br:first-child{ display: none; }
 
 		}
 		@media (max-width: 767px){

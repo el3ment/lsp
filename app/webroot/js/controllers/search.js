@@ -349,9 +349,7 @@
 				$('input[name="searchQuery"]').val(_state.keywords);
 				// Load the state only if the new state is different from the old state (tmpState)
 				if(!_util.isEqual(tmpState, _state)){
-					console.log("_state", _state, " oldState", tmpState);
 					_this.search(null, passthrough);
-					_this.changeView(_state.view);
 				}
 			},
 
@@ -620,6 +618,8 @@
 			renderProducts : function(easyAskDataObject){
 				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
+
+				_this.changeView(_state.view);
 				
 			},
 

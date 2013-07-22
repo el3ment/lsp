@@ -393,6 +393,7 @@
 				width: 100%;
 			}
 			.productAvailability{
+
 				background-color: transparent;
 				border: 0;
 				padding: 0;
@@ -403,9 +404,11 @@
 				left: ($hideDistance + $paddingUnit + 2);
 				width: px(columns(3));
 				color: $grey;
+
 				@media (max-width: 979px) and (min-width: 768px){
 					margin-top: -38px; // move it back up, smaller picture
 				}
+
 				.status{
 					color: $grey;
 					font-weight: normal;
@@ -413,8 +416,25 @@
 						display: none;
 					}
 				}
+
 				.details {
 					display: none;
+				}
+
+				&.hasOptions{
+					.details{
+						display: block;
+						color: $grey;
+						font-weight: normal;
+						text-transform: uppercase;
+						float: left; // move in front of in stock
+						padding: 2px 3px;
+					}
+				}
+				&.has0Options{
+					.details{
+						display: none;
+					}
 				}
 			}
 			.scroller{
