@@ -143,12 +143,21 @@
 			#zoom-mainImage, .zoomPad{
 				display: block;
 				float: none;
+				min-height: 480px;
+				@media (max-width: 767px){
+					min-height: 0;
+				}
+				@media (max-width: 979px) and (min-width: 768px){
+					min-height: 350px;
+				}
+
 			}
 			@media (max-width: 767px){
 				.zoomPup, .zoomWindow{
 					display: none !important;
 				}
 			}
+
 			.zoom-thumbnails{
 				position: relative;
 				top: 25px;
