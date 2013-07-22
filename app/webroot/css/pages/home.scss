@@ -399,3 +399,38 @@
 		}
 	}*/
 }
+
+
+// Carosuel
+// some of the features are scattered in form.scss and icons.scss
+
+.tc-paging-container {	
+	margin-top: -22px;
+}
+.tc-paging-item{
+	width: 24px;
+	height: 24px;
+
+	&:before {
+		content: '.';
+		position: absolute;
+		top: -35px;
+		left: 0;
+		font-size: 98px;
+		color: $lightGrey;
+		text-indent: 0;
+	}
+	&:hover:before, &.current:before{
+		color: black;
+	}
+}
+.tc-paging-item.current {
+	color: black;
+}
+.tc-paging-container {
+	margin-top: -25px;
+}
+.tc-paging-centerer-inside {
+
+}
+

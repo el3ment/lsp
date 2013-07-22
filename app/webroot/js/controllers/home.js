@@ -36,7 +36,7 @@
 							
 							scrollbar: false,
 							pagingNav: true,
-							pagingNavControls: false,
+							pagingNavControls: true,
 							itemsPerPage: 1,
 							scrollToLast: true,
 							loopItems: true,
