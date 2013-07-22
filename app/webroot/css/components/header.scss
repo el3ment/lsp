@@ -161,11 +161,6 @@
 			z-index: 1;
 			min-width: 250px;
 
-			&.reveal-closed{
-				position: absolute;
-				left: -10000px;
-			}
-
 			// A spacer to keep the menu open while mousing between the
 			// utility bar and the manu. This technique is also used for
 			// the definitions

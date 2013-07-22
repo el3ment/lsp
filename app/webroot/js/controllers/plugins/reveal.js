@@ -6,6 +6,8 @@
 		var _this = {};
 		var _app = window.LSP;
 
+		var _waitToOpen = false;
+
 		var ANIMATION_TIME = 300;
 
 		_this =  {
@@ -73,45 +75,55 @@
 			},
 
 			open : function(children, doAnimations){
-				
-				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
 
-				// Mark Parents as Open
-				children.each(function(index, child){
-					// Find it as the only child, and also if it's space seperated
-					// Otherwise you'l find partials like id="states" would find "states-main"
-					$('*[data-reveal-children="' + child.id + '"], *[data-reveal-children*="' + child.id + ' "] ').addClass('reveal-open').removeClass('reveal-closed');
-				})
+				if(!_waitToOpen){
 
-				if(doAnimations){
-					var queue = $({});
-					children.each(function(i, child){
-						queue.queue(function(){
-							var control = $(this);
-							$(child)
-								.css('display', 'none')
-								.slideDown({
-									duration : ANIMATION_TIME,
-									easing : 'swing',
-									complete : function(){
-										$(child)
-											.addClass('reveal-open')
-											.css('display', '')
-											.removeClass('reveal-closed');
-										control.dequeue();
-									}
-								});
+					doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
+
+					// Mark Parents as Open
+					children.each(function(index, child){
+						// Find it as the only child, and also if it's space seperated
+						// Otherwise you'l find partials like id="states" would find "states-main"
+						$('*[data-reveal-children="' + child.id + '"], *[data-reveal-children*="' + child.id + ' "] ').addClass('reveal-open').removeClass('reveal-closed');
+					})
+
+					if(doAnimations){
+						var queue = $({});
+						children.each(function(i, child){
+							queue.queue(function(){
+								var control = $(this);
+								$(child)
+									.css('display', 'none')
+									.slideDown({
+										duration : ANIMATION_TIME,
+										easing : 'swing',
+										complete : function(){
+											$(child)
+												.addClass('reveal-open')
+												.css('display', '')
+												.removeClass('reveal-closed');
+											control.dequeue();
+										}
+									});
+							});
 						});
-					});
-					
-				}else{
-					children.addClass('reveal-open').removeClass('reveal-closed');
+						
+					}else{
+						children.addClass('reveal-open').removeClass('reveal-closed');
+					}
 				}
 
 			},
-
+			
 			close : function(children, doAnimations){
-				
+
+
+				// Prevents flickering
+				_waitToOpen = true;
+				setTimeout(function(){
+					_waitToOpen = false;
+				}, 50)
+
 				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
 
 				// Mark Parents as Open
@@ -155,9 +167,9 @@
 				var openChildren = children.filter('.reveal-open:not(*[class*="reveal-context"]), .reveal-open.reveal-context-' + context);
 				var closedChildren = children.filter('.reveal-closed:not(*[class*="reveal-context"]), .reveal-closed.reveal-context-' + context +', .reveal-context-' + context + ':not(.reveal-open)');
 
-				_this.close(openChildren, doAnimations);
 				_this.open(closedChildren, doAnimations);
-
+				_this.close(openChildren, doAnimations);
+				
 			}
 		};
 
