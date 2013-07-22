@@ -13,6 +13,13 @@
 <meta http-equiv="content-language" content="en-us">
 <meta name="verify-v1" content="jLBvNRJJ1GQtziN3nMNUJ+MOhMZfsreW4Pqt43oUYDc=">
 <meta name="google-site-verification" content="Hy_gwdHqynlIn8FX5Zxh5-55ryWTDIsrfe8XrRV1wmU"><META name="y_key" content="2bef09f789f16ef8"><meta name="msvalidate.01" content="6C7558EAC95C775E044647E429F7DE5E">
+<!-- Include stylesheets to avoid FOUC -->
+<link rel="stylesheet" type="text/css" href="https://dev.lonestarpercussion.com/ccss/vendors/bootstrap/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://dev.lonestarpercussion.com/ccss/complete.css">
+<link rel="stylesheet" type="text/css" href="https://dev.lonestarpercussion.com/css/vendors/touch_carousel/touchcarousel.css">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
+
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -31,29 +38,32 @@
 </script>
 
 
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/head/head-min.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/jquery/jquery-1.9.1.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/menu-aim/menu-aim.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/touch_carousel/jquery.touchcarousel-1.2.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/jcookie/jcookie.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/json2/json2.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/form2js/form2js.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/vendors/md5/md5.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/utilities/global.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/application.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/head/head-min.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/jquery/jquery-1.9.1.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/menu-aim/menu-aim.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/touch_carousel/jquery.touchcarousel-1.2.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/jcookie/jcookie.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/json2/json2.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/form2js/form2js.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/md5/md5.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/utilities/global.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/application.js'></script>
 
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/models/api.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/models/netsuite.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/models/easyask.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/models/api.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/models/netsuite.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/models/easyask.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/vendors/netsuite/quietPatch.js'></script>
+
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/search.js'></script>
 
 <style>
 /*
 <!--[if lte IE 7]>
 Hiding NetSuite native styles, and scripts
 <script language='JavaScript' type='text/javascript'>window.status='Loading...';</script>
-<script type='text/javascript' src='/javascript/NLUtil.jsp__NS_VER=2013.1.0&amp;minver=130&amp;locale=en_US.nlqs'></script>
+<script type='text/javascript' src='/javascript/NLUtil.jsp__NS_VER=2013.1.0&amp;minver=134&amp;locale=en_US.nlqs'></script>
 <script language='JavaScript' type='text/javascript'>window.status='';</script>
-<!-- v=2013.1.0.130 db=20081 c=665798 n=1 rg=1 e=0 r=17 ct=WEBSITE isstore=T https=F
+<!-- v=2013.1.0.134 db=20081 c=665798 n=1 rg=1 e=0 r=17 ct=WEBSITE isstore=T https=F
      id= cat= sc=1 sct=HOME thm=103 bll=i:116;c:98;r:117;cr:118;
      cart=328334 (serno=1) price=5 cur=1 lang=en_US partner=0 promocode=0 leadsource=
      sco=F
@@ -66,12 +76,19 @@ End Hiding NetSuite native scripts and styles
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" type="text/css" href="http://dev.lonestarpercussion.com/ccss/vendors/bootstrap/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="http://dev.lonestarpercussion.com/ccss/complete.css">
-<link rel="stylesheet" type="text/css" href="http://dev.lonestarpercussion.com/css/vendors/touch_carousel/touchcarousel.css">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,800' rel='stylesheet' type='text/css'>
 
 
+
+
+<script type='text/javascript'>
+(function(){
+var htmlElement =  $('html').attr('data-path', document.location.href + '-END');
+htmlElement.attr('data-title', $('title').text());
+if(document.location.hash.indexOf('~search') > -1){
+    htmlElement.addClass('search-loading')
+}
+}())
+</script>
 </head>
 <body style="margin-top:0px;" onload="page_init()">
 <div id='outerwrapper' style='width:1000px;margin: 0 auto;'>
@@ -97,12 +114,12 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 </div>
 <!-- Start Header -->
 
-<div class='header span12 container'>
+<div class='header large span12 container'>
         <!-- Large Header -->
 <div class='navbar'>
 		<ul class='span12 utilityLinks'> 
-			<li><a class='b5 icon-24-texas-grey icon' href='/Our-Location.html'>our store</a></li>
-			<li><a class='b5 icon-24-box-grey' href='#'>track order</a></li>
+			<li><a class='b5 icon-24-texas-grey icon' href='/Our-Location.html'>our location</a></li>
+			<!--<li><a class='b5 icon-24-box-grey' href='#'>track order</a></li>-->
 			<li><a class='b5 icon-24-card-grey' href='/Lone-Star-Gift-Card.html'>gift cards</a></li>
 			<li><a class='b5 icon-24-chat-grey' href='/Contact-Us-Form.html'>contact us</a></li>
 
@@ -110,13 +127,13 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 			<li data-reveal-children='accountFlyout' class='reveal-closed reveal-showOnMouseover reveal-noAnimation' data-firstName="Error processing dynamic tag">
 				<span class='b5 icon-24-account-grey'>Hi Friend!</span>
 				<ul id='accountFlyout' class='sublist reveal-closed'>
-					<li><a href='https://checkout.sandbox.netsuite.com/app/center/nlvisitor.nl?c=665798&amp;sc=6&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114233&amp;cart=328334&amp;addrcountry=US&amp;gc=clear'>My Account <span class='details'>Subtext</span></a></li>
-					<li class='last'><a href='https://checkout.sandbox.netsuite.com/s.nl?c=665798&amp;sc=4&amp;logoff=T&amp;ckabandon=QhkfqVG-ATxu6m8j&amp;addrcountry=US&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114233&amp;cart=328334&amp;gc=clear'>Logout <span class='details'>Subtext</span></a></li>
+					<li><a href='https://checkout.sandbox.netsuite.com/app/center/nlvisitor.nl?c=665798&amp;sc=6&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114209&amp;cart=328334&amp;addrcountry=US&amp;gc=clear'>My Account <span class='details'>Your personal information</span></a></li>
+					<li class='last'><a href='https://checkout.sandbox.netsuite.com/s.nl?c=665798&amp;sc=4&amp;logoff=T&amp;ckabandon=QhkfqVG-ATxu6m8j&amp;addrcountry=US&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114209&amp;cart=328334&amp;gc=clear'>Logout</a></li>
 				</ul>
 			</li>
 
 			<!-- This element (the one directly after the accountFlyout) is hidden when logged in via CSS and data-firstname above -->
-			<li><a class='b5 icon-24-account-grey' href='https://checkout.sandbox.netsuite.com/s.nl?c=665798&amp;sc=1&amp;login=T&amp;addrcountry=US&amp;reset=T&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114233&amp;cart=328334&amp;gc=clear'>Login</a></li>
+			<li><a class='b5 icon-24-account-grey' href='https://checkout.sandbox.netsuite.com/s.nl?c=665798&amp;sc=1&amp;login=T&amp;addrcountry=US&amp;reset=T&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114209&amp;cart=328334&amp;gc=clear'>Sign In</a></li>
 
 			<!-- these are in reverse order for IE7 basically, we had to use float-right, which reorders them -->
 		</ul>
@@ -130,16 +147,16 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 	
 	<ul class='shopbar span12'> 
 		<li class='departments'><a id='flyoutControlButton' data-reveal-children='mainFlyout' class='reveal-context-phone reveal-closed b1 icon-24-star-black highlight-icon dropdown'>Shop By <strong>Department</strong></a></li>
-		<li class='cart'><a class='b3 icon-24-cart-white highlight-icon' href='https://checkout.sandbox.netsuite.com/s.nl?c=665798&amp;sc=4&amp;addrcountry=US&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114233&amp;cart=328334&amp;gc=clear'>Your <strong>Cart</strong> <span class='count'>2</span></a></li>
+		<li class='cart'><a class='b3 icon-24-cart-white highlight-icon' href='/cart'>Your <strong>Cart</strong> <span class='count'>7</span></a></li>
 		<li class='wishlist' data-firstName="Error processing dynamic tag">
-			<a class='b3 icon-24-heart-white highlight-icon' href='/My-Wishlist.html'><strong>Wish</strong> List</a>
+			<a class='b3 icon-24-heart-white highlight-icon' href='/My-Wishlist.html'><strong>Wish</strong> Lists</a>
 		</li>
-		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon' href='/Search-Wishlist.html'><strong>Wish</strong> List</a></li>
+		<li class='wishlist'><a class='b3 icon-24-heart-white highlight-icon' href='/Search-Wishlist.html'><strong>Wish</strong> Lists</a></li>
 		<li id='searchBar' class='search'>
 			<div id='searchBarContainer' class='reveal-closed-phone'>
 				<div>
 					<form data-action='search' data-controller='search'>
-						<input id='searchQuery' name='searchQuery' type='text' class='clearable autocomplete search' placeholder='e.g. Sticks, Pearl, 16' Drum Head''/>
+						<input id='searchQuery' name='searchQuery' type='text' class='clearable autocomplete search' placeholder='enter keywords or model #'/>
 						<button class='b2 icon-24-magnify-black icon-only' type='submit'>Search</button>
 					</form>
 				</div>
@@ -177,7 +194,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 						<li class='link'><a href='/Sticks-Mallets/Jingle-Sticks_LSP'>Jingle</a></li>
 						<li class='link'><a href='/Sticks-Mallets/Timbale-Sticks_LSP'>Timbale</a></li>
 						<li class='link'><a href='/Sticks-Mallets/Latin-World-Sticks-Mallets_LSP'>All World Sticks</a></li>
-						<li class='link'><a href='/Sticks-Mallets/Practice-Drum-Sticks_LSP'>Practice</a></li>
+						<li class='link'><a href='/Sticks-Mallets/Sticks-Practice-Drum-Sticks_LSP'>Practice</a></li>
 						<li class='link'><a href='/Sticks-Mallets/Stick-Mallet-Bundles_LSP'>Stick &amp; Mallet Bundles</a></li>
 					</ul>
 				</div>
@@ -216,25 +233,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sticks_Mallets-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Sticks_Mallets-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:Vic-Firth'>Vic Firth</a></li>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:ProMark'>ProMark</a></li>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:Mike-Balter'>Mike Balter</a></li>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:Malletech'>Malletech</a></li>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:Encore-Mallets'>Encore</a></li>
-						<li class='link'><a href='/Sticks-Mallets#/~search/allAttributes/Brand:Vater'>Vater</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:Vic-Firth'>Vic Firth</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:ProMark'>ProMark</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:Mike-Balter'>Mike Balter</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:Malletech'>Malletech</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:Encore-Mallets'>Encore</a></li>
+						<li class='link'><a href='/Sticks-Mallets/#/~search/allAttributes/Brand:Vater'>Vater</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
-			<a href='/Sticks-Mallets/Drum-Set-Sticks_LSP/Regal-Tip-RS-805N-Road-Series-5A-Nylon-Tip-Drumsticks.html' class='ad bottom'>
+			<a href='/Sticks-Mallets/Marching-Snare-Drum-Sticks_LSP/Innovative-Percussion-FSMM.html' class='ad bottom'>
 			<div class='content'>
-				<span class='h3 name'>Regal Tip Road Series 5A Nylon Tip Drum Sticks</span>
+				<span class='h3 name'>Mike McIntosh Signature Snare Sticks</span>
 				<div class='price h3'>
-					$3.95 <span class='productGrouping details'>per pair</span>
+					$8.85<span class='productGrouping details'>per pair</span>
 				</div>
 			</div>
-			<img class='productImage middle' src='http://s4.lonestarpercussion.com/resize/images/product-image/Sticks-Mallets-flyout.png.300x300'>
+			<img class='productImage middle' src='http://s4.lonestarpercussion.com/resize/images/product-image/Flyout-Stick-image.png'>
 			</a>
 			</li>
 		</ul>
@@ -298,25 +315,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drum_Heads-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Drum_Heads-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:Remo'>Remo</a></li>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:Evans'>Evans</a></li>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:Ludwig'>Ludwig</a></li>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:LP'>LP</a></li>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:Aquarian'>Aquarian</a></li>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Drum-Heads#/~search/allAttributes/Brand:Tama'>Tama</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:Remo'>Remo</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:Evans'>Evans</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:Ludwig'>Ludwig</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:LP'>LP</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:Aquarian'>Aquarian</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Drum-Heads/#/~search/allAttributes/Brand:Tama'>Tama</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Drum-Set-Pre-Packs_LSP/Evans-ETP-CHR-R-10-12-16-Black-Chrome-Tompack-Rock.html' class='ad bottom'>
 			<div class='content'>
-				<span class='h3 name'>Evans 10", 12" &amp; 16" Black Chrome Rock Tompack</span>
+				<span class='h3 name'>Evans 10", 12" &amp; 16" Black Chrome<br> Rock Tompack</span>
 				<div class='price h3'>
 					$50.05 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage middle' src='http://s4.lonestarpercussion.com/resize/images/product-image/Drum-Heads-flyout.png.310x310'>
+			<img class='productImage middle' src='http://s4.lonestarpercussion.com/resize/images/product-image/Drumhead-Category-Flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -376,7 +393,6 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 						<li class='link'><a href='/Drums-Drum-Sets/Latin-World-Drums-Timbales_LSP'>Timbales</a></li>
 						<li class='link'><a href='/Drums-Drum-Sets/Latin-World-Drums-Steel-Drums-Pans_LSP'>Steel Drums (Pans)</a></li>
 						<li class='link'><a href='/Drums-Drum-Sets/Latin-World-Drums-Brazilian-Samba-Percussion_LSP'>Brazilian (Samba)</a></li>
-						<li class='link allCategory'><a href='/Drums-Drum-Sets/Drums-Drum-Sets-Latin-World-Drums_LSP'>All Latin &amp; World Drums</a></li>
 					</ul>
 				</div>
 			</li>
@@ -384,24 +400,24 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Drums_Drum_Sets-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Drums_Drum_Sets-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Crush'>Crush</a></li>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Tama'>Tama</a></li>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Gretsch'>Gretsch</a></li>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Ludwig'>Ludwig</a></li>
-						<li class='link'><a href='/Drums-Drum-Sets#/~search/allAttributes/Brand:Roland'>Roland</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Crush'>Crush</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Tama'>Tama</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Gretsch'>Gretsch</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Ludwig'>Ludwig</a></li>
+						<li class='link'><a href='/Drums-Drum-Sets/#/~search/allAttributes/Brand:Roland'>Roland</a></li>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Drums-Drum-Sets/Drum-Sets_LSP/Tama-Silverstar-Lacquer-Drum-Set-VL50.html' class='ad top'>
 			<div class='content'>
-				<span class='h3 name'>Tama Silverstar Lacquer 5-Piece Drum Set</span>
+				<span class='h3 name'>Tama Silverstar Lacquer 5-Piece<br> Drum Set</span>
 				<div class='price h3'>
 					$999.99 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage breakout' src='http://s4.lonestarpercussion.com/resize/images/product-image/Drums-Drum-Sets-flyout-flip.png.380x380'>
+			<img class='productImage breakout' style='bottom:10px;' src='http://s4.lonestarpercussion.com/resize/images/product-image/Drumset-Category-Flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -460,7 +476,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 						<li class='link'><a href='/Cymbals-Gong/Cymbal-Gong-Accessories-Cymbal-Straps_LSP'>Straps</a></li>
 						<li class='link'><a href='/Cymbals-Gong/Cymbal-Gong-Accessories-Cymbal-Polish_LSP'>Polish</a></li>
 						<li class='link'><a href='/Cymbals-Gong/Cymbal-Gong-Accessories-Cymbal-Sizzles_LSP'>Sizzles</a></li>
-						<li class='link allCategory'><a href='/Cymbals-Gong/Cymbals-Gongs-Cymbal-Gong-Accessories_LSP'>All Accessories</a></li>
+						<li class='link allCategory'><a href='/Cymbals-Gong/Cymbals-Gongs-Cymbal-Accessories_LSP'>All Accessories</a></li>
 					</ul>
 				</div>
 			</li>
@@ -468,25 +484,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cymbals_Gongs-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Cymbals_Gongs-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Sabian'>Sabian</a></li>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Dream'>Dream</a></li>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Han-Chi'>Han Chi</a></li>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Paiste'>Paiste</a></li>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Wuhan'>Wuhan</a></li>
-						<li class='link'><a href='/Cymbals-Gongs#/~search/allAttributes/Brand:Meinl'>Meinl</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Sabian'>Sabian</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Dream'>Dream</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Han-Chi'>Han Chi</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Paiste'>Paiste</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Wuhan'>Wuhan</a></li>
+						<li class='link'><a href='/Cymbals-Gongs/#/~search/allAttributes/Brand:Meinl'>Meinl</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Cymbals-Gongs/Ride-Cymbals_LSP/Paiste-CY-0004101620-20-Signature-Precision-Ride-Cymbal.html' class='ad top'>
 			<div class='content'>
-				<span class='h3 name'>Paiste 20" Signature Precision Ride Cymbal</span>
+				<span class='h3 name'>Paiste 20" Signature Precision Ride<br>Cymbal</span>
 				<div class='price h3'>
 					$312.48 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage' src='http://s1.lonestarpercussion.com/resize/images/product-image/Cymbals-Gongs-flyout-flip.png.320x320'>
+			<img class='productImage breakout' style='bottom:20px;' src='http://s1.lonestarpercussion.com/resize/images/product-image/Cymbal-Flyout-Image-category-flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -536,8 +552,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Keyboard_Instruments-Practice_Beginning_Keyboards'>Practice &amp; Beginner</span>
 					<ul id='flyout-Keyboard_Instruments-Practice_Beginning_Keyboards' class='links reveal-closed-phone reveal-open'>
 						<li class='link'><a href='/Keyboards/Keyboards-Beginner-Bell-Snare-Kits_LSP'>Beginner Bell & Snare Kits</a></li>
-						<li class='link'><a href='/Keyboards/Practice-Keyboards-Practice-Marimbas_LSP'>Practice Marimbas</a></li>
-						<li class='link'><a href='/Keyboards/Practice-Keyboards-Practice-Xylophones_LSP'>Practice Xylophones</a></li>
+						<li class='link'><a href='/Keyboards/Keyboards-Practice-Keyboards_LSP'>Practice Keyboards</a></li>
 						<li class='link'><a href='/Keyboards/Keyboards-Orff-Keyboards_LSP'>Orff Keyboards</a></li>
 						<li class='link'><a href='/Keyboards/Keyboards-Elementary-Music-Keyboards_LSP'>Elementary Music Keyboards</a></li>
 					</ul>
@@ -547,25 +562,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Keyboard_Instruments-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Keyboard_Instruments-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Adams'>Adams</a></li>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Musser'>Musser</a></li>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Bergerault'>Bergerault</a></li>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Fall-Creek'>Fall Creek</a></li>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Malletech'>Malletech</a></li>
-						<li class='link'><a href='/Keyboards#/~search/allAttributes/Brand:Majestic'>Majestic</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Adams'>Adams</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Musser'>Musser</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Bergerault'>Bergerault</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Fall-Creek'>Fall Creek</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Malletech'>Malletech</a></li>
+						<li class='link'><a href='/Keyboards/#/~search/allAttributes/Brand:Majestic'>Majestic</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Keyboards/Vibraphones_LSP/Adams-VAST-30M-3-0-Octave-Alpha-Series-Vibraphone-with-Silver-Bars-Traveler-Frame-and-Motor.html' class='ad top'>
-			<div class='content'>
-				<span class='h3 name'>Adams 3.0 Octave Alpha Series Vibraphone</span>
+			<div class='content' style='top:100px;'>
+				<span class='h3 name'>Adams 3.0 Octave Alpha Series<br>Vibraphone</span>
 				<div class='price h3'>
 					$4,395.00 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage breakout' src='http://s1.lonestarpercussion.com/resize/images/product-image/Keyboard-Instruments-flyout.png.300x300'>
+			<img class='productImage breakout' style='bottom:20px;' src='http://s1.lonestarpercussion.com/resize/images/product-image/Keyboard-size-2.png'>
 			</a>
 			</li>
 		</ul>
@@ -648,13 +663,13 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Latin_World_Effects-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Latin_World_Effects-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:LP'>LP</a></li>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:Meinl'>Meinl</a></li>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:Acme'>Acme</a></li>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:Remo'>Remo</a></li>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:Toca'>Toca</a></li>
-						<li class='link'><a href='/Latin-World-Effects#/~search/allAttributes/Brand:Gon-Bops'>Gon Bops</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:LP'>LP</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:Meinl'>Meinl</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:Acme'>Acme</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:Remo'>Remo</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:Toca'>Toca</a></li>
+						<li class='link'><a href='/Latin-World-Effects/#/~search/allAttributes/Brand:Gon-Bops'>Gon Bops</a></li>
 					</ul>
 				</div>
 				<div class='list'>
@@ -678,7 +693,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 					$247.78 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage breakout' src='http://s1.lonestarpercussion.com/resize/images/product-image/Latin-World-&amp;-Effects-flyout.png.320x320'>
+			<img class='productImage' style='bottom:10px; right:40px;' src='http://s1.lonestarpercussion.com/resize/images/product-image/Latin-World-Category-Flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -692,7 +707,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 			Marching
 		</div>
 		<div class='details'>
-			Drums, Carriers, Brass
+			Drums, Brass, Amplification
 		</div>
 	</div>
 	<div id='flyout-Marching' class='flyout reveal-closed-phone reveal-context-phone'>
@@ -701,7 +716,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Marching-Instruments'>Instruments</span>
 					<ul id='flyout-Marching-Instruments' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Marching/Marching-Snare-Drums_LSP'>Snare Drums</a></li>
+						<li class='link'><a href='/Marching/Marching-Marching-Snare-Drums_LSP'>Snare Drums</a></li>
 						<li class='link'><a href='/Marching/Marching-Tenor-Drums_LSP'>Tenors</a></li>
 						<li class='link'><a href='/Marching/Marching-Bass-Drums_LSP'>Bass Drums</a></li>
 						<li class='link'><a href='/Marching/Marching-Cymbals_LSP'>Crash Cymbals</a></li>
@@ -751,25 +766,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Marching-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Marching-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Tama'>Tama</a></li>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Dynasty'>Dynasty</a></li>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Mapex'>Mapex</a></li>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
-						<li class='link'><a href='/Marching#/~search/allAttributes/Brand:Gator-Cases'>Gator Cases</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Tama'>Tama</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Dynasty'>Dynasty</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Mapex'>Mapex</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
+						<li class='link'><a href='/Marching/#/~search/allAttributes/Brand:Gator-Cases'>Gator Cases</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Marching/Marching-Snare-Drums_2_LSP/Yamaha-MTS-9214-14-x-12-MTS-Snare-Drum.html' class='ad bottom'>
 			<div class='content'>
-				<span class='h3 name'>Yamaha 14" x 12" MTS Marching Snare Drum</span>
+				<span class='h3 name'>Yamaha 14" x 12" MTS Marching Snare<br>Drum</span>
 				<div class='price h3'>
 					from $604.80 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage middle' src='http://s2.lonestarpercussion.com/resize/images/product-image/Marching-flyout.png.285x285'>
+			<img class='productImage' style='right:10px; top:100px;' src='http://s2.lonestarpercussion.com/resize/images/product-image/Marching-Category-flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -806,7 +821,6 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Triangle-Clips_LSP'>Triangle Clips</a></li>
 						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Beeswax_LSP'>Beeswax</a></li>
 						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Hand-Cymbal-Cradles_LSP'>Hand Cymbal Cradles</a></li>
-						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Percussion-Cabinets_LSP'>Percussion Cabinets</a></li>
 						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Concert-Bass-Drum-Stands_LSP'>Bass Drum Stands</a></li>
 						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Gong-Tam-Tam-Stands_LSP'>Gong Stands</a></li>
 						<li class='link'><a href='/Concert/Concert-Accessories-Hardware-Trap-Tables_LSP'>Trap Tables</a></li>
@@ -837,25 +851,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Concert--Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Concert--Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:Black-Swamp'>Black Swamp</a></li>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:Grover-Pro'>Grover Pro</a></li>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:LP'>LP</a></li>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:Ron-Vaughn'>Ron Vaughn</a></li>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:Alan-Abel'>Alan Abel</a></li>
-						<li class='link'><a href='/Concert#/~search/allAttributes/Brand:TreeWorks'>Treeworks</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:Black-Swamp'>Black Swamp</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:Grover-Pro'>Grover Pro</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:LP'>LP</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:Ron-Vaughn'>Ron Vaughn</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:Alan-Abel'>Alan Abel</a></li>
+						<li class='link'><a href='/Concert/#/~search/allAttributes/Brand:TreeWorks'>Treeworks</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Concert/Tambourines_LSP/Black-Swamp-TD3S.html' class='ad bottom'>
 			<div class='content'>
-				<span class='h3 name'>Black Swamp 10" Double Row German Silver Synthetic Head Tambourine</span>
+				<span class='h3 name'>Black Swamp 10" Double Row<br>Chromium/Bronze Tambourine</span>
 				<div class='price h3'>
-					$159.00 <span class='productGrouping details'>per pair</span>
+					$155.00<span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage middle' src='http://s1.lonestarpercussion.com/resize/images/product-image/Concertflyout-new.png.300x300'>
+			<img class='productImage' style='bottom:120px; right:20px;' src='http://s1.lonestarpercussion.com/resize/images/product-image/Concert-category-image-flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -901,7 +915,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Practice_Classroom-Beginning_Percussion'>Beginning Percussion</span>
 					<ul id='flyout-Practice_Classroom-Beginning_Percussion' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Practice-Classroom/Practice-Keyboards_LSP'>Practice Keyboards</a></li>
+						<li class='link'><a href='/Practice-Classroom/Practice-Classroom-Practice-Keyboards_LSP'>Practice Keyboards</a></li>
 						<li class='link'><a href='/Practice-Classroom/Practice-Classroom-Practice-Keyboards_LSP'>Rental Keyboards</a></li>
 						<li class='link allCategory'><a href='/Practice-Classroom/Percussion-Beginner-Kits_LSP'>Beginner Bell & Snare Kits</a></li>
 					</ul>
@@ -909,13 +923,13 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Practice_Classroom-Elementary_Music_Orff'>Elementary Music &amp; Orff</span>
 					<ul id='flyout-Practice_Classroom-Elementary_Music_Orff' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Practice-Classroom/Orff-Drums_LSP'>Drums</a></li>
+						<li class='link'><a href='/Practice-Classroom/Elementary-Drums_LSP'>Drums</a></li>
 						<li class='link'><a href='/Practice-Classroom/Elementary-Music-Instruments-Boomwhackers_LSP'>Boomwhackers</a></li>
 						<li class='link'><a href='/Practice-Classroom/Elementary-Music-Instruments-Recorders_LSP'>Recorders</a></li>
 						<li class='link'><a href='/Practice-Classroom/Elementary-Music-Instruments-Keyboards-Bells_LSP'>Keyboards &amp; Bells</a></li>
-						<li class='link'><a href='/Practice-Classroom/Elementary-Music-Instruments-Handbells_LSP'>Handbells</a></li>
+						<li class='link'><a href='/Practice-Classroom/Elementary-Handbells_LSP'>Handbells</a></li>
 						<li class='link'><a href='/Practice-Classroom/Elementary-Music-Instruments-Rhythm-Instruments_LSP'>Rhythm Instruments</a></li>
-						<li class='link'><a href='/Practice-Classroom/Elementary-Music-Instruments-Steel-Drums-Pans_LSP'>Steel Drums (Pans)</a></li>
+						<li class='link'><a href='/Practice-Classroom/Elementary-Steel-Drums_LSP'>Steel Drums (Pans)</a></li>
 						<li class='link'><a href='/Practice-Classroom/Practice-Classroom-Sticks-Mallets_LSP'>Sticks &amp; Mallets</a></li>
 						<li class='link gapAbove'><a href='/Practice-Classroom/Orff-Instruments-Orff-Drums_LSP'>Orff Drums</a></li>
 						<li class='link'><a href='/Practice-Classroom/Orff-Instruments-Orff-Keyboards_LSP'>Orff Keyboards</a></li>
@@ -928,25 +942,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Practice_Classroom-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Practice_Classroom-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Vic-Firth'>Vic Firth</a></li>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Remo'>Remo</a></li>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Evans'>Evans</a></li>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Offworld-Percussion'>Offworld Percussion</a></li>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Boss'>Boss</a></li>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Practice-Classroom#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Vic-Firth'>Vic Firth</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Remo'>Remo</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Evans'>Evans</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Offworld-Percussion'>Offworld Percussion</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Boss'>Boss</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Practice-Classroom/#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Practice-Classroom/Snare-Practice-Pads_LSP/Ahead-AHSHP-14-S-Hoop-Pad-with-Snare-Sound.html' class='ad top'>
-			<div class='content'>
-				<span class='h3 name'>Ahead 14" S-Hoop Pad<br>with Snare Sound</span>
+			<div class='content' style='top:100px;'>
+				<span class='h3 name'>Ahead 14" S-Hoop Pad with<br>Snare Sound</span>
 				<div class='price h3'>
 					$59.99 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage' src='http://s3.lonestarpercussion.com/resize/images/product-image/PracticeClassroom-flyout-photo.png.260x260'>
+			<img class='productImage' style='bottom:20px;' src='http://s3.lonestarpercussion.com/resize/images/product-image/Practice-Classroom-category-flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -1028,25 +1042,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Sheet_Music_Books-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Sheet_Music_Books-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Mark-Wessels-Publications'>Mark Wessels Publications</a></li>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Alfred-Music-Publishing'>Alfred Music Publishing</a></li>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Row-Loff'>Row-Loff</a></li>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Hal-Leonard'>Hal Leonard</a></li>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Keyboard-Percussion-Publications'>KPP</a></li>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
-						<li class='link'><a href='/Sheet-Music-Books#/~search/allAttributes/Brand:Tapspace'>Tapspace</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Mark-Wessels-Publications'>Mark Wessels Pub.</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Alfred-Music-Publishing'>Alfred Music Pub.</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Row-Loff'>Row-Loff</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Hal-Leonard'>Hal Leonard</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Keyboard-Percussion-Publications'>KPP</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
+						<li class='link'><a href='/Sheet-Music-Books/#/~search/allAttributes/Brand:Tapspace'>Tapspace</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 				<a href='/Sheet-Music-Books/Vibraphone-Solos_LSP/Vibraphone-Solo-Amazing-Grace-Arranged-for-Solo-Vibraphone-by-Eric-Rath-Tapspace.html' class='ad bottom'>
 				<div class='content'>
-					<span class='h3 name'>Amazing Grace Arranged for Solo Vibraphone by Eric Rath</span>
+					<span class='h3 name'>Amazing Grace Arranged for<br>Solo Vibraphone by Eric Rath</span>
 					<div class='price h3'>
-						$14.40 <span class='productGrouping details'>per pair</span>
+						$14.40 <span class='productGrouping details'>each</span>
 					</div>
 				</div>
-				<img class='productImage middle' src='http://s4.lonestarpercussion.com/resize/images/product-image/SheetMusic-Books-flyout.png.280x280'>
+				<img class='productImage' style='right:10px; top:100px;' src='http://s4.lonestarpercussion.com/resize/images/product-image/SheetMusic-Books-flyout.png.280x280'>
 				</a>
 			</li>
 		</ul>
@@ -1106,13 +1120,13 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Cases_Bags-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Cases_Bags-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:Vic-Firth'>VIc Firth</a></li>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:Humes-Berg'>Humes &amp; Berg</a></li>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:ProMark'>ProMark</a></li>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Cases-Bags#/~search/allAttributes/Brand:Sabian'>Sabian</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:Vic-Firth'>VIc Firth</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:Innovative-Percussion'>Innovative Percussion</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:Humes-Berg'>Humes &amp; Berg</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:ProMark'>ProMark</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Cases-Bags/#/~search/allAttributes/Brand:Sabian'>Sabian</a></li>
 					</ul>
 				</div>
 			</li>
@@ -1121,10 +1135,10 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 			<div class='content'>
 				<span class='h3 name'>Ludwig Atlas Classic Laptop Bag</span>
 				<div class='price h3'>
-					$65.40 <span class='productGrouping details'>per pair</span>
+					$65.40 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage middle' src='http://s1.lonestarpercussion.com/resize/images/product-image/Cases-&amp;-Bags-flyout.png.300x300' style='right: 20px;'>
+			<img class='productImage' src='http://s1.lonestarpercussion.com/resize/images/product-image/Bag-Case-Category-Flyout.png' style='right: 10px; top:100px;'>
 			</a>
 			</li>
 		</ul>
@@ -1203,25 +1217,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Stands_Hardware-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Stands_Hardware-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:Gibraltar'>Gibraltar</a></li>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:LP'>LP</a></li>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:Ludwig'>Ludwig</a></li>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:DW'>DW</a></li>
-						<li class='link'><a href='/Stands-Hardware#/~search/allAttributes/Brand:PDP'>PDP</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:Gibraltar'>Gibraltar</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:Yamaha'>Yamaha</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:LP'>LP</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:Ludwig'>Ludwig</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:DW'>DW</a></li>
+						<li class='link'><a href='/Stands-Hardware/#/~search/allAttributes/Brand:PDP'>PDP</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
 			<a href='/Snare-Drum-Stands_LSP/Gibraltar-4606-Light-Weight-Double-Braced-Snare-Stand.html' class='ad top'>
 			<div class='content'>
-				<span class='h3 name'>Gibraltar Light Weight Double Braced Snare Stand</span>
+				<span class='h3 name'>Gibraltar Light Weight Double<br>Braced Snare Stand</span>
 				<div class='price h3'>
-					$37.75 <span class='productGrouping details'>per pair</span>
+					$37.75 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage' src='http://s1.lonestarpercussion.com/resize/images/product-image/Stands-Hardware-flyout.png.350x350'>
+			<img class='productImage' style='bottom:10px; right:40px;' src='http://s1.lonestarpercussion.com/resize/images/product-image/Hardware-category-flyout.png'>
 			</a>
 			</li>
 		</ul>
@@ -1235,7 +1249,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 			Apparel &amp; Accessories
 		</div>
 		<div class='details'>
-			Shirts, Drum Keys, Stick Tape
+			Drum Keys, Stick Tape, Ear Plugs
 		</div>
 	</div>
 	<div id='flyout-Accessories_Cases' class='flyout reveal-closed-phone reveal-context-phone'>
@@ -1245,7 +1259,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Apparel_Gifts'>Apparel &amp; Gifts</span>
 					<ul id='flyout-Accessories_Cases-Apparel_Gifts' class='links reveal-closed-phone reveal-open'>
 						<li class='link'><a href='/Apparel-Accessories/Shirts_LSP'>Shirts</a></li>
-						<li class='link'><a href='/Apparel-Accessories/Hats-Gloves-Trinkets_LSP'>Hats</a></li>
+						<li class='link'><a href='/Apparel-Accessories/Hats-Gloves-Trinkets_LSP'>Hats, Gloves & Trinkets</a></li>
 						<li class='link'><a href='/Apparel-Accessories/Apparel_LSP'>All Apparel</a></li>
 						<li class='link gapAbove'><a href='/Apparel-Accessories/Giant-Sticks_LSP'>Giant Sticks</a></li>
 						<li class='link'><a href='/Apparel-Accessories/Gifts-Novelties-Miniature-Drums_LSP'>Miniature Drums</a></li>
@@ -1296,25 +1310,25 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 				<div class='list'>
 					<span class='h3 reveal-context-phone reveal-closed-phone' data-reveal-children='flyout-Accessories_Cases-Popular-Brands'>Popular Brands</span>
 					<ul id='flyout-Accessories_Cases-Popular-Brands' class='links reveal-closed-phone reveal-open'>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:Lone-Star-Percussion'>Lone Star Percussion</a></li>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:ProMark'>ProMark</a></li>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:StickTape-com'>StickTape.com</a></li>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:Sabian'>Sabian</a></li>
-						<li class='link'><a href='/Apparel-Accessories#/~search/allAttributes/Brand:Vic-Firth'>Vic Firth</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:Zildjian'>Zildjian</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:Lone-Star-Percussion'>Lone Star Percussion</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:Pearl'>Pearl</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:ProMark'>ProMark</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:StickTape-com'>StickTape.com</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:Sabian'>Sabian</a></li>
+						<li class='link'><a href='/Apparel-Accessories/#/~search/allAttributes/Brand:Vic-Firth'>Vic Firth</a></li>
 					</ul>
 				</div>
 			</li>
 			<li class='advertisement'>
-			<a href='/Apparel-Accessories/Giant-Sticks_LSP/Promark-GNT-Giant-Sticks.html' class='ad top'>
-			<div class='content'>
-				<span class='h3 name'>Promark Giant Sticks</span>
+			<a href='/Apparel-Accessories/Key-Rings_LSP/Paiste-PR0280846000-Drumsticks-Keyring.html' class='ad top'>
+			<div class='content' style='top:120px;'>
+				<span class='h3 name'>Paiste Drumsticks Keyring</span>
 				<div class='price h3'>
-					$22.75 <span class='productGrouping details'>per pair</span>
+					$1.50 <span class='productGrouping details'>each</span>
 				</div>
 			</div>
-			<img class='productImage' src='http://s1.lonestarpercussion.com/resize/images/product-image/Apparel-&amp;-Accessories-2.png.380x380'>
+			<img class='productImage' style='bottom:20px; right:10px;' src='http://s1.lonestarpercussion.com/resize/images/product-image/Apparel-Flyout-image.png'>
 			</a>
 			</li>
 		</ul>
@@ -1353,10 +1367,10 @@ leftmargin='0' topmargin='0' marginwidth='1' >
             </table>
         </div>
 <!-- CONTENT AREA END OPENING REVERSE CODE -->
-
-<!-- CONTENT AREA BEGIN CUSTOM CODE -->
 <div class='page-generic span12 container'>
 <table>
+<!-- CONTENT AREA BEGIN CUSTOM CODE -->
+
 <!-- Begin Content -->
      <tr class='portletHandle' id='handle_welcomeMainPortlet' >
 <td width='100%' height=0 align='left' valign='top'>
@@ -1372,94 +1386,147 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 <input type='hidden' name='it' value='A'>
 <input type='hidden' name='vid' value='QhkfqVG-AVlu6pEW'>
 <input type='hidden' name='ck' value='QhkfqVG-ATxu6m8j'>
-<input type='hidden' name='cktime' value='114233'>
+<input type='hidden' name='cktime' value='114209'>
 <input type='hidden' name='cart' value='328334'>
 
 </td>
 </tr>
 <tr>
 </form>
+</tr>
+</td> 
+</tr>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- End Closing Netsuite Tags -->
+
+
 <div class='page-home span12 container'>
 	<div class='row'>
 		<div id='mainSlider' class='touchcarousel'>
 			<ul class='touchcarousel-container'>
-				<li class='ad touchcarousel-item slide-banner-right' style="position: relative;">
-					<img src="http://lonestarpercussion.local/app/webroot/img/slider-placeholder-2.jpg" alt="" class="banner" style="margin-right: 30px;">
-					<div class="price h3">$70.99<span class="productGrouping details">per pair</span></div>
-					<div class="content">
-						<div class="slide-content-title">
-							<img src="http://lonestarpercussion.local/app/webroot/img/trick-or-treat.png" alt="">
-						</div>
-						<div class="slide-content-body">
-							<p class="description">Sweeter than your entire Halloween haul, these sexy pedals are <strong>more than you can handle.</strong></p>
-							<div class="features">
-								<ul class="list">
-									<li><a href="#" title="">Trick Accessories</a></li>
-									<li><a href="#" title="">Trick Hardware</a></li>
-									<li><a href="#" title="">All Bass Drum Pedals</a></li>
-								</ul>
-								<ul class="list">
-									<li><a href="#" title="">Drum Set Accessories</a></li>
-									<li><a href="#" title="">Pedal Cases</a></li>
-								</uL>
-							</div>
-						</div>
-						<a href="#" class="b2">Trick Pedals</a>
-					</div>
-				</li>
-				<li class='ad touchcarousel-item slide-banner-left' style="position: relative;">
-					<img src="http://lonestarpercussion.local/app/webroot/img/slider-placeholder-2.jpg" alt="" class="banner" style="margin-left: 40px;">
-					<div class="price h3">$70.99<span class="productGrouping details">per pair</span></div>
-					<div class="content">
-						<div class="slide-content-title">
-							<img src="http://lonestarpercussion.local/app/webroot/img/trick-or-treat.png" alt="">
-						</div>
-						<p class="description">Sweeter than your entire Halloween haul, these sexy pedals are <strong>more than you can handle.</strong></p>
-						<ul class="list">
-							<li><a href="#" title="">Trick Accessories</a></li>
-							<li><a href="#" title="">Trick Hardware</a></li>
-							<li><a href="#" title="">All Bass Drum Pedals</a></li>
-						</ul>
-						<ul class="list">
-							<li><a href="#" title="">Drum Set Accessories</a></li>
-							<li><a href="#" title="">Pedal Cases</a></li>
-						</uL>
-						<a href="#" class="b2">Trick Pedals</a>
-					</div>
-				</li>
-				<li class='ad touchcarousel-item'>Product 3</li>
+				<li class='ad touchcarousel-item slide-banner-right'>
+	<!-- Main Ad Image -->
+	<a href="#" class="add-image">
+		<img src="http://s1.lonestarpercussion.com/resize/images/Dynasty-Snare-Drum.png" alt="" class="banner">
+		<div class="price h3">from $470.05<span class="productGrouping details">each</span></div>
+	</a>
+	<div class="content">
+		<div class="slide-content-title">
+			<!-- Title Image -->
+			<img src="http://s2.lonestarpercussion.com/resize/images/Paul-Rennick-Dynasty.png" alt="">
+		</div>
+		<div class="slide-content-body">
+			<p class="description">Paul Rennick and Dynasty join forces to bring you these <strong>sweet, sweet drums.</strong></p>
+			<div class="features">
+				<ul class="list">
+					<li><a href="/Marching/Marching-Marching-Snare-Drums_LSP/#/~search/allAttributes/Brand:Dynasty/" title="">Dynasty Snares</a></li>
+					<li><a href="/Marching-Tenor-Drums_LSP/#/~search/allAttributes/Brand:Dynasty/" title="">Dynasty Tenors</a></li>
+					<li><a href="/Marching/Marching-Bass-Drums_LSP/#/~search/allAttributes/Brand:Dynasty/" title="">Dynasty Basses</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="/Marching/Carriers_LSP/#/~search/allAttributes/Brand:Dynasty/" title="">Dynasty Carriers</a></li>
+					<li><a href="/Marching/Marching-Stands_LSP/#/~search/allAttributes/Brand:Dynasty/" title="">Dynasty Stands</a></li>
+					<li><a href="/Marching/Cases-Covers_LSP/#/~search/allAttributes/Brand:Dynasty/" title="">Dynasty Cases</a></li>
+				</ul>
+			</div>
+		</div>
+		<a href="/Marching/#/~search/allAttributes/Brand:Dynasty|Series:DFZ/" class="b2">Dynasty Marching</a>
+	</div>
+</li>
+<li class='ad touchcarousel-item slide-banner-left'>
+	<!-- Main Ad Image -->
+	<a href="#" class="add-image">
+		<img src="http://s4.lonestarpercussion.com/resize/images/drummer-tshirts-for-school.jpg" alt="" class="banner">
+		<div class="price h3">$18.00<span class="productGrouping details">each</span></div>
+	</a>
+	<div class="content">
+		<div class="slide-content-title">
+			<!-- Title Image -->
+			<img src="http://s4.lonestarpercussion.com/resize/images/too-cool-for-school.png" alt="">
+		</div>
+		<div class="slide-content-body">
+			<p class="description">Shirts that speak your language.</p>
+			<div class="features">
+				<ul class="list">
+					<li><a href="/Apparel-Accessories/Apparel_LSP/Shirts_LSP#/~search/allAttributes/Brand:Lone-Star-Percussion/keywords/" title="">Rudiment Shirts</a></li>
+					<li><a href="/Apparel-Accessories/Apparel_LSP/" title="">All Apparel</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="/Apparel-Accessories/Apparel_LSP/Hats-Gloves-Trinkets_LSP#/~search/keywords/" title="">Hats, Gloves & Trinkets</a></li>
+				</ul>
+			</div>
+		</div>
+		<a href="/Apparel-Accessories/Apparel_LSP/Shirts_LSP#/~search/allAttributes/Brand:Lone-Star-Percussion/keywords/" class="b2">Drummer Shirts</a>
+	</div>
+</li>
+<li class='ad touchcarousel-item slide-banner-right'>
+	<!-- Main Ad Image -->
+	<a href="#" class="add-image">
+		<img src="http://s3.lonestarpercussion.com/resize/images/scojo-invader.jpg" alt="" class="banner">
+		<div class="price h3">$67.95<span class="productGrouping details">each</span></div>
+	</a>
+	<div class="content">
+		<div class="slide-content-title">
+			<!-- Title Image -->
+			<img src="http://s3.lonestarpercussion.com/resize/images/tricked-out.png" alt="">
+		</div>
+		<div class="slide-content-body">
+			<p class="description">Scott Johnson’s Invader V3 practice pad is so rad it <strong>should be illegal.</strong></p>
+			<div class="features">
+				<ul class="list">
+					<li><a href="/Sticks-Mallets/#/~search/allAttributes/Artist:Johnson-Scott/keywords/" title="">Scott Johnson Sticks</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="/Sheet-Music-Books#/~search/allAttributes/Author-Composer:Johnson-Scott/keywords/" title="">Scott Johnson Compositions</a></li>
+				</ul>
+			</div>
+		</div>
+		<a href="/Practice-Classroom/Snare-Practice-Pads_LSP/Offworld-Percussion-SBSCOJO-Invader-V3-System-Blue-Scojo-Practice-Pad.html" class="b2">Scojo Invader</a>
+	</div>
+</li>
 			</ul>
 		</div>
 	</div>
 	<div class='row-fluid section'>
-		<a href="/Sticks-Mallets#/~search/allAttributes/Brand:Prodigy" class="productAd span6">
+		<a href="/Sticks-Mallets/#/~search/allAttributes/Brand:Prodigy" class="productAd span6">
 	<div class="productImage">
 		<!-- TODO : add badges -->
-		<img src="http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png" width="190" height="190">
+		<img src="http://s4.lonestarpercussion.com/resize/images/product-image/Mallets-1-resize.png">
 	</div>
 	<div class="content">
 		<div class="h2 title">
-			Prodigy Percussion
+			Prodigy Mallets
 		</div>
 		<div class="description">
 			Lone Star Percussion's own line of <strong>money-saving mallets</strong>, perfect for students of all ages.
 		</div>
-		<span class="b5 action">Start With Quality</span>
+		<span class="b5 action">Start with quality</span>
 	</div>
 </a>
 		<a href="/Lone-Star-Gift-Card.html" class="productAd span6">
 	<div class="productImage">
 		<!-- TODO : add badges -->
-		<img src="http://www.promotesystems.com/press/gps/images/05_on_cam_transp.png" width="190" height="190">
+		<img src="http://s4.lonestarpercussion.com/resize/images/product-image/Gift-card-4-png.png">
 	</div>
 	<div class="content">
 		<div class="h2 title">
 			Give it, Spend It.
 		</div>
 		<div class="description">
-			Lone Star Percussion Gift Cards are great for any occassion. Give the gift of drum.
+			Lone Star Percussion Gift Cards are great for any occasion. Give the gift of drum.
 		</div>
-		<span class="b5 action">Give the gift of drum.</span>
+		<span class="b5 action">Give the gift of drum</span>
 	</div>
 </a>
 	</div>
@@ -1576,7 +1643,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 			<h3>Marching</h3>
 			</a>
 			<ul class='links'>
-				<li><a href='/Marching/Marching-Snare-Drums_LSP'>Snare Drums</a></li>
+				<li><a href='/Marching/Marching-Marching-Snare-Drums_LSP'>Snare Drums</a></li>
 				<li><a href='/Marching/Marching-Tenor-Drums_LSP'>Tenors</a></li>
 				<li><a href='/Marching/Marching-Bass-Drums_LSP'>Bass Drums</a></li>
 				<li><a href='/Marching/Carriers_LSP'>Carriers</a></li>
@@ -1626,6 +1693,9 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 	</div>
 </div>
 
+<!-- If we did this via the tag manager, it would be applied to the login page as well -->
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/home.js'></script>
+
 
 </tr>
 </table>
@@ -1633,28 +1703,31 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 </tr>
 
 <!-- End Content -->
+
 </table>
 </div>
 <!-- CONTENT AREA END CUSTOM CODE -->
 
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/models/netsuite.js'></script>
+<!-- CONTENT AREA END CUSTOM CODE -->
 
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/reveal.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/flyout.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/badges.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/compare.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/suggestions.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/definitions.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/clearable.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/plugins/validation.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/reviews.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/shipping.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/account.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/product.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/category.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/search.js'></script>
-<script type='text/javascript' src='http://dev.lonestarpercussion.com/js/controllers/home.js'></script>
+<!-- CONTENT AREA BEGIN ENDING REVERSE CODE -->
+        <div class="hide">
+            <table>
+                <tr>
+                    <td></td>
+<!-- CONTENT AREA END ENDING REVERSE CODE -->
 
+</tr>
+</table>
+</div>
+<div id='div__footer' class='noprint' leftmargin='0' topmargin='0' marginwidth='1' marginheight='1'>
+<!--FOOTER BEGIN OPENING REVERSE CODE -->
+</div>
+<!-- FOOTER END OPENING REVERSE CODE -->
+
+<!-- FOOTER BEGIN CUSTOM CODE -->
+
+<!-- Large Footer --> 
 <!-- Search Result Templates -->
 <script id='templates-search-page' type='text/html'>
 <!-- Search / Item Result Template -->
@@ -1675,7 +1748,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 
 			<ul class='tabs'>
 				<li><button class='b5 icon-24-compact' data-action='showCompactView'>Compact View</button></li>
-				<li><button class='b5 icon-24-list' data-action='showDetailsView'>Details View</button></li>
+				<li><button class='b5 icon-24-list' data-action='showDetailsView'>Detailed View</button></li>
 			</ul>
 			<div class='head'>
 				<ul class='controls'>
@@ -1698,8 +1771,8 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 						<label for='control-pagination-sort-top'>Sort:</label>
 						<select id='control-pagination-sort-top' data-action='sort'>
 							<option selected="selected" value="default">Recommended</option>
-							<option value="Featured Description,t">Name (A-Z)</option>
-							<option value="Featured Description,f">Name (Z-A)</option>
+							<option value="featured description,t">Name (A-Z)</option>
+							<option value="featured description,f">Name (Z-A)</option>
 							<option value="Online Price,t">Price ($-$$$)</option>
 							<option value="Online Price,f">Price ($$$-$)</option>
 							<!--<option value="Manufacturer,t">Manufacturer (A-Z)</option>
@@ -1723,19 +1796,19 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 					<li class='control-pagination-itemCount'>
 						<label for='control-pagination-itemCount-bottom'>Items:</label>
 						<select id='control-pagination-itemCount-bottom' data-action='itemsPerPage'>
-							<option value='24'>20</option>
-							<option value='48'>50</option>
+							<option value='24'>24</option>
+							<option value='48'>48</option>
 							<option value='96'>96</option>
 						</select>
 					</li>
 					<li class='control-pagination-sort'>
 						<label for='control-pagination-sort-bottom'>Sort:</label>
 						<select id='control-pagination-sort-bottom' data-action='sort'>
-							<option selected="selected" value="-default-">Recommended</option>
-							<option value="Store_Description,t">Name (A-Z)</option>
-							<option value="Store_Description,f">Name (Z-A)</option>
-							<option value="Price,t">Price ($-$$$)</option>
-							<option value="Price,f">Price ($$$-$)</option>
+							<option selected="selected" value="default">Recommended</option>
+							<option value="featured description,t">Name (A-Z)</option>
+							<option value="featured description,f">Name (Z-A)</option>
+							<option value="Online Price,t">Price ($-$$$)</option>
+							<option value="Online Price,f">Price ($$$-$)</option>
 						</select>
 					</li>
 				</ul>
@@ -1750,12 +1823,11 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 		var categories = this.navPath._lsp.categoryNodes;
 		var currentCategory = categories[categories.length - 1].englishName;
 		var searchNode = this.navPath._lsp.searchNode;
-		var pageTitle = (searchNode ? '"' + searchNode.englishName + '" in ' + currentCategory : currentCategory);
+		var pageTitle = (searchNode ? '"' + (this._lsp.query.assumedQuery ? this.normalizedQuestion : searchNode.englishName) + '" in ' + currentCategory : currentCategory);
 	#>
 	<h1 id='pageName'><#=pageTitle #></h1>
-	<# if(this.commentary.length > 0){ #>
-		<div class='details didYouMean'>
-			We figured you meant "<#=this._lsp.query.assumedQuery #>".
+	<# if((this._lsp.query.assumedQuery || '').length > 0){ #>
+		<div class='details didYouMean'>Showing results for "<#=this._lsp.query.assumedQuery #>." We couldn't find anything for "<#=this._lsp.query.originalQuery #>."
 			<# /* You might also try <# for(var i = 0; i < this._lsp.query.otherSuggestions.length; i++){ #>
 				<button class='b5' data-action='search' data-controller='search' data-query='<#=this._lsp.query.otherSuggestions[i] #>'><#=this._lsp.query.otherSuggestions[i]  #></button> 
 			<# } #> */ #>
@@ -1893,7 +1965,7 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 
 				<#=_util.parseMicroTemplate('templates-search-refinementSection', {
 					name : 'Categories',
-					id : 'categories',
+					id : 'categories-search',
 					isOpen : true,
 					entries : categories.categoryList,
 					initialListSize : initialSize,
@@ -1939,10 +2011,13 @@ leftmargin='0' topmargin='0' marginwidth='1' >
 
 var isPreSelected = false;
 var optionCounts = {};
+var hasOptions = false;
 if(item.Matrix_Values != '[]'){ 
 	isPreSelected = true;
 	$.each(item._formattedMatrixObject.options, function(label, value){
 		var count = 0;
+		hasOptions = true;
+
 		$.each(value, function(a, b){ count++; });
 		optionCounts[label] = count;
 
@@ -1952,7 +2027,7 @@ if(item.Matrix_Values != '[]'){
 
 #>
 
-		<li class='entry productScope'>
+		<li class='entry productScope' data-lifecycleState='<#=item.Lifecycle_State #>'>
 			<form action='/app/site/backend/additemtocart.nl' method='POST' data-controller='product' data-action='addToCart' data-productIndex='<#=i #>'>
 				<input type='hidden' name='buyid' value='<#=item.Product_Id #>'>
 				<ul class='addToCart panel'>
@@ -1960,44 +2035,53 @@ if(item.Matrix_Values != '[]'){
 					<#
 					/* If it's a matrix item, build the price range - Online_Price is a formatted string - we do this by starting off assuming it's a range */
 					var maxPrice = parseFloat((item.Online_Price || '').replace(/[^0-9\.]/g, ''));
+					var maxMsrp = parseFloat((item.Price || '').replace(/[^0-9\.]/g, ''));
+					if((item.MatrixElement || '').length > 0){
+						maxPrice = item.MatrixElement.split('|')[5];
+						maxMsrp = item.MatrixElement.split('|')[6];
+					}
 					var minPrice =  maxPrice;
 					$.each((item._formattedMatrixObject || {}).products, function(id, product){
 						product.data.onlinePrice = parseFloat(product.data.onlinePrice);
 						if(product.data.onlinePrice > maxPrice){
 							maxPrice = product.data.onlinePrice;
+							maxMsrp = product.data.msrp;
 						}else if(product.data.onlinePrice < minPrice){
 							minPrice = product.data.onlinePrice;
 						}
+
 					});
 
 					var itemPriceString = _util.parseCurrency(minPrice) + ' - ' + _util.parseCurrency(maxPrice);
 					if(minPrice === maxPrice || isPreSelected){
-						itemPriceString = item.Online_Price;
+						itemPriceString = _util.parseCurrency(minPrice);
 					}
 					#>
 						<span class='productPrice'><#=itemPriceString #></span>
-						<span class='productGrouping'>each</span>
-						<# if(minPrice === maxPrice && item.Price && item.Online_Price && parseFloat(item.Price.substr(1, 100)) - parseFloat((item.Online_Price || 0).substr(1, 100)) > 0){ #>						
-							<span class='details'>List : <span class='productMsrp'><#=item.Price #></span>, You Save: <span class='productDiscount'><#=_util.parseCurrency(parseFloat(item.Price.substr(1, 100)) - parseFloat((item.Online_Price || 0).substr(1, 100))) #></span>!</span>
+						<span class='productGrouping'>WAITING ON EASYASK</span>
+						<# if(maxMsrp - maxPrice > 0){ #>
+							<span class='details'>List : <span class='productMsrp'><#=_util.parseCurrency(maxMsrp) #></span>, You Save: <span class='productDiscount'><#=_util.parseCurrency(maxMsrp - maxPrice) #></span>!</span>
 					<# } #>
 					</li>
 					<li class='productAvailability'>
-						<# 
-							var matrixOptionsInStock = (item.Matrix_Values || '').split('Arrives').length - 1;
-							if(matrixOptionsInStock > 0 && !isPreSelected){ #>
-								<span itemprop="availability" class='status'>In Stock<span class='hidden-iphone'>:</span></span> <span class='details'><#=matrixOptionsInStock #> Variations In Stock</span>
+						<# if(!isPreSelected){ #>
+							<# var numberOfOptions = ((item.Matrix_Values || '').match(/In Stock</g) || []).length; #>
+							<# if(hasOptions && numberOfOptions > 0){ #>
+								<span itemprop="availability" class="status">In Stock<span class="hidden-iphone"> :</span></span><span class="details"><#=numberOfOptions #> Variation<#=numberOfOptions > 1 ? 's' : '' #></span>
 							<# }else{ #>
 								<#=item.stock_message #>
 							<# } #>
+						<# }else{ #>
+							<#=item.MatrixElement.split('@')[0].split('|')[7] #>
+						<# } #>
 					</li>
 					<# if(item._formattedMatrixObject){ #>
 						<li class='hide'>
 							<div data-name='summaryString' data-value='<#=item.Matrix_Values #>'></div>
 						</li>
-						<# $.each(item._formattedMatrixObject.options, function(key, value){  
-							hasOptions = true; #>
+						<# $.each(item._formattedMatrixObject.options, function(key, value){  #>
 							<li class='option'>
-								<label><#=key #></label>
+								<label><#=_util.cleanTrailing((' ' + key + ' ').replace(' ' + item.Manufacturer + ' ', '').replace(/-{1,}/g, ' ').replace('Finishes', 'Finish').replace('Legacy', '').replace('Generic', '').replace('Timbale', '')) #></label>
 								<select class='matrix-option' name='<#=key #>' data-action='matrixOptionSelect'>
 									<option value=''>Select an Option</option>
 									
@@ -2033,7 +2117,7 @@ if(item.Matrix_Values != '[]'){
 					}
 
 					/* If the label was a source of the filtering, show the image */
-					if(refinedToOption){
+					if(refinedToOption || isPreSelected){
 						imageUrl = options[j].split('|')[3];
 						sourcedFromFilter = true;
 					}
@@ -2042,12 +2126,12 @@ if(item.Matrix_Values != '[]'){
 			#>
 			<a href='<#=item.Item_URL.replace('http://www.lonestarpercussion.com', 'http://lspsandbox.explorewebdev.com') #>' class='productLink'>
 				<div data-badge='<#=item.badge #>' class='thumbnail'><img src='<#=imageUrl #>.200x200' data-size='200' '/></div>
-				<span class='field compare details'>
+				<div class='field compare details'>
 					<input type='checkbox'>
 					<button class='b5'>Compare Now</button>
-				</span>
-				<span class='productName'><#=item.featured_description #><span class='options'></span></span>  
-				<span class='details model'>Model Number #<span class='productMpn'><#=(!isPreSelected ? item.model_number : (item.MatrixElement || '').split('|')[4]) #></span></span>
+				</div>
+				<span class='productName'><#=item.featured_description #><span class='options'></span> </span>
+				<span class='details model'>Model # <span class='productMpn'><#=(!isPreSelected ? item.model_number : (item.MatrixElement || '').split('|')[4]) #></span></span>
 			</a>
 			
 			<# if(item.number_of_reviews){ #>
@@ -2085,9 +2169,9 @@ if(item.Matrix_Values != '[]'){
 			</div>
 			<# if(count === 0){ #>
 				<div class='detailedDescription'>
-				<h6>Description</h6>
-				<p><#=(item.CleanDescription || '').substr(0, 200) #><# if((item.CleanDescription || '').length > 200){ #>... <a href='<#=item.Item_URL.replace('http://www.lonestarpercussion.com', 'http://lspsandbox.explorewebdev.com') #>'>Read&nbsp;more</a><# } #></p>
-			</div>
+					<h6>Description</h6>
+					<p><#=(item.CleanDescription || '').substr(0, 200) #><# if((item.CleanDescription || '').length > 200){ #>... <a href='<#=item.Item_URL.replace('http://www.lonestarpercussion.com', 'http://lspsandbox.explorewebdev.com') #>'>Read&nbsp;more</a><# } #></p>
+				</div>
 			<# } #>
 		</li>
 	<# } #>
@@ -2129,27 +2213,7 @@ if(item.Matrix_Values != '[]'){
 	</div>
 	<# } #>
 </script>
-
-<!-- CONTENT AREA END CUSTOM CODE -->
-
-<!-- CONTENT AREA BEGIN ENDING REVERSE CODE -->
-        <div class="hide">
-            <table>
-                <tr>
-                    <td></td>
-<!-- CONTENT AREA END ENDING REVERSE CODE -->
-
-</tr>
-</table>
-</div>
-<div id='div__footer' class='noprint' leftmargin='0' topmargin='0' marginwidth='1' marginheight='1'>
-<!--FOOTER BEGIN OPENING REVERSE CODE -->
-</div>
-<!-- FOOTER END OPENING REVERSE CODE -->
-
-<!-- FOOTER BEGIN CUSTOM CODE -->
-
-<!-- Large Footer --> <div class="footer">
+<div class="footer">
 	<div class="banner">
 		<div class="rowContent span12 row">
 			<div class="profile">
@@ -2159,7 +2223,7 @@ if(item.Matrix_Values != '[]'){
 				<li class="image-creditCards">All major cards accepted.</li>
 				<li><a href="https://www.mcafeesecure.com/RatingVerify?ref=www.lonestarpercussion.com" class="mcafee image-mcafee" target="_blank">McAfee</a></li>
 			</ul>
-			<div class="content"> <strong>We speak drum.</strong> At Lone Star Percussion, we’re musicians too – we have a wealth of experience when it comes to percussion, so <a href="/Contact-Us-Form.html">let us know how we can help.</a> </div>
+			<div class="content"> <strong>We speak drum.</strong> At Lone Star Percussion, we’re drummers too – we have a wealth of performance and teaching experience, so let us know <a href="/Contact-Us-Form.html">how we can help.</a> </div>
 		</div>
 	</div>
 	<div class="well">
@@ -2169,8 +2233,10 @@ if(item.Matrix_Values != '[]'){
 				<div class="newsletter">
 					<h3><strong>Sign up</strong> for our newsletter</h3>
 					<div class="email">
-						<input type="email" placeholder="Enter your email address">
-						<button class="b1">Sign-Up</button>
+						<form action='http://lonestarpercussion.us2.list-manage.com/subscribe/post?u=76cbba5cb9964a23f3c63304e&amp;id=de9769c3be' method='post'>
+							<input type="email" name='EMAIL' placeholder="Enter your email address">
+							<button class="b1" type='submit'>Sign-Up</button>
+						</form>
 					</div>
 				</div>
 			
@@ -2202,7 +2268,7 @@ if(item.Matrix_Values != '[]'){
 					<li class="first span2">
 					  
 						<ul class="utilities">
-							<li><strong class="h2">Shop With Us</strong></li>
+							<li><strong class="h2">Departments</strong></li>
 							<li><a href="/Sticks-Mallets">Sticks &amp; Mallets</a></li>
 							<li><a href="/Drum-Heads">Drum Heads</a></li>
 							<li><a href="/Drums-Drum-Sets">Drums &amp; Drum Sets</a></li>
@@ -2234,11 +2300,11 @@ if(item.Matrix_Values != '[]'){
 					<li class="span2">
 					  <ul class="utilities">
 						<li><strong class="h2">Our Services</strong></li>
-						<li><a href="/School-Bids.html">School Bids Form</a></li>
-						<!--<li><a href="/Drum-Lessons.html">Drum lessons</a></li>-->
+						<li><a href="/School-Bids.html">School Bids</a></li>
+						<!--<li><a href="/Drum-Lessons.html">Drum Lessons</a></li>-->
 						<li><a href="/Marimba-Rentals.html">Marimba Rentals</a></li>
 						<!--<li><a href="/Financing.html">Financing</a></li>-->
-						<li><a href="/Two-Dollar-Cymbal-Trades.html">Cymbal Trade In</a></li>
+						<li><a href="/Two-Dollar-Cymbal-Trades.html">Cymbal Trade-In</a></li>
 						<li><a href="/Drum-Repair.html">Drum Repair</a></li>
 						<li><a href="/Lone-Star-Gift-Card.html">Gift Cards</a></li>
 					  </ul>
@@ -2250,13 +2316,15 @@ if(item.Matrix_Values != '[]'){
 							<li><a href="/Lone-Star-Percussion-Return-Policy.html">Returns</a></li>
 							<!--<li><a href="/Shipping.html">Shipping</a></li>-->
 							<!--<li><a href="/FAQ.html">FAQ</a></li>-->
+							<li><a href="/cart/">Your Cart</a></li>
 						</ul>
 					</li>
 					<li class="span2">
 						<ul class="utilities">
 							<li><strong class="h2">Account</strong></li>
-							<li><a href="/Set-Up-A-Wish-List.html">My Wish List</a></li>
-							<li><a href="#">Track Order</a></li>
+							<li><a href="/My-Wishlist.html">My Wish List</a></li>
+							<li><a href="https://checkout.sandbox.netsuite.com/app/center/nlvisitor.nl?c=665798&amp;sc=6&amp;ck=QhkfqVG-ATxu6m8j&amp;vid=QhkfqVG-AVlu6pEW&amp;cktime=114209&amp;cart=328334&amp;addrcountry=US&amp;gc=clear">My Account</a></li>
+							<!--<li><a href="#">Track Order</a></li>-->
 							<li><a href="/International-Shipping.html">International Orders</a></li>
 							<!--<li><a href="#">Site Map</a></li>-->
 						</ul>
@@ -2277,11 +2345,27 @@ if(item.Matrix_Values != '[]'){
 <!-- FOOTER END CUSTOM CODE -->
 
 
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/models/netsuite.js'></script>
+
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/reveal.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/flyout.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/badges.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/compare.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/suggestions.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/definitions.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/clearable.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/plugins/validation.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/reviews.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/shipping.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/account.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/product.js'></script>
+<script type='text/javascript' src='https://dev.lonestarpercussion.com/js/controllers/category.js'></script>
+
+
 <!-- FOOTER BEGIN ENDING REVERSE CODE -->
 <div style="display:none;">
 	<div>
     	<div>
-    	
 <!-- FOOTER END ENDING REVERSE CODE -->
 </div>
 <iframe src='/empty.html' id='server_commands' style='visibility:hidden' height=0></iframe>
@@ -2317,7 +2401,7 @@ window.loadcomplete = true;
 
 
 
-<!-- 1,355 s: 42% #131 co: 4% #263-->
-<!-- [ sb.sh.j2.sv ] [ 2013.1.0.130 ]-->
-<!-- [ 665798 ] [  ] [ /s.nl ] [ Mon Jul 15 17:46:01 PDT 2013 ] -->
+<!-- 1,140 s: 44% #128 co: 2% #224-->
+<!-- [ sb.sh.j3.sv ] [ 2013.1.0.134 ]-->
+<!-- [ 665798 ] [  ] [ /s.nl ] [ Sun Jul 21 17:13:42 PDT 2013 ] -->
 <!-- Not logging slowest SQL -->

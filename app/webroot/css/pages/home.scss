@@ -28,17 +28,14 @@
 		height: $flyoutHeight - 20;
 		margin-left: 270px;
 		width: 690px; // width + margin-left = pagewidth
-		@media (max-width: 767px) {
-			margin-left: 0;
-			width: 90%;
-		}
 		position: relative;
+		@include box-sizing();
 
 		.ad{
 			@include box-sizing();
 			position: relative;
 			margin-left:0;
-			padding: 20px 40px;
+			padding: 20px;
 			height: 460px;
 			width: 690px;
 			float: left;
@@ -62,7 +59,9 @@
 					padding: 0;
 				}
 			}
-
+			a {
+				color: #000;
+			}
 			.price:before {
 				width: 0;
 			}
@@ -70,7 +69,7 @@
 
 			&.slide-banner-right {
 				.banner {
-					right: 0;
+					right: 20px;
 				}
 				.price{
 					right: 75px;
@@ -81,7 +80,7 @@
 					float: right;
 				}
 				.banner {
-					left: 0;
+					left: 20px;
 				}
 				//These price labels will probably need to be updated on an image by image basis
 				.price{
@@ -92,15 +91,22 @@
 						right: 0;
 					}
 				}
+
+				a:hover {
+					.price:before {
+						border-top-color: $yellow;
+					}
+				}
 			}
 
 			.description {
 				font-size: 1.25em;
 				line-height: 1.5em;
+				margin: 1em 0;
 			}
 
 			.list li {
-				margin-bottom: 1em;
+				margin-bottom: .5em;
 			}
 
 			.b2 {
@@ -143,11 +149,15 @@
 						left: 0;
 					}
 				}
+
+				a:hover .price:before {
+					border-top-color: $yellow;
+				}
 			}
 		}
 
 		@media (min-width: 980px) and (max-width: 1199px){
-			&, .ad{
+			.ad{
 				.price {
 					top: 30px;
 					&:before{
@@ -158,14 +168,20 @@
 					}
 				}
 
+				a:hover .price:before {
+					border-top-color: $yellow;
+				}
+
 				.b2 {
-					margin: 55px 35px 0 0;
+					margin: 15px 35px 0 0;
 				}
 			}
 		}
 		@media (max-width: 979px) and (min-width: 768px){
 			&, .ad{
 				width: 475px;
+			}	
+			.ad{
 				padding: 10px;
 				.banner {
 					bottom: 15px;
@@ -186,18 +202,71 @@
 					float: left;
 				}
 			}
+			.slide-banner-left.ad {
+				.add-image {
+					right: 0;
+					bottom: 0;
+					position: absolute;
+
+					img {
+						position: static;
+						max-width: 100%;
+					}
+				}
+			}
 		}
 
-		@media (max-width: 767px){
+		@media (max-width: 767px) {
+			margin-left: 0;
+			width: 650px;
+			margin: 0 auto;
+			.ad {
+				width: 650px;
+			}
 			.ad .b2 {
 				margin-right: 35px;
-				margin-top: 45px;
+				margin-top: 15px;
+			}
+			.arrow-holder .right {
+				right: -15px;
+			}
+		}
+
+		@media (max-width: 690px){
+			&, .ad {
+				width: 610px
+			}
+			.ad.slide-banner-right .banner {
+				right: 0;
+			}
+		}
+
+		@media (max-width: 650px){
+			&, .ad {
+				width: 570px
+			}
+		}
+
+		@media (max-width: 610px){
+			&, .ad {
+				width: 530px
+			}
+		}
+
+		@media (max-width: 570px){
+			&, .ad {
+				width: 480px
 			}
 		}
 
 		@media (max-width: 520px){
 			&, .ad{
-				width: 480px;
+				width: 460px;
+			}
+			& {
+				margin: 0 auto;
+			}
+			.ad{
 				.banner {
 					position: static;
 					max-width: 100%;
@@ -208,27 +277,47 @@
 					float: none;
 					width: 100%;
 				}
-				.description {
+				.slide-content-title img {
+					margin-top: -100px;
+				}
+				.features {
 					display: none;
 				}
 				.b2 {
 					margin-top: 0;
 				}
 			}
-			.ad.slide-banner-right .price {
-				right: 65px;
-				top: 0;
-				&:before{
-					border: px(8px) solid transparent;
-					border-top: px(8px) solid black; 
-					left: -20px;
-				}
+			.price {
+				display: none;
+			}
+		}
+
+		@media (max-width: 500px){
+			&, .ad{
+				width: 430px;
+			}
+		}
+
+		@media (max-width: 470px){
+			&, .ad{
+				width: 400px;
+			}
+		}
+
+		@media (max-width: 440px){
+			&, .ad{
+				width: 360px;
 			}
 		}
 
 		@media (max-width: 400px){
 			&, .ad{
 				width: 360px;
+			}
+			&{
+				margin: 0 auto;
+			}
+			.ad{
 				.banner {
 					position: static;
 					max-width: 100%;
@@ -239,7 +328,7 @@
 					float: none;
 					width: 100%;
 				}
-				.description {
+				.features {
 					display: none;
 				}
 				.b2 {
