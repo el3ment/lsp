@@ -933,6 +933,10 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 	width: 600px;
 	margin: auto;
 	display:block;
+	@media (max-width: 767px){
+		width: 100%;
+		top: 10px !important;
+	}
 }
 // "New Customer? Create an account" link on naked Returning Customers / Login page
 html[data-title*="Login"] .page-generic > table .changeContextLink a,
@@ -941,7 +945,7 @@ html[data-title*="Login"] .page-generic > table .changeContextLink a,
 }
 
 .nscheckout-register .changeContextLink{
-	display: none;
+	display: none !important;
 	//outline: 1px solid red;
 }
 
@@ -2216,38 +2220,22 @@ html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"
 //	margin-top: 135px !important;
 //}
 
-/*
+
 // Login page by itself when not comming from a checkout screen
 .header.large ~ .page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > input[name="new"] ~ table > tbody > tr,
 .header.large ~ .page-generic table table table table input[name="new"] ~ table > tbody > tr{
-	width: 600px !important;
-	margin-left: 50% !important;
-	margin-left: 0 \0/ !important; // IE 8/9 can't render table rows as blocks, so let's fix that
-	position: relative !important;
-	left: -300px;
-	display: block;
 
-	// Because IE 8/9 can't add position relative to the TR tag, we need to add it to the next table down so the sign in button has something to hook into
-	> td > table{
-		position: relative;
-		width: 100%; // forced into it, account for padding
-	}
+	> td{
+		padding-bottom: 0 !important;
+		width: 1000px;
 
-	#tbl_submitter{
-
-		bottom: -60px; // How far it is from the panel
-		right: -5px;
-		input{ padding-right: 88px; text-indent: -300px; z-index: 2; }
-	
-		&:after{
-			padding-right: 10px;
-			content: ' Sign In';
-			margin-left: -90px;
-			left:0
+		#tbl_submitter{
+			right: -10px;
+			bottom: -60px;
 		}
 	}
 }
-*/
+
 
 // Hide the timeline from a normal login or a normal creation outside of checkout
 .header.large ~ .page-generic #newcust{
