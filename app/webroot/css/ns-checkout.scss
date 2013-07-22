@@ -550,15 +550,16 @@ tr[height="25"]{ height: 0; }
 		text-align: right !important;
 		position: relative !important;
 		color: $grey;
-		//padding: 30px 95px 10px 0 !important; // used when we add more functionality - gives space for United States
-		padding: 30px 10px 10px 0 !important;
+		padding: 30px 87px 10px 0 !important; // used when we add more functionality - gives space for United States
+		//padding: 30px 10px 10px 0 !important;
 
 		@media (max-width: 767px){
 			position: absolute !important;
 			right: 130px;
 			top: 23px;
 			width: 200px !important;
-			padding: 10px !important;
+			padding-top: 10px !important;
+			padding-bottom: 10px !important;
 		}
 
 		// Label
@@ -568,24 +569,23 @@ tr[height="25"]{ height: 0; }
 			font-weight: bold;
 			color: black;
 			z-index: 1;
-			top: 10px;
+			top: 2px;
 			display: block !important;
 			//padding-left: 100px;
-			//position: absolute;
-			right: 10px;
-			top: 10px;
+			position: relative;
+			right: -87px;
 			margin-top: -20px;
+			text-indent: 20px;
 			
 			&:after{
 
-				visibility: hidden; // temporary
+				//visibility: hidden; // temporary
 
 				content: 'United States';
-				text-decoration: underline;
 				padding-left: 8px;
 				position: absolute;
 				right: 0;
-				bottom: -21px;
+				bottom: -20px;
 				color: $grey;
 				font-weight: normal;
 				font-size: 13px;
@@ -594,12 +594,7 @@ tr[height="25"]{ height: 0; }
 				// }
 			}
 
-			&:hover:after{
-				text-decoration: none;
-			}
-
 			@media (max-width: 767px){
-				position: absolute;
 				width: 100%;
 				&:after{
 					display: block !important;
@@ -613,9 +608,10 @@ tr[height="25"]{ height: 0; }
 
 		}
 		@media (max-width: 450px){
-			padding-right: 10px !important;
+			padding-right: 0px !important;
 			a{
 				text-decoration: underline;
+				right: 0;
 				&:after{
 					display: none !important;
 				}
@@ -2133,7 +2129,24 @@ html[data-path*="category=thanks"] .page-generic > table{
 	.receiptMessage{
 		margin: auto;
 		text-align: center;
-		margin-bottom: 20px;
+		margin-bottom: 40px;
+		@include clearfix();
+
+		h1{
+			margin-top: 60px; // center it
+		}
+		.image-badge-orderComplete{
+			float: left;
+			@media (max-width: 979px){
+				float: none;
+				position: relative;
+				left: 50%;
+				margin-left: -168px;
+			}
+			@media (max-width: 348px){
+
+			}
+		}
 		.salesOrderNumber{
 			margin-top: 10px;
 			.number{
@@ -2142,6 +2155,9 @@ html[data-path*="category=thanks"] .page-generic > table{
 				font-weight: bold;
 				padding: 2px 3px;
 				@include border-radius(5px);
+				@media (max-width: 400px){
+					display: block;
+				}
 			}
 		}
 		.container{

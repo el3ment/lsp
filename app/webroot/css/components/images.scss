@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+div[class*="image-badge"]{
+	background-image: url(../img/lsp-master-badges.jpg);
+}
+
 .image-logoCircle{
 	background-position: 0px 0px;
     width: 140px;
@@ -41,4 +45,14 @@
 	background-position: -279px -266px;
 	width: 140px;
 	height: 75px;
+}
+.image-badge-wishList{
+	background-position: 0 0;
+	height: 200px;
+	width: 320px;
+}
+.image-badge-orderComplete{
+	background-position: 0 -200px;
+	height: 244px;
+	width: 348px;
 }
