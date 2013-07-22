@@ -192,7 +192,8 @@
 					width: 100%;
 				}
 				.features ul {
-					float: none;
+					float: left;
+					clear: both;
 				}
 				.price {
 					bottom: 0;

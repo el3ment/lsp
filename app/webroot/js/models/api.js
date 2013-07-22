@@ -40,7 +40,7 @@
 				crossDomain : true,
 				dataType : dataType,
 				context : this,
-				timeout : this._timeout,
+				//timeout : this._timeout,
 				passthrough : $.extend({}, passthrough)
 			};
 			

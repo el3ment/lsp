@@ -746,7 +746,7 @@ tr[height="25"]{ height: 0; }
 	}
 
 	a{ color: black; line-height: 22px; }
-
+	strong{ color: black; }
 	// Required Icon
 	.required_icon{
 		//background-color: red;
@@ -792,6 +792,7 @@ tr[height="25"]{ height: 0; }
 .smalltext{
 	color: $grey;
 	font-size: 13px;
+	strong{ color: black; }
 }
 
 .greytitle{
@@ -1938,6 +1939,8 @@ html[data-title*="Review"] .page-generic > table,
 	}
 }
 
+
+
 input[name="total"] ~ table > tbody{
 	display: table;
 	width: 100%;
@@ -2119,6 +2122,26 @@ html[data-path*="category=thanks"] .page-generic > table{
 		@include box-shadow-multiple(none);
 		width: 100%;
 		display: table;
+	}
+
+	.receiptMessage{
+		margin: auto;
+		text-align: center;
+		margin-bottom: 20px;
+		.salesOrderNumber{
+			margin-top: 10px;
+			.number{
+				background-color: $grey;
+				color: white;
+				font-weight: bold;
+				padding: 2px 3px;
+				@include border-radius(5px);
+			}
+		}
+		.container{
+			margin: auto;
+			float: none;
+		}
 	}
 }
 

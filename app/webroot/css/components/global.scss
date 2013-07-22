@@ -215,7 +215,10 @@ ol.list{
 
 /* Common Properties */
 /* Details are subtext */
-.details{ color: $grey; font-size: 13px; line-height: 18px; }
+.details{ 
+	color: $grey; font-size: 13px; line-height: 18px;
+	strong{ color: black; }
+}
 
 /* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
 .productAvailability .status,

@@ -822,7 +822,7 @@
 	position: relative;
 	min-height: 800px;
 
-	> div{
+	> div, > fieldset, > li{
 		@include opacity(.25);
 		display: none\9 !important; // something is wierd here, ie8 wasn't making them all transparent even if the property was applied
 	}
@@ -843,5 +843,5 @@
 }
 
 .loading.secondary:before{
-	content: ' ';
+	display: none;
 }

@@ -26,6 +26,7 @@
 						// Close the add-review form
 						$('button.b1.reveal-open[data-reveal-children*="addReviewForm"]').trigger('click');
 
+
 					},
 					onBeforeAPICall : function(e, data){
 						$(_settings.formSelector).addClass('loading');
@@ -129,8 +130,10 @@
 				$($.parseHTML(_this.render(review)))
 					.filter('li')
 					.hide()
+					.addClass('saved')
 					.insertAfter('#reviewEntries li:first')
 					.fadeIn();
+
 			},
 
 			// Take the form, JSON encode the profile section, perform
