@@ -76,9 +76,9 @@
 								preloadImages: (context !== 'phone' ? true : false),
 								xOffset : (context === 'phone' ? 1000 : parseInt($('.information.span6').css('margin-left'), 10)),
 								yOffset : -20,
-								zoomType: 'standard'//,
-								// showEffect: 'fadein',
-								// fadeinSpeed: 'fast'
+								zoomType: 'standard',
+								showEffect: 'fadein',
+								fadeinSpeed: 'fast'
 							});
 					}
 				}
