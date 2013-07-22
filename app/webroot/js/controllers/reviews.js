@@ -25,12 +25,13 @@
 
 						// Close the add-review form
 						$('button.b1.reveal-open[data-reveal-children*="addReviewForm"]').trigger('click');
-
+						$(':input', _settings.formSelector).removeAttr('disabled');
 
 					},
 					onBeforeAPICall : function(e, data){
 						$(_settings.formSelector).addClass('loading');
 						$('#reviewEntries').addClass('loading secondary');
+						$(':input', _settings.formSelector).attr('disabled');
 					},
 					onSave : function(e, data){
 						var form = data.selector[0];
@@ -127,12 +128,8 @@
 				
 				_util.scrollTo($('.reviews.section'));
 
-				$($.parseHTML(_this.render(review)))
-					.filter('li')
-					.hide()
-					.addClass('saved')
-					.insertAfter('#reviewEntries li:first')
-					.fadeIn();
+				$('ul.entries')
+					.addClass('saved');
 
 			},
 

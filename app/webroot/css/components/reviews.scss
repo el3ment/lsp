@@ -243,6 +243,23 @@
 		.entry:last-child{
 			border-bottom: 0;
 		}
+
+		&.saved{
+			&:before{
+				content: "Thanks for helping others with your review! You're a rock star in our book.";
+				display: block;
+				background-color: $superLightGrey;
+				border: 1px solid $lightGrey;
+				border-width: 1px 0;
+				padding: 10px 0;
+				text-align: center;
+				width: 100%;
+				line-height: 22px;
+				margin-top: -4px;
+				margin-bottom: -1px;
+			}
+		}
+
 		.entry{
 			
 			padding: px($gutterWidth / 2) 0;
@@ -257,23 +274,7 @@
 			@media (max-width: 767px){
 				display: table;
 			}
-			
-			&.saved{
-				&:before{
-					content: "Thanks for helping others with your review! You're a rock star in our book.";
-					display: block;
-					background-color: $superLightGrey;
-					border: 1px solid $lightGrey;
-					border-width: 1px 0;
-					padding: 10px 0;
-					text-align: center;
-					width: 100%;
-					line-height: 22px;
-					margin-top: -11px;
-					margin-bottom: 10px;
-				}
-			}
-			
+
 			&.preview{
 
 				background-color: white;
