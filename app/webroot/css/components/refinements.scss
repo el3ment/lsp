@@ -123,7 +123,8 @@
 				content: '›';
 				position: absolute;
 				left: 0;
-				text-decoration: none !important;
+				text-decoration: none;
+				display: none\9;
 			}
 			.label{
 				text-decoration: underline;
