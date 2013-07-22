@@ -148,7 +148,7 @@
 					}
 				}
 
-				if(((easyAskDataSourceObject.attributes. || {}).attribute || []).length === 0){
+				if(((easyAskDataSourceObject.attributes || {}).attribute || []).length === 0){
 					delete easyAskDataSourceObject.attributes;
 				}
 
