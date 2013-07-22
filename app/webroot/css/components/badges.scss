@@ -16,7 +16,7 @@
 		color: white;
 		font-size: 11px;
 		@include border-radius(px($borderRadius));
-		
+		z-index: 9999;
 	}
 	
 	&.badges-text{
@@ -33,6 +33,7 @@
 
 	/* Individual Badges */
 	.badge-new{ background-color: red; }
+	.badge-discontinued{ background-color: $grey; }
 	&.badges-text .badge-new{ color: red; }
 	/*
 	&.badge-smallImage{

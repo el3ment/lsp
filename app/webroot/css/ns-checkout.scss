@@ -189,6 +189,11 @@ tr[height="25"]{ height: 0; }
 *   Cart
 */ 
 
+	// Error message logic -- only show one at a time, never both
+	.productAvailability + br + .errortext{
+		display: none;
+	}
+
 	#handle_cartMainPortlet > td > table,
 	html[data-path*="cart"] .page-generic > table{
 		width: 100% !important; // overrides the code on "Panel Widths" near line 1998
@@ -199,23 +204,27 @@ tr[height="25"]{ height: 0; }
 		margin-top: 70px !important;
 
 		&:before{
- 		content: 'Your Cart';
- 		display: block;
- 		font-size: 30px;
- 		line-height: 43px;
-		font-size: 2.9em;
-		font-family: "League Gothic", sans-serif;
-		text-transform: uppercase;
-		color: $black; 
-		-webkit-font-smoothing: antialiased;
-		margin-top:10px;
-		position:absolute;
-		top: 0;
+	 		content: 'Your Cart';
+	 		display: block;
+	 		font-size: 30px;
+	 		line-height: 43px;
+			font-size: 2.9em;
+			font-family: "League Gothic", sans-serif;
+			text-transform: uppercase;
+			color: $black; 
+			-webkit-font-smoothing: antialiased;
+			margin-top:10px;
+			position:absolute;
+			top: 0;
 
-		@media (max-width: 767px){
-			//top: -70px;
+			@media (max-width: 767px){
+				//top: -70px;
+			}
 		}
-	}
+
+		.errortext{
+			background-color: transparent !important;
+		}
 	}
 
 	html[data-path*="category=thanks"] .page-generic > table #carttable{

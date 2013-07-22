@@ -79,7 +79,7 @@
 								zoomType: 'standard',
 								showEffect: 'fadein',
 								fadeinSpeed: 'fast',
-								delay : 300
+								delay : 100
 							});
 					}
 				}

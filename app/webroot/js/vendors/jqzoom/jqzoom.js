@@ -198,7 +198,6 @@
 				clearTimeout(el.timer);
 				//show lens and zoomWindow
 				el.timer = setTimeout(function(){
-					console.log('hey');
 					lens.show();
 					stage.show();
 					$('.zoomWindow', el).bind('mouseenter', function(){
