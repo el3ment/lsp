@@ -357,6 +357,9 @@ tr[height="25"]{ height: 0; }
 		a{
 			text-decoration: none;
 			color: black;
+			&:hover{
+				text-decoration: underline;
+			}
 		}
 	}
 
