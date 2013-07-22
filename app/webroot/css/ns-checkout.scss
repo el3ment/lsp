@@ -118,7 +118,9 @@ body .span12 > table{
 	}
 }
 
-.pic{ display: none !important; }
+// Overqualified to beat !important declarations above
+html body .page-generic .pic{ display: none !important; }
+
 .checkoutwarning,
 .errortext p,
 .errortext.bglt{ 
@@ -2235,7 +2237,9 @@ html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"
 
 	> td{
 		padding-bottom: 0 !important;
-		width: 1000px;
+		width: 575px;
+
+
 
 		#tbl_submitter{
 			right: -10px;
