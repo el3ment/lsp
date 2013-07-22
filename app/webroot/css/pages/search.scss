@@ -862,6 +862,7 @@
 	}
 }
 
+// Used on other elements that need to be faded, but not have the loading circle
 .loading.secondary:before{
 	display: none;
 }

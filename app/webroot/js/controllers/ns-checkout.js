@@ -22,7 +22,8 @@
 						$('a[href="#"]').attr('href', null);
 						$('input[size="6"][maxlength="6"]')
 							.attr('type', 'number')
-							.attr('min', '0');
+							.attr('min', '0')
+
 					},
 					onEnterRegister : function(e, data){
 
