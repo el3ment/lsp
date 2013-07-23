@@ -50,7 +50,7 @@ if (!empty($s3fs_mounts)) {
 		$mount_command .= ' -o '.(!empty($m['gid'])?escapeshellarg('gid='.$m['gid']):'gid=501');
 		$mount_command .= ' -o '.(!empty($m['uid'])?escapeshellarg('uid='.$m['uid']):'uid=500');
 		
-		$deploy_hook_contents .= $mount_command."\n";
+		$deploy_hook_contents .= $mount_command."\n; chmod -R 775 ".escapeshellarg($current_app_directory.'/'.$m['local_folder']);
 
 	}
 
