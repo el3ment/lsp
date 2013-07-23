@@ -71,6 +71,10 @@ class ThumbnailController extends Controller {
 	}
 	
 	function _getFile($filename){ // Return filedata
+
+		echo $filename;
+		die();
+
 		$file = file_get_contents($filename);
 		
 		return $file;
