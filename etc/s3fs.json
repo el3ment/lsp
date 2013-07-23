@@ -1,6 +1,6 @@
 [
 	{
-		"local_folder": "static",
+		"local_folder": "static-new",
 		"bucket": "lsp-static",
 		"cache_folder": "/tmp",
 		"gid": "501",
