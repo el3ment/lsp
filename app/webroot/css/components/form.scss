@@ -157,7 +157,6 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 /* Yellow, Uppercase */ 
 .b1, .b2, .b3, .b4, .yellowButton, .greyButton{ 
 	
-	@include gradient($lightYellow, $darkYellow);
 	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
 	@include box-sizing();
 	
@@ -182,6 +181,12 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 	&:hover, &.active{
 		@include gradient($hoverLightYellow, $darkYellow);
 	}
+
+	&, &:active{
+		@include gradient($lightYellow, $darkYellow);
+		text-decoration: none;
+	}
+
 	// Don't do the hover effect on disabled buttons
 	&[disabled]:hover, &.active{
 		@include gradient($lightYellow, $darkYellow);
@@ -200,7 +205,9 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 
 /* Grey, Caps */
 .b3, .b4, .greyButton{ 
-	@include gradient($buttonLightGrey, $buttonDarkGrey); 
+	&, &:active{ 
+		@include gradient($buttonLightGrey, $buttonDarkGrey);
+	}
 	@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
 	text-shadow: 0 1px $saturatedHighlightGrey;
 	border: 1px solid $darkGrey;

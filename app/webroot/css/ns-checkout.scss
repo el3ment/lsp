@@ -2199,6 +2199,10 @@ html[data-path*="category=thanks"] .page-generic > table #checkout td[colspan="2
 html[data-title*="Login"],
 .nscheckout-login{
 
+	.breadcrumbs{
+		display: none;
+	}
+
 	#login input[name="new"] ~ table > tbody > tr,
 	.page-generic > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr{
 		
@@ -2212,6 +2216,22 @@ html[data-title*="Login"],
 			width: 100% !important;
 			margin-left: 0 !important;
 			left: 0 !important;
+		}
+
+		#tbl_submitter{
+
+			position:absolute;
+			bottom:10px;
+			right: 5px;
+
+			input{ padding-right: 65px; text-indent:-200px; z-index: 2;}
+			
+			&:after{
+				position: absolute;
+				left: 10px;
+				top: 9px;
+				content: 'Sign In';
+			}
 		}
 	}
 }

@@ -285,6 +285,13 @@ ol.list{
 	display: none !important;
 }
 
+.centered{
+	text-align: center;
+	margin: auto;
+	float: none;
+	margin: 20px auto;
+}
+
 
 /* Related items are the things-you-might need, hand selected products seen on product detail pages 
  * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page

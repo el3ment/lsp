@@ -72,8 +72,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 
 			// IE dosen't maintain event bubbling for transparent background
 			// divs - so we use a transparent only part of the sprite image
-			@include lsp-sprite-background();
-			background-position: -200px -373px;
+			background-image: url('data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
 		}
 
 

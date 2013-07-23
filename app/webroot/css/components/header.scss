@@ -18,7 +18,6 @@
 		color: #fff;
 		border-color: $darkBrownBorder;
 		
-		@include gradient($brown, $darkBrown);
 		@include box-shadow-multiple(0 1px 0px #7b6d62 inset, 
 									 0 2px 3px #000); /* Top Highlight, Drop shadow */  
 		
@@ -31,6 +30,8 @@
 			background-color: transparent\9; /* Remove the background for IE8 */
 			@include box-shadow-multiple(0 -1px 0 #52483d inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #312a24 inset);
 		}
+
+		&, &:active{ @include gradient($brown, $darkBrown); }
 	}
 
 	// If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
