@@ -343,6 +343,15 @@
 					margin-top: 0;
 				}
 			}
+			.arrow-holder {
+				display: none;
+			}
+		}
+
+		@media (max-width: 360px){
+			&, .ad{
+				width: 320px;
+			}
 		}
 
 		.arrow-holder{
