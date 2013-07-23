@@ -6,10 +6,21 @@
 
 	&.formStyle{
 		label{
-			width: 75px;
+			width: 24%;
+			text-align: right;
+			vertical-align: top;
 		}
-		input, select{
-			width: 243px;
+		input, select, textarea{
+			width: 72%;
+			display: inline-block;
+		}
+
+		@media (max-width: 767px){
+			label { text-align: left;}
+			label, input, select, textarea{
+				display: block;
+				width: 100%;
+			}
 		}
 	}
 	
@@ -31,7 +42,7 @@
 			border-bottom: 0;
 		}
 		label{
-			margin: px($paddingUnit+3) px($paddingUnit) 0 0;
+			margin: px($paddingUnit+3) 2% 0 0;
 			display: inline; /* IE */
 			display: inline-block;
 			//float: left;
