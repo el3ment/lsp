@@ -1,6 +1,0 @@
-[global]
-ApplicationName=Lone Star Percussion Website
-DevToolsEndpoint=git.elasticbeanstalk.us-west-1.amazonaws.com
-EnvironmentName=Development
-Region=us-west-1
-AwsCredentialFile=/Users/jchinkle/.elasticbeanstalk/aws_credential_file
