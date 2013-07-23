@@ -1,10 +1,10 @@
 [
 	{
-		"local_folder": "static-s3",
+		"local_folder": "static",
 		"bucket": "lsp-static",
 		"cache_folder": "/tmp",
 		"gid": "501",
 		"uid": "500",
-		"default_acl": "public-write"
+		"default_acl": "public-read"
 	}
 ]
