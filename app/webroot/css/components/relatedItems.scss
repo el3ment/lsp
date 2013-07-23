@@ -110,7 +110,7 @@
 	ul{ 
 		
 		display:inline-block;
-		width: 100%;
+		
 		//background-color: $superLightGrey;
 		//-moz-background-clip: padding;     /* Firefox 3.6 */
 		//-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
@@ -119,7 +119,7 @@
 
 		
 		//border-left: px(columns(2) + $gutterWidth) solid transparent;
-		background-color: $superLightGrey;
+		
 		@media (max-width: 979px){
 			border-left: 0;
 		}
