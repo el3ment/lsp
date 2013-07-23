@@ -317,7 +317,7 @@
 		
 		.entry{
 			clear:none;
-			padding: 0 px(7px);
+			padding: 0 px(15px);
 			width: 33%;
 			@include box-sizing();
 			
@@ -395,7 +395,7 @@
 				font-size: px(17px);
 				position: absolute;
 				top: px($_topOfPrice, 17px);
-				left: $hideDistance + $paddingUnit + 2px;
+				left: $hideDistance + $paddingUnit + 9px;
 				width: 100%;
 			}
 			.productAvailability{
@@ -407,7 +407,7 @@
 				font-size: px(13px);
 				position: absolute;
 				top: px($_topOfPrice + 18px);
-				left: ($hideDistance + $paddingUnit + 2);
+				left: ($hideDistance + $paddingUnit + 9px);
 				width: px(columns(3));
 				color: $grey;
 
