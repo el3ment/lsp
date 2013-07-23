@@ -51,7 +51,7 @@
 				$outputImage = ImageCreateTrueColor($outputWidth, $outputHeight);
 				
 				if($imageDataArray['image-type'] === IMAGETYPE_PNG){
-					imagefill($outputImage, 0, 0, imagecolorallocatealpha($new, 0, 0, 0, 127));
+					imagefill($outputImage, 0, 0, imagecolorallocatealpha($outputImage, 0, 0, 0, 127));
 					imagesavealpha($outputImage, true); 
 				}else{
 					imagefill($outputImage, 0, 0, imagecolorallocate($outputImage, 255, 255, 255));	

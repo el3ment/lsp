@@ -1,7 +1,0 @@
-app/tmp/sessions/ses*
-!empty
-.project/
-dummy
-app/tmp/logs/*
-.DS_Store
-*.swp

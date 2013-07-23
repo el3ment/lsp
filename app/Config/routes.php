@@ -20,6 +20,14 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+
+	// Resizer
+	Router::connect('/resize/:imagePath', 
+		array('controller' => 'thumbnail', 'action' => 'resize'),
+		array('imagePath' => '.*',
+			  'pass' => array('imagePath')));
+
+
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
  * its action called 'display', and we pass a param to select the view file
@@ -33,6 +41,7 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
 
 /**
  * Load all plugin routes.  See the CakePlugin documentation on 

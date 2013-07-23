@@ -1,6 +1,6 @@
 <?php
 
-define('SOURCE_DIRECTORY', '/www/static');
+define('SOURCE_DIRECTORY', ROOT . '/static');
 define('ERROR_IMAGE', '/images/product-image/no-image.png');
 define('THUMBNAIL_DIRECTORY', SOURCE_DIRECTORY . '/thumbnails');
 define('FULLIMAGE_DIRECTORY', SOURCE_DIRECTORY);
