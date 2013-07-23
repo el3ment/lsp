@@ -3,7 +3,7 @@
 
 // Left hand refinement block
 .refinements{
-	
+
 	// margin-left:0;
 	font-size: 13px;
 	
@@ -147,9 +147,22 @@
 	li.indent ~ .indent,
 	.level0.openParentCategory ~ .openParentCategory{
 		
+		&.currentParentCategory{
+			a, .b5{
+				font-weight: bold;
+			}
+			a:hover:before, .b5:hover:before{
+				color: $lightGrey;
+			}
+			a:hover, .b5:hover{
+				text-decoration: none;
+				cursor: default;
+			}
+		}
+
 		a, .b5{
 			
-			font-weight: bold;
+			
 			position: relative;
 			//left: -10px;
 			padding-left: 13px;
@@ -327,16 +340,25 @@
 			&:hover:before{
 				content: '';
 			}
-			margin-left: 5px;
-			margin-top: 5px;
+			margin-left: 20px;
+			text-decoration: underline;
+			&:hover {color: #000;}
 
 			.more{ display: none; }
 			.less{ display: none; }
 			&.reveal-open{
-				.less{ display: block; padding-left: 16px;}
+				.less{
+					display: block;
+					text-decoration: underline;
+					&:hover {color: #000;}
+				}
 			}
 			&.reveal-closed{
-				.more{ display: block; padding-left: 16px;}
+				.more{
+					display: block;
+					text-decoration: underline;
+					&:hover {color: #000;}
+				}
 			}
 			// top: px(-5px);
 		}

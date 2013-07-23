@@ -54,7 +54,8 @@
 
 				ul {
 					float: left;
-					width: 50%;
+					max-width: 50%;
+					min-width: 33%;
 					margin: 0;
 					padding: 0;
 				}
@@ -96,6 +97,9 @@
 					.price:before {
 						border-top-color: $yellow;
 					}
+				}
+				.b2 {
+					float: left;
 				}
 			}
 
@@ -182,7 +186,7 @@
 				width: 475px;
 			}	
 			.ad{
-				padding: 10px;
+				padding: 10px 18px;
 				.banner {
 					bottom: 15px;
 					max-width: 50%;
@@ -204,6 +208,9 @@
 				}
 			}
 			.slide-banner-left.ad {
+				.content {
+					float: none;
+				}
 				.add-image {
 					right: 0;
 					bottom: 0;
@@ -260,7 +267,7 @@
 			}
 		}
 
-		@media (max-width: 520px){
+		@media (max-width: 600px){
 			&, .ad{
 				width: 460px;
 			}

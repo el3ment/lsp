@@ -1,7 +1,13 @@
 /* Search Results */
+
 .page-search{
 	position: relative;
 	
+	.level0.openParentCategory button[data-action='removeCategory']:before {
+		content: "< ";
+		position: absolute;
+	}
+
 	.title{
 		float:right;
 		text-align:left;
@@ -311,7 +317,7 @@
 		
 		.entry{
 			clear:none;
-			padding: 0 px(7px);
+			padding: 0 px(15px);
 			width: 33%;
 			@include box-sizing();
 			
@@ -389,7 +395,7 @@
 				font-size: px(17px);
 				position: absolute;
 				top: px($_topOfPrice, 17px);
-				left: $hideDistance + $paddingUnit + 2px;
+				left: $hideDistance + $paddingUnit + 9px;
 				width: 100%;
 			}
 			.productAvailability{
@@ -401,7 +407,7 @@
 				font-size: px(13px);
 				position: absolute;
 				top: px($_topOfPrice + 18px);
-				left: ($hideDistance + $paddingUnit + 2);
+				left: ($hideDistance + $paddingUnit + 9px);
 				width: px(columns(3));
 				color: $grey;
 
@@ -441,6 +447,9 @@
 				position: absolute;
 				top: px($_topOfPrice + 90px, $inputFontSize);
 				left: px($hideDistance + $paddingUnit + 4px, $inputFontSize);
+				@media (min-width: 767px) and (max-width: 1199px){
+					left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
+				}
 				width: 48px;
 			}
 			.hasOptions.quantity{
@@ -458,6 +467,9 @@
 
 				@media (max-width: 979px) and (min-width: 768px){
 					left: px($hideDistance + 2 * $paddingUnit + 10px, $b1FontSize);
+				}
+				@media (min-width: 980px) and (max-width: 1199px){
+					left: px($hideDistance + 2 * $paddingUnit + 50px + 17px, $b1FontSize);
 				}
 			}
 			.hasOptions .b1.customize{
