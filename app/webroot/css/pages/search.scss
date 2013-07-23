@@ -1,7 +1,13 @@
 /* Search Results */
+
 .page-search{
 	position: relative;
 	
+	.level0.openParentCategory button[data-action='removeCategory']:before {
+		content: "< ";
+		position: absolute;
+	}
+
 	.title{
 		float:right;
 		text-align:left;
@@ -441,6 +447,9 @@
 				position: absolute;
 				top: px($_topOfPrice + 90px, $inputFontSize);
 				left: px($hideDistance + $paddingUnit + 4px, $inputFontSize);
+				@media (min-width: 767px) and (max-width: 1199px){
+					left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
+				}
 				width: 48px;
 			}
 			.hasOptions.quantity{
@@ -458,6 +467,9 @@
 
 				@media (max-width: 979px) and (min-width: 768px){
 					left: px($hideDistance + 2 * $paddingUnit + 10px, $b1FontSize);
+				}
+				@media (min-width: 980px) and (max-width: 1199px){
+					left: px($hideDistance + 2 * $paddingUnit + 50px + 17px, $b1FontSize);
 				}
 			}
 			.hasOptions .b1.customize{
