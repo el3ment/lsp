@@ -1,7 +1,7 @@
 [
 	{
-		"local_folder": "my-bucket",
-		"bucket": "lsp-images",
+		"local_folder": "static",
+		"bucket": "lsp-static",
 		"cache_folder": "/tmp",
 		"gid": "501",
 		"uid": "500",
