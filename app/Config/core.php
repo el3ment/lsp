@@ -51,7 +51,7 @@
 		'handler' => 'ErrorHandler::handleError',
 		'level' => E_ALL & ~E_NOTICE,
 		'trace' => true
-	));
+	)); 
 
 /**
  * Configure the Exception handler used for uncaught exceptions.  By default,
