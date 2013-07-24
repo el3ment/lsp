@@ -63,6 +63,7 @@ class ThumbnailController extends Controller {
 	}
 	
 	function _saveFile($sourceFile, $destinationPath){ // Save filedata to destinationPath
+
 		if(!file_put_contents($destinationPath, $sourceFile)){
 			return false;
 		}
