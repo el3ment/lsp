@@ -62,7 +62,7 @@ class ThumbnailController extends Controller {
 		return $returnObject;	
 	}
 	
-	function _saveFile($sourceFile, $destinationPath){ // Save filedata to destinationPath
+	function _saveFile(&$sourceFile, $destinationPath){ // Save filedata to destinationPath
 
 		if(!file_put_contents($destinationPath, $sourceFile)){
 			return false;
@@ -73,12 +73,17 @@ class ThumbnailController extends Controller {
 	
 	function _getFile($filename){ // Return filedata
 
+		$filesizeMb = ceil(filesize($filename) / 1000 / 1000);
+		if($filesizeMb > 96){
+			ini_set('memory_limit', $filesizeMb . 'M');
+		}
+
 		$file = file_get_contents($filename);
 		
 		return $file;
 	}
 	
-	function _handleError($request, $code, $message){
+	function _handleError(&$request, $code, $message){
 		switch($code){
 			case 404:
 				header("HTTP/1.1 404 File Not Found");
@@ -105,7 +110,7 @@ class ThumbnailController extends Controller {
 		return $this->_render($filename, true); 
 	}
 
-	function _resize($request){ // Resize an image, return saved thumbnail filename
+	function _resize(&$request){ // Resize an image, return saved thumbnail filename
 
 		App::import('Vendor', 'SuperSimpleResizer');
 		$resizer = new SuperSimpleResizer();	
@@ -171,10 +176,9 @@ class ThumbnailController extends Controller {
 	
 	function resize($path){
 
-		ini_set('memory_limit', '512M'); // Enough to load a large image into memory
-		
-		//Configure::write('debug', 2); // Uncomment for debugging
-		
+		error_reporting(-1);
+		Configure::write('debug', 2); // Uncomment for debugging
+
 		$cleanURI = str_replace('/thumbnail/resize', '', $_SERVER['REQUEST_URI']);
 		$cleanURI = str_replace('/resize', '', $cleanURI);
 		$request = $this->_parsePath($cleanURI);
@@ -185,6 +189,7 @@ class ThumbnailController extends Controller {
         	// If it needs a resize, resize/grab the thumbnail filename
 		    $outputImageFilename = $this->_resize($request, true);
         }
+
 		if($outputImageFilename){
 			if(!$this->_render($outputImageFilename)){
 				$this->_handleError($request, 404, 'Image file ['.$outputImageFilename.'] not found (A)');
