@@ -18,7 +18,7 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-error_reporting(-1);
+//error_reporting(-1);
 /**
  * CakePHP Debug Level:
  *
@@ -32,7 +32,7 @@ error_reporting(-1);
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 0);
 
 /**
  * Configure the Error handler used to handle errors for your application.  By default

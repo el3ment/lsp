@@ -40,8 +40,8 @@ class ThumbnailController extends Controller {
 		
 		// If a remote image is requested, only allow lonestarpercussion as a host
 		$returnObject['isRemote'] = false;
-		$remoteURLParsed = parse_url(substr($returnObject['imagePath'], 1, 1000)); // Remove the starting /
-		if(isset($remoteURLParsed['host']) && $remoteURLParsed['host'] === 'www.lonestarpercussion.com'){
+		$remoteURLParsed = parse_url(substr($returnObject['imagePath'], 1, 10000)); // Remove the starting /
+		if(isset($remoteURLParsed['host']) && ($remoteURLParsed['host'] === 'www.lonestarpercussion.com' || $remoteURLParsed['host'] === 'lspsandbox.explorewebdev.com')){
 				
 			$returnObject['isRemote'] = true;
 			$returnObject['remotePath'] = substr($returnObject['imagePath'], 1, 1000); // Remove starting /
@@ -71,10 +71,7 @@ class ThumbnailController extends Controller {
 	}
 	
 	function _getFile($filename){ // Return filedata
-
-		echo $filename;
-		die();
-
+		
 		$file = file_get_contents($filename);
 		
 		return $file;
@@ -195,7 +192,7 @@ class ThumbnailController extends Controller {
 			if(is_file($request['fullImagePath'])){
 				$this->_handleError($request, 503, 'Error resizing image');
 			}else{
-				$this->_handleError($request, 404, 'Image file not found (B)');
+				$this->_handleError($request, 404, 'Image file not found (B) - ' . $request['fullImagePath']);
 			}
 		}
 		
