@@ -5,3 +5,5 @@ dummy
 app/tmp/logs/*
 .DS_Store
 *.swp
+static
+static/*/**

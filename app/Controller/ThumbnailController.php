@@ -1,8 +1,8 @@
 <?php
 
-define('SOURCE_DIRECTORY', '/www/static-source');
+define('SOURCE_DIRECTORY', '/static');
 define('ERROR_IMAGE', '/images/product-image/no-image.png');
-define('THUMBNAIL_DIRECTORY', SOURCE_DIRECTORY . '/thumbnails');
+define('THUMBNAIL_DIRECTORY', ROOT . '/cache/thumbnails');
 define('FULLIMAGE_DIRECTORY', SOURCE_DIRECTORY);
 define('REMOTE_DIRECTORY', '/remote');
 define('FORCE_RENDER', false); // Set to true if you are trying to debug image resizing operations
@@ -40,8 +40,8 @@ class ThumbnailController extends Controller {
 		
 		// If a remote image is requested, only allow lonestarpercussion as a host
 		$returnObject['isRemote'] = false;
-		$remoteURLParsed = parse_url(substr($returnObject['imagePath'], 1, 1000)); // Remove the starting /
-		if(isset($remoteURLParsed['host']) && $remoteURLParsed['host'] === 'www.lonestarpercussion.com'){
+		$remoteURLParsed = parse_url(substr($returnObject['imagePath'], 1, 10000)); // Remove the starting /
+		if(isset($remoteURLParsed['host']) && ($remoteURLParsed['host'] === 'www.lonestarpercussion.com' || $remoteURLParsed['host'] === 'lspsandbox.explorewebdev.com')){
 				
 			$returnObject['isRemote'] = true;
 			$returnObject['remotePath'] = substr($returnObject['imagePath'], 1, 1000); // Remove starting /
@@ -63,6 +63,7 @@ class ThumbnailController extends Controller {
 	}
 	
 	function _saveFile($sourceFile, $destinationPath){ // Save filedata to destinationPath
+
 		if(!file_put_contents($destinationPath, $sourceFile)){
 			return false;
 		}
@@ -71,6 +72,7 @@ class ThumbnailController extends Controller {
 	}
 	
 	function _getFile($filename){ // Return filedata
+
 		$file = file_get_contents($filename);
 		
 		return $file;
@@ -191,7 +193,7 @@ class ThumbnailController extends Controller {
 			if(is_file($request['fullImagePath'])){
 				$this->_handleError($request, 503, 'Error resizing image');
 			}else{
-				$this->_handleError($request, 404, 'Image file not found (B)');
+				$this->_handleError($request, 404, 'Image file not found (B) - ' . $request['fullImagePath']);
 			}
 		}
 		
