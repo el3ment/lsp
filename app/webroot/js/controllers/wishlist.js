@@ -70,7 +70,7 @@ function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, 
 		comments : unescape(itemComments),
 		msrp : baseprice,
 		stockMessage : unescape(stock),
-		mpn : mpn
+		mpn : unescape(mpn)
 	};
 
 	// var options = unescape(itemOptions).split(";"), optionLabels = "",
@@ -208,6 +208,7 @@ function searchWishlist(config){
 
 					var resultNameAndTitle = $(this).text();
 					var name = LSP.utilities.cleanTrailing(resultNameAndTitle.substr(0, resultNameAndTitle.indexOf(' - ')));
+
 					if(name.length === 0){
 						name = resultNameAndTitle.substr(resultNameAndTitle.indexOf(' - ') + 3, 300);
 					}
@@ -216,6 +217,10 @@ function searchWishlist(config){
 
 					wishlist.hide().find("tbody tr:not(#wish-item-template)").remove();
 					var customerId = $(this).next().val();
+
+					//LSP.controllers.application.pushState({name : 'wishlist'}, {q : name});
+
+					
 					$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + customerId + "&s=" + config.site, function(){
 						if(wishlist.find("tbody tr:not(#wish-item-template)").length > 0)	{
 							wishlist.show().find(".wish-add-cart").click(function(){

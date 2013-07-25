@@ -96,18 +96,19 @@
 				_this.attachEnterKey();
 			},
 			attachEnterKey : function(){
-				$('div:has(input)').off('.submitter').on('keyup.lsp.submitter', function(e){
+				$('div:has(input):not(:has(input)').off('.submitter').on('keyup.lsp.submitter', function(e){
 					// If it's an enter key
 					switch(e.which){
 						case 13:
-							$(this).parents().each(function(i, element){
-								var submit = $(element).find('#tbl_submitter input')[0];
-								if(submit){
-									submit.click();
-									e.stopPropagation();
-									return false;
-								}
-							})
+							alert('you have hit the enter key');
+							// $(this).parents().each(function(i, element){
+							// 	var submit = $(element).find('#tbl_submitter input')[0];
+							// 	if(submit){
+							// 		submit.click();
+							// 		e.stopPropagation();
+							// 		return false;
+							// 	}
+							// })
 						break;
 						default:
 					}

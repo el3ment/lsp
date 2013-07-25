@@ -277,7 +277,7 @@ tr[height="25"]{ height: 0; }
 		text-align: left;
 		div{
 			position: relative;
-			left: -50px;
+			left: -88px;
 		}
 	}
 
@@ -863,6 +863,10 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 
 			#tbl_submitter{
 				bottom: -50px;
+			}
+
+			.smalltext{
+				color: black;
 			}
 		}
 		
@@ -2025,7 +2029,7 @@ tr#ordersummary_subtotal, #ordersummary_subtotal td
 
 // Just the overall total value
 #ordersummary_total td:first-child + td{
-	font-size: 21px;
+	font-size: 24px !important;
 }
 
 

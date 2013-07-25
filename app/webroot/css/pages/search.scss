@@ -3,9 +3,15 @@
 .page-search{
 	position: relative;
 	
-	.level0.openParentCategory button[data-action='removeCategory']:before {
-		content: "< ";
-		position: absolute;
+	.level0.openParentCategory button[data-action='removeCategory']{
+		&:before {
+			content: "←";
+			position: absolute;
+			color: $grey;
+		}
+		&:hover:before{
+			color: $black;
+		}
 	}
 
 	.title{

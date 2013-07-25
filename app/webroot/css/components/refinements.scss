@@ -63,7 +63,6 @@
 	li.indent:first-child + .indent + .indent + .indent + .indent{ padding-left: 15px; }
 	li{ clear: both; }
 
-
 	// Current list	
 	.currentCategory{
 		a, button{
@@ -85,15 +84,29 @@
 		left: -10px;
 	}
 
-	.level1 a, .level1 button{ margin-left: 10px; }
-	.level2 a, .level2 button{ margin-left: 20px; }
-	.level3 a, .level3 button{ margin-left: 30px; }
-	.level4 a, .level4 button{ margin-left: 40px; }
-	.level5 a, .level5 button{ margin-left: 50px; }
-	.level6 a, .level6 button{ margin-left: 60px; }
-	.level7 a, .level7 button{ margin-left: 70px; }
-	.level8 a, .level8 button{ margin-left: 80px; }
-	.level9 a, .level9 button{ margin-left: 90px; }
+	.level1 a, .level1 button{ margin-left: 15px; }
+	.level2 a, .level2 button{ margin-left: 25px; }
+	.level3 a, .level3 button{ margin-left: 35px; }
+	.level4 a, .level4 button{ margin-left: 45px; }
+	.level5 a, .level5 button{ margin-left: 55px; }
+	.level6 a, .level6 button{ margin-left: 65px; }
+	.level7 a, .level7 button{ margin-left: 75px; }
+	.level8 a, .level8 button{ margin-left: 85px; }
+	.level9 a, .level9 button{ margin-left: 95px; }
+
+	.level0.openParentCategory button[data-action='removeCategory']{
+		margin-left: 10px;
+		&:before {
+			content: "←";
+			position: relative;
+			color: $lightGrey;
+			left: -4px;
+		}
+		&:hover:before{
+			color: $black;
+		}
+	}
+
 
 	.b5 {
 		text-indent: 8px;

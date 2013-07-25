@@ -172,6 +172,14 @@
 			margin-right: 0;
 		}
 	}
+	.productName{
+		font-weight: bold;
+		text-decoration: none;
+		color: black;
+		&:hover{
+			text-decoration: underline;
+		}
+	}
 	.productPrice{
 		font-size: 19px;
 		float: right;
