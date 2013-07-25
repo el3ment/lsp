@@ -541,7 +541,13 @@
 				var totalPages = ((easyAskDataObject.products || {}).itemDescription || {}).pageCount;
 
 				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', $.extend({}, easyAskDataObject));
-				_app.controllers.application.attachEvents($('#breadcrumbs').html(breadcrumbHTML));
+				var breadcrumbElement = $('#breadcrumbs').html(breadcrumbHTML);
+				_app.controllers.application.attachEvents(breadcrumbElement);
+				if(breadcrumbElement.is(':has(button)')){
+					breadcrumbElement.parent('.breadcrumbs').removeClass('hide'); // Show the breadcrumbs if they are not empty
+				}else{
+					breadcrumbElement.parent('.breadcrumbs').addClass('hide');
+				}
 
 				var titleHTML = _util.parseMicroTemplate('templates-search-title', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchTitle').html(titleHTML));

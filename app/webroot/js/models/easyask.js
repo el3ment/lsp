@@ -54,7 +54,7 @@
 				// 	// Build the category path by hand
 				formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)])
 					.join('/')
-					.replace(/^\/-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
+					.replace(/^\/{1,}-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
 				//}
 
 				if($.isEmptyObject(payload.allAttributes) && !payload.attribute && payload.method === 'CA_AttributeSelected'){
@@ -100,7 +100,7 @@
 				
 				_sessionId = responseData.sessionID;
 
-				responseData.source = _this.cleanRefinements(responseData.source);
+				responseData.source = _this.clean(responseData.source);
 				
 				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
 				responseData.source.navPath._lsp.categoryNodes = _this.getCategoryNodes(responseData.source);
@@ -125,7 +125,21 @@
 				return responseData;
 			},
 
-			cleanRefinements : function(easyAskDataSourceObject){
+			clean : function(easyAskDataSourceObject){
+
+				// Categories - Remove 'School'
+				for(var i = 0; i < ((easyAskDataSourceObject.categories || {}).categoryList || []).length; i++){
+					if(easyAskDataSourceObject.categories.categoryList[i].name === 'School'){
+						easyAskDataSourceObject.categories.categoryList.splice(i, 1);
+						i--;
+					}
+				}
+				
+				// if(((easyAskDataSourceObject.categories || {}).categoryList || []).length === 0){
+				// 	delete easyAskDataSourceObject.categories;
+				// }
+
+				// Refinements
 				var value;
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].attributeValueList || {}).length; j++){
@@ -333,12 +347,13 @@
 						navPathNodeList[i].englishName = navPathNodeList[i].englishName.replace(/\/$/, '');
 						navPathNodeList[i].englishName = (navPathNodeList[i].englishName === 'All-Products' ? 'All Products' : navPathNodeList[i].englishName);
 
-						var len = categoryNodes.push(navPathNodeList[i]);
-						var newCategoryName = categoryNodes[len - 1].seoPath;
+						if(navPathNodeList[i].englishName !== 'All Products'){
+							var len = categoryNodes.push(navPathNodeList[i]);
+							var newCategoryName = categoryNodes[len - 1].seoPath;
 
-						// Grab the stuff after newCategoryName
-						categoryNodes[len - 1].removePath = pureCategoryPath.substr(pureCategoryPath.indexOf(newCategoryName) + newCategoryName.length, pureCategoryPath.length);
-
+							// Grab the stuff after newCategoryName
+							categoryNodes[len - 1].removePath = pureCategoryPath.substr(pureCategoryPath.indexOf(newCategoryName) + newCategoryName.length, pureCategoryPath.length);
+						}
 					}
 				}
 
