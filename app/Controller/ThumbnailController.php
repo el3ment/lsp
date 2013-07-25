@@ -73,11 +73,6 @@ class ThumbnailController extends Controller {
 	
 	function _getFile($filename){ // Return filedata
 
-		$filesizeMb = ceil(filesize($filename) / 1000 / 1000);
-		if($filesizeMb > 96){
-			ini_set('memory_limit', $filesizeMb . 'M');
-		}
-
 		$file = file_get_contents($filename);
 		
 		return $file;
@@ -175,9 +170,6 @@ class ThumbnailController extends Controller {
 	}
 	
 	function resize($path){
-
-		error_reporting(-1);
-		Configure::write('debug', 2); // Uncomment for debugging
 
 		$cleanURI = str_replace('/thumbnail/resize', '', $_SERVER['REQUEST_URI']);
 		$cleanURI = str_replace('/resize', '', $cleanURI);

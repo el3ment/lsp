@@ -1,6 +1,12 @@
 <?php
 	class SuperSimpleResizer {
 		function load($filename){ // what happens when imagecreatefromstring errors out?
+			
+			$filesizeMb = ceil(filesize($filename) / 1000 / 1000);
+			if($filesizeMb > 50){
+					ini_set('memory_limit', $filesizeMb + 2 . 'M');
+			}
+
 			if (is_file($filename)) { // is_file AND is_image
 				$image['source'] = $filename;
 				$image['image-type'] = exif_imagetype($filename);
@@ -16,8 +22,11 @@
 			return false;
 		}
 		
-		function save($imageDataArray, $destinationFile){
+		function save(&$imageDataArray, $destinationFile){
 			$success = false;
+
+
+
 			if(!is_dir(dirname($destinationFile))){
 				mkdir(dirname($destinationFile));
 			}
@@ -44,8 +53,8 @@
 			return ($success ? $destinationFile : false);
 		}
 	
-		function resize($imageDataArray, $outputWidth, $outputHeight, $zoomPercentage = 0){
-			    
+		function resize(&$imageDataArray, $outputWidth, $outputHeight, $zoomPercentage = 0){
+				
 			$sourceImage = $imageDataArray['data']; 
 			if($sourceImage) {
 				$outputImage = ImageCreateTrueColor($outputWidth, $outputHeight);
@@ -85,7 +94,7 @@
 					return $imageDataArray;
 				}
 			}
-				        
+						
 			return false;
 		}
 	}

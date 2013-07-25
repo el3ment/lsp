@@ -21,12 +21,15 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
+	// Handle .rss extensions
+	Router::parseExtensions('rss');
+
+
 	// Resizer
 	Router::connect('/resize/:imagePath', 
 		array('controller' => 'thumbnail', 'action' => 'resize'),
 		array('imagePath' => '.*',
 			  'pass' => array('imagePath')));
-
 
 /**
  * Here, we are connecting '/' (base path) to controller called 'Pages',
