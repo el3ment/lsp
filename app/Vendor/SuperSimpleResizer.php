@@ -19,7 +19,7 @@
 				}				
 			}
 			
-			return false;
+			return false; 
 		}
 		
 		function save(&$imageDataArray, $destinationFile){
