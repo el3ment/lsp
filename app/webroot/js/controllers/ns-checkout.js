@@ -92,28 +92,6 @@
 
 				$(_this).triggerHandler(_util.camelCase('on-enter-' + pageName), {selector : $(document)});
 				$(_mainTable).addClass('nscheckout-' + pageName);
-				
-				_this.attachEnterKey();
-			},
-			attachEnterKey : function(){
-				$('.page-generic div:has(input):not(:has(textarea)').off('.submitter').on('keyup.lsp.submitter', function(e){
-					// If it's an enter key
-					switch(e.which){
-						case 13:
-							alert('you have hit the enter key');
-							// $(this).parents().each(function(i, element){
-							// 	var submit = $(element).find('#tbl_submitter input')[0];
-							// 	if(submit){
-							// 		submit.click();
-							// 		e.stopPropagation();
-							// 		return false;
-							// 	}
-							// })
-						break;
-						default:
-					}
-
-				});
 			}
 
 		};

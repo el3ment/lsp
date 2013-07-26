@@ -143,7 +143,7 @@
 				// Create an object of selected options to test against the formattedObject (the source)
 				var selects = $('select', form)
 					.each(function(i, element){
-						selectedOptions[$(element).attr('name')] = $(element).val();
+						selectedOptions[$(element).attr('name')] = unescape($(element).val());
 					});
 				
 				if(selects.length){
