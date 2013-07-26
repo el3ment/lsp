@@ -240,7 +240,7 @@
 					stage.hide();
 					obj.load();
 				} else {
-					alert('ERROR :: Missing parameter for largeimage or smallimage.');
+					//alert('ERROR :: Missing parameter for largeimage or smallimage.');
 					throw 'ERROR :: Missing parameter for largeimage or smallimage.';
 				}
 				return false;
@@ -307,7 +307,7 @@
 				
 			};
 			this.node.onerror = function () {
-				alert('Problems while loading image.');
+				//alert('Problems while loading image.');
 				throw 'Problems while loading image.';
 			};
 			this.node.onload = function () {
@@ -657,7 +657,7 @@
 				lens.setdimensions();
 			};
 			this.node.onerror = function () {
-				alert('Problems while loading the big image.');
+				//alert('Problems while loading the big image.');
 				throw 'Problems while loading the big image.';
 			};
 			this.node.onload = function () {

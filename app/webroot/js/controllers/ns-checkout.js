@@ -96,7 +96,7 @@
 				_this.attachEnterKey();
 			},
 			attachEnterKey : function(){
-				$('div:has(input):not(:has(input)').off('.submitter').on('keyup.lsp.submitter', function(e){
+				$('.page-generic div:has(input):not(:has(textarea)').off('.submitter').on('keyup.lsp.submitter', function(e){
 					// If it's an enter key
 					switch(e.which){
 						case 13:

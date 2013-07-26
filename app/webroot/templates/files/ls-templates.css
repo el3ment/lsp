@@ -1,0 +1,376 @@
+/*-----------------------------------------------
+	Templates styles
+----------------------------------------------- */
+
+.yellow-boxborder {
+	border-right:1px solid #ffcc00;
+	border-left:1px solid #ffcc00;
+}
+
+.ywtitle-lineborder {
+	border-top: solid 1px #807546;
+	background-repeat:repeat;
+}
+
+.items-lineborder {
+	border-left: solid 1px #37362f;
+}
+
+.items-lineborder1 {
+	border-top: solid 1px #37362f;
+	background-repeat:repeat;
+}
+
+.tit-related, .tit-related a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: bold;
+	color: #d0d0d0;
+	text-decoration:none;
+}
+
+.text-related, .text-related a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: normal;
+	color: #ffcc00;
+}
+
+.price-related {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: bold;
+	color: #d0d0d0;
+}
+
+.ywtitle, .ywtitle a {
+	font-family: "Tahoma";
+	font-size: 18px;
+	color: #ffcc00;
+    text-transform:uppercase;
+	text-decoration:none;
+}
+
+.text-descwte, .text-descwte a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: normal;
+	color: #d0d0d0;
+}
+
+.text-descgray, .text-descgray a {
+	font-family: "tahoma";
+	font-size: 12px;
+	font-weight: normal;
+	color: #d0d0d0;
+}
+
+.text-item, .text-item a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: normal;
+	color: #d0d0d0;
+}
+
+.detail-item, .detail-item a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	line-height: 150%;
+	font-weight: normal;
+	color: #d0d0d0; 
+}
+.detail-item a:visited {
+	color:#ffff99;
+}
+.title-item, .title-item a {
+	font-family: "Tahoma";
+	font-size: 16px;
+	font-weight: normal;
+	color: #ffd000;
+	padding-left:15px;
+}
+
+.text-descyw, .text-descyw a {
+	font-family: "Tahoma";
+	font-size: 11px;
+	font-weight: normal;
+	color: #ffcc00;
+}
+
+.tit-descyw, .tit-descyw a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: bold;
+	color: #ffcc00;
+	text-decoration:none;
+}
+
+.prodname-yw, .prodname-yw a {
+	font-family: "Tahoma";
+	font-size: 16px;
+	font-weight: bold;
+	color: #ffcc00;
+	height:21px;
+    text-transform:uppercase;
+}
+
+#category-max IMG {
+	width:120px;
+}
+
+
+/*-----------------------------------------------
+	Item List Styles
+----------------------------------------------- */ 
+
+.qty-multi {
+	border:solid 1px #77783f;
+	width:45px;
+	height:14px;
+	font-family:"Tahoma";
+	font-size:10px;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+.no-border {
+	border:none;
+}
+
+.item-desc, .item-desc a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight:normal;
+	color: #ffcc00;
+	text-decoration:none;
+}
+
+#item-max IMG {
+	width:120px;
+}
+.quickviewShow img	{
+	width:auto !important;
+}
+.title-item, .title-item a {
+	font-family: "Tahoma";
+	font-size: 16px;
+	font-weight: normal;
+	color: #ffd000;
+	padding-left:15px;
+}
+.text-item, .text-item a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: normal;
+	color: #d0d0d0;
+}
+.title-table {
+	font-family: "Tahoma";
+	font-size: 11px;
+	font-weight: bold;
+	color: #000000;
+	padding-bottom:3px;
+}
+.code-itemtable, .code-itemtable a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: bold;
+	color: #d0d0d0;
+	text-transform: uppercase;
+	/*padding-left:5px;*/
+	padding-right:5px;
+        text-decoration: none;
+}
+.desc-itemtable, .desc-itemtable a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: normal;
+	color: #ffd000;
+	/*padding-left:5px;*/
+	padding-right:5px;
+        text-decoration: none;
+}
+.stock-itemtable, .stock-itemtable a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: bold;
+	color: #d0d0d0;
+	padding-left:5px;
+	padding-right:5px;
+}
+.price-itemtable, .price-itemtable a {
+	font-family: "Tahoma";
+	font-size: 12px;
+	font-weight: bold;
+	color: #d0d0d0;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+/*-----------------------------------------------
+	Accounting Item Template Styles
+----------------------------------------------- */ 
+
+.no-display {
+	display:none;
+}
+
+.div-zoom {
+	width:425px;
+	display:none;
+}
+
+.title-divzoom {
+	font-family:"Tahoma";
+	color:#000000;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:16px;
+}
+
+.close-divzoom a {
+	font-family:"Tahoma";
+	color:#000000;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:18px;
+}
+
+#itemdrill-max IMG  {
+	width:240px;
+}
+
+#zoom-max IMG {
+	max-width:480px;
+}
+
+#zoomImage{
+	max-width:480px;
+	max-height:480px;
+}
+
+#divtellafriend a {text-indent:-9999px; display:block; height:23px; width:100px; background:url(https://d2bghjaa5qmp6f.cloudfront.net/templates/templates/ls-tellafriend.jpg); text-align:left;}
+
+
+
+/*-----------------------------------------------
+	Related Items List Template Style
+----------------------------------------------- */ 
+
+#relateditem-max IMG {
+	width:120px;
+}
+
+.related-items-list-title {
+	height:33px;
+	background: #000000 url(https://d2bghjaa5qmp6f.cloudfront.net/templates/templates/relatedItems-top02.jpg) no-repeat top left;
+}
+
+.correlated-items .related-items-list-title {
+	height:33px;
+	background: #000000 url(https://system.netsuite.com/core/media/media.nl?id=14318&c=665798&h=924d88772c21f6d3cb0d) no-repeat top left;
+}
+/* Code By AD form SuiteCOmmerce */
+#itemdrill-max img {width:225px !important;}
+.salesprice2 {
+	font-family: "Tahoma";
+	font-size:12px;
+	color:#d0d0d0;
+	font-weight:normal;
+	text-decoration:none;
+}
+.yousave2 {
+	font-family: "Tahoma";
+	font-size:12px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#FFCC00;
+}
+.smalltext{ text-align:left;}
+.product_review	{
+	border-bottom:1px dotted #fff;
+	padding-bottom:10px;
+	margin-top:10px;
+	float:left;
+	width:690px;
+	color:#d0d0d0;
+}
+.product_review .heading, .product_review .content, .product_review .footing	{
+	float:left;
+	width:690px;
+}
+.product_review h3	{
+	float:left;
+	margin:0;
+	font-size:13px;
+}
+.product_review .heading	{margin-bottom:5px;}
+.product_review .heading .rating	{float:right;}
+.product_review .content blockquote	{
+	font-size:11px;
+	margin:0;
+	color:#d0d0d0;
+}
+.product_review .footing p	{
+	font-size:11px;
+	font-style:italic;
+	margin:0;
+}
+#add_review	{
+	font-size:11px;
+	color:#d0d0d0;
+	text-decoration:underline;
+}
+#reviews h4	{
+	margin:0;
+	font-size:16px;
+	font-weight:normal;
+	color:#ffd000;
+	margin-bottom:10px;
+}
+#reviews_container{margin-top:10px;}
+#new_review	{
+	font-size:13px;
+	color:#d0d0d0;
+	display:none;
+}
+#starsrating a	{
+	cursor:pointer;
+	float:left;
+	display:block;
+	text-indent:-1000px;
+	width:10px;
+	height:20px;
+}
+.reviews_average, #top_add_review, #read_reviews	{
+	font-size:11px;
+	color:#d0d0d0;
+	text-decoration:underline;
+}
+#top_add_review	{
+	padding-top:5px;
+	display:block;
+}
+.reviews_img	{
+	position:relative;
+	top:1px;
+}
+#review_form_container	{
+	overflow:hidden;
+	height:295px;
+	#height:325px;
+	width:260px;
+	#width:290px;
+	display:none;
+	background:#000 url('https://d2bghjaa5qmp6f.cloudfront.net/templates/files/loading.gif') no-repeat 115px 130px;
+	padding:15px;
+	margin:10px 0px;
+}
+#review_form_container iframe	{
+	background:#000;
+	width:450px;
+	height:600px;
+	border:none;
+	display:none;
+}
+/* End of Code By AD form SuiteCommerce */

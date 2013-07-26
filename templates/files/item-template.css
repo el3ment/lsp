@@ -1,0 +1,81 @@
+.related-items-list-title {
+    background: url("http://s1.lonestarpercussion.com/templates/templates/relatedItems-top02.jpg") no-repeat scroll left top #000000;
+    height: 33px;
+}
+.contentvideo {padding: 17px;}
+#boxvideo {
+    float: left;
+    margin: 10px 0;
+    width: 100%;
+}
+.contentmp3 {padding: 17px;}
+#boxmp3 {
+    float: left;
+    margin: 10px 0;
+    width: 100%;
+}
+.contentmp3 a {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFD000;
+    display: block;
+    margin: 5px 0;
+}
+.contentmp3 a em { *margin-left: -20px;}
+#featureslist {
+    font-size: 12px;
+    line-height: 21px;
+    list-style-image: url("http://s1.lonestarpercussion.com/templates/images-site/bulletfeatures.jpg");
+    padding-left: 30px;
+    color: #dedede;
+}
+.sharethis {
+    color: #dedede;
+    font-family: 'Tahoma';
+}
+.sharethis .stButton {margin: 0 !important;}
+.chicklets {font-family: "tahoma" !important;}
+select#custcol13 {width: 160px;}
+#item-top td	{
+	vertical-align: top;
+}
+#co-related-items	{
+	padding-top: 10px;
+}
+#co-related-items .related-items-list-title	{
+	background: #000 url(http://s1.lonestarpercussion.com/templates/images-site/customerwhobought.jpg) no-repeat;
+}
+#wishlist-messages p 	{
+	color: #d0d0d0;
+	display: none;
+	font-size: 11px;
+	font-weight: bold;
+}
+#wishlist-messages a	{
+	color: #ffd102;
+}
+#add-wishlist	{
+	background: #161616 url(http://www.lonestarpercussion.com//wishlist/images/bg-wish-button.gif) no-repeat 0 0;
+	display: block;
+	height: 25px;
+	margin-top: 10px;
+	outline: none;
+	text-indent: -9999999px;
+	width: 139px;
+}
+#add-wishlist.loading	{
+	background: url(http://s1.lonestarpercussion.com/templates/files/loading.gif) no-repeat center;
+}
+.invisible	{
+	display: none;
+}
+#stock-status {
+	color: #d0d0d0;
+	margin-bottom: 4px;
+}
+#stock-status.loading {
+	background: url(http://s1.lonestarpercussion.com/templates/files/loading.gif) no-repeat center;
+	height: 24px;
+	margin-bottom: 0;
+}
+table#cart-table tbody tr td.medtext { display:none}
