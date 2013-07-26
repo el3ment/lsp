@@ -814,6 +814,10 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 .nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
 	width: 800px !important;
 	margin-top: 60px;
+
+	@media (max-width: 979px) and (min-width: 768px){
+		width: 100% !important;
+	}
 }
 
 /*
@@ -1534,6 +1538,7 @@ input[name="category"][value="login-register"] ~ table{
 			input[type="radio"]{
 				float: none;
 				display: inline-block;
+				margin: 0 5px 0 0;
 			}
 
 			&:before{
@@ -1575,7 +1580,7 @@ input[name="category"][value="login-register"] ~ table{
 
 		// Coupon Code row cells
 		> tr:first-child + tr > td{
-			padding-top: 20px !important;
+			padding-top: 60px !important;
 			
 		}
 
