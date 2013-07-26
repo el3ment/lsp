@@ -35,9 +35,13 @@
 						var inputSelector = $('input[name="amount"]');
 						var amount = parseInt(inputSelector.val(), 10) || 0;
 						if(amount <= 1000 && amount > 1){
-							inputSelector.parent('.validation-container').removeAttr('data-validation-invalidtypes');
+							inputSelector.parent().addClass('validation-container').removeAttr('data-validation-invalidtypes');
+							if(isValid){
+								inputSelector[0].form.submit();
+							}
 						}else{
-							inputSelector.parent('.validation-container').attr('data-validation-invalidtypes', 'overGiftCardAmount');
+							inputSelector.parent().addClass('validation-container').attr('data-validation-invalidtypes', 'overGiftCardAmount');
+							_util.scrollTo(inputSelector);
 						}
 
 					}
