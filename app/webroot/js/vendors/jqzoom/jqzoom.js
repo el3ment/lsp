@@ -454,10 +454,14 @@
 				
 				this.node.left = lensleft;
 				this.node.top = lenstop;
-				this.node.css({
-					'left': lensleft + 'px',
-					'top': lenstop + 'px'
-				});
+				var $node = $(this.node);
+				var style = $node.attr('style');
+				$node.attr('style',
+					style
+						.replace(/top:[-0-9. ]{1,}px;/i, 'top:'+lenstop+'px;')
+						.replace(/left:[-0-9. ]{1,}px;/i, 'left:'+lensleft+'px;')
+				);
+
 				if (settings.zoomType == 'reverse') {
 					if ($.browser.msie && $.browser.version > 7) {
 						$(this.node).empty().append(this.image);
