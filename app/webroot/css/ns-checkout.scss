@@ -1893,12 +1893,12 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 		}
 	}
 	
-	// Shipping Method
-	#shippingmethodtable{
+	// Shipping Method - overqualified on purpose
+	table#shippingmethodtable{
 
 		margin-bottom: 20px !important;
 
-		.smalltext{
+		td.smalltext{
 			// everything
 			line-height: 0;
 			padding-top: 5px;
