@@ -3,16 +3,7 @@
 .page-search{
 	position: relative;
 	
-	.level0.openParentCategory button[data-action='removeCategory']{
-		&:before {
-			content: "←";
-			position: absolute;
-			color: $grey;
-		}
-		&:hover:before{
-			color: $black;
-		}
-	}
+
 
 	.title{
 		float:right;
@@ -860,7 +851,7 @@
 	position: relative;
 	min-height: 800px;
 
-	> div, > fieldset, > li{
+	> div, > fieldset, > li, .controls{
 		@include opacity(.25);
 		display: none\9 !important; // something is wierd here, ie8 wasn't making them all transparent even if the property was applied
 	}
