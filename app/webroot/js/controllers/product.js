@@ -28,6 +28,18 @@
 							qty: $('.shopping.section input[name="qty"]'),
 							messages: $("#wishlist-messages > div")
 						});
+					},
+					onVerifyGiftCardAmount : function(e, data){
+						
+						var isValid = _app.controllers.validation.validateForm(data.selector[0].form);
+						var inputSelector = $('input[name="amount"]');
+						var amount = parseInt(inputSelector.val(), 10) || 0;
+						if(amount <= 1000 && amount > 1){
+							inputSelector.parent('.validation-container').removeAttr('data-validation-invalidtypes');
+						}else{
+							inputSelector.parent('.validation-container').attr('data-validation-invalidtypes', 'overGiftCardAmount');
+						}
+
 					}
 				},
 				application : {

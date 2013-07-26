@@ -10,7 +10,11 @@
 			text-align: right;
 			vertical-align: top;
 		}
-		input, select, textarea{
+		.fullWidth label{
+			text-align: left;
+			width: 100%;
+		}
+		.field{
 			width: 72%;
 			display: inline-block;
 		}
@@ -21,6 +25,12 @@
 				display: block;
 				width: 100%;
 			}
+		}
+		.validation-container[data-validation-invalidTypes]:after{
+			margin-left: 26%; // 24% + left margin of input
+		}
+		.fullWidth.validation-container[data-validation-invalidTypes]:after{
+			margin-left: 0;
 		}
 	}
 	
@@ -42,7 +52,7 @@
 			border-bottom: 0;
 		}
 		label{
-			margin: px($paddingUnit+3) 2% 0 0;
+			margin: px($paddingUnit+3) 1% 0 0;
 			display: inline; /* IE */
 			display: inline-block;
 			//float: left;

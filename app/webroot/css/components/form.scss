@@ -126,7 +126,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 
 .validation-container{
 
-	&[data-validation-invalidTypes*="required"]{
+	&[data-validation-invalidTypes]{
 		
 		position: relative;
 		
@@ -144,6 +144,12 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 			font-size: 12px;
 			font-style: italic;
 			color: #bb0000;
+		}
+	}
+
+	&[data-validation-invalidTypes*="overGiftCardAmount"]{
+		&:after{
+			content: 'Any value between $1 and $1000';
 		}
 	}
 	
