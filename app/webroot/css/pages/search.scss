@@ -409,7 +409,7 @@
 				color: $grey;
 
 				@media (max-width: 979px) and (min-width: 768px){
-					margin-top: -38px; // move it back up, smaller picture
+					margin-top: -25px; // move it back up, smaller picture
 				}
 
 				.status{
@@ -483,13 +483,15 @@
 					display: none;
 				}
 				.productName {
-					max-height: 7em;
+					max-height: 10em;
 				}
 				.productPrice,
 				.shortStatus,
-				.b1,
 				.aggregateReviews{
-					margin-top:-40px;
+					margin-top:-20px;
+				}
+				.b1 {
+					margin-top: -30px;
 				}
 			}
 		}
