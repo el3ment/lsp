@@ -219,16 +219,13 @@ tr[height="25"]{ height: 0; }
 			font-size: 2.9em;
 			font-family: "League Gothic", sans-serif;
 			text-transform: uppercase;
-			color: $black; 
-			-webkit-font-smoothing: antialiased;
-			margin-top:10px;
-			position:absolute;
+			color: $black;
+			margin-top: 10px;
+			position: absolute;
 			top: -70px;
-			top: -80px\9;
 
-			@media (max-width: 767px){
-				//top: -70px;
-			}
+			-webkit-font-smoothing: antialiased;
+
 		}
 
 		.errortext{
