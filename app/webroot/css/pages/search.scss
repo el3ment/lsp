@@ -357,6 +357,7 @@
 		}
 		img{
 			max-width: 100%;
+			margin-bottom: 10px;
 			/*
 			@media (min-width: 1200px){
 				width: 200px;
@@ -409,7 +410,7 @@
 				color: $grey;
 
 				@media (max-width: 979px) and (min-width: 768px){
-					margin-top: -25px; // move it back up, smaller picture
+					margin-top: -10px; // move it back up, smaller picture
 				}
 
 				.status{
@@ -478,7 +479,7 @@
 		}
 		@media (max-width: 979px) and (min-width: 768px){
 			.entry {
-				height: 435px;
+				height: 450px;
 				.quantity{
 					display: none;
 				}
@@ -488,10 +489,10 @@
 				.productPrice,
 				.shortStatus,
 				.aggregateReviews{
-					margin-top:-20px;
+					margin-top:-5px;
 				}
 				.b1 {
-					margin-top: -30px;
+					margin-top: -15px;
 				}
 			}
 		}
