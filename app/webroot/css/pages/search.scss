@@ -395,6 +395,9 @@
 				top: px($_topOfPrice, 17px);
 				left: $hideDistance + $paddingUnit + 9px;
 				width: 100%;
+				@media (max-width: 1199px) and (min-width: 980px){
+					top: 330px;
+				}
 			}
 			.productAvailability{
 
@@ -746,6 +749,7 @@
 				position: absolute;
 				bottom: 65px;
 				right: $hideDistance + $paddingUnit + 2px;
+				@media 
 			}
 			.shortStatus{
 				display: block;
