@@ -76,6 +76,7 @@ input.scroller{
 	height: 40px;
 	line-height: 24px;
 	text-align: right;
+	text-align: left\9; //input gets cut off on the right on focus in ie, so aligning left
 }
 
 label{
