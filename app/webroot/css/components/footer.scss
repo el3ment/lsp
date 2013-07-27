@@ -117,7 +117,6 @@
 		float: left;
 		background: url(../img/dark_pattern.jpg);
 		padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
-		padding-bottom: 200px; /* Temp hack to stop background color showing through on short pages. */
 		clear: both;
 		
 		@media (min-width: 768px) and (max-width: 979px) {
