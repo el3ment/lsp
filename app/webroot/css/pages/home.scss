@@ -301,12 +301,18 @@
 		}
 
 		@media (max-width: 500px){
+			.slide-content-title img {
+				max-width: 50%;
+			}
 			&, .ad{
 				width: 430px;
 			}
 		}
 
 		@media (max-width: 470px){
+			.slide-content-title img {
+				max-width: 45%;
+			}
 			&, .ad{
 				width: 400px;
 			}
