@@ -129,8 +129,7 @@ function myWishlist(config){
 			if (data == ""){ 
 				config.messages.filter('.emptyWishlist').show();
 				$('#wishlistStatus').html('empty');	
-			}
-			else	{
+			}else{
 				var wishlist = $("#wishlist-wrapper tbody"),
 					wishMessages = $("#wishlist-messages > div"),
 					publicWraper = $("#wish-pub"),
@@ -220,7 +219,7 @@ function searchWishlist(config){
 
 					//LSP.controllers.application.pushState({name : 'wishlist'}, {q : name});
 
-					
+
 					$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + customerId + "&s=" + config.site, function(){
 						if(wishlist.find("tbody tr:not(#wish-item-template)").length > 0)	{
 							wishlist.show().find(".wish-add-cart").click(function(){

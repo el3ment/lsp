@@ -347,7 +347,7 @@
 						navPathNodeList[i].englishName = navPathNodeList[i].englishName.replace(/\/$/, '');
 						navPathNodeList[i].englishName = (navPathNodeList[i].englishName === 'All-Products' ? 'All Products' : navPathNodeList[i].englishName);
 
-						if(navPathNodeList[i].englishName !== 'All Products'){
+						if(navPathNodeList[i].englishName !== 'All Products' && navPathNodeList[i].englishName !== 'School'){
 							var len = categoryNodes.push(navPathNodeList[i]);
 							var newCategoryName = categoryNodes[len - 1].seoPath;
 

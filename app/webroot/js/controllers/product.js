@@ -16,6 +16,7 @@
 						data.selector[0].submit();
 					},
 					onMatrixOptionSelect : function(e, data){
+						$('option[value=""]', data.selector).remove();
 						_this.updateMatrixLists(data.selector[0].form);
 					},
 					onAddToWishlist : function(e, data){
