@@ -82,10 +82,10 @@
 			attachZoom : function(context){
 				// If jqzoom, it's the product page.
 				if($.jqzoom){
-					
 					_this.detachZoom();
-					if($('a[data-asset="mouseoverZoom"]').is(':not([href*="no-image"])')){
-						$('a[data-asset="mouseoverZoom"]')
+					var zoomAsset = $('a[data-asset="mouseoverZoom"]');
+					if(zoomAsset.is(':not([href*="no-image"])')){
+						zoomAsset
 							.jqzoom({
 								zoomWidth: $('.addToCart').width(),
 								zoomHeight: 480,
@@ -98,6 +98,10 @@
 								fadeinSpeed: 'fast',
 								delay : 100
 							});
+					}else{
+						//zoomAsset.removeAttr('href');
+						// Get all image-links including thumbnails
+						$('a[href*=no-image]').removeAttr('href');
 					}
 				}
 			},

@@ -1463,11 +1463,12 @@ input[name="category"][value="login-register"] ~ table{
 
 	br:first-child, script + br{ display: none !important; }
 
-	#shippingaddress, #billingaddress{
-		br:first-child{
-			display: block !important;
-		}
-	}
+	// The goal here is to find a <br> tag that is not preceeded by any text, but couldn't do it
+	// #shippingaddress, #billingaddress{
+	// 	br:first-child{
+	// 		content:
+	// 	}
+	// }
 
 	// Shipping Method Label
 	.smalltext b{
@@ -1534,7 +1535,7 @@ input[name="category"][value="login-register"] ~ table{
 			font-size: 14px;
 			font-weight: normal;
 			color: black;
-			padding-left: 140px !important;
+			padding-left: 140px;
 			position: relative;
 
 			input[type="radio"]{
@@ -1712,7 +1713,7 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 			//padding-bottom: 10px !important;
 			color: black;
 
-			//br:first-child{ display: none; }
+			br:first-child{ display: none; }
 
 		}
 		@media (max-width: 767px){
