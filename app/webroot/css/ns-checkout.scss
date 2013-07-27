@@ -284,8 +284,9 @@ tr[height="25"]{ height: 0; }
 	// "Remove"
 	> td:first-child,
 	> td:first-child + td + td + td + td + td + td + td{
-		color: transparent;
+		color: white;
 		line-height: 0;
+		text-indent: -9999px;
 	}
 }
 
@@ -482,7 +483,6 @@ tr[height="25"]{ height: 0; }
 				position: absolute;
 				top: 0;
 				left: -10px;
-				outline: 1px solid red;
 				&:hover{
 					cursor: pointer;
 					cursor: hand;
