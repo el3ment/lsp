@@ -405,6 +405,10 @@
 		}
 	}
 
+	@media (max-width: 767px){
+		.productAd ~ .productAd{ display: none } 
+	}
+
 	/*@media (max-width: 520px){
 		// Just hide the last one
 		.category{ border-bottom-color: $lightGrey !important; }
