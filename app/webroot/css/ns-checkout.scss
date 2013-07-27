@@ -203,7 +203,7 @@ tr[height="25"]{ height: 0; }
 
 	#carttable{
 		
-		margin-top: 70px !important;
+		padding-top: 70px !important;
 
 		input[type="number"]{
 			width: 100%;
@@ -223,7 +223,7 @@ tr[height="25"]{ height: 0; }
 			-webkit-font-smoothing: antialiased;
 			margin-top:10px;
 			position:absolute;
-			top: 0;
+			top: -70px;
 
 			@media (max-width: 767px){
 				//top: -70px;
@@ -286,7 +286,6 @@ tr[height="25"]{ height: 0; }
 	> td:first-child + td + td + td + td + td + td + td{
 		color: white;
 		line-height: 0;
-		text-indent: -9999px;
 	}
 }
 
