@@ -588,12 +588,17 @@
 	}
 	
 	&.small{
+		
+		height: 100px;
+
 		.logo{
+			height: 75px;
+			width: 75px;
 			margin-top: 8px;
 			margin-bottom: 8px;
 		}
 		.established, .tagline{
-			margin-top: 55px;
+			margin-top: 45px;
 		}
 	}
 }
