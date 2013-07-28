@@ -322,7 +322,7 @@
 				width: 25%;
 			}
 			
-			height: px(475px);
+			height: px(490px);
 			border: 1px solid $lightGrey;
 			border-top: none;
 			border-left: none;
@@ -388,13 +388,17 @@
 			top: 0;
 			left: -$hideDistance;
 			margin:0;
+			width: 80%;
 			
 			.productPrice{
 				font-size: px(17px);
 				position: absolute;
-				top: px($_topOfPrice, 17px);
+				top: 340px;
 				left: $hideDistance + $paddingUnit + 9px;
 				width: 100%;
+				@media (max-width: 1199px) and (min-width: 980px){
+					top: 330px;
+				}
 			}
 			.productAvailability{
 
@@ -404,13 +408,13 @@
 				display: block;
 				font-size: px(13px);
 				position: absolute;
-				top: px($_topOfPrice + 18px);
+				top: 372px;
 				left: ($hideDistance + $paddingUnit + 9px);
 				width: px(columns(3));
 				color: $grey;
 
 				@media (max-width: 979px) and (min-width: 768px){
-					margin-top: -10px; // move it back up, smaller picture
+					margin-top: 0; // move it back up, smaller picture
 				}
 
 				.status{
@@ -443,7 +447,7 @@
 			}
 			.scroller{
 				position: absolute;
-				top: px($_topOfPrice + 90px, $inputFontSize);
+				top: px($_topOfPrice + 105px, $inputFontSize);
 				left: px($hideDistance + $paddingUnit + 4px, $inputFontSize);
 				@media (min-width: 767px) and (max-width: 1199px){
 					left: px($hideDistance + $paddingUnit + 7px, $inputFontSize);
@@ -458,7 +462,7 @@
 			.hasOptions .b1{ display: none; }
 			.b1, .hasOptions .b1.customize{
 				position: absolute;
-				top: px($_topOfPrice + 89px, $boldAllCapsH4);
+				top: px($_topOfPrice + 105px, $boldAllCapsH4);
 				left: px($hideDistance + 2 * $paddingUnit + 50px + 9px, $b1FontSize);
 				width: px(135px, $b1FontSize);
 				display: block;
@@ -479,7 +483,7 @@
 		}
 		@media (max-width: 979px) and (min-width: 768px){
 			.entry {
-				height: 450px;
+				height: 465px;
 				.quantity{
 					display: none;
 				}
@@ -746,6 +750,7 @@
 				position: absolute;
 				bottom: 65px;
 				right: $hideDistance + $paddingUnit + 2px;
+				@media 
 			}
 			.shortStatus{
 				display: block;

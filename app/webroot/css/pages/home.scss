@@ -301,12 +301,18 @@
 		}
 
 		@media (max-width: 500px){
+			.slide-content-title img {
+				max-width: 50%;
+			}
 			&, .ad{
 				width: 430px;
 			}
 		}
 
 		@media (max-width: 470px){
+			.slide-content-title img {
+				max-width: 45%;
+			}
 			&, .ad{
 				width: 400px;
 			}
@@ -403,6 +409,10 @@
 			+ .category + .category ~ .category{
 				border-bottom-color: transparent !important; // The important! solves the over specificity of the + and ~ selectors
 		}
+	}
+
+	@media (max-width: 767px){
+		.productAd ~ .productAd{ display: none } 
 	}
 
 	/*@media (max-width: 520px){
