@@ -1538,7 +1538,7 @@ input[name="category"][value="login-register"] ~ table{
 			input[type="radio"]{
 				float: none;
 				display: inline-block;
-				margin: 0 5px 0 0;
+				margin: 0 5px 0 140px;
 			}
 
 			&:before{
@@ -1560,7 +1560,7 @@ input[name="category"][value="login-register"] ~ table{
 		}
 		td.smalltext{
 			
-			padding-left: 140px !important;
+			//padding-left: 140px !important;
 
 			&:before{
 				content: ''; // Shipping Method

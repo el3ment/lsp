@@ -112,7 +112,7 @@
 			}
 		}
 
-		&[data-image*='!empty!']{
+		&[data-imageUrl*='!empty!'], &[data-imageUrl*='no-image']{
 			padding-right: 20px;
 
 			.representativeImage{
