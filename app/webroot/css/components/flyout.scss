@@ -11,7 +11,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 .departmentDropdown{
 	height: 1px;
 	width:100%;
-	top: 215px;
+	top: 190px;
 	left: 0;
 	position: absolute;
 	z-index: 200; // In front of everything!
@@ -20,8 +20,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		height: auto;
 	}
 
-	@media (max-height: 675px){
-		top: 190px;
+	@media (min-height: 676px){
+		top: 210px;
 	}
 
 	.wrapper{

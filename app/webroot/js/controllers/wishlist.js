@@ -113,10 +113,10 @@ function wishlistReady(bool)	{
 function wishStatusText(public){
 	if(public == "T")	{
 		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true);
-		$('#wishlistStatus').html('public');
+		$('#wishlistStatus').removeClass('loading').html('public');
 	}else{
 		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true);
-		$('#wishlistStatus').html('private');	
+		$('#wishlistStatus').removeClass('loading').html('private');	
 	}
 }
 function myWishlist(config){
@@ -124,12 +124,15 @@ function myWishlist(config){
 		config.messages.filter('.loggedIn').show();
 		var today = new Date(),
 			myWishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + config.customer + "&s=lonestarpercussion&random=" + (Math.random() * today.getTime());
+		$("table.wishlist.table tbody").addClass('loading small');
 		$.getScript(myWishUrl,function(data){
 			$("#wish-info").show();
 			if (data == ""){ 
 				config.messages.filter('.emptyWishlist').show();
 				$('#wishlistStatus').html('empty');	
+				$("table.wishlist.table tbody").removeClass('loading');
 			}else{
+				$("table.wishlist.table tbody").removeClass('loading');
 				var wishlist = $("#wishlist-wrapper tbody"),
 					wishMessages = $("#wishlist-messages > div"),
 					publicWraper = $("#wish-pub"),
@@ -141,11 +144,11 @@ function myWishlist(config){
 					var status = $(this).val().substr(0, 1).toUpperCase();
 					if(wait) clearTimeout(wait);
 					var updateUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_public&deploy=customdeploy_update_wishlist_public&j=" + config.customer + "&p=" + status + "&random=" + (Math.random() * today.getTime());
+					$('#wishlistStatus').addClass('loading small');
 					$.getScript(updateUrl,function(){
 						wishStatusText(status);
 					});
 				});
-				wishlist.parent().parent().show();
 				$(function(){
 					wishlist.find(".wish-remove").click(function(){
 						var $this = $(this);

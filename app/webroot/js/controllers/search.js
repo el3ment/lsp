@@ -365,7 +365,11 @@
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
 					.done(function(data){
 						if(data.response){
-							_this.renderPage(data.response.source);
+							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1){
+								document.location = data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev');
+							}else{
+								_this.renderPage(data.response.source);
+							}
 						}
 					});
 			},
@@ -630,7 +634,6 @@
 			},
 
 			renderFatalError : function(){
-				console.error('Fatal Error');
 				// var errorHTML = _util.parseMicroTemplate('templates-error', {
 				// 	title : 'Something Big Has Happened',
 				// 	message : 'Sorry about that, but something has gone seriously wrong.'
