@@ -105,7 +105,7 @@
 		&:hover:before{
 			color: $black;
 		}
-		button:before{
+		button:before, a:before{
 			content: ' ';
 		}
 	}

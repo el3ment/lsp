@@ -15,6 +15,9 @@ html{
 	font-size: 100%;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
+
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 // Our page-level containers tend to use this pattern of being both a row, and a span12 container
@@ -28,7 +31,9 @@ body{
 	color: black;
 	font-size: 14px;
 	line-height: px(22px);
-	
+
+	overflow-y: scroll;
+	overflow-x: hidden;
 	@include box-sizing();
 }
 

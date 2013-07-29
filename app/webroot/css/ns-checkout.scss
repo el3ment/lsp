@@ -191,6 +191,13 @@ tr[height="25"]{ height: 0; }
 *   Cart
 */ 
 
+	.head{
+		position: relative;
+		#tbl_checkout{
+			bottom: 10px;
+		}
+	}
+
 	// Error message logic -- only show one at a time, never both
 	.productAvailability + br + .errortext{
 		display: none;
@@ -205,6 +212,7 @@ tr[height="25"]{ height: 0; }
 		
 		//margin-top: 0px !important;
 		position: relative;
+		//top: -10px;
 
 		input[type="number"]{
 			width: 100%;

@@ -478,7 +478,9 @@
 				text-decoration: none;
 				cursor: default;
 				color: black;
-				font-weight: bold;
+				//font-weight: bold;
+				//we can't make it bold right now, netsuite's
+				//native breadcrumb html is awful and we can't do it everywhere
 			}
 		}
 		
