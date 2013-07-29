@@ -16,8 +16,8 @@ html{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 
-	overflow-y: scroll;
-	overflow-x: hidden;
+	// overflow-y: scroll;
+	// overflow-x: hidden;
 }
 
 // Our page-level containers tend to use this pattern of being both a row, and a span12 container
@@ -32,9 +32,16 @@ body{
 	font-size: 14px;
 	line-height: px(22px);
 
-	overflow-y: scroll;
-	overflow-x: hidden;
+	// overflow-y: scroll;
+	// overflow-x: hidden;
 	@include box-sizing();
+	background-color: red;
+	@media (min-width: 1200px){
+		background-color: green;
+	}
+	@media (max-width: 979px) and (min-width: 768px){
+		background-color: purple;
+	}
 }
 
 /* Content Container */
