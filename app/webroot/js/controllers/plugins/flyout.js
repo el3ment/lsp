@@ -17,13 +17,14 @@
 		
 		var _holdOpen = false;
 		var _waitToOpen = false;
+		var _isOpen = false;
 		var _topLevelTimeout; // Used when _holdOpen is true, waits to open flyout
 
 		var _revealController = _lsp.controllers.reveal;
 
 		var OPEN_SPEED = 150;
 		var EXIT_TIMEOUT = 500;
-		var ENTER_TIMEOUT = 300;
+		var ENTER_TIMEOUT = 250;
 
 		_this =  {
 			name : 'flyout',
@@ -85,15 +86,24 @@
 				var openTimeout;
 				
 				// Control Button
-				_flyoutControlButton.on('mouseenter.lsp.flyout', function(e){ 
-					openTimeout = setTimeout(_this.openFlyout, ENTER_TIMEOUT); // Start the timer
-				
+				_flyoutControlButton.off('.flyout').on('mouseenter.lsp.flyout', function(e){ 
+					if(!_isOpen){
+						openTimeout = setTimeout(_this.openFlyout, ENTER_TIMEOUT); // Start the timer
+					}
 				}).on('mouseleave.lsp.flyout', function(e){
 					clearTimeout(openTimeout); // Clear timeout on exit
 
 				}).on('click.lsp.flyout', function(e){
 					clearTimeout(openTimeout); // Force open if clicked
-					_this.openFlyout();
+					_this.toggleFlyout();
+				});
+
+				$('.topLevel').on('click.lsp.flyout', function(e){
+					_this.toggleFlyout();
+					console.log(e);
+				});
+				$('.topLevel li').on('click.lsp.flyout', function(e){
+					e.stopPropagation();
 				});
 
 				// Container
@@ -134,6 +144,7 @@
 			openFlyout : function(holdOpen){
 				_holdOpen = holdOpen || false;
 				_waitToOpen = _holdOpen;
+				_isOpen = true;
 
 				_flyout.addClass('active');
 				_flyoutControlButton.addClass('active');
@@ -143,6 +154,8 @@
 
 				if(_flyout){ // Only if attachMenu has been called
 					clearTimeout(_topLevelTimeout);
+
+					_isOpen = false;
 
 					// This is used to put the home page flyout back to normal
 					if(reset){
@@ -163,6 +176,16 @@
 
 						_isOpen = false;
 					}
+
+					//_this.attachMenu(); // Reset
+				}
+			},
+			toggleFlyout : function(){
+				console.log('toggle', _isOpen);
+				if(_isOpen){
+					_this.closeFlyout();
+				}else{
+					_this.openFlyout();
 				}
 			},
 
