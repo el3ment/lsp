@@ -1,3 +1,7 @@
+*{
+	-webkit-tap-highlight-color: red;
+}
+
 
 //a[href]{ outline: 1px solid red; }
 a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outline: none; }
