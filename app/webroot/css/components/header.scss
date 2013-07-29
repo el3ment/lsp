@@ -48,11 +48,11 @@
 	// Contains the logo, the tagline, and the phone number
 	.well{
 
-		$_taglineMarginTop : 40px; // The space between the utility bar and the tagline and the phone number
+		$_taglineMarginTop : 20px; // The space between the utility bar and the tagline and the phone number
 
 		position: relative;
 		margin-top:-23px;
-		height: 110px;
+		height: 80px;
 		overflow: visible;
 		clear: both;
 		float: none;

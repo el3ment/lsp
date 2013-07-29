@@ -11,7 +11,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 .departmentDropdown{
 	height: 1px;
 	width:100%;
-	top: 190px;
+	top: 160px;
 	left: 0;
 	position: absolute;
 	z-index: 200; // In front of everything!
@@ -132,7 +132,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 	// Left hand Department label/container (Sticks & Mallets, Latin & World, etc)
 	.flyoutTitle{
 		
-		padding: 5px 6px;
+		padding: 4px 6px;
 		position: relative;
 		z-index:1;
 		border-right: 1px solid $lightGrey;
