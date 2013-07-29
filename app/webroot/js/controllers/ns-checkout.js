@@ -66,6 +66,10 @@
 							});
 
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
+					},
+					onEnter : function(e, data){
+						$('input[name*="email"]').attr('type', 'email');
+						$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
 					}
 				},
 				application : {
@@ -89,8 +93,10 @@
 			setPage : function(pageName){
 				_state.page = pageName;
 
+
 				console.log('Firing Page Event : ' + _util.camelCase('on-enter-' + pageName));
 
+				$(_this).triggerHandler(_util.camelCase('on-enter'), {selector : $(document)});
 				$(_this).triggerHandler(_util.camelCase('on-enter-' + pageName), {selector : $(document)});
 				$(_mainTable).addClass('nscheckout-' + pageName);
 			}

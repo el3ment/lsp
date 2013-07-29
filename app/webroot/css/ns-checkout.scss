@@ -1185,6 +1185,7 @@ input[name="category"][value="login-register"] ~ table{
 	#paymethhider > table > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr > td:first-child + td{
 		input{
 			float: left;
+			width: 55px;
 		}
 
 		// Our own CSC example image

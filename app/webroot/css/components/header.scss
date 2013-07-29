@@ -113,6 +113,11 @@
 				margin-top: 60px;
 			}
 		}
+
+		@media (max-width: 767px){
+			width: 100px;
+			float: left;
+		}
 		
 	}
 	
@@ -497,7 +502,7 @@
 		}
 	}
 	@media (max-width: 767px){
-		.established, .large .tagline, ul li.wishlist{
+		.established, &.large .tagline, ul li.wishlist{
 			display: none !important; // important overrides login/logout detection
 		}
 		.image-logoCircle{
@@ -613,6 +618,9 @@
 				top: 50%;
 				margin-top: 0px;
 			}
+		}
+		.well{
+			width: 100%;
 		}
 
 		@media (max-width: 767px){
