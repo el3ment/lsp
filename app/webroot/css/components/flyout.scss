@@ -137,6 +137,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		z-index:1;
 		border-right: 1px solid $lightGrey;
 		//height: 30px;
+		text-rendering: optimizeLegibility;
+		@include box-sizing();
 
 		// Department Name
 		.h3{ 
