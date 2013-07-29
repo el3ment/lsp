@@ -79,6 +79,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		.collection{
 			
 			cursor: pointer;
+			text-rendering: optimizeLegibility;
+			@include box-sizing();
 
 			// Yellow bar at the top of the department list
 			&:first-child{
