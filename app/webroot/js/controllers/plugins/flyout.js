@@ -18,6 +18,9 @@
 		var _holdOpen = false;
 		var _waitToOpen = false;
 		var _isOpen = false;
+		var _isOpenFromClick = false;
+		var _isClosedFromClick = false;
+		var _waitToCloseFromClick = false;
 		var _topLevelTimeout; // Used when _holdOpen is true, waits to open flyout
 
 		var _revealController = _lsp.controllers.reveal;
@@ -68,8 +71,8 @@
 					activate : _this.showRow,
 					deactivate : _this.hideRow,
 					exitTimeout : EXIT_TIMEOUT,
-					exitMenu : function(){ 
-						return true;
+					exitMenu : function(){
+						return false;
 					},
 					afterExitMenu : function(){
 						_isOpen = false;
@@ -87,22 +90,30 @@
 				
 				// Control Button
 				_flyoutControlButton.off('.flyout').on('mouseenter.lsp.flyout', function(e){ 
-					if(!_isOpen){
+					if(!_isOpen && !_isClosedFromClick){
 						openTimeout = setTimeout(_this.openFlyout, ENTER_TIMEOUT); // Start the timer
 					}
 				}).on('mouseleave.lsp.flyout', function(e){
 					clearTimeout(openTimeout); // Clear timeout on exit
 
 				}).on('click.lsp.flyout', function(e){
-					clearTimeout(openTimeout); // Force open if clicked
+					console.log('button click');
+					_isOpenFromClick = !_isOpen;
+					_isClosedFromClick = !_isOpenFromClick;
+					_waitToCloseFromClick = true;
 					_this.toggleFlyout();
+					if(_isClosedFromClick){
+						setTimeout(function(){
+							_isClosedFromClick = false;
+						}, 800);
+					}
 				});
 
-				$('.topLevel').on('click.lsp.flyout', function(e){
-					_this.toggleFlyout();
-					console.log(e);
+				$('.topLevel').off('.flyout').on('click.lsp.flyout', function(e){
+					_flyoutControlButton.click();
+					e.stopPropagation();
 				});
-				$('.topLevel li').on('click.lsp.flyout', function(e){
+				$('.topLevel li').off('.flyout').on('click.lsp.flyout', function(e){
 					e.stopPropagation();
 				});
 
@@ -114,8 +125,12 @@
 				// Wrapper
 				$('.wrapper', _flyout).bind('mouseleave.lsp.flyout', function(e){
 					//clearTimeout(timeout);
-					closeTimeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
-					clearTimeout(_topLevelTimeout);
+					if(!_waitToCloseFromClick){
+						closeTimeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
+						clearTimeout(_topLevelTimeout);
+					}
+					_waitToCloseFromClick = false;
+					e.stopPropagation();
 				});
 
 				// Trigger Event
@@ -181,7 +196,6 @@
 				}
 			},
 			toggleFlyout : function(){
-				console.log('toggle', _isOpen);
 				if(_isOpen){
 					_this.closeFlyout();
 				}else{
