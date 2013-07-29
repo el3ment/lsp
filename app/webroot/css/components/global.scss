@@ -35,14 +35,15 @@ body{
 	overflow-y: scroll;
 	overflow-x: hidden;
 	@include box-sizing();
-	
-	//background-color: red;
-	@media (min-width: 1200px){
-	//	background-color: green;
-	}
-	@media (max-width: 979px) and (min-width: 768px){
-	//	background-color: purple;
-	}
+
+
+	// //background-color: red;
+	// @media (min-width: 1200px){
+	// //	background-color: green;
+	// }
+	// @media (max-width: 979px) and (min-width: 768px){
+	// //	background-color: purple;
+	// }
 }
 
 /* Content Container */
