@@ -497,10 +497,10 @@
 		}
 	}
 	@media (max-width: 767px){
-		.established, .tagline, ul li.wishlist{
+		.established, .large .tagline, ul li.wishlist{
 			display: none !important; // important overrides login/logout detection
 		}
-		.image-logoCircle, .well{
+		.image-logoCircle{
 			width: 120px;
 			height: 64px;
 			float: left;
@@ -606,6 +606,22 @@
 		}
 		.established, .tagline{
 			margin-top: 45px;
+			@media (max-width: 767px){
+				margin-top: 0;
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				margin-top: 0px;
+			}
+		}
+
+		@media (max-width: 767px){
+			.tagline{
+				display: none;
+			}
+			.tagline.visible-phone{
+				display: block;
+			}
 		}
 	}
 }
