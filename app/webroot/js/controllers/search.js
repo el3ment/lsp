@@ -98,7 +98,7 @@
 
 					onSearch : function(e, data){
 
-						var query = $('input[name="searchQuery"]').val().trigger('blur');
+						var query = $('input[name="searchQuery"]').trigger('blur').val();
 						$('.mobileSearch .b3').click();
 
 						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
