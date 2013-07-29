@@ -97,7 +97,6 @@
 					clearTimeout(openTimeout); // Clear timeout on exit
 
 				}).on('click.lsp.flyout', function(e){
-					console.log('button click');
 					_isOpenFromClick = !_isOpen;
 					_isClosedFromClick = !_isOpenFromClick;
 					_waitToCloseFromClick = true;

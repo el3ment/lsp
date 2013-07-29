@@ -68,7 +68,7 @@
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
 					},
 					onEnter : function(e, data){
-						$('input[name*="email"]').attr('type', 'email');
+						$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
 						$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
 					}
 				},
