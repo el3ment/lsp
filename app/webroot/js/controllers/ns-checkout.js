@@ -20,10 +20,14 @@
 						// Remove 'empty' links - they create a state in history
 						// that is annoying to overcome
 						$('a[href="#"]').attr('href', null);
-						$('input[size="6"][maxlength="6"]')
-							.attr('type', 'number')
-							.attr('min', '0')
-							.off('.submitter')
+						
+						// IE has 'type' as a read-only attribute, jquery will complain
+						try{
+							$('input[size="6"][maxlength="6"]')
+								.attr('type', 'number')
+								.attr('min', '0')
+								.off('.submitter')
+						}catch(e){}
 
 					},
 					onEnterRegister : function(e, data){
@@ -68,8 +72,10 @@
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
 					},
 					onEnter : function(e, data){
-						$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
-						$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
+						try{
+							$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
+							$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
+						}catch(e){ }
 					}
 				},
 				application : {
