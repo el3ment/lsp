@@ -35,11 +35,15 @@
 
 			// Sigh..
 			fixSignInUrlForRedirection : function(){
-				var link = $('a[href*="login=T"]');
+
 				var redirectUrl = (document.location.href.indexOf('lsppassthrough=') === -1 ? encodeURIComponent(document.location.href) : _util.findBetween('lsppassthrough=', '&', document.location.href));
-				if(redirectUrl.indexOf('login=T') === -1){
-					link.attr('href', link.attr('href') + '&lsppassthrough=' + redirectUrl);
-				}
+				
+				$('a[href*="login=T"]').each(function(i, e){
+					var link = $(e);
+					if(redirectUrl.indexOf('login=T') === -1){
+						link.attr('href', link.attr('href') + '&lsppassthrough=' + redirectUrl);
+					}
+				});
 			},
 
 

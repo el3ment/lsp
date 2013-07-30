@@ -175,6 +175,7 @@ tr[height="25"]{ height: 0; }
 			width: 100% !important;
 			padding: 0 !important;
 			margin: 0 !important;
+			float: left;
 		}
 	}
 }
@@ -986,6 +987,7 @@ tr[height="25"] {
 		left: 0;
 		//width: 100%;
 		width: 100%;
+
 	}
 
 	.steps{
@@ -1548,6 +1550,9 @@ input[name="category"][value="login-register"] ~ table{
 				float: none;
 				display: inline-block;
 				margin: 0 5px 0 140px;
+				@media (max-width: 767px){
+					margin-left: 0;
+				}
 			}
 
 			&:before{

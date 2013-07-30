@@ -116,6 +116,7 @@
 
 		@media (max-width: 767px){
 			width: 100px;
+			height: 65px;
 			float: left;
 		}
 		
@@ -523,13 +524,14 @@
 			clear: none;
 			
 			li.search{
+
 				position:absolute;
 				top: 64px;
 				left: 0;
 				background: url(../img/dark_pattern.jpg);
 
 				width: 100%;
-				z-index: 2;
+				z-index: 9999;
 				@include box-shadow-multiple(0 2px 3px -1px $grey); /* Top Highlight, Drop shadow */  
 											 
 				
