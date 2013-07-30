@@ -12,11 +12,45 @@
 				application : {
 					onReady : function(e, data){
 						_this.attachEnterKey();
+						_this.fixSignInUrlForRedirection();
+						_this.injectRedirectInput();
+					}
+				},
+				netsuite : {
+					onInit : function(e, data){
+						_this.handlePostSignInRedirection();
 					}
 				}
 			},
 			
 			assets : {},
+
+			// Takes a url parameter and adds it to the login form
+			injectRedirectInput : function(){
+				var params = _util.getURLParameters();
+				if(params.lsppassthrough && document.forms.login){
+					$(document.forms.login).prepend('<input type="hidden" name="redirect" value="' + params.lsppassthrough + '">');
+				}
+			},
+
+			// Sigh..
+			fixSignInUrlForRedirection : function(){
+				var link = $('a[href*="login=T"]');
+				var redirectUrl = (document.location.href.indexOf('lsppassthrough=') === -1 ? encodeURIComponent(document.location.href) : _util.findBetween('lsppassthrough=', '&', document.location.href));
+				if(redirectUrl.indexOf('login=T') === -1){
+					link.attr('href', link.attr('href') + '&lsppassthrough=' + redirectUrl);
+				}
+			},
+
+
+			handlePostSignInRedirection : function(){
+				if(parseInt($('.page-generic').data('uid'), 10) > 0){
+					var params = _util.getURLParameters();
+					if(params.lspredirectto){
+						document.location = params.lspredirectto;
+					}
+				}
+			},
 
 			attachEnterKey : function(){
 

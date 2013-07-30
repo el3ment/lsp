@@ -19,6 +19,7 @@
 
 				application : {
 
+
 					onResize : function(e, data){
 						var width = $(window).width();
 						var newContext;
@@ -433,10 +434,11 @@
 					// }
 					
 					// Call onInit/onReady events, the when().then() functions
-					// ensure that all of the onInit functions finish, before firing
-					$(controllerObj).triggerHandler('onInit');
+					// ensure that all of the onInit functions finish, before firing	
 					//$(controllerObj).triggerHandler('onLoaded');
 				}
+
+				$(specificController).triggerHandler('onInit');
 				
 			}
 
