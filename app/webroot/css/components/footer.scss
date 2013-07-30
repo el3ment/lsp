@@ -152,6 +152,7 @@
 				font-family: 'Open Sans', Sans-serif;
 				font-size: 14px;
 			}
+
 		}
 
 		// Title above Email Newsletter signup
@@ -323,4 +324,11 @@
 		}
 	}
 	
+}
+
+
+@-moz-document url-prefix(){
+	.footer .h2{
+		font-weight: normal;
+	}
 }

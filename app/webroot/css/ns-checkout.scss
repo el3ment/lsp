@@ -191,6 +191,13 @@ tr[height="25"]{ height: 0; }
 *   Cart
 */ 
 
+	.head{
+		position: relative;
+		#tbl_checkout{
+			bottom: 10px;
+		}
+	}
+
 	// Error message logic -- only show one at a time, never both
 	.productAvailability + br + .errortext{
 		display: none;
@@ -203,7 +210,9 @@ tr[height="25"]{ height: 0; }
 
 	#carttable{
 		
-		margin-top: 70px !important;
+		//margin-top: 0px !important;
+		position: relative;
+		//top: -10px;
 
 		input[type="number"]{
 			width: 100%;
@@ -211,24 +220,21 @@ tr[height="25"]{ height: 0; }
 			min-width: 65px;
 		}
 
-		&:before{
-	 		content: 'Your Cart';
-	 		display: block;
-	 		font-size: 30px;
-	 		line-height: 43px;
-			font-size: 2.9em;
-			font-family: "League Gothic", sans-serif;
-			text-transform: uppercase;
-			color: $black; 
-			-webkit-font-smoothing: antialiased;
-			margin-top:10px;
-			position:absolute;
-			top: 0;
+		// &:before{
+		// 	content: "Your Cart";
+		// 	display: block;
+		// 	font-size: 30px;
+		// 	line-height: 43px;
+		// 	font-size: 2.9em;
+		// 	top: -50px !important;
+		// 	font-family: "League Gothic", sans-serif;
+		// 	text-transform: uppercase;
+		// 	color: $black;
+		// 	margin-top: -60px;
+		// 	position: absolute;
+		// 	-webkit-font-smoothing: antialiased;
 
-			@media (max-width: 767px){
-				//top: -70px;
-			}
-		}
+		// }
 
 		.errortext{
 			background-color: transparent !important;
@@ -284,7 +290,7 @@ tr[height="25"]{ height: 0; }
 	// "Remove"
 	> td:first-child,
 	> td:first-child + td + td + td + td + td + td + td{
-		color: transparent;
+		color: white;
 		line-height: 0;
 	}
 }
@@ -482,7 +488,6 @@ tr[height="25"]{ height: 0; }
 				position: absolute;
 				top: 0;
 				left: -10px;
-				outline: 1px solid red;
 				&:hover{
 					cursor: pointer;
 					cursor: hand;
@@ -814,6 +819,10 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 .nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
 	width: 800px !important;
 	margin-top: 60px;
+
+	@media (max-width: 979px) and (min-width: 768px){
+		width: 100% !important;
+	}
 }
 
 /*
@@ -1459,11 +1468,12 @@ input[name="category"][value="login-register"] ~ table{
 
 	br:first-child, script + br{ display: none !important; }
 
-	#shippingaddress, #billingaddress{
-		br:first-child{
-			display: block !important;
-		}
-	}
+	// The goal here is to find a <br> tag that is not preceeded by any text, but couldn't do it
+	// #shippingaddress, #billingaddress{
+	// 	br:first-child{
+	// 		content:
+	// 	}
+	// }
 
 	// Shipping Method Label
 	.smalltext b{
@@ -1530,15 +1540,20 @@ input[name="category"][value="login-register"] ~ table{
 			font-size: 14px;
 			font-weight: normal;
 			color: black;
+			padding-left: 140px;
+			position: relative;
 
 			input[type="radio"]{
 				float: none;
 				display: inline-block;
+				margin: 0 5px 0 140px;
 			}
 
 			&:before{
 				content: 'Shipping Method';
 				top: 0px;
+				left: 0;
+				position: absolute;
 				margin-right: 10px;
 				font-weight: bold;
 			}
@@ -1553,7 +1568,7 @@ input[name="category"][value="login-register"] ~ table{
 		}
 		td.smalltext{
 			
-			padding-left: 140px !important;
+			//padding-left: 140px !important;
 
 			&:before{
 				content: ''; // Shipping Method
@@ -1575,7 +1590,7 @@ input[name="category"][value="login-register"] ~ table{
 
 		// Coupon Code row cells
 		> tr:first-child + tr > td{
-			padding-top: 20px !important;
+			padding-top: 60px !important;
 			
 		}
 
@@ -1703,7 +1718,7 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 			//padding-bottom: 10px !important;
 			color: black;
 
-			//br:first-child{ display: none; }
+			br:first-child{ display: none; }
 
 		}
 		@media (max-width: 767px){
@@ -1884,12 +1899,12 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 		}
 	}
 	
-	// Shipping Method
-	#shippingmethodtable{
+	// Shipping Method - overqualified on purpose
+	table#shippingmethodtable{
 
 		margin-bottom: 20px !important;
 
-		.smalltext{
+		td.smalltext{
 			// everything
 			line-height: 0;
 			padding-top: 5px;

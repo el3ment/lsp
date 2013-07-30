@@ -23,6 +23,7 @@
 						$('input[size="6"][maxlength="6"]')
 							.attr('type', 'number')
 							.attr('min', '0')
+							.off('.submitter')
 
 					},
 					onEnterRegister : function(e, data){

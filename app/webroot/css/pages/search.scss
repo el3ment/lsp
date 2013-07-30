@@ -882,6 +882,14 @@
 	}
 }
 
+.page-generic .loading.small{
+	min-height: 0;
+	color: white;
+	&:before{
+		top: 3px;
+	}
+}
+
 // Used on other elements that need to be faded, but not have the loading circle
 .loading.secondary:before{
 	display: none;

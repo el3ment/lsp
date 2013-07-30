@@ -16,6 +16,7 @@
 						data.selector[0].submit();
 					},
 					onMatrixOptionSelect : function(e, data){
+						$('option[value=""]', data.selector).remove();
 						_this.updateMatrixLists(data.selector[0].form);
 					},
 					onAddToWishlist : function(e, data){
@@ -35,9 +36,13 @@
 						var inputSelector = $('input[name="amount"]');
 						var amount = parseInt(inputSelector.val(), 10) || 0;
 						if(amount <= 1000 && amount > 1){
-							inputSelector.parent('.validation-container').removeAttr('data-validation-invalidtypes');
+							inputSelector.parent().addClass('validation-container').removeAttr('data-validation-invalidtypes');
+							if(isValid){
+								inputSelector[0].form.submit();
+							}
 						}else{
-							inputSelector.parent('.validation-container').attr('data-validation-invalidtypes', 'overGiftCardAmount');
+							inputSelector.parent().addClass('validation-container').attr('data-validation-invalidtypes', 'overGiftCardAmount');
+							_util.scrollTo(inputSelector);
 						}
 
 					}
@@ -77,10 +82,10 @@
 			attachZoom : function(context){
 				// If jqzoom, it's the product page.
 				if($.jqzoom){
-					
 					_this.detachZoom();
-					if($('a[data-asset="mouseoverZoom"]').is(':not([href*="no-image"])')){
-						$('a[data-asset="mouseoverZoom"]')
+					var zoomAsset = $('a[data-asset="mouseoverZoom"]');
+					if(zoomAsset.is(':not([href*="no-image"])')){
+						zoomAsset
 							.jqzoom({
 								zoomWidth: $('.addToCart').width(),
 								zoomHeight: 480,
@@ -93,6 +98,10 @@
 								fadeinSpeed: 'fast',
 								delay : 100
 							});
+					}else{
+						//zoomAsset.removeAttr('href');
+						// Get all image-links including thumbnails
+						$('a[href*=no-image]').removeAttr('href');
 					}
 				}
 			},

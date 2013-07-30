@@ -94,16 +94,19 @@
 	.level8 a, .level8 button{ margin-left: 85px; }
 	.level9 a, .level9 button{ margin-left: 95px; }
 
-	.level0.openParentCategory button[data-action='removeCategory']{
-		margin-left: 10px;
+	.level0.openParentCategory{
 		&:before {
-			content: "←";
+			content: '←';
 			position: relative;
 			color: #cfcfcf;
 			left: -4px;
+			float: left;
 		}
 		&:hover:before{
 			color: $black;
+		}
+		button:before, a:before{
+			content: ' ';
 		}
 	}
 

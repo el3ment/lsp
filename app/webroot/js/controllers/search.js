@@ -98,7 +98,8 @@
 
 					onSearch : function(e, data){
 
-						var query = $('input[name="searchQuery"]').val();
+						var query = $('input[name="searchQuery"]').trigger('blur').val();
+						$('.mobileSearch .b3').click();
 
 						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
 						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
@@ -112,6 +113,7 @@
 													 // but search is unique because it's ubiquious and can be done from anywhere
 													 // we might need to redirect (via onBeforeAPICall) and we'll update the state string a little early
 							_this.search(query);
+
 						}
 					},
 
@@ -365,7 +367,11 @@
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
 					.done(function(data){
 						if(data.response){
-							_this.renderPage(data.response.source);
+							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1){
+								document.location = data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev');
+							}else{
+								_this.renderPage(data.response.source);
+							}
 						}
 					});
 			},
@@ -630,7 +636,6 @@
 			},
 
 			renderFatalError : function(){
-				console.error('Fatal Error');
 				// var errorHTML = _util.parseMicroTemplate('templates-error', {
 				// 	title : 'Something Big Has Happened',
 				// 	message : 'Sorry about that, but something has gone seriously wrong.'

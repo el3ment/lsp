@@ -32,7 +32,7 @@
 	}
 }
 
-.reviews{
+.page-generic .reviews{
 
 	// Temporary until we write the functionality for this
 	.reviewInteractionCount, .actions{ display: none !important;  }
@@ -112,8 +112,13 @@
 			width: 100%;
 		}
 
-		label .details{
-			display: inline-block;
+		label{
+			
+			margin-bottom: 2px;
+
+			.details{
+				display: inline;
+			}
 		}
 
 		.review{
