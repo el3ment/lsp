@@ -545,6 +545,12 @@
 			border-width: 1px 0;
 			margin-bottom: 0;
 			padding: 10px 0px 0;
+
+			#attributeList{
+				float: left;
+				clear: both;
+				outline: 1px solid red;
+			}
 			
 			.section{
 				background-color: white;
