@@ -518,9 +518,9 @@
 		.refinements{
 			display: table;
 			 #attributeList.reveal-isOpen{
-				 display: table;
-				 width: 100%;
-				 margin-top:41px; // Space between the top of the list and the header
+				 //display: table;
+				 //width: 100%;
+				 //margin-top:41px; // Space between the top of the list and the header
 			}
 		}
 		.searchRefinementsAndResults{
@@ -545,11 +545,7 @@
 			border-width: 1px 0;
 			margin-bottom: 0;
 			padding: 10px 0px 0;
-
-			#resultsContainer{
-				clear: both;
-				outline: 2px solid pink;
-			}
+			
 			.section{
 				background-color: white;
 				border-top: 0;

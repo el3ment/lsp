@@ -8,7 +8,7 @@
 
 		var _waitToOpen = false;
 
-		var ANIMATION_TIME = 300;
+		var ANIMATION_TIME = 3000;
 
 		_this =  {
 			name : 'reveal',
