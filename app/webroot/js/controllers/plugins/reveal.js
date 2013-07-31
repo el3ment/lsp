@@ -94,6 +94,7 @@
 								var control = $(this);
 								$(child)
 									.css('display', 'none')
+									.addClass('reveal-open')
 									.slideDown({
 										duration : ANIMATION_TIME,
 										easing : 'swing',

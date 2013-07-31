@@ -25,7 +25,7 @@
 
 		var _revealController = _lsp.controllers.reveal;
 
-		var OPEN_SPEED = 150;
+		var OPEN_SPEED = 1050;
 		var EXIT_TIMEOUT = 500;
 		var ENTER_TIMEOUT = 250;
 

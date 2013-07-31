@@ -192,6 +192,7 @@
 					// check the event down below in initializeGlobalEvents to see more
 					if(!useReplaceState){
 						history.pushState(true, '', '/' + snapshot.path + '#' + statePath);
+						$('html').attr('data-path', document.location.origin + '/' + snapshot.path + '#' + statePath + '-END');
 					}else{
 						console.log('Replacing State');
 						history.replaceState(true, '', '/' + snapshot.path + '#' + statePath);
