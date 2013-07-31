@@ -20,14 +20,15 @@
 						_this.updateMatrixLists(data.selector[0].form);
 					},
 					onAddToWishlist : function(e, data){
-						_this.updateProduct();
+						var form = data.selector.parents('form');
+						_this.updateProduct(form);
 						addToWishlist({
-							customer: $('input[name="customer"]').val(),
-							item: $('.shopping.section input[name="itemid"]'),
+							customer: $('input[name="customer"]', form).val(),
+							item: $('.shopping.section input[name="itemid"]', form),
 							site: 'lonestarpercussion',
-							options : $('.shopping.section select'),
-							qty: $('.shopping.section input[name="qty"]'),
-							messages: $("#wishlist-messages > div")
+							options : $('.shopping.section select', form),
+							qty: $('.shopping.section input[name="qty"]', form),
+							messages: $(".wishlist-messages > div", form)
 						});
 					},
 					onVerifyGiftCardAmount : function(e, data){
@@ -166,7 +167,7 @@
 					.each(function(i, element){
 						selectedOptions[$(element).attr('name')] = unescape($(element).val());
 					});
-				
+					
 				if(selects.length){
 					$('button.b1', form).attr('disabled', true);
 					$('input[name="buyid"]', form).val('');

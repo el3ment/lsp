@@ -115,8 +115,9 @@
 		}
 		.b5[data-action="addToWishlist"]{ 
 			display: block;
-			margin-top: 10px;
+			margin-top: 5px;
+			margin-bottom: 5px;
 		}
-		a{ display:block; }
+		> a{ display:block; }
 	}
 }

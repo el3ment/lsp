@@ -27,6 +27,7 @@
 								.attr('type', 'number')
 								.attr('min', '0')
 								.off('.submitter')
+							_app.controllers.netsuite.attachEnterKey();
 						}catch(e){}
 
 					},
@@ -75,6 +76,7 @@
 						try{
 							$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
 							$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
+							_app.controllers.netsuite.attachEnterKey();
 						}catch(e){ }
 					}
 				},

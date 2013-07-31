@@ -591,6 +591,23 @@
 					display: none;
 				}
 			}
+			.cart .count{
+				bottom: 9px;
+				right: 6px;
+				top: auto;
+				display: block;
+				line-height: 20px;
+				height: 21px;
+				font-size: 13px;
+				padding: 0px 5px;
+				text-indent: 0;
+				color: white;
+				@include box-shadow-multiple(none);
+				background-image: none;
+				background-color: transparent;
+				text-shadow: none;
+				background-color: black;
+			}
 		}
 	}
 

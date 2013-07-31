@@ -281,7 +281,12 @@
 			
 			.status{ display: inline; }
 			//.method{ display: block; }
-			.option, .quantity, .action{ text-align:right; }
+			.option, .quantity, .action{ text-align: right; }
+			.b5{ 
+				float: right;
+				@include clearfix();
+			}
+
 			
 			@media (max-width: 979px) and (min-width: 768px){
 				.productAvailability .status > span {

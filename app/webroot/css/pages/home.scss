@@ -22,7 +22,8 @@
 
 
 @media (max-width: 767px) {
-	html[data-path*=".com/-END"]{
+	html[data-path*=".com/-END"],
+	html[data-path*=".com/?"]{
 
 		#flyoutControlButton{
 			display: none; // Hide the control button since it's forced open
