@@ -121,9 +121,12 @@ body .span12 > table{
 // Overqualified to beat !important declarations above
 html body .page-generic .pic{ display: none !important; }
 
+[name='retemail'] {
+	margin-top: 10px;
+}
 .checkoutwarning,
 .errortext p,
-.errortext.bglt{ 
+.errortext.bglt{
 	color: #bb0000 !important;
 	background-color: #ffe0e0 !important;
 	margin-bottom: 10px;
@@ -872,7 +875,9 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 			}
 
 			#tbl_submitter{
-				bottom: -50px;
+				height: 34px;
+				width: 79px;
+				//bottom: -50px;
 			}
 
 			.smalltext{
