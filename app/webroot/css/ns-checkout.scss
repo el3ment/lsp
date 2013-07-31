@@ -121,7 +121,8 @@ body .span12 > table{
 // Overqualified to beat !important declarations above
 html body .page-generic .pic{ display: none !important; }
 
-[name='retemail'] {
+#retemail_fs_lbl, [name='retemail'] {
+	display: block;
 	margin-top: 10px;
 }
 .checkoutwarning,
@@ -916,7 +917,8 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 				position:absolute;
 				bottom:10px;
 				right: 5px;
-
+				height: 34px;
+				width: 79px;
 				input{ padding-right: 65px; text-indent:-200px; z-index: 2;}
 				
 				&:after{
