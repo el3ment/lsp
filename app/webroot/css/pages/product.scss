@@ -319,6 +319,12 @@
 	}
 }
 
+#productReviews .reviewReviewCount {
+	@media (max-width: 767px){
+		display: none;
+	}
+}
+
 .specifications{
 	tr td{
 		padding: 2px 5px;
