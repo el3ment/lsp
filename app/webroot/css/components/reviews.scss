@@ -516,11 +516,24 @@
 
 	&:hover > input ~ label{ // "Reset" the color
 		color: $lightGrey;
+		color: black\9;
 	}
 
 	> input ~ label:active,
 	> input ~ label:active ~ label{
 		text-shadow: 0px 0px 1px red;
+	}
+
+	& > label, & > input {
+		float: left\9 !important;
+	}
+
+	& > input {
+		margin-right: 1px;
+	}
+
+	& > label {
+		margin-right: 6px;
 	}
 }
 

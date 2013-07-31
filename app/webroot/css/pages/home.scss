@@ -31,6 +31,11 @@
 		position: relative;
 		@include box-sizing();
 
+		@media (max-width: 767px) {
+			position: absolute;
+			top: 64px;
+		}		
+
 		.ad{
 			@include box-sizing();
 			position: relative;
@@ -412,6 +417,12 @@
 	}
 
 	@media (max-width: 767px){
+		.productAd {
+			position: absolute;
+			top: 495px;
+			left: 0;
+			margin-top: 10px;
+		}
 		.productAd ~ .productAd{ display: none } 
 	}
 

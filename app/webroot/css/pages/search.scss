@@ -531,6 +531,7 @@
 		}
 		// +/- button for refinements
 		.refinements .refineResults{
+			position: relative;
 			display: table-caption; // moes it above the selectedFilters
 			min-height:52px;
 			float: none;
@@ -577,6 +578,8 @@
 			
 			h2{ display: none; }
 			.b3{
+				position: absolute;
+				left: 95px;
 				margin-right: 10px;
 				text-indent: px(-$hideDistance);
 				width: px(32px);
@@ -586,8 +589,6 @@
 				margin-left: 0;
 				margin-top: 0;
 				line-height:200px;
-				float: right;
-	
 			}	
 		}
 		
@@ -676,10 +677,10 @@
 			display: none;
 		}
 		.head .controls li.control-pagination-sort{
-			
-			float:left;
 			position:absolute;
+			right: 0;
 			top: 10px;
+			margin-right: 0;
 			padding: 0 5px;
 			select{
 				height: 30px;
@@ -698,7 +699,9 @@
 			margin-top: 0;
 		}
 		.toggleLabel{
-			float:right;
+			position: absolute;
+			left: 0;
+			top: 10px;
 		}
 		
 		.foot select{

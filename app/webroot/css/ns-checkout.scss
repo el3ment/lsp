@@ -121,9 +121,13 @@ body .span12 > table{
 // Overqualified to beat !important declarations above
 html body .page-generic .pic{ display: none !important; }
 
+#retemail_fs_lbl, [name='retemail'] {
+	display: block;
+	margin-top: 10px;
+}
 .checkoutwarning,
 .errortext p,
-.errortext.bglt{ 
+.errortext.bglt{
 	color: #bb0000 !important;
 	background-color: #ffe0e0 !important;
 	margin-bottom: 10px;
@@ -873,7 +877,9 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 			}
 
 			#tbl_submitter{
-				bottom: -50px;
+				height: 34px;
+				width: 79px;
+				//bottom: -50px;
 			}
 
 			.smalltext{
@@ -912,7 +918,8 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 				position:absolute;
 				bottom:10px;
 				right: 5px;
-
+				height: 34px;
+				width: 79px;
 				input{ padding-right: 65px; text-indent:-200px; z-index: 2;}
 				
 				&:after{
