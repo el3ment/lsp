@@ -72,7 +72,7 @@
 					deactivate : _this.hideRow,
 					exitTimeout : EXIT_TIMEOUT,
 					exitMenu : function(){
-						return false;
+						return true;
 					},
 					afterExitMenu : function(){
 						_isOpen = false;

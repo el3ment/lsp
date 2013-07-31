@@ -605,14 +605,23 @@
 		
 		height: 100px;
 
+		@media (max-width: 767px){
+			height: 65px;
+		}
+
 		.logo{
 			height: 75px;
 			width: 180px;
 			margin-top: 8px;
 			margin-bottom: 8px;
 			//background-position: -334px -738px;
-			// HEAD :: background-position: -240px -885px;
-			background-position: -190px -158px;
+			background-position: -240px -885px;
+
+			@media (max-width: 767px){
+				background-position: -190px -166px;
+				height: 45px;
+				width: 140px;
+			}
 		}
 		.established, .tagline{
 			margin-top: 45px;
@@ -621,7 +630,7 @@
 				position: absolute;
 				right: 10px;
 				top: 50%;
-				margin-top: 0px;
+				margin-top: -12px;
 			}
 		}
 

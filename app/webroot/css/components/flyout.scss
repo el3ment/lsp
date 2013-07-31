@@ -146,7 +146,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		text-rendering: optimizeLegibility;
 		@include box-sizing();
 		&:active{
-			background-color: red;
+			// background-color: black;
+			// color: white;
 		}
 
 		// Department Name
