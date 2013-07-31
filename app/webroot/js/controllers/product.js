@@ -198,6 +198,7 @@
 							$('.price .details', entry).show();
 						}
 
+						$('.productMsrp', entry).html(_util.parseCurrency(productData.data.msrp));
 						$('.productPrice', entry).html(_util.parseCurrency(productData.data.onlinePrice));
 						$('.productMpn', entry).html(productData.data.mpn);
 						$('.productDiscount', entry).html(_util.parseCurrency(productData.data.msrp - productData.data.onlinePrice));

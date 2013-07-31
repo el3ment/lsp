@@ -251,7 +251,7 @@
 
 		&.saved{
 			&:before{
-				content: "Thanks for helping others with your review! You're a rock star in our book.";
+				content: "Thanks for helping others with your review! As a security check, your review will be posted in 24-48 hours. You're a rock star in our book!";
 				display: block;
 				background-color: $superLightGrey;
 				border: 1px solid $lightGrey;
@@ -516,16 +516,12 @@
 
 	&:hover > input ~ label{ // "Reset" the color
 		color: $lightGrey;
-		color: black\9;
+		color : black\0/;
 	}
 
 	> input ~ label:active,
 	> input ~ label:active ~ label{
 		text-shadow: 0px 0px 1px red;
-	}
-
-	& > label, & > input {
-		float: left\9 !important;
 	}
 
 	& > input {
