@@ -517,10 +517,15 @@
 		
 		.refinements{
 			display: table;
-			 #attributeList.reveal-isOpen{
+			 #attributeList{
+			 	display: block;
+			 	overflow: hidden;
 				 //display: table;
 				 //width: 100%;
 				 //margin-top:41px; // Space between the top of the list and the header
+			}
+			#attributeList.reveal-closed{
+				display: none;
 			}
 		}
 		.searchRefinementsAndResults{
