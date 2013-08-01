@@ -369,7 +369,7 @@
 					.done(function(data){
 						if(data.response){
 							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1){
-								document.location = data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev');
+								document.location.replace(data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev'));
 							}else{
 								_this.renderPage(data.response.source);
 							}
