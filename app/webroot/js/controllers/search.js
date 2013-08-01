@@ -201,6 +201,7 @@
 
 					onLoadCategory : function(e, data){
 						_this.loadCategory($(data.selector).data('path'), true);
+						data.originalEvent.preventDefault();
 					},
 
 					onRemoveCategory : function(e, data){
@@ -250,10 +251,11 @@
 
 					onStateChange : function(e, data){
 						if(_app.controllers.application.pullState(_this)){
+							_isFirstRequest = false;
 							_this.loadCurrentState();
 						}else{
-							// We must have gone back to a .html page
-							document.location.reload();
+							$('.page-search').hide();
+							$('.page-generic').show();
 						}
 					},
 
@@ -309,7 +311,6 @@
 			pushState : function(){
 
 				var pushedState = _this.getState();
-
 				// if isFirstRequest is true, then app.pushState will use history.replaceState instead
 				return _app.controllers.application.pushState(_this, pushedState, _isFirstRequest);
 			},
@@ -323,7 +324,7 @@
 
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
 				
-				if(!_state.category || _app.controllers.application.hasPushState()){
+				if(!_state.category){
 					_state.category = path;
 				}
 				
@@ -506,7 +507,7 @@
 					// If the page hasn't been injected yet
 					if(!$('.page-search').length){
 
-						// These are error pages, they don't get the <div class=''
+						// We must be on an error page, they don't get the <div class=''
 						if(!$('.page-generic').length){
 							$('#div__body').addClass('page-generic');
 						}
@@ -519,6 +520,9 @@
 
 						_app.controllers.application.attachEvents($('.page-search'));
 					}
+
+					$('.page-search').show();
+					$('.page-generic').hide();
 
 					// Render Sections
 					_this.renderSummary(easyAskDataObject);
@@ -537,7 +541,7 @@
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				var searchPage = $('.page-search');
+				var searchPage = $('.page-generic');
 				return _util.scrollTo(searchPage);
 			},
 
