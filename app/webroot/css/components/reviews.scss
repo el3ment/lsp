@@ -516,7 +516,10 @@
 
 	&:hover > input ~ label{ // "Reset" the color
 		color: $lightGrey;
-		color : black\0/;
+		color: black\9; //ie8
+		@media screen and (min-width:0\0) { // Reset color back to grey since ie9 is picking up on the ie8 color hack.
+		   color: $lightGrey;
+		}
 	}
 
 	> input ~ label:active,
