@@ -35,6 +35,7 @@ select{
 	padding: px($inputPadding - 1); /* Fix for unknown space on selects */
 	height: px(40px, $inputFontSize);
 	width: 100%;
+	background-color: white;
 }
 
 textarea{ 

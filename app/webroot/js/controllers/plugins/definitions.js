@@ -71,6 +71,8 @@
 								_this.showDefinition(this); 
 							}).bind('mouseleave', function(){
 								_this.hideDefinition(this);
+							}).bind('click', function(){
+								_this.toggleDefinition(this);
 							});
 						}
 					}
@@ -83,6 +85,14 @@
 			
 			showDefinition : function(element){
 				$('.panel', element).show();
+			},
+
+			toggleDefinition : function(element){
+				if($('.panel', element).is(':visible')){
+					$('.panel', element).hide();
+				}else{
+					$('.panel', element).show();
+				}
 			},
 			
 			makeSlug : function(content){

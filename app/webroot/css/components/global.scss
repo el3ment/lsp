@@ -16,7 +16,7 @@ html{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 }
 
@@ -32,7 +32,7 @@ body{
 	font-size: 14px;
 	line-height: px(22px);
 
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	@include box-sizing();
 
@@ -331,6 +331,20 @@ ol.list{
 	display: none;
 }
 
+
+.hideIfLoggedIn{
+	display: none !important;
+}
+// Hide/Show elements if logged in
+// If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
+li[data-uid*="Error processing dynamic tag"],
+li[data-uid*="Error processing dynamic tag"] ~ .showIfLoggedIn{
+	display: none !important;
+}
+
+li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
+	display: block !important;
+}
 
 @media (max-width: 400px){
 	.hidden-iphone{ display: none !important; }

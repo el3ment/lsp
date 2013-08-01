@@ -113,6 +113,12 @@
 				margin-top: 60px;
 			}
 		}
+
+		@media (max-width: 767px){
+			width: 100px;
+			height: 65px;
+			float: left;
+		}
 		
 	}
 	
@@ -497,10 +503,10 @@
 		}
 	}
 	@media (max-width: 767px){
-		.established, .tagline, ul li.wishlist{
+		.established, &.large .tagline, ul li.wishlist{
 			display: none !important; // important overrides login/logout detection
 		}
-		.image-logoCircle, .well{
+		.image-logoCircle{
 			width: 120px;
 			height: 64px;
 			float: left;
@@ -518,13 +524,14 @@
 			clear: none;
 			
 			li.search{
+
 				position:absolute;
 				top: 64px;
 				left: 0;
 				background: url(../img/dark_pattern.jpg);
 
 				width: 100%;
-				z-index: 2;
+				z-index: 9999;
 				@include box-shadow-multiple(0 2px 3px -1px $grey); /* Top Highlight, Drop shadow */  
 											 
 				
@@ -584,6 +591,23 @@
 					display: none;
 				}
 			}
+			.cart .count{
+				bottom: 9px;
+				right: 6px;
+				top: auto;
+				display: block;
+				line-height: 20px;
+				height: 21px;
+				font-size: 13px;
+				padding: 0px 5px;
+				text-indent: 0;
+				color: white;
+				@include box-shadow-multiple(none);
+				background-image: none;
+				background-color: transparent;
+				text-shadow: none;
+				background-color: black;
+			}
 		}
 	}
 
@@ -598,15 +622,46 @@
 		
 		height: 100px;
 
+		@media (max-width: 767px){
+			height: 65px;
+		}
+
 		.logo{
 			height: 75px;
-			width: 75px;
+			width: 180px;
 			margin-top: 8px;
 			margin-bottom: 8px;
-			background-position: -190px -158px;
+			//background-position: -334px -738px;
+			background-position: -240px -885px;
+
+			@media (max-width: 767px){
+				background-position: -190px -166px;
+				height: 45px;
+				width: 140px;
+			}
 		}
 		.established, .tagline{
 			margin-top: 45px;
+			@media (max-width: 767px){
+				margin-top: 0;
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				margin-top: -12px;
+			}
+		}
+
+
+		@media (max-width: 767px){
+			.tagline{
+				display: none;
+			}
+			.tagline.visible-phone{
+				display: block;
+			}
+			.well{
+				width: 100%;
+			}
 		}
 	}
 }

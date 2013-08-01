@@ -458,8 +458,8 @@
 				var style = $node.attr('style');
 				$node.attr('style',
 					style
-						.replace(/top:[-0-9. ]{1,}px;/i, 'top:'+lenstop+'px;')
-						.replace(/left:[-0-9. ]{1,}px;/i, 'left:'+lensleft+'px;')
+						.replace(/top:[-0-9. ]{1,}px/i, 'top:'+lenstop+'px')
+						.replace(/left:[-0-9. ]{1,}px/i, 'left:'+lensleft+'px')
 				);
 
 				if (settings.zoomType == 'reverse') {

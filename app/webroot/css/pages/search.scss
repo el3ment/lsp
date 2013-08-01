@@ -281,7 +281,12 @@
 			
 			.status{ display: inline; }
 			//.method{ display: block; }
-			.option, .quantity, .action{ text-align:right; }
+			.option, .quantity, .action{ text-align: right; }
+			.b5{ 
+				float: right;
+				@include clearfix();
+			}
+
 			
 			@media (max-width: 979px) and (min-width: 768px){
 				.productAvailability .status > span {
@@ -512,10 +517,18 @@
 		
 		.refinements{
 			display: table;
-			 #attributeList.reveal-isOpen{
-				 display: table;
-				 width: 100%;
-				 margin-top:41px; // Space between the top of the list and the header
+			 #attributeList{
+			 	display: block;
+			 	overflow: hidden;
+				 //display: table;
+				 //width: 100%;
+				 //margin-top:41px; // Space between the top of the list and the header
+			}
+			#attributeList.reveal-closed{
+				display: none;
+			}
+			#searchRefinements{
+				@include clearfix();
 			}
 		}
 		.searchRefinementsAndResults{
@@ -540,13 +553,33 @@
 			border-width: 1px 0;
 			margin-bottom: 0;
 			padding: 10px 0px 0;
-			
+
 			.section{
 				background-color: white;
 				border-top: 0;
 				margin-bottom:0;
-				padding: 10px;
 				border-bottom: 1px solid $lightGrey;
+				padding: 0;
+
+				@include clearfix();
+
+				h4{
+					padding: 10px;
+				}
+
+				// A bit of a hack, the parent (#attributeList) has overflow: hidden
+				// to avoid a visual 'pop' from the reveal -- this compenstates for the space caused by the hidden overflow it
+				&:last-child h4{
+					padding-bottom: 20px;
+
+				}
+				.content{
+					padding: 0 10px;
+					position: relative;
+					top: -20px;
+				}
+
+
 				
 				&:first-child{
 					border-top: 1px solid $lightGrey;

@@ -20,7 +20,47 @@
 	}
 }
 
+
+@media (max-width: 767px) {
+	html[data-path*=".com/-END"],
+	html[data-path*=".com/?"]{
+
+		#flyoutControlButton{
+			display: none; // Hide the control button since it's forced open
+		}
+
+		.shopbar .mobileSearch{
+			margin-right: 70px; // move the search button back to the right
+		}
+
+		// Force it open on the home page
+		#mainFlyout{
+			margin-top: 660px;
+			display: block !important;
+			height: auto;
+			.wrapper{
+				height: auto !important;
+			}
+
+		}
+	}
+}
+
 .page-home{
+
+	.sliderContainer{
+		width: 100%;
+
+		@media (max-width: 767px) {
+			position: absolute;
+			top: 65px;
+			left: 0;
+
+			padding: 5px 0 10px;
+
+			@include box-shadow-multiple(0 3px 6px -3px $grey inset, 0 -3px 6px -3px $grey inset);
+		}
+	}
 
 	#mainSlider{
 		
@@ -30,11 +70,6 @@
 		width: 690px; // width + margin-left = pagewidth
 		position: relative;
 		@include box-sizing();
-
-		@media (max-width: 767px) {
-			position: absolute;
-			top: 64px;
-		}		
 
 		.ad{
 			@include box-sizing();
@@ -419,9 +454,10 @@
 	@media (max-width: 767px){
 		.productAd {
 			position: absolute;
-			top: 495px;
+			top: 540px;
+			margin: 0 3% !important;
+			width: 94%;
 			left: 0;
-			margin-top: 10px;
 		}
 		.productAd ~ .productAd{ display: none } 
 	}
@@ -436,6 +472,7 @@
 		}
 	}*/
 }
+
 
 
 // Carosuel

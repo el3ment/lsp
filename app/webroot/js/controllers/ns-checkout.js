@@ -20,10 +20,15 @@
 						// Remove 'empty' links - they create a state in history
 						// that is annoying to overcome
 						$('a[href="#"]').attr('href', null);
-						$('input[size="6"][maxlength="6"]')
-							.attr('type', 'number')
-							.attr('min', '0')
-							.off('.submitter')
+						
+						// IE has 'type' as a read-only attribute, jquery will complain
+						try{
+							$('input[size="6"][maxlength="6"]')
+								.attr('type', 'number')
+								.attr('min', '0')
+								.off('.submitter')
+							_app.controllers.netsuite.attachEnterKey();
+						}catch(e){}
 
 					},
 					onEnterRegister : function(e, data){
@@ -66,6 +71,13 @@
 							});
 
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
+					},
+					onEnter : function(e, data){
+						try{
+							$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
+							$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
+							_app.controllers.netsuite.attachEnterKey();
+						}catch(e){ }
 					}
 				},
 				application : {
@@ -89,8 +101,10 @@
 			setPage : function(pageName){
 				_state.page = pageName;
 
+
 				console.log('Firing Page Event : ' + _util.camelCase('on-enter-' + pageName));
 
+				$(_this).triggerHandler(_util.camelCase('on-enter'), {selector : $(document)});
 				$(_this).triggerHandler(_util.camelCase('on-enter-' + pageName), {selector : $(document)});
 				$(_mainTable).addClass('nscheckout-' + pageName);
 			}

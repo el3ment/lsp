@@ -1,3 +1,7 @@
+*{
+	-webkit-tap-highlight-color: transparent;
+}
+
 
 //a[href]{ outline: 1px solid red; }
 a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outline: none; }
@@ -79,6 +83,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		.collection{
 			
 			cursor: pointer;
+			text-rendering: optimizeLegibility;
+			@include box-sizing();
 
 			// Yellow bar at the top of the department list
 			&:first-child{
@@ -137,6 +143,12 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		z-index:1;
 		border-right: 1px solid $lightGrey;
 		//height: 30px;
+		text-rendering: optimizeLegibility;
+		@include box-sizing();
+		&:active{
+			// background-color: black;
+			// color: white;
+		}
 
 		// Department Name
 		.h3{ 
@@ -441,7 +453,6 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 	// Reset Styles
 	.departmentDropdown{
 		position: static;
-		margin-top: 600px;
 
 		.wrapper{
 			margin: 0;
