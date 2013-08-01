@@ -49,9 +49,13 @@
 		&.empty:before{
 			display: block;
 			text-align: center;
-			content: 'No refinement options';
+			content: 'No refinements available';
 			padding: 40px 0 50px;
 			color: $grey;
+
+			@media (max-width: 767px){
+				display: none;
+			}
 		}
 	}
 
