@@ -348,3 +348,14 @@
 		display: none;
 	}
 }
+
+*[data-stockmessage*="Unavailable"]{
+	.addToCart{
+		.quantity, .action{
+			display: none;
+		}
+		.productAvailability{
+			background-color: $superLightGrey;
+		}
+	}
+}

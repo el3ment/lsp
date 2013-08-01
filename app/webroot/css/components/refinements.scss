@@ -12,6 +12,7 @@
 		width: 100%;
 	}
 	
+
 	// "Refine Your Results"
 	h2{ margin-bottom: 10px; }
 	
@@ -45,6 +46,13 @@
 		display: block;
 		width: 100%;
 		float: left;
+		&.empty:before{
+			display: block;
+			text-align: center;
+			content: 'No refinement options';
+			padding: 40px 0 50px;
+			color: $grey;
+		}
 	}
 
 

@@ -98,8 +98,9 @@
 
 					onSearch : function(e, data){
 
-						var query = $('input[name="searchQuery"]').trigger('blur').val();
-						$('.mobileSearch .b3').click();
+						var query = $('input[name="searchQuery"]', data.selector).trigger('blur').val();
+						
+						$('.mobileSearch .b3').click(); // hide it
 
 						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
 						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
@@ -128,7 +129,7 @@
 
 						_this.removeSearch();
 
-						$('#searchQuery').val('').change();
+						$('input[name="searchQuery"]').val('').change();
 					},
 
 					onFilterAttribute : function(e, data){
@@ -526,11 +527,11 @@
 					_this.renderProducts(easyAskDataObject);
 
 					//Make page full width if refinements aren't there.
-					if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
-						$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
-					}else{
-						$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
-					}
+					// if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
+					// 	$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
+					// }else{
+					// 	$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
+					// }
 				//}
 			},
 
@@ -618,11 +619,11 @@
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
 				
-				// If there aren't any attributes, hide the panel
+				//If there aren't any attributes, hide the panel
 				if(!(easyAskDataObject.attributes._lsp.cached || {}).length){
-					$('#searchRefinements').hide();
+					$('#searchRefinements').addClass('empty');
 				}else{
-					$('#searchRefinements').removeAttr('style');	
+					$('#searchRefinements').removeClass('empty');
 				}
 			
 			},
