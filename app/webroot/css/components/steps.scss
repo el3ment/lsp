@@ -1,0 +1,173 @@
+// Globally accessible fancy timeline
+
+.steps{
+
+	/* The fancy timeline at the top of the cart 
+	 * The original plan was to build this entirely in CSS
+	 * */
+	
+	float: left;
+	clear: both;
+	padding: px(75px) 0 px(50px); // Space for icon, bottom spacing
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+
+	@media (max-width: 767px){
+		padding-bottom: 20px;
+	}
+	
+	// Grey Progress Track
+	&:before{
+		content: ' ';
+		height: 16px;
+		width: 80%;
+		margin-left: 10%;
+		background-color: $superLightGrey;
+		display: block;
+		position: relative;
+		top: -$mediumCircleDiameter + 2;
+		height: px($smallCircleDiameter / 4);
+	}
+
+	ul{
+		margin-left: 50%;
+		//left: px(-(($spaceBetweenSteps * $numberOfSteps) / 2));
+		left: -50%;
+		position: relative;
+		//width: px($spaceBetweenSteps * $numberOfSteps);
+		width: 100%;
+		/* Circles */
+		li{
+			content: '  ';
+			width: 20%;
+			vertical-align: bottom;
+			display: block;
+			float: left;
+			position: relative;
+			text-align: center;
+		}
+		
+		/* Step Indicator (Background Circle) */
+		li:before, li.completed:after,
+		li.start span:before{
+			content: '   ';
+			display: block;
+			overflow: hidden;
+			width: px($mediumCircleDiameter);
+			height: px($mediumCircleDiameter);
+			@include border-radius(px($mediumCircleDiameter));
+			position: absolute;
+			top: px(-$mediumCircleDiameter - $smallCircleDiameter);
+			left: px(-$smallCircleDiameter);
+			margin-left: 50%;
+			background-color: $superLightGrey;
+			z-index: 1;
+		}
+		
+		/* Indicator for Completed Steps (Small Black Inner circle) */
+		li.completed:after, ul:after,
+		li.start span:before{
+			content: '    ';
+			background-color: $black;
+			width: px($smallCircleDiameter);
+			height: px($smallCircleDiameter);
+			@include border-radius(px($smallCircleDiameter));
+			top: px(-($mediumCircleDiameter - $smallCircleDiameter/2) - $smallCircleDiameter);
+			left: px($smallCircleDiameter/2 - $mediumCircleDiameter/2);
+			z-index: 2;
+		}
+		
+		/* Indicator for Active Step (Big Black Dot) */
+		li.active:before{
+			content: '      ';
+			background-color: $black;
+			width: px($largeCircleDiameter);
+			height: px($largeCircleDiameter);
+			@include border-radius(px($largeCircleDiameter));
+			top: px(-($largeCircleDiameter/2 + $mediumCircleDiameter/2) - $smallCircleDiameter);
+			left: px(-($largeCircleDiameter/2));
+			z-index: 2;
+			/*background-image: url();*/
+		}
+		
+		/* Black Progress Bar and Grey Track */
+		li.active:after{
+			content: '       ';
+			position: absolute;
+			top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter);
+			background-color: $black;
+			height: px($smallCircleDiameter / 4);
+			display: block;
+			width: 0;
+			@include border-radius(0);
+			margin-left: 0;
+			z-index: 1;
+		}
+		
+		/* Grey Track */
+		// li.start span:before{
+		// 	content: '         ';
+		// 	background-color:$superLightGrey;
+		// 	z-index:1;
+		// 	width: 100%;
+		// 	left: 50%;
+		// 	top: px(-($mediumCircleDiameter/2 + $smallCircleDiameter/8) - $smallCircleDiameter - 2);
+		// }
+
+		/* Black Progress Bars */
+		li.active.start:after{ width: 0; }
+		li.active.address:after{
+			content: '           ';
+			width: 100%;
+			left: -50%;
+		}
+		li.active.shipping:after{
+			content: '           ';
+			width: 200%;
+			left: -150%;
+		}
+		li.active.billing:after{
+			content: '       ';
+			width: 300%;
+			left: -250%;
+		}
+		li.active.review:after{ 
+			content: '         ';
+			width: 400%;
+			left: -350%; 
+		}
+		
+		/* Icons */
+		li span{
+			padding:0;
+		}
+		li span:after{
+			content: '     ';
+			display: none;
+			padding: 0;
+		}
+		li.active span:after{
+			$width : 32px;
+			content: '       ';
+			position: absolute;
+			display:block;
+			width: $width;
+			height: $width;
+			z-index:3;
+			left: 50%;
+			margin-left: px(-$width / 2);
+			top: px(-($largeCircleDiameter / 2) - $width / 2 - 3);
+		}
+
+		// Labels
+		@media (max-width: 767px){
+			li span{
+				//font-size: 0;
+				//line-height: 14px;
+				text-indent: -10000px;
+				display: block;
+			}
+		}
+	}
+}
