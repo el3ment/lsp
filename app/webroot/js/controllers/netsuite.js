@@ -63,6 +63,7 @@
 				// Check nested tables to ensure we attach only to netsuite inputs
 				$('.page-generic table table table input').off('.submitter').on('keyup.lsp.submitter', function(e){
 					// If it's an enter key and was not preceded by an enter key
+					var focusedElement = $(this);
 					switch(e.which){
 						case 13:
 							if($(this).data('isDirty')){
@@ -73,10 +74,10 @@
 											submit.click();
 										}else{
 											// recalc needs to clear the redirect property
-											debugger;
 											$('input[name="redirect"]').val('');
 											submit.form.submit();
 										}
+										focusedElement.blur();
 										e.stopPropagation();
 										return false;
 									}

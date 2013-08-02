@@ -204,7 +204,8 @@
 		.tabs .icon-24-list{
 			border-bottom: 1px solid $superLightGrey;
 			background-color: $superLightGrey;
-			color: black;	
+			color: black;
+			z-index: 3;
 		}
 		
 		.entry{
@@ -314,7 +315,8 @@
 		.tabs .icon-24-compact{
 			border-bottom: 1px solid $superLightGrey;
 			background-color: $superLightGrey;
-			color: black;	
+			color: black;
+			z-index: 3;
 		}
 		
 		.entry{

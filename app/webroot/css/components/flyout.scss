@@ -47,6 +47,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 		background-color:white;
 		@include box-shadow-multiple(0 0 10px -2px $grey);
 		display: block;
+
+
 		// The :before element covers the shadow (little yellow strip)
 		// It needs to have similar styling to a button
 		&:before{
@@ -58,8 +60,9 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			content: ' ';
 			background-color: #f1c331; // the last covered pixel for the button
 			border : 1px solid $brownYellow;
-			border-color: transparent\9;
+			//border-color: transparent/9;
 			border-width: 0px 1px;
+
 		}
 
 		// The :after element gives the onmouseleave something to recognize
@@ -74,8 +77,7 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			left: 0;
 			content: ' ';
 
-			// IE dosen't maintain event bubbling for transparent background
-			// divs - so we use a transparent only part of the sprite image
+			// IE dosen't maintain event bubbling for transparent background so we use a transparent png
 			background-image: url('data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
 		}
 

@@ -200,10 +200,17 @@ tr[height="25"]{ height: 0; }
 		position: relative;
 		#tbl_checkout{
 			bottom: 10px;
+			@media (max-width: 767px){
+				position: relative;
+				margin-bottom: -20px;
+				margin-top: 10px;
+				float: right;
+			}
 		}
 	}
 
 	// Error message logic -- only show one at a time, never both
+	.productAvailability + br,
 	.productAvailability + br + .errortext{
 		display: none;
 	}
@@ -373,6 +380,7 @@ tr[height="25"]{ height: 0; }
 			float: left !important;
 			width: auto !important;
 			padding-right: 10px !important;
+			margin-bottom: 70px !important;
 		}
 	}
 
@@ -434,7 +442,7 @@ tr[height="25"]{ height: 0; }
 			width: 135px !important;
 			input{ width: 50px !important; }
 			&:before{
-				padding-top: 10px;
+				padding-top: 14px;
 				padding-right: 5px;
 				content: 'Quantity: ';
 				float: left !important;
@@ -471,7 +479,7 @@ tr[height="25"]{ height: 0; }
 		padding-bottom: 7px;
 		@media (max-width: 767px){
 			position: relative;
-			top: 9px;
+			top: 13px;
 			font-size: 18px;
 			text-align: left !important;
 		}
@@ -539,6 +547,7 @@ tr[height="25"]{ height: 0; }
 					background-color: red;
 					color: white;
 					border-color: transparent;
+					text-decoration: none;
 				}
 			}
 		}
@@ -573,7 +582,7 @@ tr[height="25"]{ height: 0; }
 
 		@media (max-width: 767px){
 			position: absolute !important;
-			right: 130px;
+			right: 100px;
 			top: 23px;
 			width: 200px !important;
 			padding-top: 10px !important;
@@ -628,7 +637,7 @@ tr[height="25"]{ height: 0; }
 		@media (max-width: 450px){
 			padding-right: 0px !important;
 			a{
-				text-decoration: underline;
+				//text-decoration: underline;
 				right: 0;
 				&:after{
 					display: none !important;
@@ -650,9 +659,10 @@ tr[height="25"]{ height: 0; }
 			display: inline-block !important;
  			width: auto !important;
  			float: none !important;
- 			margin-top: 10px !important;
+ 			margin-top: 5px !important;
  			margin-right: 10px !important;
  			width: 100px !important;
+ 			margin-bottom: 5px;
 		}
 	}
 	@media (max-width: 767px){
@@ -717,17 +727,11 @@ tr[height="25"]{ height: 0; }
 
 	//background-color: pink;
 	
-	@media (max-width: 767px){
-		tr, td{
-			width: auto !important;
-			float: right;
-		}
-	}
+
 
 	td{
 		display: block;
 		float: right !important;
-
 	}
 	#tbl_cancel{
 		display: none;
@@ -735,11 +739,27 @@ tr[height="25"]{ height: 0; }
 
 	// Back-out of global styling. Right at the end I realized I couldn't be specific enough with a couple of buttons
 	// and thus we have two methods of positioning these buttons, generic and specific. Sorry.
-	#tbl_checkout, #tbl_cancel, #tbl_recalc{
+	#tbl_checkout, #tbl_recalc{
 		position: relative;
 		right: auto;
 		bottom: auto;
 	}
+
+	#tbl_checkout, #tbl_recalc{
+		display: block;
+	}
+
+	@media (max-width: 767px){
+		tr, td{
+			width: auto !important;
+			float: right;
+			clear: both;
+		}
+		#tbl_recalc{
+			margin-top: 10px !important;
+		}
+	}
+	
 }
 
 
@@ -851,7 +871,7 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 			
 			@include panel();
 			@include engaged();
-
+			position: relative;
 			// IE won't take the position:relative on the TR tag
 			> td{
 				position: relative;
@@ -884,6 +904,17 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 
 			.smalltext{
 				color: black;
+			}
+
+			@media (max-width: 767px){
+				#tbl_register{
+					position: relative;
+					bottom: 0;
+					margin-top: 10px;
+					float: right;
+					margin-right: 0;
+					left: 0;
+				}
 			}
 		}
 		
@@ -927,6 +958,15 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 					left: 10px;
 					top: 9px;
 					content: 'Sign In';
+				}
+
+				@media (max-width: 767px){
+					position: relative;
+					bottom: 0;
+					margin-top: 10px;
+					float: right;
+					margin-right: 0;
+					left: 0;
 				}
 			}
 		}
