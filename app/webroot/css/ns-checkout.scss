@@ -366,7 +366,7 @@ tr[height="25"]{ height: 0; }
 	}
 
 	// Image
-	td:first-child{
+	> td:first-child{
 		
 		text-align: center;
 		line-height: 0; // Hide &nbsp; nonsense when the photo isn't there
@@ -958,6 +958,7 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 					left: 10px;
 					top: 9px;
 					content: 'Sign In';
+
 				}
 
 				@media (max-width: 767px){
@@ -970,7 +971,6 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 				}
 			}
 		}
-
 
 		// Blank lines between sections
 		> tr:first-child + tr,
@@ -1261,6 +1261,12 @@ input[name="category"][value="login-register"] ~ table{
 			position: absolute;
 			top: 15px;
 			right: 15px;
+			@media (max-width: 360px){
+				width: 60px;
+				height: 60px;
+				background-position: -283px -271px;
+				outline: 1px solid red;
+			}
 		}
 	}
 	
@@ -1592,6 +1598,10 @@ input[name="category"][value="login-register"] ~ table{
 			color: black;
 			padding-left: 140px;
 			position: relative;
+			float: left !important;
+			height: 2em;
+			margin-bottom: 3px; 
+			clear: both;
 
 			input[type="radio"]{
 				float: none;
@@ -1613,6 +1623,15 @@ input[name="category"][value="login-register"] ~ table{
 			&:after{
 				content : '';
 			}
+
+			@media (max-width: 767px){
+			height: 4em; // 2em for shipping method, 2em for first radio input
+				&:before{
+					display: block;
+					position: static;
+					margin-bottom: 5px;
+				}
+			}
 		}
 	}
 	#shippingmethodtable > tbody > tr tr:first-child + tr ~ tr{
@@ -1621,6 +1640,9 @@ input[name="category"][value="login-register"] ~ table{
 		}
 		td.smalltext{
 			
+			@media (max-width: 767px){
+				height: 2em;
+			}
 			//padding-left: 140px !important;
 
 			&:before{
@@ -1644,6 +1666,11 @@ input[name="category"][value="login-register"] ~ table{
 		// Coupon Code row cells
 		> tr:first-child + tr > td{
 			padding-top: 60px !important;
+			@media (max-width: 767px){
+				&:first-child + td{
+					padding-top: 3px !important;
+				}
+			}
 			
 		}
 
@@ -1965,6 +1992,9 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 			td{
 				padding-left: 0 !important;
 				padding-right: 10px;
+				input{
+					margin-left: 0;
+				}
 				&:before{
 					display: none; // Shipping Method -- we moved it because Freight was orphaned on the review page
 				}
@@ -1984,6 +2014,7 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 				font-weight: normal;
 				padding-left: 2px !important;
 				padding-top: 10px !important;
+				height: 2em;
 
 				input[type="radio"]{
 					float: none;
@@ -2218,7 +2249,11 @@ html[data-path*="category=thanks"] .page-generic > table{
 		@include clearfix();
 
 		h1{
-			margin-top: 60px; // center it
+			margin-top: 40px; // center it
+		}
+
+		.b1{
+			margin-top: 10px;
 		}
 		.image-badge-orderComplete{
 			float: left;
@@ -2248,6 +2283,15 @@ html[data-path*="category=thanks"] .page-generic > table{
 		.container{
 			margin: auto;
 			float: none;
+		}
+		//Email address
+		strong{
+			white-space: pre-wrap;      /* CSS3 */   
+			white-space: -moz-pre-wrap; /* Firefox */    
+			white-space: -pre-wrap;     /* Opera <7 */   
+			white-space: -o-pre-wrap;   /* Opera 7 */    
+			word-wrap: break-word;      /* IE */
+			word-break: break-all;
 		}
 	}
 }
@@ -2305,6 +2349,15 @@ html[data-title*="Login"],
 				left: 10px;
 				top: 9px;
 				content: 'Sign In';
+			}
+
+			@media (max-width: 767px){
+				position: relative;
+				bottom: 0;
+				margin-top: 10px;
+				float: right;
+				margin-right: 0;
+				left: 0;
 			}
 		}
 	}
