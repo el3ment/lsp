@@ -838,6 +838,14 @@ tr[height="25"]{ height: 0; }
 	color: $black; 
 	-webkit-font-smoothing: antialiased;
 	margin-top:10px;
+	.details{
+		display: block;
+		clear: both;
+		color: $grey; font-size: 13px; line-height: 18px;
+		strong{ color: black; }
+		font-family: 'Open Sans', sans-serif;
+		text-transform: none;
+	}
 }
 
 html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,

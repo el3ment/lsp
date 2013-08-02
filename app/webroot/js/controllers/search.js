@@ -566,7 +566,8 @@
 				$('.totalPages').html(totalPages);
 				$('.numberOfResults').html(((easyAskDataObject.products || {}).itemDescription || {}).totalItems);
 
-				$('select[data-action="sort"]').val(((easyAskDataObject.products || {}).itemDescription || {}).sortOrder);
+				var sortOrder = ((easyAskDataObject.products || {}).itemDescription || {}).sortOrder;
+				$('select[data-action="sort"]').val(sortOrder.indexOf('EAScore') > -1 ? 'default' : sortOrder);
 				$('select[data-action="itemsPerPage"]').val(((easyAskDataObject.products || {}).itemDescription || {}).resultsPerPage);
 
 				if(currentPageNumber === 1){

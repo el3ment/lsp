@@ -14,14 +14,16 @@
 	margin-bottom: 17px;
 	color: $black;
 	h2{
-		margin-top:6px;
+		margin-top:6px;p
 		//margin-bottom: px($paddingUnit);
 	}
 }
 
 /* A section is a broken division within a panel, generally titled by a header tag, it basically adds a line break and some margins */
 .section{
+	padding-bottom: px(3 * $paddingUnit);
 	clear: both;
+	@include clearfix();
 	&:last-child{ border-bottom: 0; }
 	h2{
 		//margin-bottom: px($paddingUnit);

@@ -198,6 +198,11 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 	&[disabled]:hover, &.active{
 		@include gradient($lightYellow, $darkYellow);
 	}
+
+	&.forward{
+		margin-top: 10px;
+		float: right;
+	}
 }
 
 .b2, .b3, .b4, .b5{
