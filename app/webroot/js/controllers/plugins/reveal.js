@@ -8,7 +8,7 @@
 
 		var _waitToOpen = false;
 
-		var ANIMATION_TIME = 30000;
+		var ANIMATION_TIME = 300;
 
 		_this =  {
 			name : 'reveal',
@@ -87,19 +87,18 @@
 						$('*[data-reveal-children="' + child.id + '"], *[data-reveal-children*="' + child.id + ' "] ').addClass('reveal-open').removeClass('reveal-closed');
 					})
 
-					if(doAnimations){
+					if(doAnimations && _app.controllers.application.getContext() !== 'phone'){
 						var queue = $({});
 						children.each(function(i, child){
 							child = $(child);
 							queue.queue(function(){
 								var control = $(this);
 								child
-									.css('display', 'block')
-									//.addClass('reveal-open')
-									.animate({
-										height : 1000,
-										//duration : ANIMATION_TIME,
-										// easing : 'swing',
+									.css('display', 'none')
+									.addClass('reveal-open')
+									.slideDown({
+										duration : ANIMATION_TIME,
+										easing : 'swing',
 										complete : function(){
 											child
 												.addClass('reveal-open')
@@ -107,7 +106,7 @@
 												.removeClass('reveal-closed');
 											control.dequeue();
 										}
-									}, ANIMATION_TIME);
+									});
 							});
 						});
 						
@@ -134,7 +133,7 @@
 					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-closed').removeClass('reveal-open');
 				});
 
-				if(doAnimations){
+				if(doAnimations && _app.controllers.application.getContext() !== 'phone'){
 					var queue = $({});
 
 					var children = children.toArray().reverse();
@@ -144,9 +143,9 @@
 							var control = $(this);
 							$(child)
 								.css('display', 'block')
-								.animate({
-									height: 0,
-									// easing : 'swing',
+								.slideUp({
+									duration : ANIMATION_TIME,
+									easing : 'swing',
 									complete : function(){
 										$(this)
 											.removeClass('reveal-open')
@@ -154,7 +153,7 @@
 											.css('display', '');
 										control.dequeue();
 									}
-								}, ANIMATION_TIME);
+								});
 						});
 					});
 
