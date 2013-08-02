@@ -189,9 +189,8 @@
 	}
 
 	.level0.currentCategory{
-		a{ margin-left: 0; }
+		a, .b5{ margin-left: 0; }
 	}
-
 	// Parent Categories, overwrites the > character, skipping the first level
 	li.indent:first-child + .indent{ padding-left: 0px; }
 	li.indent ~ .indent,

@@ -58,7 +58,8 @@
 			//float: left;
 		}
 		input, select{
-			width: 60%;
+			width: auto;
+			max-width: 70%;
 			float: none;
 			display: inline;
 			display: inline-block;
