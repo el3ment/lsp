@@ -24,9 +24,9 @@
 						// IE has 'type' as a read-only attribute, jquery will complain
 						try{
 							$('input[size="6"][maxlength="6"]')
-								.attr('type', 'number')
+								.attr('type', 'tel')
 								.attr('min', '0')
-								.off('.submitter')
+								//.off('submitter')
 							_app.controllers.netsuite.attachEnterKey();
 						}catch(e){}
 

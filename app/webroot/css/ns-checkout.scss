@@ -1262,10 +1262,11 @@ input[name="category"][value="login-register"] ~ table{
 			top: 15px;
 			right: 15px;
 			@media (max-width: 360px){
-				width: 60px;
-				height: 60px;
-				background-position: -283px -271px;
-				outline: 1px solid red;
+				width: 64px;
+				height: 70px;
+				top: 5px;
+				right: 10px;
+				background-position: -2px -973px;
 			}
 		}
 	}
@@ -2179,7 +2180,7 @@ tr#ordersummary_subtotal, #ordersummary_subtotal td
 input[name="total"] ~ table > tbody > tr:first-child + tr + tr + tr + tr + tr{
 	td{
 		//float: right !important;
-		#tbl_submitter{
+		#tbl_submitter, #tbl_fauxsubmit{
 			bottom: -90px;
 			float: right;
 			input{
@@ -2302,7 +2303,7 @@ html[data-path*="category=thanks"] .page-generic > table{
 // }
 
 // Legaleze UPS footer
-#upsfooter, #fedexfooter{
+#upsfooter, #fedexfooter, #uspsfooter{
 	display: none !important;
 }
 
