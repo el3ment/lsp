@@ -24,7 +24,7 @@
 						_this.updateProduct(form);
 						addToWishlist({
 							customer: $('input[name="customer"]', form).val(),
-							item: $('input[name="itemid"]', form),
+							item: $('input[name="buyid"]', form),
 							site: 'lonestarpercussion',
 							options : $('.shopping.section select', form),
 							qty: $('.shopping.section input[name="qty"]', form),
