@@ -8,7 +8,7 @@
 
 		var _waitToOpen = false;
 
-		var ANIMATION_TIME = 300;
+		var ANIMATION_TIME = 30000;
 
 		_this =  {
 			name : 'reveal',
@@ -94,12 +94,12 @@
 							queue.queue(function(){
 								var control = $(this);
 								child
-									.css('display', 'none')
-									.addClass('reveal-open')
-									.slideDown({
-										useTranslate3d:true,
-										duration : ANIMATION_TIME,
-										easing : 'swing',
+									.css('display', 'block')
+									//.addClass('reveal-open')
+									.animate({
+										height : 1000,
+										//duration : ANIMATION_TIME,
+										// easing : 'swing',
 										complete : function(){
 											child
 												.addClass('reveal-open')
@@ -107,7 +107,7 @@
 												.removeClass('reveal-closed');
 											control.dequeue();
 										}
-									});
+									}, ANIMATION_TIME);
 							});
 						});
 						
@@ -144,9 +144,9 @@
 							var control = $(this);
 							$(child)
 								.css('display', 'block')
-								.slideUp({
-									duration : ANIMATION_TIME,
-									easing : 'swing',
+								.animate({
+									height: 0,
+									// easing : 'swing',
 									complete : function(){
 										$(this)
 											.removeClass('reveal-open')
@@ -154,7 +154,7 @@
 											.css('display', '');
 										control.dequeue();
 									}
-								});
+								}, ANIMATION_TIME);
 						});
 					});
 
