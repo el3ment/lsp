@@ -142,6 +142,11 @@
 		line-height: 22px;
 		margin-left: -15px;
 		//@include transition(padding-left .1s, color .1s);
+
+		td & {
+			margin-left: -25px;
+			text-indent: 0;
+		}
 		
 		&:hover{
 			//color: blue;
