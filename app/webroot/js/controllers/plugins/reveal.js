@@ -90,16 +90,18 @@
 					if(doAnimations){
 						var queue = $({});
 						children.each(function(i, child){
+							child = $(child);
 							queue.queue(function(){
 								var control = $(this);
-								$(child)
+								child
 									.css('display', 'none')
 									.addClass('reveal-open')
 									.slideDown({
+										useTranslate3d:true,
 										duration : ANIMATION_TIME,
 										easing : 'swing',
 										complete : function(){
-											$(child)
+											child
 												.addClass('reveal-open')
 												.css('display', '')
 												.removeClass('reveal-closed');
