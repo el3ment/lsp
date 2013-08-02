@@ -32,7 +32,7 @@
 			
 			tr.currentCategory,
 			tr.openParentCategory{
-				display: table-row;
+				display: block;
 			}
 
 			td[align="left"]{
@@ -106,12 +106,13 @@
 	.level8 a, .level8 button{ margin-left: 85px; }
 	.level9 a, .level9 button{ margin-left: 95px; }
 
-	.level0.openParentCategory{
+	.level0.firstParentCategory{
+		padding-left: 10px;
 		&:before {
 			content: '←';
 			position: relative;
 			color: #cfcfcf;
-			left: -4px;
+			left: -14px;
 			float: left;
 		}
 		&:hover:before{
@@ -174,6 +175,20 @@
 			font-weight: bold;
 			color: black;
 		}
+	}
+
+	// The id "#refinementForm" identifies the search result version
+	// over the category-page version
+	&#refinementForm .firstParentCategory{
+		left: -12px;
+		position: relative;
+		&:before{
+			left: -2px;
+		}
+	}
+
+	.level0.currentCategory{
+		a{ margin-left: 0; }
 	}
 
 	// Parent Categories, overwrites the > character, skipping the first level
