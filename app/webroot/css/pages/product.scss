@@ -335,9 +335,12 @@
 	}
 }
 
-#productReviews .reviewReviewCount {
+#productReviews {
 	@media (max-width: 767px){
-		display: none;
+		margin-top: 35px;
+		.reviewReviewCount {
+			display: none;
+		}
 	}
 }
 
