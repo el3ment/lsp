@@ -89,7 +89,7 @@
 
 										$(_app.controllers[controller]).
 											triggerHandler(_util.camelCase('on-' + action), 
-												{selector : element});
+												{selector : element, originalEvent : e});
 										if(e.data.preventDefault){
 											e.preventDefault();
 										}
@@ -102,7 +102,7 @@
 
 										$(_app.controllers[controller].assets[asset]).
 											triggerHandler(_util.camelCase('on-' + action), 
-												{selector : element});
+												{selector : element, originalEvent : e});
 										if(e.data.preventDefault){
 											e.preventDefault();
 										}
@@ -128,6 +128,9 @@
 
 						_isReadyFired = true;
 						_this.attachEvents($('html'));
+						if(_this.hasPushState()){
+							history.replaceState(true, 'page', document.URL);
+						}
 						
 						// Add pagetype to the body tag for CSS styling
 						//$('body').data('pagetype', $('*[data-pagetype]:first').data('pagetype'));

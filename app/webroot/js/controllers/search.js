@@ -98,8 +98,9 @@
 
 					onSearch : function(e, data){
 
-						var query = $('input[name="searchQuery"]').trigger('blur').val();
-						$('.mobileSearch .b3').click();
+						var query = $('input[name="searchQuery"]', data.selector).trigger('blur').val();
+						
+						$('.mobileSearch .b3').click(); // hide it
 
 						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
 						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
@@ -128,7 +129,7 @@
 
 						_this.removeSearch();
 
-						$('#searchQuery').val('').change();
+						$('input[name="searchQuery"]').val('').change();
 					},
 
 					onFilterAttribute : function(e, data){
@@ -200,6 +201,7 @@
 
 					onLoadCategory : function(e, data){
 						_this.loadCategory($(data.selector).data('path'), true);
+						data.originalEvent.preventDefault();
 					},
 
 					onRemoveCategory : function(e, data){
@@ -249,10 +251,11 @@
 
 					onStateChange : function(e, data){
 						if(_app.controllers.application.pullState(_this)){
+							_isFirstRequest = false;
 							_this.loadCurrentState();
 						}else{
-							// We must have gone back to a .html page
-							document.location.reload();
+							$('.page-search').hide();
+							$('.page-generic').show();
 						}
 					},
 
@@ -308,7 +311,6 @@
 			pushState : function(){
 
 				var pushedState = _this.getState();
-
 				// if isFirstRequest is true, then app.pushState will use history.replaceState instead
 				return _app.controllers.application.pushState(_this, pushedState, _isFirstRequest);
 			},
@@ -322,7 +324,7 @@
 
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
 				
-				if(!_state.category || _app.controllers.application.hasPushState()){
+				if(!_state.category){
 					_state.category = path;
 				}
 				
@@ -368,7 +370,7 @@
 					.done(function(data){
 						if(data.response){
 							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1){
-								document.location = data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev');
+								document.location.replace(data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev'));
 							}else{
 								_this.renderPage(data.response.source);
 							}
@@ -505,7 +507,7 @@
 					// If the page hasn't been injected yet
 					if(!$('.page-search').length){
 
-						// These are error pages, they don't get the <div class=''
+						// We must be on an error page, they don't get the <div class=''
 						if(!$('.page-generic').length){
 							$('#div__body').addClass('page-generic');
 						}
@@ -519,6 +521,9 @@
 						_app.controllers.application.attachEvents($('.page-search'));
 					}
 
+					$('.page-search').show();
+					$('.page-generic').hide();
+
 					// Render Sections
 					_this.renderSummary(easyAskDataObject);
 					_this.renderSelectedRefinements(easyAskDataObject);
@@ -526,18 +531,17 @@
 					_this.renderProducts(easyAskDataObject);
 
 					//Make page full width if refinements aren't there.
-					if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
-						$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
-					}else{
-						$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
-					}
+					// if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
+					// 	$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
+					// }else{
+					// 	$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
+					// }
 				//}
 			},
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				var searchPage = $('.page-search');
-				return _util.scrollTo(searchPage);
+				return _util.scrollTo($('.breadcrumbs'));
 			},
 
 			renderSummary : function(easyAskDataObject){
@@ -618,11 +622,11 @@
 				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
 				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
 				
-				// If there aren't any attributes, hide the panel
+				//If there aren't any attributes, hide the panel
 				if(!(easyAskDataObject.attributes._lsp.cached || {}).length){
-					$('#searchRefinements').hide();
+					$('#searchRefinements').addClass('empty');
 				}else{
-					$('#searchRefinements').removeAttr('style');	
+					$('#searchRefinements').removeClass('empty');
 				}
 			
 			},

@@ -16,8 +16,8 @@ html{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 
-	overflow-y: auto;
-	overflow-x: hidden;
+	// overflow-y: auto;
+	// overflow-x: hidden;
 }
 
 // Our page-level containers tend to use this pattern of being both a row, and a span12 container
@@ -32,8 +32,8 @@ body{
 	font-size: 14px;
 	line-height: px(22px);
 
-	overflow-y: auto;
-	overflow-x: hidden;
+	// overflow-y: auto;
+	// overflow-x: hidden;
 	@include box-sizing();
 
 

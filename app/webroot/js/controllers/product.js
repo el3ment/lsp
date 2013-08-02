@@ -24,7 +24,7 @@
 						_this.updateProduct(form);
 						addToWishlist({
 							customer: $('input[name="customer"]', form).val(),
-							item: $('.shopping.section input[name="itemid"]', form),
+							item: $('input[name="buyid"]', form),
 							site: 'lonestarpercussion',
 							options : $('.shopping.section select', form),
 							qty: $('.shopping.section input[name="qty"]', form),
@@ -167,7 +167,7 @@
 					.each(function(i, element){
 						selectedOptions[$(element).attr('name')] = unescape($(element).val());
 					});
-					
+
 				if(selects.length){
 					$('button.b1', form).attr('disabled', true);
 					$('input[name="buyid"]', form).val('');
