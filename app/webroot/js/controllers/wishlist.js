@@ -258,7 +258,7 @@ function searchWishlist(config){
 					onReady : function(e, data){
 						var searchButton = $("#search-wish"),
 							searchText = $("#search-wish-text"),
-							wishMessages = $("#wishlist-messages > div");
+							wishMessages = $(".wishlist-messages > div");
 						searchText
 							//.val("Enter name or e-mail")
 							// .focus(function(){
@@ -274,7 +274,7 @@ function searchWishlist(config){
 							.keyup(function(e){
 								if(e.keyCode == 13) searchButton.trigger("click");
 							});
-						searchButton.click(function(){
+						searchButton.off('wishlist').on('click.wishlist', function(){
 							wishMessages.hide();
 							$('.resultsHeader').hide();
 							$("#wish-search-results").html("");

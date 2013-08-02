@@ -124,7 +124,7 @@
 
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
 						// Firefox/webkit discrepency
-						return $('body, html').animate({ scrollTop: element.offset().top - 20});
+						return $('body, html').animate({ scrollTop: element.offset().top - 20}, 500);
 
 					}
 				}else{

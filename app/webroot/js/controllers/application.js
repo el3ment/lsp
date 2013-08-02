@@ -326,7 +326,6 @@
 					// set - if it has, then it's NOT a pageLoad. This means any time we call history.pushState, we MUST send some
 					// state (generally {} or true, or anything that will evaluate to true)
 					$(window).on('popstate', function(e){
-						console.log('popstate');
 						if(history.state){
 							$(_this).triggerHandler('onStateChange', eventData);
 						}

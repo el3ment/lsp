@@ -541,8 +541,7 @@
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				var searchPage = $('.page-generic');
-				return _util.scrollTo(searchPage);
+				return _util.scrollTo($('.breadcrumbs'));
 			},
 
 			renderSummary : function(easyAskDataObject){
