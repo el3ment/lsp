@@ -27,11 +27,11 @@
 		
 		this.settings = $.extend({}, $.fn.touchCarousel.defaults, options);		
 		
-		this._dragContainer = this.carouselRoot.find(".touchcarousel-container");	
+		this._dragContainer = this.carouselRoot.find(".touchcarousel-container");
 		
 		// animate directly style for better performance
 		this._dragContainerStyle = this._dragContainer[0].style;
-		
+
 		this._itemsWrapper = this._dragContainer.wrap($('<div class="touchcarousel-wrapper" />')).parent();		
 		var itemsJQ = this._dragContainer.find(".touchcarousel-item");
 		
@@ -257,14 +257,6 @@
 			width:currPosX
 		});
 		
-		
-
-
-		
-		
-	
-
-
 		//Direction navigation (arrows)
 		if(this.settings.directionNav) {	
 			this._itemsWrapper.after("<a href='#' class='arrow-holder left'><span class='arrow-icon left'></span></a> <a href='#' class='arrow-holder right'><span class='arrow-icon right'></span></a>");

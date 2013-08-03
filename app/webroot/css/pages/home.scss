@@ -71,6 +71,10 @@
 		position: relative;
 		@include box-sizing();
 
+		.touchcarousel-container{
+			left: -400px;
+		}
+
 		.ad{
 			@include box-sizing();
 			position: relative;
@@ -129,6 +133,12 @@
 						border: px(8px) solid transparent;
 						border-top: px(8px) solid black; 
 						right: 0;
+
+						// Hide the arrow on mobile
+						@media (max-width: 767px){
+							display: none;
+						}
+
 					}
 				}
 

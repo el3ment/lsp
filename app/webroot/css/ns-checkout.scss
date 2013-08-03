@@ -1700,6 +1700,21 @@ input[name="category"][value="login-register"] ~ table{
 				text-align: left;
 				top: 0px;
 			}
+
+			// Accepted Coupon code
+			&[colspan="2"]{
+				b{ font-weight: bold; }
+				width: 100%;
+				#tbl_removecoupon{
+					display: block;
+					float: left;
+					clear: both;
+					margin-bottom: 10px;
+				}
+				&:after{
+					display: none;
+				}
+			}
 		}
 
 		// Input box field
@@ -2102,7 +2117,8 @@ input[name="total"] ~ table #carttable > tbody > tr:first-child ~ tr{
 // Order subtotals -- _itemtotal is the same as _subtotal, they have two ids one for the cart and one for the reciept
 tr#ordersummary_itemtotal, #ordersummary_itemtotal td,
 tr#ordersummary_shipping, #ordersummary_shipping td,
-tr#ordersummary_subtotal, #ordersummary_subtotal td
+tr#ordersummary_subtotal, #ordersummary_subtotal td,
+tr#ordersummary_discount, #ordersummary_discount td
 {
 	border-bottom: 0 !important;
 	padding-bottom: 0 !important;
@@ -2116,7 +2132,8 @@ tr#ordersummary_subtotal, #ordersummary_subtotal td
 #ordersummary_subtotal,
 #ordersummary_total,
 #ordersummary_shipping,
-#ordersummary_estship{
+#ordersummary_estship,
+#ordersummary_discount{
 
 	td{
 		line-height: 22px !important;
@@ -2135,6 +2152,12 @@ tr#ordersummary_subtotal, #ordersummary_subtotal td
 		padding-right: 10px !important;
 	}
 } 
+
+#ordersummary_discount td:first-child + td{
+	&:before{
+		content: '-';
+	}
+}
 
 // Just the overall total value
 #ordersummary_total td:first-child + td{

@@ -25,7 +25,7 @@
 				},
 				application : {
 					onReady : function(e, data){
-						$('#mainSlider').touchCarousel({
+						var slider = $('#mainSlider').touchCarousel({
 							
 							// This is a custom patch for Lone Star Percussion
 							// It assumes uniform width of items, and calculates
@@ -40,10 +40,15 @@
 							itemsPerPage: 1,
 							scrollToLast: true,
 							loopItems: true,
+							startingXPos: -600
 
 							// Testing this out
 							//useWebkit3d : true
 						});
+
+						var touchCarousel = slider.data('touchCarousel');
+						touchCarousel.goTo(0)
+
 					},
 					onInit : function(e, data){}
 				}

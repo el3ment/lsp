@@ -221,6 +221,8 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 			height: 100%;
 			float: left;
 			margin-right:10px;
+			z-index: 99;
+			position: relative;
 		}
 
 		// A section within a column of links 
@@ -305,9 +307,13 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				// .name {
 				// 	padding-right: 22px;
 				// }
+
+				// Arrow
 				.name:after{
 					border: 5px inset transparent;
 					border-top: 8px solid black;
+					left: 3px;
+					top: 4px;
 				}
 
 				&:hover{
@@ -325,7 +331,9 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				}
 				.name:after{
 					border: px(5px) inset transparent;
-					border-bottom: px(8px) solid black; 
+					border-bottom: px(8px) solid black;
+					top: -1px;
+					left: 4px;
 				}
 
 				&:hover{
