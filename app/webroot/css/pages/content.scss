@@ -1,3 +1,15 @@
 .map{
 	padding-bottom: 10px;
 }
+
+.letterFormat{
+	width: 600px;
+	margin: auto;
+	@media (max-width: 767px){
+		width: 100%;
+	}
+
+	ul.list, ol.list{
+		margin-left: 20px;
+	}
+}

@@ -296,6 +296,7 @@
 		}
 
 		.block{
+		margin-top: 20px;
 			background-color: #1f150d;
 			@include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
 		}
@@ -310,3 +311,5 @@
 		font-weight: normal;
 	}
 }
+
+
