@@ -126,14 +126,18 @@
 
 
  @mixin lsp-sprite-background(){
-	background-image: url(../img/lsp-master-sprite.png);
+	background-image: url(/img/lsp-master-sprite.png);
  }
  
  /* These are convience methods to make cross-browser implementations of common
 		CSS3 properties easier */
 
  @mixin gradient($from, $to){
+ 	
+ 	background-color: $from;
+
 	@include lsp-sprite-background();
+
 	@if $from == $lightYellow{
 		background-position: 0 -527px;
 	}@else if $from == $darkYellow{ // click

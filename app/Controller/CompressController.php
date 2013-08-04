@@ -25,18 +25,41 @@ class CompressController extends Controller {
 	}
 	
 	function css(){
-		App::import('Vendor', 'CSSTidy', array('file' =>'CSSTidy'.DS.'class.csstidy.php'));
+		//App::import('Vendor', 'CSSTidy', array('file' =>'CSSTidy'.DS.'class.csstidy.php'));
 		
 		$filesArray = explode(",", str_replace("/compress/css/", "", $_SERVER['REQUEST_URI']));
 		$css = "";
 		foreach($filesArray as $file){
-			$css .= file_get_contents('/www/'.$file);
+			if(strpos($file, 'scss') > 0){
+				if (file_exists(WWW_ROOT . $file)) {
+					$sassOptions = array('debug', 'debug_info', 'style', 'property_syntax', 'cache', 'always_update', 'template_location', 'css_location', 'cache_location', 'load_paths', 'line', 'line_numbers');
+					$options = array();
+					foreach ($sassOptions as $option) {
+						$_option = Configure::read("Sass.$option");
+						if (!is_null($_option)) {
+							$options[$option] = $_option;
+							//echo $option . ' - ' . $options[$option];
+						}
+					} // foreach
+					
+					App::import('Vendor', 'PHPSass', array('file'=>'phpsass'.DS.'SassParser.php'));
+					$parser = new SassParser($options);
+					$css .= $parser->toCss(WWW_ROOT . $file);
+				}
+			}else{
+				//echo WWW_ROOT . $file;
+				$css .= file_get_contents(WWW_ROOT . $file);
+			}
+			
 		}
 		
-		$cssTidy = new csstidy();
-		$cssTidy->parse($css);
-		
-		return $cssTidy->print->formatted();
+		// $cssTidy = new csstidy();
+		// $cssTidy->parse($css);
+
+		header("Content-Type: text/css");
+
+		echo $css;
+		die();
 	}
 		 
 }

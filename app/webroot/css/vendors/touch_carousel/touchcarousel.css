@@ -153,7 +153,7 @@
 *  5. Scrollbar
 *
 \******************************************************/
-.touchcarousel .scrollbar-holder {
+/*.touchcarousel .scrollbar-holder {
 	position: absolute;
 	z-index: 30;
 	left: 6px;
@@ -175,7 +175,7 @@
 .touchcarousel .scrollbar.light {
 	background-color: rgb(210, 210, 210);	
 	background-color: rgba(255, 255, 255, 0.5);	
-}
+}*/
 
 
 

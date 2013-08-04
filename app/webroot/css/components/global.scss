@@ -10,6 +10,7 @@
   font-style: normal;
 }
 
+
 html{
 	width: 100%;
 	font-size: 100%;
@@ -51,6 +52,7 @@ div[class|="page"]{
 	
 	float: none;
 	margin: auto;
+	min-height: 100%;
 
 	// Add some extra padding on the outside of the
 	// panel border

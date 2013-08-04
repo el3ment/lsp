@@ -115,7 +115,8 @@
 	   
 		width: 100%;
 		float: left;
-		background: url(../img/dark_pattern.jpg);
+		background: url(/img/dark_pattern.jpg);
+		background-color: black;
 		padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
 		clear: both;
 		
@@ -299,10 +300,11 @@
 		margin-top: 20px;
 			background-color: #1f150d;
 			@include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
+			border: 1px solid #120C07\9;
+			border-width: 0 1px 1px;
 		}
 
 	}
-	
 }
 
 

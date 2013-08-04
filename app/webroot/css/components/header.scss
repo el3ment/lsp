@@ -7,6 +7,7 @@
 	width: 100%;
 	float: none; // This is to fix a positioning bug in firefox
 	background: url(../img/dark_pattern.jpg);
+	background-color: black;
 	
 	@include clearfix;
 	
@@ -74,10 +75,6 @@
 			
 			float: left;
 			margin: px($_taglineMarginTop) px(10px) px(10px); /* Should be same as margin-top on .tagline */
-			
-			.year:before{
-				
-			}
 		}
 		
 		.tagline{
