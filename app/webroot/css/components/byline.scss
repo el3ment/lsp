@@ -51,5 +51,16 @@
 		&[data-author="Zach"]:after{ 
 			background-image:url("http://www.gravatar.com/avatar/26d13f7ccf4bb9274e719796b8d6fb11?s=64&d=identicon");
 		}
+
+		&[data-author="Brian 'Chavez' Lowe"]:after,
+		&[data-author="Chavez"]:after{ 
+			background-image:url("http://www.gravatar.com/avatar/30acc21e43ac447ca10495c821e2f9c2?s=64&d=identicon");
+		}
+
+		&[data-author="Patrick Curry"]:after,
+		&[data-author="Patrick"]:after{ 
+			background-image:url("http://www.gravatar.com/avatar/c481502ffa3026fd53cf9d4ebcb67eea?s=64&d=identicon");
+		}
+
 	}
 }
