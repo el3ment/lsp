@@ -3,6 +3,7 @@ app/tmp/sessions/ses*
 .project/
 dummy
 app/tmp/logs/*
+app/tmp/cache/*
 .DS_Store
 *.swp
 static
