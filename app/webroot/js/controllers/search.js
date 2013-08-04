@@ -204,6 +204,13 @@
 						data.originalEvent.preventDefault();
 					},
 
+					onDestroyAndLoadCategory : function(e, data){
+						_state = _defaultState;
+						_this.loadCategory($(data.selector).data('path'), true);
+						_app.controllers.flyout.closeFlyout();
+						data.originalEvent.preventDefault();
+					},
+
 					onRemoveCategory : function(e, data){
 						var path = '/' + _state.category;
 						var categoriesToRemove = $(data.selector).data('removepath').split('/');

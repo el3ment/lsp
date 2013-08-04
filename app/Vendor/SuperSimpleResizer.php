@@ -61,11 +61,13 @@
 				
 				if($imageDataArray['image-type'] === IMAGETYPE_PNG){
 					imagefill($outputImage, 0, 0, imagecolorallocatealpha($outputImage, 0, 0, 0, 127));
-					imagesavealpha($outputImage, true); 
+					imagesavealpha($outputImage, true);
 				}else{
 					imagefill($outputImage, 0, 0, imagecolorallocate($outputImage, 255, 255, 255));	
 				}
-
+				
+				imageinterlace ($outputImage, 1);
+				
 				if($outputImage) {
 					$sourceWidth = $imageDataArray['size']['x'];
 					$sourceHeight = $imageDataArray['size']['y'];
