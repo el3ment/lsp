@@ -369,7 +369,7 @@
 				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
 					.done(function(data){
 						if(data.response){
-							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1){
+							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1 && !((((data.response || {}).source || {})._lsp || {}).query || {}).assumedQuery){
 								document.location.replace(data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev'));
 							}else{
 								_this.renderPage(data.response.source);
