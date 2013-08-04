@@ -36,27 +36,6 @@
 
 	// Actual search results
 	.results{
-
-		// The link that surrounds both the image and the title
-		.productLink{
-			
-			text-decoration: none;
-
-			.productName{
-				color: black;
-				font-weight: bold;
-			}
-
-			&:hover{
-				.productName{
-					text-decoration: underline;
-				}
-				.thumbnail{
-					// @include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-					// outline: 1px solid $darkYellow;
-				}
-			}
-		}
 		
 		.tabs{
 			font-size: 13px;
@@ -378,7 +357,10 @@
 			position: absolute;
 			top: px($_topOfPrice + 75px);
 			left: $paddingUnit;
-			
+			@media (max-width: 979px) and (min-width: 768px){
+				top: 365px;
+				left: 10px;
+			}
 		}
 		.productName{
 			max-height: 10em;
@@ -421,7 +403,7 @@
 				color: $grey;
 
 				@media (max-width: 979px) and (min-width: 768px){
-					margin-top: 0; // move it back up, smaller picture
+					margin-top: 5px; // move it back up, smaller picture
 				}
 
 				.status{

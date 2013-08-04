@@ -1,0 +1,4921 @@
+1375648705
+s:166150:"/* js/models/easyask.js */
+/* js/controllers/search.js */
+/* js/vendors/menu-aim/menu-aim.js */
+/* js/controllers/plugins/flyout.js */
+/* js/controllers/plugins/reveal.js */
+/* js/vendors/json2/json2.js */
+/* js/vendors/form2js/form2js.js */
+/* js/vendors/md5/md5.js */
+/* js/controllers/plugins/clearable.js */
+/* js/vendors/touchcarousel/touchcarousel-1.2.js */
+/* js/controllers/product.js */
+/* js/controllers/netsuite.js */
+/* js/controllers/wishlist.js */
+/* /postLoad.js */
+/* js/models/easyask.js */
+(function(){
+
+	var _util = window.LSP.utilities;
+	var _models = window.LSP.models;
+	
+	_util.register('model', 'easyask', (function(){
+
+		var _this = $.extend({}, _models.api);
+
+		// var _dictionary = 'EcomDemo';
+		// var _hostname = 'http://easyaskqa.easyaskondemand.com';
+		
+		var _dictionary = 'nslonestarpercussion';
+		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
+		var _sessionId;
+
+		var _attributeHistory = {};
+
+		// Extends the generic API
+		return $.extend(_this, {
+			
+			_timeout : 5000,
+
+			_url : function(controller, payload){
+				return _hostname + '/EasyAsk/apps/Advisor.jsp';
+			},
+			_payload : function(controller, payload){
+
+				// payload : 
+				// 	{sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
+
+				var formattedPayload = {
+					RequestAction : payload.action,
+					RequestData : payload.method,
+					currentpage : payload.page || 1,
+					forcepage : 1,
+					ResultsPerPage : payload.resultsPerPage || 24,
+					defsortcols : (payload.sort === 'default' ? '' : payload.sort),
+					indexed : 1, 
+					rootprods : 1,
+					oneshot : 1,
+					//sessionID : _sessionId,
+					defarrangeby : '///NONE///',
+					disp : 'json',
+					dct : _dictionary,
+					q : (payload.keywords && payload.keywords.length) ? payload.keywords : undefined,
+					AttribSel : _this.combineSimilarAttributesForRequest(payload.attribute, payload.allAttributes)
+				};
+
+				// if(payload.isSingleSelect){
+				// 	formattedPayload.CatPath = payload.category;
+				// 	formattedPayload.AttribSel = this.buildSingleAttributeString(payload.allAttributes);
+				// }else{
+				// 	// Build the category path by hand
+				formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)])
+					.join('/')
+					.replace(/^\\\\/{1,}-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
+				//}
+
+				if($.isEmptyObject(payload.allAttributes) && !payload.attribute && payload.method === 'CA_AttributeSelected'){
+					formattedPayload.RequestData = 'CA_BreadcrumbClick'; // If there are no attributes, just load the category
+				}
+
+				// If we are trying to remove the last breadcrumb - this was a weird bug, and I'm still not super sure if it's
+				// totally fixed.
+				if(formattedPayload.RequestData === 'CA_BreadcrumbRemove' && !formattedPayload.q && !formattedPayload.AttribSel){
+					formattedPayload.RequestData = 'CA_CategoryExpand';
+				}
+
+				if(formattedPayload.RequestData !== 'CA_Search'){
+					delete formattedPayload.q;
+				}
+
+				if(formattedPayload.ResultsPerPage > 96 || (formattedPayload.ResultsPerPage + '' || '').toLowerCase() === 'all'){
+					formattedPayload.ResultsPerPage = 96;
+				}
+
+				// As a form of cleanup - remove a trailing / from a category request
+				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\\\\/$/, '').replace(/^\\\\//, '').replace(/\\\\/\\\\//g, '/'); // Remove trailing / if it exists
+
+				return formattedPayload;			
+			},
+
+			_isSuccess : function(responseData){
+				return (responseData || {}).returnCode === 0;
+			},
+
+			isRedirect : function(responseData){
+				return /((http|https)(:\\\\/\\\\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\\\\/{1}[a-zA-Z0-9]+)*\\\\/?/.test(responseData.errorMsg) || /^\\\\//.test(responseData.errorMsg); 
+			},
+
+			_afterSuccess : function(responseData){
+
+				if(_this.isRedirect(responseData)){
+					document.location = responseData.errorMsg;
+					return;
+				}
+				
+				_sessionId = responseData.sessionID;
+
+				responseData.source = _this.clean(responseData.source);
+				
+				responseData.source.navPath._lsp = responseData.source.navPath._lsp || {};
+				responseData.source.navPath._lsp.categoryNodes = _this.getCategoryNodes(responseData.source);
+				responseData.source.navPath._lsp.refinementNodes = _this.getRefinementNodes(responseData.source);
+				responseData.source.navPath._lsp.searchNode = _this.getSearchNode(responseData.source);
+				
+				this.cacheAttributes(responseData.source);
+				responseData.source.attributes = responseData.source.attributes || {};
+				responseData.source.attributes._lsp = responseData.source.attributes._lsp || {};
+				responseData.source.attributes._lsp.cached = _this.injectCachedAttributes(responseData.source);
+
+				responseData.source._lsp = responseData.source._lsp || {};
+				responseData.source._lsp.query = _this.parseCommentaryForDidYouMean(responseData.source.commentary);
+
+				for(var i = 0; i < ((responseData.source.products || {}).items || {}).length; i++){
+					if(responseData.source.products.items[i].Matrix_Values){
+						var children = $.parseJSON(responseData.source.products.items[i].Matrix_Values);
+						responseData.source.products.items[i]._formattedMatrixObject = _this.parseMatrixChildren(children);
+					}
+				}
+
+				return responseData;
+			},
+
+			clean : function(easyAskDataSourceObject){
+
+				// Categories - Remove 'School'
+				for(var i = 0; i < ((easyAskDataSourceObject.categories || {}).categoryList || []).length; i++){
+					if(easyAskDataSourceObject.categories.categoryList[i].name === 'School'){
+						easyAskDataSourceObject.categories.categoryList.splice(i, 1);
+						i--;
+					}
+				}
+				
+				// if(((easyAskDataSourceObject.categories || {}).categoryList || []).length === 0){
+				// 	delete easyAskDataSourceObject.categories;
+				// }
+
+				// Refinements
+				var value;
+				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
+					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].attributeValueList || {}).length; j++){
+						value = easyAskDataSourceObject.attributes.attribute[i].attributeValueList[j].attributeValue;
+						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
+							easyAskDataSourceObject.attributes.attribute[i].attributeValueList.splice(j, 1);
+							j--;
+						}
+					}
+					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList || {}).length; j++){
+						value = easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList[j].attributeValue;
+						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
+							easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList.splice(j, 1);
+							easyAskDataSourceObject.attributes.attribute[i].initDispLimit--;
+							j--;
+						}
+					}
+					if(easyAskDataSourceObject.attributes.attribute[i].attributeValueList.length === 0){
+						easyAskDataSourceObject.attributes.attribute.splice(i, 1);
+						i--;
+					}
+				}
+
+				if(((easyAskDataSourceObject.attributes || {}).attribute || []).length === 0){
+					delete easyAskDataSourceObject.attributes;
+				}
+
+				return easyAskDataSourceObject;
+			
+			},
+
+
+			// AttribSel needs to have all the options for a particular attribute
+			// in the same request -- some of those are contained in the path - so
+			// we need to remove them from the path, and add them to the AttribSel
+			// parameter - combineAndRemoveAllForPath removes them for the path
+			combineAndRemoveAllForPath : function(singleAttribute, allAttributes){
+				if(allAttributes && singleAttribute){
+
+					var singleAttributeName = singleAttribute.replace(/:.*/, '');
+					allAttributes = allAttributes.split('/');
+
+					for(var i = 0; i < allAttributes.length; i++){
+						if(allAttributes[i].replace(/:.*/, '') === singleAttributeName){
+							allAttributes.splice(i, 1);
+							i--;
+						}
+					}
+					return allAttributes.join('/');
+				}
+
+				return allAttributes;
+				
+			},
+
+			// AttribSel needs to have all the options for a particular attribute
+			// in the same request -- some of those are contained in the path - so
+			// we need to remove them from the path, and add them to the AttribSel
+			// parameter - combineSimilarAttributesForRequest combines them for
+			// the request
+			combineSimilarAttributesForRequest : function(singleAttribute, allAttributes){
+				if(allAttributes && singleAttribute){
+
+					var singleAttributeName = singleAttribute.replace(/:.*/, '');
+					allAttributes = allAttributes.split('/');
+
+					for(var i = 0; i < allAttributes.length; i++){
+						if(allAttributes[i].replace(/:.*/, '') === singleAttributeName){
+							singleAttribute += ';' + allAttributes[i];
+						}
+					}
+
+					return singleAttribute;
+				}
+
+				return singleAttribute;
+			},
+
+			buildKeywordString : function(keywords){
+				return (keywords ? ('-' + keywords).replace(/-{1,}/, '-') : null);
+			},
+
+			// buildMultiAttributeString : function(attributeHashMap){
+				
+			// 	var attributes = [];
+
+			// 	if(attributeHashMap){
+			// 		$.each(attributeHashMap, function(name, valueArray){
+
+			// 			var selections = [];
+
+			// 			$.each(valueArray, function(index, selectedValue){
+			// 				// If index is null (it's the first index) add attribSel to the name
+			// 				selections.push(selectedValue);
+			// 			});
+
+			// 			attributes.push(selections.join(';'));
+
+			// 		});
+			// 	}
+
+			// 	return _util.cleanArray(attributes).join('/');
+
+			// },
+
+			buildSingleAttributeString : function(attributeHashMap){
+				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\\\\/\\\\/\\\\/\\\\/*/, '');
+			},
+
+			cacheAttributes : function(easyAskDataSourceObject){
+
+				var returnAttributeMap = {};
+
+				// Add all returned attributes to the cache
+				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
+					var attribute = easyAskDataSourceObject.attributes.attribute[i];
+					_attributeHistory[attribute.name] = attribute;
+					returnAttributeMap[attribute.name] = true; // Small lookup map
+				}
+
+				// Clean cachedAttributes that shoudn't be there
+				$.each(_attributeHistory, function(i, cachedAttribute){
+					
+					// If it's not been returned with Attributes
+					var fullPath = $(easyAskDataSourceObject.navPath.navPathNodeList).last()[0].seoPath;
+					var attributeSEOName = cachedAttribute.attributeValueList[0].nodeString.replace(/:.*/, '');
+
+					// If it's neither returned, nor selected, it's ok to delete it from the cache	
+					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){					
+						delete _attributeHistory[cachedAttribute.name];
+					}
+				});
+
+				return returnAttributeMap;
+
+			},
+
+			injectCachedAttributes : function(easyAskDataSourceObject){
+				
+				var lspAttributes = [];
+
+				// Loop through cached attributes
+				// See if the attribute came down in the response, if it is then use it
+				// if it's not - then use the cached version.
+
+				$.each(_attributeHistory, function(i, cachedAttribute){
+					
+					var found = false;
+					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
+						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.name){
+							found = true;
+							lspAttributes.push(easyAskDataSourceObject.attribute[j]);
+						}
+					}
+					if(!found){
+						lspAttributes.push(cachedAttribute);
+					}
+
+				});
+
+				return this.markSelectedAttributes(easyAskDataSourceObject, lspAttributes);
+			},
+
+			markSelectedAttributes : function(easyAskDataSourceObject, attributes){
+				
+				var attributes = $.extend(true, [], attributes); // attributes is a pointer, we need it passed as a value
+
+				$.each(((easyAskDataSourceObject.navPath || {})._lsp || {}).refinementNodes, function(j, refinementNode){
+
+					// Find the attribute
+					for(var i = 0; i < (attributes || {}).length; i++){
+						if((attributes[i] || {}).name === refinementNode.attribute){
+
+							// Find the matching value
+							for(var j = 0; j < (attributes[i].attributeValueList || {}).length; j++){
+
+								if(refinementNode.value === attributes[i].attributeValueList[j].attributeValue){
+									// Mark it as selected
+									attributes[i].attributeValueList[j].selected = true;
+									break;
+								}
+							}
+
+							break; // stop after the first attribute
+						}
+					}
+
+					
+				});
+
+				return attributes;
+
+			},
+
+			getCategoryNodes : function(easyAskDataSourceObject){
+				
+				var categoryNodes = [];
+				var navPathNodeList = easyAskDataSourceObject.navPath.navPathNodeList;
+				var pureCategoryPath = this.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath);
+
+				// Creates a list of just category nodes, and adds a convinient removePath property
+				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
+					if(navPathNodeList[i].navNodePathType === 1){
+						
+						navPathNodeList[i].englishName = navPathNodeList[i].englishName.replace(/\\\\/$/, '');
+						navPathNodeList[i].englishName = (navPathNodeList[i].englishName === 'All-Products' ? 'All Products' : navPathNodeList[i].englishName);
+
+						if(navPathNodeList[i].englishName !== 'All Products' && navPathNodeList[i].englishName !== 'School'){
+							var len = categoryNodes.push(navPathNodeList[i]);
+							var newCategoryName = categoryNodes[len - 1].seoPath;
+
+							// Grab the stuff after newCategoryName
+							categoryNodes[len - 1].removePath = pureCategoryPath.substr(pureCategoryPath.indexOf(newCategoryName) + newCategoryName.length, pureCategoryPath.length);
+						}
+					}
+				}
+
+				return categoryNodes;
+
+			},
+
+			getSearchNode : function(easyAskDataSourceObject){
+				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
+					if(easyAskDataSourceObject.navPath.navPathNodeList[i].navNodePathType === 3){ 
+						return easyAskDataSourceObject.navPath.navPathNodeList[i];
+					}
+				}
+			},
+
+
+			// Creates an array of refinement node objects
+			// and splits up each attribute selection into it's own
+			// node
+			// Is then accessible at .navPath._lsp
+			getRefinementNodes : function(easyAskDataSourceObject){
+				var attributeNodes = [];
+
+				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
+					
+					var node = easyAskDataSourceObject.navPath.navPathNodeList[i];
+
+					if(node.navNodePathType === 2){ // If it is a refinement
+
+						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\\\\+/g, ' ');
+
+						// A group is a collection of refinements of the same type (two manufactuers, or three diameters)
+						var groups = node.englishName.substring(1, node.englishName.length - 2); // Remove starting and trailing parens
+						groups = groups.split('\\\\'); (');
+
+						for(var k = 0; k < groups.length; k++){
+							
+							var attributeNode = groups[k].split('\\\\' or ');
+
+							for(var j = 0; j < attributeNode.length; j++){
+
+								// Easy ask will sometimes append random numbers to the end of node values, and since convertToSEOString
+								// can't figure it out - we need to search the seoPath, find and use the right nodeString
+								var attribute = attributeNode[j].split(' = \\\\''); // Grab the name [0] and value [1] 
+								var initialNodeString = this.convertToSEOString(attribute[0]+':'+attribute[1]); // the part we know
+								var additionalText = _util.findBetween(initialNodeString, ';', node.seoPath); // the potential part we don't
+
+								attributeNodes.push({
+									attribute : attribute[0],
+									value : attribute[1],
+									nodeString : initialNodeString + additionalText
+								});
+							}
+						}
+
+						
+					}
+				}
+
+				return attributeNodes;
+			},
+
+			parseMatrixChildren : function(easyAskMatrixArray){
+
+				var optionObject = {};
+				var productObject= {};
+				var easyAskMatrixArray = (typeof easyAskMatrixArray === 'string' ? $.parseJSON(easyAskMatrixArray) : easyAskMatrixArray) || [];
+				
+				for(var i = 0; i < easyAskMatrixArray.length; i++){
+					var id = easyAskMatrixArray[i][0],
+						item = easyAskMatrixArray[i][1].split('|'),
+						label = item[0],
+						value = item[1],
+						index = item[2],
+						imageUrl = item[3],
+						mpn = item[4],
+						onlinePrice = item[5],
+						msrp = item[6],
+						stockMessage = item[7];
+
+					optionObject[label] = optionObject[label] || {};
+					optionObject[label][value] = optionObject[label][value] || [];
+					optionObject[label][value].push(id);
+
+					productObject[id] = productObject[id] || {};
+					productObject[id].options = productObject[id].options || {};
+					productObject[id].options[label] = productObject[id].options[label] || {};
+					productObject[id].options[label] = value;
+
+					productObject[id].data = productObject[id].data || {};
+					productObject[id].data.imageUrl = imageUrl;
+					productObject[id].data.mpn = mpn;
+					productObject[id].data.onlinePrice = onlinePrice;
+					productObject[id].data.msrp = msrp;
+					productObject[id].data.stockMessage = stockMessage;
+
+
+				}
+
+				return {options : optionObject, products : productObject};
+			},
+
+			filterMatrixChildren : function(easyAskMatrixData, filters){
+				
+				var filteredOptionsObject = {};
+				var filteredProducts = {};
+				
+				$.each(easyAskMatrixData.products, function(id, options){
+					
+					// Loop through the products and check to see if any filters don't match
+					for(var key in filters){
+						if(filters.hasOwnProperty(key)){
+							if(options.options[key] && options.options[key] != filters[key]){
+								return;
+							}
+						}
+					}
+
+					// If we make it all the way through the filters, it means the product matches
+					filteredProducts[id] = options;
+
+				});
+
+				// Create the options from the products
+				$.each(filteredProducts, function(id, options){
+					$.each(options.options, function(label, value){
+
+						// // If option isn't part of the filters
+						if(!filters[label]){
+							// We avoid adding filtered options here because 1) state dosen't change like it does
+							// for search refinements (where we WANT easyask to return selected attributes, but they don't)
+							// and 2) because it makes replacing them easier - just loop through the filteredOptions and if it exists in the object, it needs to get updated.
+							filteredOptionsObject[label] = filteredOptionsObject[label] || {};
+							filteredOptionsObject[label][value] = filteredOptionsObject[label][value] || [];
+							filteredOptionsObject[label][value].push(id);
+						}
+					});
+				});
+
+				return filteredOptionsObject;
+			},
+
+
+			convertToSEOString : function(string){
+				return string.replace(/'/g, '') // remove apostrphes which are skipped by the next line
+					.replace(/[^A-Za-z0-9:]/g, '-') //Everything not a A-Z or 0-9
+					.replace(/-{1,}/g, '-') // two or more -
+					.replace(/-$/, '') // end with -
+					.replace(/:-/, ':'); // remove starting - from any values
+			},
+
+			getCategoriesFromSEOPath : function(seoPath){
+
+				var seoPath = seoPath.split('/');
+
+				for(var i = 0; i < seoPath.length; i++){
+					if(seoPath[i].indexOf(':') > 0 || seoPath[i].indexOf('-') === 0){
+						seoPath.splice(i, 1);
+						i--; // We just removed an element from the array
+					}
+				}
+				
+				return seoPath.join('/');
+			},
+
+			getRefinementsFromSEOPath : function(seoPath){
+
+				var seoPath = seoPath.split('/');
+
+				for(var i = 0; i < seoPath.length; i++){
+					if(seoPath[i].indexOf(':') < 0 || seoPath[i].indexOf('-') === 0){
+						seoPath.splice(i, 1);
+						i--; // We just removed an element from the array
+					}
+				}
+				
+				return seoPath.join('/');
+			},
+
+			getKeywordsFromSEOPath : function(seoPath){
+
+				var seoPath = seoPath.split('/');
+
+				for(var i = 0; i < seoPath.length; i++){
+					if(seoPath[i].indexOf('-') === 0){
+						return seoPath[i];
+					}
+				}
+
+				return '';
+			},
+			parseCommentaryForDidYouMean : function(commentaryString){
+				
+				var returnObject = {};
+
+				if(commentaryString.length > 0 && commentaryString.indexOf('Corrected Word') > -1){
+					var spaced = commentaryString.split(' ');
+
+					returnObject.originalQuery = _util.findBetween('Corrected Word: ', ' is ', commentaryString);
+					returnObject.assumedQuery =  _util.findBetween(' is ', '; ', commentaryString);
+					returnObject.otherSuggestions = (_util.findBetween(' could be  ', '~END', commentaryString + '~END') || '').split(', ');
+
+				}
+				
+				return returnObject;
+
+			}
+		});
+
+	}()));
+	
+}());
+/* js/controllers/search.js */
+(function(){
+	
+	var _util = window.LSP.utilities;
+	
+	_util.register('controller', 'search', (function(){
+		var _this = {};
+		var _app = window.LSP;
+		var _api = _app.models.easyask;
+
+		var IS_SINGLE_SELECT = false;
+
+		var _isFirstRequest = true;
+
+		var _defaultState = {
+			// resultsPerPage : '24',
+			page : '1'
+			// sort : 'default',
+			// category : '',
+			// allAttributes : ''
+		};
+		var _state = {};
+
+		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
+
+		var _activeDataObject = {};
+		// {sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
+
+		_this = {
+			events : {
+				search : {
+					// onBeforeAPICall : function(e, data){
+					// 	_state.path = data.xhrData.data.CatPath;
+					// 	_app.controllers.application.pushState(_this, _state);
+					// },
+
+					onBeforeAPICall : function(e, data){
+						var searchTemplate = $('#templates-search-page');
+
+						if(searchTemplate.length){
+							var height = $('.page-generic').height();
+							$('.page-search').addClass('loading');
+						}else{
+							// If we can't load the results on this page, we'll need to redirect them to a page built for searching	
+							_util.redirectTo('/search.html#' + _app.controllers.application.buildStateString(_this, _this.getState()));
+							
+							return false;
+						}
+					},
+					
+					onAfterAPICall : function(e, data){
+						$('.page-search, .page-generic').removeClass('loading');
+						$('html').removeClass('search-loading');
+						_isFirstRequest = false;
+					},
+
+					onAfterAPICallSuccess : function(e, data){
+
+						if(data.response){
+
+							var navPathNodeList = data.response.source.navPath.navPathNodeList;
+
+							// Remove everything except categories, then remove trailing /
+							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\\\\/$/, '');
+							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\\\\/$/, '');
+							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\\\\-/g, ' ').replace(/^ /, ''));
+
+							_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
+							
+							// Set the activeDataObject, used to rebuild matrix option selections
+							_activeDataObject = data;
+
+							// If we don't scroll first - the scroll position will be saved
+							// and you will jump around when clicking the back button
+							$.when(_this.scrollToFirst()).done(function(){
+								// onReady and onStateChange make use of preventPushState because those requests are
+								// administrative and shouldn't create new history entries
+								if(!data.xhrData.passthrough.preventPushState){
+									_this.pushState();
+								}
+								
+							});
+						}
+					},
+
+					onAfterAPICallFailure : function(e, data){
+						_this.renderFatalError();
+					},
+
+					onRemoveFilter : function(e, data){
+						
+						if(IS_SINGLE_SELECT){
+							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \\\\'' + $(data.selector).data('value') + '\\\\'');
+						}else{
+							_this.removeFilterAttribute($(data.selector).data('value'));
+						}
+						
+					},
+
+					onSearch : function(e, data){
+
+						var query = $('input[name="searchQuery"]', data.selector).trigger('blur').val();
+						
+						$('.mobileSearch .b3').click(); // hide it
+
+						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
+						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
+							
+							// Remove the delete statements if you want search to work within a category
+							delete _state.category;
+							delete _state.allAttributes;
+							_isFirstRequest = false;
+
+							_state.keywords = query; // usually we wait until the response to update the state
+													 // but search is unique because it's ubiquious and can be done from anywhere
+													 // we might need to redirect (via onBeforeAPICall) and we'll update the state string a little early
+							_this.search(query);
+
+						}
+					},
+
+					// Originally used for suggestions on "did you mean" - but deprecated now
+					// onSearch : function(e, data){
+					// 	var query = $(data.selector).data('query');
+					// 	_this.search(query);
+					// 	$('#searchQuery').val(query).change();
+					// },
+
+					onRemoveSearch : function(e, data){
+
+						_this.removeSearch();
+
+						$('input[name="searchQuery"]').val('').change();
+					},
+
+					onFilterAttribute : function(e, data){
+						
+						var name = $(data.selector).attr('name').replace('[]', '');
+
+						if(IS_SINGLE_SELECT){
+							_this.filterWithAttribute(name, $(data.selector).val());
+						}else{
+
+							// The basic idea here is, the first time you check a box it gets
+							// added to the history, to account unchecking we make sure
+							// all of the elements in history are present as checked boxes in the form
+
+							// On the retuning request, the attributes will be marked as "static" or "temporary"
+							// and will consequently be rendered differently.
+
+							var formObject = _util.formToObject($('#refinementForm')[0]);
+
+							// If it's not part of the history (first time it's been checked), add it to the history
+							// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
+							// paths will never happen because we will be hiding them
+
+							// If we have unselected another attribute (different from the last selected) then we need to
+							// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
+							// unselecting a "Color" and "Artist" should "collapse" into it's static form 
+							var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length
+							if(!isInHistory){
+								_attributeHistory.push({name : name, displayState : 'temporary'});
+							}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
+								_attributeHistory[_attributeHistory.length - 1].displayState = 'static';
+							}
+
+							// Mark everything not curent as static
+							for(var i = 0; i < _attributeHistory.length - 1; i++){
+								_attributeHistory[i].displayState = 'static';
+							}
+
+							// Clear unnessesary history elements
+							for(var i = 0; i < _attributeHistory.length; i++){
+
+								// Chop off the last two characters "[]"
+								var attributeName = _attributeHistory[i].name;
+
+								// If the history element isn't in the form it means nothing is selected for
+								// that attribute any longer
+								if(!formObject[attributeName]){
+									_attributeHistory.splice(i, 1);
+								}
+							}
+
+							if($(data.selector).is(':checked')){
+								_this.addFilterAttribute($(data.selector).val());
+							}else{
+								_this.removeFilterAttribute($(data.selector).val());
+							}
+						}
+						
+					},
+
+					onClearAllRefinements : function(e, data){
+
+						_attributeHistory = [];
+						_state.allAttributes = '';
+						_state.keywords = '';
+						_this.loadCategory(_state.category);
+
+					},
+
+					onLoadCategory : function(e, data){
+						_this.loadCategory($(data.selector).data('path'), true);
+						data.originalEvent.preventDefault();
+					},
+
+					onRemoveCategory : function(e, data){
+						var path = '/' + _state.category;
+						var categoriesToRemove = $(data.selector).data('removepath').split('/');
+
+						// Loop through and remove the sub categories
+						for(var i = 0; i < categoriesToRemove.length; i++){
+							if(categoriesToRemove[i].length > 0){
+								path = path.replace('/' + categoriesToRemove[i], ''); // Begins the phrase
+							}
+						}
+						_this.loadCategory(path, true);
+
+					},
+
+					onNextPage : function(e, data){
+						_this.paginate('next');
+					},
+
+					onPreviousPage : function(e, data){
+						_this.paginate('prev');
+					},
+
+					onSort : function(e, data){
+						_state.sort = $(data.selector).val();
+						_this.paginate('first');
+					},
+
+					onItemsPerPage : function(e, data){
+						_state.resultsPerPage = $(data.selector).val();
+						_this.paginate('first');
+					},
+
+					onShowCompactView : function(e, data){
+						_this.changeView('gridView');
+						_this.pushState();
+					},
+
+					onShowDetailsView : function(e, data){
+						_this.changeView('listView');
+						_this.pushState();
+					}
+				},
+
+				application : {
+
+					onStateChange : function(e, data){
+						if(_app.controllers.application.pullState(_this)){
+							_isFirstRequest = false;
+							_this.loadCurrentState();
+						}else{
+							$('.page-search').hide();
+							$('.page-generic').show();
+						}
+					},
+
+					onReady : function(e, data){
+						if(_app.controllers.application.pullState(_this)){
+							_this.loadCurrentState();
+						}
+					},
+					
+					onInit : function(e, data){
+						// Initialize the state
+						//_this.pullState(_app.controllers.application.pullState(_this));
+					},
+
+					onContextChangeEnterPhone : function(e, data){
+						_this.changeView('listView');
+
+					}
+				}
+			},
+			
+			assets : {},
+
+			loadCurrentState : function(){
+				// We need to push a state on to the beginning of the stack
+				_this.loadState(_app.controllers.application.pullState(_this), {preventPushState : !_isFirstRequest});
+			},
+
+
+			// Prepares the _state object for storing in the path
+			getState : function(){
+				
+				// This keeps other controllers from accidentially modifying state
+				var tmpState = $.extend({}, _state);
+				
+				// If it has push state, delete category, otherwise we need to store it in the hash
+				if(_app.controllers.application.hasPushState()){
+					delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
+				}
+
+				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\\\\//g, '|'), uriEncode : false};
+				tmpState.path = _state.category;
+
+				if(tmpState.allAttributes.value.length === 0){
+					delete tmpState.allAttributes;
+				}
+
+				return tmpState;
+
+			},
+
+			// Convienice hook to application pushstate
+			pushState : function(){
+
+				var pushedState = _this.getState();
+				// if isFirstRequest is true, then app.pushState will use history.replaceState instead
+				return _app.controllers.application.pushState(_this, pushedState, _isFirstRequest);
+			},
+
+			// Reads / parses state and changes the _state object
+			pullState : function(state){
+
+				var path = document.location.pathname;
+
+				_state = $.extend({}, _defaultState, (state || {}));
+
+				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\\\\|/g, '/');
+				
+				if(!_state.category){
+					_state.category = path;
+				}
+				
+				// If the path has .html in it - remove the filename and use the category
+				if(path.indexOf('.html') > -1){
+					_state.category = path.substring(0, path.lastIndexOf("/"));
+				}
+
+				// if it's only a /
+				_state.category = (_state.category === '/' ? '' : _state.category);
+				_state.category = _state.category.replace(/^\\\\//, '');
+				_state.category = _state.category.replace(/\\\\/$/, '');
+
+				if(_state.keywords){
+					_state.keywords = decodeURIComponent(_state.keywords).replace(/\\\\-/g, ' ').replace(/^ /, '');
+				}
+
+				return _state;
+			},
+
+			loadState : function(state, passthrough){
+				var tmpState = $.extend({}, _state);
+				_this.pullState(state);
+				
+				// Populate the input with the search keywords
+				$('input[name="searchQuery"]').val(_state.keywords);
+				// Load the state only if the new state is different from the old state (tmpState)
+				if(!_util.isEqual(tmpState, _state)){
+					_this.search(null, passthrough);
+				}
+			},
+
+			// By keyword
+			search : function(keywords, passthrough){
+
+				var payload = {
+					action : 'advisor',
+					method : 'CA_Search',
+					keywords : (keywords === null ? _state.keywords : keywords)
+				};
+
+				return _api.request(_this, 'search', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload), passthrough)
+					.done(function(data){
+						if(data.response){
+							if(((((data.response || {}).source || {}).products || {}).items || []).length === 1 && !((((data.response || {}).source || {})._lsp || {}).query || {}).assumedQuery){
+								document.location.replace(data.serverResponse.source.products.items[0].Item_URL.replace('www.lonestarpercussion', 'lspsandbox.explorewebdev'));
+							}else{
+								_this.renderPage(data.response.source);
+							}
+						}
+					});
+			},
+			removeSearch : function(){
+
+				var payload = {
+					action : 'advisor',
+					method : 'CA_BreadcrumbRemove'
+				};
+
+				delete _state.keywords;
+
+				return _api.request(_this, 'removeSearch', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
+
+			loadCategory : function(categoryPath, isAtomic){
+
+				var payload = {
+					action : 'advisor',
+					method : 'CA_CategoryExpand',
+					category : (isAtomic ? categoryPath : _state.category.replace(/\\\\/$/, '') + '/' + categoryPath)
+				};
+
+				return _api.request(_this, 'loadCategory', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
+
+			addFilterAttribute : function(attributeSlug){
+
+				var payload = {
+					action : 'advisor',
+					method : 'CA_AttributeSelected',
+					attribute : attributeSlug
+				};
+
+				return _api.request(_this, 'filter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
+
+			removeFilterAttribute : function(attributeSlug){
+				
+				console.log('Removing ', attributeSlug, ' from ', _state.allAttributes);
+
+				var payload = {
+					action : 'advisor',
+					method : 'CA_BreadcrumbRemove',
+					allAttributes : _state.allAttributes.replace(attributeSlug, '').replace(/\\\\/{1,}/, ';') // remove it, and remove leftover ;;
+				};
+
+				return _api.request(_this, 'removeFilter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
+					.done(function(data){
+						_this.renderPage(data.response.source);
+					});
+			},
+
+			// breadcrumbClick : function(bc){
+			//	var request = {
+			//		requestAction : 'advisor',
+			//		requestData : 'CA_BreadcrumbClick'
+			//	};
+			//	//var url = formURL() + '&RequestAction=advisor&RequestData=CA_BreadcrumbClick&CatPath='+encodeURIComponent(bc);
+			//	//invoke(url);
+			// },
+
+			// loadPage : function(pageName){
+			// 	var payload = {
+			// 		action : 'navbar',
+			// 		method : 'page' + pageName
+			// 	};
+
+			// 	return _api.request(_this, 'loadPage', $.extend({}, _state, payload));
+			// },
+
+			// Direction can be [first, last, next, prev]
+			paginate: function(direction){
+
+				var payload = {
+					action : 'navbar',
+					method : ($.isNumeric(direction) ? 'page' + direction : direction),
+					currentPage : _state.page
+				};
+
+				return _api.request(_this, 'paginate', $.extend({}, _state, payload))
+					.done(function(data){
+						_this.renderSummary(data.response.source);
+						_this.renderProducts(data.response.source);
+					});
+
+			},
+
+			// removePathNode : function(node){
+				
+			// 	var payload = {
+			// 		category : _state.category.replace('////' + node, ''),
+			// 		RequestAction : 'advisor',
+			// 		RequestData : 'CA_BreadcrumbRemove'
+			// 	};
+
+			// 	return _api.request(_this, 'removeNode', payload)
+			// 		.done(function(data){
+			// 			_this.renderPage(data.response.source);
+			// 		});
+			// },
+
+			changeView : function(viewType){
+				if(viewType === 'gridView' || viewType === 'listView'){
+					$('#resultsContainer')
+						.removeClass('gridView')
+						.removeClass('listView')
+						.addClass(viewType);
+
+					_state.view = viewType;
+				}
+			},
+
+			renderPage : function(easyAskDataObject){
+
+				// if(((easyAskDataObject.products || {}).items ||{}).length === 1){
+						
+				// 	_util.redirectTo(data.response.source.products.items[0].Item_URL);
+				
+				// }else{
+
+					// If the page hasn't been injected yet
+					if(!$('.page-search').length){
+
+						// We must be on an error page, they don't get the <div class=''
+						if(!$('.page-generic').length){
+							$('#div__body').addClass('page-generic');
+						}
+						
+						// Doing it via a node rather than directly into the after()
+						// prevents the page from shrinking height while rendering
+						var pageHTML = _util.parseMicroTemplate('templates-search-page', {});
+						var searchPageNode = $.parseHTML(pageHTML);
+						$('.page-generic').after(searchPageNode).hide();
+
+						_app.controllers.application.attachEvents($('.page-search'));
+					}
+
+					$('.page-search').show();
+					$('.page-generic').hide();
+
+					// Render Sections
+					_this.renderSummary(easyAskDataObject);
+					_this.renderSelectedRefinements(easyAskDataObject);
+					_this.renderRefinements(easyAskDataObject);
+					_this.renderProducts(easyAskDataObject);
+
+					//Make page full width if refinements aren't there.
+					// if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
+					// 	$('#searchTitle, #resultsContainer').removeClass('span9').addClass('span12 row');
+					// }else{
+					// 	$('#searchTitle, #resultsContainer').removeClass('span12 row').addClass('span9');
+					// }
+				//}
+			},
+
+			scrollToFirst : function(){
+				// Scroll To Top
+				return _util.scrollTo($('.breadcrumbs'));
+			},
+
+			renderSummary : function(easyAskDataObject){
+
+				var path = _state.category;
+				var currentPageNumber = ((easyAskDataObject.products || {}).itemDescription || {}).currentPage;
+				var totalPages = ((easyAskDataObject.products || {}).itemDescription || {}).pageCount;
+
+				var breadcrumbHTML = _util.parseMicroTemplate('templates-search-breadcrumbs', $.extend({}, easyAskDataObject));
+				var breadcrumbElement = $('#breadcrumbs').html(breadcrumbHTML);
+				_app.controllers.application.attachEvents(breadcrumbElement);
+				if(breadcrumbElement.is(':has(button)')){
+					breadcrumbElement.parent('.breadcrumbs').removeClass('hide'); // Show the breadcrumbs if they are not empty
+				}else{
+					breadcrumbElement.parent('.breadcrumbs').addClass('hide');
+				}
+
+				var titleHTML = _util.parseMicroTemplate('templates-search-title', $.extend({}, easyAskDataObject));
+				_app.controllers.application.attachEvents($('#searchTitle').html(titleHTML));
+
+				$('.currentPageNumber').html(currentPageNumber);
+				$('.totalPages').html(totalPages);
+				$('.numberOfResults').html(((easyAskDataObject.products || {}).itemDescription || {}).totalItems);
+
+				var sortOrder = ((easyAskDataObject.products || {}).itemDescription || {}).sortOrder || 'default';
+				$('select[data-action="sort"]').val(sortOrder.indexOf('EAScore') > -1 ? 'default' : sortOrder);
+				$('select[data-action="itemsPerPage"]').val(((easyAskDataObject.products || {}).itemDescription || {}).resultsPerPage);
+
+				if(currentPageNumber === 1){
+					$('*[data-action="previousPage"]').css('visibility', 'hidden');
+				}else{
+					$('*[data-action="previousPage"]').css('visibility', 'visible');
+				}
+
+				if(currentPageNumber === totalPages){
+					$('*[data-action="nextPage"]').css('visibility', 'hidden');
+				}else{
+					$('*[data-action="nextPage"]').css('visibility', 'visible');
+				}
+
+				// Update Title
+				var refinements = [];
+				
+				if(easyAskDataObject.navPath._lsp.searchNode){
+					refinements.push('"' + easyAskDataObject.navPath._lsp.searchNode.englishName + '"');
+				}
+				// Looping backwards so the refinements come out in a sort-of first-picked-first-in-list format
+				for(var i = easyAskDataObject.navPath._lsp.refinementNodes.length - 1; i >= 0 ; i--){
+					refinements.push(easyAskDataObject.navPath._lsp.refinementNodes[i].value);
+				}
+				document.title = ($('#pageName').text() + (refinements.length ? ' : ' + refinements.join(', ') : '') + ' | Lone Star Percussion');
+
+				
+
+			},
+
+			renderSelectedRefinements : function(easyAskDataObject){
+				var selectedHTML = _util.parseMicroTemplate('templates-search-selectedRefinements', $.extend({}, easyAskDataObject));
+				_app.controllers.application.attachEvents($('#selectedRefinements').html(selectedHTML));
+			},
+
+
+			renderRefinements : function(easyAskDataObject){
+
+				// Mark attributes._lsp.cached attributes with _attributeHistory states
+				// Loop through the history, then loop through the cached attributes
+				// looking to find the entry, and mark it with the saved state
+				for(var i = 0; i < _attributeHistory.length; i++){
+					for(var j = 0; j < easyAskDataObject.attributes._lsp.cached.length; j++){
+						var cachedAttribute = easyAskDataObject.attributes._lsp.cached[j];
+
+						if((_attributeHistory[i] || {}).name === cachedAttribute.name){
+							easyAskDataObject.attributes._lsp.cached[j].displayState = _attributeHistory[i].displayState;
+							break;
+						}
+					}
+				}
+
+				var refinementHTML = _util.parseMicroTemplate('templates-search-refinements', $.extend({}, easyAskDataObject));
+				_app.controllers.application.attachEvents($('#searchRefinements').html(refinementHTML).show());
+				
+				//If there aren't any attributes, hide the panel
+				if(!(easyAskDataObject.attributes._lsp.cached || {}).length){
+					$('#searchRefinements').addClass('empty');
+				}else{
+					$('#searchRefinements').removeClass('empty');
+				}
+			
+			},
+
+			renderProducts : function(easyAskDataObject){
+				var entriesHTML = _util.parseMicroTemplate('templates-search-entries', $.extend({}, easyAskDataObject));
+				_app.controllers.application.attachEvents($('#searchEntries').html(entriesHTML));
+
+				_this.changeView(_state.view);
+				
+			},
+
+			renderFatalError : function(){
+				// var errorHTML = _util.parseMicroTemplate('templates-error', {
+				// 	title : 'Something Big Has Happened',
+				// 	message : 'Sorry about that, but something has gone seriously wrong.'
+				// });
+				// _app.controllers.application.attachEvents($('.page-search').html(errorHTML));
+			}
+		};
+		
+		return _this;
+
+	})());
+
+})();
+/* js/vendors/menu-aim/menu-aim.js */
+/**
+ * menu-aim is a jQuery plugin for dropdown menus that can differentiate
+ * between a user trying hover over a dropdown item vs trying to navigate into
+ * a submenu's contents.
+ *
+ * menu-aim assumes that you have are using a menu with submenus that expand
+ * to the menu's right. It will fire events when the user's mouse enters a new
+ * dropdown item *and* when that item is being intentionally hovered over.
+ *
+ * __________________________
+ * | Monkeys  >|   Gorilla  |
+ * | Gorillas >|   Content  |
+ * | Chimps   >|   Here     |
+ * |___________|____________|
+ *
+ * In the above example, "Gorillas" is selected and its submenu content is
+ * being shown on the right. Imagine that the user's cursor is hovering over
+ * "Gorillas." When they move their mouse into the "Gorilla Content" area, they
+ * may briefly hover over "Chimps." This shouldn't close the "Gorilla Content"
+ * area.
+ *
+ * This problem is normally solved using timeouts and delays. menu-aim tries to
+ * solve this by detecting the direction of the user's mouse movement. This can
+ * make for quicker transitions when navigating up and down the menu. The
+ * experience is hopefully similar to amazon.com/'s "Shop by Department"
+ * dropdown.
+ *
+ * Use like so:
+ *
+ *      $("#menu").menuAim({
+ *          activate: $.noop,  // fired on row activation
+ *          deactivate: $.noop  // fired on row deactivation
+ *      });
+ *
+ *  ...to receive events when a menu's row has been purposefully (de)activated.
+ *
+ * The following options can be passed to menuAim. All functions execute with
+ * the relevant row's HTML element as the execution context ('this'):
+ *
+ *      .menuAim({
+ *          // Function to call when a row is purposefully activated. Use this
+ *          // to show a submenu's content for the activated row.
+ *          activate: function() {},
+ *
+ *          // Function to call when a row is deactivated.
+ *          deactivate: function() {},
+ *
+ *          // Function to call when mouse enters a menu row. Entering a row
+ *          // does not mean the row has been activated, as the user may be
+ *          // mousing over to a submenu.
+ *          enter: function() {},
+ *
+ *          // Function to call when mouse exits a menu row.
+ *          exit: function() {},
+ *
+ *          // Selector for identifying which elements in the menu are rows
+ *          // that can trigger the above events. Defaults to "> li".
+ *          rowSelector: "> li",
+ *
+ *          // You may have some menu rows that aren't submenus and therefore
+ *          // shouldn't ever need to "activate." If so, filter submenu rows w/
+ *          // this selector. Defaults to "*" (all elements).
+ *          submenuSelector: "*",
+ *
+ *          // Direction the submenu opens relative to the main menu. Can be
+ *          // left, right, above, or below. Defaults to "right".
+ *          submenuDirection: "right"
+ *      });
+ *
+ * https://github.com/kamens/jQuery-menu-aim
+*/
+(function($) {
+
+	$.fn.menuAim = function(opts) {
+		// Initialize menu-aim for all elements in jQuery collection
+		this.each(function() {
+			init.call(this, opts);
+		});
+
+		return this;
+	};
+
+	function init(opts) {
+		var $menu = $(this),
+			activeRow = null,
+			mouseLocs = [],
+			lastDelayLoc = null,
+			timeoutId = null,
+			exitTimeoutId = null,
+			options = $.extend({
+				rowSelector: "> li",
+				submenuSelector: "*",
+				submenuDirection: "right",
+				tolerance: 75,  // bigger = more forgivey when entering submenu
+				enter: $.noop,
+				exit: $.noop,
+				activate: $.noop,
+				deactivate: $.noop,
+				exitMenu: $.noop,
+				exitTimeout: 0, // NEW from LSP
+				afterExitMenu : $.noop // NEW from LSP
+			}, opts);
+
+		var MOUSE_LOCS_TRACKED = 3,  // number of past mouse locations to track
+			DELAY = 300;  // ms delay when user appears to be entering submenu
+
+		/**
+		 * Keep track of the last few locations of the mouse.
+		 */
+		var mousemoveDocument = function(e) {
+				mouseLocs.push({x: e.pageX, y: e.pageY});
+
+				if (mouseLocs.length > MOUSE_LOCS_TRACKED) {
+					mouseLocs.shift();
+				}
+			};
+
+		/**
+		 * Cancel possible row activations when leaving the menu entirely
+		 */
+		var mouseleaveMenu = function() {
+				if (timeoutId) {
+					clearTimeout(timeoutId);
+				}
+
+				// If exitMenu is supplied and returns true, deactivate the
+				// currently active row on menu exit.
+				if (options.exitMenu(this)) {
+					
+					exitTimeoutId = setTimeout(function(){
+						if (activeRow) {
+							options.deactivate(activeRow);
+						}
+
+						activeRow = null;
+						options.afterExitMenu();
+
+					}, options.exitTimeout);
+					
+				}
+			};
+
+		/**
+		 * Trigger a possible row activation whenever entering a new row.
+		 */
+		var mouseenterRow = function() {
+				if (timeoutId) {
+					// Cancel any previous activation delays
+					clearTimeout(timeoutId);
+				}
+				if(exitTimeoutId){
+					clearTimeout(exitTimeoutId);
+				}
+
+				options.enter(this);
+				possiblyActivate(this);
+			},
+			mouseleaveRow = function() {
+				options.exit(this);
+			};
+
+		/*
+		 * Immediately activate a row if the user clicks on it.
+		 */
+		var clickRow = function() {
+				activate(this);
+			};
+
+		/**
+		 * Activate a menu row.
+		 */
+		var activate = function(row) {
+				if (row == activeRow) {
+					return;
+				}
+
+				if (activeRow) {
+					options.deactivate(activeRow);
+				}
+
+				options.activate(row);
+				activeRow = row;
+			};
+
+		/**
+		 * Possibly activate a menu row. If mouse movement indicates that we
+		 * shouldn't activate yet because user may be trying to enter
+		 * a submenu's content, then delay and check again later.
+		 */
+		var possiblyActivate = function(row) {
+				var delay = activationDelay();
+
+				if (delay) {
+					timeoutId = setTimeout(function() {
+						possiblyActivate(row);
+					}, delay);
+				} else {
+					activate(row);
+				}
+			};
+
+		/**
+		 * Return the amount of time that should be used as a delay before the
+		 * currently hovered row is activated.
+		 *
+		 * Returns 0 if the activation should happen immediately. Otherwise,
+		 * returns the number of milliseconds that should be delayed before
+		 * checking again to see if the row should be activated.
+		 */
+		var activationDelay = function() {
+				if (!activeRow || !$(activeRow).is(options.submenuSelector)) {
+					// If there is no other submenu row already active, then
+					// go ahead and activate immediately.
+					return 0;
+				}
+
+				var offset = $menu.offset(),
+					upperLeft = {
+						x: offset.left,
+						y: offset.top - options.tolerance
+					},
+					upperRight = {
+						x: offset.left + $menu.outerWidth(),
+						y: upperLeft.y
+					},
+					lowerLeft = {
+						x: offset.left,
+						y: offset.top + $menu.outerHeight() + options.tolerance
+					},
+					lowerRight = {
+						x: offset.left + $menu.outerWidth(),
+						y: lowerLeft.y
+					},
+					loc = mouseLocs[mouseLocs.length - 1],
+					prevLoc = mouseLocs[0];
+
+				if (!loc) {
+					return 0;
+				}
+
+				if (!prevLoc) {
+					prevLoc = loc;
+				}
+
+				if (prevLoc.x < offset.left || prevLoc.x > lowerRight.x ||
+					prevLoc.y < offset.top || prevLoc.y > lowerRight.y) {
+					// If the previous mouse location was outside of the entire
+					// menu's bounds, immediately activate.
+					return 0;
+				}
+
+				if (lastDelayLoc &&
+						loc.x == lastDelayLoc.x && loc.y == lastDelayLoc.y) {
+					// If the mouse hasn't moved since the last time we checked
+					// for activation status, immediately activate.
+					return 0;
+				}
+
+				// Detect if the user is moving towards the currently activated
+				// submenu.
+				//
+				// If the mouse is heading relatively clearly towards
+				// the submenu's content, we should wait and give the user more
+				// time before activating a new row. If the mouse is heading
+				// elsewhere, we can immediately activate a new row.
+				//
+				// We detect this by calculating the slope formed between the
+				// current mouse location and the upper/lower right points of
+				// the menu. We do the same for the previous mouse location.
+				// If the current mouse location's slopes are
+				// increasing/decreasing appropriately compared to the
+				// previous's, we know the user is moving toward the submenu.
+				//
+				// Note that since the y-axis increases as the cursor moves
+				// down the screen, we are looking for the slope between the
+				// cursor and the upper right corner to decrease over time, not
+				// increase (somewhat counterintuitively).
+				function slope(a, b) {
+					return (b.y - a.y) / (b.x - a.x);
+				};
+
+				var decreasingCorner = upperRight,
+					increasingCorner = lowerRight;
+
+				// Our expectations for decreasing or increasing slope values
+				// depends on which direction the submenu opens relative to the
+				// main menu. By default, if the menu opens on the right, we
+				// expect the slope between the cursor and the upper right
+				// corner to decrease over time, as explained above. If the
+				// submenu opens in a different direction, we change our slope
+				// expectations.
+				if (options.submenuDirection == "left") {
+					decreasingCorner = lowerLeft;
+					increasingCorner = upperLeft;
+				} else if (options.submenuDirection == "below") {
+					decreasingCorner = lowerRight;
+					increasingCorner = lowerLeft;
+				} else if (options.submenuDirection == "above") {
+					decreasingCorner = upperLeft;
+					increasingCorner = upperRight;
+				}
+
+				var decreasingSlope = slope(loc, decreasingCorner),
+					increasingSlope = slope(loc, increasingCorner),
+					prevDecreasingSlope = slope(prevLoc, decreasingCorner),
+					prevIncreasingSlope = slope(prevLoc, increasingCorner);
+
+				if (decreasingSlope < prevDecreasingSlope &&
+						increasingSlope > prevIncreasingSlope) {
+					// Mouse is moving from previous location towards the
+					// currently activated submenu. Delay before activating a
+					// new menu row, because user may be moving into submenu.
+					lastDelayLoc = loc;
+					return DELAY;
+				}
+
+				lastDelayLoc = null;
+				return 0;
+			};
+
+		/**
+		 * Hook up initial menu events
+		 */
+		 // Added namespacing
+		$menu
+			.on("mouseleave.menuaim", mouseleaveMenu)
+			.find(options.rowSelector)
+				.on("mouseenter.menuaim", mouseenterRow)
+				.on("mouseleave.menuaim", mouseleaveRow)
+				.on("click.menuaim", clickRow);
+
+		$(document).mousemove(mousemoveDocument);
+
+	};
+})(jQuery);
+/* js/controllers/plugins/flyout.js */
+(function(){
+
+	// Requires REVEAL
+
+	var _util = window.LSP.utilities;
+
+	_util.register('controller', 'flyout', (function(){
+		var _this = {};
+		var _lsp = window.LSP;
+		
+		var _flyout;
+		var _flyoutControlButton;
+		var _flyoutParent;
+
+		var _isOpen = false;
+		var _currentFlyoutTween;
+		
+		var _holdOpen = false;
+		var _waitToOpen = false;
+		var _isOpen = false;
+		var _isOpenFromClick = false;
+		var _isClosedFromClick = false;
+		var _waitToCloseFromClick = false;
+		var _topLevelTimeout; // Used when _holdOpen is true, waits to open flyout
+
+		var _revealController = _lsp.controllers.reveal;
+
+		var OPEN_SPEED = 150;
+		var EXIT_TIMEOUT = 500;
+		var ENTER_TIMEOUT = 250;
+
+		_this =  {
+			name : 'flyout',
+			events : {
+				application : {
+					onContextChangeLeavePhone : function(e, data){
+						_this.attachMenu();
+					},
+					onContextChangeEnterPhone : function(e, data){
+						_this.detachMenu();
+					},
+
+					// We want to make sure we fire after reveal.js (which uses onReady)
+					onAfterReady : function(e, data){
+						if(_lsp.controllers.application.getContext() !== 'phone'){
+							_this.attachMenu();
+						}
+					}
+				}
+			},
+			assets : {},
+
+
+			attachMenu : function(){
+
+				var _holdOpenFlyoutTimeout; // When the menu is holdOpen
+											// we need to wait to activate a row
+											// for the first time
+
+				_flyoutControlButton = $('#flyoutControlButton');
+				_flyout = $('#mainFlyout');
+				_flyoutParent = $('#mainFlyout .topLevel');
+
+				// Unbind the native reveal functionality
+				if(_revealController){
+					_revealController.unbindEvents(_flyoutParent);
+				}
+
+				// Create the menu
+				_flyoutParent.menuAim({
+					activate : _this.showRow,
+					deactivate : _this.hideRow,
+					exitTimeout : EXIT_TIMEOUT,
+					exitMenu : function(){
+						return true;
+					},
+					afterExitMenu : function(){
+						_isOpen = false;
+						_waitToOpen = _holdOpen;
+						clearTimeout(_topLevelTimeout);
+					}
+				});
+
+				// I'm using annynomus functions here to hide the event
+				// argument from the controller methods. You shouldn't expect
+				// openFlyout or closeFlyout to rely on the event - it's possible
+				// to force it open from elsewhere (like on the home page)
+				var closeTimeout;
+				var openTimeout;
+				
+				// Control Button
+				_flyoutControlButton.off('.flyout').on('mouseenter.lsp.flyout', function(e){ 
+					if(!_isOpen && !_isClosedFromClick){
+						openTimeout = setTimeout(_this.openFlyout, ENTER_TIMEOUT); // Start the timer
+					}
+				}).on('mouseleave.lsp.flyout', function(e){
+					clearTimeout(openTimeout); // Clear timeout on exit
+
+				}).on('click.lsp.flyout', function(e){
+					_isOpenFromClick = !_isOpen;
+					_isClosedFromClick = !_isOpenFromClick;
+					_waitToCloseFromClick = true;
+					_this.toggleFlyout();
+					if(_isClosedFromClick){
+						setTimeout(function(){
+							_isClosedFromClick = false;
+						}, 800);
+					}
+				});
+
+				$('.topLevel').off('.flyout').on('click.lsp.flyout', function(e){
+					_flyoutControlButton.click();
+					e.stopPropagation();
+				});
+				$('.topLevel li').off('.flyout').on('click.lsp.flyout', function(e){
+					e.stopPropagation();
+				});
+
+				// Container
+				$('.container', _flyout).on('mouseenter.lsp.flyout', function(e){
+					clearTimeout(closeTimeout);
+				});
+
+				// Wrapper
+				$('.wrapper', _flyout).bind('mouseleave.lsp.flyout', function(e){
+					//clearTimeout(timeout);
+					if(!_waitToCloseFromClick){
+						closeTimeout = setTimeout(_this.closeFlyout, EXIT_TIMEOUT);
+						clearTimeout(_topLevelTimeout);
+					}
+					_waitToCloseFromClick = false;
+					e.stopPropagation();
+				});
+
+				// Trigger Event
+				$(this).triggerHandler('onAfterAttach', {selector : _flyout});
+			},
+
+			detachMenu : function(){
+				// If the flyout exists, destroy it
+				if(_flyout){
+					_this.closeFlyout();
+					$('*', _flyout).off('.menuaim');
+					_flyoutControlButton.off('.flyout');
+					$('.wrapper', _flyout).off('.flyout');
+				}
+
+				// Rebind the reveal events
+				if(_revealController){
+					_revealController.bindEvents(_flyoutParent);
+				}
+
+			},
+			
+			// Opens the flyout, set holdOpen to true, and the menu will remain open
+			// even when mousing out. holdOpen will also add a timeout to row activation
+			// much in the same way there is a timeout on the main flyout button
+			openFlyout : function(holdOpen){
+				_holdOpen = holdOpen || false;
+				_waitToOpen = _holdOpen;
+				_isOpen = true;
+
+				_flyout.addClass('active');
+				_flyoutControlButton.addClass('active');
+			},
+
+			closeFlyout : function(reset){
+
+				if(_flyout){ // Only if attachMenu has been called
+					clearTimeout(_topLevelTimeout);
+
+					_isOpen = false;
+
+					// This is used to put the home page flyout back to normal
+					if(reset){
+						_holdOpen = false;
+						_waitToOpen = false;
+					}
+
+					if(!_holdOpen){
+						_flyout.removeClass('active');
+						_flyoutControlButton.removeClass('active');
+						$('li.collection.active', _flyout).removeClass('active');
+
+						// Finish any lingering animations
+						if(_currentFlyoutTween){
+							$(_currentFlyoutTween.elem).stop(true, true);
+						}
+						_currentFlyoutTween = null;
+
+						_isOpen = false;
+					}
+
+					//_this.attachMenu(); // Reset
+				}
+			},
+			toggleFlyout : function(){
+				if(_isOpen){
+					_this.closeFlyout();
+				}else{
+					_this.openFlyout();
+				}
+			},
+
+			showRow : function(element, forceShow){
+
+				// We want to wait to open it if it's _holdOpen, and
+				// if it hasn't already been opened (_waitToOpen)
+				// forceShow is a way to avoid having two functions
+				// the timeout just calls itself again with the flag
+				if(_holdOpen && _waitToOpen && !forceShow){
+					
+					clearTimeout(_topLevelTimeout);
+					
+					_topLevelTimeout = setTimeout(function(){
+						_this.showRow(element, true);
+					}, ENTER_TIMEOUT);
+
+				}else{
+								
+					// Reset the close timeout
+					element = $(element);
+					_waitToOpen = false;
+
+					if(!_isOpen){
+
+						// Because the content windows are all unique
+						// we need to 'transfer' the animation to the new
+						// content window to create a seemless slide right
+
+						// We do this by storing the tween object, and hijacking it
+						// mid-animation -- there is a little cleanup work to be done
+						// after doing this
+						
+						var flyout = $('.flyout', element);
+						
+
+						if(_currentFlyoutTween){
+							// Animation in progress, hijack it!
+							$(_currentFlyoutTween.elem).removeAttr('style'); // Cleanup!
+							$(flyout[0]).css({'width' : _currentFlyoutTween.now, 'overflow' : 'hidden'}); // we are likely between frames, this helps smooth the transition
+							_currentFlyoutTween.elem = flyout[0]; // Hijack it.
+
+						}else{
+
+							var width = flyout.outerWidth();
+							
+							// No animation has started, so create one
+							flyout
+								.css({width : 0})
+								.animate({width: width}, {
+									duration : OPEN_SPEED,
+									easing : 'swing',
+									step : function(a, tween){
+										// on each frame, store the tween object
+										// we really only need to do this once (not every step)- but this is the
+										// only place I found we have access to the tween object
+										_currentFlyoutTween = tween;
+									},
+									always : function(e){
+										$('*[style]', _flyout).css({width: ''}); // atomic cleanup, why?
+										_currentFlyoutTween = null; // cleanup
+										_isOpen = true; // prevent the animation from happening again
+									}
+								});
+						}
+
+					}
+
+					// We have to use a class rather than just the :hover
+					// pesduo element because it's possible to
+					// hover an item but not be active (the whole reason
+					// we are using this plugin)
+					
+					element.addClass('active');
+				}
+			},
+			hideRow : function(element){
+				$(element).removeClass('active');
+			}
+		};
+
+		return _this;
+		
+	})());
+})();
+
+// CASE WHEN NVL({quantityavailable}, 0) > 0 
+//     THEN '<span itemprop="availability" class="status">In Stock<span class="hidden-iphone"> :</span></span> <span class="details">Ships next business day</span>' 
+//     ELSE 
+//          CASE WHEN NVL({outofstockmessage}, 'EMPTY') = 'EMPTY' THEN 
+//               CASE WHEN NVL({quantityonorder},0) > 0  AND NVL({quantityonorder}, 0) > NVL({quantitycommitted}, 0)
+//               THEN '<span itemprop="availability" class="status">In Stock Soon<span class="hidden-iphone"> :</span></span> <span class="details">More on the way. Order now!</span>'
+//               ELSE
+//                   CASE WHEN NVL({reorderpoint},0) > 0 
+//                   THEN '<span itemprop="availability" class="status">In Stock Soon<span class="hidden-iphone"> :</span></span> <span class="details">Call for estimated delivery date</span>' 
+//                   ELSE '<span itemprop="availability" class="status">Special Order<span class="hidden-iphone"> :</span></span> <span class="details">Allow additional time. Call for details.</span>' END
+//               END
+//          ELSE {outofstockmessage} 
+//          END
+// END
+/* js/controllers/plugins/reveal.js */
+(function(){
+
+	var _util = window.LSP.utilities;
+
+	var reveal = (function(){
+		var _this = {};
+		var _app = window.LSP;
+
+		var _waitToOpen = false;
+
+		var ANIMATION_TIME = 300;
+
+		_this =  {
+			name : 'reveal',
+			events : {
+				reveal : {},
+				application : {
+					onContextChange : function(e, data){
+						$('.reveal-closed-'+ data.previousContext)
+							.removeClass('reveal-closed')
+							.addClass('reveal-open');
+
+						$('.reveal-closed-'+ data.context)
+							.removeClass('reveal-open')
+							.addClass('reveal-closed');
+
+						$('.reveal-context-' + data.previousContext)
+							.removeClass('reveal-open')
+							.removeClass('reveal-closed');
+					},
+					onAttachEvents : function(e, data){
+						_this.bindEvents(data.selector);
+
+					}
+				}
+			},
+			
+			assets : {},
+
+			bindEvents : function(parent){
+			
+				$('*[data-reveal-children]', parent).off('click.reveal').on('click.reveal', function(e){
+
+					// On click - fire the click event
+					_this.toggle(_this.buildChildrenSelector(this), !$(this).hasClass('reveal-noAnimation'));
+
+					// We don't want to propagate default browser events
+					e.stopPropagation();
+					return true;
+
+				});
+
+				// Mouseover reveals
+				$('.reveal-showOnMouseover', parent).off('mouseenter.reveal').on('mouseenter.reveal', function(e){
+					_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
+					//return true;
+				}).off('mouseleave.reveal').on('mouseleave.reveal', function(e){
+					_this.toggle(_this.buildChildrenSelector(this), !$(e.currentTarget).hasClass('reveal-noAnimation'));
+					//return true;
+				});
+
+				$('.reveal-closed-'+ _app.controllers.application.getContext())
+					.removeClass('reveal-open')
+					.addClass('reveal-closed');
+			},
+
+
+			unbindEvents : function(parent){
+				$('*[data-reveal-children]', parent).off('.reveal');
+			},
+
+
+			buildChildrenSelector : function(element){
+				return $('#' + $(element).data('reveal-children').split(' ').join(', #'));
+			},
+
+			open : function(children, doAnimations){
+
+				if(!_waitToOpen){
+
+					doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
+
+					// Mark Parents as Open
+					children.each(function(index, child){
+						// Find it as the only child, and also if it's space seperated
+						// Otherwise you'l find partials like id="states" would find "states-main"
+						$('*[data-reveal-children="' + child.id + '"], *[data-reveal-children*="' + child.id + ' "] ').addClass('reveal-open').removeClass('reveal-closed');
+					})
+
+					if(doAnimations && _app.controllers.application.getContext() !== 'phone'){
+						var queue = $({});
+						children.each(function(i, child){
+							child = $(child);
+							queue.queue(function(){
+								var control = $(this);
+								child
+									.css('display', 'none')
+									.addClass('reveal-open')
+									.slideDown({
+										duration : ANIMATION_TIME,
+										easing : 'swing',
+										complete : function(){
+											child
+												.addClass('reveal-open')
+												.css('display', '')
+												.removeClass('reveal-closed');
+											control.dequeue();
+										}
+									});
+							});
+						});
+						
+					}else{
+						children.addClass('reveal-open').removeClass('reveal-closed');
+					}
+				}
+
+			},
+			
+			close : function(children, doAnimations){
+
+
+				// Prevents flickering
+				_waitToOpen = true;
+				setTimeout(function(){
+					_waitToOpen = false;
+				}, 50)
+
+				doAnimations = (typeof doAnimations === 'undefined') ? true : doAnimations;
+
+				// Mark Parents as Open
+				children.each(function(index, child){
+					$('*[data-reveal-children*="' + child.id + '"] ').addClass('reveal-closed').removeClass('reveal-open');
+				});
+
+				if(doAnimations && _app.controllers.application.getContext() !== 'phone'){
+					var queue = $({});
+
+					var children = children.toArray().reverse();
+
+					$.each(children, function(i, child){
+						queue.queue(function(){
+							var control = $(this);
+							$(child)
+								.css('display', 'block')
+								.slideUp({
+									duration : ANIMATION_TIME,
+									easing : 'swing',
+									complete : function(){
+										$(this)
+											.removeClass('reveal-open')
+											.addClass('reveal-closed')
+											.css('display', '');
+										control.dequeue();
+									}
+								});
+						});
+					});
+
+				}else{
+					children.addClass('reveal-closed').removeClass('reveal-open');
+				}
+
+			},
+
+			toggle : function(children, doAnimations){
+
+				var context = _app.controllers.application.getContext();
+				var openChildren = children.filter('.reveal-open:not(*[class*="reveal-context"]), .reveal-open.reveal-context-' + context);
+				var closedChildren = children.filter('.reveal-closed:not(*[class*="reveal-context"]), .reveal-closed.reveal-context-' + context +', .reveal-context-' + context + ':not(.reveal-open)');
+
+				_this.open(closedChildren, doAnimations);
+				_this.close(openChildren, doAnimations);
+				
+			}
+		};
+
+		return _this;
+		
+	})();
+
+	_util.register('controller', 'reveal', reveal);
+
+})();
+/* js/vendors/json2/json2.js */
+/*
+    json2.js
+    2011-10-19
+
+    Public Domain.
+
+    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+
+    See http://www.JSON.org/js.html
+
+
+    This code should be minified before deployment.
+    See http://javascript.crockford.com/jsmin.html
+
+    USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
+    NOT CONTROL.
+
+
+    This file creates a global JSON object containing two methods: stringify
+    and parse.
+
+        JSON.stringify(value, replacer, space)
+            value       any JavaScript value, usually an object or array.
+
+            replacer    an optional parameter that determines how object
+                        values are stringified for objects. It can be a
+                        function or an array of strings.
+
+            space       an optional parameter that specifies the indentation
+                        of nested structures. If it is omitted, the text will
+                        be packed without extra whitespace. If it is a number,
+                        it will specify the number of spaces to indent at each
+                        level. If it is a string (such as '\\\\t' or '&nbsp;'),
+                        it contains the characters used to indent at each level.
+
+            This method produces a JSON text from a JavaScript value.
+
+            When an object value is found, if the object contains a toJSON
+            method, its toJSON method will be called and the result will be
+            stringified. A toJSON method does not serialize: it returns the
+            value represented by the name/value pair that should be serialized,
+            or undefined if nothing should be serialized. The toJSON method
+            will be passed the key associated with the value, and this will be
+            bound to the value
+
+            For example, this would serialize Dates as ISO strings.
+
+                Date.prototype.toJSON = function (key) {
+                    function f(n) {
+                        // Format integers to have at least two digits.
+                        return n < 10 ? '0' + n : n;
+                    }
+
+                    return this.getUTCFullYear()   + '-' +
+                         f(this.getUTCMonth() + 1) + '-' +
+                         f(this.getUTCDate())      + 'T' +
+                         f(this.getUTCHours())     + ':' +
+                         f(this.getUTCMinutes())   + ':' +
+                         f(this.getUTCSeconds())   + 'Z';
+                };
+
+            You can provide an optional replacer method. It will be passed the
+            key and value of each member, with this bound to the containing
+            object. The value that is returned from your method will be
+            serialized. If your method returns undefined, then the member will
+            be excluded from the serialization.
+
+            If the replacer parameter is an array of strings, then it will be
+            used to select the members to be serialized. It filters the results
+            such that only members with keys listed in the replacer array are
+            stringified.
+
+            Values that do not have JSON representations, such as undefined or
+            functions, will not be serialized. Such values in objects will be
+            dropped; in arrays they will be replaced with null. You can use
+            a replacer function to replace those with JSON values.
+            JSON.stringify(undefined) returns undefined.
+
+            The optional space parameter produces a stringification of the
+            value that is filled with line breaks and indentation to make it
+            easier to read.
+
+            If the space parameter is a non-empty string, then that string will
+            be used for indentation. If the space parameter is a number, then
+            the indentation will be that many spaces.
+
+            Example:
+
+            text = JSON.stringify(['e', {pluribus: 'unum'}]);
+            // text is '["e",{"pluribus":"unum"}]'
+
+
+            text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\\\\t');
+            // text is '[\\\\n\\\\t"e",\\\\n\\\\t{\\\\n\\\\t\\\\t"pluribus": "unum"\\\\n\\\\t}\\\\n]'
+
+            text = JSON.stringify([new Date()], function (key, value) {
+                return this[key] instanceof Date ?
+                    'Date(' + this[key] + ')' : value;
+            });
+            // text is '["Date(---current time---)"]'
+
+
+        JSON.parse(text, reviver)
+            This method parses a JSON text to produce an object or array.
+            It can throw a SyntaxError exception.
+
+            The optional reviver parameter is a function that can filter and
+            transform the results. It receives each of the keys and values,
+            and its return value is used instead of the original value.
+            If it returns what it received, then the structure is not modified.
+            If it returns undefined then the member is deleted.
+
+            Example:
+
+            // Parse the text. Values that look like ISO date strings will
+            // be converted to Date objects.
+
+            myData = JSON.parse(text, function (key, value) {
+                var a;
+                if (typeof value === 'string') {
+                    a =
+/^(\\\\d{4})-(\\\\d{2})-(\\\\d{2})T(\\\\d{2}):(\\\\d{2}):(\\\\d{2}(?:\\\\.\\\\d*)?)Z$/.exec(value);
+                    if (a) {
+                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
+                            +a[5], +a[6]));
+                    }
+                }
+                return value;
+            });
+
+            myData = JSON.parse('["Date(09/09/2001)"]', function (key, value) {
+                var d;
+                if (typeof value === 'string' &&
+                        value.slice(0, 5) === 'Date(' &&
+                        value.slice(-1) === ')') {
+                    d = new Date(value.slice(5, -1));
+                    if (d) {
+                        return d;
+                    }
+                }
+                return value;
+            });
+
+
+    This is a reference implementation. You are free to copy, modify, or
+    redistribute.
+*/
+
+/*jslint evil: true, regexp: true */
+
+/*members "", "\\\\b", "\\\\t", "\\\\n", "\\\\f", "\\\\r", "\\\\"", JSON, "\\\\\\\\", apply,
+    call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
+    getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
+    lastIndex, length, parse, prototype, push, replace, slice, stringify,
+    test, toJSON, toString, valueOf
+*/
+
+
+// Create a JSON object only if one does not already exist. We create the
+// methods in a closure to avoid creating global variables.
+
+var JSON;
+if (!JSON) {
+    JSON = {};
+}
+
+(function () {
+    'use strict';
+
+    function f(n) {
+        // Format integers to have at least two digits.
+        return n < 10 ? '0' + n : n;
+    }
+
+    if (typeof Date.prototype.toJSON !== 'function') {
+
+        Date.prototype.toJSON = function (key) {
+
+            return isFinite(this.valueOf())
+                ? this.getUTCFullYear()     + '-' +
+                    f(this.getUTCMonth() + 1) + '-' +
+                    f(this.getUTCDate())      + 'T' +
+                    f(this.getUTCHours())     + ':' +
+                    f(this.getUTCMinutes())   + ':' +
+                    f(this.getUTCSeconds())   + 'Z'
+                : null;
+        };
+
+        String.prototype.toJSON      =
+            Number.prototype.toJSON  =
+            Boolean.prototype.toJSON = function (key) {
+                return this.valueOf();
+            };
+    }
+
+    var cx = /[\\\\u0000\\\\u00ad\\\\u0600-\\\\u0604\\\\u070f\\\\u17b4\\\\u17b5\\\\u200c-\\\\u200f\\\\u2028-\\\\u202f\\\\u2060-\\\\u206f\\\\ufeff\\\\ufff0-\\\\uffff]/g,
+        escapable = /[\\\\\\\\\\\\"\\\\x00-\\\\x1f\\\\x7f-\\\\x9f\\\\u00ad\\\\u0600-\\\\u0604\\\\u070f\\\\u17b4\\\\u17b5\\\\u200c-\\\\u200f\\\\u2028-\\\\u202f\\\\u2060-\\\\u206f\\\\ufeff\\\\ufff0-\\\\uffff]/g,
+        gap,
+        indent,
+        meta = {    // table of character substitutions
+            '\\\\b': '\\\\\\\\b',
+            '\\\\t': '\\\\\\\\t',
+            '\\\\n': '\\\\\\\\n',
+            '\\\\f': '\\\\\\\\f',
+            '\\\\r': '\\\\\\\\r',
+            '"' : '\\\\\\\\"',
+            '\\\\\\\\': '\\\\\\\\\\\\\\\\'
+        },
+        rep;
+
+
+    function quote(string) {
+
+// If the string contains no control characters, no quote characters, and no
+// backslash characters, then we can safely slap some quotes around it.
+// Otherwise we must also replace the offending characters with safe escape
+// sequences.
+
+        escapable.lastIndex = 0;
+        return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+            var c = meta[a];
+            return typeof c === 'string'
+                ? c
+                : '\\\\\\\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+        }) + '"' : '"' + string + '"';
+    }
+
+
+    function str(key, holder) {
+
+// Produce a string from holder[key].
+
+        var i,          // The loop counter.
+            k,          // The member key.
+            v,          // The member value.
+            length,
+            mind = gap,
+            partial,
+            value = holder[key];
+
+// If the value has a toJSON method, call it to obtain a replacement value.
+
+        if (value && typeof value === 'object' &&
+                typeof value.toJSON === 'function') {
+            value = value.toJSON(key);
+        }
+
+// If we were called with a replacer function, then call the replacer to
+// obtain a replacement value.
+
+        if (typeof rep === 'function') {
+            value = rep.call(holder, key, value);
+        }
+
+// What happens next depends on the value's type.
+
+        switch (typeof value) {
+        case 'string':
+            return quote(value);
+
+        case 'number':
+
+// JSON numbers must be finite. Encode non-finite numbers as null.
+
+            return isFinite(value) ? String(value) : 'null';
+
+        case 'boolean':
+        case 'null':
+
+// If the value is a boolean or null, convert it to a string. Note:
+// typeof null does not produce 'null'. The case is included here in
+// the remote chance that this gets fixed someday.
+
+            return String(value);
+
+// If the type is 'object', we might be dealing with an object or an array or
+// null.
+
+        case 'object':
+
+// Due to a specification blunder in ECMAScript, typeof null is 'object',
+// so watch out for that case.
+
+            if (!value) {
+                return 'null';
+            }
+
+// Make an array to hold the partial results of stringifying this object value.
+
+            gap += indent;
+            partial = [];
+
+// Is the value an array?
+
+            if (Object.prototype.toString.apply(value) === '[object Array]') {
+
+// The value is an array. Stringify every element. Use null as a placeholder
+// for non-JSON values.
+
+                length = value.length;
+                for (i = 0; i < length; i += 1) {
+                    partial[i] = str(i, value) || 'null';
+                }
+
+// Join all of the elements together, separated with commas, and wrap them in
+// brackets.
+
+                v = partial.length === 0
+                    ? '[]'
+                    : gap
+                    ? '[\\\\n' + gap + partial.join(',\\\\n' + gap) + '\\\\n' + mind + ']'
+                    : '[' + partial.join(',') + ']';
+                gap = mind;
+                return v;
+            }
+
+// If the replacer is an array, use it to select the members to be stringified.
+
+            if (rep && typeof rep === 'object') {
+                length = rep.length;
+                for (i = 0; i < length; i += 1) {
+                    if (typeof rep[i] === 'string') {
+                        k = rep[i];
+                        v = str(k, value);
+                        if (v) {
+                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                        }
+                    }
+                }
+            } else {
+
+// Otherwise, iterate through all of the keys in the object.
+
+                for (k in value) {
+                    if (Object.prototype.hasOwnProperty.call(value, k)) {
+                        v = str(k, value);
+                        if (v) {
+                            partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                        }
+                    }
+                }
+            }
+
+// Join all of the member texts together, separated with commas,
+// and wrap them in braces.
+
+            v = partial.length === 0
+                ? '{}'
+                : gap
+                ? '{\\\\n' + gap + partial.join(',\\\\n' + gap) + '\\\\n' + mind + '}'
+                : '{' + partial.join(',') + '}';
+            gap = mind;
+            return v;
+        }
+    }
+
+// If the JSON object does not yet have a stringify method, give it one.
+
+    if (typeof JSON.stringify !== 'function') {
+        JSON.stringify = function (value, replacer, space) {
+
+// The stringify method takes a value and an optional replacer, and an optional
+// space parameter, and returns a JSON text. The replacer can be a function
+// that can replace values, or an array of strings that will select the keys.
+// A default replacer method can be provided. Use of the space parameter can
+// produce text that is more easily readable.
+
+            var i;
+            gap = '';
+            indent = '';
+
+// If the space parameter is a number, make an indent string containing that
+// many spaces.
+
+            if (typeof space === 'number') {
+                for (i = 0; i < space; i += 1) {
+                    indent += ' ';
+                }
+
+// If the space parameter is a string, it will be used as the indent string.
+
+            } else if (typeof space === 'string') {
+                indent = space;
+            }
+
+// If there is a replacer, it must be a function or an array.
+// Otherwise, throw an error.
+
+            rep = replacer;
+            if (replacer && typeof replacer !== 'function' &&
+                    (typeof replacer !== 'object' ||
+                    typeof replacer.length !== 'number')) {
+                throw new Error('JSON.stringify');
+            }
+
+// Make a fake root object containing our value under the key of ''.
+// Return the result of stringifying the value.
+
+            return str('', {'': value});
+        };
+    }
+
+
+// If the JSON object does not yet have a parse method, give it one.
+
+    if (typeof JSON.parse !== 'function') {
+        JSON.parse = function (text, reviver) {
+
+// The parse method takes a text and an optional reviver function, and returns
+// a JavaScript value if the text is a valid JSON text.
+
+            var j;
+
+            function walk(holder, key) {
+
+// The walk method is used to recursively walk the resulting structure so
+// that modifications can be made.
+
+                var k, v, value = holder[key];
+                if (value && typeof value === 'object') {
+                    for (k in value) {
+                        if (Object.prototype.hasOwnProperty.call(value, k)) {
+                            v = walk(value, k);
+                            if (v !== undefined) {
+                                value[k] = v;
+                            } else {
+                                delete value[k];
+                            }
+                        }
+                    }
+                }
+                return reviver.call(holder, key, value);
+            }
+
+
+// Parsing happens in four stages. In the first stage, we replace certain
+// Unicode characters with escape sequences. JavaScript handles many characters
+// incorrectly, either silently deleting them, or treating them as line endings.
+
+            text = String(text);
+            cx.lastIndex = 0;
+            if (cx.test(text)) {
+                text = text.replace(cx, function (a) {
+                    return '\\\\\\\\u' +
+                        ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                });
+            }
+
+// In the second stage, we run the text against regular expressions that look
+// for non-JSON patterns. We are especially concerned with '()' and 'new'
+// because they can cause invocation, and '=' because it can cause mutation.
+// But just to be safe, we want to reject all unexpected forms.
+
+// We split the second stage into 4 regexp operations in order to work around
+// crippling inefficiencies in IE's and Safari's regexp engines. First we
+// replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
+// replace all simple value tokens with ']' characters. Third, we delete all
+// open brackets that follow a colon or comma or that begin the text. Finally,
+// we look to see that the remaining characters are only whitespace or ']' or
+// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
+
+            if (/^[\\\\],:{}\\\\s]*$/
+                    .test(text.replace(/\\\\\\\\(?:["\\\\\\\\\\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+                        .replace(/"[^"\\\\\\\\\\\\n\\\\r]*"|true|false|null|-?\\\\d+(?:\\\\.\\\\d*)?(?:[eE][+\\\\-]?\\\\d+)?/g, ']')
+                        .replace(/(?:^|:|,)(?:\\\\s*\\\\[)+/g, ''))) {
+
+// In the third stage we use the eval function to compile the text into a
+// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
+// in JavaScript: it can begin a block or an object literal. We wrap the text
+// in parens to eliminate the ambiguity.
+
+                j = eval('(' + text + ')');
+
+// In the optional fourth stage, we recursively walk the new structure, passing
+// each name/value pair to a reviver function for possible transformation.
+
+                return typeof reviver === 'function'
+                    ? walk({'': j}, '')
+                    : j;
+            }
+
+// If the text is not JSON parseable, then a SyntaxError is thrown.
+
+            throw new SyntaxError('JSON.parse');
+        };
+    }
+}());
+
+/* js/vendors/form2js/form2js.js */
+/**
+ * Copyright (c) 2010 Maxim Vasiliev
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @author Maxim Vasiliev
+ * Date: 09.09.2010
+ * Time: 19:02:33
+ */
+
+
+var form2js = (function()
+{
+	"use strict";
+
+	/**
+	 * Returns form values represented as Javascript object
+	 * "name" attribute defines structure of resulting object
+	 *
+	 * @param rootNode {Element|String} root form element (or it's id) or array of root elements
+	 * @param delimiter {String} structure parts delimiter defaults to '.'
+	 * @param skipEmpty {Boolean} should skip empty text values, defaults to true
+	 * @param emptyToNull {Boolean} should empty values be converted to null?
+	 * @param nodeCallback {Function} custom function to get node value
+	 * @param useIdIfEmptyName {Boolean} if true value of id attribute of field will be used if name of field is empty
+	 */
+	function form2js(rootNode, delimiter, skipEmpty, emptyToNull, nodeCallback, useIdIfEmptyName)
+	{
+		if (typeof skipEmpty == 'undefined' || skipEmpty == null) skipEmpty = true;
+		if (typeof emptyToNull == 'undefined' || emptyToNull == null) emptyToNull = true;
+		if (typeof delimiter == 'undefined' || delimiter == null) delimiter = '.';
+		if (arguments.length < 6) useIdIfEmptyName = false;
+
+		rootNode = typeof rootNode == 'string' ? document.getElementById(rootNode) : rootNode;
+
+		var formValues = [],
+			currNode,
+			i = 0;
+
+		/* If rootNode is array - combine values */
+		if (rootNode.constructor == Array || (typeof NodeList != 'undefined' && rootNode.constructor == NodeList))
+		{
+			while(currNode = rootNode[i++])
+			{
+				formValues = formValues.concat(getFormValues(currNode, nodeCallback, useIdIfEmptyName));
+			}
+		}
+		else
+		{
+			formValues = getFormValues(rootNode, nodeCallback, useIdIfEmptyName);
+		}
+
+		return processNameValues(formValues, skipEmpty, emptyToNull, delimiter);
+	}
+
+	/**
+	 * Processes collection of { name: 'name', value: 'value' } objects.
+	 * @param nameValues
+	 * @param skipEmpty if true skips elements with value == '' or value == null
+	 * @param delimiter
+	 */
+	function processNameValues(nameValues, skipEmpty, emptyToNull, delimiter)
+	{
+		var result = {},
+			arrays = {},
+			i, j, k, l,
+			value,
+			nameParts,
+			currResult,
+			arrNameFull,
+			arrName,
+			arrIdx,
+			namePart,
+			name,
+			_nameParts;
+
+		for (i = 0; i < nameValues.length; i++)
+		{
+			value = nameValues[i].value;
+
+			if (emptyToNull && (value === '')) { value = null; }
+			if (skipEmpty && (value === '' || value === null)) continue;
+
+			name = nameValues[i].name;
+			if (typeof name === 'undefined') continue;
+
+			_nameParts = name.split(delimiter);
+			nameParts = [];
+			currResult = result;
+			arrNameFull = '';
+
+			for(j = 0; j < _nameParts.length; j++)
+			{
+				namePart = _nameParts[j].split('][');
+				if (namePart.length > 1)
+				{
+					for(k = 0; k < namePart.length; k++)
+					{
+						if (k == 0)
+						{
+							namePart[k] = namePart[k] + ']';
+						}
+						else if (k == namePart.length - 1)
+						{
+							namePart[k] = '[' + namePart[k];
+						}
+						else
+						{
+							namePart[k] = '[' + namePart[k] + ']';
+						}
+
+						arrIdx = namePart[k].match(/([a-z_]+)?\\\\[([a-z_][a-z0-9_]+?)\\\\]/i);
+						if (arrIdx)
+						{
+							for(l = 1; l < arrIdx.length; l++)
+							{
+								if (arrIdx[l]) nameParts.push(arrIdx[l]);
+							}
+						}
+						else{
+							nameParts.push(namePart[k]);
+						}
+					}
+				}
+				else
+					nameParts = nameParts.concat(namePart);
+			}
+
+			for (j = 0; j < nameParts.length; j++)
+			{
+				namePart = nameParts[j];
+
+				if (namePart.indexOf('[]') > -1 && j == nameParts.length - 1)
+				{
+					arrName = namePart.substr(0, namePart.indexOf('['));
+					arrNameFull += arrName;
+
+					if (!currResult[arrName]) currResult[arrName] = [];
+					currResult[arrName].push(value);
+				}
+				else if (namePart.indexOf('[') > -1)
+				{
+					arrName = namePart.substr(0, namePart.indexOf('['));
+					arrIdx = namePart.replace(/(^([a-z_]+)?\\\\[)|(\\\\]$)/gi, '');
+
+					/* Unique array name */
+					arrNameFull += '_' + arrName + '_' + arrIdx;
+
+					/*
+					 * Because arrIdx in field name can be not zero-based and step can be
+					 * other than 1, we can't use them in target array directly.
+					 * Instead we're making a hash where key is arrIdx and value is a reference to
+					 * added array element
+					 */
+
+					if (!arrays[arrNameFull]) arrays[arrNameFull] = {};
+					if (arrName != '' && !currResult[arrName]) currResult[arrName] = [];
+
+					if (j == nameParts.length - 1)
+					{
+						if (arrName == '')
+						{
+							currResult.push(value);
+							arrays[arrNameFull][arrIdx] = currResult[currResult.length - 1];
+						}
+						else
+						{
+							currResult[arrName].push(value);
+							arrays[arrNameFull][arrIdx] = currResult[arrName][currResult[arrName].length - 1];
+						}
+					}
+					else
+					{
+						if (!arrays[arrNameFull][arrIdx])
+						{
+							if ((/^[a-z_]+\\\\[?/i).test(nameParts[j+1])) currResult[arrName].push({});
+							else currResult[arrName].push([]);
+
+							arrays[arrNameFull][arrIdx] = currResult[arrName][currResult[arrName].length - 1];
+						}
+					}
+
+					currResult = arrays[arrNameFull][arrIdx];
+				}
+				else
+				{
+					arrNameFull += namePart;
+
+					if (j < nameParts.length - 1) /* Not the last part of name - means object */
+					{
+						if (!currResult[namePart]) currResult[namePart] = {};
+						currResult = currResult[namePart];
+					}
+					else
+					{
+						currResult[namePart] = value;
+					}
+				}
+			}
+		}
+
+		return result;
+	}
+
+    function getFormValues(rootNode, nodeCallback, useIdIfEmptyName)
+    {
+        var result = extractNodeValues(rootNode, nodeCallback, useIdIfEmptyName);
+        return result.length > 0 ? result : getSubFormValues(rootNode, nodeCallback, useIdIfEmptyName);
+    }
+
+    function getSubFormValues(rootNode, nodeCallback, useIdIfEmptyName)
+	{
+		var result = [],
+			currentNode = rootNode.firstChild;
+		
+		while (currentNode)
+		{
+			result = result.concat(extractNodeValues(currentNode, nodeCallback, useIdIfEmptyName));
+			currentNode = currentNode.nextSibling;
+		}
+
+		return result;
+	}
+
+    function extractNodeValues(node, nodeCallback, useIdIfEmptyName) {
+        var callbackResult, fieldValue, result, fieldName = getFieldName(node, useIdIfEmptyName);
+
+        callbackResult = nodeCallback && nodeCallback(node);
+
+        if (callbackResult && callbackResult.name) {
+            result = [callbackResult];
+        }
+        else if (fieldName != '' && node.nodeName.match(/INPUT|TEXTAREA/i)) {
+            fieldValue = getFieldValue(node);   
+	        if (fieldValue == null && node.type == 'radio')
+                result = [];
+            else
+                result = [ { name: fieldName, value: fieldValue} ];
+        }
+        else if (fieldName != '' && node.nodeName.match(/SELECT/i)) {
+	        fieldValue = getFieldValue(node);
+	        result = [ { name: fieldName.replace(/\\\\[\\\\]$/, ''), value: fieldValue } ];
+        }
+        else {
+            result = getSubFormValues(node, nodeCallback, useIdIfEmptyName);
+        }
+
+        return result;
+    }
+
+	function getFieldName(node, useIdIfEmptyName)
+	{
+		if (node.name && node.name != '') return node.name;
+		else if (useIdIfEmptyName && node.id && node.id != '') return node.id;
+		else return '';
+	}
+
+
+	function getFieldValue(fieldNode)
+	{
+		if (fieldNode.disabled) return null;
+		
+		switch (fieldNode.nodeName) {
+			
+			case 'TEXTAREA':
+				return $('<div/>').text(fieldNode.value).html(); // Escapes the textarea
+				break;
+			case 'INPUT':
+				switch (fieldNode.type.toLowerCase()) {
+					case 'radio':
+					case 'checkbox':
+						if (fieldNode.checked) return fieldNode.value;
+						break;
+
+					case 'button':
+					case 'reset':
+					case 'submit':
+					case 'image':
+						return '';
+						break;
+
+					default:
+						return fieldNode.value;
+						break;
+				}
+				break;
+
+			case 'SELECT':
+				return getSelectedOptionValue(fieldNode);
+				break;
+
+			default:
+				break;
+		}
+
+		return null;
+	}
+
+	function getSelectedOptionValue(selectNode)
+	{
+		var multiple = selectNode.multiple,
+			result = [],
+			options,
+			i, l;
+
+		if (!multiple) return selectNode.value;
+
+		for (options = selectNode.getElementsByTagName('option'), i = 0, l = options.length; i < l; i++)
+		{
+			if (options[i].selected) result.push(options[i].value);
+		}
+
+		return result;
+	}
+
+	return form2js;
+
+})();
+
+LSP.utilities = LSP.utilities || {};
+LSP.utilities.formToObject = form2js;
+/* js/vendors/md5/md5.js */
+(function(){
+	window.LSP = window.LSP || {};
+	window.LSP.utilities = window.LSP.utilities || {};
+	window.LSP.utilities.md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]|(G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
+})();
+/* js/controllers/plugins/clearable.js */
+(function(){
+	
+	var _util = window.LSP.utilities;
+	
+	_util.register('controller', 'clearable', (function(){
+		var _this = {};
+		var _lsp = window.LSP;
+		
+		_this =  {
+			name : 'clearable',
+			events : {
+				clearable : {
+					onClear : function(e, data){
+						$(data.passthrough.targetInput).val('');
+						$(data.passthrough.targetInput).trigger('change');
+					},
+					onShowHideButton : function(e, data){
+						var input = $(data.passthrough.targetInput);
+						if($(data.passthrough.targetInput).val().length > 0){
+							input.next('button').fadeIn(200);
+						}else{
+							input.next('button').fadeOut(200);
+						}
+					},
+					onSelectedInput : function(e, data){
+						$(data.selector).select();
+					}
+				},
+				application : {
+					onAttachEvents : function(e, data){
+						$('.clearable', data.selector).each(function(i, element){ _this.attach(element); });
+						$('input[type="text"], input[type="number"], input[type="tel"]', data.selector)
+							.off('focusable')
+							.on('click.lsp.focusable', function(e){ 
+							$(_this).triggerHandler('onSelectedInput', {selector : $(this)});
+						}).change();
+					}
+				}
+			},
+			assets : {},
+			attach : function(element){
+
+				var button = $('<button type="button" class="b5 clearContents" tabindex="-1">Clear Contents</button>')
+					.on('click.lsp.clearable', _lsp.controllers.application.createHandlerBridge(_this, 'clear', {targetInput : element}));
+				
+				$(element)
+					.off('.clearable')
+					.on('keyup.lsp.clearable change.lsp.clearable', _lsp.controllers.application.createHandlerBridge(_this, 'showHideButton', {targetInput : element}))
+					.wrap('<div class="clearableContainer" />')
+					.after(button)
+
+				_lsp.controllers.application.attachEvents(element);
+			},
+			makeElement : function(index, elementString){
+				return '<div class="badges-badge badge-'+$(this).data('badge')+'">'+ $(this).data('badge') +'</div>';
+			}
+		};
+
+		return _this;
+
+	}()));
+
+})();
+/* js/vendors/touchcarousel/touchcarousel-1.2.js */
+/*
+ * TouchCarousel  v1.1
+ *
+ * Copyright 2011, Dmitry Semenov, http://dimsemenov.com
+ * 
+ */
+(function($) {
+	function TouchCarousel(element, options) {	
+		this.carouselRoot = $(element);
+		
+		var self = this;			
+		this._lockYAxis = false;
+		this._isAnimating = false;		
+		
+		this._downEvent = "";
+		this._moveEvent = "";
+		this._upEvent = "";
+		
+		this._totalItemsWidth;
+		this._itemWidths;
+		
+		this._startAccelerationX;
+		this._accelerationX;
+		this._latestDragX;
+		
+		this._startTime = 0;
+		
+		this.settings = $.extend({}, $.fn.touchCarousel.defaults, options);		
+		
+		this._dragContainer = this.carouselRoot.find(".touchcarousel-container");
+		
+		// animate directly style for better performance
+		this._dragContainerStyle = this._dragContainer[0].style;
+
+		this._itemsWrapper = this._dragContainer.wrap($('<div class="touchcarousel-wrapper" />')).parent();		
+		var itemsJQ = this._dragContainer.find(".touchcarousel-item");
+		
+		/* Array item structure: 
+		 * {
+		 * 		item: jQuery item object
+		 * 		index: item index
+		 * 		posX: item X position
+		 *      width: item width
+		 * }
+		 * 
+		 * */
+		this.items = [];
+		this.numItems = itemsJQ.length;
+		
+		
+		var ua = navigator.userAgent.toLowerCase();
+	    var uaMatch = function( ua ) {
+		    var match = /(chrome)[ \\\\/]([\\\\w.]+)/.exec( ua ) ||
+		        /(webkit)[ \\\\/]([\\\\w.]+)/.exec( ua ) ||
+		        /(opera)(?:.*version|)[ \\\\/]([\\\\w.]+)/.exec( ua ) ||
+		        /(msie) ([\\\\w.]+)/.exec( ua ) ||
+		        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\\\\w.]+)|)/.exec( ua ) ||
+		        [];
+
+		    return {
+		        browser: match[ 1 ] || "",
+		        version: match[ 2 ] || "0"
+		    };
+		};
+		var matched = uaMatch( ua );
+		var br = {};
+		if ( matched.browser ) {
+		    br[ matched.browser ] = true;
+		    br.version = matched.version;
+		}
+		if(br.chrome) { br.webkit = true; };
+		self._browser = br;
+
+		this._decelerationAnim;
+		this._successfullyDragged = false;
+		this._startMouseX = 0;
+		this._prevMouseX = 0;
+		this._moveDist = 0;
+		this._blockClickEvents = false;
+		this._wasBlocked = false;
+		
+		this._useWebkitTransition = false;
+		
+		
+		if('ontouchstart' in window) {
+			this.hasTouch = true;
+			this._downEvent = 'touchstart.rs';
+			this._moveEvent = 'touchmove.rs';
+			this._upEvent = 'touchend.rs';
+			this._baseFriction = this.settings.baseTouchFriction;
+		} else {
+			this.hasTouch = false;
+			this._baseFriction = this.settings.baseMouseFriction;
+			if(this.settings.dragUsingMouse) {
+				this._downEvent = 'mousedown.rs';
+				this._moveEvent = 'mousemove.rs';
+				this._upEvent = 'mouseup.rs';
+				
+				//setup cursor
+				this._grabCursor;
+				this._grabbingCursor;
+				var ua = self._browser;
+				if (ua.msie || ua.opera) {
+					this._grabCursor = this._grabbingCursor = "move";
+				} else if(ua.mozilla) {
+					this._grabCursor = "-moz-grab";
+					this._grabbingCursor = "-moz-grabbing";
+				} 
+				this._setGrabCursor();
+			} else {
+				// set cursor to auto if drag navigation is disabled
+				this._itemsWrapper.addClass('auto-cursor');
+			}
+			
+		}	
+		if(this.hasTouch || this.settings.useWebkit3d) {
+			// check if browser supports translate3d()
+			if(('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix())) {	
+				this._dragContainer.css({'-webkit-transform-origin':'0 0', '-webkit-transform': 'translateZ(0)'});			
+				this._useWebkitTransition = true;
+			}
+		}
+		
+		
+		if(this._useWebkitTransition) {
+			this._xProp = '-webkit-transform';
+			this._xPref = 'translate3d(';
+			this._xSuf = 'px, 0, 0)';
+		} else {
+			this._xProp = 'left';
+			this._xPref = '';
+			this._xSuf = 'px';
+		}
+		
+		if(this.hasTouch) {
+			this.settings.directionNavAutoHide = false;			
+		}		
+		
+		if(!this.settings.directionNav) {
+			if(this.settings.loopItems) {
+				this._arrowLeftBlocked = true;
+				this._arrowRightBlocked = true;
+			} else {
+				this._arrowLeftBlocked = false;
+				this._arrowRightBlocked = false;
+			}
+			this.settings.loopItems = true;
+		}
+		
+		var	itemObj,
+			jqItem,
+			dataSRC,
+			slideImg,
+			currPosX = 0;
+		
+		
+		
+		itemsJQ.eq(this.numItems - 1).addClass('last');
+		
+		// parse items
+		itemsJQ.each(function(index) {
+			jqItem = $(this);			
+			itemObj = {};
+			itemObj.item = jqItem;
+			itemObj.index = index;
+			itemObj.posX = currPosX;
+			itemObj.width = (jqItem.outerWidth(true) || self.settings.itemFallbackWidth);			
+			currPosX += itemObj.width;
+			
+			// block all links inside slides when dragging
+			if(!this.hasTouch) {
+				jqItem.find('a').bind('click.touchcarousel', function(e) {					
+					if(self._successfullyDragged) {						
+						e.preventDefault();						
+						return false;
+					}						
+				});
+			} else {
+				// Fix preventing link bug on some touch devices
+				var jqLinks = jqItem.find('a');
+				var jqLink;
+				jqLinks.each(function() {
+					jqLink = $(this);
+					jqLink.data('tc-href', jqLink.attr('href'));
+					jqLink.data('tc-target', jqLink.attr('target'));
+					jqLink.attr('href', '#');
+					jqLink.bind('click', function(e) {							
+						e.preventDefault();	
+						if(self._successfullyDragged) {							
+							return false;
+						} else {
+							var linkData = $(this).data('tc-href');							
+							var linkTarget = $(this).data('tc-target');								
+							if(!linkTarget || linkTarget.toLowerCase() === '_self') {
+								window.location.href = linkData;
+							} else {
+								window.open(linkData);
+							}							
+						}					
+					});
+				});		
+			}				
+			
+			// prevent dragging on all elements that have 'non-draggable' class			
+			jqItem.find('.non-draggable').bind(self._downEvent, function(e) {					
+				self._successfullyDragged = false;	
+				e.stopImmediatePropagation();
+			});
+			
+			self.items.push(itemObj);
+		});
+		
+		
+		this._maxXPos = this._totalItemsWidth = currPosX;		
+		
+		
+		if(this.settings.itemsPerMove > 0) {
+			this._itemsPerMove = this.settings.itemsPerMove;
+		} else {
+			this._itemsPerMove = 1;			
+		}
+		
+		// Setup paging
+		if(this.settings.pagingNav) {
+			this.settings.snapToItems = true;
+			this._pagingEnabled = true;
+			this._numPages = Math.ceil(this.numItems / this._itemsPerMove);
+			this._currPageId = 0;
+			
+			if(this.settings.pagingNavControls) {
+				this._pagingNavContainer = $('<div class="tc-paging-container"><div class="tc-paging-centerer"><div class="tc-paging-centerer-inside"></div></div></div>');
+				var pagingInside = this._pagingNavContainer.find('.tc-paging-centerer-inside');
+				var pagingItem;
+				
+				for(var i = 1; i <= this._numPages; i++ ) {					
+					pagingItem = $('<a class="tc-paging-item" href="#">' + i + '</a>').data('tc-id',i);					
+					if(i === this._currPageId + 1) {
+						pagingItem.addClass('current');
+					}
+					pagingInside.append(pagingItem);	
+				}
+			
+				this._pagingItems = pagingInside.find(".tc-paging-item").click(function(e) {		
+					e.preventDefault();						
+					self.goTo(($(e.currentTarget).data('tc-id') - 1) * self._itemsPerMove);
+				});
+				
+				this._itemsWrapper.after(this._pagingNavContainer);
+			}
+			
+		} else {
+			this._pagingEnabled = false;
+		}
+
+		
+		this._dragContainer.css({
+			width:currPosX
+		});
+		
+		//Direction navigation (arrows)
+		if(this.settings.directionNav) {	
+			this._itemsWrapper.after("<a href='#' class='arrow-holder left'><span class='arrow-icon left'></span></a> <a href='#' class='arrow-holder right'><span class='arrow-icon right'></span></a>");
+			this.arrowLeft = this.carouselRoot.find(".arrow-holder.left");
+			this.arrowRight = this.carouselRoot.find(".arrow-holder.right");
+
+			
+			/*if(this.settings.loopItems) {
+				this._arrowLeftBlocked = false;
+				this._disableLeftArrow();
+			}*/
+			
+			if(this.arrowLeft.length < 1 || this.arrowRight.length < 1) {
+				this.settings.directionNav = false;
+			} else if(this.settings.directionNavAutoHide) {
+				this.arrowLeft.hide();
+				this.arrowRight.hide();
+
+				this.carouselRoot.one("mousemove.arrowshover",function() {
+					self.arrowLeft.fadeIn("fast");
+					self.arrowRight.fadeIn("fast");					
+				});
+
+
+				this.carouselRoot.hover(
+						function() {
+							self.arrowLeft.fadeIn("fast");
+							self.arrowRight.fadeIn("fast");
+						},
+						function() {
+							self.arrowLeft.fadeOut("fast");
+							self.arrowRight.fadeOut("fast");				
+						}
+				);	
+			}	
+			
+			
+			this._updateDirectionNav(0);
+			
+			if(this.settings.directionNav) {
+				this.arrowRight.click(function(e) {					
+					e.preventDefault();	
+					if(self.settings.loopItems && !self._blockClickEvents || !self._arrowRightBlocked )
+						self.next();
+				});
+
+				this.arrowLeft.click(function(e) {
+					e.preventDefault();
+					if(self.settings.loopItems && !self._blockClickEvents || !self._arrowLeftBlocked )
+						self.prev();
+				});	
+			}
+		}
+
+		
+		
+
+		// Manage window resize event with 100ms delay
+		this.carouselWidth;
+		this._resizeEvent = 'onorientationchange' in window ? 'orientationchange.touchcarousel' : 'resize.touchcarousel';
+		var resizeTimer;
+		$(window).bind(this._resizeEvent, function() {		
+			if(resizeTimer) 
+				clearTimeout(resizeTimer);			
+			resizeTimer = setTimeout(function() { self.updateCarouselSize(false); }, 100);			
+		});		
+		
+		
+		// Setup scrollbar
+		if(this.settings.scrollbar) {
+			this._scrollbarHolder = $("<div class='scrollbar-holder'><div class='scrollbar"+ (this.settings.scrollbarTheme.toLowerCase() === "light" ? " light" : " dark")  +"'></div></div>");
+			this._scrollbarHolder.appendTo(this.carouselRoot);
+			this.scrollbarJQ = this._scrollbarHolder.find('.scrollbar');
+			this._scrollbarHideTimeout = "";
+			this._scrollbarStyle = this.scrollbarJQ[0].style;			
+			this._scrollbarDist = 0;
+			if(this.settings.scrollbarAutoHide) {
+				this._scrollbarVisible = false;
+				this.scrollbarJQ.css("opacity", 0);
+			} else {
+				this._scrollbarVisible = true;
+			}
+			
+		} else {
+			this.settings.scrollbarAutoHide = false;
+		}
+		
+		
+		this.updateCarouselSize(true);
+		
+		
+		
+		
+		
+		this._itemsWrapper.bind(this._downEvent, function(e) {  self._onDragStart(e); });	
+		
+		
+		
+		// Setup autoplay			
+		if(this.settings.autoplay && this.settings.autoplayDelay > 0) {		
+			this._isHovering = false;
+			this.autoplayTimer = '';
+			this.wasAutoplayRunning = true;
+			
+			if(!this.hasTouch) {						
+				this.carouselRoot.hover(
+						function() {						
+							self._isHovering = true;							
+							self._stopAutoplay();
+						},
+						function() {							
+							self._isHovering = false;							
+							self._resumeAutoplay();
+						}
+				);				
+			}
+			this.autoplay = true;	
+			
+			this._releaseAutoplay();
+		} else {
+			this.autoplay = false;
+		}
+		
+		
+		// Keyboard navigation
+		if(this.settings.keyboardNav) {
+			$(document).bind("keydown.touchcarousel", function(e) {
+				if(!self._blockClickEvents) {
+					if (e.keyCode === 37) {						
+						self.prev();
+					}
+					else if (e.keyCode === 39) {						
+						self.next();
+					}
+				}
+			});
+		}
+		
+		// release carousel main container overflow
+		this.carouselRoot.css("overflow","visible");
+		
+	} /* TouchCarousel Constructor End */
+	/* -------------------------------------TouchCarousel Prototype------------------------------------------------------*/
+	
+	
+	
+	TouchCarousel.prototype = {
+			/* Public methods: */
+			goTo:function(id, fromAutoplay) {
+						
+				
+				var newItem = this.items[id];
+				
+				
+				if(newItem) {					
+					if(!fromAutoplay && this.autoplay && this.settings.autoplayStopAtAction) {						
+						this.stopAutoplay();
+					}
+					
+					this._updatePagingNav(id);
+					
+					
+					this.endPos = this._getXPos();
+					var newX = -newItem.posX;
+					if(newX > 0) {
+						newX = 0;
+					} else if(newX < this.carouselWidth - this._maxXPos) {
+						newX = this.carouselWidth - this._maxXPos;
+					}
+					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");					
+				}			
+				
+			},
+			next:function(fromAutoplay) {				
+				var currXPos = this._getXPos();				
+				var newItemId = this._getItemAtPos(currXPos).index;	
+				
+				
+				if(!this._pagingEnabled) {
+					newItemId = newItemId + this._itemsPerMove;						
+					if(this.settings.loopItems) {
+						if(currXPos <= this.carouselWidth - this._maxXPos) {
+							newItemId = 0;
+						}
+					}
+					if(newItemId > this.numItems - 1) {
+						newItemId = this.numItems - 1;
+					}
+				} else {
+					var newPageId = this._currPageId +  1;
+					if(newPageId >  this._numPages - 1) {						
+						if(this.settings.loopItems) {
+							newItemId = 0;
+						} else {
+							newItemId = (this._numPages - 1) * this._itemsPerMove;	
+						}
+					} else {
+						newItemId = newPageId * this._itemsPerMove;	
+					}
+				}
+				
+				
+				
+				this.goTo(newItemId, fromAutoplay);
+			},
+			prev:function(fromAutoplay) {	
+				var currXPos = this._getXPos();				
+				var newItemId = this._getItemAtPos(currXPos).index;	
+				
+				if(!this._pagingEnabled) {
+					newItemId = newItemId - this._itemsPerMove;						
+					if(newItemId < 0) {
+						if(this.settings.loopItems) {
+							if(currXPos < 0) {
+								newItemId = 0;							
+							} else {
+								newItemId = this.numItems - 1;							
+							}
+							
+						} else {
+							newItemId = 0;
+						}
+					}	
+				} else {
+					var newPageId = this._currPageId -  1;
+					if(newPageId <  0) {						
+						if(this.settings.loopItems) {
+							newItemId = (this._numPages - 1) * this._itemsPerMove;	
+						} else {
+							newItemId = 0;
+						}
+					} else {
+						newItemId = newPageId * this._itemsPerMove;	
+					}			
+				}				
+				this.goTo(newItemId, fromAutoplay);
+			},
+			getCurrentId:function() {
+				var currId = this._getItemAtPos(this._getXPos()).index;
+				return currId;
+			},
+			setXPos:function(pos, isScrollbar) {	
+				if(!isScrollbar) {
+					this._dragContainerStyle[this._xProp] = (this._xPref + pos + this._xSuf);					
+				} else {					
+					this._scrollbarStyle[this._xProp] = (this._xPref + pos + this._xSuf);
+				}				
+			},
+			stopAutoplay: function() {				
+				this._stopAutoplay();
+				this.autoplay = false;
+				this.wasAutoplayRunning = false;				
+			},
+			resumeAutoplay: function() {
+				this.autoplay = true;
+				if(!this.wasAutoplayRunning) {
+					this._resumeAutoplay();
+				}				
+			},
+			updateCarouselSize:function(leavePos) {
+				var self = this;
+				this.carouselWidth = this.carouselRoot.width();
+
+				// Monkey Patch for Lone Star Percussion - calculates _itemsPerMove automatically
+
+					// Update widths of % based item widths
+					this._totalItemsWidth = 0;
+					for(var i = 0; i < this.items.length; i++){
+						this.items[i].width = this.items[i].item.outerWidth();
+						this._totalItemsWidth += this.items[i].width;
+					}
+
+					// Reset Items Per Move
+					if(this.settings._calculatePageWidth){
+						this._itemsPerMove = Math.floor(this.carouselWidth / (this.items[0].width || 1)) || 1;
+					}
+
+					// Resize the container
+					this._dragContainer.css({
+						width: this._totalItemsWidth
+					});
+
+					// Update Positions - we need to do this after the widths because the positions
+					// have been altered, but we need totalItemsWidth before we can save positions
+					for(var i = 0; i < this.items.length; i++){
+						this.items[i].posX = this.items[i].item.position().left;
+					}
+
+				// End Monkey Patch
+
+				if(this.settings.scrollToLast) {
+					var lastItemsWidth = 0;
+					if(this._pagingEnabled) {					
+						var freeItems = (this.numItems % this._itemsPerMove);
+						if(freeItems > 0) {
+							for(var i = this.numItems - freeItems; i < this.numItems; i++) {								
+								lastItemsWidth += this.items[i].width;
+							}
+						} else {
+							lastItemsWidth = this.carouselWidth;
+						}
+						
+					} else {
+						lastItemsWidth = this.items[this.numItems - 1].width;
+					}
+					this._maxXPos = this._totalItemsWidth + this.carouselWidth - lastItemsWidth;
+				} else {
+					
+					this._maxXPos = this._totalItemsWidth;
+				}
+				
+				
+				if(this.settings.scrollbar) {
+					var scrlWidth = Math.round(this._scrollbarHolder.width() / (this._maxXPos / this.carouselWidth));
+					this.scrollbarJQ.css('width', scrlWidth);					
+					this._scrollbarDist = this._scrollbarHolder.width() - scrlWidth;
+				}		
+				if(!this.settings.scrollToLast) {
+					if(this.carouselWidth >= this._totalItemsWidth) {
+						this._wasBlocked = true;						
+						if(!this.settings.loopItems) {
+							this._arrowRightBlocked = true;							
+							this.arrowRight.addClass("disabled");	
+							this._arrowLeftBlocked = true;
+							this.arrowLeft.addClass("disabled");	
+						}
+						this.setXPos(0);						
+						return;
+					} else if(this._wasBlocked) {
+						this._wasBlocked = false;
+						this._arrowRightBlocked = false;	
+						this._arrowLeftBlocked = false;
+						this.arrowRight.removeClass("disabled");	
+						this.arrowLeft.removeClass("disabled");	
+					}					
+				}
+				
+				if(!leavePos) {
+					var newX = this.endPos = this._getXPos();		
+					
+					if(newX > 0) {
+						newX = 0;
+					} else if(newX < this.carouselWidth - this._maxXPos) {
+						newX = this.carouselWidth - this._maxXPos;
+					}
+					this.animateTo(newX, 300, "easeInOutSine");		
+				}
+				
+				// Additional Monkey Patch for Lone Star Percussion
+				// This re-adjusts the carosel when we resize it.
+				this.goTo(this._currPageId);
+				// End additional patch
+				
+			},
+			animateTo:function(pos, speed, easing, bounceAnim, endPos, bounceSpeed, bounceEasing) {		
+				
+				if(this.settings.onAnimStart !== null) {
+					this.settings.onAnimStart.call(this);
+				}
+				
+				
+				if(this.autoplay && this.autoplayTimer) {		
+					this.wasAutoplayRunning = true;
+					this._stopAutoplay();
+				}
+				this._stopAnimation();
+				
+				var self = this;
+				
+				var scrollbarEnabled = this.settings.scrollbar,
+					prop = self._xProp,
+					pref = self._xPref,
+					suf = self._xSuf,				
+					from = {containerPos: this.endPos},
+					to = {containerPos: pos},
+					to2 = {containerPos: endPos},
+					endPos = bounceAnim ? endPos : pos,
+					dContainer = self._dragContainerStyle;
+				
+				self._isAnimating = true;
+				
+				if(scrollbarEnabled) {
+					var sbStyle = this._scrollbarStyle;
+					var sbAnimateDist = self._maxXPos - self.carouselWidth;
+					if(this.settings.scrollbarAutoHide)  { 
+						if(!this._scrollbarVisible) {
+							this._showScrollbar();
+						}
+					}
+				}
+				
+				
+				
+				this._updateDirectionNav(endPos);
+				
+				function animationComplete() {
+					self._isAnimating = false;
+			    	self._releaseAutoplay();
+			    	if(self.settings.scrollbarAutoHide)  {					
+			    		self._hideScrollbar();
+					}
+			    	
+			    	if(self.settings.onAnimComplete !== null) {
+						self.settings.onAnimComplete.call(self);
+					}
+				}
+				
+				
+				
+				
+				this._decelerationAnim = $(from).animate(to, {
+				    duration: speed,
+				    easing: easing,
+				    step: function() {
+				    	if(scrollbarEnabled) {		
+				    		sbStyle[prop] = (pref + Math.round((self._scrollbarDist) * (-this.containerPos / sbAnimateDist)) + suf );	  
+				    	}
+				    	dContainer[prop] = (pref + Math.round(this.containerPos) + suf);					       
+				    }, 
+				    complete: function() {
+				    	if(bounceAnim) {
+				    		self._decelerationAnim = $(to).animate(to2, {
+							    duration: bounceSpeed,
+							    easing: bounceEasing,
+							    step: function() {			
+							    	if(scrollbarEnabled) {
+							    		sbStyle[prop] = (pref + Math.round((self._scrollbarDist) * (-this.containerPos / sbAnimateDist)) + suf );	  
+							    	}
+							    	dContainer[prop] = (pref + Math.round(this.containerPos) + suf);							        				       
+							    },
+							    complete: function() {							    	
+							    	if(scrollbarEnabled) {
+							    		sbStyle[prop] = (pref + Math.round((self._scrollbarDist) * (-to2.containerPos / sbAnimateDist)) + suf );	  
+							    	}
+							    	dContainer[prop] = (pref + Math.round(to2.containerPos) + suf);								    	
+							    	animationComplete();
+							    }
+				    		});					    		
+				    	} else {					    		
+				    		if(scrollbarEnabled) {
+					    		sbStyle[prop] = (pref + Math.round((self._scrollbarDist) * (-to.containerPos / sbAnimateDist)) + suf );	  					    	
+				    		}
+				    		dContainer[prop] = (pref + Math.round(to.containerPos) + suf);			    		
+				    		animationComplete();				    		
+				    	}
+				    }
+				});	
+				
+							
+			},
+			/* Destroy carousel and remove it's element */
+			destroy: function() {
+				this.stopAutoplay();
+				this._itemsWrapper.unbind(this._downEvent);					
+				$(document).unbind(this._moveEvent).unbind(this._upEvent);	
+				$(window).unbind(this._resizeEvent);
+				if(this.settings.keyboardNav) {
+					$(document).unbind("keydown.touchcarousel");
+				}	
+				this.carouselRoot.remove();
+			},
+			
+			
+			/* Private methods: */
+			_updatePagingNav:function(id) {
+				if(this._pagingEnabled) {	
+					var newPageId = this._getPageIdFromItemId(id);					
+					this._currPageId = newPageId;	
+					if(this.settings.pagingNavControls) {
+						this._pagingItems.removeClass('current');
+						this._pagingItems.eq(newPageId).addClass('current');
+					}
+					
+				}
+			},
+			_getPageIdFromItemId:function(id) {
+				var itemsPerPage = this._itemsPerMove;				
+				for(var i = 0; i < this._numPages; i++) {	
+					if(id >= i * itemsPerPage  && id < i * itemsPerPage + itemsPerPage) {								
+						return i;						
+					}					
+				}
+				if(id < 0) {
+					return 0;
+				} else if(id >= this._numPages) {
+					return this._numPages - 1;
+				}
+				return false;
+			},			
+			_enableArrows:function() {
+				if(!this.settings.loopItems) {
+					if(this._arrowLeftBlocked) {								
+						this._arrowLeftBlocked = false;
+						this.arrowLeft.removeClass("disabled");				
+					} else if(this._arrowRightBlocked) {								
+						this._arrowRightBlocked = false;
+						this.arrowRight.removeClass("disabled");		
+					}
+				}
+			},
+			
+			
+			_disableLeftArrow:function() {			
+				if(!this._arrowLeftBlocked && !this.settings.loopItems) {		
+			
+					this._arrowLeftBlocked = true;
+					this.arrowLeft.addClass("disabled");	
+					if(this._arrowRightBlocked) {
+						this._arrowRightBlocked = false;
+						this.arrowRight.removeClass("disabled");
+					}					
+				}	
+			},
+			_disableRightArrow:function() {				
+				if(!this._arrowRightBlocked && !this.settings.loopItems) {					
+					this._arrowRightBlocked = true;							
+					this.arrowRight.addClass("disabled");	
+					if(this._arrowLeftBlocked) {
+						this._arrowLeftBlocked = false;
+						this.arrowLeft.removeClass("disabled");		
+					}					
+				}	
+			},
+			_getItemAtPos:function(pos) {
+				var self = this;
+				pos = -pos;
+				
+				
+				var currItem;				
+				for(var i = 0; i < self.numItems; i++) {					
+					currItem = self.items[i];
+					if(pos >= currItem.posX && pos < currItem.posX + currItem.width) {	
+					
+						return currItem;					
+					}
+				}
+				return -1;
+			},
+			
+
+			
+			_releaseAutoplay:function() {
+				if(this.autoplay) {
+					if(this.wasAutoplayRunning) {		
+						if(!this._isHovering) {
+							this._resumeAutoplay();
+						}						
+						this.wasAutoplayRunning = false;						
+					}
+				}
+			},
+			_hideScrollbar:function() {
+				var self = this;
+				this._scrollbarVisible = false;
+				if(this._scrollbarHideTimeout) {
+					clearTimeout(this._scrollbarHideTimeout);
+				}				
+				this._scrollbarHideTimeout = setTimeout(function(){
+					self.scrollbarJQ.animate({opacity:0}, 150, "linear");
+				}, 450);
+			},
+			_showScrollbar:function() {
+				this._scrollbarVisible = true;		
+				if(this._scrollbarHideTimeout) {
+					clearTimeout(this._scrollbarHideTimeout);
+				}	
+				this.scrollbarJQ.stop().animate({opacity:1}, 150, "linear");
+			},
+			_stopAnimation:function() {
+				if(this._decelerationAnim) {
+					this._decelerationAnim.stop();
+				}				
+			},			
+			_resumeAutoplay: function() {
+ 				if(this.autoplay) {
+ 					var self = this;
+ 	 				if(!this.autoplayTimer) {
+ 	 					this.autoplayTimer = setInterval(function() { 
+ 	 						if(!self._isDragging && !self._isAnimating) {
+ 	 							self.next(true);
+ 	 						}						
+ 	 					}, this.settings.autoplayDelay);
+ 	 				}
+ 				}	
+			},	
+			_stopAutoplay: function() {
+				if(this.autoplayTimer) {					
+					clearInterval(this.autoplayTimer);
+					this.autoplayTimer = '';
+				}								
+			},
+			_getXPos:function(isScrollbar) {
+				var obj = !isScrollbar ? this._dragContainer : this.scrollbarJQ;			
+				
+				if(!this._useWebkitTransition) {
+					return Math.round(obj.position().left);	
+				} else {						
+					var transform = obj.css("-webkit-transform");
+					var explodedMatrix = transform.replace(/^matrix\\\\(/i, '').split(/, |\\\\)$/g);
+					return parseInt(explodedMatrix[4], 10);				
+				}
+			},		
+			
+			_onDragStart:function(e) {			
+				if(!this._isDragging) {		
+					
+					if(this.autoplay && this.settings.autoplayStopAtAction) {
+						this.stopAutoplay();
+					}
+					
+					this._stopAnimation();
+					if(this.settings.scrollbarAutoHide) {
+						this._showScrollbar();
+					}
+					
+					
+					var point;
+					if(this.hasTouch) {
+						this._lockYAxis = false;
+						//parsing touch event
+						var currTouches = e.originalEvent.touches;
+						if(currTouches && currTouches.length > 0) {
+							point = currTouches[0];
+						}					
+						else {	
+							return false;						
+						}
+					} else {
+						point = e;						
+						e.preventDefault();						
+					}
+					
+					
+					this._setGrabbingCursor();			
+					this._isDragging = true;
+					var self = this;
+					if(this._useWebkitTransition) {
+						self._dragContainer.css({'-webkit-transition-duration':'0', '-webkit-transition-property': 'none'});
+					}
+					$(document).bind(this._moveEvent, function(e) { self._onDragMove(e); });
+					$(document).bind(this._upEvent, function(e) { self._onDragRelease(e); });		
+
+				
+					this._startPos = this._getXPos();
+					
+								
+					
+					this._accelerationX = point.clientX;
+					
+					
+					this._successfullyDragged = false;
+					
+					this._startTime = (e.timeStamp || (new Date().getTime()));
+					
+					this._moveDist = 0;
+					this._prevMouseX = this._startMouseX = point.clientX;
+					this._startMouseY = point.clientY;
+				}
+			},
+			_onDragMove:function(e) {
+				var timeStamp = (e.timeStamp || (new Date().getTime()));
+				var point;
+				if(this.hasTouch) {
+					if(this._lockYAxis) {
+						return false;
+					}				
+					
+					var touches = e.originalEvent.touches;
+					// If touches more then one, so stop sliding and allow browser do default action
+					
+					if(touches.length > 1) {
+						return false;
+					}
+					
+					point = touches[0];	
+					// If drag direction on mobile is vertical, so stop sliding and allow browser to scroll				
+					if(Math.abs(point.clientY - this._startMouseY) > Math.abs(point.clientX - this._startMouseX) + 3) {
+						if(this.settings.lockAxis) {
+							this._lockYAxis = true;
+						}						
+						return false;
+					}
+				
+					e.preventDefault();			
+				} else {
+					point = e;
+					e.preventDefault();		
+				}
+				
+				this._latestDragX = point.clientX;
+
+				// Helps find last direction of drag move
+				this._lastDragPosition = this._currentDragPosition;
+				var distance = point.clientX - this._prevMouseX;
+				if(this._lastDragPosition != distance) {
+					this._currentDragPosition = distance;
+				}
+				
+				if(distance != 0)
+				{
+					
+					var dist = this._startPos + this._moveDist;
+					
+					
+					
+					if(dist >= 0) {						
+						distance = distance / 4;						
+						this._disableLeftArrow();
+						
+					} else if(dist <= this.carouselWidth - this._maxXPos) {	
+						this._disableRightArrow();
+						distance = distance / 4;
+					} else {						
+						this._enableArrows();
+					}
+					
+					this._moveDist += distance;
+					this.setXPos(dist);				
+					
+					if(this.settings.scrollbar) {					
+						this.setXPos((this._scrollbarDist) * (-dist / (this._maxXPos - this.carouselWidth)), true);
+					}
+				}		
+				
+				
+				
+				
+				
+				
+				this._prevMouseX = point.clientX;
+			
+				if (timeStamp - this._startTime > 350) {
+					this._startTime = timeStamp;
+					this._accelerationX = point.clientX;						
+				}
+				
+				if(this.settings.onDragStart !== null) {
+					this.settings.onDragStart.call(this);
+				}
+				
+				return false;		
+			},
+			
+			_onDragRelease:function(e) {
+				
+			
+				
+				if(this._isDragging) {		
+					
+					var self = this;
+					this._isDragging = false;			
+					this._setGrabCursor();
+					
+				
+					
+					
+					
+					this.endPos = this._getXPos();
+					
+					
+					this.isdrag = false;
+
+					$(document).unbind(this._moveEvent).unbind(this._upEvent);					
+
+					if(this.endPos == this._startPos) {						
+						this._successfullyDragged = false;
+						if(this.settings.scrollbarAutoHide) {
+							this._hideScrollbar();
+						}
+						return;	
+					} else {
+						this._successfullyDragged = true;
+					}
+					
+					//function animate
+					var dist = (this._latestDragX - this._accelerationX);		
+					var duration =  Math.max(40, (e.timeStamp || (new Date().getTime())) - this._startTime);
+					
+					
+					
+					// For nav speed calculation F=ma :)
+					var friction = 0.5,
+					    mass = 2,					
+						v0 = Math.abs(dist) / duration;	
+					
+					function getCorrectXPos(pos) {
+						
+						if(pos > 0) {
+							pos = 0;
+						} else if(pos < self.carouselWidth - self._maxXPos) {
+							pos = self.carouselWidth - self._maxXPos;
+						}	
+						return pos;
+					}
+					
+					if(!this.settings.snapToItems) {
+						// Physics continue
+						var timeOffset = 0;
+						if(v0 <= 2) {
+							friction = this._baseFriction * 3.5;
+							timeOffset = 0;
+						} else if(v0 > 2 && v0 <= 3) {
+							friction = this._baseFriction * 4;
+							timeOffset = 200;
+						} else if(v0 > 3){
+							timeOffset = 300;
+							if(v0 > 4) {
+								v0 = 4;
+								timeOffset = 400;
+								friction = this._baseFriction * 6;
+							}
+							friction = this._baseFriction * 5;
+						}							
+						
+						var S = (v0 * v0 * mass) / (2 * friction);
+						S = S * (dist < 0 ? -1 : 1);					
+						var t = v0 * mass / friction + timeOffset;	
+							
+						
+						if(this.endPos + S > 0) {	
+							if(this.endPos > 0) {
+								this.animateTo(0, 800, "easeOutCubic");							
+							} else {
+								this.animateTo(
+										(this.carouselWidth / 10) * ((timeOffset + 200) / 1000), 
+										(Math.abs(this.endPos) * 1.1) / v0, 
+										"easeOutSine", 
+										true, 
+										0, 
+										400, 
+										"easeOutCubic");					
+							}
+						} else if(this.endPos + S < this.carouselWidth - this._maxXPos) {	
+							if(this.endPos < this.carouselWidth - this._maxXPos) {						
+								this.animateTo(this.carouselWidth - this._maxXPos, 800, "easeOutCubic");							
+							} else {							
+								this.animateTo(
+										this.carouselWidth - this._maxXPos - (this.carouselWidth / 10) * ((timeOffset + 200) / 1000), 
+										(Math.abs(this.carouselWidth - this._maxXPos - this.endPos) * 1.1) / v0, 
+										"easeOutSine", 
+										true, 
+										this.carouselWidth - this._maxXPos, 
+										400, 
+										"easeOutCubic");	
+							}	
+						} else {				
+							this.animateTo(this.endPos + S, t, "easeOutCubic");
+						}		
+					} else {						
+						if(this.autoplay && this.settings.autoplayStopAtAction) {
+							this.stopAutoplay();
+						}
+						var isNext = Boolean(this._startMouseX - this._prevMouseX > 0);
+										
+						
+						var newX = getCorrectXPos(this._getXPos());
+						
+											
+						var newItemId = this._getItemAtPos(newX).index;						
+						
+						if(!this._pagingEnabled) {
+							newItemId = newItemId + (isNext ?  this._itemsPerMove : ( - this._itemsPerMove + 1));									
+						} else {	
+							if(isNext) {			
+								newX = Math.max(newX - this.carouselWidth - 1, 1 - self._maxXPos);	
+								newItemId = this._getItemAtPos(newX).index;
+								if(newItemId === undefined) {
+									newItemId = this.numItems - 1;
+								}
+							}							
+							
+							var newPageId = this._getPageIdFromItemId(newItemId);
+														
+							newItemId = newPageId * this._itemsPerMove;								
+						}
+						
+						if(isNext) {							
+							newItemId = Math.min(newItemId, this.numItems - 1);
+						} else {							
+							newItemId = Math.max(newItemId, 0);
+						}
+						
+											
+						
+						var newItem = this.items[newItemId];
+					
+						this._updatePagingNav(newItemId);
+						
+						if(newItem) {
+							
+							newX = getCorrectXPos(-newItem.posX);
+							
+							var newDist = Math.abs(this.endPos  - newX);
+							var newDuration = Math.max((newDist * 1.08) / v0, 150);
+							var isFast = Boolean(newDuration < 180);
+							var addDist = newDist * 0.08;
+							if(isNext) {
+								addDist = addDist * -1;
+							}
+							
+							
+							this.animateTo(isFast ? (newX + addDist ) : newX,
+									Math.min(newDuration, 400),
+									"easeOutSine",
+									isFast,
+									newX,
+									300,
+									"easeOutCubic");	
+							
+							
+						}
+					
+					}
+					
+					if(this.settings.onDragRelease !== null) {
+						this.settings.onDragRelease.call(this);
+					}
+					
+				}
+
+				return false;
+			},
+			_updateDirectionNav:function(pos) {				
+				if(pos === undefined) {					
+					pos = this._getXPos();
+				}				
+				if(!this.settings.loopItems) {
+					if(pos >= 0) {						
+						this._disableLeftArrow();
+					} else if(pos <= this.carouselWidth - this._maxXPos) {
+						this._disableRightArrow();						
+					} else {
+						this._enableArrows();
+					}
+				}
+			},
+			_setGrabCursor:function() {			
+				if(this._grabCursor) {
+					this._itemsWrapper.css('cursor', this._grabCursor);
+				} else {
+					this._itemsWrapper.removeClass('grabbing-cursor');
+					this._itemsWrapper.addClass('grab-cursor');	
+				}
+							
+			},
+			_setGrabbingCursor:function() {		
+				if(this._grabbingCursor) {
+					this._itemsWrapper.css('cursor', this._grabbingCursor);
+				} else {
+					this._itemsWrapper.removeClass('grab-cursor');
+					this._itemsWrapper.addClass('grabbing-cursor');	
+				}				
+			}
+	}; /* TouchCarousel.prototype end */
+
+	$.fn.touchCarousel = function(options) {    	
+		return this.each(function(){
+			var touchCarousel = new TouchCarousel($(this), options);
+			$(this).data("touchCarousel", touchCarousel);
+		});
+	};
+
+	$.fn.touchCarousel.defaults = {  
+			itemsPerMove: 1,              // The number of items to move per arrow click.
+			
+			snapToItems: false,           // Snaps to items, based on itemsPerMove
+			pagingNav: false,             // Enable paging nav (snaps to first item of every group, based on itemsPerMove). Overrides snapToItems
+			pagingNavControls: true,      // Paging controls (bullets)
+			_calculatePageWidth: false,	  // Proprietary - pagingNav but does not rely on itemsPerMove
+			
+			
+			
+			autoplay:false,               // Autoplay enabled          
+			autoplayDelay:3000,	          // Delay between transitions	
+			autoplayStopAtAction:true,    // Stop autoplay forever when user clicks arrow or does any other action
+			
+			scrollbar: true,              // Scrollbar enabled
+			scrollbarAutoHide: false,     // Scrollbar autohide
+			scrollbarTheme: "dark",	      // Scrollbar color. Can be "light" or "dark"	
+			
+			transitionSpeed: 600,         // Carousel transition speed (next/prev arrows, autoplay)		
+			
+			directionNav:true,            // Direction (arrow) navigation (true or false)
+			directionNavAutoHide:false,   // Direction (arrow) navigation auto hide on hover. (On touch devices arrows are always shown)
+			
+			loopItems: false,             // Loop items (don't disable arrows on last slide and allow autoplay to loop)
+			
+			keyboardNav: false,			  // Keyboard arrows navigation
+			dragUsingMouse:true,          // Enable drag using mouse	
+			
+			
+			scrollToLast: false,          // Last item ends at start of carousel wrapper	
+			
+
+			itemFallbackWidth: 500,       // Default width of the item in pixels. (used if impossible to get item width).
+			
+			baseMouseFriction: 0.0012,    // Container friction on desktop (higher friction - slower speed)
+			baseTouchFriction: 0.0008,    // Container friction on mobile
+			lockAxis: true,               // Allow dragging only on one direction
+			useWebkit3d: false,           // Enable WebKit 3d transform on desktop devices 
+                                          // (on touch devices this option is turned on)
+										  // Use it if you have only images, 3d transform makes text blurry
+			                                       
+			
+			onAnimStart: null,            // Callback, triggers before deceleration or transition animation
+			onAnimComplete: null,         // Callback, triggers after deceleration or transition animation
+
+			onDragStart:null,             // Callback, triggers on drag start
+			onDragRelease: null           // Callback, triggers on drag complete
+	};
+	
+	$.fn.touchCarousel.settings = {};
+	
+	/* easing types */
+	$.extend(jQuery.easing, {
+		easeInOutSine: function (x, t, b, c, d) {
+			return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+		},
+		easeOutSine: function (x, t, b, c, d) {
+			return c * Math.sin(t/d * (Math.PI/2)) + b;
+		},
+		easeOutCubic: function (x, t, b, c, d) {
+			return c*((t=t/d-1)*t*t + 1) + b;
+		}
+	});
+	
+})(jQuery);
+/* js/controllers/product.js */
+(function(){
+	
+	var _util = window.LSP.utilities;
+	
+	var product = (function(){
+		var _this = {};
+		var _app = window.LSP;
+		var _assets = _app.assets;
+		var _api = _app.models.easyask;
+		
+		_this =  {
+			events : {
+				product : {
+					onAddToCart : function(e, data){
+						_this.updateProduct(data.selector); // Update the product, just to be safe.
+						data.selector[0].submit();
+					},
+					onMatrixOptionSelect : function(e, data){
+						$('option[value=""]', data.selector).remove();
+						_this.updateMatrixLists(data.selector[0].form);
+					},
+					onAddToWishlist : function(e, data){
+						var form = data.selector.parents('form');
+						_this.updateProduct(form);
+						addToWishlist({
+							customer: $('input[name="customer"]', form).val(),
+							item: $('input[name="buyid"]', form),
+							site: 'lonestarpercussion',
+							options : $('.shopping.section select', form),
+							qty: $('.shopping.section input[name="qty"]', form),
+							messages: $(".wishlist-messages > div", form)
+						});
+					},
+					onVerifyGiftCardAmount : function(e, data){
+						
+						var isValid = _app.controllers.validation.validateForm(data.selector[0].form);
+						var inputSelector = $('input[name="amount"]');
+						var amount = parseInt(inputSelector.val(), 10) || 0;
+						if(amount <= 1000 && amount > 1){
+							inputSelector.parent().addClass('validation-container').removeAttr('data-validation-invalidtypes');
+							if(isValid){
+								inputSelector[0].form.submit();
+							}
+						}else{
+							inputSelector.parent().addClass('validation-container').attr('data-validation-invalidtypes', 'overGiftCardAmount');
+							_util.scrollTo(inputSelector);
+						}
+
+					}
+				},
+				application : {
+					onContextChange : function(e, data){
+						_this.attachZoom(data.context);
+					},
+					onReady : function(e, data){
+						
+						var productPageForm = $('.page-product form[action="/app/site/backend/additemtocart.nl"]')[0];
+						if(productPageForm){
+							_this.renderMatrixLists(productPageForm);
+						}
+
+						setTimeout(_this.removeEmptySpecificationsRows, 500);
+
+						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
+							head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
+								$('.audio.section a').jPlayer({
+									ready : function(){
+										$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
+									},
+									swfPath : "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
+									supplied : "mp3"
+								});	
+							});
+						}
+						
+					},
+					onInit : function(e, data){}
+				}
+			},
+			
+			assets : {},
+
+			attachZoom : function(context){
+				// If jqzoom, it's the product page.
+				if($.jqzoom){
+					_this.detachZoom();
+					var zoomAsset = $('a[data-asset="mouseoverZoom"]');
+					if(zoomAsset.is(':not([href*="no-image"])')){
+						zoomAsset
+							.jqzoom({
+								zoomWidth: $('.addToCart').width(),
+								zoomHeight: 480,
+								position: 'right',
+								preloadImages: (context !== 'phone' ? true : false),
+								xOffset : (context === 'phone' ? 1000 : parseInt($('.information.span6').css('margin-left'), 10)),
+								yOffset : -20,
+								zoomType: 'standard',
+								showEffect: 'fadein',
+								fadeinSpeed: 'fast',
+								delay : 100
+							});
+					}else{
+						//zoomAsset.removeAttr('href');
+						// Get all image-links including thumbnails
+						$('a[href*=no-image]').removeAttr('href');
+					}
+				}
+			},
+			detachZoom : function(){
+				$('.zoomWindow').remove();
+				$('.zoomPup').remove();
+				$('.zoomPreload').remove();
+				$('.zoomPad img').unwrap();
+				
+				var html = $('.section.images').html();
+				$('.section.images').empty().html(html);
+			},
+
+			removeEmptySpecificationsRows : function(){
+				$('tr[data-specifications-data*="!empty!"], tr[data-specifications-data*="!Unknown!"], tr[data-specifications-data*="!None!"]').remove();
+			},
+
+			renderMatrixLists : function(form){
+				
+			},
+
+			updateMatrixLists : function(form){
+
+				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', form).data('value'));
+				var selectedOptions = {};
+
+				// Create an object of currently selected options
+				$('select', form)
+					.each(function(i, element){
+						// If it's not the 'Select an Option' choice - which is identified by value=''
+						if($(element).val().length){
+							selectedOptions[$(element).attr('name')] = $(element).val();
+						}
+					});
+
+				// Filter, and render newly updated options
+				var filteredOptions = _api.filterMatrixChildren(easyAskMatrixData, selectedOptions)
+				var unselectedOptionText = $('option[value=""]:first', form).text();
+				
+				$.each(filteredOptions, function(label, options){
+					
+					var optionHTML = '<option value="">'+ unselectedOptionText +'</option>';
+
+					$.each(options, function(value, noop){
+						optionHTML += '<option value="' + value + '" '+ ((selectedOptions[label] === value) ? 'selected' : '') +'>'+value+'</option>';
+					});
+
+					// Update everything except the one you are currently on.					
+					$('select[name="'+ label + '"]', form).html(optionHTML);
+				});
+
+				_this.updateProduct(form);
+			},
+			
+			updateProduct : function(form){
+
+				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', form).data('value'));
+				var selectedOptions = {};
+
+				// Create an object of selected options to test against the formattedObject (the source)
+				var selects = $('select', form)
+					.each(function(i, element){
+						selectedOptions[$(element).attr('name')] = unescape($(element).val());
+					});
+
+				if(selects.length){
+					$('button.b1', form).attr('disabled', true);
+					$('input[name="buyid"]', form).val('');
+					$('input[name="itemid"]', form).val('');
+
+					// Loop through the formattedMatrix (source of all attributes) and if we find an id that
+					// matches the filter criteria, then set the id
+					$.each(easyAskMatrixData.products, function(id, productData){
+						
+						for(var label in productData.options){
+							// If it's not present, or if it exists, but is another value
+							if(!selectedOptions[label] || selectedOptions[label] !== productData.options[label])
+								return;
+						}
+
+						_this.detachZoom();
+
+						var entry = $(form).parents('.entry');
+						// If we've made it here, it's because we've found an ID that matches the filters
+						// Update all the changing nick nacks in the item listing
+						$('input[name="buyid"]', form).val(id); // Set the buyid
+						$('input[name="itemid"]', form).val(id);
+						$('button.b1', form).removeAttr('disabled');
+
+						// "You save $x" - we hide it if the save amount is < 0 (it would be an error, so this is just to be safe)
+						if(productData.data.msrp - productData.data.onlinePrice <= 0){
+							$('.price .details', entry).hide();
+						}else{
+							$('.price .details', entry).show();
+						}
+
+						$('.productMsrp', entry).html(_util.parseCurrency(productData.data.msrp));
+						$('.productPrice', entry).html(_util.parseCurrency(productData.data.onlinePrice));
+						$('.productMpn', entry).html(productData.data.mpn);
+						$('.productDiscount', entry).html(_util.parseCurrency(productData.data.msrp - productData.data.onlinePrice));
+
+						var optionArray = [];
+						for(var label in productData.options){
+							if(productData.options.hasOwnProperty(label)){
+								optionArray.push(productData.options[label]);
+							}
+						}
+
+						$('.productName .options', entry).html(' : ' + optionArray.join(', '));
+
+						// Update the active thumbnail
+						var size = $('.thumbnail img, #zoom-mainImage img', entry).width();
+						var img = $('.thumbnail img, #zoom-mainImage img', entry);
+						var productImageLink = $('#zoom-mainImage').attr('href',  productData.data.imageUrl);
+						img.attr('src',  productData.data.imageUrl + '.' + size + 'x' + size);
+
+						$('.productAvailability', entry).html(productData.data.stockMessage);
+						
+						_this.attachZoom();
+
+					})
+	}
+			},
+			
+			// Returns product specs
+			getSpecifications : function(id){
+				return _api.request(_this, 'getSpecifications', 'getSpecifications', {id : id});
+			},
+			
+			// Returns an object of options
+			getMatrixOptions : function(matrixParentId){
+				return _api.request(_this, 'get', 'getMatrixOptions', {parentId : matrixParentId});
+			}
+		};
+		
+		return _this;
+	})();
+	
+	_util.register('controller', 'product', product);
+
+})();
+/* js/controllers/netsuite.js */
+(function(){
+	
+	var _util = window.LSP.utilities;
+	
+	_util.register('controller', 'netsuite', (function(){
+		var _this = {};
+		var _app = window.LSP;
+
+		_this = {
+			
+			events : {
+				application : {
+					onReady : function(e, data){
+						_this.attachEnterKey();
+						_this.fixSignInUrlForRedirection(document);
+						_this.injectRedirectInput();
+					},
+					onAttachEvents : function(e, data){
+						_this.fixSignInUrlForRedirection(data.selector);
+					}
+				},
+				netsuite : {
+					onInit : function(e, data){
+						_this.handlePostSignInRedirection();
+					}
+				}
+			},
+			
+			assets : {},
+
+			// Takes a url parameter and adds it to the login form
+			injectRedirectInput : function(){
+				var params = _util.getURLParameters();
+				if(params.lsppassthrough && document.forms.login){
+					$(document.forms.login).prepend('<input type="hidden" name="redirect" value="' + params.lsppassthrough + '">');
+				}
+			},
+
+			// Sigh..
+			fixSignInUrlForRedirection : function(context){
+
+				var redirectUrl = (document.location.href.indexOf('lsppassthrough=') === -1 ? encodeURIComponent(document.location.href) : _util.findBetween('lsppassthrough=', '&', document.location.href));
+				
+				if(redirectUrl.indexOf('login=T') === -1){
+					$('a[href*="login=T"]:not([href*="'+redirectUrl+'"])', context).each(function(i, e){
+						var link = $(e);
+						link.attr('href', link.attr('href') + '&lsppassthrough=' + redirectUrl);
+					});
+				}
+			},
+
+
+			handlePostSignInRedirection : function(){
+				if(parseInt($('.page-generic').data('uid'), 10) > 0){
+					var params = _util.getURLParameters();
+					if(params.lspredirectto){
+						document.location = params.lspredirectto;
+					}
+				}
+			},
+
+			attachEnterKey : function(){
+				// Check nested tables to ensure we attach only to netsuite inputs
+				$('.page-generic table table table input').off('.submitter').on('keyup.lsp.submitter', function(e){
+					// If it's an enter key and was not preceded by an enter key
+					var focusedElement = $(this);
+					switch(e.which){
+						case 13:
+							if($(this).data('isDirty')){
+								$(this).parents().each(function(i, element){
+									var submit = $(element).find('#tbl_recalc *[type="submit"], #tbl_submitter *[onclick]')[0];
+									if(submit){
+										if($(submit).attr('onclick')){
+											submit.click();
+										}else{
+											// recalc needs to clear the redirect property
+											$('input[name="redirect"]').val('');
+											submit.form.submit();
+										}
+										focusedElement.blur();
+										e.stopPropagation();
+										return false;
+									}
+								});
+
+								// Prevents firing this event if the user hit enter
+								// last time. This is a problem when you hit enter to
+								// close the beautiful alert box netsuite generates
+								$(this).data('isDirty', false);
+							}
+							break;
+						case 40:
+						case 38:
+							//noop - in autocomplete
+							$(this).data('isDirty', false);
+							break;
+						default:
+							$(this).data('isDirty', true);
+					}
+
+				}).data('isDirty', true);
+			}
+		};
+		
+		return _this;
+
+	})());
+
+})();
+/* js/controllers/wishlist.js */
+// Begin Suite Commerce Stuff
+function parsePrice(number,bool)	{
+	number = (Math.round(number*100))/100;
+	var aux1 = parseInt(number/1000), aux2 = Math.round((number%1000)*100)/100;
+	if(aux2 < 100)	{
+		if(aux2 < 10) aux2 = "00"+ aux2;
+		else aux2 = "0"+ aux2;
+	}
+	if(aux1 > 0)	{
+		aux1 = parsePrice(aux1,true);
+		number = aux1 +","+ aux2;
+	}
+	if(!bool){
+		number += "";
+		if (number.indexOf(".") != -1) {
+			var sigFig = number.substring(number.indexOf(".") + 1, number.length);
+			if (sigFig.length == 1)	number += "0";
+		}
+		else number += ".00";
+		return "$" + number;
+	}
+	return number;
+}
+function getNumber(string){
+	string += "";
+	if(string.indexOf("$") != -1) string = string.substring(string.indexOf("$") + 1).replace(",","").replace(" ","");
+	return parseFloat(string);
+}
+function calcSaves(list,sale)	{
+	var list = getNumber(list), sale = getNumber(sale), dif = list - sale, perDif = Math.round(dif*10000/list)/100;
+	if(dif > 0) return perDif + "%";
+	else return false;
+}
+function addToWishlist(config){
+	config.messages.hide();
+	if (config.customer != "")	{
+		var options = "";
+		if (config.options.length === 0 || (config.options.length > 0 && config.options.find("option:selected").length === config.options.length && (config.item.val() || '').length > 0)) {
+			config.options.each(function(){
+				var optionValue = this.id, optionName = $(this).attr('name'),
+					selected = $(this).find("option:selected"), selectedValue = selected.val(), selectedLabel = selected.text();
+				options += optionName + "=" + optionName + "==" + escape(selectedLabel) + "=" + escape(selectedLabel) + ";";
+			});
+			var wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_add_item_wishlist&deploy=customdeploy_add_item_wishlist&i=" + config.item.val() + "&j=" + config.customer + "&q=1&s=" + config.site + "&o=" + options;
+			$.getScript(wishUrl, function(){
+				$("#add-wishlist").hide();
+				config.messages.eq(0).show();
+				// setTimeout(function(){
+				// 	config.messages.eq(0).fadeOut();
+				// }, 8000);
+			});
+		}
+		else {
+			$("#add-wishlist").removeClass("loading");
+			config.messages.eq(2).show();
+		}
+	}
+	else config.messages.eq(1).show();
+}
+function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn)	{
+
+	var templateData = {
+		id : itemId,
+		url : itemUrl,
+		thumbnailUrl : itemThumb,
+		name : unescape(itemName),
+		price : itemPrice,
+		quantity : itemQty,
+		options : unescape(itemOptions),
+		comments : unescape(itemComments),
+		msrp : baseprice,
+		stockMessage : unescape(stock),
+		mpn : unescape(mpn)
+	};
+
+	// var options = unescape(itemOptions).split(";"), optionLabels = "",
+	// 	optionValues = "", template = $("#wish-item-template").html();
+	// for(var i = 0; i < options.length - 1; i++){
+	// 	var splitOptions = options[i].split("==");
+	// 	optionLabels+= splitOptions[0].split("=")[1] + ": " + splitOptions[1].split("=")[1] + "<br/>";
+	// 	optionValues+= "&" + splitOptions[0].split("=")[0] + "=" + splitOptions[1].split("=")[0];
+	// }
+	// template = template.replace(/_itemThumb/gi,itemThumb);
+	// template = template.replace(/_itemName/gi,unescape(itemName));
+	// template = template.replace(/_itemUrl/gi,itemUrl);
+	// template = template.replace(/_itemId/gi,itemId);
+	// template = template.replace(/_itemQty/gi,itemQty);
+	// template = template.replace(/_stock/gi,unescape(stock));
+	// template = template.replace(/_optionValues/gi,optionValues);
+	// template = template.replace(/_optionLabels/gi,optionLabels);
+	// template = template.replace(/_options/gi,itemOptions);
+	// template = template.replace(/_itemComments/gi,unescape(itemComments));
+	
+	// var savings = calcSaves(baseprice, itemPrice);
+	// if( savings )
+	// 	template = template.replace(/_itemPrice/gi,"MSRP: " + parsePrice(baseprice) + "<br />" + "Price: <span>" + parsePrice(itemPrice) + "</span> <br />" + "<span>You Save: " + savings + "</span>");
+	// else
+	// 	template = template.replace(/_itemPrice/gi,"Price: <span>" + parsePrice(itemPrice) + "</span>");
+
+	$("table.wishlist.table tbody")
+		.append(LSP.utilities.parseMicroTemplate('templates-wishlistItem', templateData))
+		.parent('table').show();
+	$('table.wishlist .comments textarea').off('keyup.wishlist').on('keyup.wishlist', function(){
+		if($(this).val().length > 0){
+			$('.wish-update', this.parentNode).fadeIn();
+			$('.wish-text-saved', this.parentNode).hide();
+		}
+	});
+}
+function wishlistReady(bool)	{
+	if(document.location.href.indexOf("austintest") != -1) alert(bool);
+};
+function wishStatusText(public){
+	if(public == "T")	{
+		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true);
+		$('#wishlistStatus').removeClass('loading').html('public');
+	}else{
+		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true);
+		$('#wishlistStatus').removeClass('loading').html('private');	
+	}
+}
+function myWishlist(config){
+	if (config.customer != ""){
+		config.messages.filter('.loggedIn').show();
+		var today = new Date(),
+			myWishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + config.customer + "&s=lonestarpercussion&random=" + (Math.random() * today.getTime());
+		$("table.wishlist.table tbody").addClass('loading small');
+		$.getScript(myWishUrl,function(data){
+			$("#wish-info").show();
+			if (data == ""){ 
+				config.messages.filter('.emptyWishlist').show();
+				$('#wishlistStatus').html('empty');	
+				$("table.wishlist.table tbody").removeClass('loading');
+			}else{
+				$("table.wishlist.table tbody").removeClass('loading');
+				var wishlist = $("#wishlist-wrapper tbody"),
+					wishMessages = $("#wishlist-messages > div"),
+					publicWraper = $("#wish-pub"),
+					wait = null, 
+					public = data.substring(data.indexOf("Ready('") + 7);
+				public = public.substring(0,public.indexOf("'"));
+				wishStatusText(public);
+				$('input[type="radio"][name="isPublic"]').click(function(){
+					var status = $(this).val().substr(0, 1).toUpperCase();
+					if(wait) clearTimeout(wait);
+					var updateUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_public&deploy=customdeploy_update_wishlist_public&j=" + config.customer + "&p=" + status + "&random=" + (Math.random() * today.getTime());
+					$('#wishlistStatus').addClass('loading small');
+					$.getScript(updateUrl,function(){
+						wishStatusText(status);
+					});
+				});
+				$(function(){
+					wishlist.find(".wish-remove").click(function(){
+						var $this = $(this);
+						var id = $(this).data('id');
+						var options = $(this).data('options');
+
+						$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_remove_item_wishlist&deploy=customdeploy_remove_item_wishlist&j=" + config.customer + "&i=" + id + "&o=" + options, function(){
+							$this.closest("tr").fadeOut(function(){
+								$(this).remove();
+								if (wishlist.find(".wishlistItem").length == 0) {
+									wishMessages.filter(".emptyWishlist").show();
+									wishlist.closest("table.wishlist").hide();
+									wishlist.closest("h2").hide();
+								}
+							});
+						});
+						return false;
+					});
+					wishlist.find(".wish-update").click(function(){
+						var wishActions = $(this).parent(),
+						    itemId = $(this).data('id'),
+							comments = escape(wishActions.parent().find("textarea").val()),
+							wishUrl = "/app/site/hosting/scriptlet.nl?script=customscript_update_wishlist_comments&deploy=customdeploy_update_wishlist_comments&i=" + itemId + "&j=" + config.customer + "&t=" + comments + "&o=" + $(this).data('options');
+						$.getScript(wishUrl,function(){
+							var saveText = wishActions.parent().find(".wish-text-saved");
+							saveText.fadeIn();
+							$('.wish-update', wishActions).hide();
+						});
+						return false;
+					});
+					
+				});
+			}
+		});
+	}else{
+		config.messages.hide().filter(".notLoggedIn").show();
+	} 
+}
+function addCustomer(customerId, customerName, customerLastName, customerEmail){
+	var template = 	"<div class='wish-result'>";
+	template +=			"<a href='#'>" + unescape(customerName) + " " + unescape(customerLastName) + " - " + customerEmail + "</a>";
+	template +=			"<input type='hidden' value='" + customerId + "' />";
+	template +=		"</div>";
+	$("#wish-search-results").append(template);
+}
+function searchWishlist(config){
+	var today = new Date();
+	$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_search_wishlist&deploy=customdeploy_search_wishlist&st=" + config.searchText + "&random=" + (Math.random() * today.getTime()), function(){
+		config.messages.hide();
+		$(function(){
+			var wishlist = $("#wishlist-wrapper"), wishResultsWrapper = $("#wish-search-results");
+			if (wishResultsWrapper.find(".wish-result").length == 0)
+				config.messages.eq(2).show();
+			else {
+				config.messages.eq(4).show();
+				wishResultsWrapper.find("a").click(function(){
+					
+					config.messages.eq(7).hide();
+
+					var resultNameAndTitle = $(this).text();
+					var name = LSP.utilities.cleanTrailing(resultNameAndTitle.substr(0, resultNameAndTitle.indexOf(' - ')));
+
+					if(name.length === 0){
+						name = resultNameAndTitle.substr(resultNameAndTitle.indexOf(' - ') + 3, 300);
+					}
+					$(this).parent().siblings().remove();
+					$('h2').html('Wishlist for ' + name).show();
+
+					wishlist.hide().find("tbody tr:not(#wish-item-template)").remove();
+					var customerId = $(this).next().val();
+
+					//LSP.controllers.application.pushState({name : 'wishlist'}, {q : name});
+
+
+					$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_show_my_wishlist&deploy=customdeploy_show_my_wishlist&j=" + customerId + "&s=" + config.site, function(){
+						if(wishlist.find("tbody tr:not(#wish-item-template)").length > 0)	{
+							wishlist.show().find(".wish-add-cart").click(function(){
+								var wishActions = $(this).parent(), itemId = wishActions.find(".wish-id").val(), itemQty = wishActions.find(".wish-qty").val(), itemOptions = wishActions.find(".wish-options-values").val(), addUrl = "/app/site/backend/additemtocart.nl?c=" + config.account + "&buyid=" + itemId + "&qty=" + itemQty + itemOptions + "&continue=/Search-Wishlist?searchtext="+config.searchText;
+								document.location = addUrl;
+								return false;
+							});	
+						}
+						else config.messages.eq(7).show();
+					});
+					return false;
+				});
+				config.messages.eq(6).show();
+			}
+		});
+	});
+}
+
+// END SuiteCommerce stuff
+
+(function(){
+	
+	var _util = window.LSP.utilities;
+	
+	_util.register('controller', 'wishlist', (function(){
+		var _this = {};
+		var _lsp = window.LSP;
+		
+		_this =  {
+			name : 'wishlist',
+			events : {
+				application : {
+					onReady : function(e, data){
+						var searchButton = $("#search-wish"),
+							searchText = $("#search-wish-text"),
+							wishMessages = $(".wishlist-messages > div");
+						searchText
+							//.val("Enter name or e-mail")
+							// .focus(function(){
+							// 	var $this = $(this);
+							// 	// if( $this.val() == "Enter name or e-mail" )
+							// 	// 	$this.val("")
+							// })
+							// .blur(function(){
+							// 	var $this = $(this);
+							// 	// if( $this.val() == "" )
+							// 	// 	$this.val("Enter name or e-mail")
+							// })
+							.keyup(function(e){
+								if(e.keyCode == 13) searchButton.trigger("click");
+							});
+						searchButton.off('wishlist').on('click.wishlist', function(){
+							wishMessages.hide();
+							$('.resultsHeader').hide();
+							$("#wish-search-results").html("");
+							$("#wishlist-wrapper").hide().find("tbody tr:not(#wish-item-template)").remove();
+							if(searchText.val() != "")	{
+								if (searchText.val().length > 2) {
+									wishMessages.eq(1).show();
+									searchWishlist({
+										account : "665798",
+				            			messages: wishMessages,
+										searchText : searchText.val(),
+				            			site: 'lonestarpercussion'
+									});
+								}
+								else wishMessages.eq(5).show();
+							}
+							else wishMessages.eq(0).show();
+						});
+						var url = window.location.href;
+						if( url.indexOf("searchtext") != -1 ) {
+							var searched = url.substring( url.indexOf("searchtext") + 11 );
+							searched = searched.substring( 0, searched.indexOf("&") );
+							searchText.val( searched );
+							searchButton.click();
+						}
+					}
+				}
+			},
+			assets : {},
+
+		};
+
+		return _this;
+
+	}()));
+
+})();
+
+/* /postLoad.js */
+";
