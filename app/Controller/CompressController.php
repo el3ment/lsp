@@ -29,7 +29,6 @@ class CompressController extends Controller {
 		header("Pragma: cache");
 		header("Cache-Control: maxage=$seconds_to_cache");
 		echo $fullScript;
-		ob_end_flush();
 		die();
 	}
 	
@@ -76,10 +75,8 @@ class CompressController extends Controller {
 		header("Pragma: cache");
 		header("Cache-Control: maxage=$seconds_to_cache");
 		echo $css;
-		ob_end_flush();
 		die();
 	}
-		 
 }
 
 ?>
