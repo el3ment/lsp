@@ -19,8 +19,13 @@ class CompressController extends Controller {
 		}
 		
 		header("Content-Type: text/javascript");
-
+		$seconds_to_cache = 31556926;
+		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
+		header("Expires: $ts");
+		header("Pragma: cache");
+		header("Cache-Control: maxage=$seconds_to_cache");
 		echo $fullScript;
+		ob_end_flush();
 		die();
 	}
 	
@@ -56,9 +61,15 @@ class CompressController extends Controller {
 		// $cssTidy = new csstidy();
 		// $cssTidy->parse($css);
 
+		
 		header("Content-Type: text/css");
-
+		$seconds_to_cache = 31556926;
+		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
+		header("Expires: $ts");
+		header("Pragma: cache");
+		header("Cache-Control: maxage=$seconds_to_cache");
 		echo $css;
+		ob_end_flush();
 		die();
 	}
 		 

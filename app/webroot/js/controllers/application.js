@@ -181,8 +181,6 @@
 			// but the slashes look much prettier
 			pushState : function(controller, snapshot, useReplaceState){
 				
-				console.log('pushing state');
-
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
 				// If pushState, push the path
