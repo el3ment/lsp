@@ -72,15 +72,13 @@
 				}
 
 				if(formattedPayload.ResultsPerPage > 96 || (formattedPayload.ResultsPerPage + '' || '').toLowerCase() === 'all'){
-					formattedPayload.ResultsPerPage = 96
+					formattedPayload.ResultsPerPage = 96;
 				}
 
 				// As a form of cleanup - remove a trailing / from a category request
 				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
 
-				return formattedPayload;
-
-				
+				return formattedPayload;			
 			},
 
 			_isSuccess : function(responseData){
@@ -143,7 +141,7 @@
 				var value;
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].attributeValueList || {}).length; j++){
-						value = easyAskDataSourceObject.attributes.attribute[i].attributeValueList[j].attributeValue
+						value = easyAskDataSourceObject.attributes.attribute[i].attributeValueList[j].attributeValue;
 						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
 							easyAskDataSourceObject.attributes.attribute[i].attributeValueList.splice(j, 1);
 							j--;
@@ -565,9 +563,4 @@
 
 	}()));
 	
-}())
-
-
-
-
-//http://lonestarpercussion.prod.easyaskondemand.com/EasyAsk/apps/Advisor.jsp?callback=jQuery19109178190503735095_1370632723193&RequestAction=advisor&RequestData=CA_CategoryExpand&forcepage=1&indexed=1&rootprods=1&oneshot=1&defarrangeby=%2F%2F%2FNONE%2F%2F%2F&disp=json&dct=nslonestarpercussion&q=-triangle&AttribSel=Author%3ABarroso-Ary&CatPath=-triangle&_=1370632723195
+}());

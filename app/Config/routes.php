@@ -39,7 +39,8 @@
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'complete'));
 	Router::connect('/complete', array('controller' => 'pages', 'action' => 'display', 'complete'));
 	Router::connect('/components', array('controller' => 'pages', 'action' => 'display', 'components'));
-	Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
+	//Router::connect('/compress', array('controller' => 'pages', 'action' => 'display'));
+	//Router::connect('/*', array('controller' => 'pages', 'action' => 'display'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

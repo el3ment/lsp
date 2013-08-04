@@ -1,5 +1,4 @@
 (function(){
-	
 	var _util = window.LSP.utilities;
 	
 	var application = (function(){
@@ -294,7 +293,7 @@
 			},
 
 			include : function(filename){
-				head.js('https://dev.lonestarpercussion.com' + filename);
+				$('head').append('<script type="text/javascript" src="https://dev.lonestarpercussion.com'+ filename +'"></script>');
 			},
 
 			initializeGlobalEvents : function(){

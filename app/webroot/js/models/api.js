@@ -2,7 +2,6 @@
 	
 	var _app = window.LSP;
 	var _util = _app.utilities;
-	
 
 	// This is a generic API model that can be extended to overwrite : 
 	//      _url - returns the url for the service

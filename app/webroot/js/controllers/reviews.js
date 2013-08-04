@@ -46,7 +46,7 @@
 
 						// If the current one is empty, AND the next one is too, hide the second one
 						}else if($(e.currentTarget).parent().next().length &&
-								$(e.currentTarget).parent().next().children('input').val().length < 1){ // the previous one is empty
+								($(e.currentTarget).parent().next().children('input').val() || '').length < 1){ // the previous one is empty
 
 							$(e.currentTarget).parent().next().hide();
 

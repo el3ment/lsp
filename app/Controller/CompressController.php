@@ -5,16 +5,23 @@ class CompressController extends Controller {
 	var $autoRender = false;
 	 
 	function js(){
-			
 		App::import('Vendor', 'JSMin');
-		
 		$filesArray = explode(",", str_replace("/compress/js/", "", $_SERVER['REQUEST_URI']));
 		$fullScript = "";
 		foreach($filesArray as $file){
-			$fullScript .= file_get_contents('/www/'.$file);
+			$fullScript .= '/* '. $file .' */' . PHP_EOL;
+		}
+		foreach($filesArray as $file){
+			$fullScript .= '/* '. $file .' */' . PHP_EOL;
+			if(is_file(WWW_ROOT . $file)){
+				$fullScript .= file_get_contents(WWW_ROOT . $file) . PHP_EOL;
+			}
 		}
 		
-		return JSMin::minify($fullScript);
+		header("Content-Type: text/javascript");
+
+		echo $fullScript;
+		die();
 	}
 	
 	function css(){

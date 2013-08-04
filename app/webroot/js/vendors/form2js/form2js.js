@@ -332,3 +332,6 @@ var form2js = (function()
 	return form2js;
 
 })();
+
+LSP.utilities = LSP.utilities || {};
+LSP.utilities.formToObject = form2js;

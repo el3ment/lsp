@@ -7,7 +7,6 @@
 		var _this = {};
 		var _app = window.LSP;
 		var _assets = _app.assets;
-		var _api = _app.models.cart;
 		var _util = _app.utilities;
 		
 		var _state = {};

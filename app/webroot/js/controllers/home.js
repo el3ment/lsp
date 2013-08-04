@@ -18,36 +18,39 @@
 				},
 				flyout : {
 					onAfterAttach : function(e, data){
-						if(_remainOpen && document.location.hash.indexOf('/~search') === -1){
+						if($('.page-home').length && _remainOpen && document.location.hash.indexOf('/~search') === -1){
 							_app.controllers.flyout.openFlyout(true);
 						}
 					}
 				},
 				application : {
 					onReady : function(e, data){
-						var slider = $('#mainSlider').touchCarousel({
-							
-							// This is a custom patch for Lone Star Percussion
-							// It assumes uniform width of items, and calculates
-							// how many items per page automatically. This solves
-							// the responsive design problem of hardcoding too many
-							// items per page
-							_calculatePageWidth: true,
-							
-							scrollbar: false,
-							pagingNav: true,
-							pagingNavControls: true,
-							itemsPerPage: 1,
-							scrollToLast: true,
-							loopItems: true,
-							startingXPos: -600
+						var mainSlider = $('#mainSlider');
+						if(mainSlider.length){
+							var slider = $('#mainSlider').touchCarousel({
+								
+								// This is a custom patch for Lone Star Percussion
+								// It assumes uniform width of items, and calculates
+								// how many items per page automatically. This solves
+								// the responsive design problem of hardcoding too many
+								// items per page
+								_calculatePageWidth: true,
+								
+								scrollbar: false,
+								pagingNav: true,
+								pagingNavControls: true,
+								itemsPerPage: 1,
+								scrollToLast: true,
+								loopItems: true,
+								startingXPos: -600
 
-							// Testing this out
-							//useWebkit3d : true
-						});
+								// Testing this out
+								//useWebkit3d : true
+							});
 
-						var touchCarousel = slider.data('touchCarousel');
-						touchCarousel.goTo(0)
+							var touchCarousel = slider.data('touchCarousel');
+							touchCarousel.goTo(0)
+						}
 
 					},
 					onInit : function(e, data){}

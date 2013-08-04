@@ -150,7 +150,10 @@
 				}
 			}()),
 
-			formToObject : window.form2js,
+			// formToObject : window.form2js,
+			// Because form2js is being included as part of the postLoad group
+			// it dosen't exist, so we need to attach it to _util later.
+			// check in the form2js vendor file
 
 			cleanArray : function(array){
 				for(var i = 0; i < array.length; i++){
