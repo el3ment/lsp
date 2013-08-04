@@ -206,7 +206,7 @@
 
 					onDestroyAndLoadCategory : function(e, data){
 						_state = _defaultState;
-						_this.loadCategory($(data.selector).data('path'), true);
+						_this.loadCategory($(data.selector).attr('href'), true);
 						_app.controllers.flyout.closeFlyout();
 						data.originalEvent.preventDefault();
 					},
