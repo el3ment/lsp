@@ -404,7 +404,6 @@
 			goTo:function(id, fromAutoplay) {
 						
 				var newItem = this.items[id];
-				alert('item : ' + newItem);
 				
 				if(newItem) {					
 					if(!fromAutoplay && this.autoplay && this.settings.autoplayStopAtAction) {						
@@ -421,6 +420,7 @@
 					} else if(newX < this.carouselWidth - this._maxXPos) {
 						newX = this.carouselWidth - this._maxXPos;
 					}
+					alert(newX + ' - ' + this.settings.transitionSpeed);
 					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");					
 				}			
 				
