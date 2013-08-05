@@ -49,7 +49,9 @@
 							});
 
 							var touchCarousel = slider.data('touchCarousel');
-							touchCarousel.goTo(0)
+							// setTimeout(function(){
+							// 	touchCarousel.goTo(0);
+							// }, 500);
 						}
 
 					},
