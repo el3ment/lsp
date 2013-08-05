@@ -1,5 +1,5 @@
-1375664112
-s:166398:"/* js/models/easyask.js */
+1375703873
+s:162771:"/* js/models/easyask.js */
 /* js/controllers/search.js */
 /* js/vendors/menu-aim/menu-aim.js */
 /* js/controllers/plugins/flyout.js */
@@ -70,7 +70,7 @@ s:166398:"/* js/models/easyask.js */
 				// 	// Build the category path by hand
 				formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)])
 					.join('/')
-					.replace(/^\\\\/{1,}-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
+					.replace(/^\/{1,}-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
 				//}
 
 				if($.isEmptyObject(payload.allAttributes) && !payload.attribute && payload.method === 'CA_AttributeSelected'){
@@ -92,7 +92,7 @@ s:166398:"/* js/models/easyask.js */
 				}
 
 				// As a form of cleanup - remove a trailing / from a category request
-				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\\\\/$/, '').replace(/^\\\\//, '').replace(/\\\\/\\\\//g, '/'); // Remove trailing / if it exists
+				formattedPayload.CatPath = formattedPayload.CatPath.replace(/\/$/, '').replace(/^\//, '').replace(/\/\//g, '/'); // Remove trailing / if it exists
 
 				return formattedPayload;			
 			},
@@ -102,7 +102,7 @@ s:166398:"/* js/models/easyask.js */
 			},
 
 			isRedirect : function(responseData){
-				return /((http|https)(:\\\\/\\\\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\\\\/{1}[a-zA-Z0-9]+)*\\\\/?/.test(responseData.errorMsg) || /^\\\\//.test(responseData.errorMsg); 
+				return /((http|https)(:\/\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\/{1}[a-zA-Z0-9]+)*\/?/.test(responseData.errorMsg) || /^\//.test(responseData.errorMsg); 
 			},
 
 			_afterSuccess : function(responseData){
@@ -260,7 +260,7 @@ s:166398:"/* js/models/easyask.js */
 			// },
 
 			buildSingleAttributeString : function(attributeHashMap){
-				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\\\\/\\\\/\\\\/\\\\/*/, '');
+				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\/\/\/\/*/, '');
 			},
 
 			cacheAttributes : function(easyAskDataSourceObject){
@@ -358,7 +358,7 @@ s:166398:"/* js/models/easyask.js */
 				for(var i = 0; i < easyAskDataSourceObject.navPath.navPathNodeList.length; i++){
 					if(navPathNodeList[i].navNodePathType === 1){
 						
-						navPathNodeList[i].englishName = navPathNodeList[i].englishName.replace(/\\\\/$/, '');
+						navPathNodeList[i].englishName = navPathNodeList[i].englishName.replace(/\/$/, '');
 						navPathNodeList[i].englishName = (navPathNodeList[i].englishName === 'All-Products' ? 'All Products' : navPathNodeList[i].englishName);
 
 						if(navPathNodeList[i].englishName !== 'All Products' && navPathNodeList[i].englishName !== 'School'){
@@ -397,21 +397,21 @@ s:166398:"/* js/models/easyask.js */
 
 					if(node.navNodePathType === 2){ // If it is a refinement
 
-						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\\\\+/g, ' ');
+						var fullPath = decodeURIComponent(easyAskDataSourceObject.navPath.fullPath).replace(/\+/g, ' ');
 
 						// A group is a collection of refinements of the same type (two manufactuers, or three diameters)
 						var groups = node.englishName.substring(1, node.englishName.length - 2); // Remove starting and trailing parens
-						groups = groups.split('\\\\'); (');
+						groups = groups.split('\'); (');
 
 						for(var k = 0; k < groups.length; k++){
 							
-							var attributeNode = groups[k].split('\\\\' or ');
+							var attributeNode = groups[k].split('\' or ');
 
 							for(var j = 0; j < attributeNode.length; j++){
 
 								// Easy ask will sometimes append random numbers to the end of node values, and since convertToSEOString
 								// can't figure it out - we need to search the seoPath, find and use the right nodeString
-								var attribute = attributeNode[j].split(' = \\\\''); // Grab the name [0] and value [1] 
+								var attribute = attributeNode[j].split(' = \''); // Grab the name [0] and value [1] 
 								var initialNodeString = this.convertToSEOString(attribute[0]+':'+attribute[1]); // the part we know
 								var additionalText = _util.findBetween(initialNodeString, ';', node.seoPath); // the potential part we don't
 
@@ -643,9 +643,9 @@ s:166398:"/* js/models/easyask.js */
 							var navPathNodeList = data.response.source.navPath.navPathNodeList;
 
 							// Remove everything except categories, then remove trailing /
-							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\\\\/$/, '');
-							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\\\\/$/, '');
-							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\\\\-/g, ' ').replace(/^ /, ''));
+							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
 
 							_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 							
@@ -672,7 +672,7 @@ s:166398:"/* js/models/easyask.js */
 					onRemoveFilter : function(e, data){
 						
 						if(IS_SINGLE_SELECT){
-							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \\\\'' + $(data.selector).data('value') + '\\\\'');
+							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'');
 						}else{
 							_this.removeFilterAttribute($(data.selector).data('value'));
 						}
@@ -886,7 +886,7 @@ s:166398:"/* js/models/easyask.js */
 					delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
 				}
 
-				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\\\\//g, '|'), uriEncode : false};
+				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\//g, '|'), uriEncode : false};
 				tmpState.path = _state.category;
 
 				if(tmpState.allAttributes.value.length === 0){
@@ -912,7 +912,7 @@ s:166398:"/* js/models/easyask.js */
 
 				_state = $.extend({}, _defaultState, (state || {}));
 
-				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\\\\|/g, '/');
+				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
 				
 				if(!_state.category){
 					_state.category = path;
@@ -925,11 +925,11 @@ s:166398:"/* js/models/easyask.js */
 
 				// if it's only a /
 				_state.category = (_state.category === '/' ? '' : _state.category);
-				_state.category = _state.category.replace(/^\\\\//, '');
-				_state.category = _state.category.replace(/\\\\/$/, '');
+				_state.category = _state.category.replace(/^\//, '');
+				_state.category = _state.category.replace(/\/$/, '');
 
 				if(_state.keywords){
-					_state.keywords = decodeURIComponent(_state.keywords).replace(/\\\\-/g, ' ').replace(/^ /, '');
+					_state.keywords = decodeURIComponent(_state.keywords).replace(/\-/g, ' ').replace(/^ /, '');
 				}
 
 				return _state;
@@ -987,7 +987,7 @@ s:166398:"/* js/models/easyask.js */
 				var payload = {
 					action : 'advisor',
 					method : 'CA_CategoryExpand',
-					category : (isAtomic ? categoryPath : _state.category.replace(/\\\\/$/, '') + '/' + categoryPath)
+					category : (isAtomic ? categoryPath : _state.category.replace(/\/$/, '') + '/' + categoryPath)
 				};
 
 				return _api.request(_this, 'loadCategory', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -1017,7 +1017,7 @@ s:166398:"/* js/models/easyask.js */
 				var payload = {
 					action : 'advisor',
 					method : 'CA_BreadcrumbRemove',
-					allAttributes : _state.allAttributes.replace(attributeSlug, '').replace(/\\\\/{1,}/, ';') // remove it, and remove leftover ;;
+					allAttributes : _state.allAttributes.replace(attributeSlug, '').replace(/\/{1,}/, ';') // remove it, and remove leftover ;;
 				};
 
 				return _api.request(_this, 'removeFilter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -2100,7 +2100,7 @@ s:166398:"/* js/models/easyask.js */
                         of nested structures. If it is omitted, the text will
                         be packed without extra whitespace. If it is a number,
                         it will specify the number of spaces to indent at each
-                        level. If it is a string (such as '\\\\t' or '&nbsp;'),
+                        level. If it is a string (such as '\t' or '&nbsp;'),
                         it contains the characters used to indent at each level.
 
             This method produces a JSON text from a JavaScript value.
@@ -2160,8 +2160,8 @@ s:166398:"/* js/models/easyask.js */
             // text is '["e",{"pluribus":"unum"}]'
 
 
-            text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\\\\t');
-            // text is '[\\\\n\\\\t"e",\\\\n\\\\t{\\\\n\\\\t\\\\t"pluribus": "unum"\\\\n\\\\t}\\\\n]'
+            text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\t');
+            // text is '[\n\t"e",\n\t{\n\t\t"pluribus": "unum"\n\t}\n]'
 
             text = JSON.stringify([new Date()], function (key, value) {
                 return this[key] instanceof Date ?
@@ -2189,7 +2189,7 @@ s:166398:"/* js/models/easyask.js */
                 var a;
                 if (typeof value === 'string') {
                     a =
-/^(\\\\d{4})-(\\\\d{2})-(\\\\d{2})T(\\\\d{2}):(\\\\d{2}):(\\\\d{2}(?:\\\\.\\\\d*)?)Z$/.exec(value);
+/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
                     if (a) {
                         return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
                             +a[5], +a[6]));
@@ -2218,7 +2218,7 @@ s:166398:"/* js/models/easyask.js */
 
 /*jslint evil: true, regexp: true */
 
-/*members "", "\\\\b", "\\\\t", "\\\\n", "\\\\f", "\\\\r", "\\\\"", JSON, "\\\\\\\\", apply,
+/*members "", "\b", "\t", "\n", "\f", "\r", "\"", JSON, "\\", apply,
     call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
     getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
     lastIndex, length, parse, prototype, push, replace, slice, stringify,
@@ -2263,18 +2263,18 @@ if (!JSON) {
             };
     }
 
-    var cx = /[\\\\u0000\\\\u00ad\\\\u0600-\\\\u0604\\\\u070f\\\\u17b4\\\\u17b5\\\\u200c-\\\\u200f\\\\u2028-\\\\u202f\\\\u2060-\\\\u206f\\\\ufeff\\\\ufff0-\\\\uffff]/g,
-        escapable = /[\\\\\\\\\\\\"\\\\x00-\\\\x1f\\\\x7f-\\\\x9f\\\\u00ad\\\\u0600-\\\\u0604\\\\u070f\\\\u17b4\\\\u17b5\\\\u200c-\\\\u200f\\\\u2028-\\\\u202f\\\\u2060-\\\\u206f\\\\ufeff\\\\ufff0-\\\\uffff]/g,
+    var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
+        escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
         gap,
         indent,
         meta = {    // table of character substitutions
-            '\\\\b': '\\\\\\\\b',
-            '\\\\t': '\\\\\\\\t',
-            '\\\\n': '\\\\\\\\n',
-            '\\\\f': '\\\\\\\\f',
-            '\\\\r': '\\\\\\\\r',
-            '"' : '\\\\\\\\"',
-            '\\\\\\\\': '\\\\\\\\\\\\\\\\'
+            '\b': '\\b',
+            '\t': '\\t',
+            '\n': '\\n',
+            '\f': '\\f',
+            '\r': '\\r',
+            '"' : '\\"',
+            '\\': '\\\\'
         },
         rep;
 
@@ -2291,7 +2291,7 @@ if (!JSON) {
             var c = meta[a];
             return typeof c === 'string'
                 ? c
-                : '\\\\\\\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+                : '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
         }) + '"' : '"' + string + '"';
     }
 
@@ -2378,7 +2378,7 @@ if (!JSON) {
                 v = partial.length === 0
                     ? '[]'
                     : gap
-                    ? '[\\\\n' + gap + partial.join(',\\\\n' + gap) + '\\\\n' + mind + ']'
+                    ? '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']'
                     : '[' + partial.join(',') + ']';
                 gap = mind;
                 return v;
@@ -2417,7 +2417,7 @@ if (!JSON) {
             v = partial.length === 0
                 ? '{}'
                 : gap
-                ? '{\\\\n' + gap + partial.join(',\\\\n' + gap) + '\\\\n' + mind + '}'
+                ? '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}'
                 : '{' + partial.join(',') + '}';
             gap = mind;
             return v;
@@ -2511,7 +2511,7 @@ if (!JSON) {
             cx.lastIndex = 0;
             if (cx.test(text)) {
                 text = text.replace(cx, function (a) {
-                    return '\\\\\\\\u' +
+                    return '\\u' +
                         ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
                 });
             }
@@ -2529,10 +2529,10 @@ if (!JSON) {
 // we look to see that the remaining characters are only whitespace or ']' or
 // ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
 
-            if (/^[\\\\],:{}\\\\s]*$/
-                    .test(text.replace(/\\\\\\\\(?:["\\\\\\\\\\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
-                        .replace(/"[^"\\\\\\\\\\\\n\\\\r]*"|true|false|null|-?\\\\d+(?:\\\\.\\\\d*)?(?:[eE][+\\\\-]?\\\\d+)?/g, ']')
-                        .replace(/(?:^|:|,)(?:\\\\s*\\\\[)+/g, ''))) {
+            if (/^[\],:{}\s]*$/
+                    .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+                        .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+                        .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
 // In the third stage we use the eval function to compile the text into a
 // JavaScript structure. The '{' operator is subject to a syntactic ambiguity
@@ -2684,7 +2684,7 @@ var form2js = (function()
 							namePart[k] = '[' + namePart[k] + ']';
 						}
 
-						arrIdx = namePart[k].match(/([a-z_]+)?\\\\[([a-z_][a-z0-9_]+?)\\\\]/i);
+						arrIdx = namePart[k].match(/([a-z_]+)?\[([a-z_][a-z0-9_]+?)\]/i);
 						if (arrIdx)
 						{
 							for(l = 1; l < arrIdx.length; l++)
@@ -2716,7 +2716,7 @@ var form2js = (function()
 				else if (namePart.indexOf('[') > -1)
 				{
 					arrName = namePart.substr(0, namePart.indexOf('['));
-					arrIdx = namePart.replace(/(^([a-z_]+)?\\\\[)|(\\\\]$)/gi, '');
+					arrIdx = namePart.replace(/(^([a-z_]+)?\[)|(\]$)/gi, '');
 
 					/* Unique array name */
 					arrNameFull += '_' + arrName + '_' + arrIdx;
@@ -2748,7 +2748,7 @@ var form2js = (function()
 					{
 						if (!arrays[arrNameFull][arrIdx])
 						{
-							if ((/^[a-z_]+\\\\[?/i).test(nameParts[j+1])) currResult[arrName].push({});
+							if ((/^[a-z_]+\[?/i).test(nameParts[j+1])) currResult[arrName].push({});
 							else currResult[arrName].push([]);
 
 							arrays[arrNameFull][arrIdx] = currResult[arrName][currResult[arrName].length - 1];
@@ -2814,7 +2814,7 @@ var form2js = (function()
         }
         else if (fieldName != '' && node.nodeName.match(/SELECT/i)) {
 	        fieldValue = getFieldValue(node);
-	        result = [ { name: fieldName.replace(/\\\\[\\\\]$/, ''), value: fieldValue } ];
+	        result = [ { name: fieldName.replace(/\[\]$/, ''), value: fieldValue } ];
         }
         else {
             result = getSubFormValues(node, nodeCallback, useIdIfEmptyName);
@@ -2931,12 +2931,14 @@ LSP.utilities.formToObject = form2js;
 				},
 				application : {
 					onAttachEvents : function(e, data){
-						$('.clearable', data.selector).each(function(i, element){ _this.attach(element); });
-						$('input[type="text"], input[type="number"], input[type="tel"]', data.selector)
-							.off('focusable')
-							.on('click.lsp.focusable', function(e){ 
-							$(_this).triggerHandler('onSelectedInput', {selector : $(this)});
-						}).change();
+						setTimeout(function(){
+							$('.clearable', data.selector).each(function(i, element){ _this.attach(element); });
+							$('input[type="text"], input[type="number"], input[type="tel"]', data.selector)
+								.off('focusable')
+								.on('click.lsp.focusable', function(e){ 
+								$(_this).triggerHandler('onSelectedInput', {selector : $(this)});
+							}).change();
+						}, 1);
 					}
 				}
 			},
@@ -3017,11 +3019,11 @@ LSP.utilities.formToObject = form2js;
 		
 		var ua = navigator.userAgent.toLowerCase();
 	    var uaMatch = function( ua ) {
-		    var match = /(chrome)[ \\\\/]([\\\\w.]+)/.exec( ua ) ||
-		        /(webkit)[ \\\\/]([\\\\w.]+)/.exec( ua ) ||
-		        /(opera)(?:.*version|)[ \\\\/]([\\\\w.]+)/.exec( ua ) ||
-		        /(msie) ([\\\\w.]+)/.exec( ua ) ||
-		        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\\\\w.]+)|)/.exec( ua ) ||
+		    var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+		        /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+		        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+		        /(msie) ([\w.]+)/.exec( ua ) ||
+		        ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
 		        [];
 
 		    return {
@@ -3822,7 +3824,7 @@ LSP.utilities.formToObject = form2js;
 					return Math.round(obj.position().left);	
 				} else {						
 					var transform = obj.css("-webkit-transform");
-					var explodedMatrix = transform.replace(/^matrix\\\\(/i, '').split(/, |\\\\)$/g);
+					var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
 					return parseInt(explodedMatrix[4], 10);				
 				}
 			},		

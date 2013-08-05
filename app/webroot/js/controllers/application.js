@@ -130,9 +130,10 @@
 						if(_this.hasPushState()){
 							history.replaceState(true, 'page', document.URL);
 						}
-						
-						// Add pagetype to the body tag for CSS styling
-						//$('body').data('pagetype', $('*[data-pagetype]:first').data('pagetype'));
+
+						// Handle deferred inline scripting
+						// https://gist.github.com/RonnyO/2391995
+						$(function(){$('script[type="text/javascript/defer"]').each(function(){eval($(this).text());})});
 					},
 
 					onInit : function(e, data){
@@ -354,7 +355,7 @@
 					// $(_this).triggerHandler('onHashChange', eventData);
 					// $(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
 
-					$(_this).triggerHandler('onResize', eventData);
+					//$(_this).triggerHandler('onResize', eventData);
 					$(_this).triggerHandler('onReady', eventData);
 					//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
 					$(_this).triggerHandler('onAfterReady', eventData);
