@@ -153,7 +153,7 @@
 			slideImg,
 			currPosX = 0;
 		
-		
+		alert('156');
 		
 		itemsJQ.eq(this.numItems - 1).addClass('last');
 		
@@ -213,7 +213,7 @@
 		
 		this._maxXPos = this._totalItemsWidth = currPosX;		
 		
-		
+		alert('216');
 		if(this.settings.itemsPerMove > 0) {
 			this._itemsPerMove = this.settings.itemsPerMove;
 		} else {
@@ -293,7 +293,7 @@
 				);	
 			}	
 			
-			
+			alert('296');
 			this._updateDirectionNav(0);
 			
 			if(this.settings.directionNav) {
