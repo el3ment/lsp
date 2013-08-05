@@ -21,8 +21,9 @@ class CompressController extends Controller {
 				}
 			}
 			Cache::write(md5($_SERVER['REQUEST_URI']), $fullScript);
+			Cache::write(md5($_SERVER['REQUEST_URI'] . '-time'), strtotime('now'));
 		}
-		$this->render('text/javascript', $fullScript);
+		$this->render('text/javascript', $fullScript, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
 	}
 	
 	function css(){
@@ -60,25 +61,24 @@ class CompressController extends Controller {
 		
 		// $cssTidy = new csstidy();
 		// $cssTidy->parse($css);
-		$this->render('text/css', $css, Cache::read(md5($_SERVER['REQUEST_URI']) . '-time'));
+		$this->render('text/css', $css, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
 	}
 
 	function render($mime, $content, $modified){
 		
-		header('X-hey: ' . $_SERVER['HTTP_IF_MODIFIED_SINCE'] . '#' . $modified);
-
-		if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $_SERVER['HTTP_IF_MODIFIED_SINCE'] !== $modified){
+		if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $modified){
 			header("HTTP/1.1 304 Not Modified");
 			header("Status: 304 Not Modified");
-			header("Last-Modified: " . gmdate('r', filemtime($filename)) . " GMT");
+			header("Last-Modified: " . gmdate('r', $modified . " GMT"));
 			
-			return true;
+			die();
 		}
 		
 		header("Content-Type: " . $mime);
 		$seconds_to_cache = 31556926;
 		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
 		header("Expires: $ts");
+		header("Last-Modified: " . gmdate('r', $modified . " GMT"));
 		header("Pragma: cache");
 		header("Cache-Control: maxage=$seconds_to_cache");
 
