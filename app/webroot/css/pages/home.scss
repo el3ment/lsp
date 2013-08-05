@@ -71,10 +71,6 @@
 		position: relative;
 		@include box-sizing();
 
-		.touchcarousel-container{
-			right: -100%;
-		}
-
 		.ad{
 			@include box-sizing();
 			position: relative;
