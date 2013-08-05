@@ -1,5 +1,5 @@
-1375715388
-s:129736:"/* js/vendors/jquery/jquery-1.9.1.js */
+1375718957
+s:129824:"/* js/vendors/jquery/jquery-1.9.1.js */
 /* /js/utilities/global.js */
 /* js/models/api.js */
 /* js/controllers/application.js */
@@ -961,6 +961,7 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
 						controllerObj.events.application.onReady(_this._createGlobalEventObject());
+						controllerObj.events.application.attachEvents(_this._createGlobalEventObject());
 					}
 
 					// bind asset events to controllers

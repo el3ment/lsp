@@ -410,6 +410,7 @@
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
 						controllerObj.events.application.onReady(_this._createGlobalEventObject());
+						controllerObj.events.application.attachEvents(_this._createGlobalEventObject());
 					}
 
 					// bind asset events to controllers

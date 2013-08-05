@@ -1,5 +1,5 @@
-1375715389
-s:162771:"/* js/models/easyask.js */
+1375718960
+s:162991:"/* js/models/easyask.js */
 /* js/controllers/search.js */
 /* js/vendors/menu-aim/menu-aim.js */
 /* js/controllers/plugins/flyout.js */
@@ -1841,7 +1841,7 @@ s:162771:"/* js/models/easyask.js */
 										_currentFlyoutTween = tween;
 									},
 									always : function(e){
-										$('*[style]', _flyout).css({width: ''}); // atomic cleanup, why?
+										$('.flyout[style]', _flyout).css({width: ''}); // atomic cleanup, why?
 										_currentFlyoutTween = null; // cleanup
 										_isOpen = true; // prevent the animation from happening again
 									}
@@ -4306,7 +4306,10 @@ LSP.utilities.formToObject = form2js;
 				},
 				application : {
 					onContextChange : function(e, data){
-						_this.attachZoom(data.context);
+						// previousContext is null for the first firing... if it's not null it must be a 2+ event
+						if(data.previousContext){
+							_this.attachZoom(data.context);
+						}
 					},
 					onReady : function(e, data){
 						
@@ -4317,17 +4320,19 @@ LSP.utilities.formToObject = form2js;
 
 						setTimeout(_this.removeEmptySpecificationsRows, 500);
 
-						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
-							head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
-								$('.audio.section a').jPlayer({
-									ready : function(){
-										$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
-									},
-									swfPath : "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
-									supplied : "mp3"
-								});	
-							});
-						}
+						// if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
+						// 	head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
+						// 		$('.audio.section a').jPlayer({
+						// 			ready : function(){
+						// 				$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
+						// 			},
+						// 			swfPath : "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
+						// 			supplied : "mp3"
+						// 		});	
+						// 	});
+						// }
+
+						_this.attachZoom(data.context);
 						
 					},
 					onInit : function(e, data){}

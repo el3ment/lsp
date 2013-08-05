@@ -70,10 +70,10 @@ class CompressController extends Controller {
 			header("HTTP/1.1 304 Not Modified");
 			header("Status: 304 Not Modified");
 			header("Last-Modified: " . gmdate('r', $modified . " GMT"));
-			
-			die();
+		}else{
+			$displayContent = true;
 		}
-		
+
 		header("Content-Type: " . $mime);
 		$seconds_to_cache = 31556926;
 		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
@@ -82,7 +82,10 @@ class CompressController extends Controller {
 		header("Pragma: cache");
 		header("Cache-Control: maxage=$seconds_to_cache");
 
-		echo $content;
+		if($displayContent){
+			echo $content;
+		}
+
 		die();
 	}
 }

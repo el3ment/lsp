@@ -258,7 +258,7 @@
 										_currentFlyoutTween = tween;
 									},
 									always : function(e){
-										$('*[style]', _flyout).css({width: ''}); // atomic cleanup, why?
+										$('.flyout[style]', _flyout).css({width: ''}); // atomic cleanup, why?
 										_currentFlyoutTween = null; // cleanup
 										_isOpen = true; // prevent the animation from happening again
 									}
