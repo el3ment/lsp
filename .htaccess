@@ -17,8 +17,3 @@
 <FilesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|svg)$">
 	Header set Cache-Control "max-age=290304000, public"
 </FilesMatch>
-
-<LimitExcept GET POST> 
-Order allow,deny 
-Deny from all 
-</LimitExcept>
