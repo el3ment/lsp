@@ -420,7 +420,7 @@
 					} else if(newX < this.carouselWidth - this._maxXPos) {
 						newX = this.carouselWidth - this._maxXPos;
 					}
-					alert(newX + ' - ' + this.settings.transitionSpeed);
+
 					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");					
 				}			
 				
@@ -612,7 +612,7 @@
 				if(this.settings.onAnimStart !== null) {
 					this.settings.onAnimStart.call(this);
 				}
-				
+				alert('615');
 				
 				if(this.autoplay && this.autoplayTimer) {		
 					this.wasAutoplayRunning = true;
@@ -644,7 +644,7 @@
 					}
 				}
 				
-				
+				alert('647');
 				
 				this._updateDirectionNav(endPos);
 				
@@ -673,6 +673,7 @@
 				    	dContainer[prop] = (pref + Math.round(this.containerPos) + suf);					       
 				    }, 
 				    complete: function() {
+				    	alert('676');
 				    	if(bounceAnim) {
 				    		self._decelerationAnim = $(to).animate(to2, {
 							    duration: bounceSpeed,
@@ -701,7 +702,7 @@
 				    }
 				});	
 				
-							
+							alert('705');
 			},
 			/* Destroy carousel and remove it's element */
 			destroy: function() {
