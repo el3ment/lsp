@@ -27,7 +27,7 @@
 					onReady : function(e, data){
 						var mainSlider = $('#mainSlider');
 						if(mainSlider.length){
-							var slider = $('#mainSlider').touchCarousel({
+							$('#mainSlider').touchCarousel({
 								
 								// This is a custom patch for Lone Star Percussion
 								// It assumes uniform width of items, and calculates
