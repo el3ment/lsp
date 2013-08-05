@@ -847,6 +847,7 @@
 					if(obj.css('left') ){
 						var out = Math.round(obj.position().left);
 						obj.css('left', '');
+						obj.css("-webkit-transform", 'matrix: 0, 0, 0, 0, ' + out + ', 0');
 						return out;
 					}else{
 						var transform = obj.css("-webkit-transform");
