@@ -403,9 +403,8 @@
 			/* Public methods: */
 			goTo:function(id, fromAutoplay) {
 						
-				debugger;
 				var newItem = this.items[id];
-				
+				alert('item : ' + newItem);
 				
 				if(newItem) {					
 					if(!fromAutoplay && this.autoplay && this.settings.autoplayStopAtAction) {						
@@ -602,7 +601,6 @@
 				}
 				
 
-				alert('id : ' + this._currPageId);
 				// Additional Monkey Patch for Lone Star Percussion
 				// This re-adjusts the carosel when we resize it.
 				this.goTo(this._currPageId || 0);
