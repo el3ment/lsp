@@ -205,6 +205,30 @@
 				a:hover .price:before {
 					border-top-color: $yellow;
 				}
+				.ad.slide-banner-left{
+					.banner{
+						padding-left: 50px;
+					}
+					.add-image, .price{
+						float: left;
+						margin-top: 30px;
+					}
+					.price{
+						margin-left: 50px;
+					}
+				}
+				.ad.slide-banner-right{
+					.banner{
+						padding-right: 50px;
+					}
+					.add-image, .price{
+						float: right;
+						margin-top: 30px;
+					}
+					.price{
+						margin-right: 50px;
+					}
+				}
 			}
 		}
 
