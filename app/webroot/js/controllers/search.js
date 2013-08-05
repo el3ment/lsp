@@ -205,9 +205,9 @@
 					},
 
 					onDestroyAndLoadCategory : function(e, data){
+						$('html').attr('data-path', '').addClass('search-loading');
 						_state = _defaultState;
 						_this.scrollToFirst();
-						$('html').addClass('search-loading');
 						_this.loadCategory($(data.selector).attr('href').replace(/#.*/, ''), true);
 						_app.controllers.flyout.closeFlyout();
 						data.originalEvent.preventDefault();
