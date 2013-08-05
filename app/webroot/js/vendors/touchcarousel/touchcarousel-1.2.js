@@ -426,6 +426,7 @@
 				
 			},
 			next:function(fromAutoplay) {				
+				alert('next');
 				var currXPos = this._getXPos();				
 				var newItemId = this._getItemAtPos(currXPos).index;	
 				
@@ -457,7 +458,8 @@
 				
 				this.goTo(newItemId, fromAutoplay);
 			},
-			prev:function(fromAutoplay) {	
+			prev:function(fromAutoplay) {
+				alert('prev');
 				var currXPos = this._getXPos();				
 				var newItemId = this._getItemAtPos(currXPos).index;	
 				
@@ -658,7 +660,7 @@
 					}
 				}
 				
-				
+
 				this._decelerationAnim = $(from).animate(to, {
 				    duration: speed,
 				    easing: easing,
