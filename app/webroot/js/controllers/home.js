@@ -41,8 +41,7 @@
 								pagingNavControls: true,
 								itemsPerPage: 1,
 								scrollToLast: true,
-								loopItems: true,
-								startingXPos: -600
+								loopItems: true
 
 								// Testing this out
 								//useWebkit3d : true
