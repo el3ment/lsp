@@ -12,4 +12,23 @@
 	ul.list, ol.list{
 		margin-left: 20px;
 	}
+
+	.pull-left{
+		float: left;
+	}
+
+	.push-right{
+		float: right;
+	}
+
+	img.pull-left{
+		padding-right: 10px;
+		position: relative;
+		left: -10px;
+	}
+	img.push-right{
+		padding-left: 10px;
+		position: relative;
+		right: -10px;
+	}
 }

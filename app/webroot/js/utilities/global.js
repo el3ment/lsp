@@ -112,7 +112,7 @@
 			},
 
 			scrollTo : function(element){
-				
+
 				element = $(element);
 
 				if(element){
@@ -124,8 +124,13 @@
 
 					if(elementPos < scrollTop || elementPos > scrollTop + viewportHeight){
 						// Firefox/webkit discrepency
-						return $('body, html').animate({ scrollTop: element.offset().top - 20}, 500);
-
+						if(LSP.controllers.application.getContext() === 'phone'){
+							$('body, html').scrollTop(element.offset().top - 20);
+							return $.Deferred().resolve();
+						}else{
+							return $('body, html').animate({ scrollTop: element.offset().top - 20}, 500);
+						}
+						
 					}
 				}else{
 					return $.Deferred().resolve()

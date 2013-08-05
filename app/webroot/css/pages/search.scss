@@ -874,7 +874,7 @@
 	}
 }
 
-.loading, .search-loading .page-generic{
+.loading, .search-loading .page-generic, .search-loading .page-search{
 
 	position: relative;
 	min-height: 800px;
@@ -893,7 +893,7 @@
 		left: 50%;
 		top: 100px;
 		margin-left: -16px;
-		background-image: url(../img/loading.gif);
+		background-image: url(/img/loading.gif);
 		z-index: 99;
 		@include box-sizing();
 	}

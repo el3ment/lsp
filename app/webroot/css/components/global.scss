@@ -1,11 +1,11 @@
 /* Fonts */
 @font-face {
   font-family: "League Gothic";
-  src: url('https://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot');
-  src: url('https://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	   url('https://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
-	   url('https://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.woff') format('woff'),
-	   url('https://dev.lonestarpercussion.com/files/leaguegothic-regular-webfont.ttf') format('truetype');
+  src: url('/files/leaguegothic-regular-webfont.eot');
+  src: url('/files/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+	   url('/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
+	   url('/files/leaguegothic-regular-webfont.woff') format('woff'),
+	   url('/files/leaguegothic-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

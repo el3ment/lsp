@@ -6,6 +6,7 @@
  */
 (function($) {
 	function TouchCarousel(element, options) {	
+
 		this.carouselRoot = $(element);
 		
 		var self = this;			
@@ -81,7 +82,6 @@
 		
 		this._useWebkitTransition = false;
 		
-		
 		if('ontouchstart' in window) {
 			this.hasTouch = true;
 			this._downEvent = 'touchstart.rs';
@@ -154,7 +154,6 @@
 			currPosX = 0;
 		
 		
-		
 		itemsJQ.eq(this.numItems - 1).addClass('last');
 		
 		// parse items
@@ -212,7 +211,6 @@
 		
 		
 		this._maxXPos = this._totalItemsWidth = currPosX;		
-		
 		
 		if(this.settings.itemsPerMove > 0) {
 			this._itemsPerMove = this.settings.itemsPerMove;
@@ -293,7 +291,6 @@
 				);	
 			}	
 			
-			
 			this._updateDirectionNav(0);
 			
 			if(this.settings.directionNav) {
@@ -342,8 +339,7 @@
 			
 		} else {
 			this.settings.scrollbarAutoHide = false;
-		}
-		
+		}		
 		
 		this.updateCarouselSize(true);
 		
@@ -407,9 +403,7 @@
 			/* Public methods: */
 			goTo:function(id, fromAutoplay) {
 						
-				
 				var newItem = this.items[id];
-				
 				
 				if(newItem) {					
 					if(!fromAutoplay && this.autoplay && this.settings.autoplayStopAtAction) {						
@@ -426,6 +420,7 @@
 					} else if(newX < this.carouselWidth - this._maxXPos) {
 						newX = this.carouselWidth - this._maxXPos;
 					}
+
 					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");					
 				}			
 				
@@ -462,7 +457,7 @@
 				
 				this.goTo(newItemId, fromAutoplay);
 			},
-			prev:function(fromAutoplay) {	
+			prev:function(fromAutoplay) {
 				var currXPos = this._getXPos();				
 				var newItemId = this._getItemAtPos(currXPos).index;	
 				
@@ -605,9 +600,10 @@
 					this.animateTo(newX, 300, "easeInOutSine");		
 				}
 				
+
 				// Additional Monkey Patch for Lone Star Percussion
 				// This re-adjusts the carosel when we resize it.
-				this.goTo(this._currPageId);
+				this.goTo(this._currPageId || 0);
 				// End additional patch
 				
 			},
@@ -616,7 +612,6 @@
 				if(this.settings.onAnimStart !== null) {
 					this.settings.onAnimStart.call(this);
 				}
-				
 				
 				if(this.autoplay && this.autoplayTimer) {		
 					this.wasAutoplayRunning = true;
@@ -649,7 +644,6 @@
 				}
 				
 				
-				
 				this._updateDirectionNav(endPos);
 				
 				function animationComplete() {
@@ -664,9 +658,7 @@
 					}
 				}
 				
-				
-				
-				
+
 				this._decelerationAnim = $(from).animate(to, {
 				    duration: speed,
 				    easing: easing,
@@ -704,8 +696,6 @@
 				    	}
 				    }
 				});	
-				
-							
 			},
 			/* Destroy carousel and remove it's element */
 			destroy: function() {
@@ -853,10 +843,18 @@
 				
 				if(!this._useWebkitTransition) {
 					return Math.round(obj.position().left);	
-				} else {						
-					var transform = obj.css("-webkit-transform");
-					var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
-					return parseInt(explodedMatrix[4], 10);				
+				} else {
+					if(obj.css('left') ){
+						var out = Math.round(obj.position().left);
+						obj.css('left', '');
+						obj.css("-webkit-transform", 'matrix: 0, 0, 0, 0, ' + out + ', 0');
+						return out;
+					}else{
+						var transform = obj.css("-webkit-transform");
+						var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
+						return parseInt(explodedMatrix[4], 10);			
+					}
+						
 				}
 			},		
 			

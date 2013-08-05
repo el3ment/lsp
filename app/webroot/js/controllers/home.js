@@ -27,7 +27,7 @@
 					onReady : function(e, data){
 						var mainSlider = $('#mainSlider');
 						if(mainSlider.length){
-							var slider = $('#mainSlider').touchCarousel({
+							$('#mainSlider').touchCarousel({
 								
 								// This is a custom patch for Lone Star Percussion
 								// It assumes uniform width of items, and calculates
@@ -41,15 +41,16 @@
 								pagingNavControls: true,
 								itemsPerPage: 1,
 								scrollToLast: true,
-								loopItems: true,
-								startingXPos: -600
+								loopItems: true
 
 								// Testing this out
 								//useWebkit3d : true
 							});
 
-							var touchCarousel = slider.data('touchCarousel');
-							touchCarousel.goTo(0)
+							//var touchCarousel = slider.data('touchCarousel');
+							// setTimeout(function(){
+							// 	touchCarousel.goTo(0);
+							// }, 500);
 						}
 
 					},

@@ -23,6 +23,7 @@
 						var width = $(window).width();
 						var newContext;
 						var oldContext = _context;
+						var targetController = (data.controller ? data.controller : _this);
 
 						if(width >= 1200){
 							newContext = 'largeDesktop'; // could be largeDesktop
@@ -37,9 +38,9 @@
 						if(newContext !== oldContext){
 							console.log('Leaving ' + oldContext + ' entering ' + newContext);
 							
-							$(_this).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
-							$(_this).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
-							$(_this).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
+							$(targetController).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
+							$(targetController).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
+							$(targetController).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
 							
 							_context = newContext;
 						}
@@ -130,9 +131,10 @@
 						if(_this.hasPushState()){
 							history.replaceState(true, 'page', document.URL);
 						}
-						
-						// Add pagetype to the body tag for CSS styling
-						//$('body').data('pagetype', $('*[data-pagetype]:first').data('pagetype'));
+
+						// Handle deferred inline scripting
+						// https://gist.github.com/RonnyO/2391995
+						$(function(){$('script[type="text/javascript/defer"]').each(function(){eval($(this).text());})});
 					},
 
 					onInit : function(e, data){
@@ -197,6 +199,8 @@
 						console.log('Replacing State');
 						history.replaceState(true, '', '/' + snapshot.path + '#' + statePath);
 					}
+
+					$('html').attr('data-path', document.location.href);
 
 				}else{
 
@@ -408,7 +412,9 @@
 
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
+						//_this.events.application.onResize({}, {controller : controllerObj}); // need to test this, if a controller loads after onready he needs to get onreszie fired too
 						controllerObj.events.application.onReady(_this._createGlobalEventObject());
+						controllerObj.events.application.attachEvents(_this._createGlobalEventObject());
 					}
 
 					// bind asset events to controllers

@@ -192,6 +192,9 @@
 					}
 
 					//_this.attachMenu(); // Reset
+				}else{
+					// Is in the phone, so close the reveals
+					_lsp.controllers.reveal.close($('#mainFlyout, #mainFlyout *[data-reveal-children]'), false);
 				}
 			},
 			toggleFlyout : function(){
@@ -258,7 +261,7 @@
 										_currentFlyoutTween = tween;
 									},
 									always : function(e){
-										$('*[style]', _flyout).css({width: ''}); // atomic cleanup, why?
+										$('.flyout[style]', _flyout).css({width: ''}); // atomic cleanup, why?
 										_currentFlyoutTween = null; // cleanup
 										_isOpen = true; // prevent the animation from happening again
 									}

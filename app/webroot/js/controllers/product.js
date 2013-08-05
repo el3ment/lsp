@@ -50,7 +50,10 @@
 				},
 				application : {
 					onContextChange : function(e, data){
-						_this.attachZoom(data.context);
+						// previousContext is null for the first firing... if it's not null it must be a 2+ event
+						if(data.previousContext){
+							_this.attachZoom(data.context);
+						}
 					},
 					onReady : function(e, data){
 						
@@ -61,17 +64,19 @@
 
 						setTimeout(_this.removeEmptySpecificationsRows, 500);
 
-						if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
-							head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
-								$('.audio.section a').jPlayer({
-									ready : function(){
-										$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
-									},
-									swfPath : "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
-									supplied : "mp3"
-								});	
-							});
-						}
+						// if($('.page-productDetail .audio.section').is(':not(.show0Elements)')){
+						// 	head.js('http://dev.lonestarpercussion.com/js/vendors/jqplayer/jquery.jplayer.min.js', function(){
+						// 		$('.audio.section a').jPlayer({
+						// 			ready : function(){
+						// 				$(this).jPlayer('setMedia', { mp3: $(this).attr('href') });
+						// 			},
+						// 			swfPath : "http://dev.lonestarpercussion.com/js/vendors/jqplayer/",
+						// 			supplied : "mp3"
+						// 		});	
+						// 	});
+						// }
+
+						_this.attachZoom(data.context);
 						
 					},
 					onInit : function(e, data){}
