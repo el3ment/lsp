@@ -846,7 +846,9 @@
 				} else {
 					alert('left:'+obj.css('left'));
 					if(obj.css('left')){
-						return obj.css('left', null);
+						var out = Math.round(obj.position().left);
+						obj.css('left', null);
+						return out;
 					}else{
 						var transform = obj.css("-webkit-transform");
 						var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
