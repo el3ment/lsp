@@ -844,6 +844,7 @@
 				if(!this._useWebkitTransition) {
 					return Math.round(obj.position().left);	
 				} else {
+					alert('left:'+obj.css('left'));
 					if(obj.css('left')){
 						return obj.css('left', null);
 					}else{
