@@ -842,15 +842,16 @@
 				var obj = !isScrollbar ? this._dragContainer : this.scrollbarJQ;			
 				
 				if(!this._useWebkitTransition) {
-					alert(Math.round(obj.position().left));
 					return Math.round(obj.position().left);	
-				} else {						
-					
-
-					var transform = obj.css("-webkit-transform");
-					alert('transform' + transform);
-					var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
-					return parseInt(explodedMatrix[4], 10);				
+				} else {
+					if(obj.css('left')){
+						return obj.css('left', null);
+					}else{
+						var transform = obj.css("-webkit-transform");
+						var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
+						return parseInt(explodedMatrix[4], 10);			
+					}
+						
 				}
 			},		
 			
