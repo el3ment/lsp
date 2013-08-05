@@ -845,9 +845,8 @@
 					return Math.round(obj.position().left);	
 				} else {
 					if(obj.css('left') ){
-						alert('hey');
 						var out = Math.round(obj.position().left);
-						obj.css('left', null);
+						obj.css('left', '');
 						return out;
 					}else{
 						var transform = obj.css("-webkit-transform");
