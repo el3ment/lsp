@@ -23,6 +23,7 @@
 						var width = $(window).width();
 						var newContext;
 						var oldContext = _context;
+						var targetController = (data.controller ? data.controller : _this);
 
 						if(width >= 1200){
 							newContext = 'largeDesktop'; // could be largeDesktop
@@ -37,9 +38,9 @@
 						if(newContext !== oldContext){
 							console.log('Leaving ' + oldContext + ' entering ' + newContext);
 							
-							$(_this).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
-							$(_this).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
-							$(_this).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
+							$(targetController).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
+							$(targetController).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
+							$(targetController).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
 							
 							_context = newContext;
 						}
@@ -355,7 +356,7 @@
 					// $(_this).triggerHandler('onHashChange', eventData);
 					// $(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
 
-					//$(_this).triggerHandler('onResize', eventData);
+					$(_this).triggerHandler('onResize', eventData);
 					$(_this).triggerHandler('onReady', eventData);
 					//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
 					$(_this).triggerHandler('onAfterReady', eventData);
@@ -409,6 +410,7 @@
 
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
+						//_this.events.application.onResize({}, {controller : controllerObj}); // need to test this, if a controller loads after onready he needs to get onreszie fired too
 						controllerObj.events.application.onReady(_this._createGlobalEventObject());
 						controllerObj.events.application.attachEvents(_this._createGlobalEventObject());
 					}

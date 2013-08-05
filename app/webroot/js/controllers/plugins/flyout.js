@@ -190,7 +190,7 @@
 
 						_isOpen = false;
 					}
-
+					
 					//_this.attachMenu(); // Reset
 				}
 			},
