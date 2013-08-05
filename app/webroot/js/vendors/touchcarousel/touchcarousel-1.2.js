@@ -6,7 +6,7 @@
  */
 (function($) {
 	function TouchCarousel(element, options) {	
-		alert('9');
+
 		this.carouselRoot = $(element);
 		
 		var self = this;			
@@ -339,10 +339,7 @@
 			
 		} else {
 			this.settings.scrollbarAutoHide = false;
-		}
-
-		alert('344');
-		
+		}		
 		
 		this.updateCarouselSize(true);
 		
@@ -604,6 +601,8 @@
 					this.animateTo(newX, 300, "easeInOutSine");		
 				}
 				
+
+				alert('605');
 				// Additional Monkey Patch for Lone Star Percussion
 				// This re-adjusts the carosel when we resize it.
 				this.goTo(this._currPageId || 0);
