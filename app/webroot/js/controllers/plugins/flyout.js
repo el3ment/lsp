@@ -190,8 +190,11 @@
 
 						_isOpen = false;
 					}
-					
+
 					//_this.attachMenu(); // Reset
+				}else{
+					// Is in the phone, so close the reveals
+					_lsp.controllers.reveal.close($('#mainFlyout, #mainFlyout *[data-reveal-children]'), false);
 				}
 			},
 			toggleFlyout : function(){

@@ -200,6 +200,8 @@
 						history.replaceState(true, '', '/' + snapshot.path + '#' + statePath);
 					}
 
+					$('html').attr('data-path', document.location.href);
+
 				}else{
 
 					// Setting window.location.hash to the same path does not cause hashchange to fire

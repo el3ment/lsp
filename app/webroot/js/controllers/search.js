@@ -206,6 +206,8 @@
 
 					onDestroyAndLoadCategory : function(e, data){
 						_state = _defaultState;
+						_this.scrollToFirst();
+						$('html').addClass('search-loading');
 						_this.loadCategory($(data.selector).attr('href').replace(/#.*/, ''), true);
 						_app.controllers.flyout.closeFlyout();
 						data.originalEvent.preventDefault();
@@ -548,7 +550,7 @@
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				return _util.scrollTo($('.breadcrumbs'));
+				return _util.scrollTo($('.header'));
 			},
 
 			renderSummary : function(easyAskDataObject){
