@@ -6,6 +6,7 @@
  */
 (function($) {
 	function TouchCarousel(element, options) {	
+		alert('9');
 		this.carouselRoot = $(element);
 		
 		var self = this;			
@@ -81,7 +82,7 @@
 		
 		this._useWebkitTransition = false;
 		
-		
+		alert('84');
 		if('ontouchstart' in window) {
 			this.hasTouch = true;
 			this._downEvent = 'touchstart.rs';
