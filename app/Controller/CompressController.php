@@ -22,14 +22,7 @@ class CompressController extends Controller {
 			}
 			Cache::write(md5($_SERVER['REQUEST_URI']), $fullScript);
 		}
-		header("Content-Type: text/javascript");
-		$seconds_to_cache = 31556926;
-		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
-		header("Expires: $ts");
-		header("Pragma: cache");
-		header("Cache-Control: maxage=$seconds_to_cache");
-		echo $fullScript;
-		die();
+		$this->render('text/javascript', $css);
 	}
 	
 	function css(){
@@ -66,7 +59,17 @@ class CompressController extends Controller {
 		
 		// $cssTidy = new csstidy();
 		// $cssTidy->parse($css);
+		$this->render('text/css', $css);
+	}
 
+	render : function($mime, $content){
+			if(!FORCE_RENDER && isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($filename) && !$forceDisplay){
+				header("HTTP/1.1 304 Not Modified");
+				header("Status: 304 Not Modified");
+				header("Last-Modified: " . gmdate('r', filemtime($filename)) . " GMT");
+				
+				return true;
+			}
 		
 		header("Content-Type: text/css");
 		$seconds_to_cache = 31556926;
@@ -74,6 +77,9 @@ class CompressController extends Controller {
 		header("Expires: $ts");
 		header("Pragma: cache");
 		header("Cache-Control: maxage=$seconds_to_cache");
+
+
+
 		echo $css;
 		die();
 	}
