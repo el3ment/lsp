@@ -426,7 +426,6 @@
 				
 			},
 			next:function(fromAutoplay) {				
-				alert('next');
 				var currXPos = this._getXPos();				
 				var newItemId = this._getItemAtPos(currXPos).index;	
 				
@@ -459,7 +458,6 @@
 				this.goTo(newItemId, fromAutoplay);
 			},
 			prev:function(fromAutoplay) {
-				alert('prev');
 				var currXPos = this._getXPos();				
 				var newItemId = this._getItemAtPos(currXPos).index;	
 				
@@ -844,9 +842,13 @@
 				var obj = !isScrollbar ? this._dragContainer : this.scrollbarJQ;			
 				
 				if(!this._useWebkitTransition) {
+					alert(Math.round(obj.position().left));
 					return Math.round(obj.position().left);	
 				} else {						
+					
+
 					var transform = obj.css("-webkit-transform");
+					alert('transform' + transform);
 					var explodedMatrix = transform.replace(/^matrix\(/i, '').split(/, |\)$/g);
 					return parseInt(explodedMatrix[4], 10);				
 				}
