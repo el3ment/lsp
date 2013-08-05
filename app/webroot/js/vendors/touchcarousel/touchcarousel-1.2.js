@@ -602,7 +602,7 @@
 				}
 				
 
-				alert('605');
+				alert('id : ' + this._currPageId);
 				// Additional Monkey Patch for Lone Star Percussion
 				// This re-adjusts the carosel when we resize it.
 				this.goTo(this._currPageId || 0);
