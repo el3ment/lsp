@@ -844,8 +844,8 @@
 				if(!this._useWebkitTransition) {
 					return Math.round(obj.position().left);	
 				} else {
-					alert('left:'+obj.css('left'));
-					if(obj.css('left')){
+					if(obj.css('left') ){
+						alert('hey');
 						var out = Math.round(obj.position().left);
 						obj.css('left', null);
 						return out;
