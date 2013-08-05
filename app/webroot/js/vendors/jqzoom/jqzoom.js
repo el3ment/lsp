@@ -169,7 +169,7 @@
 				}
 				thumblist.each(function () {
 					//preloading thumbs
-					if (settings.preloadImages) {
+					if (settings.preloadImages && $(this).data('prezoomimage').indexOf('#') === -1) {
 						thumb_preload[i] = new Image();
 						thumb_preload[i].src = $(this).data('prezoomimage');
 						i++;

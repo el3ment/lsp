@@ -1,3 +1,6 @@
+div[data-lifecycleState="Marked for Cleanup"] .byline{
+	display: none;
+}
 .byline{
 	float:right;
 	display: block;

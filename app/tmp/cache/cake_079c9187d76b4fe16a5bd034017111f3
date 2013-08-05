@@ -1,5 +1,5 @@
-1375655395
-s:166150:"/* js/models/easyask.js */
+1375664112
+s:166398:"/* js/models/easyask.js */
 /* js/controllers/search.js */
 /* js/vendors/menu-aim/menu-aim.js */
 /* js/controllers/plugins/flyout.js */
@@ -784,6 +784,13 @@ s:166150:"/* js/models/easyask.js */
 
 					onLoadCategory : function(e, data){
 						_this.loadCategory($(data.selector).data('path'), true);
+						data.originalEvent.preventDefault();
+					},
+
+					onDestroyAndLoadCategory : function(e, data){
+						_state = _defaultState;
+						_this.loadCategory($(data.selector).attr('href'), true);
+						_app.controllers.flyout.closeFlyout();
 						data.originalEvent.preventDefault();
 					},
 

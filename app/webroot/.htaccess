@@ -9,3 +9,15 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
+
+# 480 weeks
+
+Header unset Pragma
+
+<FilesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|svg)$">
+	<IfModule mod_headers.c>
+		FileETag None
+		Header unset ETag
+		Header set Cache-Control "max-age=290304000, public"
+	</IfModule>
+</FilesMatch>

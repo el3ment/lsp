@@ -1,5 +1,5 @@
-1375653422
-s:39374:"/* js/models/netsuite.js */
+1375664111
+s:39426:"/* js/models/netsuite.js */
 /* js/vendors/jqzoom/jqzoom.js */
 /* js/controllers/plugins/zoom.js */
 /* js/controllers/plugins/definitions.js */
@@ -212,7 +212,7 @@ s:39374:"/* js/models/netsuite.js */
 				}
 				thumblist.each(function () {
 					//preloading thumbs
-					if (settings.preloadImages) {
+					if (settings.preloadImages && $(this).data('prezoomimage').indexOf('#') === -1) {
 						thumb_preload[i] = new Image();
 						thumb_preload[i].src = $(this).data('prezoomimage');
 						i++;
