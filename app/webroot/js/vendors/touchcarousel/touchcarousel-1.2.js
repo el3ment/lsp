@@ -517,7 +517,6 @@
 				}				
 			},
 			updateCarouselSize:function(leavePos) {
-				alert('trying!');
 				var self = this;
 				this.carouselWidth = this.carouselRoot.width();
 
