@@ -48,7 +48,7 @@
 								//useWebkit3d : true
 							});
 
-							var touchCarousel = slider.data('touchCarousel');
+							//var touchCarousel = slider.data('touchCarousel');
 							// setTimeout(function(){
 							// 	touchCarousel.goTo(0);
 							// }, 500);
