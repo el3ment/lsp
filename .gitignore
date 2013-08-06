@@ -8,3 +8,4 @@ app/tmp/cache/*
 *.swp
 static
 static/*/**
+app/tmp/cache/persistent
