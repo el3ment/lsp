@@ -162,6 +162,7 @@
 
 				_flyout.addClass('active');
 				_flyoutControlButton.addClass('active');
+				_util.scrollTo($('.collection:first-child', _flyout));
 			},
 
 			closeFlyout : function(reset){

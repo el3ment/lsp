@@ -248,9 +248,8 @@
 				return statePath;
 			},
 
-			pullState : function(controller){
-				
-				var statePath = window.location.hash;
+			parseStateFromHash : function(hash){
+				var statePath = hash;
 				var controllers = statePath.split('/~');
 				var state = {};
 
@@ -276,6 +275,13 @@
 					}
 				});
 
+				return state;
+			},
+
+			pullState : function(controller){
+				
+				var state = _this.parseStateFromHash(window.location.hash);
+
 				// If they asked for a controller, just send that data, otherwise you get the whole object
 				return (controller ? state[controller.name] : state);
 
@@ -284,7 +290,8 @@
 			_createGlobalEventObject : function(){
 				return eventData = {
 					filename : _this.getFilename(),
-					queryParameters : _util.getURLParameters()
+					queryParameters : _util.getURLParameters(),
+					context : _this.getContext()
 				};
 			},
 
@@ -412,14 +419,19 @@
 
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
-						controllerObj.events.application.onReady(_this._createGlobalEventObject());
-						
+						controllerObj.events.application.onReady({}, _this._createGlobalEventObject());
+					}
+					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onAfterReady){
+						controllerObj.events.application.onAfterReady({}, _this._createGlobalEventObject());
 					}
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).attachEvents){
-						controllerObj.events.application.attachEvents(_this._createGlobalEventObject());
+						controllerObj.events.application.attachEvents({}, $.extend({selector : $('html')}, _this._createGlobalEventObject()));
+					}
+					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onResize){
+						_this.events.application.onResize({}, {controller : controllerObj});
 					}
 
-					//_this.events.application.onResize({}, {controller : controllerObj}); // need to test this, if a controller loads after onready he needs to get onreszie fired too
+					// // need to test this, if a controller loads after onready he needs to get onreszie fired too
 				}
 
 				$(specificController).triggerHandler('onInit');

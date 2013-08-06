@@ -10,7 +10,6 @@
   font-style: normal;
 }
 
-
 html{
 	width: 100%;
 	font-size: 100%;
@@ -19,6 +18,7 @@ html{
 
 	overflow-y: auto;
 	overflow-x: hidden;
+	zoom: 100%;
 }
 
 // Our page-level containers tend to use this pattern of being both a row, and a span12 container
@@ -34,6 +34,7 @@ body{
 	line-height: px(22px);
 	overflow-y: auto;
 	overflow-x: hidden;
+	zoom: 100%;
 
 	@include box-sizing();
 
@@ -182,6 +183,11 @@ ul.list li,
 		list-style: none;
 		padding-left: 15px;
 	}
+	&.title{
+		list-style: none;
+		margin-left: 10px;
+		font-weight: bold;
+	}
 }
 
 ol.list{
@@ -204,6 +210,7 @@ ol.list{
 table.zebra{
 	
 	width: 100%;
+	margin-bottom: 20px;
 
 	td{ padding: 10px; }
 

@@ -433,7 +433,8 @@
 		font-size: 12px;
 		
 		@media (max-width: 767px){
-
+			display: none !important;
+			
 			border: 10px solid transparent;
 			border-width: 0 10px;
 			@include box-sizing();
@@ -617,19 +618,21 @@
 	
 	&.small{
 		
-		height: 100px;
+		height: 135px;
 
 		@media (max-width: 767px){
 			height: 65px;
 		}
 
 		.logo{
-			height: 75px;
-			width: 180px;
-			margin-top: 8px;
+			//height: 75px;
+			//width: 180px;
+			height: 110px;
+			width: 120px;
+			margin-top: 12px;
 			margin-bottom: 8px;
-			//background-position: -334px -738px;
-			background-position: -240px -885px;
+			background-position: -334px -738px;
+			//background-position: -240px -885px;
 
 			@media (max-width: 767px){
 				background-position: -190px -166px;
@@ -638,7 +641,7 @@
 			}
 		}
 		.established, .tagline{
-			margin-top: 45px;
+			margin-top: 59px;
 			@media (max-width: 767px){
 				margin-top: 0;
 				position: absolute;
