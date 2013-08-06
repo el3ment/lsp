@@ -248,9 +248,8 @@
 				return statePath;
 			},
 
-			pullState : function(controller){
-				
-				var statePath = window.location.hash;
+			parseStateFromHash : function(hash){
+				var statePath = hash;
 				var controllers = statePath.split('/~');
 				var state = {};
 
@@ -275,6 +274,13 @@
 						}catch(e){ }
 					}
 				});
+
+				return state;
+			},
+
+			pullState : function(controller){
+				
+				var state = _this.parseStateFromHash(window.location.hash);
 
 				// If they asked for a controller, just send that data, otherwise you get the whole object
 				return (controller ? state[controller.name] : state);

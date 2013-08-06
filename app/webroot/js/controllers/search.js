@@ -205,12 +205,19 @@
 					},
 
 					onDestroyAndLoadCategory : function(e, data){
-						$('html').attr('data-path', '').addClass('search-loading');
-						_state = _defaultState;
-						_this.scrollToFirst();
-						_this.loadCategory($(data.selector).attr('href').replace(/#.*/, ''), true);
-						_app.controllers.flyout.closeFlyout();
-						data.originalEvent.preventDefault();
+						
+						var url = ($(data.selector).attr('href') + '#').split('#');
+						var state = (_app.controllers.application.parseStateFromHash(url[1]) || {}).search || {};
+						state.category = url[0];
+
+						// Force pushState
+						if(_this.loadState(state, null, true)){
+							$('html').attr('data-path', '').addClass('search-loading');
+							_this.scrollToFirst();
+							_app.controllers.flyout.closeFlyout();
+							data.originalEvent.preventDefault();
+						}
+
 					},
 
 					onRemoveCategory : function(e, data){
@@ -263,8 +270,15 @@
 							_isFirstRequest = false;
 							_this.loadCurrentState();
 						}else{
-							$('.page-search').hide();
-							$('.page-generic').show();
+
+							// They hit the back button - so the code is still avliable in .page-generic .. but you have to reinitialize the page
+							// $('.page-search').hide();
+							// $('.page-generic').show();
+
+							// TODO : load state for pages so back button navigation can be snappy
+							if(!_isFirstRequest){
+								document.location.reload();
+							}
 						}
 					},
 
@@ -354,7 +368,7 @@
 				return _state;
 			},
 
-			loadState : function(state, passthrough){
+			loadState : function(state, passthrough, forcePushState){
 				var tmpState = $.extend({}, _state);
 				_this.pullState(state);
 				
@@ -362,8 +376,15 @@
 				$('input[name="searchQuery"]').val(_state.keywords);
 				// Load the state only if the new state is different from the old state (tmpState)
 				if(!_util.isEqual(tmpState, _state)){
+					if(forcePushState){
+						_isFirstRequest = false;
+					}
+
 					_this.search(null, passthrough);
+					
+					return true;
 				}
+				return false;
 			},
 
 			// By keyword

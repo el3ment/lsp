@@ -19,8 +19,10 @@
 		.more{
 			font-weight: bold;
 			&:before, &:after{
+				color: $grey;
 				content: ' - ';
 			}
+			a:before{ display: none; } // > symbol
 		}
 	}
 
