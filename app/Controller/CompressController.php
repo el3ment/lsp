@@ -32,6 +32,7 @@ class CompressController extends Controller {
 		$filesArray = explode(",", str_replace("/compress/css/", "", $_SERVER['REQUEST_URI']));
 		$css = Cache::read(md5($_SERVER['REQUEST_URI']));
 		if($css === false){
+			$css = '';
 			foreach($filesArray as $file){
 				if(strpos($file, 'scss') > 0){
 					if (file_exists(WWW_ROOT . $file)) {
@@ -85,5 +86,7 @@ class CompressController extends Controller {
 		if($displayContent){
 			echo $content;
 		}
+		exit;
 	}
 }
+?>

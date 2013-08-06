@@ -1,5 +1,5 @@
 (function(){
-	
+	debugger;
 	window.LSP = window.LSP || {};
 	window.LSP.utilities = window.LSP.utilities || {};
 	

@@ -163,7 +163,11 @@ class ThumbnailController extends Controller {
 			header('X-Peak-Memory-Usage: '.(int)(memory_get_peak_usage() / 1000).'k');
 			
 			readfile($filename);
-			
+
+			$fp = @fopen($file,"rb");
+			fpassthru($fp);
+			fclose($fp);			
+
 			return true; 
 		} 
 
@@ -180,7 +184,7 @@ class ThumbnailController extends Controller {
         
         if(isset($request['size']) && is_array($request['size'])){
         	// If it needs a resize, resize/grab the thumbnail filename
-		    $outputImageFilename = $this->_resize($request, true);
+		    //$outputImageFilename = $this->_resize($request, true);
         }
 
 		if($outputImageFilename){
@@ -195,6 +199,7 @@ class ThumbnailController extends Controller {
 			}
 		}
 
+		exit;
 		//die(); // Without this, cakePHP is returning text/html as a content-type.. I couldn't figure it out
 	}
     
