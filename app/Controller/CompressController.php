@@ -85,9 +85,5 @@ class CompressController extends Controller {
 		if($displayContent){
 			echo $content;
 		}
-
-		die();
 	}
 }
-
-?>

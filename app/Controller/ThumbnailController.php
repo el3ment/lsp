@@ -65,9 +65,10 @@ class ThumbnailController extends Controller {
 	function _saveFile(&$sourceFile, $destinationPath){ // Save filedata to destinationPath
 
 		if(!file_put_contents($destinationPath, $sourceFile)){
+			fclose($sourceFile);
 			return false;
 		}
-		
+		fclose($sourceFile);
 		return $destinationPath;
 	}
 	
@@ -193,9 +194,8 @@ class ThumbnailController extends Controller {
 				$this->_handleError($request, 404, 'Image file not found (B) - ' . $request['fullImagePath']);
 			}
 		}
-		
-		die(); // Without this, cakePHP is returning text/html as a content-type.. I couldn't figure it out
+
+		//die(); // Without this, cakePHP is returning text/html as a content-type.. I couldn't figure it out
 	}
     
 }
-?>
