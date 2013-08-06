@@ -389,11 +389,12 @@ table.zebra{
 }
 // Hide/Show elements if logged in
 // If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
-li[data-uid*="Error processing dynamic tag"],
+li[data-uid*="Error processing dynamic tag"].showIfLoggedIn,
 li[data-uid*="Error processing dynamic tag"] ~ .showIfLoggedIn{
 	display: none !important;
 }
 
+li[data-uid*="Error processing dynamic tag"].hideIfLoggedIn,
 li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 	display: block !important;
 }
