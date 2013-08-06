@@ -1,6 +1,5 @@
 (function(){
 	
-	debugger;
 	var _util = window.LSP.utilities;
 	
 	_util.register('controller', 'home', (function(){
