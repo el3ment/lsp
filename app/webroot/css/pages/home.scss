@@ -319,6 +319,9 @@
 			.arrow-holder .right {
 				right: -15px;
 			}
+			.ad.slide-banner-right .content{
+				float: left;
+			}
 		}
 
 		@media (max-width: 690px){
@@ -345,7 +348,7 @@
 			}
 			.ad.slide-banner-right .banner {
 				right: 0;
-				width: 60%;
+				height: 60%;
 			}
 		}
 

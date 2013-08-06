@@ -13,7 +13,8 @@
 		position: relative;
 		display:inline-block;
 	
-		&:hover:before;{
+		&:hover:before,
+		&:active:before{
 			content:' ';
 			background-color: rgba(0,0,0,0.0001);
 			width: 120%;
@@ -62,10 +63,12 @@
 			@include border-radius(px($borderRadius));
 
 		}
-		&:hover:after{
+		&:hover:after,
+		&:active:after{
 			background-color:$yellow;
 		}
-		&:hover{
+		&:hover,
+		&:active{
 			dl{
 				display:block;
 			}

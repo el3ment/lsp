@@ -453,6 +453,24 @@ tr[height="25"]{ height: 0; }
 		}
 	}
 
+
+	// Total Price
+	td:first-child + td + td + td + td + td + td{
+		//background-color: red;
+		text-align:right;
+		font-size: 15px;
+		font-weight: bold;
+		width: 200%;
+		padding-top: 18px;
+		padding-bottom: 7px;
+		@media (max-width: 767px){
+			position: relative;
+			top: 13px;
+			font-size: 18px;
+			text-align: left !important;
+		}
+	}
+
 	// Item Price
 	td:first-child + td + td + td + td + td{
 		//background-color: red;
@@ -468,22 +486,6 @@ tr[height="25"]{ height: 0; }
 		}
 	}
 
-	// Total Price
-	td:first-child + td + td + td + td + td + td{
-		//background-color: red;
-		text-align:right;
-		font-size: 24px;
-		font-weight: 600;
-		width: 200%;
-		padding-top: 18px;
-		padding-bottom: 7px;
-		@media (max-width: 767px){
-			position: relative;
-			top: 13px;
-			font-size: 18px;
-			text-align: left !important;
-		}
-	}
 
 	// Remove - it's dumb, but the action is on the image, not on the link
 	td:first-child + td + td + td + td + td + td + td{
@@ -685,11 +687,11 @@ tr[height="25"]{ height: 0; }
 	}
 	.texttablert + .texttablert{
 		font-weight: bold !important;
-		font-size: 24px;
+		font-size: 24px !important;
 	}
 }
 @media (max-width: 767px){
-	#ordersummary_estship + tr{
+	 #carttableheader + #carttablerow0 ~ #ordersummary_estship + tr{
 
 		background-color: $superLightGrey;
 
@@ -717,6 +719,7 @@ tr[height="25"]{ height: 0; }
 		}
 
 	}
+
 }
 
 // The button row for cart - second selector for ie8
