@@ -42,6 +42,7 @@
 
 					// We want to make sure we fire after reveal.js (which uses onReady)
 					onAfterReady : function(e, data){
+						debugger;
 						if(_lsp.controllers.application.getContext() !== 'phone'){
 							_this.attachMenu();
 						}
