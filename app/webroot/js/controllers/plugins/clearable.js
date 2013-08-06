@@ -21,6 +21,9 @@
 						}else{
 							input.next('button').fadeOut(200);
 						}
+						
+						input.focus();
+
 					},
 					onSelectedInput : function(e, data){
 						$(data.selector).select();
