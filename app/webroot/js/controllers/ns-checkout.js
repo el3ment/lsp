@@ -69,6 +69,8 @@
 								$(e).attr('id', 'carttablerow' + i); 
 							});
 
+						$('#ordersummary_total .texttablert:first-child b').text('Total');
+
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
 					},
 					onEnter : function(e, data){
