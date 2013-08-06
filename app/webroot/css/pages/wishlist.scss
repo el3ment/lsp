@@ -147,21 +147,17 @@
 	.addToCart{
 		min-width: 200px;
 		@media (max-width: 767px){
-			margin-top: -40px;
+			margin-top: 10px;
 		}
 	}
 
 	.comments{
-		width: 25%;
+		width: 100%;
 		@media (max-width: 767px){
 			padding-left: 110px;
 			margin-top: 10px;
 			width: 100%;
-			padding-right: 100px; // space for price
-			textarea{
-				width: auto;
-				height: auto;
-			}
+			//padding-right: 100px; // space for price
 		}
 	}
 
@@ -238,6 +234,7 @@
 
 	@media (max-width: 767px){
 		tr{
+
 			float: left;
 			width: 100%;
 			position: relative;
