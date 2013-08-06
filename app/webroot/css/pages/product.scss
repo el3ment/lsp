@@ -188,6 +188,9 @@
 		
 		&.dynamicItemSuggestions{
 			padding-bottom: 0;
+			@media (max-width: 767px){
+				margin-top: 50px;
+			}
 		}
 		&.customerPurchaseSuggestions .well{
 			height: 256px;
