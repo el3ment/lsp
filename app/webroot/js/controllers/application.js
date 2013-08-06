@@ -412,37 +412,14 @@
 
 					// If the onReady events have already fired, then force this controller along individually
 					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
-						//_this.events.application.onResize({}, {controller : controllerObj}); // need to test this, if a controller loads after onready he needs to get onreszie fired too
 						controllerObj.events.application.onReady(_this._createGlobalEventObject());
+						
+					}
+					if(_isReadyFired && ((controllerObj.events || {}).application || {}).attachEvents){
 						controllerObj.events.application.attachEvents(_this._createGlobalEventObject());
 					}
 
-					// bind asset events to controllers
-					// Removing Assets, we don't use them in this project
-					// for(asset in controllerObj.assets){
-					// 	for(subController in controllerObj.assets[asset].events){
-							
-					// 		subControllerObj = _app.controllers[subController]; // Convience
-							
-					// 		for(event in controllerObj.assets[asset].events[subController]){
-					// 			if(subController === 'self'){
-					// 				// Assets will sometimes have their own events, like onSort, onClose, ect.
-					// 				// so we need to attach the default function to the asset event
-					// 				$(controllerObj.assets[asset])
-					// 					.bind(event, controllerObj.assets[asset].events[subController][event]);
-					// 			}else{
-					// 				// Otherwise, the assets want to attach themselves
-					// 				// to the normal controller.onMethod events
-					// 				$(subControllerObj)
-					// 					.bind(event, controllerObj.assets[asset].events[subController][event]);
-					// 			}
-					// 		}
-					// 	}
-					// }
-					
-					// Call onInit/onReady events, the when().then() functions
-					// ensure that all of the onInit functions finish, before firing	
-					//$(controllerObj).triggerHandler('onLoaded');
+					//_this.events.application.onResize({}, {controller : controllerObj}); // need to test this, if a controller loads after onready he needs to get onreszie fired too
 				}
 
 				$(specificController).triggerHandler('onInit');

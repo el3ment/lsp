@@ -18,4 +18,7 @@
 	Header set Cache-Control "max-age=290304000, public"
 </FilesMatch>
 
-KeepAlive off
+<LimitExcept GET POST> 
+Order allow,deny 
+Deny from all 
+</LimitExcept>
