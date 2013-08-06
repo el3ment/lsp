@@ -433,7 +433,8 @@
 		font-size: 12px;
 		
 		@media (max-width: 767px){
-
+			display: none !important;
+			
 			border: 10px solid transparent;
 			border-width: 0 10px;
 			@include box-sizing();

@@ -182,6 +182,11 @@ ul.list li,
 		list-style: none;
 		padding-left: 15px;
 	}
+	&.title{
+		list-style: none;
+		margin-left: 10px;
+		font-weight: bold;
+	}
 }
 
 ol.list{
@@ -204,6 +209,7 @@ ol.list{
 table.zebra{
 	
 	width: 100%;
+	margin-bottom: 20px;
 
 	td{ padding: 10px; }
 
