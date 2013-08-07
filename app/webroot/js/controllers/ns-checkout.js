@@ -74,12 +74,12 @@
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
 					},
 					onEnter : function(e, data){
-						// try{
-						// 	$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
-						// 	$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
-						// 	$('input:not([type])').attr('type', 'text');
-						// 	_app.controllers.netsuite.attachEnterKey();
-						// }catch(e){ }
+						try{
+							$('input[name*="email"]:not([type="checkbox"])').attr('type', 'email');
+							//$('input[name*="zip"], input[name*="phone"], input[name*="sCardNum"], input[name*="ccsecuritycode"]').attr('type', 'tel');
+							//$('input:not([type])').attr('type', 'text');
+							//_app.controllers.netsuite.attachEnterKey();
+						}catch(e){ }
 					}
 				},
 				application : {
