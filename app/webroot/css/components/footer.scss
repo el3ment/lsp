@@ -112,12 +112,11 @@
 	.well{
 	   
 		/* The space below the banner */
-	   
 		width: 100%;
 		float: left;
-		background: url(/img/dark_pattern.jpg);
+		background: url("/img/background-drummer.jpg")  bottom center no-repeat fixed, url("/img/dark_pattern.jpg") bottom center fixed;
 		background-color: black;
-		padding-top: px($_bottomPadding); /* Same as padding-bottom of .banner */
+		padding-top: 20px;
 		clear: both;
 		
 		@media (min-width: 768px) and (max-width: 979px) {

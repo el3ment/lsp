@@ -6,7 +6,7 @@
 	position: relative;
 	width: 100%;
 	float: none; // This is to fix a positioning bug in firefox
-	background: url(/img/dark_pattern.jpg);
+	background: url(/img/dark_pattern.jpg) fixed;
 	background-color: black;
 	
 	@include clearfix;
