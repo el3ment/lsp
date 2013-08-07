@@ -144,7 +144,7 @@
 					});
 
 				// Filter, and render newly updated options
-				var filteredOptions = _api.filterMatrixChildren(easyAskMatrixData, selectedOptions)
+				var filteredOptions = _api.filterMatrixChildren(easyAskMatrixData, selectedOptions);
 				var unselectedOptionText = $('option[value=""]:first', form).text();
 				
 				$.each(filteredOptions, function(label, options){
@@ -182,7 +182,9 @@
 					// matches the filter criteria, then set the id
 					$.each(easyAskMatrixData.products, function(id, productData){
 						
-						for(var label in productData.options){
+						var label;
+
+						for(label in productData.options){
 							// If it's not present, or if it exists, but is another value
 							if(!selectedOptions[label] || selectedOptions[label] !== productData.options[label])
 								return;
@@ -210,7 +212,7 @@
 						$('.productDiscount', entry).html(_util.parseCurrency(productData.data.msrp - productData.data.onlinePrice));
 
 						var optionArray = [];
-						for(var label in productData.options){
+						for(label in productData.options){
 							if(productData.options.hasOwnProperty(label)){
 								optionArray.push(productData.options[label]);
 							}
@@ -228,8 +230,8 @@
 						
 						_this.attachZoom();
 
-					})
-	}
+					});
+				}
 			},
 			
 			// Returns product specs

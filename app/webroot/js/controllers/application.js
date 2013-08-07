@@ -83,12 +83,12 @@
 								
 
 								if(controller && action && !asset){
-									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
+									element.bind(eventType, {preventDefault : preventDefault}, function(e){
 
 										console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
 
 										$(_app.controllers[controller]).
-											triggerHandler(_util.camelCase('on-' + action), 
+											triggerHandler(_util.camelCase('on-' + action),
 												{selector : element, originalEvent : e});
 										if(e.data.preventDefault){
 											e.preventDefault();
@@ -96,12 +96,12 @@
 									});
 								
 								}else if(controller && action && asset){
-									element.bind(eventType, {preventDefault : preventDefault}, function(e){  
+									element.bind(eventType, {preventDefault : preventDefault}, function(e){
 
 										console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
 
 										$(_app.controllers[controller].assets[asset]).
-											triggerHandler(_util.camelCase('on-' + action), 
+											triggerHandler(_util.camelCase('on-' + action),
 												{selector : element, originalEvent : e});
 										if(e.data.preventDefault){
 											e.preventDefault();
@@ -134,7 +134,11 @@
 
 						// Handle deferred inline scripting
 						// https://gist.github.com/RonnyO/2391995
-						$(function(){$('script[type="text/javascript/defer"]').each(function(){eval($(this).text());})});
+						$('script[type="text/javascript/defer"]').each(
+							function(){
+								debugger;
+								eval($(this).text());
+							});
 					},
 
 					onInit : function(e, data){
@@ -318,7 +322,7 @@
 
 							if(resizeTimer){ clearTimeout(resizeTimer);	}
 							
-							resizeTimer = setTimeout(function() { 
+							resizeTimer = setTimeout(function() {
 								$(_this).triggerHandler('onResize', eventData);
 							}, 100);
 
