@@ -142,7 +142,7 @@
 				$(".zoomPad", el).bind('mouseleave.jqzoom', function (event) {
 					obj.deactivate();
 				});
-				$(".zoomPad", el).bind('mousemove.jqzoom', function (e) {
+				$(".zoomPad", el).bind('mousemove.jqzoom mousedown.jqzoom', function (e) {
 
 					//prevent fast mouse mevements not to fire the mouseout event
 					if (e.pageX > smallimage.pos.r || e.pageX < smallimage.pos.l || e.pageY < smallimage.pos.t || e.pageY > smallimage.pos.b) {
@@ -150,12 +150,12 @@
 						return false;
 					}
 					el.zoom_active = true;
-					if (el.largeimageloaded && !$('.zoomWindow', el).is(':visible')) {
+					//if (el.largeimageloaded && !$('.zoomWindow', el).is(':visible')) {
 						obj.activate(e);
-					}
-					if (el.largeimageloaded && (settings.zoomType != 'drag' || (settings.zoomType == 'drag' && el.mouseDown))) {
+					//}
+					//if (el.largeimageloaded && (settings.zoomType != 'drag' || (settings.zoomType == 'drag' && el.mouseDown))) {
 						lens.setposition(e);
-					}
+					//}
 				});
 				var thumb_preload = [];
 				var i = 0;
@@ -167,7 +167,7 @@
 					var first = thumblist.splice(0, 1);
 					thumblist.push(first);
 				}
-				thumblist.each(function () {
+			thumblist.each(function () {
 					//preloading thumbs
 					if (settings.preloadImages && $(this).data('prezoomimage').indexOf('#') === -1) {
 						thumb_preload[i] = new Image();
