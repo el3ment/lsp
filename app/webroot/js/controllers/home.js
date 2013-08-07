@@ -49,7 +49,7 @@
 
 							//var touchCarousel = slider.data('touchCarousel');
 							// setTimeout(function(){
-							// 	touchCarousel.goTo(0);
+							// touchCarousel.goTo(0);
 							// }, 500);
 						}
 

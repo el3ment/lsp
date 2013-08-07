@@ -125,7 +125,7 @@
 					// },
 
 					onReady : function(e, data){
-
+						
 						_isReadyFired = true;
 						_this.attachEvents($('html'));
 						if(_this.hasPushState()){
@@ -134,8 +134,7 @@
 
 						// Handle deferred inline scripting
 						// https://gist.github.com/RonnyO/2391995
-						alert('hello!');
-						debugger;
+
 						$('script[type="text/javascript/defer"]').each(
 							function(){
 								debugger;
