@@ -16,7 +16,7 @@
 		color: white;
 		font-size: 11px;
 		@include border-radius(px($borderRadius));
-		z-index: 9999;
+		z-index: 190;
 	}
 	
 	&.badges-text{

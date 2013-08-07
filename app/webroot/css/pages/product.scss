@@ -312,7 +312,8 @@
 	}
 }
 
-*[data-stockmessage*="Unavailable"]{
+*[data-stockmessage*="Unavailable"],
+.discontinued{
 	.addToCart{
 		.quantity, .action{
 			display: none;
@@ -343,3 +344,4 @@
 		}
 	}
 }
+
