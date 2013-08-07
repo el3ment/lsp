@@ -27,7 +27,7 @@
 
 		// Force it open on the home page
 		#mainFlyout{
-			margin-top: 660px;
+			margin-top: 680px;
 			display: block !important;
 			height: auto;
 			.wrapper{
@@ -37,6 +37,20 @@
 		}
 	}
 }
+
+
+@media (max-width: 600px) {
+	html[data-path*=".com/-END"],
+	html[data-path*=".com/?"]{
+
+		// Force it open on the home page
+		#mainFlyout{
+			margin-top: 600px;
+
+		}
+	}
+}
+
 
 .page-home{
 
@@ -348,7 +362,7 @@
 			}
 			.ad.slide-banner-right .banner {
 				right: 0;
-				height: 60%;
+				//height: 60%;
 			}
 		}
 
@@ -359,8 +373,9 @@
 		}
 
 		@media (max-width: 600px){
-			&, .ad{
+			&, .ad, #mainSlider{
 				width: 460px;
+				height: 350px;
 			}
 			& {
 				margin: 0 auto;
@@ -368,22 +383,23 @@
 			.ad{
 				.banner {
 					position: static;
-					max-width: 100%;
-					max-height: 200px;
+					max-width: 40%;
 					float: right;
-				}
-				.content {
-					float: none;
-					width: 100%;
+					top: 20px;
+					right: 20px;
 				}
 				.slide-content-title img {
-					margin-top: -100px;
+					margin-top: 0px;
 				}
 				.features {
 					display: none;
 				}
 				.b2 {
 					margin-top: 0;
+				}
+				.content{
+					width: 100%;
+					top: -170px;
 				}
 			}
 			.price {
@@ -393,16 +409,21 @@
 
 		@media (max-width: 500px){
 			.slide-content-title img {
-				max-width: 50%;
+				max-height: 26%;
+				max-width: 100%;
 			}
 			&, .ad{
 				width: 430px;
+			}
+			.ad .content{
+				top: -130px;
 			}
 		}
 
 		@media (max-width: 470px){
 			.slide-content-title img {
-				max-width: 45%;
+				max-height: 26%;
+				max-width: 100%;
 			}
 			&, .ad{
 				width: 400px;
@@ -424,10 +445,8 @@
 			}
 			.ad{
 				.banner {
-					position: static;
+					max-height: 47%;
 					max-width: 100%;
-					max-height: 200px;
-					float: right;
 				}
 				.content {
 					float: none;
@@ -511,6 +530,23 @@
 			left: 0;
 		}
 		.productAd ~ .productAd{ display: none } 
+		.content{
+			top: -30px;
+		}
+		.featuredCategories h2{
+			position: absolute;
+			top: 670px;
+		}
+	}
+
+	@media (max-width: 600px){
+		.productAd {
+			top: 450px;
+		}
+		.featuredCategories h2{
+			position: absolute;
+			top: 600px;
+		}
 	}
 
 	/*@media (max-width: 520px){
