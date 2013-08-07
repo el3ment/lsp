@@ -24,7 +24,13 @@
 @media (max-width: 767px) {
 	html[data-path*=".com/-END"],
 	html[data-path*=".com/?"]{
+		#flyoutControlButton{
+			display: none; // Hide the control button since it's forced open
+		}
 
+		.shopbar .mobileSearch{
+			margin-right: 70px; // move the search button back to the right
+		}
 		// Force it open on the home page
 		#mainFlyout{
 			margin-top: 680px;
