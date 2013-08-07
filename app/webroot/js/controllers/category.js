@@ -18,7 +18,7 @@
 			markNetSuiteCategoriesAsOpen : function(){
 
 				var maxDepth = 0;
-				$('#refinement-categories-container table table tr').each(function(i, element){
+				var adjustedItems = $('#refinement-categories-container table table tr').each(function(i, element){
 					var row = $(element);
 					var depth = $('td:first-child', element).attr('colspan') || 0;
 					
@@ -27,19 +27,21 @@
 					row.addClass('level' + depth);
 				});
 
-				// Mark Parents as open
-				$('.level1:first, .level2:first, .level3:first, level4:first, .level5:first, .level6:first, .level7:first, .level8:first, .level9:first')
-					.prev()
-					.addClass('openParentCategory');
+				if(adjustedItems.length){
+					// Mark Parents as open
+					$('.level1:first, .level2:first, .level3:first, level4:first, .level5:first, .level6:first, .level7:first, .level8:first, .level9:first')
+						.prev()
+						.addClass('openParentCategory');
 
-				// Mark max
-				$('.level' + maxDepth).addClass('currentCategory');
+					// Mark max
+					$('.level' + maxDepth).addClass('currentCategory');
 
-				// Mark current parent
-				$('.level' + maxDepth + ':first').prev().addClass('currentParentCategory');
+					// Mark current parent
+					$('.level' + maxDepth + ':first').prev().addClass('currentParentCategory');
 
-				// Mark first parent
-				$('.openParentCategory:first').addClass('firstParentCategory');
+					// Mark first parent
+					$('.openParentCategory:first').addClass('firstParentCategory');
+				}
 
 			}
 		};
