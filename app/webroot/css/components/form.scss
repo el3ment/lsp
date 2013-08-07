@@ -22,6 +22,10 @@ input, select, textarea{
 	}
 }
 
+input[type="password"]{
+	font-family: sans-serif;
+}
+
 input[type="checkbox"]:focus{
 	outline: 1px solid $darkYellow;
 }	
