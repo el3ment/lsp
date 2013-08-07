@@ -137,8 +137,7 @@
 
 						$('script[type="text/javascript/defer"]').each(
 							function(){
-								debugger;
-								eval($(this).text());
+								eval($(this).html());
 							});
 					},
 
