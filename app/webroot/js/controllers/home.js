@@ -24,7 +24,7 @@
 					}
 				},
 				application : {
-					onReady : function(e, data){
+					onAfterReady : function(e, data){
 						var mainSlider = $('#mainSlider');
 						if(mainSlider.length){
 							$('#mainSlider').touchCarousel({
