@@ -241,7 +241,8 @@
 					obj.load();
 				} else {
 					//alert('ERROR :: Missing parameter for largeimage or smallimage.');
-					throw 'ERROR :: Missing parameter for largeimage or smallimage.';
+					//throw 'ERROR :: Missing parameter for largeimage or smallimage.';
+					console.error('jqZoom : Missing parameter for large image or small image');
 				}
 				return false;
 			}
@@ -308,7 +309,8 @@
 			};
 			this.node.onerror = function () {
 				//alert('Problems while loading image.');
-				throw 'Problems while loading image.';
+				//throw 'Problems while loading image.';
+				console.error('jqZoom : Problems loading image');
 			};
 			this.node.onload = function () {
 				$obj.fetchdata();
@@ -662,7 +664,8 @@
 			};
 			this.node.onerror = function () {
 				//alert('Problems while loading the big image.');
-				throw 'Problems while loading the big image.';
+				//throw 'Problems while loading the big image.';
+				console.error('jqZoom : problems loading large image');
 			};
 			this.node.onload = function () {
 				//fetching data

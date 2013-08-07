@@ -5,5 +5,6 @@ window.page_init = window.page_init || function(){};
 window.process_currency_field_value = window.process_currency_field_value || function(){};
 
 window.console = window.console || {
-	log: function(){ }
+	log: function(){ },
+	error: function(){ }
 };
