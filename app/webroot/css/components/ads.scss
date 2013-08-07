@@ -40,23 +40,28 @@
 	}
 	.description{
 		width: 100%;
+		z-index: 2;
+		position: relative;
 	}
 
 	@media (max-width: 767px){
 
 		.productImage{
 			position: absolute;
-			width: 35%;
-
-			img{
-				max-width: 100%;
-				max-height: 120px;
-			}
-
+			right: 0;
+			bottom: -5px;
+			left: auto;
 		}
 		.content{
-			padding-left: 140px;
+			padding-left: 15px;
+			padding-right: 20%;
 			min-height: 70px;
+			padding-top: 15px;
+		}
+		.action{
+			left: 20px;
+
+			right: auto;
 		}
 
 	}

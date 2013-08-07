@@ -45,7 +45,7 @@
 
 		// Force it open on the home page
 		#mainFlyout{
-			margin-top: 600px;
+			margin-top: 620px;
 
 		}
 	}
@@ -409,7 +409,7 @@
 
 		@media (max-width: 500px){
 			.slide-content-title img {
-				max-height: 26%;
+				max-height: 80px;
 				max-width: 100%;
 			}
 			&, .ad{
@@ -422,7 +422,7 @@
 
 		@media (max-width: 470px){
 			.slide-content-title img {
-				max-height: 26%;
+				max-height: 80px;
 				max-width: 100%;
 			}
 			&, .ad{
@@ -465,6 +465,12 @@
 		}
 
 		@media (max-width: 360px){
+			.ad{
+				.banner {
+					max-height: 39%;
+					max-width: 100%;
+				}
+			}
 			&, .ad{
 				width: 320px;
 			}
@@ -545,7 +551,7 @@
 		}
 		.featuredCategories h2{
 			position: absolute;
-			top: 600px;
+			top: 610px;
 		}
 	}
 
