@@ -156,7 +156,7 @@
 							// If we have unselected another attribute (different from the last selected) then we need to
 							// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
 							// unselecting a "Color" and "Artist" should "collapse" into it's static form 
-							var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length
+							var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length;
 							if(!isInHistory){
 								_attributeHistory.push({name : name, displayState : 'temporary'});
 							}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
@@ -452,12 +452,12 @@
 
 			removeFilterAttribute : function(attributeSlug){
 				
-				console.log('Removing ', attributeSlug, ' from ', _state.allAttributes);
+				console.log('Removing ', attributeSlug+';', ' from ', _state.allAttributes, ' resulting in ', (_state.allAttributes + ';').replace(attributeSlug+';', '').replace(/\/{1,}/, ';').replace(/^;$/, ''));
 
 				var payload = {
 					action : 'advisor',
 					method : 'CA_BreadcrumbRemove',
-					allAttributes : _state.allAttributes.replace(attributeSlug, '').replace(/\/{1,}/, ';') // remove it, and remove leftover ;;
+					allAttributes : (_state.allAttributes + ';').replace(attributeSlug+';', '').replace(/\/{1,}/, ';').replace(/^;$/, '') // remove it, and remove leftover ;;
 				};
 
 				return _api.request(_this, 'removeFilter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))
@@ -671,11 +671,7 @@
 			},
 
 			renderFatalError : function(){
-				// var errorHTML = _util.parseMicroTemplate('templates-error', {
-				// 	title : 'Something Big Has Happened',
-				// 	message : 'Sorry about that, but something has gone seriously wrong.'
-				// });
-				// _app.controllers.application.attachEvents($('.page-search').html(errorHTML));
+				alert('Something has gone wrong with our network connection to our database. You can try again by reloading the page. Sorry about that!');
 			}
 		};
 		

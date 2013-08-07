@@ -512,8 +512,8 @@ tr[height="25"]{ height: 0; }
 			&:before{
 				content: 'Remove';
 				position: absolute;
-				top: 0;
-				left: -10px;
+				top: 17px;
+				left: 10px;
 			}
 
 			&:hover:before{
@@ -1788,7 +1788,7 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 	@include disengaged();
 	
 	//Space for steps
-	margin-top: 160px;
+	margin-top: 140px;
 	width: 100%;
 
 	@media (max-width: 767px){

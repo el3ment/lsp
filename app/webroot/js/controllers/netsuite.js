@@ -70,6 +70,7 @@
 								$(this).parents().each(function(i, element){
 									var submit = $(element).find('#tbl_recalc *[type="submit"], #tbl_submitter *[onclick]')[0];
 									if(submit){
+										
 										if($(submit).attr('onclick')){
 											submit.click();
 										}else{
@@ -77,10 +78,13 @@
 											$('input[name="redirect"]').val('');
 											submit.form.submit();
 										}
-										focusedElement.blur();
-										e.stopPropagation();
+										//focusedElement.blur();
+										
 										return false;
 									}
+									
+									e.stopPropagation();
+								
 								});
 
 								// Prevents firing this event if the user hit enter

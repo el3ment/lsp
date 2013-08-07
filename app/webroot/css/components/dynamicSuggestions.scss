@@ -6,7 +6,7 @@
 	position: relative;
 
 	.well{
-		//height: px(250px);
+		height: 280px;
 		width: 100%;
 		overflow:hidden;
 		border-top: 1px solid $lightGrey;
@@ -33,7 +33,6 @@
 			float: left;
 			width: 180px;
 			height: 280px;
-			margin-top: 3px;
 			position: relative;
 			display: block;
 			padding-bottom: px(2 * $paddingUnit);
