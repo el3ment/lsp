@@ -127,6 +127,10 @@
 						content : ' ';
 						display: none;
 					}
+					@media (max-width: 979px) and (min-width: 768px){
+						content : 'Tap image to zoom';
+					}
+
 					font-style: italic;
 					display: block;
 					position: absolute;
