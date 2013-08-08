@@ -307,7 +307,7 @@
 			},
 
 			include : function(filename){
-				$('head').append('<script type="text/javascript" src="https://dev.lonestarpercussion.com'+ filename +'"></script>');
+				$('head').append('<script type="text/javascript" src="//d2bghjaa5qmp6f.cloudfront.net'+ filename +'"></script>');
 			},
 
 			initializeGlobalEvents : function(){
