@@ -8,7 +8,7 @@
 
 	return $.extend(_this, {
 			_url : function(controller, payload){
-				var url = 'https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl';
+				var url = 'https://forms.netsuite.com/app/site/hosting/scriptlet.nl';
 				url = (payload.method.match('getUPS') ? 'http://static.lonestarpercussion.com/shipping/' + payload.method : url);
 				
 				return url;
