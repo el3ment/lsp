@@ -38,7 +38,7 @@
 			},
 
 			fixLogoutUrl : function(context){
-				var href = $('[href*="logoff=T"]', context).attr('href').replace('sc=4', 'sc=30'); // change chrome from checkout to normal
+				var href = ($('[href*="logoff=T"]', context).attr('href') || '').replace('sc=4', 'sc=30'); // change chrome from checkout to normal
 				$('[href*="logoff=T"]', context).attr('href', href);
 			},
 
