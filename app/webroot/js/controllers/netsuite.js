@@ -14,6 +14,7 @@
 						_this.attachEnterKey();
 						_this.fixSignInUrlForRedirection(document);
 						_this.injectRedirectInput();
+						_this.fixLogoutUrl(document);
 					},
 					onAttachEvents : function(e, data){
 						_this.fixSignInUrlForRedirection(data.selector);
@@ -34,6 +35,11 @@
 				if(params.lsppassthrough && document.forms.login){
 					$(document.forms.login).prepend('<input type="hidden" name="redirect" value="' + params.lsppassthrough + '">');
 				}
+			},
+
+			fixLogoutUrl : function(context){
+				var href = $('[href*="logoff=T"]', context).attr('href').replace('sc=4', 'sc=30'); // change chrome from checkout to normal
+				$('[href*="logoff=T"]', context).attr('href', href);
 			},
 
 			// Sigh..
