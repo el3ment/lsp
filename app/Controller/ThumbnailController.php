@@ -2,7 +2,7 @@
 
 define('SOURCE_DIRECTORY', '/static');
 define('ERROR_IMAGE', '/images/product-image/no-image.png');
-define('THUMBNAIL_DIRECTORY', '/static/thumbnails');
+define('THUMBNAIL_DIRECTORY', ROOT . '/cache/thumbnails');
 define('FULLIMAGE_DIRECTORY', SOURCE_DIRECTORY);
 define('REMOTE_DIRECTORY', '/remote');
 define('FORCE_RENDER', false); // Set to true if you are trying to debug image resizing operations
@@ -22,7 +22,7 @@ class ThumbnailController extends Controller {
 		$sizeEnd = strlen($path);
 		$sizePortion = substr($path, $sizeStart, $sizeEnd-$sizeStart);
 		$requestedSizes = explode("x", $sizePortion); // Make an array with the sizes
-		
+
 		$returnObject['imagePath'] = $path;
 		$returnObject['fullImagePath'] = FULLIMAGE_DIRECTORY . $returnObject['imagePath'];
 		if(is_array($requestedSizes) && count($requestedSizes) >= 2 && is_numeric($requestedSizes[0]) && is_numeric($requestedSizes[1])){
@@ -32,53 +32,52 @@ class ThumbnailController extends Controller {
 			if(isset($requestedSizes[2])){
 				$returnObject['size']['zoom'] = $requestedSizes[2];
 			}
-			
+
 			$returnObject['imagePath'] = substr($path, 0, $sizeStart - 1);
 			$returnObject['fullImagePath'] = FULLIMAGE_DIRECTORY . $returnObject['imagePath'];
 			$returnObject['thumbnailImagePath'] = THUMBNAIL_DIRECTORY . $returnObject['imagePath'] . '.' . $returnObject['size']['width'] . 'x' . $returnObject['size']['height'] . (isset($returnObject['size']['zoom']) ? 'x' . $returnObject['size']['zoom'] : '');
 		}
-		
+
 		// If a remote image is requested, only allow lonestarpercussion as a host
 		$returnObject['isRemote'] = false;
 		$remoteURLParsed = parse_url(substr($returnObject['imagePath'], 1, 10000)); // Remove the starting /
 		if(isset($remoteURLParsed['host']) && ($remoteURLParsed['host'] === 'www.lonestarpercussion.com' || $remoteURLParsed['host'] === 'lspsandbox.explorewebdev.com')){
-				
+
 			$returnObject['isRemote'] = true;
 			$returnObject['remotePath'] = substr($returnObject['imagePath'], 1, 1000); // Remove starting /
-			
+
 			// Download the image, and parse the local location in as imagePath
 			$returnObject['imagePath'] = REMOTE_DIRECTORY . DS . md5($returnObject['remotePath']);	
 			$returnObject['fullImagePath'] = FULLIMAGE_DIRECTORY . $returnObject['imagePath'];
 			if(!is_file($returnObject['fullImagePath'])){
 				$this->_saveFile($this->_getFile($returnObject['remotePath']), $returnObject['fullImagePath']);
 			}
-			
+
 			if(isset($returnObject['size'])){
 				$returnObject['thumbnailImagePath'] = THUMBNAIL_DIRECTORY . $returnObject['imagePath']. '.' . $returnObject['size']['width'] . 'x' . $returnObject['size']['height'] . (isset($returnObject['size']['zoom']) ? 'x' . $returnObject['size']['zoom'] : '');
 			}
 		}
-		
-		
+
+
 		return $returnObject;	
 	}
-	
+
 	function _saveFile(&$sourceFile, $destinationPath){ // Save filedata to destinationPath
 
 		if(!file_put_contents($destinationPath, $sourceFile)){
-			fclose($sourceFile);
 			return false;
 		}
-		fclose($sourceFile);
+
 		return $destinationPath;
 	}
-	
+
 	function _getFile($filename){ // Return filedata
 
 		$file = file_get_contents($filename);
-		
+
 		return $file;
 	}
-	
+
 	function _handleError(&$request, $code, $message){
 		switch($code){
 			case 404:
@@ -90,10 +89,10 @@ class ThumbnailController extends Controller {
 				header("Status: 503 Service Temporarily Unavailable");
 				header("Retry-After: 120");
 		}
-		
+
 		header("Connection: Close");
 		header("X-Error-Message: " . $message);
-		
+
 		// Pretend the user requested an error image
 		$request['imagePath'] = ERROR_IMAGE;
 		$request['fullImagePath'] = FULLIMAGE_DIRECTORY . $request['imagePath'];
@@ -110,50 +109,50 @@ class ThumbnailController extends Controller {
 
 		App::import('Vendor', 'SuperSimpleResizer');
 		$resizer = new SuperSimpleResizer();	
-		
+
 		// Let's start by assuming the thumbnail exists
 		if(!(is_file($request['thumbnailImagePath']) && getimagesize($request['thumbnailImagePath'])) || !is_file($request['thumbnailImagePath']) || (is_file($request['thumbnailImagePath']) && filemtime($request['thumbnailImagePath']) < filemtime($request['fullImagePath'])) || FORCE_RENDER){
 			// If we don't already have a thumbnail, FORECE_THUMBNAILS is off, or the thumbnail is older than the full image
-			
+
 			if($request['fullImagePath']){ // If downloading a remote image failed, this will be false, otherwise, it will be true
-				
-				
-				
+
+
+
 				$imageDataArray = $resizer->load($request['fullImagePath']);
 				$thumbnailImageDataArray = ($imageDataArray ? $resizer->resize($imageDataArray, 
 																	$request['size']['width'], 
 																	$request['size']['height'], 
 																	(isset($request['size']['zoom']) ? $request['size']['zoom'] : 0)) : false);
-				
+
 				if($thumbnailImageDataArray){ // If load and resize both completed successfully, save and return the filename
 					//header("X-File-Was-Resized: True");
 					return $resizer->save($thumbnailImageDataArray, $request['thumbnailImagePath']);
 				}
 			}
-			
+
 			return null; // Downloading a remote image failed
 		}
 		// If the thumbnail exists, skip the resize, and return the filename
 		//header("X-File-Was-Resized: False");
 		return $request['thumbnailImagePath'];
 	}
-	
+
 	function _render($filename, $forceDisplay = false){ // Output an image to the client
 
 		if(is_file($filename)){
 			// Take advantage of 304 Caching
-			//if(!FORCE_RENDER && isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($filename) && !$forceDisplay){
-			//	header("HTTP/1.1 304 Not Modified");
-			//	header("Status: 304 Not Modified");
-			//	header("Last-Modified: " . gmdate('r', filemtime($filename)) . " GMT");
-				
-			//	return true;
-			//}
-			
+			if(!FORCE_RENDER && isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($filename) && !$forceDisplay){
+				header("HTTP/1.1 304 Not Modified");
+				header("Status: 304 Not Modified");
+				header("Last-Modified: " . gmdate('r', filemtime($filename)) . " GMT");
+
+				return true;
+			}
+
 			// If the file was created more than 7 days ago, set far-future expires header
 			// but if it was created within a week -- set the expires header for tomorrow,
 			// this gives us a week or so of buffer time to fix any errors with images
-			
+
 			$expires = (time() - filemtime($filename) > 60*60*24*7) ?  77760000 : 86400;
 	        header("Content-Type: " . mime_content_type($filename)); // need to handle mime-type detection
 	        header("Last-Modified: " . gmdate('r', filemtime($filename)));
@@ -161,30 +160,26 @@ class ThumbnailController extends Controller {
 			header("Cache-Control: public maxage=" . $expires);
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
 			header('X-Peak-Memory-Usage: '.(int)(memory_get_peak_usage() / 1000).'k');
-			
-			readfile($filename);
 
-			$fp = @fopen($file,"rb");
-			fpassthru($fp);
-			fclose($fp);			
+			readfile($filename);
 
 			return true; 
 		} 
 
 		return false;
 	}
-	
+
 	function resize($path){
 
 		$cleanURI = str_replace('/thumbnail/resize', '', $_SERVER['REQUEST_URI']);
 		$cleanURI = str_replace('/resize', '', $cleanURI);
 		$request = $this->_parsePath($cleanURI);
-		
+
         $outputImageFilename = $request['fullImagePath']; // Assume it's a full-size image
         
         if(isset($request['size']) && is_array($request['size'])){
         	// If it needs a resize, resize/grab the thumbnail filename
-		    //$outputImageFilename = $this->_resize($request, true);
+		    $outputImageFilename = $this->_resize($request, true);
         }
 
 		if($outputImageFilename){
@@ -199,8 +194,7 @@ class ThumbnailController extends Controller {
 			}
 		}
 
-		exit;
-		//die(); // Without this, cakePHP is returning text/html as a content-type.. I couldn't figure it out
+		exit; // Without this, cakePHP is returning text/html as a content-type.. I couldn't figure it out
 	}
     
 }
