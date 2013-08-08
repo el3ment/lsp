@@ -42,7 +42,7 @@
 				var redirectUrl = (document.location.href.indexOf('lsppassthrough=') === -1 ? encodeURIComponent(document.location.href) : _util.findBetween('lsppassthrough=', '&', document.location.href));
 				
 				if(redirectUrl.indexOf('login=T') === -1){
-					$('a[href*="login=T"]:not([href*="'+redirectUrl+'"])', context).each(function(i, e){
+					$('a[href*="login=T"]:not([href*="'+redirectUrl+'"], [href*="logoff=T"])', context).each(function(i, e){
 						var link = $(e);
 						link.attr('href', link.attr('href') + '&lsppassthrough=' + redirectUrl);
 					});

@@ -113,6 +113,9 @@
 			// },
 
 			save : function(reviewData){
+				
+				_gaq.push(['_trackEvent', 'reviews', 'saveReview', true]);
+
 				return _api.request(_this, 'saveReview', {method : 'saveReview', data : JSON.stringify(reviewData)})
 					.done(function(data){
 						_this.renderSavedReview(reviewData);

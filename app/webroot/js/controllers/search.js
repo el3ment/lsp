@@ -116,6 +116,8 @@
 							_this.search(query);
 
 						}
+
+						_gaq.push(['_trackEvent', 'search', 'keywordSearch', query]);
 					},
 
 					// Originally used for suggestions on "did you mean" - but deprecated now
@@ -187,6 +189,8 @@
 								_this.removeFilterAttribute($(data.selector).val());
 							}
 						}
+
+						_gaq.push(['_trackEvent', 'search', 'filterAttribute', $(data.selector).val()]);
 						
 					},
 
@@ -197,11 +201,15 @@
 						_state.keywords = '';
 						_this.loadCategory(_state.category);
 
+						_gaq.push(['_trackEvent', 'search', 'clearAllRefinements', true]);
+
 					},
 
 					onLoadCategory : function(e, data){
 						_this.loadCategory($(data.selector).data('path'), true);
 						data.originalEvent.preventDefault();
+
+						_gaq.push(['_trackEvent', 'search', 'loadCategory', $(data.selector).data('path')]);
 					},
 
 					onDestroyAndLoadCategory : function(e, data){
@@ -218,6 +226,8 @@
 							data.originalEvent.preventDefault();
 						}
 
+						_gaq.push(['_trackEvent', 'search', 'loadCategory', state.category]);
+
 					},
 
 					onRemoveCategory : function(e, data){
@@ -232,34 +242,42 @@
 						}
 						_this.loadCategory(path, true);
 
+						_gaq.push(['_trackEvent', 'search', 'removeCategory', categoriesToRemove]);
+
 					},
 
 					onNextPage : function(e, data){
 						_this.paginate('next');
+						_gaq.push(['_trackEvent', 'search', 'paginate', 'next']);
 					},
 
 					onPreviousPage : function(e, data){
 						_this.paginate('prev');
+						_gaq.push(['_trackEvent', 'search', 'paginate', 'previous']);
 					},
 
 					onSort : function(e, data){
 						_state.sort = $(data.selector).val();
 						_this.paginate('first');
+						_gaq.push(['_trackEvent', 'search', 'sort', $(data.selector).val()]);
 					},
 
 					onItemsPerPage : function(e, data){
 						_state.resultsPerPage = $(data.selector).val();
 						_this.paginate('first');
+						_gaq.push(['_trackEvent', 'search', 'resultsPerPage', $(data.selector).val()]);
 					},
 
 					onShowCompactView : function(e, data){
 						_this.changeView('gridView');
 						_this.pushState();
+						_gaq.push(['_trackEvent', 'search', 'changeView', 'compact']);
 					},
 
 					onShowDetailsView : function(e, data){
 						_this.changeView('listView');
 						_this.pushState();
+						_gaq.push(['_trackEvent', 'search', 'changeView', 'detailed']);
 					}
 				},
 
@@ -352,9 +370,9 @@
 				}
 				
 				// If the path has .html in it - remove the filename and use the category
-				if(path.indexOf('.html') > -1){
-					_state.category = path.substring(0, path.lastIndexOf("/"));
-				}
+				// if(path.indexOf('.html') > -1){
+				// 	_state.category = path.substring(0, path.lastIndexOf("/"));
+				// }
 
 				// if it's only a /
 				_state.category = (_state.category === '/' ? '' : _state.category);
@@ -452,8 +470,6 @@
 
 			removeFilterAttribute : function(attributeSlug){
 				
-				console.log('Removing ', attributeSlug+';', ' from ', _state.allAttributes, ' resulting in ', (_state.allAttributes + ';').replace(attributeSlug+';', '').replace(/\/{1,}/, ';').replace(/^;$/, ''));
-
 				var payload = {
 					action : 'advisor',
 					method : 'CA_BreadcrumbRemove',
@@ -571,7 +587,7 @@
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				return _util.scrollTo($('.header'));
+				return _util.scrollTo($('.breadcrumbs'));
 			},
 
 			renderSummary : function(easyAskDataObject){

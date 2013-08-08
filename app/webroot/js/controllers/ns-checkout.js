@@ -80,6 +80,9 @@
 							$('input:not([type])').attr('type', 'text');
 							_app.controllers.netsuite.attachEnterKey();
 						}catch(e){ }
+
+						_gaq.push(['_set', 'title', 'Checkout - ' + data.pageName]);
+						_gaq.push(['_trackPageview']);
 					}
 				},
 				application : {
@@ -106,7 +109,7 @@
 
 				console.log('Firing Page Event : ' + _util.camelCase('on-enter-' + pageName));
 
-				$(_this).triggerHandler(_util.camelCase('on-enter'), {selector : $(document)});
+				$(_this).triggerHandler(_util.camelCase('on-enter'), {selector : $(document), pageName : pageName});
 				$(_this).triggerHandler(_util.camelCase('on-enter-' + pageName), {selector : $(document)});
 				$(_mainTable).addClass('nscheckout-' + pageName);
 			}
