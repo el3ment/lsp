@@ -128,6 +128,7 @@
 			.span4{
 				width: 724px;
 				@include box-sizing();
+
 				margin-left: 0;
 			}
 		}
@@ -301,8 +302,8 @@
 		margin-top: 20px;
 			background-color: #1f150d;
 			@include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
-			border: 1px solid #120C07\9;
-			border-width: 0 1px 1px;
+			//border: 1px solid #120C07\9;
+			//border-width: 0 1px 1px;
 		}
 
 	}

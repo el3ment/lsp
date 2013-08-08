@@ -205,6 +205,7 @@
 					}
 
 					$('html').attr('data-path', document.location.href);
+					_gaq.push(['_trackPageview', '/' + snapshot.path + '#' + statePath]);
 
 				}else{
 
