@@ -98,23 +98,29 @@
 
 					onSearch : function(e, data){
 
-						var query = $('input[name="searchQuery"]', data.selector).trigger('blur').val();
-						
-						$('.mobileSearch .b3').click(); // hide it
+						var query = $('input[name="searchQuery"]', data.selector).trigger('blur').val() || '';
 
-						// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
-						if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
-							
-							// Remove the delete statements if you want search to work within a category
-							delete _state.category;
-							delete _state.allAttributes;
-							_isFirstRequest = false;
+						if(query.length > 0){
+							if(document.location.href.indexOf('https') === -1){						
+								$('.mobileSearch .b3').click(); // hide it
 
-							_state.keywords = query; // usually we wait until the response to update the state
-													 // but search is unique because it's ubiquious and can be done from anywhere
-													 // we might need to redirect (via onBeforeAPICall) and we'll update the state string a little early
-							_this.search(query);
+								// If the query has text, or if there are searched keywords (even if the query is blank - they must be clearing it)
+								if(query !== 'undefined' && query.length || (_state.keywords && (_state.keywords || {}).length)){
+									
+									// Remove the delete statements if you want search to work within a category
+									delete _state.category;
+									delete _state.allAttributes;
+									_isFirstRequest = false;
 
+									_state.keywords = query; // usually we wait until the response to update the state
+															 // but search is unique because it's ubiquious and can be done from anywhere
+															 // we might need to redirect (via onBeforeAPICall) and we'll update the state string a little early
+									_this.search(query);
+
+								}
+							}else{
+								document.location = 'http://www.lonestarpercussion.com/#/~search/keywords/' + encodeURIComponent(query);
+							}
 						}
 
 						_gaq.push(['_trackEvent', 'search', 'keywordSearch', query]);
@@ -214,16 +220,19 @@
 
 					onDestroyAndLoadCategory : function(e, data){
 						
-						var url = ($(data.selector).attr('href') + '#').split('#');
-						var state = (_app.controllers.application.parseStateFromHash(url[1]) || {}).search || {};
-						state.category = url[0];
+						if(document.location.href.indexOf('https') === -1){
+							var url = ($(data.selector).attr('href') + '#').split('#');
+						
+							var state = (_app.controllers.application.parseStateFromHash(url[1]) || {}).search || {};
+							state.category = url[0];
 
-						// Force pushState
-						if(_this.loadState(state, null, true)){
-							$('html').attr('data-path', '').addClass('search-loading');
-							_this.scrollToFirst();
-							_app.controllers.flyout.closeFlyout();
-							data.originalEvent.preventDefault();
+							// Force pushState
+							if(_this.loadState(state, null, true)){
+								$('html').attr('data-path', '').addClass('search-loading');
+								_this.scrollToFirst();
+								_app.controllers.flyout.closeFlyout();
+								data.originalEvent.preventDefault();
+							}
 						}
 
 						_gaq.push(['_trackEvent', 'search', 'loadCategory', state.category]);
@@ -359,7 +368,7 @@
 			// Reads / parses state and changes the _state object
 			pullState : function(state){
 
-				var path = document.location.pathname;
+				var path = document.location.pathname.replace('/?.*/', '');
 
 				_state = $.extend({}, _defaultState, (state || {}));
 
@@ -370,9 +379,9 @@
 				}
 				
 				// If the path has .html in it - remove the filename and use the category
-				// if(path.indexOf('.html') > -1){
-				// 	_state.category = path.substring(0, path.lastIndexOf("/"));
-				// }
+				if(path.indexOf('.html') > -1){
+					_state.category = path.substring(0, path.lastIndexOf("/"));
+				}
 
 				// if it's only a /
 				_state.category = (_state.category === '/' ? '' : _state.category);
