@@ -61,6 +61,7 @@
 
 							// Remove everything except categories, then remove trailing /
 							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
+							_state.category = _state.category.replace(/\/.*\/.*\//, '/');
 							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
 
@@ -596,7 +597,7 @@
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				return _util.scrollTo($('.breadcrumbs'));
+				return _util.scrollTo($('#div__body'));
 			},
 
 			renderSummary : function(easyAskDataObject){

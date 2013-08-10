@@ -492,11 +492,17 @@ tr[height="25"]{ height: 0; }
 		//background-color: red;
 		text-align: center;
 		padding-top: 18px;
+		padding-left: 0;
+		padding-right: 0;
 		a{
+			display: block;
+			width: 100%;
+			//outline: 1px solid red;
+			height: 100%;
 			position: relative;
 
 			img{
-				width: 70px;
+				width: 100%;
 				height: 30px;
 				background-color: white;
 				@include opacity(.0001);
@@ -511,9 +517,6 @@ tr[height="25"]{ height: 0; }
 			
 			&:before{
 				content: 'Remove';
-				position: absolute;
-				top: 17px;
-				left: 10px;
 			}
 
 			&:hover:before{
@@ -2327,6 +2330,9 @@ html[data-path*="category=thanks"] .page-generic > table{
 			white-space: -o-pre-wrap;   /* Opera 7 */    
 			word-wrap: break-word;      /* IE */
 			word-break: break-all;
+			@media (max-width: 400px){
+
+			}
 		}
 	}
 }
@@ -2475,3 +2481,8 @@ html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"
 	 	}
 	}
 }
+
+
+//https://checkout.sandbox.netsuite.com/s.nl?c=665798&sc=4&logoff=T&ckabandon=SDYQkmW-AS2Vex5Y&shipmeth=51489&ck=SDYQkmW-AS2Vex5Y&vid=SDYQkpa-AYvEuRir&cktime=114278&cart=329446&promocode=&dontcookiepromocode=T&addrcountry=US&addrzip=75150&gc=clear
+
+//         https://checkout.netsuite.com/&ckabandon=SDYQknu-AWbyFVB-&ck=SDYQknu-AWbyFVB-&vid=SDYQkka-ATiwYg3I&cktime=114273&cart=343660&gc=clear

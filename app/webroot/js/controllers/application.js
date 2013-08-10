@@ -75,7 +75,11 @@
 									eventType = 'submit';
 									preventDefault = true;
 								}else{
-									eventType = 'click';
+									if('ontouchstart' in document.documentElement){
+										eventType = 'touchstart';
+									}else{
+										eventType = 'click';
+									}
 									if(element.is('button, submit')){
 										preventDefault = true;
 									}

@@ -84,6 +84,7 @@
 		}
 		&.level0, &.openParentCategory{
 			a, button{
+				padding-left: 0;
 				border-left: 0;
 			}
 		}
@@ -234,6 +235,10 @@
 				}
 			}
 		}
+	}
+
+	.level0.currentCategory .label{
+		padding-left: 10px;
 	}
 
 	// Usually refinements need padding - but not categories, which apparently are using
