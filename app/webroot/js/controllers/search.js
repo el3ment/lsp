@@ -369,19 +369,17 @@
 			// Reads / parses state and changes the _state object
 			pullState : function(state){
 
-				var path = document.location.pathname.replace('/?.*/', '');
+				var path = document.location.pathname.replace(/\?.*/, '');
 
 				_state = $.extend({}, _defaultState, (state || {}));
 
 				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
 				
-				if(!_state.category){
-					_state.category = path;
-				}
-				
 				// If the path has .html in it - remove the filename and use the category
-				if(path.indexOf('.html') > -1){
+				if(path.indexOf('.html') > -1 && !_state.category){
 					_state.category = path.substring(0, path.lastIndexOf("/"));
+				}else if(!_state.category){
+					_state.category = path;
 				}
 
 				// if it's only a /

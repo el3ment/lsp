@@ -316,6 +316,8 @@
 }
 
 *[data-stockmessage*="Unavailable"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="Out of Stock"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="In Stock Soon"],
 .discontinued{
 	.addToCart{
 		.quantity, .action{

@@ -75,11 +75,11 @@
 									eventType = 'submit';
 									preventDefault = true;
 								}else{
-									if('ontouchstart' in document.documentElement){
+									//if('ontouchstart' in document.documentElement){
 										eventType = 'touchstart';
-									}else{
+									//}else{
 										eventType = 'click';
-									}
+									//}
 									if(element.is('button, submit')){
 										preventDefault = true;
 									}
@@ -258,7 +258,7 @@
 			},
 
 			parseStateFromHash : function(hash){
-				var statePath = hash;
+				var statePath = hash.replace(/\?.*/, '');
 				var controllers = statePath.split('/~');
 				var state = {};
 
