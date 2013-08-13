@@ -329,6 +329,22 @@
 	}
 }
 
+.showIfPackage{ display: none; }
+*[data-itemtype="Kit"]{
+	.showIfPackage{
+		display: block;
+	}
+	.hideIfPackage{
+		display: none;
+	}
+
+	.showIfInStock{ display: none; }
+	span[data-netsuiteoutofstockmessage*="></span>"]{
+		.showIfInStock{ display: block; }
+		.hideIfInStock{ display: none; }
+	}
+}
+
 // The link that surrounds both the image and the title
 .productLink{
 	
