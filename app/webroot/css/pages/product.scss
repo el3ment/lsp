@@ -315,10 +315,22 @@
 	}
 }
 
+.showIfDisallowBackordersAndOutOfStock{
+	display: none;
+}
 *[data-stockmessage*="Unavailable"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="Out of Stock"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="In Stock Soon"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="Out of Stock"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="In Stock Soon"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="On Order"],
 .discontinued{
+	.showIfDisallowBackordersAndOutOfStock{
+		display: block;
+	}
+	.hideIfDisallowBackordersAndOutOfStock{
+		display: none;
+	}
 	.addToCart{
 		.quantity, .action{
 			display: none;
@@ -338,11 +350,23 @@
 		display: none;
 	}
 
-	.showIfInStock{ display: none; }
-	span[data-netsuiteoutofstockmessage*="></span>"]{
-		.showIfInStock{ display: block; }
-		.hideIfInStock{ display: none; }
-	}
+}
+
+//
+.showIfInStock{ display: none; }
+*[data-netsuiteoutofstockmessage*="9></span>"],
+*[data-netsuiteoutofstockmessage*="8></span>"],
+*[data-netsuiteoutofstockmessage*="7></span>"],
+*[data-netsuiteoutofstockmessage*="6></span>"],
+*[data-netsuiteoutofstockmessage*="5></span>"],
+*[data-netsuiteoutofstockmessage*="4></span>"],
+*[data-netsuiteoutofstockmessage*="3></span>"],
+*[data-netsuiteoutofstockmessage*="2></span>"],
+*[data-netsuiteoutofstockmessage*="1></span>"],
+*[data-netsuiteoutofstockmessage*="0></span>"],
+*[data-stockmessage*="In Stock<"]{
+	.showIfInStock{ display: block; }
+	.hideIfInStock{ display: none; }
 }
 
 // The link that surrounds both the image and the title
