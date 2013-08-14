@@ -632,20 +632,30 @@
 
 		function Largeimage() {
 			var $obj = this;
-			this.node = new Image();
+			this.node = {};
+			//this.node = new Image();
+			//$('.zoomWrapperImage', el).empty().append(this.node);
+
 			this.loadimage = function (url) {
 				//showing preload
 				console.log('Loading large image');
 				loader.show();
 				this.url = url;
+				this.node = new Image();
 				this.node.style.position = 'absolute';
 				this.node.style.border = '0px';
 				this.node.style.display = 'none';
 				this.node.style.left = '-5000px';
 				this.node.style.top = '0px';
-				document.body.appendChild(this.node);
 				this.node.onload = this.afterLoad;
+				this.node.onerror = function (e) {
+					//alert('Problems while loading the big image.');
+					//throw 'Problems while loading the big image.';
+					console.error('jqZoom : problems loading large image', e);
+				};
+				document.body.appendChild(this.node);
 				this.node.src = url; // fires off async
+				//this.afterLoad();
 			};
 			this.afterLoad = function(){
 				//fetching data
@@ -674,17 +684,15 @@
 				scale.x = ($obj.w / smallimage.w);
 				scale.y = ($obj.h / smallimage.h);
 				el.scale = scale;
+				
 				document.body.removeChild(this.node);
 				$('.zoomWrapperImage', el).empty().append(this.node);
+				
 				//setting lens dimensions;
 				lens.setdimensions();
 			};
-			this.node.onerror = function () {
-				//alert('Problems while loading the big image.');
-				//throw 'Problems while loading the big image.';
-				console.error('jqZoom : problems loading large image');
-			};
-			this.node.onload = this.afterLoad;
+			
+			//this.node.onload = this.afterLoad;
 			this.setposition = function () {
 				var left = -el.scale.x * (lens.getoffset().left - smallimage.bleft + 1);
 				var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 1);
