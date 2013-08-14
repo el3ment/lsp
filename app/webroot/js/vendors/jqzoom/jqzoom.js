@@ -190,8 +190,10 @@
 			load: function () {
 				if (el.largeimageloaded === false && el.largeimageloading === false) {
 					var url = $(el).attr('href');
-					el.largeimageloading = true;
-					largeimage.loadimage(url);
+					if(largeimage.node.src !== url){
+						el.largeimageloading = true;
+						largeimage.loadimage(url);
+					}
 				}
 			},
 			activate: function (e) {
@@ -633,6 +635,7 @@
 			this.node = new Image();
 			this.loadimage = function (url) {
 				//showing preload
+				console.log('Loading large image');
 				loader.show();
 				this.url = url;
 				this.node.style.position = 'absolute';
@@ -641,7 +644,21 @@
 				this.node.style.left = '-5000px';
 				this.node.style.top = '0px';
 				document.body.appendChild(this.node);
+				this.node.onload = this.afterLoad;
 				this.node.src = url; // fires off async
+			};
+			this.afterLoad = function(){
+				//fetching data
+				console.log('loaded');
+				$obj.fetchdata();
+				loader.hide();
+				el.largeimageloading = false;
+				el.largeimageloaded = true;
+				if (settings.zoomType == 'drag' || settings.alwaysOn) {
+					lens.show();
+					stage.show();
+					lens.setcenter();
+				}
 			};
 			this.fetchdata = function () {
 				var image = $(this.node);
@@ -667,18 +684,7 @@
 				//throw 'Problems while loading the big image.';
 				console.error('jqZoom : problems loading large image');
 			};
-			this.node.onload = function () {
-				//fetching data
-				$obj.fetchdata();
-				loader.hide();
-				el.largeimageloading = false;
-				el.largeimageloaded = true;
-				if (settings.zoomType == 'drag' || settings.alwaysOn) {
-					lens.show();
-					stage.show();
-					lens.setcenter();
-				}
-			};
+			this.node.onload = this.afterLoad;
 			this.setposition = function () {
 				var left = -el.scale.x * (lens.getoffset().left - smallimage.bleft + 1);
 				var top = -el.scale.y * (lens.getoffset().top - smallimage.btop + 1);
