@@ -14,10 +14,12 @@
 					onAddToCart : function(e, data){
 						_this.updateProduct(data.selector); // Update the product, just to be safe.
 						data.selector[0].submit();
+						_gaq.push(['_trackEvent', 'product', 'addToCart', $('.productName', form.parents('.entry'))]);
 					},
 					onMatrixOptionSelect : function(e, data){
 						$('option[value=""]', data.selector).remove();
 						_this.updateMatrixLists(data.selector[0].form);
+						_gaq.push(['_trackEvent', 'product', 'selectMatrixOption', $('.productName', form.parents('.entry'))]);
 					},
 					onAddToWishlist : function(e, data){
 						var form = data.selector.parents('form');
@@ -30,6 +32,7 @@
 							qty: $('.shopping.section input[name="qty"]', form),
 							messages: $(".wishlist-messages > div", form)
 						});
+						_gaq.push(['_trackEvent', 'product', 'addToWishlist', $('.productName', form.parents('.entry'))]);
 					},
 					onVerifyGiftCardAmount : function(e, data){
 						

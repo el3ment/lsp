@@ -113,6 +113,8 @@
 					}else{
 						children.addClass('reveal-open').removeClass('reveal-closed');
 					}
+
+					//_gaq.push(['_trackEvent', 'reveal', 'open', children.attr('id')]);
 				}
 
 			},
@@ -160,7 +162,7 @@
 				}else{
 					children.addClass('reveal-closed').removeClass('reveal-open');
 				}
-
+				//_gaq.push(['_trackEvent', 'reveal', 'close', children.attr('id')]);
 			},
 
 			toggle : function(children, doAnimations){

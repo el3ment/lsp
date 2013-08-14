@@ -196,8 +196,9 @@
 								_this.removeFilterAttribute($(data.selector).val());
 							}
 						}
-
-						_gaq.push(['_trackEvent', 'search', 'filterAttribute', $(data.selector).val()]);
+						
+						var filtered = $(data.selector).val().split(':');
+						_gaq.push(['_trackEvent', 'search', 'filterAttribute', filtered[0], filtered[1]]);
 						
 					},
 
@@ -216,7 +217,7 @@
 						_this.loadCategory($(data.selector).data('path'), true);
 						data.originalEvent.preventDefault();
 
-						_gaq.push(['_trackEvent', 'search', 'loadCategory', $(data.selector).data('path')]);
+						_gaq.push(['_trackEvent', 'search', 'filterCategory', $(data.selector).data('path')]);
 					},
 
 					onDestroyAndLoadCategory : function(e, data){
@@ -695,6 +696,7 @@
 			},
 
 			renderFatalError : function(){
+				_gaq.push(['_trackEvent', 'search', 'error', 'fatalError']);
 				alert('Something has gone wrong with our network connection to our database. You can try again by reloading the page. Sorry about that!');
 			}
 		};

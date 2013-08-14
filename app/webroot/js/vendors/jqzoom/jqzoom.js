@@ -234,17 +234,20 @@
 				var largeimage = $(link).attr('href');
 				
 				if (smallimage && largeimage) {
-					
 					$(link).addClass('zoomThumbActive');
 					$(el).attr('href', largeimage);
 					img.attr('src', smallimage);
 					lens.hide();
 					stage.hide();
 					obj.load();
+
+					_gaq.push(['_trackEvent', 'product', 'zoom', 'thumbnailClick']);
+				
 				} else {
 					//alert('ERROR :: Missing parameter for largeimage or smallimage.');
 					//throw 'ERROR :: Missing parameter for largeimage or smallimage.';
 					console.error('jqZoom : Missing parameter for large image or small image');
+					_gaq.push(['_trackEvent', 'product', 'zoom', 'missingParameterError']);
 				}
 				return false;
 			}
@@ -313,6 +316,7 @@
 				//alert('Problems while loading image.');
 				//throw 'Problems while loading image.';
 				console.error('jqZoom : Problems loading image');
+				_gaq.push(['_trackEvent', 'product', 'zoom', 'loadSmallImageError']);
 			};
 			this.node.onload = function () {
 				$obj.fetchdata();
@@ -652,6 +656,7 @@
 					//alert('Problems while loading the big image.');
 					//throw 'Problems while loading the big image.';
 					console.error('jqZoom : problems loading large image', e);
+					_gaq.push(['_trackEvent', 'product', 'zoom', 'loadLargeImageError']);
 				};
 				document.body.appendChild(this.node);
 				this.node.src = url; // fires off async

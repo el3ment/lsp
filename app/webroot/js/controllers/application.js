@@ -145,6 +145,10 @@
 							});
 					},
 
+					onAfterStateChange : function(e, data){
+						_gaq.push(['_trackPageview']);
+					},
+
 					onInit : function(e, data){
 						_state = _this.pullState();
 					}
@@ -209,7 +213,6 @@
 					}
 
 					$('html').attr('data-path', document.location.href);
-					_gaq.push(['_trackPageview', '/' + snapshot.path + '#' + statePath]);
 
 				}else{
 
@@ -345,6 +348,7 @@
 					$(window).on('popstate', function(e){
 						if(history.state){
 							$(_this).triggerHandler('onStateChange', eventData);
+							$(_this).triggerHandler('onAfterStateChange', eventData);
 						}
 						//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-state-change'), eventData);
 					});
