@@ -145,9 +145,9 @@
 							});
 					},
 
-					onAfterStateChange : function(e, data){
-						_gaq.push(['_trackPageview']);
-					},
+					// onAfterStateChange : function(e, data){
+					// 	_gaq.push(['_trackPageview']);
+					// },
 
 					onInit : function(e, data){
 						_state = _this.pullState();

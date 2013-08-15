@@ -653,6 +653,7 @@
 				document.title = ($('#pageName').text() + (refinements.length ? ' : ' + refinements.join(', ') : '') + ' | Lone Star Percussion');
 				$('html').attr('data-title', document.title);
 				
+				_gaq.push(['_trackPageview']);
 
 			},
 
