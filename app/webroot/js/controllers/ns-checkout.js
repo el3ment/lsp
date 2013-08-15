@@ -82,7 +82,7 @@
 						}catch(e){ }
 
 						_gaq.push(['_set', 'title', 'Checkout - ' + data.pageName]);
-						_gaq.push(['_trackPageview']);
+						_gaq.push(['_trackPageview', '/checkout/' + data.pageName]);
 					}
 				},
 				application : {
