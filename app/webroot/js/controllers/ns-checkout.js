@@ -72,8 +72,6 @@
 						$('#ordersummary_total .texttablert:first-child b').text('Total');
 
 						$(_mainTable).addClass('nscheckout-receipt'); // page-specific hook
-
-
    
 						_gaq.push(['_trackTrans']);
 					},
