@@ -14,12 +14,13 @@
 					onAddToCart : function(e, data){
 						_this.updateProduct(data.selector); // Update the product, just to be safe.
 						data.selector[0].submit();
-						_gaq.push(['_trackEvent', 'product', 'addToCart', $('.productName', data.selector.parents('.entry')).text()]);
+						debugger;
+						_gaq.push(['_trackEvent', 'product', _util.camelCase('addToCart-' + _this.getProductContext(data.selector)), $('.productName', data.selector.parents('.entry')).text()]);
 					},
 					onMatrixOptionSelect : function(e, data){
 						$('option[value=""]', data.selector).remove();
 						_this.updateMatrixLists(data.selector[0].form);
-						_gaq.push(['_trackEvent', 'product', 'selectMatrixOption', $('.productName', data.selector.parents('.entry')).text()]);
+						_gaq.push(['_trackEvent', 'product', _util.camelCase('selectMatrixOption-' + _this.getProductContext(data.selector)) , $('.productName', data.selector.parents('.entry')).text()]);
 					},
 					onAddToWishlist : function(e, data){
 						var form = data.selector.parents('form');
@@ -32,7 +33,7 @@
 							qty: $('.shopping.section input[name="qty"]', form),
 							messages: $(".wishlist-messages > div", form)
 						});
-						_gaq.push(['_trackEvent', 'product', 'addToWishlist', $('.productName', form.parents('.entry')).text()]);
+						_gaq.push(['_trackEvent', 'product', _util.camelCase('addToWishlist-' + _this.getProductContext(form)), $('.productName', form.parents('.entry')).text()]);
 					},
 					onVerifyGiftCardAmount : function(e, data){
 						
@@ -87,6 +88,17 @@
 			},
 			
 			assets : {},
+
+			getProductContext : function(element){
+
+				var containerClasses = $(element).parents('[class*="page-"]').attr('class').split(' ');
+				if(containerClasses[0].indexOf('page-') > -1){
+					return containerClasses[0].replace('page-', '');
+				}else{
+					return 'unknown';
+				}
+
+			},
 
 			attachZoom : function(context){
 				// If jqzoom, it's the product page.
