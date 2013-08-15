@@ -14,7 +14,6 @@
 					onAddToCart : function(e, data){
 						_this.updateProduct(data.selector); // Update the product, just to be safe.
 						data.selector[0].submit();
-						debugger;
 						_gaq.push(['_trackEvent', 'product', _util.camelCase('addToCart-' + _this.getProductContext(data.selector)), $('.productName', data.selector.parents('.entry')).text()]);
 					},
 					onMatrixOptionSelect : function(e, data){
