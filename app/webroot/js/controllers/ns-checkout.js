@@ -81,8 +81,9 @@
 							_app.controllers.netsuite.attachEnterKey();
 						}catch(e){ }
 
-						_gaq.push(['_set', 'title', 'Checkout - ' + data.pageName]);
-						_gaq.push(['_trackPageview', '/checkout/' + data.pageName]);
+						_gaq.push(
+							['_set', 'title', 'Checkout - ' + data.pageName],
+							['_trackEvent', 'checkout', _util.camelCase('enter-' + data.pageName)]);
 					}
 				},
 				application : {
