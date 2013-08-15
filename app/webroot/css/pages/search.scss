@@ -406,6 +406,8 @@
 				width: px(columns(3));
 				color: $grey;
 
+				display: none;
+
 				@media (max-width: 979px) and (min-width: 768px){
 					margin-top: 5px; // move it back up, smaller picture
 				}

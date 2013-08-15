@@ -94,6 +94,9 @@
 						}else{
 							_this.removeFilterAttribute($(data.selector).data('value'));
 						}
+
+						var filtered = $(data.selector).data('value').split(':');
+						_gaq.push(['_trackEvent', 'search', 'removeFilterAttribute', filtered[0], filtered[1]]);
 						
 					},
 
