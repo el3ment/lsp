@@ -83,8 +83,14 @@
 							_app.controllers.netsuite.attachEnterKey();
 						}catch(e){ }
 
-						_gaq.push(['_set', 'title', 'Checkout - ' + data.pageName]);
-						_gaq.push(['_trackPageview', '/checkout/' + data.pageName]);
+						// TODO : check and see if we can add setPage code in the Enter Shipping Address header customize text rather
+						// than doing the generic 'address' call we are currently doing
+						
+						// Avoid address/shipping/billing confusion
+						if(data.pageName !== 'address'){
+							_gaq.push(['_set', 'title', 'Checkout - ' + data.pageName]);
+							_gaq.push(['_trackPageview', '/checkout/' + data.pageName]);
+						}
 					}
 				},
 				application : {

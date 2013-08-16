@@ -231,7 +231,7 @@
 				var pagingItem;
 				
 				for(var i = 1; i <= this._numPages; i++ ) {					
-					pagingItem = $('<a class="tc-paging-item" href="#">' + i + '</a>').data('tc-id',i);					
+					pagingItem = $('<a class="tc-paging-item" href="#" id="tcPagingItem'+i+'">' + i + '</a>').data('tc-id',i);					
 					if(i === this._currPageId + 1) {
 						pagingItem.addClass('current');
 					}
@@ -257,7 +257,7 @@
 		
 		//Direction navigation (arrows)
 		if(this.settings.directionNav) {	
-			this._itemsWrapper.after("<a href='#' class='arrow-holder left'><span class='arrow-icon left'></span></a> <a href='#' class='arrow-holder right'><span class='arrow-icon right'></span></a>");
+			this._itemsWrapper.after("<a id='tcPagingLeft' href='#' class='arrow-holder left'><span class='arrow-icon left'></span></a> <a id='tcPagingRight' href='#' class='arrow-holder right'><span class='arrow-icon right'></span></a>");
 			this.arrowLeft = this.carouselRoot.find(".arrow-holder.left");
 			this.arrowRight = this.carouselRoot.find(".arrow-holder.right");
 
