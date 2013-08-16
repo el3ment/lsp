@@ -700,7 +700,7 @@
 			},
 
 			renderFatalError : function(){
-				_gaq.push(['_trackEvent', 'search', 'error', 'fatalError']);
+				_gaq.push(['_trackEvent', 'search', 'error', 'fatalError', JSON.stringify(_state)]);
 				alert('Something has gone wrong with our network connection to our database. You can try again by reloading the page. Sorry about that!');
 			}
 		};

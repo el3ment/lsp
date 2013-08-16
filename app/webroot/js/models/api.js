@@ -14,7 +14,7 @@
 
 	_util.register('model', 'api', {
 		
-		_timeout : 5000,
+		_timeout : 15000,
 
 		_url : function(payload){
 			return '';
@@ -39,7 +39,7 @@
 				crossDomain : true,
 				dataType : dataType,
 				context : this,
-				//timeout : this._timeout,
+				timeout : this._timeout,
 				passthrough : $.extend({}, passthrough)
 			};
 			
