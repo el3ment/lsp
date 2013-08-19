@@ -1930,14 +1930,57 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 	// Normally we display: none things we want to hide
 	// but this time, there are fewer we want to show than hide
 	// so we display: none, and then display: table-row the one we want to show
-	#additionalfieldstable > tbody > tr{
+	#additionalfieldstable > tbody > tr td{
 		display: none !important;
 	}
 
-	// Special Instructions
-	#additionalfieldstable > tbody > tr:first-child + tr + tr + tr + tr + tr + tr + tr{
+	// Coupon code
+	#additionalfieldstable > tbody > tr:first-child + tr td,
+	#additionalfieldstable > tbody > tr:first-child + tr + tr td,
+	#additionalfieldstable > tbody > tr:first-child + tr + tr + tr td{
+		display: table-cell !important;
+
 		
-		display: block !important;
+
+		&.pic{
+			display: none !important;
+		}
+
+		#tbl_applycoupon, #tbl_removecoupon{
+			input{
+				margin-top: 0px;
+				text-decoration: none;
+			}
+		}
+
+		&[align="right"] + td{
+			line-height: 0;
+			padding-bottom: 0 !important;
+		}
+		&.smalltext + .smalltext{
+			display: block;
+			padding-bottom: 30px;
+		}
+
+		@media (max-width: 767px){
+			display: block !important;
+			float: left !important;
+			width: auto !important;
+			&[align="right"] + td{
+				padding-bottom: 10px;
+			}
+		}
+
+		&.smalltextnolink[align="right"]{
+			b{ font-weight: normal; }
+			@include optionalLabel();
+		}
+	}
+
+	// Special Instructions
+	#additionalfieldstable > tbody > tr:first-child + tr + tr + tr + tr + tr ~ tr{
+		//display: block !important;
+		
 		clear: both;
 		width: 50%;
 		margin-top: 20px;
@@ -1945,13 +1988,19 @@ tr.portletHandle:first-child + .noprint + .portletHandle > td > table{
 		@media (max-width: 767px){
 			margin-top: 20px !important;
 		}
+
+		#custbody4_fs{
+			width: 500px;
+		}
 		
-		td{
+		td[nowrap]{
+			display: table-cell !important;
 			//padding-top: 20px !important;
 			width: 100%;
 
 			@media (max-width: 767px){
 				padding-top:0 !important;
+				display: block !important;
 			}
 		}
 
