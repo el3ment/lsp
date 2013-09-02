@@ -138,7 +138,7 @@
 			removeEmptySpecificationsRows : function(){
 				$("tr[data-specifications-data]").filter(function() {
 					var val = $(this).attr('data-specifications-data');
-					return val.replace(/[^A-Za-z0-9]/, '') === '' || val === '!empty!' || val === '!Empty!' || val === '!None!' || val === 'None' || val === '!Unknown' || val === '!Needspec!';
+					return val.replace(/[^A-Za-z0-9]/, '') === '' || val === '!empty!' || val === '!Empty!' || val === '!None!' || val === 'None' || val === '!Unknown!' || val === '!Needspec!';
 				}).remove();
 			},
 
