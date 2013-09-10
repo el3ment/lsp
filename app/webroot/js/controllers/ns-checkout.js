@@ -19,7 +19,11 @@
 						// Remove 'empty' links - they create a state in history
 						// that is annoying to overcome
 						$('a[href="#"]').attr('href', null);
-						$('input[name="checkout"]').attr('formnovalidate', true);
+						$('input[name="checkout"]').attr('formnovalidate', true).click(function(){
+							setTimeout(function(){
+								_gaq.push(['_trackEvent', 'cart', 'error', '5 seconds have passed since clicking proceed to checkout']);
+							}, 5000);
+						});
 						
 						// IE has 'type' as a read-only attribute, jquery will complain
 						// try{

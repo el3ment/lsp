@@ -34,6 +34,8 @@
 	/* Individual Badges */
 	.badge-new{ background-color: red; }
 	.badge-discontinued{ background-color: $grey; }
+	.badge-clearance{ background-color: $yellow; }
+	
 	&.badges-text .badge-new{ color: red; }
 	/*
 	&.badge-smallImage{
