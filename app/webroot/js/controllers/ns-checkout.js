@@ -18,9 +18,14 @@
 					onEnterCart : function(e, data){
 						// Remove 'empty' links - they create a state in history
 						// that is annoying to overcome
+						var timeout;
 						$('a[href="#"]').attr('href', null);
 						$('input[name="checkout"]').attr('formnovalidate', true).click(function(){
-							setTimeout(function(){
+							//console.log('Input Clicked.')
+							setTimeout(function(){ clearTimeout(timeout); }, 1000);
+						}).parent().click(function(){
+							//console.log('Container Clicked');
+							timeout = setTimeout(function(){
 								_gaq.push(['_trackEvent', 'cart', 'error', '5 seconds have passed since clicking proceed to checkout']);
 							}, 5000);
 						});
