@@ -247,6 +247,7 @@
 				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\/\/\/\/*/, '');
 			},
 
+
 			cacheAttributes : function(easyAskDataSourceObject){
 
 				var returnAttributeMap = {};
@@ -254,7 +255,7 @@
 				// Add all returned attributes to the cache
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					var attribute = easyAskDataSourceObject.attributes.attribute[i];
-					_attributeHistory[attribute.name] = attribute;
+					_attributeHistory[attribute.name] = {index: i, attribute: attribute};
 					returnAttributeMap[attribute.name] = true; // Small lookup map
 				}
 
@@ -263,11 +264,11 @@
 					
 					// If it's not been returned with Attributes
 					var fullPath = $(easyAskDataSourceObject.navPath.navPathNodeList).last()[0].seoPath;
-					var attributeSEOName = cachedAttribute.attributeValueList[0].nodeString.replace(/:.*/, '');
+					var attributeSEOName = cachedAttribute.attribute.attributeValueList[0].nodeString.replace(/:.*/, '');
 
 					// If it's neither returned, nor selected, it's ok to delete it from the cache	
-					if(!returnAttributeMap[cachedAttribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){					
-						delete _attributeHistory[cachedAttribute.name];
+					if(!returnAttributeMap[cachedAttribute.attribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){					
+						delete _attributeHistory[cachedAttribute.attribute.name];
 					}
 				});
 
@@ -276,24 +277,32 @@
 			},
 
 			injectCachedAttributes : function(easyAskDataSourceObject){
-				
+
 				var lspAttributes = [];
+				var _attributeHistoryArray = [];
+				
+				// Caching attributes and storing them in a map loses ordinality
+				// Convert map to array, then sort by index
+				$.each(_attributeHistory, function(key, attribute){
+					_attributeHistoryArray.push(attribute);
+				});
+				_attributeHistoryArray.sort(function(a, b){
+					return a.index < b.index ? -1 : (a.index > b.index ? 1 : 0);
+				});
 
 				// Loop through cached attributes
 				// See if the attribute came down in the response, if it is then use it
 				// if it's not - then use the cached version.
-
 				$.each(_attributeHistory, function(i, cachedAttribute){
-					
 					var found = false;
 					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
-						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.name){
+						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.attribute.name){
 							found = true;
 							lspAttributes.push(easyAskDataSourceObject.attribute[j]);
 						}
 					}
 					if(!found){
-						lspAttributes.push(cachedAttribute);
+						lspAttributes.push(cachedAttribute.attribute);
 					}
 
 				});
