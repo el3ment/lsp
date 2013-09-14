@@ -266,11 +266,6 @@
 				float: right;
 				@include clearfix();
 			}
-
-			.productAvailability{
-				display: none;
-			}
-
 			
 			@media (max-width: 979px) and (min-width: 768px){
 				.productAvailability .status > span {

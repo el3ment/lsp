@@ -198,14 +198,29 @@ tr[height="25"]{ height: 0; }
 
 	.head{
 		position: relative;
+		padding-bottom: 50px;
 		#tbl_checkout{
-			bottom: 10px;
+			bottom: 0px;
 			@media (max-width: 767px){
 				position: relative;
 				margin-bottom: -20px;
 				margin-top: 10px;
 				float: right;
 			}
+		}
+
+		@media (max-width: 767px){
+			padding-bottom: 35px;
+		}
+
+		.helpMessage{
+			display: block !important;
+			text-align: right;
+			color: $grey;
+			position: absolute;
+			top: 0px;
+			right: 10px;
+			.data{ display: block; }
 		}
 	}
 
