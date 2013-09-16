@@ -266,7 +266,7 @@
 					var fullPath = $(easyAskDataSourceObject.navPath.navPathNodeList).last()[0].seoPath;
 					var attributeSEOName = cachedAttribute.attribute.attributeValueList[0].nodeString.replace(/:.*/, '');
 
-					// If it's neither returned, nor selected, it's ok to delete it from the cache	
+					// If it's neither returned, nor selected, it's ok to delete it from the cache
 					if(!returnAttributeMap[cachedAttribute.attribute.name] && fullPath.indexOf(attributeSEOName+':') < 0){					
 						delete _attributeHistory[cachedAttribute.attribute.name];
 					}
@@ -298,7 +298,7 @@
 					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
 						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.attribute.name){
 							found = true;
-							lspAttributes.push(easyAskDataSourceObject.attribute[j]);
+							lspAttributes.push(easyAskDataSourceObject.attributes.attribute[j]);
 						}
 					}
 					if(!found){
