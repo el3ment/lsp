@@ -18,7 +18,10 @@
 			},
 			assets : {},
 			makeElement : function(index, elementString){
-				return '<div class="badges-badge badge-'+_util.camelCase($(this).data('badge'))+'">'+ $(this).data('badge') +'</div>';
+				if($(this).data('badge').length > 0)
+					return '<div class="badges-badge badge-'+_util.camelCase($(this).data('badge'))+'">'+ $(this).data('badge') +'</div>';
+				else
+					return '';
 			}
 		};
 
