@@ -17,6 +17,7 @@
 		font-size: 11px;
 		@include border-radius(px($borderRadius));
 		z-index: 190;
+		background-color: $grey;
 	}
 	
 	&.badges-text{
@@ -35,7 +36,8 @@
 	.badge-new{ background-color: red; }
 	.badge-discontinued{ background-color: $grey; }
 	.badge-clearance{ background-color: $yellow; }
-	
+	.badge-demo{ background-color: blue; }
+
 	&.badges-text .badge-new{ color: red; }
 	/*
 	&.badge-smallImage{
