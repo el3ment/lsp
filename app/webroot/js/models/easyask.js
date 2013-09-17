@@ -299,7 +299,6 @@
 					if(a.isFromCached && !b.isFromCached) return -1;
 					if(b.isFromCached && !a.isFromCached) return 1;
 
-					debugger;
 					return 0;
 				});
 
