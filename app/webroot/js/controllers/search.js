@@ -481,8 +481,6 @@
 			},
 
 			removeFilterAttribute : function(attributeSlug){
-
-				console.log('Removing ' + attributeSlug+';' + ' from ' + _state.allAttributes + ';');
 				
 				var payload = {
 					action : 'advisor',
