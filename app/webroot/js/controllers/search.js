@@ -88,12 +88,14 @@
 					},
 
 					onRemoveFilter : function(e, data){
+
+						var name = $(data.selector).data('attribute');
 						
-						if(IS_SINGLE_SELECT){
-							_this.removePathNode('AttribSelect=' + $(data.selector).data('attribute') + ' = \'' + $(data.selector).data('value') + '\'');
-						}else{
-							_this.removeFilterAttribute($(data.selector).data('value'));
-						}
+						$('#refinementForm input[name="' + name + '[]"][value="' + $(data.selector).data('value') + '"]').attr('checked', false);
+
+						_this.updateHistoryMap(name);
+						
+						_this.removeFilterAttribute($(data.selector).data('value'));
 
 						var filtered = $(data.selector).data('value').split(':');
 						_gaq.push(['_trackEvent', 'search', 'removeFilterAttribute', filtered[0], filtered[1]]);
@@ -145,61 +147,17 @@
 					},
 
 					onFilterAttribute : function(e, data){
-						
+
 						var name = $(data.selector).attr('name').replace('[]', '');
 
-						if(IS_SINGLE_SELECT){
-							_this.filterWithAttribute(name, $(data.selector).val());
+						_this.updateHistoryMap(name);
+
+						if($(data.selector).is(':checked')){
+							_this.addFilterAttribute($(data.selector).val());
 						}else{
-
-							// The basic idea here is, the first time you check a box it gets
-							// added to the history, to account unchecking we make sure
-							// all of the elements in history are present as checked boxes in the form
-
-							// On the retuning request, the attributes will be marked as "static" or "temporary"
-							// and will consequently be rendered differently.
-
-							var formObject = _util.formToObject($('#refinementForm')[0]);
-
-							// If it's not part of the history (first time it's been checked), add it to the history
-							// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
-							// paths will never happen because we will be hiding them
-
-							// If we have unselected another attribute (different from the last selected) then we need to
-							// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
-							// unselecting a "Color" and "Artist" should "collapse" into it's static form 
-							var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length;
-							if(!isInHistory){
-								_attributeHistory.push({name : name, displayState : 'temporary'});
-							}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
-								_attributeHistory[_attributeHistory.length - 1].displayState = 'static';
-							}
-
-							// Mark everything not curent as static
-							for(var i = 0; i < _attributeHistory.length - 1; i++){
-								_attributeHistory[i].displayState = 'static';
-							}
-
-							// Clear unnessesary history elements
-							for(var i = 0; i < _attributeHistory.length; i++){
-
-								// Chop off the last two characters "[]"
-								var attributeName = _attributeHistory[i].name;
-
-								// If the history element isn't in the form it means nothing is selected for
-								// that attribute any longer
-								if(!formObject[attributeName]){
-									_attributeHistory.splice(i, 1);
-								}
-							}
-
-							if($(data.selector).is(':checked')){
-								_this.addFilterAttribute($(data.selector).val());
-							}else{
-								_this.removeFilterAttribute($(data.selector).val());
-							}
+							_this.removeFilterAttribute($(data.selector).val());
 						}
-						
+					
 						var filtered = $(data.selector).val().split(':');
 						_gaq.push(['_trackEvent', 'search', 'filterAttribute', filtered[0], filtered[1]]);
 						
@@ -333,6 +291,49 @@
 			},
 			
 			assets : {},
+
+			updateHistoryMap : function(name){
+				// The basic idea here is, the first time you check a box it gets
+				// added to the history, to account unchecking we make sure
+				// all of the elements in history are present as checked boxes in the form
+
+				// On the retuning request, the attributes will be marked as "static" or "temporary"
+				// and will consequently be rendered differently.
+
+				var formObject = _util.formToObject($('#refinementForm')[0]);
+
+				// If it's not part of the history (first time it's been checked), add it to the history
+				// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
+				// paths will never happen because we will be hiding them
+
+				// If we have unselected another attribute (different from the last selected) then we need to
+				// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
+				// unselecting a "Color" and "Artist" should "collapse" into it's static form 
+				var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length;
+				if(!isInHistory){
+					_attributeHistory.push({name : name, displayState : 'temporary'});
+				}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
+					_attributeHistory[_attributeHistory.length - 1].displayState = 'static';
+				}
+
+				// Mark everything not curent as static
+				for(var i = 0; i < _attributeHistory.length - 1; i++){
+					_attributeHistory[i].displayState = 'static';
+				}
+
+				// Clear unnessesary history elements
+				for(var i = 0; i < _attributeHistory.length; i++){
+
+					// Chop off the last two characters "[]"
+					var attributeName = _attributeHistory[i].name;
+
+					// If the history element isn't in the form it means nothing is selected for
+					// that attribute any longer
+					if(!formObject[attributeName]){
+						_attributeHistory.splice(i, 1);
+					}
+				}
+			},
 
 			loadCurrentState : function(){
 				// We need to push a state on to the beginning of the stack
@@ -481,7 +482,7 @@
 			},
 
 			removeFilterAttribute : function(attributeSlug){
-				
+
 				var payload = {
 					action : 'advisor',
 					method : 'CA_BreadcrumbRemove',
