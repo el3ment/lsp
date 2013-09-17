@@ -486,7 +486,7 @@
 				var payload = {
 					action : 'advisor',
 					method : 'CA_BreadcrumbRemove',
-					allAttributes : (_state.allAttributes + ';').replace(attributeSlug+';', '').replace(/\/{1,}/, ';').replace(/^;$/, '') // remove it, and remove leftover ;;
+					allAttributes : (_state.allAttributes + ';').replace(/\/{1,}/, ';').replace(attributeSlug+';', '').replace(/^;$/, '') // remove it, and remove leftover ;;
 				};
 
 				return _api.request(_this, 'removeFilter', $.extend({}, _state, {isSingleSelect : IS_SINGLE_SELECT}, payload))

@@ -252,10 +252,16 @@
 
 				var returnAttributeMap = {};
 
-				// Add all returned attributes to the cache
+
+				// Mark everything as 'cached'
+				$.each(_attributeHistory, function(i, cachedAttribute){
+					_attributeHistory[cachedAttribute.attribute.name].isFromCached = true;
+				});
+
+				// Add all returned attributes to the cache, marking them as not cached
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					var attribute = easyAskDataSourceObject.attributes.attribute[i];
-					_attributeHistory[attribute.name] = {index: i, attribute: attribute};
+					_attributeHistory[attribute.name] = {index: i, attribute: attribute, isFromCached: false};
 					returnAttributeMap[attribute.name] = true; // Small lookup map
 				}
 
@@ -280,20 +286,27 @@
 
 				var lspAttributes = [];
 				var _attributeHistoryArray = [];
-				
+
 				// Caching attributes and storing them in a map loses ordinality
 				// Convert map to array, then sort by index
 				$.each(_attributeHistory, function(key, attribute){
 					_attributeHistoryArray.push(attribute);
 				});
 				_attributeHistoryArray.sort(function(a, b){
-					return a.index < b.index ? -1 : (a.index > b.index ? 1 : 0);
+
+					if(a.index < b.index) return -1;
+					if(a.index > b.index) return 1;
+					if(a.isFromCached && !b.isFromCached) return -1;
+					if(b.isFromCached && !a.isFromCached) return 1;
+
+					debugger;
+					return 0;
 				});
 
 				// Loop through cached attributes
 				// See if the attribute came down in the response, if it is then use it
 				// if it's not - then use the cached version.
-				$.each(_attributeHistory, function(i, cachedAttribute){
+				$.each(_attributeHistoryArray, function(i, cachedAttribute){
 					var found = false;
 					for(var j = 0; j < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; j++){
 						if(easyAskDataSourceObject.attributes.attribute[j].attributeName === cachedAttribute.attribute.name){
