@@ -52,7 +52,7 @@
 				// 	formattedPayload.AttribSel = this.buildSingleAttributeString(payload.allAttributes);
 				// }else{
 				// 	// Build the category path by hand
-				formattedPayload.CatPath = _util.cleanArray([payload.category, _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)])
+				formattedPayload.CatPath = _util.cleanArray([(payload.category || '').replace('All Products', '') , _this.combineAndRemoveAllForPath(payload.attribute, payload.allAttributes), this.buildKeywordString(payload.keywords)])
 					.join('/')
 					.replace(/^\/{1,}-/, '-'); // It's possible it get a keyword search like /-keyword... which is interpreted as a category, it's best to clean this up
 				//}

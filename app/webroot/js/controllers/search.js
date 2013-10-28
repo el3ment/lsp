@@ -187,7 +187,7 @@
 							var url = ($(data.selector).attr('href') + '#').split('#');
 						
 							var state = (_app.controllers.application.parseStateFromHash(url[1]) || {}).search || {};
-							state.category = url[0];
+							state.category = state.category || url[0];
 
 							// Force pushState
 							if(_this.loadState(state, null, true)){
