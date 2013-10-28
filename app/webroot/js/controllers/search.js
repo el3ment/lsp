@@ -64,7 +64,6 @@
 							_state.category = _state.category.replace(/\/.*\/.*\//, '/');
 							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
-
 							_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;
 							
 							// Set the activeDataObject, used to rebuild matrix option selections
@@ -352,7 +351,7 @@
 					delete tmpState.category; // Remove Category from the hash (it's being 'saved' in the URL)
 				}
 
-				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\//g, '|'), uriEncode : false};
+				tmpState.allAttributes = {value : (tmpState.allAttributes || '').replace(/\//g, ','), uriEncode : false};
 				tmpState.path = _state.category;
 
 				if(tmpState.allAttributes.value.length === 0){
@@ -378,7 +377,7 @@
 
 				_state = $.extend({}, _defaultState, (state || {}));
 
-				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/');
+				_state.allAttributes = ((_state || {}).allAttributes || '').replace(/\|/g, '/').replace(/\,/g, '/');
 				
 				// If the path has .html in it - remove the filename and use the category
 				if(path.indexOf('.html') > -1 && !_state.category){
