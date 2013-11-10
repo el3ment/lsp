@@ -11,6 +11,16 @@
 		_this = {
 			
 			events : {
+				home : {
+					onEngageAd : function(e, data){
+						 _gaq.push(['_setCustomVar',
+						      1,
+						      'Clicked Ad',
+						      data.selector.data('context') || 'Yes',
+						      2
+						   ]);
+					}
+				},
 				search : {
 					onAfterAPICallSuccess : function(){
 						_this.closePermanentFlyout();
