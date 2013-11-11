@@ -20,7 +20,7 @@
 						      2
 						   ]);
 						 // Force the Custom Var to be set
-						_gaq.push(['_trackEvent', 'Ad Engaged', 'Click', data.selector.data('context'), 1, true]);
+						_gaq.push(['_trackEvent', 'advertisement', 'click', data.selector.data('context'), 1, true]);
 					}
 				},
 				search : {
