@@ -148,7 +148,8 @@
 			}
 
 			&:after{
-				border-color: white transparent transparent transparent;
+				// Brown down arrow
+				border-color: #625b55 transparent transparent transparent;
 				border-style:solid;
 				border-width: px(5px);
 				width:0;
@@ -157,6 +158,10 @@
 				position: absolute;
 				top: px(17px);
 				right: px(11px);
+			}
+
+			&:hover:after{
+				border-top-color: white;
 			}
 		}
 

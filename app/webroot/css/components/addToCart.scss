@@ -122,3 +122,16 @@
 		> a{ display:block; }
 	}
 }
+
+
+*[data-stockmessage*="Temporarily unavailable"][data-hasOptions="false"],
+*[data-stockmessage*="Temporarily unavailable"][data-hasOptions="true"][data-numberOfOptions="0"],
+{
+	.productAvailability{
+		background-color: $superLightGrey;
+	}
+	li.quantity,
+	li.action{
+		display: none;
+	}
+}
