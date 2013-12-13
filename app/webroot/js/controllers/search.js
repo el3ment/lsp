@@ -40,9 +40,9 @@
 							var height = $('.page-generic').height();
 							$('.page-search').addClass('loading');
 						}else{
-							// If we can't load the results on this page, we'll need to redirect them to a page built for searching	
-							_util.redirectTo('/search.html#' + _app.controllers.application.buildStateString(_this, _this.getState()));
-							
+							alert("Unfortunately it appears the templates can't be loaded, please call to complete your order");
+							_gaq.push(['_trackEvent', 'search', 'error', 'templatesCannotBeLoaded']);
+
 							return false;
 						}
 					},
