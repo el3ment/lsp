@@ -109,12 +109,12 @@
 	.level9 a, .level9 button{ margin-left: 95px; }
 
 	.level0.firstParentCategory{
-		padding-left: 10px;
+		padding-left: 20px;
 		&:before {
 			content: '←';
-			position: relative;
+			position: absolute;
 			color: #cfcfcf;
-			left: -14px;
+			left: 2px;
 			float: left;
 		}
 		&:hover:before{
@@ -184,9 +184,9 @@
 	&#refinementForm .firstParentCategory{
 		left: -12px;
 		position: relative;
-		&:before{
-			left: -2px;
-		}
+		// &:before{
+		//	left: -2px;
+		// }
 	}
 
 	.level0.currentCategory{

@@ -390,3 +390,9 @@
 	}
 }
 
+
+.page-productDetail[data-class="Clinic"]{
+	.specifications, .returns, .reviews, .zoomPup, .zoomWindow, .zoomPreload{
+		display: none !important;
+	}
+}

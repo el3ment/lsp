@@ -45,7 +45,13 @@
 				}
 			}
 		}
+
+		button[data-reveal-children="refinement-categories"]{
+			display: none;
+		}
 	}
+
+
 
 	.head{
 		position: relative;
@@ -417,3 +423,8 @@
 }
 
 @import "components/categoryBlocks.scss";
+
+
+.page-category .section.categories{
+	padding-bottom: 0px;
+}

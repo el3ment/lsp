@@ -420,6 +420,9 @@ tr[height="25"]{ height: 0; }
 		@media (max-width: 767px){
 			color: $grey;
 		}
+		.giftCardImage{
+			display: none;
+		}
 	}
 
 	// Options

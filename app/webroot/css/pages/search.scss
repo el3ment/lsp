@@ -151,6 +151,7 @@
 				padding-bottom: px($gutterWidth);
 				border-bottom: 1px solid $lightGrey;
 				float:left;
+				min-height: 220px; // Prevents accidental overlap
 				@media (max-width: 767px){
 					padding-bottom: 85px;
 				}
