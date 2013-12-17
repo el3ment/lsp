@@ -116,7 +116,7 @@
 						});
 
 						// Set up lazy loading of images
-						$('img').unveil();
+						$('img').unveil(200);
 					},
 
 					onReady : function(e, data){

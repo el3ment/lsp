@@ -38,6 +38,8 @@
 		left: 0;
 		bottom: 0;
 		img{
+			min-height:1px; // otherwise they are considered :hidden by jquery
+			min-width:1px;
 			float: left;
 		}
 	}

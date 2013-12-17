@@ -85,6 +85,11 @@
 		position: relative;
 		@include box-sizing();
 
+		img{
+			min-height:1px;
+			min-width:1px;
+		}
+
 		.ad{
 			@include box-sizing();
 			position: relative;
