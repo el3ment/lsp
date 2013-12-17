@@ -115,18 +115,9 @@
 							});
 						});
 
-						// $('a[href^="/"], a').off('click.lsp.pageController').on('click.lsp.pageController', function(e){
-						// 	if(_hasPushState){
-						// 		_this.loadPage($(this).attr('href'));
-						// 		e.preventDefault();
-						// 	} 
-						// });
+						// Set up lazy loading of images
+						$('img').unveil();
 					},
-
-					// onStateChange : function(e, data){
-					// 	console.log('hey');
-					// 	console.log(e, data);
-					// },
 
 					onReady : function(e, data){
 						
@@ -143,6 +134,8 @@
 							function(){
 								eval($(this).html());
 							});
+
+
 					},
 
 					// onAfterStateChange : function(e, data){
