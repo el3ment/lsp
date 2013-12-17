@@ -62,6 +62,7 @@ class CompressController extends Controller {
 		
 		// $cssTidy = new csstidy();
 		// $cssTidy->parse($css);
+		// $cssTidy->print->plain();
 		$this->render('text/css', $css, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
 	}
 
