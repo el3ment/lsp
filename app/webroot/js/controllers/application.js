@@ -116,7 +116,7 @@
 						});
 
 						// Set up lazy loading of images
-						$('img').unveil(200);
+						$('img[data-src]', data.selector).attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7').unveil(200);
 					},
 
 					onReady : function(e, data){

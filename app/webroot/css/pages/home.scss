@@ -614,3 +614,8 @@
 
 }
 
+
+// Handle search loading lazy-loading
+html.search-loading img[data-src]{
+	display: none;
+}
