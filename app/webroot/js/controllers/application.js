@@ -12,6 +12,7 @@
 		var _state = {};
 
 		var _isPushingState;
+		var _defferedScriptCount = 0;
 
 		_this =  {
 			events : {
@@ -127,20 +128,27 @@
 							history.replaceState(true, 'page', document.URL);
 						}
 
-						// Handle deferred inline scripting
-						// https://gist.github.com/RonnyO/2391995
-						$.ajaxSetup({cache: true});
-						$('script[type="text/javascript/defer"]').each(
-							function(){
-								if($(this).attr('src')){
-									$.getScript($(this).attr('src'));
-									$(this).remove();
-								}else{
-									eval($(this).html());
-								}
-							});
-						$.ajaxSetup({cache: false});
 
+						var requestNextScript = function(){
+							var script = $('script[type="text/javascript/defer"]')[0];
+							if(script){
+								script = $(script);
+								if(script.attr('src')){
+									$.ajaxSetup({cache: true});
+									$.getScript(script.attr('src'), function(){
+										requestNextScript();
+									})
+									script.remove();
+									$.ajaxSetup({cache: false});
+								}else{
+									eval(script.html());
+									script.remove();
+									requestNextScript();
+								}
+							}
+						};
+
+						requestNextScript();
 
 					},
 
