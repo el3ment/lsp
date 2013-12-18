@@ -63,7 +63,7 @@
 							// setTimeout(function(){
 							// touchCarousel.goTo(0);
 							// }, 500);
-							_this.events.flyout.onAfterAttach();
+							//_this.events.flyout.onAfterAttach();
 						}
 
 					},
