@@ -141,7 +141,7 @@
 									script.remove();
 									$.ajaxSetup({cache: false});
 								}else{
-									eval(script.html());
+									eval("with(window){ " + script.html() + "}");
 									script.remove();
 									requestNextScript();
 								}
