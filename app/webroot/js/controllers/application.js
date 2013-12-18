@@ -115,8 +115,8 @@
 							});
 						});
 
-						// Set up lazy loading of images
-						$('img[data-src]', data.selector).attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7').unveil(200);
+						// Set up lazy loading of images, give them a blank background src
+						$('img:not([src])', data.selector).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
 					},
 
 					onReady : function(e, data){
@@ -129,11 +129,17 @@
 
 						// Handle deferred inline scripting
 						// https://gist.github.com/RonnyO/2391995
-
+						$.ajaxSetup({cache: true});
 						$('script[type="text/javascript/defer"]').each(
 							function(){
-								eval($(this).html());
+								if($(this).attr('src')){
+									$.getScript($(this).attr('src'));
+									$(this).remove();
+								}else{
+									eval($(this).html());
+								}
 							});
+						$.ajaxSetup({cache: false});
 
 
 					},
