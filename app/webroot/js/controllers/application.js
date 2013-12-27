@@ -317,6 +317,7 @@
 			requiresNetsuite : function(){
 				if(typeof debugAlert === 'undefined'){
 					_this.include('/js/vendors/netsuite/interface.js');
+					$("head link").last().after("<link rel='stylesheet' href='//d2bghjaa5qmp6f.cloudfront.net/compress/css/css/ns-checkout.scss,/checkout1.0.44.css.css' type='text/css'>");
 				}
 			},
 
