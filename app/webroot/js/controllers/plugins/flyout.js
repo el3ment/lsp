@@ -277,6 +277,9 @@
 					// we are using this plugin)
 					
 					element.addClass('active');
+					if(element.unveil){
+						$('img[data-src]:not([src])', element).unveil();
+					}
 				}
 			},
 			hideRow : function(element){

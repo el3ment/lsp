@@ -421,7 +421,12 @@
 						newX = this.carouselWidth - this._maxXPos;
 					}
 
-					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");					
+					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");
+					
+					// Monkey Patch for global carosuels
+					if($(this.carouselRoot).unveil){
+						$('img[data-src]:not([src])', this.carouselRoot).unveil();
+					}
 				}			
 				
 			},

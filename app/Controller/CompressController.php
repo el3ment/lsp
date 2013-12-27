@@ -6,6 +6,7 @@ class CompressController extends Controller {
 	 
 	function js(){
 		App::import('Vendor', 'JSMin');
+		App::import('Vendor', 'Uglify/uglify');
 
 		$fullScript = Cache::read(md5($_SERVER['REQUEST_URI']));
 		if($fullScript === false){
@@ -20,9 +21,16 @@ class CompressController extends Controller {
 					$fullScript .= file_get_contents(WWW_ROOT . $file) . PHP_EOL;
 				}
 			}
+
+			$compiler = new UglifyJS();
+			$fullScript = $compiler
+							->advancedMode()
+							->send($fullScript);
+
 			Cache::write(md5($_SERVER['REQUEST_URI']), $fullScript);
 			Cache::write(md5($_SERVER['REQUEST_URI'] . '-time'), strtotime('now'));
 		}
+
 		$this->render('text/javascript', $fullScript, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
 	}
 	

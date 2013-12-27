@@ -114,9 +114,9 @@
 		/* The space below the banner */
 		width: 100%;
 		float: left;
-		background-color: black;
-		background: url("/img/background-drummer.jpg")  bottom center no-repeat fixed, url("/img/dark_pattern.jpg") bottom center fixed;
-		background: url("/img/dark_pattern.jpg") bottom center fixed\9; // Fallback
+		background-color: $headerBackgroundColor;
+		background: url("/img/background-drummer.jpg")  bottom center no-repeat fixed;//, url("/img/dark_pattern.jpg") bottom center fixed;
+		//background: url("/img/dark_pattern.jpg") bottom center fixed\9; // Fallback
 		
 		padding-top: 20px;
 		clear: both;

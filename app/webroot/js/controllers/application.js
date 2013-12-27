@@ -116,7 +116,6 @@
 							});
 						});
 
-						console.log('hey');
 						// Set up lazy loading of images, give them a blank background src
 						$('img:not([src])', data.selector).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
 					},
