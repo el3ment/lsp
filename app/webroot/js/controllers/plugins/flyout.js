@@ -278,7 +278,7 @@
 					
 					element.addClass('active');
 					if(element.unveil){
-						$('img[data-src]:not([src])', element).unveil();
+						$('*[data-src]', element).unveil();
 					}
 				}
 			},

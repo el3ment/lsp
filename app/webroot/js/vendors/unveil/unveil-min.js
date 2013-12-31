@@ -10,48 +10,59 @@
 
 ;(function($) {
 
-  $.fn.unveil = function(threshold, callback) {
+	$.fn.unveil = function(threshold, callback) {
 
-    var $w = $(window),
-        th = threshold || 0,
-        retina = window.devicePixelRatio > 1,
-        attrib = retina? "data-src-retina" : "data-src",
-        images = this,
-        loaded;
+		var $w = $(window),
+				th = threshold || 0,
+				retina = window.devicePixelRatio > 1,
+				attrib = retina ? "data-src-retina" : "data-src",
+				images = this,
+				loaded;
 
-    this.one("unveil", function() {
-      var source = this.getAttribute(attrib);
-      source = source || this.getAttribute("data-src");
-      if (source) {
-        this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
-      }
-    });
+		this.one("unveil", function() {
 
-    function unveil() {
-      var inview = images.filter(function() {
-        var $e = $(this);
-        if ($e.is(":hidden")) return;
+			var source = this.getAttribute(attrib);
+			source = source || this.getAttribute("data-src");
+			
+			if (source) {
+				if(this.nodeName === 'IMG'){
+					this.setAttribute("src", source);
+				}else{
+					$(this).css('background-image', 'url(' + source + ')');
+				}
 
-        var wt = $w.scrollTop(),
-            wb = wt + $w.height(),
-            et = $e.offset().top,
-            eb = et + $e.height();
+				if (typeof callback === "function") callback.call(this);
 
-        return eb >= wt - th && et <= wb + th;
-      });
+				this.removeAttribute('data-src');
+				this.removeAttribute('data-src-retina');
+			}
 
-      loaded = inview.trigger("unveil");
-      images = images.not(loaded);
-    }
+		});
 
-    $w.scroll(unveil);
-    $w.resize(unveil);
+		function unveil() {
+			var inview = images.filter(function() {
+				var $e = $(this);
+				if ($e.is(":hidden")) return;
 
-    unveil();
+				var wt = $w.scrollTop(),
+						wb = wt + $w.height(),
+						et = $e.offset().top,
+						eb = et + $e.height();
 
-    return this;
+				return eb >= wt - th && et <= wb + th;
+			});
 
-  };
+			loaded = inview.trigger("unveil");
+			images = images.not(loaded);
+		}
+
+		$w.scroll(unveil);
+		$w.resize(unveil);
+
+		unveil();
+
+		return this;
+
+	};
 
 })(window.jQuery || window.Zepto);

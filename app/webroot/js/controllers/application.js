@@ -47,7 +47,6 @@
 						}
 					},
 					onAttachEvents : function(e, data){
-						
 						// This is a helper event attacher, it looks for all
 						// buttons, and if they have data-controller, and data-action
 						// attributes, will call the appropriate event.
@@ -117,13 +116,15 @@
 						});
 
 						// Set up lazy loading of images, give them a blank background src
-						$('img:not([src])', data.selector).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
+						$('*[data-src]', data.selector).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
 					},
 
 					onReady : function(e, data){
 						
 						_isReadyFired = true;
+						
 						_this.attachEvents($('html'));
+						
 						if(_this.hasPushState()){
 							history.replaceState(true, 'page', document.URL);
 						}
@@ -326,7 +327,6 @@
 			},
 
 			initializeGlobalEvents : function(){
-
 				var eventData = _this._createGlobalEventObject();
 
 				$(window).resize(
@@ -385,17 +385,25 @@
 					
 					// $(_this).triggerHandler('onHashChange', eventData);
 					// $(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
-
-					$(_this).triggerHandler('onResize', eventData);
-					$(_this).triggerHandler('onReady', eventData);
-					//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
-					$(_this).triggerHandler('onAfterReady', eventData);
+					
+					// Defer parsing until the next avaliable moment - this allows the onLoad event to finish firing
+					setTimeout(function(){
+						return function(){
+							console.time('Application onRezie, onReady, onAfterReady');
+							$(_this).triggerHandler('onResize', eventData);
+							$(_this).triggerHandler('onReady', eventData);
+							//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
+							$(_this).triggerHandler('onAfterReady', eventData);
+							console.timeEnd('Application onRezie, onReady, onAfterReady');
+							
+						}
+					}(eventData), 1);
 				});
 			},
 
 			init : function(specificController){
 				
-				console.log('Initializing Events for ' + specificController.name);
+				//console.time('Initializing Events for ' + specificController.name);
 				
 				var controller, subController, event, asset, controllerObj, subControllerObj;
 				
@@ -431,7 +439,14 @@
 							// If we've passed a specific controller - only bind that one, otherwise, in the darkness bind them (all of them)
 							if((specificController && (specificController === controllerObj || specificController === subControllerObj)) || !specificController){
 								$(subControllerObj)
-									.bind(event, controllerObj.events[subController][event]);
+									.bind(event, function(controllerObj, subController, event){
+										// extra closure to give access to controllerObj, subController, and event objects
+										return function(a, b, c, d){
+											console.time("-" + controllerObj.name + ".events." + subController + "." + event);
+											controllerObj.events[subController][event](a, b, c, d);
+											console.timeEnd("-" + controllerObj.name + ".events." + subController + "." + event);
+										}
+									}(controllerObj, subController, event));
 							}
 
 							// }
@@ -456,6 +471,7 @@
 				}
 
 				$(specificController).triggerHandler('onInit');
+				//console.timeEnd('Initializing Events for ' + specificController.name);
 				
 			}
 
@@ -466,7 +482,8 @@
 	}());
 	
 	_util.register('controller', 'application', application);
-
+	
+	console.time('Application Initialize');
 	window.LSP.controllers.application.initializeGlobalEvents();
-
+	
 }());

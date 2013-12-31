@@ -11,8 +11,11 @@
 			events : {
 				application : {
 					onAttachEvents : function(e, data){
-						$('div[data-badge]:not(:has(div.badges-badge)), a[data-badge]:not(:has(div.badges-badge))', data.selector)
+						// $('div[data-badge]:not(:has(div.badges-badge)), a[data-badge]:not(:has(div.badges-badge))', data.selector)
+						// 	.append(_this.makeElement).addClass('badges-hasBadge');
+						$('div[data-badge]:not(.badges-hasBadge), a[data-badge]:not(.badges-hasBadge)', data.selector)
 							.append(_this.makeElement).addClass('badges-hasBadge');
+							
 					}
 				}
 			},

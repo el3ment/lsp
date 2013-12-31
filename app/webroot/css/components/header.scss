@@ -1,4 +1,6 @@
 /* Header */
+$headerBackgroundColor : #17100a;
+
 .header {
 	
 	/* Layout */
@@ -9,7 +11,7 @@
 	// Removing for the time being -- dark-pattern was the previous background image
 	// background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEYAAABGBAMAAACDAP+3AAAAD1BMVEUAAABkZGSFhYXR0dFsbGyO8oaiAAAABXRSTlMABQIGDKndyUAAAAUMSURBVEjHJI6BrdtQDAOPkgegbA+gZ3eA5yQDOPndf6amLSBBgEAcDyuuh9fInGYYG+KHsKUVTRtSnUtKcF3CiElmM2X6Z+R5G1lKFnl6dGzmXKU6mX5jw12i/LzrvHipenqBnKfq5vnWsfQdVwccUuicwVdqY4p2G7ALDrDZQUITfNixSy2g//WuaeYkR41p4bZxlDyrVn/WXycCmwl6TlE3hJZBGJnJBo8fKC4FEGYzDwdKqQw13EpD58IYUMEadfm92ZKXxR8kqC7Fsb/fRrrBEv4clCYCh58CohkawKW7QlLcXy6rwfGWhvoNcZZFdRJXLRSg0l3urWrUvv6eApzknK8F1ofa927V8sDS++ByVlJlEufPpxkAojYdxZ7XAQ+DfSZf8PNm4/AEBMLOzZeNmxzxYa5bm1Ruo74uqX1hLVLSdCSpCz411KxabCMnBLy4XNxQXk/GIcfZHM2KPO+Mb6DXTfRNob9Bju/gm4+s9SauRlSjfZOeiydzaPtZfHcza/n1AoG18/D5ghRJvh9EQD+zUOF7+i8aR5e6EKyl0DtdGwYSzWPkbS9M3JI3wq7nWCeKeF1IQ0rji8k/Li94rEKL2AxcutZly3GKnR9kAQDhQhgvlvaNpRPZnK7Tt4wMqL32oJFdbl+/akJXZ7AM6FMIc3ueCdPftw0xyy5hGPyzP+Mz0w4kZiPad5cJXQDLe+7cJnv7zU2kMTniu4xvm1GuYB3b5ElZFduPX9v3RiuRYyUeRYvXSuUDBvnXRJLe1Uv2tJnS9tlLYVE7kHYeM2qf55zHuybs9DPQP/GpL9BEyItSLf068cJYq61mJWvJk8Od86NmWv+tDRaCCPxl/CmZDG8dh2EY/FHuAFTSAeS2A9jJGyDtu/1nuvrujw0IJEER1K/JeDevYmXI4nWZPXTsj1uMPs/tfs/Us+Ytmsa9mysEuJgfhJtf2zulnD+2tyvzRy3gU2RshjFcYwBS20xqP6Nw/JYwrxYNluKh09yzf7jF1nJmmWzcGhMe/AfxZ+y4+3CpXDHVAYuzrcR7NWwuJ+vQ9BWscQ1Vu4AeqSUS78MjgjDpVkQrW0E1ce593uAVMMi8Ot8xI8nempZ4kA6PJdRg3+PcuPJSnXpqLlwgWNrXfk/YA9thlJ5CJAO51nbPrvcuRwXsWQPl05jivRYd2MHv9LPs2iNLPMQInr6+DVUc/mcjVCsmORenGFqlkpeW1tO2SkKAdKvE7nB5/jv5Rz0WicFpVPKIZfNS95Z+du96qYXe8CjVl1eX99HKe5R1xBc7UqtqrwlDYzhc32kzun2IcCxz6VwntPwINv4wyRg/5yvigFgzbuI6sy6OYl/95qeFW9Ml/wvdfEUkvRhgoqLvbji/9OXWW6rOMPvm2USTohnGSmh0gfpOdPZWsVhVDIqkldr1GTzaNocsLewr51rIID3n1naypi3JsPPIHBsY+K31DVK8sQt0r4firiJyuSY4qbSNRrCQfPqO2pIb9X6cv/ADhXyD+bM/VSuV7XjwkxmZlpwMgzeubzYahfqXtjrwyovW7+Z5Muda1dm8OtmFFhdLm+SJZvVlSxZozNOMAv85klD0gfqmNvPDyL1kilcEYzT7GBKsZ41RI8OP/olK7Jta2avi7XDCRL3yidnKRc7jizcxQ7r5Pfpq0P0c9RyMIe/1sbuCPW2aqZGXUJomDoROvU81UAyP8m/6wZjg/WGR+guDe55xpDvu6AAAAABJRU5ErkJggg==");
 	background-attachment: fixed;
-	background-color: #17100a;
+	background-color: $headerBackgroundColor;
 	
 	@include clearfix;
 	
@@ -533,8 +535,9 @@
 				position:absolute;
 				top: 64px;
 				left: 0;
-				background: url(/img/dark_pattern.jpg);
-
+				// background: url(/img/dark_pattern.jpg);
+				background-color: $headerBackgroundColor;
+				
 				width: 100%;
 				z-index: 9999;
 				@include box-shadow-multiple(0 2px 3px -1px $grey); /* Top Highlight, Drop shadow */  

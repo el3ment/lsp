@@ -422,10 +422,10 @@
 					}
 
 					this.animateTo(newX, this.settings.transitionSpeed, "easeInOutSine");
-					
+
 					// Monkey Patch for global carosuels
-					if($(this.carouselRoot).unveil){
-						$('img[data-src]:not([src])', this.carouselRoot).unveil();
+					if($(newItem.item.context).unveil){
+						$('*[data-src]', newItem.item.context).unveil();
 					}
 				}			
 				

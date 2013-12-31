@@ -3,11 +3,11 @@
 class CompressController extends Controller {
 	var $name = "Compress";
 	var $autoRender = false;
+	var $time;
 	 
 	function js(){
-		App::import('Vendor', 'JSMin');
+		$time = microtime(true);
 		App::import('Vendor', 'Uglify/uglify');
-
 		$fullScript = Cache::read(md5($_SERVER['REQUEST_URI']));
 		if($fullScript === false){
 			$filesArray = explode(",", str_replace("/compress/js/", "", $_SERVER['REQUEST_URI']));
@@ -36,7 +36,8 @@ class CompressController extends Controller {
 	
 	function css(){
 		//App::import('Vendor', 'CSSTidy', array('file' =>'CSSTidy'.DS.'class.csstidy.php'));
-		
+	
+		$time = microtime(true);	
 		$filesArray = explode(",", str_replace("/compress/css/", "", $_SERVER['REQUEST_URI']));
 		$css = Cache::read(md5($_SERVER['REQUEST_URI']));
 		if($css === false){
@@ -80,6 +81,8 @@ class CompressController extends Controller {
 			header("HTTP/1.1 304 Not Modified");
 			header("Status: 304 Not Modified");
 			header("Last-Modified: " . gmdate('r', $modified . " GMT"));
+			header("X-Execution-Time: " . (microtime(true) - $time)/10000);
+			exit;
 		}else{
 			$displayContent = true;
 		}
@@ -89,8 +92,9 @@ class CompressController extends Controller {
 		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . " GMT";
 		header("Expires: $ts");
 		header("Last-Modified: " . gmdate('r', $modified . " GMT"));
-		header("Pragma: cache");
-		header("Cache-Control: maxage=$seconds_to_cache");
+		header("Pragma: public");
+		header("Cache-Control: public max-age=$seconds_to_cache");
+		header("X-Execution-Time: " . (microtime(true) - $time)/10000);
 
 		if($displayContent){
 			echo $content;

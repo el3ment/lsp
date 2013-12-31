@@ -149,15 +149,12 @@ class ThumbnailController extends Controller {
 				return true;
 			}
 
-			// If the file was created more than 7 days ago, set far-future expires header
-			// but if it was created within a week -- set the expires header for tomorrow,
-			// this gives us a week or so of buffer time to fix any errors with images
-
-			$expires = (time() - filemtime($filename) > 60*60*24*7) ?  77760000 : 86400;
+			
+			$expires = 31536000;
 	        header("Content-Type: " . mime_content_type($filename)); // need to handle mime-type detection
 	        header("Last-Modified: " . gmdate('r', filemtime($filename)));
 			header("Pragma: public");
-			header("Cache-Control: public maxage=" . $expires);
+			header("Cache-Control: public max-age=" . $expires;
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
 			header('X-Peak-Memory-Usage: '.(int)(memory_get_peak_usage() / 1000).'k');
 

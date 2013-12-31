@@ -64,6 +64,8 @@
 							// touchCarousel.goTo(0);
 							// }, 500);
 							//_this.events.flyout.onAfterAttach();
+							if(window.performance)
+								console.log('Home Page Load : ' + ((new Date().getTime()) - window.performance.timing.requestStart)/1000 + "sec");
 						}
 
 					},
