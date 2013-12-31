@@ -150,11 +150,11 @@ class ThumbnailController extends Controller {
 			}
 
 			
-			$expires = 31536000;
+			$expires = 77760000;
 	        header("Content-Type: " . mime_content_type($filename)); // need to handle mime-type detection
 	        header("Last-Modified: " . gmdate('r', filemtime($filename)));
 			header("Pragma: public");
-			header("Cache-Control: public max-age=" . $expires;
+			header("Cache-Control: public max-age=" . $expires);
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
 			header('X-Peak-Memory-Usage: '.(int)(memory_get_peak_usage() / 1000).'k');
 
