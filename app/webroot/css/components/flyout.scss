@@ -405,6 +405,9 @@ a[href*="_LSP"], a[href*="http://"],a[href*="http://"], a[href*=".html"]{ outlin
 				&.middle{
 					top: 50px;
 				}
+				img{
+					display: block;
+				}
 			}
 
 			// Hide the ad for tablet

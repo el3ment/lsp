@@ -6,7 +6,8 @@ window.process_currency_field_value = window.process_currency_field_value || fun
 
 window.console = window.console || {
 	log: function(){ },
-	error: function(){ },
-	time: function(){ },
-	timeEnd: function(){ }
+	error: function(){ }
 };
+
+window.console.time = window.console.time || function(){};
+window.console.timeEnd = window.console.timeEnd || function(){};

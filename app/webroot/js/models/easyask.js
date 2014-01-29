@@ -142,14 +142,14 @@
 				for(var i = 0; i < ((easyAskDataSourceObject.attributes || {}).attribute || {}).length; i++){
 					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].attributeValueList || {}).length; j++){
 						value = easyAskDataSourceObject.attributes.attribute[i].attributeValueList[j].attributeValue;
-						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
+						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown' || value === 'Required'){
 							easyAskDataSourceObject.attributes.attribute[i].attributeValueList.splice(j, 1);
 							j--;
 						}
 					}
 					for(var j = 0; j < (easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList || {}).length; j++){
 						value = easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList[j].attributeValue;
-						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown'){
+						if(value.substr(0, 1) === '!' || value === 'None' || value === 'Unknown' || value === 'Required'){
 							easyAskDataSourceObject.attributes.attribute[i].initialAttributeValueList.splice(j, 1);
 							easyAskDataSourceObject.attributes.attribute[i].initDispLimit--;
 							j--;
