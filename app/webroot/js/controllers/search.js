@@ -208,10 +208,10 @@
 						// Loop through and remove the sub categories
 						for(var i = 0; i < categoriesToRemove.length; i++){
 							if(categoriesToRemove[i].length > 0){
-								path = path.replace('/' + categoriesToRemove[i], ''); // Begins the phrase
+								path = (path + '/').replace('/' + categoriesToRemove[i] + '/', '/'); // Begins the phrase
 							}
 						}
-						_this.loadCategory(path, true);
+						_this.loadCategory(path.replace(/\/{1,}/g, '/', '/'), true);
 
 						_gaq.push(['_trackEvent', 'search', 'removeCategory', categoriesToRemove]);
 
