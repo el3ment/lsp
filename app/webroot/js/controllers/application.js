@@ -50,7 +50,7 @@
 						// This is a helper event attacher, it looks for all
 						// buttons, and if they have data-controller, and data-action
 						// attributes, will call the appropriate event.
-						$('*[data-action]', data.selector).each(function(){
+						$('*[data-action]:not([data-action-handled])', data.selector).each(function(){
 							
 							var elements = $(this);
 							
@@ -74,6 +74,7 @@
 								}else if(element.is('form')){
 									eventType = 'submit';
 									preventDefault = true;
+									console.log('yep');
 								}else{
 									//if('ontouchstart' in document.documentElement){
 										eventType = 'touchstart';
@@ -97,7 +98,7 @@
 										if(e.data.preventDefault){
 											e.preventDefault();
 										}
-									});
+									}).attr('data-action-handled', true);
 								
 								}else if(controller && action && asset){
 									element.bind(eventType, {preventDefault : preventDefault}, function(e){
@@ -110,13 +111,13 @@
 										if(e.data.preventDefault){
 											e.preventDefault();
 										}
-									});
+									}).attr('data-action-handled', true);
 								}
 							});
 						});
 
 						// Set up lazy loading of images, give them a blank background src
-						$('*[data-src]', data.selector).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
+						$('*[data-src]:not([data-lazy-handled])', data.selector).attr('data-lazy-handled', true).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
 					},
 
 					onReady : function(e, data){
