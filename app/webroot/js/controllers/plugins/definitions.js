@@ -31,8 +31,11 @@
 							// we will attach the definition to them after they return
 							// from the server
 							$(this).attr('data-definitions-slug',  _this.makeSlug($(this).html()));
-							
-							slugs.push($(this).data('definitions-slug'));
+						});
+
+						// Create a list of slugs to request
+						$(_settings.definitionlessSelector, data.selector).each(function(index, element){
+							slugs.push($(this).attr('data-definitions-slug'));
 						});
 						
 						// Request them, and set up the parser for when they return

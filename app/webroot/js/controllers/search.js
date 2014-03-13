@@ -599,7 +599,7 @@
 
 			scrollToFirst : function(){
 				// Scroll To Top
-				return _util.scrollTo($('#div__body'));
+				return _util.scrollTo($('body'));
 			},
 
 			renderSummary : function(easyAskDataObject){
