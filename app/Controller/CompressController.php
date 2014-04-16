@@ -22,10 +22,10 @@ class CompressController extends Controller {
 				}
 			}
 
-			$compiler = new UglifyJS();
-			$fullScript = $compiler
-							->advancedMode()
-							->send($fullScript);
+			// $compiler = new UglifyJS();
+			// $fullScript = $compiler
+			// 				->advancedMode()
+			// 				->send($fullScript);
 
 			Cache::write(md5($_SERVER['REQUEST_URI']), $fullScript);
 			Cache::write(md5($_SERVER['REQUEST_URI'] . '-time'), strtotime('now'));

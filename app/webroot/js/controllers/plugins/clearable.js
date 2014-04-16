@@ -32,7 +32,7 @@
 				application : {
 					onAttachEvents : function(e, data){
 						setTimeout(function(){
-							$('.clearable', data.selector).each(function(i, element){ _this.attach(element); });
+							$('.clearable:not([data-isclearablehandled])', data.selector).each(function(i, element){ _this.attach(element); });
 							$('input[type="text"], input[type="number"], input[type="tel"]', data.selector)
 								.off('focusable')
 								.on('click.lsp.focusable', function(e){
@@ -53,6 +53,7 @@
 					.on('keyup.lsp.clearable change.lsp.clearable', _lsp.controllers.application.createHandlerBridge(_this, 'showHideButton', {targetInput : element}))
 					.wrap('<div class="clearableContainer" />')
 					.after(button)
+					.attr('data-isclearablehandled', true);
 
 				_lsp.controllers.application.attachEvents(element);
 			},

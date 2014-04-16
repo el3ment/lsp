@@ -62,6 +62,9 @@
 							// Remove everything except categories, then remove trailing /
 							_state.category = (_api.getCategoriesFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 							_state.category = _state.category.replace(/\/.*\/.*\//, '/');
+
+							debugger;
+							
 							_state.allAttributes = (_api.getRefinementsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\/$/, '');
 							_state.keywords = decodeURIComponent((_api.getKeywordsFromSEOPath(navPathNodeList[navPathNodeList.length - 1].seoPath)).replace(/\-/g, ' ').replace(/^ /, ''));
 							_state.page = ((data.response.source.products || {}).itemDescription || {}).currentPage;

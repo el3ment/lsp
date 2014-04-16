@@ -403,6 +403,8 @@
 			},
 
 			init : function(specificController){
+
+				console.log('specificController', specificController);
 				
 				//console.time('Initializing Events for ' + specificController.name);
 				
@@ -420,22 +422,6 @@
 						subControllerObj = _app.controllers[subController]; // Convience
 						
 						for(event in controllerObj.events[subController]){
-							// Self event wasn't working right anyway, we just name it explicitly
-							// if(event === 'self'){
-							// 	event = subController;
-							// }
-							// Removing Assets - we don't use them in this project
-							// if(event === 'assets'){
-							// 	for(asset in controllerObj.events[subController].assets){
-							// 		for(event in controllerObj.events[subController].assets[asset]){
-							// 			// Attach the event to the asset
-							// 			$(subControllerObj.assets[asset])
-							// 				.bind(event, controllerObj.events[subController].assets[asset][event]); 
-							// 		}
-							// 	}
-							// }
-							// else{
-							// attach the event to the subcontroller
 
 							// If we've passed a specific controller - only bind that one, otherwise, in the darkness bind them (all of them)
 							if((specificController && (specificController === controllerObj || specificController === subControllerObj)) || !specificController){
