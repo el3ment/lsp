@@ -21,8 +21,8 @@
 			},
 			assets : {},
 			makeElement : function(index, elementString){
-				if($(this).data('badge').length > 0)
-					return '<div class="badges-badge badge-'+_util.camelCase($(this).data('badge'))+'">'+ $(this).data('badge') +'</div>';
+				if($(this).attr('data-badge').length > 0)
+					return '<div class="badges-badge badge-'+_util.camelCase($(this).attr('data-badge'))+'">'+ $(this).attr('data-badge') +'</div>';
 				else
 					return '';
 			}

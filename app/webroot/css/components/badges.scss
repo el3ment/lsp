@@ -31,6 +31,11 @@
 			padding-left:2px;
 		}	
 	}
+	
+	&.badges-text:first-child .badges-badge{
+		top: 0;
+		left: 0;
+	}
 
 	/* Individual Badges */
 	.badge-new{ background-color: red; }

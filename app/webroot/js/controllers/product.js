@@ -247,8 +247,17 @@
 						img.attr('src',  productData.data.imageUrl + '.' + size + 'x' + size);
 
 						$('.productAvailability', entry).html(productData.data.stockMessage);
+						$('*[data-stockmessage]', entry.parent()).attr('data-stockmessage', productData.data.stockMessage);
 						
 						_this.attachZoom();
+
+
+						// Update badges
+						$('.productName *[data-badge], .details *[data-badge]', entry).removeClass('badges-hasBadge').attr('data-badge', productData.data.specialFeature);
+						$('.thumbnail[data-badge], #zoom-mainImage[data-badge]', entry).removeClass('badges-hasBadge').attr('data-badge', productData.data.waysToSave);
+						$('.productName *[data-badge] .badges-badge, .thumbnail[data-badge] .badges-badge, .details *[data-badge] .badges-badge').remove();
+						_app.controllers.application.attachEvents(entry);
+
 
 					});
 				}

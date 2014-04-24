@@ -452,6 +452,8 @@
 						onlinePrice = item[5],
 						msrp = item[6],
 						stockMessage = item[7];
+						waysToSave = item[8];
+						specialFeature = item[9];
 
 					optionObject[label] = optionObject[label] || {};
 					optionObject[label][value] = optionObject[label][value] || [];
@@ -468,7 +470,8 @@
 					productObject[id].data.onlinePrice = onlinePrice;
 					productObject[id].data.msrp = msrp;
 					productObject[id].data.stockMessage = stockMessage;
-
+					productObject[id].data.waysToSave = waysToSave;
+					productObject[id].data.specialFeature = specialFeature;
 
 				}
 

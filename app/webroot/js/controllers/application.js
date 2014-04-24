@@ -74,7 +74,9 @@
 								}else if(element.is('form')){
 									eventType = 'submit';
 									preventDefault = true;
-									console.log('yep');
+									if(true){
+										console.log('yep');
+									}
 								}else{
 									//if('ontouchstart' in document.documentElement){
 										eventType = 'touchstart';
@@ -324,6 +326,7 @@
 			},
 
 			include : function(filename){
+				jQuery.ajaxSetup({ cache:true});
 				$('head').append('<script type="text/javascript" src="//d2bghjaa5qmp6f.cloudfront.net/compress/js'+ filename +',/'+ filename + $('#currentScriptVersion').data('version') + '"></script>');
 			},
 

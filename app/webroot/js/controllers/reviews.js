@@ -78,7 +78,6 @@
 				application : {
 					onAttachEvents : function(e, data){
 						
-						console.error('hey');
 						 $(_settings.formSelector+' :input', data.selector)
 							.off('reviews')
 							.on('keyup.lsp.reviews change.lsp.reviews', _this.events.reviews.onRenderPreview)
