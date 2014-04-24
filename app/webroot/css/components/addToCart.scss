@@ -125,13 +125,14 @@
 
 
 *[data-stockmessage*="Temporarily unavailable"][data-hasOptions="false"],
-*[data-stockmessage*="Temporarily unavailable"][data-hasOptions="true"][data-numberOfOptions="0"],
+*[data-stockmessage*="Temporarily unavailable"][data-hasOptions="true"][data-numberOfOptions="0"]
 {
 	.productAvailability{
 		background-color: $superLightGrey;
 	}
 	li.quantity,
-	li.action{
+	li.action,
+	li.option{
 		display: none;
 	}
 }

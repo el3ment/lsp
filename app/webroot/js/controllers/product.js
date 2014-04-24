@@ -255,7 +255,7 @@
 						// Update badges
 						$('.productName *[data-badge], .details *[data-badge]', entry).removeClass('badges-hasBadge').attr('data-badge', productData.data.specialFeature);
 						$('.thumbnail[data-badge], #zoom-mainImage[data-badge]', entry).removeClass('badges-hasBadge').attr('data-badge', productData.data.waysToSave);
-						$('.productName *[data-badge] .badges-badge, .thumbnail[data-badge] .badges-badge, .details *[data-badge] .badges-badge').remove();
+						$('.productName *[data-badge] .badges-badge, .thumbnail[data-badge] .badges-badge, .details *[data-badge] .badges-badge', entry).remove();
 						_app.controllers.application.attachEvents(entry);
 
 

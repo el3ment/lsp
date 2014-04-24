@@ -407,7 +407,7 @@
 
 			init : function(specificController){
 
-				console.log('specificController', specificController);
+				console.log('Initializing Controller', specificController);
 				
 				//console.time('Initializing Events for ' + specificController.name);
 				
@@ -432,9 +432,9 @@
 									.bind(event, function(controllerObj, subController, event){
 										// extra closure to give access to controllerObj, subController, and event objects
 										return function(a, b, c, d){
-											console.time("-" + controllerObj.name + ".events." + subController + "." + event);
+											//console.time("-" + controllerObj.name + ".events." + subController + "." + event);
 											controllerObj.events[subController][event](a, b, c, d);
-											console.timeEnd("-" + controllerObj.name + ".events." + subController + "." + event);
+											//console.timeEnd("-" + controllerObj.name + ".events." + subController + "." + event);
 										}
 									}(controllerObj, subController, event));
 							}
@@ -444,17 +444,19 @@
 					}
 
 					// If the onReady events have already fired, then force this controller along individually
-					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
-						controllerObj.events.application.onReady({}, _this._createGlobalEventObject());
-					}
-					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onAfterReady){
-						controllerObj.events.application.onAfterReady({}, _this._createGlobalEventObject());
-					}
-					if(_isReadyFired && ((controllerObj.events || {}).application || {}).attachEvents){
-						controllerObj.events.application.attachEvents({}, $.extend({selector : $('html')}, _this._createGlobalEventObject()));
-					}
-					if(_isReadyFired && ((controllerObj.events || {}).application || {}).onResize){
-						_this.events.application.onResize({}, {controller : controllerObj});
+					if(specificController === controllerObj){
+						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
+							controllerObj.events.application.onReady({}, _this._createGlobalEventObject());
+						}
+						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onAfterReady){
+							controllerObj.events.application.onAfterReady({}, _this._createGlobalEventObject());
+						}
+						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onAttachEvents){
+							controllerObj.events.application.onAttachEvents({}, $.extend({selector : $('html')}, _this._createGlobalEventObject()));
+						}
+						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onResize){
+							_this.events.application.onResize({}, {controller : controllerObj});
+						}
 					}
 
 					// // need to test this, if a controller loads after onready he needs to get onreszie fired too

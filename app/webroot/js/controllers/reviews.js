@@ -1,5 +1,5 @@
 (function(){
-	
+
 	var _util = window.LSP.utilities;
 	
 	_util.register('controller', 'reviews', (function(){
@@ -77,7 +77,7 @@
 				},
 				application : {
 					onAttachEvents : function(e, data){
-						
+
 						 $(_settings.formSelector+' :input', data.selector)
 							.off('reviews')
 							.on('keyup.lsp.reviews change.lsp.reviews', _this.events.reviews.onRenderPreview)
