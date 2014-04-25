@@ -88,10 +88,12 @@
 		text-indent: -152px;
 		padding-right: 0;
 		min-width: 115px;
+		color: white;
 		&:after{
 			content: 'Hide Form';
 			display: inline;
 			padding-left: 20px;
+			color: black;
 		}
 		padding-left: 8px; //ie8 hack
 	}
