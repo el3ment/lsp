@@ -120,7 +120,7 @@
 							});
 
 						// Reattach unveil handlers for thumbnails
-						$('.images img').unveil(200);
+						$('*[data-src]:not([data-lazy-handled])', data.selector).attr('data-lazy-handled', true).unveil(200);
 					}else{
 						//zoomAsset.removeAttr('href');
 						// Get all image-links including thumbnails
