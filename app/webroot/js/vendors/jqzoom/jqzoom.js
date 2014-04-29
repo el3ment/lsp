@@ -139,9 +139,12 @@
 						obj.load();
 					}
 				});
-				$(".zoomPad", el).bind('mouseleave.jqzoom', function (event) {
-					obj.deactivate();
+				$(".zoomPad", el).bind('mouseleave.jqzoom, click.jqzoom', function (event) {
+					//obj.deactivate();
 				});
+				$("body").bind('click.jqzoom', function(e){
+					obj.deactivate();
+				})
 				$(".zoomPad", el).bind('mousemove.jqzoom mousedown.jqzoom', function (e) {
 
 					//prevent fast mouse mevements not to fire the mouseout event
@@ -540,7 +543,7 @@
 						this.node.toppos = (smallimage.pos.t - smallimage.btop + smallimage.oh + Math.abs(settings.yOffset) + settings.zoomHeight < screen.height) ? (smallimage.oh + Math.abs(settings.yOffset)) : (0 - settings.zoomHeight - Math.abs(settings.yOffset));
 						break;
 					default:
-						this.node.leftpos = (smallimage.rightlimit + Math.abs(settings.xOffset) + settings.zoomWidth < screen.width) ? (smallimage.ow + Math.abs(settings.xOffset)) : (0 - settings.zoomWidth - Math.abs(settings.xOffset));
+						this.node.leftpos = smallimage.ow + Math.abs(settings.xOffset);//(smallimage.rightlimit + Math.abs(settings.xOffset) + settings.zoomWidth < screen.width) ? (smallimage.ow + Math.abs(settings.xOffset)) : (0 - settings.zoomWidth - Math.abs(settings.xOffset));
 						this.node.toppos = settings.yOffset; // LSP Removed abs
 						break;
 					}
@@ -642,7 +645,6 @@
 
 			this.loadimage = function (url) {
 				//showing preload
-				console.log('Loading large image');
 				loader.show();
 				this.url = url;
 				this.node = new Image();
@@ -664,7 +666,6 @@
 			};
 			this.afterLoad = function(){
 				//fetching data
-				console.log('loaded');
 				$obj.fetchdata();
 				loader.hide();
 				el.largeimageloading = false;

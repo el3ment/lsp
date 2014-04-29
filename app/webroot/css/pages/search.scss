@@ -357,8 +357,8 @@
 		}
 		.aggregateReviews{
 			position: absolute;
-			top: px($_topOfPrice + 75px);
-			left: $paddingUnit;
+			top: px($_topOfPrice + 73px);
+			left: 11px;
 			@media (max-width: 979px) and (min-width: 768px){
 				top: 365px;
 				left: 10px;
@@ -399,10 +399,11 @@
 				display: block;
 				font-size: px(13px);
 				position: absolute;
-				top: 372px;
+				top: 377px;
 				left: ($hideDistance + $paddingUnit + 9px);
 				width: px(columns(3));
 				color: $grey;
+				text-transform: none;
 
 				//display: none;
 
@@ -413,6 +414,7 @@
 				.status{
 					color: $grey;
 					font-weight: normal;
+					text-transform: none;
 					& > span  {
 						display: none;
 					}

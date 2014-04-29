@@ -19,22 +19,14 @@
 
 				application : {
 
+					onStateChange : function(e, data){
+						$('html').attr('data-path', document.href + '-END');
+					},
 
 					onResize : function(e, data){
-						var width = $(window).width();
-						var newContext;
-						var oldContext = _context;
 						var targetController = (data.controller ? data.controller : _this);
-
-						if(width >= 1200){
-							newContext = 'largeDesktop'; // could be largeDesktop
-						}else if(width > 979){
-							newContext = 'desktop';
-						}else if(width >= 768){
-							newContext = 'tablet';
-						}else{
-							newContext = 'phone';
-						}
+						var oldContext = _context;
+						var newContext = _this.getContext();
 
 						if(newContext !== oldContext){
 							console.log('Leaving ' + oldContext + ' entering ' + newContext);
@@ -42,8 +34,6 @@
 							$(targetController).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
 							$(targetController).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
 							$(targetController).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
-							
-							_context = newContext;
 						}
 					},
 					onAttachEvents : function(e, data){
@@ -74,9 +64,6 @@
 								}else if(element.is('form')){
 									eventType = 'submit';
 									preventDefault = true;
-									if(true){
-										console.log('yep');
-									}
 								}else{
 									//if('ontouchstart' in document.documentElement){
 										eventType = 'touchstart';
@@ -169,6 +156,21 @@
 			assets : {},
 
 			getContext : function(){
+				var width = $(window).width();
+				var newContext;
+
+				if(width >= 1200){
+					newContext = 'largeDesktop'; // could be largeDesktop
+				}else if(width > 979){
+					newContext = 'desktop';
+				}else if(width >= 768){
+					newContext = 'tablet';
+				}else{
+					newContext = 'phone';
+				}
+
+				_context = newContext;
+
 				return _context;
 			},
 

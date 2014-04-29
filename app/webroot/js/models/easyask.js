@@ -199,6 +199,7 @@
 			// parameter - combineSimilarAttributesForRequest combines them for
 			// the request
 			combineSimilarAttributesForRequest : function(singleAttribute, allAttributes){
+				
 				if(allAttributes && singleAttribute){
 
 					var singleAttributeName = singleAttribute.replace(/:.*/, '');

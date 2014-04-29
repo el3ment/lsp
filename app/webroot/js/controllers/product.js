@@ -104,7 +104,7 @@
 				if($.jqzoom){
 					_this.detachZoom();
 					var zoomAsset = $('a[data-asset="mouseoverZoom"]');
-					if(zoomAsset.is(':not([href*="no-image"])')){
+					if(zoomAsset.is(':not([href*="no-image"])') && context !== 'phone'){
 						zoomAsset
 							.jqzoom({
 								zoomWidth: $('.addToCart').width(),
@@ -249,8 +249,7 @@
 						$('.productAvailability', entry).html(productData.data.stockMessage);
 						$('*[data-stockmessage]', entry.parent()).attr('data-stockmessage', productData.data.stockMessage);
 						
-						_this.attachZoom();
-
+						_this.attachZoom(_app.getContext());
 
 						// Update badges
 						$('.productName *[data-badge], .details *[data-badge]', entry).removeClass('badges-hasBadge').attr('data-badge', productData.data.specialFeature);
