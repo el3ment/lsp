@@ -143,7 +143,8 @@
 					obj.deactivate();
 				});
 				$("body").bind('touchstart.jqzoom', function(e){
-					obj.deactivate();
+					if(!$(e.target).parent().is('.zoomPad'))
+						obj.deactivate();
 				})
 				$(".zoomPad", el).bind('mousemove.jqzoom mousedown.jqzoom', function (e) {
 
@@ -159,8 +160,6 @@
 					//if (el.largeimageloaded && (settings.zoomType != 'drag' || (settings.zoomType == 'drag' && el.mouseDown))) {
 						lens.setposition(e);
 					//}
-
-					e.stopPropagation();
 				});
 				var thumb_preload = [];
 				var i = 0;
