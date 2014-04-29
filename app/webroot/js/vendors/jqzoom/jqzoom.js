@@ -159,6 +159,8 @@
 					//if (el.largeimageloaded && (settings.zoomType != 'drag' || (settings.zoomType == 'drag' && el.mouseDown))) {
 						lens.setposition(e);
 					//}
+
+					e.stopPropagation();
 				});
 				var thumb_preload = [];
 				var i = 0;
