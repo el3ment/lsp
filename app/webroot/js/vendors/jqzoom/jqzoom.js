@@ -139,10 +139,10 @@
 						obj.load();
 					}
 				});
-				$(".zoomPad", el).bind('mouseleave.jqzoom, click.jqzoom', function (event) {
-					//obj.deactivate();
+				$(".zoomPad", el).bind('mouseleave.jqzoom', function (event) {
+					obj.deactivate();
 				});
-				$("body").bind('click.jqzoom', function(e){
+				$("body").bind('touchstart.jqzoom', function(e){
 					obj.deactivate();
 				})
 				$(".zoomPad", el).bind('mousemove.jqzoom mousedown.jqzoom', function (e) {
