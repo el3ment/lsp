@@ -114,7 +114,7 @@
 						_isReadyFired = true;
 						
 						_this.attachEvents($('html'));
-						
+
 						if(_this.hasPushState()){
 							history.replaceState(true, 'page', document.URL);
 						}
