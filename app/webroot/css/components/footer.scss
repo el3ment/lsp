@@ -238,31 +238,6 @@ $headerBackgroundColor : #17100a;
 				}
 			}
 			
-			.newsletter{
-				
-				h3{ margin: 10px 0 px(8px); }
-				
-				
-				.email{
-					
-					
-					position: relative;
-					
-					input{
-						font-size: px($largeInputFontSize);
-						padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
-					}
-					
-					.b1{
-						position: absolute;
-						right: px(-3px);
-						top: px(0);
-						line-height: px(17px);
-					}
-				}
-			}
-			
-			
 		}
 
 		@media (min-width: 767px) and (max-width: 979px){

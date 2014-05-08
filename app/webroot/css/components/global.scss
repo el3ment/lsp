@@ -427,3 +427,30 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 	 	display: inherit !important;
 	 }
 }
+
+
+// Single line email input
+.newsletter{
+	
+	.email{
+		
+		
+		position: relative;
+		
+		input{
+			font-size: px($largeInputFontSize);
+			padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+		}
+		
+		.b1, .b3{
+			position: absolute;
+			right: px(-3px);
+			top: px(0);
+			line-height: px(17px);
+		}
+	}
+}
+
+.forward{
+	float:right;
+}

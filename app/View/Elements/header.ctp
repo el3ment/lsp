@@ -45,8 +45,6 @@
 	<div id='breadcrumbs' class='breadcrumbs'>
 		<ul class='span12 breadcrumbLinks'>
 			<li><a href='#'>Sticks &amp; Mallets</a></li>
-			<li><a href='#'>Mallets</a></li>
-			<li class='active'><a href='#'>IP240</a></li>
 		</ul>
 	</div>
 </div>

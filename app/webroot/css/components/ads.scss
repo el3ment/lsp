@@ -1,5 +1,5 @@
 .productAd,
-.businessAd{
+*[class*="bsa-"]{
 	
 	position: relative;
 	font-size: 13px;
@@ -22,6 +22,11 @@
 		padding-bottom: 30px;
 		color: black;
 	}
+	&.right .content{
+		padding-left: 20px;
+		padding-right: 170px;
+	}
+
 	&:hover{
 		.content{
 			background-color: #ecebe6;
@@ -43,10 +48,25 @@
 			float: left;
 		}
 	}
+	&.right .productImage{
+		right: 0;
+		left: auto;
+	}
 	.description{
 		width: 100%;
 		z-index: 2;
 		position: relative;
+	}
+
+
+	blockquote{
+		border-left: 3px solid grey;
+		padding-left: 10px;
+		font-style: italic;
+	}
+
+	p{
+		margin-bottom: 10px;
 	}
 
 	@media (max-width: 767px){
@@ -55,6 +75,10 @@
 			position: absolute;
 			left: 0;
 			bottom: 0;
+			left: auto;
+		}
+		&.right .productImage{
+			right: 0;
 			left: auto;
 		}
 		.content{
@@ -68,6 +92,15 @@
 			left: auto;
 		}
 
+	}
+}
+
+.bsa-newsletter{
+	background-color: #fffcdf;
+	padding: 20px;
+	.title{
+		font-weight: bold;
+		font-size: 15px;
 	}
 
 }

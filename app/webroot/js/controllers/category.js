@@ -12,6 +12,24 @@
 					onReady : function(e, data){
 						_this.markNetSuiteCategoriesAsOpen();
 					}
+				},
+				category : {
+					onAddMultipleItemsToCart : function(e, data){
+						var formElement = $('form#categoryForm')[0];
+						var form = _util.formToObject(formElement, null, true);
+						var multiString = "";
+						$.each(form.items, function(index, value){
+							if(value.include === 'true'){
+								multiString += value.id + ',' + value.qty + ';';
+							}
+						})
+						
+						if(multiString.length > 2){
+							multiString =  multiString.substring(0, multiString.length - 1);
+							$('input[name="multi"]', formElement).attr('value', multiString);
+							formElement.submit();
+						}
+					}
 				}
 			},
 			assets : {},
