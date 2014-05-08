@@ -1,0 +1,84 @@
+.page-school-category{
+
+	.head{
+		background-color: $superLightGrey;
+		padding: 20px;
+		box-sizing: border-box;
+		width: 90%;
+		margin: auto;
+		margin-bottom: 20px;
+		margin-top: 10px;
+		img{
+			float: left;
+			margin:0 20px 0 10px;
+		}
+		.byline{
+			float:right;
+			color: $grey;
+			font-style: italic;
+			margin: 0;
+			padding-right: 10px;
+		}
+	}
+
+	@media (max-width: 767px){
+		table.table tr{ 
+			position:relative;
+			padding-right: 130px;
+		}
+	}
+
+	.quantity{
+		text-align: center;
+		vertical-align: top;
+		width: 50px;
+		input{
+			margin: auto;
+		}
+		@media (max-width: 767px){
+			position: absolute;
+			top: 10px;
+			right: 70px;
+		}
+	}
+	.price{
+		text-align: right;
+		width: 100px;
+		@media (max-width: 767px){
+			position: absolute;
+			top: 10px;
+			right: 0;
+		}
+
+	}
+	tbody .price{
+		font-weight: bold;
+		font-size: 15px;
+		vertical-align: top;
+	}
+	.item{
+		
+		$thumbnailSize = 55px;
+
+		position: relative;
+		min-height: 10 + $thumbnailSize;
+
+		input[type="checkbox"]{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.thumbnail{
+			position: absolute;
+			top: 5px;
+			left: 25px;
+		}
+		.productName{
+			font-size: 15px;
+		}
+		.name{
+			padding-left: 35 + $thumbnailSize;	
+		}
+
+	}
+}
