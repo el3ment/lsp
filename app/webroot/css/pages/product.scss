@@ -17,6 +17,36 @@
 		visibility: hidden !important;
 	}
 
+	.share-buttons{
+		float:right;
+		position: relative;
+		top: -7px;
+		.s-24{
+			width: 30px;
+			height: 25px;
+			@include lsp-sprite-background();
+		}
+		.twitter-24{
+			background-position: -266px -993px;
+			width: 58px;
+		}
+		.facebook-24{
+			background-position: -148px -993px;
+			width: 50px;
+		}
+		.email-24{
+			
+		}
+		.addshoppers-24{
+			background-position: -200px -993px;
+			width: 57px;
+		}
+		.pinterest-24{
+			background-position: -100px -992px;
+			width: 45px;
+		}
+	}
+
 	.isAuthorized{
 		
 		position: relative;
