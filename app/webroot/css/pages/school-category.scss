@@ -77,8 +77,22 @@
 			font-size: 15px;
 		}
 		.name{
-			padding-left: 35 + $thumbnailSize;	
+			margin-left: 35 + $thumbnailSize;	
+		}
+		
+		
+		.matrixOptions{
+			margin-left: 35 + $thumbnailSize;
+			margin-top: 10px;
+			select{
+				width: 50%;
+				@media (max-width: 979px){
+					width: 100%;
+				}
+			}
 		}
 
 	}
+
+
 }

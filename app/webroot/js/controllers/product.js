@@ -18,7 +18,7 @@
 					},
 					onMatrixOptionSelect : function(e, data){
 						$('option[value=""]', data.selector).remove();
-						_this.updateMatrixLists(data.selector[0].form);
+						_this.updateMatrixLists(data.selector[0].form, data.selector);
 						_gaq.push(['_trackEvent', 'product', _util.camelCase('selectMatrixOption-' + _this.getProductContext(data.selector)) , $('.productName', data.selector.parents('.entry')).text()]);
 					},
 					onAddToWishlist : function(e, data){
@@ -149,13 +149,14 @@
 				
 			},
 
-			updateMatrixLists : function(form){
+			updateMatrixLists : function(form, select){
 
-				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', form).data('value'));
+				var entry = select.parents('.entry');
+				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', entry).data('value'));
 				var selectedOptions = {};
 
 				// Create an object of currently selected options
-				$('select', form)
+				$('select', entry)
 					.each(function(i, element){
 						// If it's not the 'Select an Option' choice - which is identified by value=''
 						if($(element).val().length){
@@ -165,7 +166,7 @@
 
 				// Filter, and render newly updated options
 				var filteredOptions = _api.filterMatrixChildren(easyAskMatrixData, selectedOptions);
-				var unselectedOptionText = $('option[value=""]:first', form).text();
+				var unselectedOptionText = $('option[value=""]:first', entry).text();
 				
 				$.each(filteredOptions, function(label, options){
 					
@@ -179,24 +180,24 @@
 					$('select[name="'+ label + '"]', form).html(optionHTML);
 				});
 
-				_this.updateProduct(form);
+				_this.updateProduct(entry);
 			},
 			
-			updateProduct : function(form){
+			updateProduct : function(entry){
 
-				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', form).data('value'));
+				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', entry).data('value'));
 				var selectedOptions = {};
 
 				// Create an object of selected options to test against the formattedObject (the source)
-				var selects = $('select', form)
+				var selects = $('select', entry)
 					.each(function(i, element){
 						selectedOptions[$(element).attr('name')] = unescape($(element).val());
 					});
 
 				if(selects.length){
-					$('button.b1', form).attr('disabled', true);
-					$('input[name="buyid"]', form).val('');
-					$('input[name="itemid"]', form).val('');
+					$('button.b1', entry).attr('disabled', true);
+					$('input[name="buyid"]', entry).val('');
+					$('input[name="itemid"]', entry).val('');
 
 					// Loop through the formattedMatrix (source of all attributes) and if we find an id that
 					// matches the filter criteria, then set the id
@@ -212,12 +213,12 @@
 
 						_this.detachZoom();
 
-						var entry = $(form).parents('.entry');
 						// If we've made it here, it's because we've found an ID that matches the filters
 						// Update all the changing nick nacks in the item listing
-						$('input[name="buyid"]', form).val(id); // Set the buyid
-						$('input[name="itemid"]', form).val(id);
-						$('button.b1', form).removeAttr('disabled');
+						$('input[name="buyid"]', entry).val(id); // Set the buyid
+						$('input[name="itemid"]', entry).val(id);
+						$('input[name*=".id"]', entry).val(id)
+						$('button.b1', entry).removeAttr('disabled');
 
 						// "You save $x" - we hide it if the save amount is < 0 (it would be an error, so this is just to be safe)
 						if(productData.data.msrp - productData.data.onlinePrice <= 0){
@@ -241,15 +242,15 @@
 						$('.productName .options', entry).html(' : ' + optionArray.join(', '));
 
 						// Update the active thumbnail
-						var size = $('.thumbnail img, #zoom-mainImage img', entry).width();
-						var img = $('.thumbnail img, #zoom-mainImage img', entry);
+						var size = $('.thumbnail img, #zoom-mainImage img, img.thumbnail', entry).width();
+						var img = $('.thumbnail img, #zoom-mainImage img, img.thumbnail', entry);
 						var productImageLink = $('#zoom-mainImage').attr('href',  productData.data.imageUrl);
 						img.attr('src',  productData.data.imageUrl + '.' + size + 'x' + size);
 
 						$('.productAvailability', entry).html(productData.data.stockMessage);
 						$('*[data-stockmessage]', entry.parent()).attr('data-stockmessage', productData.data.stockMessage);
 						
-						_this.attachZoom(_app.getContext());
+						_this.attachZoom(_app.controllers.application.getContext());
 
 						// Update badges
 						$('.productName *[data-badge], .details *[data-badge]', entry).removeClass('badges-hasBadge').attr('data-badge', productData.data.specialFeature);
