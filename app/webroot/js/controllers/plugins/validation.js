@@ -7,7 +7,7 @@
 		var _app = window.LSP;
 		var _api = _app.models.api;
 		var _settings = {
-			validationInputs : '*[class*="validation-"]:input'	
+			validationInputs : '*[class*="validation-"]:input:not([disabled])'	
 		};
 		var _patterns = {
 			required : {
@@ -91,18 +91,30 @@
 
 			validateForm : function(form){
 				var stop = false;
+				var scrollTo;
 				var inputs = $(_settings.validationInputs, form);
 				for(var i = 0; i < inputs.length; i++){
 					if(!_this.validate(inputs[i])){
 						stop = true;
+						scrollTo = inputs[i];
+						break;
 					}
 				}
 
 				if(stop === true){
-					_util.scrollTo(form);
+					_util.scrollTo(scrollTo);
 				}
 				
 				return !stop;
+			},
+
+			isValidForm : function(form){
+				var inputs = $(_settings.validationInputs, form);
+				for(var i = 0; i < inputs.length; i++){
+					if(!_this.validate(inputs[i]))
+						return false;
+				}
+				return true;
 			},
 			
 			// Parse, then display any validating messages

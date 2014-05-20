@@ -27,8 +27,15 @@
 						if(multiString.length > 2){
 							multiString =  multiString.substring(0, multiString.length - 1);
 							$('input[name="multi"]', formElement).attr('value', multiString);
-							formElement.submit();
+							if(_app.controllers.validation.isValidForm(formElement))
+								formElement.submit();
 						}
+					},
+					onDisableInputs : function(e, data){
+						if(data.selector[0].checked)
+							$(':input:not([type="checkbox"])', $(data.selector).parents('.entry')).prop('disabled', false).removeAttr('disabled');
+						else
+							$(':input:not([type="checkbox"])', $(data.selector).parents('.entry')).prop('disabled', true).attr('disabled', true)
 					}
 				}
 			},
