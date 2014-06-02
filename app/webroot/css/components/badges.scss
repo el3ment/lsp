@@ -42,6 +42,7 @@
 	.badge-discontinued{ background-color: $grey; }
 	.badge-clearance{ background-color: $yellow; }
 	.badge-demo{ background-color: blue; }
+	.badge-staff{ background-color: $yellow; }
 
 	&.badges-text .badge-new{ color: red; }
 	/*
@@ -54,6 +55,4 @@
 			left: 0;
 		}
 	}*/
-	
-	
 }

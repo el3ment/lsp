@@ -381,6 +381,10 @@
 				.reviewAuthor{font-weight:bold;}
 				.reviewLocation{text-transform: uppercase; }
 				.reviewProfile{font-style:italic;}
+				.isStaff .badges-badge{
+					position: relative;
+					left: 0px;
+				}
 			}
 			
 			.review{
