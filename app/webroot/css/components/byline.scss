@@ -67,19 +67,19 @@ div[data-lifecycleState="Marked for Cleanup"] .byline{
 
 		&[data-author="Kyle Giauque"]:after,
 		&[data-author*="Kyle"]:after{ 
-			background-image:url("");
+			background-image:url("http://gravatar.com/avatar/76cc1bec0c6f6cfede0ad7bc0d94a149?s=64&d=identicon");
 		}
 		&[data-author="Jose Gutierrez Jr."]:after,
 		&[data-author*="Jose"]:after{ 
-			background-image:url("http://gravatar.com/avatar/81805b61decbfdfd4bea9186cf9440f2?d=identicon");
+			background-image:url("http://gravatar.com/avatar/81805b61decbfdfd4bea9186cf9440f2?s=64&d=identicon");
 		}
 		&[data-author="Chad Ford"]:after,
 		&[data-author*="Chad"]:after{ 
-			background-image:url("http://gravatar.com/avatar/d254de6f3472231f61cf3d83bf5477e6?d=identicon");
+			background-image:url("http://gravatar.com/avatar/d254de6f3472231f61cf3d83bf5477e6?s=64&d=identicon");
 		}
 		&[data-author="Dan Wahl"]:after,
 		&[data-author*="Dan"]:after{ 
-			background-image:url("http://gravatar.com/avatar/10fcb44e6118c80795b64ec9d33d976b?d=identicon");
+			background-image:url("http://gravatar.com/avatar/10fcb44e6118c80795b64ec9d33d976b?s=64&d=identicon");
 		}
 	}
 }
