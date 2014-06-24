@@ -11,7 +11,7 @@
 		// var _hostname = 'http://easyaskqa.easyaskondemand.com';
 		
 		var _dictionary = 'nslonestarpercussion';
-		var _hostname = 'http://lonestarpercussion.prod.easyaskondemand.com';
+		var _hostname = 'http://lonestarpercussion.easyaskondemand.com';
 		var _sessionId;
 
 		var _attributeHistory = {};
