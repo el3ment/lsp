@@ -127,7 +127,7 @@
 
 				// Categories - Remove 'School'
 				for(var i = 0; i < ((easyAskDataSourceObject.categories || {}).categoryList || []).length; i++){
-					if(easyAskDataSourceObject.categories.categoryList[i].name === 'School'){
+					if(easyAskDataSourceObject.categories.categoryList[i].name === 'Schools'){
 						easyAskDataSourceObject.categories.categoryList.splice(i, 1);
 						i--;
 					}
