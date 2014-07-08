@@ -221,6 +221,9 @@
 				
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
+
+				console.log('---' + statePath);
+
 				// If pushState, push the path
 				if(_this.hasPushState()){
 					// To overcome an implementation problem with chrome/firefox where the popstate event 
@@ -229,11 +232,11 @@
 					// that evaluates to true, {} would work too.
 					// check the event down below in initializeGlobalEvents to see more
 					if(!useReplaceState){
-						history.pushState(true, '', '/' + snapshot.path + '#' + statePath);
-						$('html').attr('data-path', document.location.origin + '/' + snapshot.path + '#' + statePath + '-END');
+						history.pushState(true, '', document.location.origin + ('/' + snapshot.path).replace(/\/$/, '') + '/#' + statePath);
+						$('html').attr('data-path', document.location.origin + ('/' + snapshot.path).replace(/\/$/, '') + '/#' + statePath + '-END');
 					}else{
 						console.log('Replacing State');
-						history.replaceState(true, '', '/' + snapshot.path + '#' + statePath);
+						history.replaceState(true, '', ('/' + snapshot.path).replace(/\/$/, '') + '/#' + statePath);
 					}
 
 					$('html').attr('data-path', document.location.href);
