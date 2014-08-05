@@ -38,6 +38,10 @@ div[data-lifecycleState="Marked for Cleanup"] .byline{
 
 		// You'll have to add new employees by hand
 		// Sorry - http://md5-hash-online.waraxe.us/
+		&[data-author="Robert Pottorff"]:after{ 
+			background-image:url("http://www.gravatar.com/avatar/7f99ee3461962250cd542407d5744776?s=64&d=identicon");
+		}
+
 		&[data-author="Michael Dooley"]:after,
 		&[data-author="Michael"]:after{ 
 			background-image:url("http://www.gravatar.com/avatar/77940a61b2dec54ca9b1bdf8e17c10f5?s=64&d=identicon");

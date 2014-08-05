@@ -18,7 +18,7 @@
 
 		// Extends the generic API
 		return $.extend(_this, {
-			
+
 			_timeout : 30000,
 
 			_url : function(controller, payload){

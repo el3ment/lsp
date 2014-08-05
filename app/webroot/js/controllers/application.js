@@ -221,9 +221,6 @@
 				
 				var statePath = _this.buildStateString(controller, snapshot); // relies on _state to build full string
 				
-
-				console.log('---' + statePath);
-
 				// If pushState, push the path
 				if(_this.hasPushState()){
 					// To overcome an implementation problem with chrome/firefox where the popstate event 
@@ -342,6 +339,7 @@
 			},
 
 			include : function(filename){
+				console.log('Async request for file : ' + filename);
 				jQuery.ajaxSetup({ cache:true});
 				$('head').append('<script type="text/javascript" src="//d2bghjaa5qmp6f.cloudfront.net/compress/js'+ filename +',/'+ filename + $('#currentScriptVersion').data('version') + '"></script>');
 			},

@@ -13,6 +13,25 @@
 	&.matrixType- .action .b1.disabledByDefault{ display: none; }
 	&.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
 
+
+	// From VWO Campaign Winner - Big Button, Red Price
+		.productPrice{ color: red !important; }
+		.action .b1{
+			font-size: 17px;
+			width: 181px;
+			height: 50px;
+			
+			&:after{
+				left: 10px;
+			}
+		}
+
+		.icon-24-cart-black:after {
+			background-position: -103% -70.8%;
+			background-size: 2000%;
+		}
+	// End VWO Campaign Winner - Big Button, Red Price
+
 	.has0Reviews{
 		visibility: hidden !important;
 	}

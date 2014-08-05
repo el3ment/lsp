@@ -36,7 +36,7 @@
 				type : type,
 				url : this._url(controller, payload),
 				data : this._payload(controller, payload),
-				crossDomain : true,
+				// crossDomain : true,
 				dataType : dataType,
 				context : this,
 				timeout : this._timeout,
@@ -121,7 +121,7 @@
 		},
 
 		request : function(controller, eventName, method, data){
-			return this._request('GET', 'jsonp', controller, eventName, method, data);
+			return this._request('GET', 'json', controller, eventName, method, data);
 		}
 	});
 	

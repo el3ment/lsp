@@ -84,7 +84,7 @@
 					},
 
 					onAfterAPICallFailure : function(e, data){
-						_this.renderFatalError();
+						_this.renderFatalError(data);
 					},
 
 					onRemoveFilter : function(e, data){
@@ -703,8 +703,8 @@
 				
 			},
 
-			renderFatalError : function(){
-				_gaq.push(['_trackEvent', 'search', 'error', 'fatalError']);
+			renderFatalError : function(response){
+				_gaq.push(['_trackEvent', 'search', 'error', 'fatalError : ' + response.serverResponse.status + ' : ' + response.serverResponse.statusText]);
 				alert('Something has gone wrong with our network connection to our database. You can try again by reloading the page. Sorry about that!');
 			}
 		};
