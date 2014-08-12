@@ -32,11 +32,14 @@
 		
 			var result = $.Deferred();
 			var eventData = {};
+			
+			$.support.cors = true;
+
 			eventData.xhrData = {
 				type : type,
 				url : this._url(controller, payload),
 				data : this._payload(controller, payload),
-				// crossDomain : true,
+				crossDomain : true,
 				dataType : dataType,
 				context : this,
 				timeout : this._timeout,
