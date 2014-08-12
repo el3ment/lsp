@@ -22,10 +22,10 @@ class CompressController extends Controller {
 				}
 			}
 
-			// $compiler = new UglifyJS();
-			// $fullScript = $compiler
-			// 				->advancedMode()
-			// 				->send($fullScript);
+			$compiler = new UglifyJS();
+			$fullScript = $compiler
+							->advancedMode()
+							->send($fullScript);
 
 			Cache::write(md5($_SERVER['REQUEST_URI']), $fullScript);
 			Cache::write(md5($_SERVER['REQUEST_URI'] . '-time'), strtotime('now'));
@@ -82,6 +82,7 @@ class CompressController extends Controller {
 			header("Status: 304 Not Modified");
 			header("Last-Modified: " . gmdate('r', $modified . " GMT"));
 			header("X-Execution-Time: " . (microtime(true) - $time)/10000);
+			
 			exit;
 		}else{
 			$displayContent = true;

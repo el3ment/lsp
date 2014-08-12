@@ -8,4 +8,6 @@ app/tmp/cache/*
 *.swp
 static
 static/*/**
+aws_credential_file
+.elasticbeanstalk
 app/tmp/cache/persistent

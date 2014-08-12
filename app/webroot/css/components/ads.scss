@@ -108,12 +108,22 @@
 
 }
 
-.bsa-newsletter{
-	background-color: #fffcdf;
+.bsa-barebones, .bsa-newsletter{
 	padding: 20px;
+	padding-top: 0px;
 	.title{
 		font-weight: bold;
 		font-size: 15px;
 	}
+}
+.bsa-newsletter{
+	background-color: #fffcdf;
+	padding-top: 20px;
+}
 
+.bsa-hideImage{
+	img{ display: none; }
+	.content{
+		padding-left: 20px;
+	}
 }

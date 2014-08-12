@@ -555,6 +555,9 @@
 						.addClass(viewType);
 
 					_state.view = viewType;
+
+					// Trigger New Images
+					$('.thumbnail img[data-src][data-lazy-handled]').unveil();
 				}
 			},
 

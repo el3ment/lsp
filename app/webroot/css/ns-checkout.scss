@@ -2554,7 +2554,121 @@ html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"
 	}
 }
 
+.orderSummary{ /* The cart summary */
+	
+	border: 0;
+	font-size: 13px;
+	
+	.b1{
+		float: right;
+		margin-bottom: px(20px);
+		@include clearfix();
+	}
+	
+	.cart{
+		/* width: 100%; */
+		padding: 0;
+		
+	}
+	table{
+		width: 100%;
+		td{
+			width: 100%;
+		}
+	}
+	thead{
+		td{ padding: px(10px) 0 0 px(10px) !important; }
+	}
+	
+	tbody{
+		
+		td{ 
+			width: 100%;
+			padding: px(10px) !important;
+			border-bottom: 1px solid $lightGrey;
+			vertical-align: top;
+		}
+		
+		tr:first-child td{ padding-top: 0px; }
+	  
+		.productAvailability{ 
+			margin-left: px(20px);
+			float: left;
+		}
+		
+		.quantity{ 
+			
+			float: left;
+			
+			.data{ font-weight:bold; }
+			.productQuantity{
+				font-weight: bold;
+			}
+		}
+		
+		.properties{ float: left; }
+		
+		.quantity{
+			.scroller{ display: block; }
+		}
+		
+		.productAvailability, .quantity{ margin-top: px(5px); } /* space between detail groups */
+		
+		.extendedPrice{
+			
+			text-align: right;
+			
+			.productExtendedPrice{
+				font-weight: bold;    
+			}
+		}
+	}
+	tfoot{
+		
+		td{
+			padding: px(0) px(10px) 0 px(10px) !important;
+			text-align: right;
+		}
+		
+		.taxTotal td, .orderTotal td{
+			padding-bottom: px(10px) !important;
+		}
+		
+		label{ 
+			color: $grey;
+			font-weight: normal;
+		}
+		
+		.value{ font-weight: bold;}
+		
+		.merchandiseTotal{
+			td{
+				padding-top: 10px !important;
+			}
+			label{}
+			.value{}
+		}
+		
+		.shippingTotal{
+			label{ }
+			.value{  }
+		}
+		
+		.taxTotal{
+			label{}
+			.value{}
+		}
+		
+		.orderTotal{
+			
+			background-color: $superLightGrey;
 
-//https://checkout.sandbox.netsuite.com/s.nl?c=665798&sc=4&logoff=T&ckabandon=SDYQkmW-AS2Vex5Y&shipmeth=51489&ck=SDYQkmW-AS2Vex5Y&vid=SDYQkpa-AYvEuRir&cktime=114278&cart=329446&promocode=&dontcookiepromocode=T&addrcountry=US&addrzip=75150&gc=clear
-
-//         https://checkout.netsuite.com/&ckabandon=SDYQknu-AWbyFVB-&ck=SDYQknu-AWbyFVB-&vid=SDYQkka-ATiwYg3I&cktime=114273&cart=343660&gc=clear
+			label{ 
+				font-weight: bold;
+				color: black;
+			}
+			td{ padding-top: px(10px) !important; }
+			.value{}
+		}
+	}
+}
