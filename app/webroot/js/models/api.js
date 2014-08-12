@@ -124,7 +124,7 @@
 		},
 
 		request : function(controller, eventName, method, data){
-			return this._request('GET', 'json', controller, eventName, method, data);
+			return this._request('GET', 'jsonp', controller, eventName, method, data);
 		}
 	});
 	
