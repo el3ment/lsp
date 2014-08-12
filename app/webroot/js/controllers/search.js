@@ -18,7 +18,9 @@
 			// category : '',
 			// allAttributes : ''
 		};
-		var _state = {};
+		var _state = {
+			view : (LSP.settings || {}).defaultSearchView || 'listView'
+		};
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
 
@@ -586,6 +588,8 @@
 						_app.controllers.application.attachEvents($('.page-search'));
 					}
 
+					_this.changeView(_state.view);
+
 					$('.page-search').show();
 					$('.page-generic').hide();
 
@@ -594,6 +598,7 @@
 					_this.renderSelectedRefinements(easyAskDataObject);
 					_this.renderRefinements(easyAskDataObject);
 					_this.renderProducts(easyAskDataObject);
+					
 
 					//Make page full width if refinements aren't there.
 					// if(!easyAskDataObject.navPath._lsp.refinementNodes.length && !easyAskDataObject.attributes.attribute){
