@@ -11,16 +11,7 @@
 
 		var _isFirstRequest = true;
 
-		var _defaultState = {
-			// resultsPerPage : '24',
-			page : '1'
-			// sort : 'default',
-			// category : '',
-			// allAttributes : ''
-		};
-		var _state = {
-			view : (LSP.settings || {}).defaultSearchView || 'listView'
-		};
+		var _state = { };
 
 		var _attributeHistory = []; // [{name : attributeName, state : 'temporary or static'}]
 
@@ -380,6 +371,15 @@
 			pullState : function(state){
 
 				var path = document.location.pathname.replace(/\?.*/, '');
+
+				var _defaultState = {
+					// resultsPerPage : '24',
+					page : '1',
+					// sort : 'default',
+					// category : '',
+					// allAttributes : ''
+					view : (LSP.settings || {}).defaultSearchView || 'listView'
+				};
 
 				_state = $.extend({}, _defaultState, (state || {}));
 
