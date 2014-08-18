@@ -20,6 +20,8 @@
 		padding-left: 170px;	
 		padding-bottom: 30px;
 		color: black;
+		float: none;
+		top: 0px;
 	}
 	&.right .content{
 		padding-left: 20px;
@@ -41,6 +43,7 @@
 		position: absolute;
 		left: 0;
 		bottom: 0;
+		z-index: 1;
 		img{
 			min-height:1px; // otherwise they are considered :hidden by jquery
 			min-width:1px;
@@ -66,6 +69,30 @@
 
 	p{
 		margin-bottom: 10px;
+	}
+
+	&.rightPadImage .productImage{
+		margin-right: 10px;
+	}
+	
+	&.leftPadImage .productImage{
+		margin-left: 10px;
+	}
+
+	&.verticalCenterImage .productImage{
+		top: 50%;
+		margin-top: -85px;
+	}
+
+	&.topCenterImage .productImage{
+		top: 10px;
+	}
+
+	&.right.wideImage .content{
+		padding-right: 210px;
+	}
+	&.left.wideImage .content{
+		padding-left: 220px;
 	}
 
 	@media (max-width: 767px){
@@ -109,11 +136,17 @@
 }
 
 .bsa-barebones, .bsa-newsletter{
+	
 	padding: 20px;
 	padding-top: 0px;
+	
 	.title{
 		font-weight: bold;
 		font-size: 15px;
+	}
+	
+	.h2{
+		margin-bottom: 5px;
 	}
 }
 .bsa-newsletter{
@@ -126,4 +159,8 @@
 	.content{
 		padding-left: 20px;
 	}
+}
+
+.page-search *[class*="bsa-"]{
+	display: none !important;
 }

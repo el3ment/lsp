@@ -144,6 +144,9 @@
 				iframe{ width: 100%; }
 			}
 		}
+		.ads{
+			border-top: 0;
+		}
 		.images{
 			
 			margin-top: 0;
@@ -300,6 +303,12 @@
 			width: 100%;
 			@include box-sizing();
 		}
+
+		*[class*="bsa-"] .content{
+			float: none;
+			top: 0px;
+		}
+		
 		@include clearfix;
 		
 	}
