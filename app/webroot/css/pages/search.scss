@@ -1,6 +1,11 @@
 /* Search Results */
 
 .page-search{
+
+	*[class*="bsa-"]{
+		display: none !important;
+	}
+
 	position: relative;
 	
 
