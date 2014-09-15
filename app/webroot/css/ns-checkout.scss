@@ -2672,3 +2672,91 @@ html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"
 		}
 	}
 }
+
+
+// VWO "Enhanced Payment" Promotion
+.nscheckout-payment{
+
+	.bsa-expertAdvice.noImage .content{
+		padding-left:20px;
+	}
+	@media (max-width: 979px){
+		tr[height="25"] .steps{
+			margin-left:0;
+		}
+	}
+	@media (min-width: 768px){
+		.header.small ~ .page-generic input[name="category"] ~ table,
+		#paymeth > table{
+			margin-top: 0px !important;
+			width: 65% !important;
+		}
+	}
+	@media (max-width: 767px){
+		.orderSummary .cart { margin-top: 40px; }
+		.orderSummary tbody td{ width: 900px !important; } 
+	}
+	@media (max-width: 400px){
+		.notice{
+			width: 30% !important;
+		}
+	}
+
+	.page-generic{
+		padding-bottom: 100px;
+	}
+
+	@media (max-width: 767px){
+		.header.small ~ .page-generic input[name="category"] ~ table,
+		#paymeth > table{
+			margin-top: 10px !important;
+			float:right;
+		}
+		.orderSummary{
+			margin-top: 40px;
+		}
+		table tr td.checkoutwarning{
+			padding: 5px 10px !important;
+			margin-top: 30px !important;
+		}
+		table tr.newGiftCardRow{
+			margin-top: 20px !important;
+		}
+		.newGiftCardRow input[type="checkbox"]{ 
+			float: left !important;
+			position: relative !important;
+			top: 0px !important; 
+		}
+		.orderSummary .cart table{
+			display: table !important;
+		}
+		.orderSummary .cart tr{
+			display: table-row !important;
+		}
+		.orderSummary .cart td{
+			display: table-cell !important;
+		}
+	}
+
+
+	.notice{
+		width: 50%;
+	}
+	.orderSummary{
+		float: right !important;
+		width: 100% !important;
+	}
+	.bsa-expertAdvice{
+		margin-top:20px !important;
+		width: 100% !important;
+		float: right !important;
+	}
+	.bsa-expertAdvice .content{
+		padding-bottom:15px !important;
+	}
+
+	//.orderSummary{border:0;font-size:13px;}.orderSummary .b1{float:right;margin-bottom:20px;zoom:1;}.orderSummary .b1:after{display:block;clear:both;content:' ';}.orderSummary .cart{padding:0;}.orderSummary table{width:100%;}.orderSummary table td{width:100%;}.orderSummary thead td{padding:10px 0 0 10px!important;}.orderSummary tbody{}.orderSummary tbody td{width:100%;padding:10px!important;border-bottom:1px solid #cfcfcf;vertical-align:top;}.orderSummary tbody tr:first-child td{padding-top:0px;}.orderSummary tbody .productAvailability{margin-left:20px;float:left;}.orderSummary tbody .quantity{float:left;}.orderSummary tbody .quantity .data{font-weight:bold;}.orderSummary tbody .quantity .productQuantity{font-weight:bold;}.orderSummary tbody .properties{float:left;}.orderSummary tbody .quantity .scroller{display:block;}.orderSummary tbody .productAvailability,.orderSummary tbody .quantity{margin-top:5px;}.orderSummary tbody .extendedPrice{text-align:right;}.orderSummary tbody .extendedPrice .productExtendedPrice{font-weight:bold;}.orderSummary tfoot td{padding:0 10px 0 10px!important;text-align:right;}.orderSummary tfoot .taxTotal td,.orderSummary tfoot .orderTotal td{padding-bottom:10px!important;}.orderSummary tfoot label{color:#847e77;font-weight:normal;}.orderSummary tfoot .value{font-weight:bold;}.orderSummary tfoot .merchandiseTotal td{padding-top:10px!important;}.orderSummary tfoot .orderTotal{background-color:#f5f4f0;}.orderSummary tfoot .orderTotal label{font-weight:bold;color:black;}.orderSummary tfoot .orderTotal td{padding-top:10px!important;}
+
+}
+
+// End VWO "Enhanced Payment" Promotion

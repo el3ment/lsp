@@ -63,6 +63,54 @@
 					},
 					onEnterPayment : function(e, data){
 						$('input[name="gc"], #applygift').attr('tabindex', -1);
+
+						// VWO Test "Enhanced Payment" Promotion
+						$('#stepSlider').prependTo('.page-generic').wrap('<table><tr height="25"><td></td></tr></table>'); // Move slider
+
+						// Set up structure
+						$('#paymeth > table').parent().parent().addClass('row-fluid');
+						$('#paymeth > table').addClass('span8').attr('style', '');
+						$('<div class="span4 rightColumn pull-right"><div class="orderSummary"></div>').insertBefore('#paymeth > table')
+						$(".cart").prependTo(".orderSummary");
+						
+						// Move/Add BSA
+						$('.adForPaymentPage *[class*="bsa-"]').appendTo(".rightColumn").parent().removeClass("hide");
+
+						// Hide Gift Card
+						if($('.newGiftCardRow').length == 0)
+						  $('<tr class="newGiftCardRow"><td class="smalltextnolink" align="right" style="padding-top:10px;"><input id="giftCardCheckbox" type="checkbox" style="float:right;position:relative;top:10px;" onclick="window.toggleGiftCard()"></td><td style="padding-top:20px;">Do you have a gift card?<div class="details">Redeeming a Gift Card is easy!</div></tr>').insertBefore('input[name="sIssueNo"]');
+
+						$('td:contains("Apply a Gift Card"):last').attr('style', 'visibility: hidden;')
+						  $('.greytitle:contains("Gift Card"):last').attr('style', 'display: none !important;').parent().prev().attr('style', 'display: none !important;');
+						$('tr:contains("Apply a Gift Card"):last').addClass('giftCardRow');
+						$('tr:contains("If you have a gift card"):last').attr('style', 'display: none !important;');
+						$('input[name="sValidFromYr"] ~ tr:contains("Invalid"):last table').attr('style', 'margin: 20px 5px 10px 160px;');
+						
+
+						window.toggleGiftCard = function(){
+						  if($('#giftCardCheckbox').is(':checked')){
+						    $('.giftCardRow').attr('style', '');
+						    $('#giftCardCheckbox').prop('checked', true);
+						  }else
+						    $('.giftCardRow').attr('style', 'display: none !important;');
+						}
+
+						window.toggleGiftCard();
+
+						if($('input[name="gc"]').val().length > 0){
+						  $('.giftCardRow').show();
+						  $('tr:contains("Do you"):last').attr('style', 'display: none !important;');
+						}
+
+						// Hide Security Code Help Text
+						$('tr:contains("For most credit"):last').attr('style', 'display: none !important;');
+
+						// Review Notice
+						if($('.notice:contains("You will")').length == 0)
+						  $('<div class="notice" style="position: absolute;bottom: -110px;height: 100px;">You won&#39;t be charged yet<span class="details">You will review and place your order on the next page</span></div>').prependTo("#paymeth > table > tbody > tr:nth-child(3) > td > table > tbody > tr > td")
+						// END VWO Promotion
+
+
 					},
 					onEnterReview : function(e, data){
 
