@@ -1499,7 +1499,7 @@ input[name="category"][value="login-register"] ~ table{
 	}
 
 	// Address 2
-	tr:first-child + tr + tr + tr{
+	.table_fields tr:first-child + tr + tr + tr{
 		td:first-child{ 
 			@include optionalLabel();
 			@media (max-width: 767px){
