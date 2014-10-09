@@ -26,6 +26,7 @@
 			},
 			_payload : function(controller, payload){
 
+
 				// payload : 
 				// 	{sort, resultsPerPage, page, category, attributes ({thing : [thing1, thing2]}), keywords, action ('advisor'), method ('CA_Search')}
 
@@ -248,6 +249,9 @@
 				return this.buildMultiAttributeString(attributeHashMap).replace('AttribSelect=', '').replace(/\/\/\/\/*/, '');
 			},
 
+			clearCachedAttributes : function(){
+				_attributeHistory = {};
+			},
 
 			cacheAttributes : function(easyAskDataSourceObject){
 
@@ -558,11 +562,11 @@
 
 			getKeywordsFromSEOPath : function(seoPath){
 
-				var seoPath = seoPath.split('/');
+				var seoPath = unescape(seoPath).split('/');
 
 				for(var i = 0; i < seoPath.length; i++){
 					if(seoPath[i].indexOf('-') === 0){
-						return seoPath[i];
+						return encodeURIComponent(seoPath[i]);
 					}
 				}
 

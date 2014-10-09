@@ -20,3 +20,9 @@
 
 .show6Elements > ul.list > li:first-child + li + li + li + li + li ~ li,
 .show6Elements > li:first-child + li + li + li + li + li ~ li{ display: none !important; }
+
+.show7Elements > ul.list > li:first-child + li + li + li + li + li + li ~ li,
+.show7Elements > li:first-child + li + li + li + li + li + li ~ li{ display: none !important; }
+
+.show8Elements > ul.list > li:first-child + li + li + li + li + li + li ~ li,
+.show8Elements > li:first-child + li + li + li + li + li + li + li ~ li{ display: none !important; }

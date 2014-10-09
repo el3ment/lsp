@@ -185,6 +185,9 @@
 							var state = (_app.controllers.application.parseStateFromHash(url[1]) || {}).search || {};
 							state.category = state.category || url[0];
 
+							//_api.clearCachedAttributes();
+							_attributeHistory = [];
+
 							// Force pushState
 							if(_this.loadState(state, null, true)){
 								$('html').attr('data-path', '').addClass('search-loading');
@@ -713,7 +716,8 @@
 
 			renderFatalError : function(response){
 				_gaq.push(['_trackEvent', 'search', 'error', 'fatalError : ' + response.serverResponse.status + ' : ' + response.serverResponse.statusText]);
-				alert('Something has gone wrong with our network connection to our database. You can try again by reloading the page. Sorry about that!');
+				receievedMessage = ((response.response.errorMsg || '').length > 0) ? ' ' + response.response.errorMsg + ' ' : ' ';
+				alert('Something has gone wrong with our network connection to our database.' + receievedMessage +'Sorry about that!');
 			}
 		};
 		

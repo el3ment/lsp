@@ -13,6 +13,10 @@
 	&.matrixType- .action .b1.disabledByDefault{ display: none; }
 	&.matrixType-PARENT .action .b1.disabledByDefault{ display: block; }
 
+	// Hide the wishlist button on matricies until a choice has been made
+	// Search results don't use MatrixType, so we have to handle them differently
+	&.matrixType-PARENT .action .b1.disabledByDefault[disabled] ~ button[data-action="addToWishlist"]{
+		display: none; }
 
 	// From VWO Campaign Winner - Big Button, Red Price
 		.addToCart .productPrice{ color: red !important; }
@@ -387,19 +391,23 @@
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="In Stock Soon"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="On Order"],
 .discontinued{
+	
 	.showIfDisallowBackordersAndOutOfStock{
 		display: block;
 	}
+	
 	.hideIfDisallowBackordersAndOutOfStock{
 		display: none;
 	}
+	
 	.addToCart{
 		.quantity, .action, .option{
 			display: none;
 		}
-		.productAvailability{
-			background-color: $superLightGrey;
-		}
+	}
+
+	.addToCart.panel .productAvailability{
+		background-color: $superLightGrey;
 	}
 }
 

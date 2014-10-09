@@ -57,7 +57,7 @@ function addToWishlist(config){
 	}
 	else config.messages.eq(1).show();
 }
-function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn)	{
+function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn, behavior)	{
 
 	var templateData = {
 		id : itemId,
@@ -70,7 +70,8 @@ function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, 
 		comments : unescape(itemComments),
 		msrp : baseprice,
 		stockMessage : unescape(stock),
-		mpn : unescape(mpn)
+		mpn : unescape(mpn),
+		behavior : unescape(behavior)
 	};
 
 	// var options = unescape(itemOptions).split(";"), optionLabels = "",

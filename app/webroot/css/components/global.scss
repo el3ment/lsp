@@ -434,12 +434,12 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 	
 	.email{
 		
-		
 		position: relative;
 		
 		input{
 			font-size: px($largeInputFontSize);
 			padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+			line-height: 22px;
 		}
 		
 		.b1, .b3{

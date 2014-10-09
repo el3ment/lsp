@@ -16,6 +16,20 @@
 
 		_this =  {
 			events : {
+				
+				home : {
+					onEngageAd : function(e, data){
+						alert('hey!');
+						 _gaq.push(['_setCustomVar',
+							  1,
+							  'Clicked Ad',
+							  data.selector.data('context') || 'Yes',
+							  2
+						   ]);
+						 // Force the Custom Var to be set
+						_gaq.push(['_trackEvent', 'advertisement', 'click', data.selector.data('context'), 1, true]);
+					}
+				},
 
 				application : {
 

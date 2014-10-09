@@ -292,6 +292,10 @@
 				@include clearfix();
 			}
 			
+			.hasOptions .b1[disabled] ~ button[data-action="addToWishlist"]{
+				display: none;
+			}
+
 			@media (max-width: 979px) and (min-width: 768px){
 				.productAvailability .status > span {
 					display: none;
@@ -463,6 +467,7 @@
 						display: none;
 					}
 				}
+
 			}
 			.scroller{
 				position: absolute;
@@ -499,6 +504,7 @@
 					left: px($hideDistance + 2 * $paddingUnit + 20px - 9px, $b1FontSize);
 				}
 			}
+
 		}
 		@media (max-width: 979px) and (min-width: 768px){
 			.entry {
