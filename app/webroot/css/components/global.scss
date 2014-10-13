@@ -454,3 +454,20 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 .forward{
 	float:right;
 }
+
+.boxlabel{
+    margin: 5px 0;                
+    background-color: lightgrey;
+    padding: 5px;
+    background-color: #f5f4f0; 
+    float: left;
+    border-radius: 5px;
+    color: #847e77;
+
+    &[class*="icon-"]{
+    	padding:  5px 5px 5px 35px;
+    	&:after{
+    		margin-left: 5px;
+    	}
+    }
+}

@@ -65,7 +65,7 @@
 						$('input[name="gc"], #applygift').attr('tabindex', -1);
 
 						// VWO Test "Enhanced Payment" Promotion
-						$('#stepSlider').prependTo('.page-generic').wrap('<table><tr height="25"><td></td></tr></table>'); // Move slider
+						$('#stepSlider').prependTo('.page-generic:first').wrap('<table><tr height="25"><td></td></tr></table>'); // Move slider
 
 						// Set up structure
 						$('#paymeth > table').parent().parent().addClass('row-fluid');

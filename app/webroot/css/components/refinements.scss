@@ -93,6 +93,15 @@
 				padding-left: 10px;
 			}
 		}
+
+		.details{
+			margin-left: -1px;
+		}
+
+		&:hover .details{
+			text-decoration: none;
+		}
+
 	}
 
 	// Basic link style
@@ -158,7 +167,7 @@
 		
 		&:hover{
 			//color: blue;
-			text-decoration: underline;
+			//text-decoration: underline;
 			//padding-left: 10px;
 			&:before{
 				color: $grey;

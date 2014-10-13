@@ -121,7 +121,11 @@
 			validate : function(element){
 				$(element).removeClass('validation-valid', 'validation-invalid');
 
-				var invalidTypes = _this.parseInvalid($(element).val(), $(element).attr('class').split(/\s+/));
+				var elementValue = $(element).prop('type') == 'radio' ? $('input[name=' + $(element).prop('name') + ']:checked').val() || '' : $(element).val(); 
+				
+				console.log(elementValue);
+
+				var invalidTypes = _this.parseInvalid(elementValue, $(element).attr('class').split(/\s+/));
 				if(invalidTypes.length > 0){
 					_this.displayInvalid(element, invalidTypes);
 					return false;
