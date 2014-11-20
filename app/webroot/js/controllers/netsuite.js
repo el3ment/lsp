@@ -1,5 +1,7 @@
 (function(){
-	
+
+define(['utilities/global', 'controllers/application'], function(){
+
 	var _util = window.LSP.utilities;
 	
 	_util.register('controller', 'netsuite', (function(){
@@ -115,5 +117,7 @@
 		return _this;
 
 	})());
+
+});
 
 })();

@@ -69,6 +69,11 @@
  *
  * https://github.com/kamens/jQuery-menu-aim
 */
+
+(function(){
+
+define([], function(){
+
 (function($) {
 
 	$.fn.menuAim = function(opts) {
@@ -333,3 +338,7 @@
 
 	};
 })(jQuery);
+
+});
+
+}())

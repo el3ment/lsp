@@ -1,3 +1,6 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
 div[data-lifecycleState="Marked for Cleanup"] .byline{
 	display: none;
 }

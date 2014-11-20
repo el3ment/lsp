@@ -1,3 +1,6 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
 /* Product Detail Page */
 .page-productDetail{
 	h1{
@@ -43,7 +46,7 @@
 	.share-buttons{
 		position: relative;
 		top: -7px;
-		margin-right5px;
+		margin-right: 5px;
 		
 		.s-24{
 			width: 30px;
@@ -261,7 +264,7 @@
 				height: 100%;
 			}
 			.productScope {
-				100%;
+				//100%; // This was flagged by the SASS processor - I imagine it was width: but I'm not sure
 			}
 		}
 		

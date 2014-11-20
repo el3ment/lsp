@@ -1,16 +1,9 @@
 @import "utilities/settings";
 @import "utilities/functions";
 
+@import "components/steps";
+
 // This file contains CSS nessesary only for native netsuite cart and checkout
-// It should be expected that this file will eventually disapear
-
-// Javascript Hooks
-
-// On the Receipt page, NetSuite doesn't include the id's for the carttable, so we add those
-// This avoids a giant mess, since the cart has some serious CSS happening
-// var cartTable = $('body .span12 > table[border="0"][cellspacing="0"][cellpadding="0"] > tbody > tr > td > table > tbody > tr > td > table > tbody > tr > td > table > tbody > tr:first-child + tr > td > table').attr('id', 'carttable')
-// $('> tbody > tr:first-child', cartTable).attr('id', 'carttableheader');
-// $('> tbody > tr:first-child ~ tr', cartTable).not('tr[id]').each(function(i, e){ $(e).attr('id', 'carttablerow' + i); });
 
 @mixin panel(){
 	@include box-shadow-multiple(0 0 px(3px) 0 $lightGrey);
@@ -1150,7 +1143,7 @@ input[name="category"][value="login-register"] ~ table{
 
 		.checkoutprogresstext{
 			width: 100%;
-			width: 600px \0/; // IE sucks
+			width: 600px\9; // IE sucks	
 			display: block;
 			top: -10px;
 		}
@@ -2761,17 +2754,19 @@ html[data-path*="newcust=T&noopt=T"] .page-generic > table input[name="category"
 
 // End VWO "Enhanced Payment" Promotion
 
-
-
 .securityGraphic{
 	position: relative;
-	top: 60px;
-	margin-top: 50px;
+	top: 30px;
+	margin-top: 80px !important;
 
 	.icon{
 		float: left;
 		margin-right: 10px;
 	}
+}
+
+#handle_cartCorrelatedItems .dynamicItemSuggestions{
+	border-top: 3px solid $lightGrey;
 }
 
 

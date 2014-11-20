@@ -1,4 +1,6 @@
 (function(){
+
+define(['utilities/global', 'controllers/application'], function(){
 	
 	var _app = window.LSP;
 	var _util = _app.utilities;
@@ -127,5 +129,7 @@
 			return this._request('GET', 'jsonp', controller, eventName, method, data);
 		}
 	});
+
+});
 	
-})();
+}());

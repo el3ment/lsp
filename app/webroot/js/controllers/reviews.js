@@ -1,5 +1,7 @@
 (function(){
 
+define(['utilities/global', 'controllers/application', 'vendors/form2js/form2js', 'models/api', 'models/netsuite'], function(){
+
 	var _util = window.LSP.utilities;
 	
 	_util.register('controller', 'reviews', (function(){
@@ -170,5 +172,7 @@
 
 		return _this;
 	})());
+
+});
 	
 })();

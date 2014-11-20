@@ -1,3 +1,6 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
 /* Panels */
 /* A panel is a boxed divison, like each step on checkout, the add-to-cart panel on product detail page, etc */
 .panel, a .panel{
@@ -14,7 +17,7 @@
 	margin-bottom: 17px;
 	color: $black;
 	h2{
-		margin-top:6px;p
+		margin-top:6px;
 		//margin-bottom: px($paddingUnit);
 	}
 }

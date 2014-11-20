@@ -1,4 +1,7 @@
 (function(){
+
+define(['utilities/global', 'vendors/unveil/unveil-min'], function(){
+
 	var _util = window.LSP.utilities;
 	
 	var application = (function(){
@@ -14,21 +17,8 @@
 		var _isPushingState;
 		var _defferedScriptCount = 0;
 
-		_this =  {
+		_this = {
 			events : {
-				
-				home : {
-					onEngageAd : function(e, data){
-						 _gaq.push(['_setCustomVar',
-							  1,
-							  'Clicked Ad',
-							  data.selector.data('context') || 'Yes',
-							  2
-						   ]);
-						 // Force the Custom Var to be set
-						_gaq.push(['_trackEvent', 'advertisement', 'click', data.selector.data('context'), 1, true]);
-					}
-				},
 
 				application : {
 
@@ -50,6 +40,10 @@
 						}
 					},
 					onAttachEvents : function(e, data){
+
+						// Ask the loader to load any new plugins or controllers if required
+						_util.loader.load(data.selector);
+
 						// This is a helper event attacher, it looks for all
 						// buttons, and if they have data-controller, and data-action
 						// attributes, will call the appropriate event.
@@ -141,7 +135,7 @@
 									$.ajaxSetup({cache: true});
 									$.getScript(script.attr('src'), function(){
 										requestNextScript();
-									})
+									});
 									script.remove();
 									$.ajaxSetup({cache: false});
 								}else{
@@ -166,10 +160,6 @@
 						}
 
 					},
-
-					// onAfterStateChange : function(e, data){
-					// 	_gaq.push(['_trackPageview']);
-					// },
 
 					onInit : function(e, data){
 						_state = _this.pullState();
@@ -196,16 +186,6 @@
 				_context = newContext;
 
 				return _context;
-			},
-
-			loadPage : function(href){
-				$.ajax({url : href}).done(function(response){
-					var newPageHTML = _util.findBetween('<!-- CONTENT AREA BEGIN CUSTOM CODE -->', '<!-- CONTENT AREA END CUSTOM CODE -->', response);
-					_this.attachEvents($('.page-generic').replaceWith(newPageHTML));
-					_util.scrollTo($('.page-generic'));
-				});
-
-				history.pushState(true, 'page', href);
 			},
 
 			getFilename : function(){
@@ -337,25 +317,28 @@
 			},
 
 			_createGlobalEventObject : function(){
-				return eventData = {
+				
+				eventData = {
 					filename : _this.getFilename(),
 					queryParameters : _util.getURLParameters(),
 					context : _this.getContext()
 				};
+
+				return eventData;
 			},
 
-			requiresNetsuite : function(){
-				if(typeof debugAlert === 'undefined'){
-					_this.include('/js/vendors/netsuite/interface.js');
-					$("head link").last().after("<link rel='stylesheet' href='//d2bghjaa5qmp6f.cloudfront.net/compress/css/css/ns-checkout.scss,/checkout1.0.44.css.css' type='text/css'>");
-				}
-			},
+			// requiresNetsuite : function(){
+			// 	if(typeof debugAlert === 'undefined'){
+			// 		_this.include('/js/vendors/netsuite/interface.js');
+			// 		$("head link").last().after("<link rel='stylesheet' href='//d2bghjaa5qmp6f.cloudfront.net/compress/css/css/ns-checkout.scss,/checkout1.0.44.css.css' type='text/css'>");
+			// 	}
+			// },
 
-			include : function(filename){
-				console.log('Async request for file : ' + filename);
-				jQuery.ajaxSetup({ cache:true});
-				$('head').append('<script type="text/javascript" src="//d2bghjaa5qmp6f.cloudfront.net/compress/js'+ filename +',/'+ filename + $('#currentScriptVersion').data('version') + '"></script>');
-			},
+			// include : function(filename){
+			// 	console.log('Async request for file : ' + filename);
+			// 	jQuery.ajaxSetup({ cache:true});
+			// 	$('head').append('<script type="text/javascript" src="//d2bghjaa5qmp6f.cloudfront.net/compress/js'+ filename +',/'+ filename + $('#currentScriptVersion').data('version') + '"></script>');
+			// },
 
 			initializeGlobalEvents : function(){
 				var eventData = _this._createGlobalEventObject();
@@ -427,7 +410,7 @@
 							$(_this).triggerHandler('onAfterReady', eventData);
 							console.timeEnd('Application onRezie, onReady, onAfterReady');
 							
-						}
+						};
 					}(eventData), 1);
 				});
 			},
@@ -462,7 +445,7 @@
 											//console.time("-" + controllerObj.name + ".events." + subController + "." + event);
 											controllerObj.events[subController][event](a, b, c, d);
 											//console.timeEnd("-" + controllerObj.name + ".events." + subController + "." + event);
-										}
+										};
 									}(controllerObj, subController, event));
 							}
 
@@ -504,5 +487,7 @@
 	
 	console.time('Application Initialize');
 	window.LSP.controllers.application.initializeGlobalEvents();
-	
+
+});
+
 }());

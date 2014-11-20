@@ -1,5 +1,7 @@
 (function(){
 	
+define(['utilities/global','controllers/application', 'vendors/touchcarousel/touchcarousel', 'plugins/flyout'], function(){
+
 	var _util = window.LSP.utilities;
 	
 	_util.register('controller', 'home', (function(){
@@ -74,6 +76,8 @@
 		return _this;
 
 	})());
+
+});
 
 })();
 

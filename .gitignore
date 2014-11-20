@@ -11,3 +11,6 @@ static/*/**
 aws_credential_file
 .elasticbeanstalk
 app/tmp/cache/persistent
+tests/**/diffs/*
+tests/**/results/*
+.sass-cache

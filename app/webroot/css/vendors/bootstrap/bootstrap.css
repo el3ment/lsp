@@ -20,7 +20,8 @@
   clear: both;
 }
 .hide-text {
-  font: 0/0 a;
+  font: 0 a;
+  line-height: 0;
   color: transparent;
   text-shadow: none;
   background-color: transparent;

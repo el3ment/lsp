@@ -1,5 +1,7 @@
 (function(){
 	
+define(['utilities/global', 'controllers/application'], function(){
+
 	var _util = window.LSP.utilities;
 	
 	var shipping = (function(){
@@ -78,5 +80,7 @@
 	})();
 	
 	_util.register('controller', 'shipping', shipping);
+
+});
 	
 })();

@@ -1,3 +1,6 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
 /* Shopping Cart */
 .page-cart{
     .head{ 
@@ -82,7 +85,6 @@
         clear: both;
         width: 100%;
 		float: left;
-		border-otp
 	}
     
     thead{

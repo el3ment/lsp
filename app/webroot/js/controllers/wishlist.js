@@ -1,3 +1,7 @@
+(function(){
+
+define(['utilities/global', 'controllers/application'], function(){
+
 // Begin Suite Commerce Stuff
 function parsePrice(number,bool)	{
 	number = (Math.round(number*100))/100;
@@ -313,3 +317,8 @@ function searchWishlist(config){
 	}()));
 
 })();
+
+
+});
+
+}())

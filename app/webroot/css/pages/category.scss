@@ -1,3 +1,6 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
 // Netsuite's crappy pagination
 #handle_itemMainPortlet{
 	display: none;
@@ -422,8 +425,7 @@
 	}
 }
 
-@import "components/categoryBlocks.scss";
-
+@import "../components/categoryBlocks.scss";
 
 .page-category .section.categories{
 	padding-bottom: 0px;

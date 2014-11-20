@@ -31,15 +31,14 @@ class CompressController extends Controller {
 			Cache::write(md5($_SERVER['REQUEST_URI'] . '-time'), strtotime('now'));
 		}
 
-		$this->render('text/javascript', $fullScript, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
+		//$this->output('text/javascript', $fullScript, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
 	}
 	
 	function css(){
 		//App::import('Vendor', 'CSSTidy', array('file' =>'CSSTidy'.DS.'class.csstidy.php'));
-	
 		$time = microtime(true);	
 		$filesArray = explode(",", str_replace("/compress/css/", "", $_SERVER['REQUEST_URI']));
-		$css = Cache::read(md5($_SERVER['REQUEST_URI']));
+		$css = false;//Cache::read(md5($_SERVER['REQUEST_URI']));
 		if($css === false){
 			$css = '';
 			foreach($filesArray as $file){
@@ -61,7 +60,9 @@ class CompressController extends Controller {
 					}
 				}else{
 					//echo WWW_ROOT . $file;
-					$css .= file_get_contents(WWW_ROOT . $file);
+					if(is_file(WWW_ROOT . $file)){
+						$css .= file_get_contents(WWW_ROOT . $file);
+					}
 				}
 				
 			}
@@ -72,10 +73,10 @@ class CompressController extends Controller {
 		// $cssTidy = new csstidy();
 		// $cssTidy->parse($css);
 		// $cssTidy->print->plain();
-		$this->render('text/css', $css, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
+		$this->output('text/css', $css, Cache::read(md5($_SERVER['REQUEST_URI'] . '-time')));
 	}
 
-	function render($mime, $content, $modified){
+	function output($mime, $content, $modified){
 		
 		if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == $modified){
 			header("HTTP/1.1 304 Not Modified");

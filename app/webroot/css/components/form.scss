@@ -1,5 +1,5 @@
-@import "settings";
-@import "functions";
+@import "../utilities/settings";
+@import "../utilities/functions";
 
 /* Standard Form Styling */
 input, select, textarea{
@@ -197,7 +197,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 		@include gradient($lightYellow, $darkYellow);
 		text-decoration: none;
 	}
-.
+	
 	// Don't do the hover effect on disabled buttons
 	&[disabled]:hover, &.active{
 		@include gradient($lightYellow, $darkYellow);

@@ -1,5 +1,7 @@
 (function(){
-	
+
+define(['utilities/global', 'controllers/application'], function(){
+
 	var _util = window.LSP.utilities;
 	
 	_util.register('controller', 'category', (function(){
@@ -73,5 +75,7 @@
 		
 		return _this;
 	}()));
+
+});
 	
 }());

@@ -1,5 +1,7 @@
 (function(){
 
+define(['utilities/global', 'controllers/application', 'models/api'], function(){
+
 	var _util = window.LSP.utilities;
 	var _models = window.LSP.models;
 	
@@ -591,5 +593,7 @@
 		});
 
 	}()));
+
+});
 	
 }());

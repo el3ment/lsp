@@ -7,6 +7,7 @@
  * Copyright 2013 Luís Almeida
  * https://github.com/luis-almeida
  */
+define([], function(){
 
 ;(function($) {
 
@@ -68,3 +69,5 @@
 	};
 
 })(window.jQuery || window.Zepto);
+
+});

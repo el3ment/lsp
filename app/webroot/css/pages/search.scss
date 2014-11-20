@@ -1,3 +1,8 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+$_topOfPrice : 325px;
+		
 /* Search Results */
 
 .page-search{
@@ -310,7 +315,6 @@
 	
 	.gridView{
 		
-		$_topOfPrice : 325px;
 		.listScope{
 			clear: both;
 			display: block;
@@ -709,7 +713,7 @@
 		}
 		
 		.gridView .entry{
-			padding-bottom: ;
+			//padding-bottom: ;
 		}
 		.compare{
 			display: none;
@@ -807,7 +811,6 @@
 				position: absolute;
 				bottom: 65px;
 				right: $hideDistance + $paddingUnit + 2px;
-				@media 
 			}
 			.shortStatus{
 				display: block;

@@ -10,10 +10,10 @@ class FeedController extends AppController {
 		$logFile = "";
 		switch($type){
 			case 'broken':
-				$logFilename = ROOT . '/tmp/logs/resize.log';
+				$logFilename = ROOT . '/app/tmp/logs/resize.log';
 				break;
 			case 'size':
-				$logFilename = ROOT . '/tmp/logs/size.log';
+				$logFilename = ROOT . '/app/tmp/logs/size.log';
 				break;
 				
 		}

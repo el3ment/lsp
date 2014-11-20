@@ -24,6 +24,7 @@
  * Time: 19:02:33
  */
 
+define([], function(){
 
 var form2js = (function()
 {
@@ -335,3 +336,5 @@ var form2js = (function()
 
 LSP.utilities = LSP.utilities || {};
 LSP.utilities.formToObject = form2js;
+
+});
