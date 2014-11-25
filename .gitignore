@@ -13,6 +13,6 @@ aws_credential_file
 app/tmp/cache/persistent
 tests/**/diffs/*
 tests/**/results/*
-.sass-cache
+.sass-cache/*
 node_modules/*
 tests/**/*
