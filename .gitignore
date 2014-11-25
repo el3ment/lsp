@@ -15,4 +15,4 @@ tests/**/diffs/*
 tests/**/results/*
 .sass-cache
 node_modules/*
-tests/**/
+tests/**/*
