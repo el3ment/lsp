@@ -14,5 +14,5 @@ app/tmp/cache/persistent
 tests/**/diffs/*
 tests/**/results/*
 .sass-cache
-node_modules/
+node_modules/*
 tests/**/
