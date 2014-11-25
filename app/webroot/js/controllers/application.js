@@ -1,6 +1,6 @@
 (function(){
 
-define(['utilities/global', 'vendors/unveil/unveil-min'], function(){
+define(['jquery', 'utilities/global'], function(){
 
 	var _util = window.LSP.utilities;
 	
@@ -112,8 +112,11 @@ define(['utilities/global', 'vendors/unveil/unveil-min'], function(){
 							});
 						});
 
-						// Set up lazy loading of images, give them a blank background src
-						$('*[data-src]:not([data-lazy-handled])', data.selector).attr('data-lazy-handled', true).unveil(200);//attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')
+						require(['vendors/unveil/unveil-min'], function(data){
+							return function(){ 
+								$('*[data-src]:not([data-lazy-handled])', data.selector).attr('data-lazy-handled', true).unveil(200);
+							};
+						}(data));
 					},
 
 					onReady : function(e, data){
@@ -401,17 +404,16 @@ define(['utilities/global', 'vendors/unveil/unveil-min'], function(){
 					// $(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-hash-change'), eventData);
 					
 					// Defer parsing until the next avaliable moment - this allows the onLoad event to finish firing
-					setTimeout(function(){
-						return function(){
-							console.time('Application onRezie, onReady, onAfterReady');
+					//setTimeout(function(){
+					//	return function(){
+							//console.time('Application onRezie, onReady, onAfterReady');
 							$(_this).triggerHandler('onResize', eventData);
 							$(_this).triggerHandler('onReady', eventData);
-							//$(_this).triggerHandler(_util.camelCase('on-'+ eventData.filename +'-ready'), eventData);
 							$(_this).triggerHandler('onAfterReady', eventData);
-							console.timeEnd('Application onRezie, onReady, onAfterReady');
+							//console.timeEnd('Application onRezie, onReady, onAfterReady');
 							
-						};
-					}(eventData), 1);
+					//	};
+					//}(eventData), 1);
 				});
 			},
 

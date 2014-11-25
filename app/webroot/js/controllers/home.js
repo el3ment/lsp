@@ -1,6 +1,6 @@
 (function(){
 	
-define(['utilities/global','controllers/application', 'vendors/touchcarousel/touchcarousel', 'plugins/flyout'], function(){
+define(['utilities/global','controllers/application'], function(){
 
 	var _util = window.LSP.utilities;
 	
@@ -29,26 +29,33 @@ define(['utilities/global','controllers/application', 'vendors/touchcarousel/tou
 					onReady : function(e, data){
 						var mainSlider = $('#mainSlider');
 						if(mainSlider.length){
-							$('#mainSlider').touchCarousel({
-								
-								// This is a custom patch for Lone Star Percussion
-								// It assumes uniform width of items, and calculates
-								// how many items per page automatically. This solves
-								// the responsive design problem of hardcoding too many
-								// items per page
-								_calculatePageWidth: true,
-								
-								scrollbar: false,
-								pagingNav: true,
-								pagingNavControls: true,
-								itemsPerPage: 1,
-								scrollToLast: true,
-								loopItems: true
-
-								// Testing this out
-								//useWebkit3d : true
+							
+							require(['plugins/flyout'], function(){
+								_app.controllers.flyout.openFlyout(true);
 							});
 
+							require(['vendors/touchcarousel/touchcarousel'], function(){
+								$('#mainSlider').touchCarousel({
+									
+									// This is a custom patch for Lone Star Percussion
+									// It assumes uniform width of items, and calculates
+									// how many items per page automatically. This solves
+									// the responsive design problem of hardcoding too many
+									// items per page
+									_calculatePageWidth: true,
+									
+									scrollbar: false,
+									pagingNav: true,
+									pagingNavControls: true,
+									itemsPerPage: 1,
+									scrollToLast: true,
+									loopItems: true
+
+									// Testing this out
+									//useWebkit3d : true
+								});
+							});
+							
 							//var touchCarousel = slider.data('touchCarousel');
 							// setTimeout(function(){
 							// touchCarousel.goTo(0);

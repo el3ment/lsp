@@ -2,8 +2,9 @@
 
 define(['utilities/global', 'controllers/application'], function(){
 
+
 // Begin Suite Commerce Stuff
-function parsePrice(number,bool)	{
+window.parsePrice = function parsePrice(number,bool)	{
 	number = (Math.round(number*100))/100;
 	var aux1 = parseInt(number/1000), aux2 = Math.round((number%1000)*100)/100;
 	if(aux2 < 100)	{
@@ -24,18 +25,18 @@ function parsePrice(number,bool)	{
 		return "$" + number;
 	}
 	return number;
-}
-function getNumber(string){
+};
+window.getNumber = function getNumber(string){
 	string += "";
 	if(string.indexOf("$") != -1) string = string.substring(string.indexOf("$") + 1).replace(",","").replace(" ","");
 	return parseFloat(string);
-}
-function calcSaves(list,sale)	{
+};
+window.calcSaves = function calcSaves(list,sale)	{
 	var list = getNumber(list), sale = getNumber(sale), dif = list - sale, perDif = Math.round(dif*10000/list)/100;
 	if(dif > 0) return perDif + "%";
 	else return false;
-}
-function addToWishlist(config){
+};
+window.addToWishlist = function addToWishlist(config){
 	config.messages.hide();
 	if (config.customer != "")	{
 		var options = "";
@@ -60,8 +61,9 @@ function addToWishlist(config){
 		}
 	}
 	else config.messages.eq(1).show();
-}
-function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn, behavior)	{
+};
+
+window.drawWishlist = function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, itemOptions, itemComments, baseprice, stock, mpn, behavior)	{
 
 	var templateData = {
 		id : itemId,
@@ -111,11 +113,11 @@ function drawWishlist(itemId, itemUrl, itemThumb, itemName, itemPrice, itemQty, 
 			$('.wish-text-saved', this.parentNode).hide();
 		}
 	});
-}
-function wishlistReady(bool)	{
+};
+window.wishlistReady = function wishlistReady(bool)	{
 	if(document.location.href.indexOf("austintest") != -1) alert(bool);
 };
-function wishStatusText(public){
+window.wishStatusText = function wishStatusText(public){
 	if(public == "T")	{
 		$('input[type="radio"][name="isPublic"][value="true"]').attr('checked',true);
 		$('#wishlistStatus').removeClass('loading').html('public');
@@ -123,8 +125,8 @@ function wishStatusText(public){
 		$('input[type="radio"][name="isPublic"][value="false"]').attr('checked',true);
 		$('#wishlistStatus').removeClass('loading').html('private');	
 	}
-}
-function myWishlist(config){
+};
+window.myWishlist = function myWishlist(config){
 	if (config.customer != ""){
 		config.messages.filter('.loggedIn').show();
 		var today = new Date(),
@@ -191,15 +193,15 @@ function myWishlist(config){
 	}else{
 		config.messages.hide().filter(".notLoggedIn").show();
 	} 
-}
-function addCustomer(customerId, customerName, customerLastName, customerEmail){
+};
+window.addCustomer = function addCustomer(customerId, customerName, customerLastName, customerEmail){
 	var template = 	"<div class='wish-result'>";
 	template +=			"<a href='#'>" + unescape(customerName) + " " + unescape(customerLastName) + " - " + customerEmail + "</a>";
 	template +=			"<input type='hidden' value='" + customerId + "' />";
 	template +=		"</div>";
 	$("#wish-search-results").append(template);
-}
-function searchWishlist(config){
+};
+window.searchWishlist = function searchWishlist(config){
 	var today = new Date();
 	$.getScript("/app/site/hosting/scriptlet.nl?script=customscript_search_wishlist&deploy=customdeploy_search_wishlist&st=" + config.searchText + "&random=" + (Math.random() * today.getTime()), function(){
 		config.messages.hide();
@@ -244,7 +246,7 @@ function searchWishlist(config){
 			}
 		});
 	});
-}
+};
 
 // END SuiteCommerce stuff
 
@@ -261,6 +263,11 @@ function searchWishlist(config){
 			events : {
 				application : {
 					onReady : function(e, data){
+
+						if(LSP.config.wishlist){
+							myWishlist(LSP.config.wishlist.myWishlistSettings);
+						}
+						
 						var searchButton = $("#search-wish"),
 							searchText = $("#search-wish-text"),
 							wishMessages = $(".wishlist-messages > div");

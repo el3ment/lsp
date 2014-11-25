@@ -1,0 +1,1 @@
+!function(){define(["utilities/global","controllers/application"],function(){var a=window.LSP,b=a.utilities;b.register("model","ads",{events:{home:{onEngageAd:function(a,b){_gaq.push(["_setCustomVar",1,"Clicked Ad",b.selector.data("context")||"Yes",2]),_gaq.push(["_trackEvent","advertisement","click",b.selector.data("context"),1,!0])}}}})})}();

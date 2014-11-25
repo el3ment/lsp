@@ -18,6 +18,12 @@ define(['utilities/global', 'controllers/application'], function(){
 		_this =  {
 			events : {
 				checkout : {
+					onInit : function(e, data){
+						
+						LSP.config = LSP.config || {};
+
+						_this.setPage(LSP.config.setPage);
+					},
 					onEnterCart : function(e, data){
 						// Remove 'empty' links - they create a state in history
 						// that is annoying to overcome
@@ -184,9 +190,13 @@ define(['utilities/global', 'controllers/application'], function(){
 			}
 
 		};
-		
+
 		return _this;
 	}()));
+
+	for(var i = 0; i < ((((LSP.config || {}).checkout || {}).page) || []).length; i++){
+		LSP.controllers.checkout.setPage(LSP.config.checkout.page[i]);
+	}
 
 });
 

@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+	//var mozjpeg = require('imagemin-mozjpeg');
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		
@@ -48,8 +50,7 @@ module.exports = function(grunt) {
 				files: [{
 					expand: true,
 					cwd: 'app/webroot/js',
-					src: ['**/*.js',
-							'!vendors/**/*'],
+					src: ['**/*.js', '!vendors/netsuite/**/*'], //'!vendors/**/*'],
 					dest: 'app/webroot/min/js'
 				}]
 			}
@@ -70,6 +71,7 @@ module.exports = function(grunt) {
 				}]
 			}
 		  },
+
 
 		// Clean clears directories or removes files
 		clean: {
@@ -101,7 +103,7 @@ module.exports = function(grunt) {
 		watch: {
 			scripts : {
 				files : 'app/webroot/js/**/*.js',
-				tasks : ['clean:js', 'uglify'],
+				tasks : ['clean:js', 'uglify', 'copy'],
 			},
 			sass : {
 				files : 'app/webroot/css/**/*.scss',
@@ -151,8 +153,8 @@ module.exports = function(grunt) {
 			},
 			firefox : {
 				options: {
-					host: 'localhost',
-					port: 4444,
+					//host: 'localhost',
+					//port: 4444,
 					desiredCapabilities:{
 						browserName: 'firefox',
 						screenWidth: [1024]
@@ -162,8 +164,8 @@ module.exports = function(grunt) {
 			},
 			chrome : {
 				options: {
-					host: 'localhost',
-					port: 4444,
+					//host: 'localhost',
+					//port: 4444,
 					desiredCapabilities:{
 						browserName: 'chrome',
 						screenWidth: [1024]
@@ -174,7 +176,7 @@ module.exports = function(grunt) {
 			android : {
 				options: {
 					desiredCapabilities:{
-						'tunnel-identifier': 'lsp-tunnel-dev',
+						//'tunnel-identifier': 'lsp-tunnel-dev',
 						browserName: 'chrome',
 						screenWidth: [400]
 					}
@@ -184,7 +186,7 @@ module.exports = function(grunt) {
 			safari : {
 				options: {
 					desiredCapabilities:{
-						'tunnel-identifier': 'lsp-tunnel-dev',
+						//'tunnel-identifier': 'lsp-tunnel-dev',
 						browserName: 'safari',
 						screenWidth: [1024]
 					}
@@ -194,7 +196,7 @@ module.exports = function(grunt) {
 			ios : {
 				options: {
 					desiredCapabilities:{
-						'tunnel-identifier': 'lsp-tunnel-dev',
+						//'tunnel-identifier': 'lsp-tunnel-dev',
 						browserName: 'safari',
 						screenWidth: [320]
 					}
@@ -204,7 +206,7 @@ module.exports = function(grunt) {
 			ie9 : {
 				options : {
 					desiredCapabilities: {
-						'tunnel-identifier': 'lsp-tunnel-dev',
+						//'tunnel-identifier': 'lsp-tunnel-dev',
 						browserName: 'iexplore',
 						version: '9',
 						platform: 'Windows 7',
@@ -216,7 +218,7 @@ module.exports = function(grunt) {
 			ie10 : {
 				options : {
 					desiredCapabilities: {
-						'tunnel-identifier': 'lsp-tunnel-dev',
+						//'tunnel-identifier': 'lsp-tunnel-dev',
 						browserName: 'iexplore',
 						version: '10',
 						platform: 'Windows 7',
@@ -228,7 +230,7 @@ module.exports = function(grunt) {
 			ie11 : {
 				options : {
 					desiredCapabilities: {
-						'tunnel-identifier': 'lsp-tunnel-dev',
+						//'tunnel-identifier': 'lsp-tunnel-dev',
 						browserName: 'iexplore',
 						version: '11',
 						platform: 'Windows 7',
@@ -238,6 +240,35 @@ module.exports = function(grunt) {
 				tests : 'tests/webdriver/suite.js'
 			}
 		},
+
+		copy: {
+		  main: {
+		    files: [
+		      // includes files within path
+		      {expand: true, cwd: 'app/webroot/js/vendors/netsuite', src: ['**'], dest: 'app/webroot/min/js/vendors/netsuite'},
+		      {expand: true, cwd: 'app/webroot/css/vendors', src: ['**'], dest: 'app/webroot/min/css/vendors/'}],
+		      //{src: ['app/webroot/js/vendors/**'], dest: 'dest/'}],
+		      //{src: ['app/webroot/js/vendors/*'], dest: 'app/webroot/min/js/vendors/'}]
+		  }
+		},
+		  imagemin: {                          // Task
+		    static: {                          // Target
+		      // options: {                       // Target options
+		      //   optimizationLevel: 3,
+		      //   svgoPlugins: [{ removeViewBox: false }],
+		      //   use: [mozjpeg()]
+		      // },
+		      files: [{
+		        expand: true,                  // Enable dynamic expansion
+		        cwd: 'app/webroot/img',                   // Src matches are relative to this path
+		        src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
+		        dest: 'app/webroot/min/img'                  // Destination path prefix
+		      }]
+		    },
+		    // dynamic: {                         // Another target
+
+		    // }
+		  }
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -248,9 +279,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-casperjs');
 	grunt.loadNpmTasks('grunt-docco');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean', 'uglify', 'sass']);
+	grunt.registerTask('default', ['clean', 'uglify', 'copy', 'sass', 'imagemin']);
 	grunt.registerTask('webdrivercss', ['webdriver']);
 	grunt.registerTask('phantomcss', ['casperjs']);
 	grunt.registerTask('docs', ['docco']);

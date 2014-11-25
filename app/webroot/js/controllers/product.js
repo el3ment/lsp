@@ -1,6 +1,6 @@
 (function(){
 
-define(['utilities/global', 'controllers/application'], function(){
+define(['utilities/global', 'controllers/application', 'models/easyask', 'vendors/jqzoom/jqzoom'], function(){
 	
 	var _util = window.LSP.utilities;
 	
@@ -26,15 +26,20 @@ define(['utilities/global', 'controllers/application'], function(){
 					onAddToWishlist : function(e, data){
 						var form = data.selector.parents('form');
 						_this.updateProduct(form);
-						addToWishlist({
-							customer: $('input[name="customer"]', form).val(),
-							item: $('input[name="buyid"]', form),
-							site: 'lonestarpercussion',
-							options : $('.shopping.section select', form),
-							qty: $('.shopping.section input[name="qty"]', form),
-							messages: $(".wishlist-messages > div", form)
-						});
-						_gaq.push(['_trackEvent', 'product', _util.camelCase('addToWishlist-' + _this.getProductContext(form)), $('.productName', form.parents('.entry')).text()]);
+						
+						require(['controllers/wishlist'], function(wishlist){
+							addToWishlist({
+								customer: $('input[name="customer"]', form).val(),
+								item: $('input[name="buyid"]', form),
+								site: 'lonestarpercussion',
+								options : $('.shopping.section select', form),
+								qty: $('.shopping.section input[name="qty"]', form),
+								messages: $(".wishlist-messages > div", form)
+							});
+						
+							_gaq.push(['_trackEvent', 'product', _util.camelCase('addToWishlist-' + _this.getProductContext(form)), $('.productName', form.parents('.entry')).text()]);
+						})
+						
 					},
 					onVerifyGiftCardAmount : function(e, data){
 						
@@ -122,7 +127,9 @@ define(['utilities/global', 'controllers/application'], function(){
 							});
 
 						// Reattach unveil handlers for thumbnails
-						$('*[data-src]:not([data-lazy-handled])').attr('data-lazy-handled', true).unveil(200);
+						require(['vendors/unveil/unveil-min'], function(data){
+							$('*[data-src]:not([data-lazy-handled])').attr('data-lazy-handled', true).unveil(200);
+						});
 					}else{
 						//zoomAsset.removeAttr('href');
 						// Get all image-links including thumbnails

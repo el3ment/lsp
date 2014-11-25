@@ -38,7 +38,8 @@ body{
 	overflow-y: auto;
 	overflow-x: hidden;
 	zoom: 100%;
-
+	padding: 0;
+	
 	@include box-sizing();
 
 
