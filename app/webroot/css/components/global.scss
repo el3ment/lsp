@@ -475,3 +475,62 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
     	}
     }
 }
+
+
+// In the event that the page is going to change contexts, a script in the head
+// will add search-loading to the HTML element (the only parent avaliable) so we
+// can hide the default display elements
+// for example : visit a category page with a search keyword and the categories will be hidden
+// and the search result, when it finishes, will populate the page
+.search-loading{
+	.breadcrumbs{
+		display: none;
+	}
+	.page-generic table ~ *{
+		visibility: hidden;
+	}
+}
+
+.loading, 
+.search-loading .page-generic,
+.search-loading .page-search{
+
+	position: relative;
+	min-height: 800px;
+
+	> div, > fieldset, > li, .controls{
+		@include opacity(.25);
+		visibility: hidden\9 !important; // something is wierd here, ie8 wasn't making them all transparent even if the property was applied
+	}
+	
+	&:before{
+		content: ' ';
+		display: block;
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		left: 50%;
+		top: 100px;
+		margin-left: -16px;
+		background-image: url(/min/img/loading.gif);
+		z-index: 99;
+		@include box-sizing();
+	}
+}
+
+// .search-loading .page-generic div[class*="page-"]{
+// 	display: none;
+// }
+
+.page-generic .loading.small{
+	min-height: 0;
+	color: white;
+	&:before{
+		top: 3px;
+	}
+}
+
+// Used on other elements that need to be faded, but not have the loading circle
+.loading.secondary:before{
+	display: none;
+}

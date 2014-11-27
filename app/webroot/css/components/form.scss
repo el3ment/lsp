@@ -324,3 +324,42 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 button label{
 	cursor: pointer;
 }
+
+
+.touchcarousel .arrow-holder{
+
+	@extend .greyButton;
+	@extend .button-circle;
+
+	position: absolute;
+	top: 50%;
+	left: -21px;
+	margin-top: -16px;
+
+	&.disabled{
+		display: none;
+	}
+	&:hover{
+		@include gradient($hoverLightYellow, $darkYellow);
+	}
+	&.left:after,
+	&.right:after{
+		content: ' ';
+		display: block;
+		@include lsp-sprite-background();
+		background-position: -82px -256px;
+		position: absolute;
+		top: 50%;
+		left: 3px;
+		margin-top: -12px;
+		height: 24px;
+		width: 24px;
+	}
+	&.right{
+		right: -21px;
+		left: inherit;
+		&:after{
+			background-position: -117px -256px;
+		}
+	}
+}

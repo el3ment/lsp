@@ -274,7 +274,7 @@ define(['utilities/global', 'controllers/application', 'models/api', 'models/eas
 					},
 
 					onReady : function(e, data){
-						if(_app.controllers.application.pullState(_this)){
+						if(_app.controllers.application.pullState(_this) || ((LSP.config || {}).search || {}).loadCurrentState){
 							_this.loadCurrentState();
 						}
 					},
@@ -300,40 +300,43 @@ define(['utilities/global', 'controllers/application', 'models/api', 'models/eas
 
 				// On the retuning request, the attributes will be marked as "static" or "temporary"
 				// and will consequently be rendered differently.
+				require(['vendors/form2js/form2js'], function updateHistoryMapRequired(){
 
-				var formObject = _util.formToObject($('#refinementForm')[0]);
+					var formObject = _util.formToObject($('#refinementForm')[0]);
 
-				// If it's not part of the history (first time it's been checked), add it to the history
-				// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
-				// paths will never happen because we will be hiding them
+					// If it's not part of the history (first time it's been checked), add it to the history
+					// We can rely on the fact that doing attribute 1, attribute 2, attribute 1 selection
+					// paths will never happen because we will be hiding them
 
-				// If we have unselected another attribute (different from the last selected) then we need to
-				// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
-				// unselecting a "Color" and "Artist" should "collapse" into it's static form 
-				var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length;
-				if(!isInHistory){
-					_attributeHistory.push({name : name, displayState : 'temporary'});
-				}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
-					_attributeHistory[_attributeHistory.length - 1].displayState = 'static';
-				}
-
-				// Mark everything not curent as static
-				for(var i = 0; i < _attributeHistory.length - 1; i++){
-					_attributeHistory[i].displayState = 'static';
-				}
-
-				// Clear unnessesary history elements
-				for(var i = 0; i < _attributeHistory.length; i++){
-
-					// Chop off the last two characters "[]"
-					var attributeName = _attributeHistory[i].name;
-
-					// If the history element isn't in the form it means nothing is selected for
-					// that attribute any longer
-					if(!formObject[attributeName]){
-						_attributeHistory.splice(i, 1);
+					// If we have unselected another attribute (different from the last selected) then we need to
+					// mark the last selected as static. This solves the use case of selecting two "Color" then "Artist" then
+					// unselecting a "Color" and "Artist" should "collapse" into it's static form 
+					var isInHistory = $.grep(_attributeHistory, function(a){ return a.name === name; }).length;
+					if(!isInHistory){
+						_attributeHistory.push({name : name, displayState : 'temporary'});
+					}else if(_attributeHistory[_attributeHistory.length - 1].name !== name){
+						_attributeHistory[_attributeHistory.length - 1].displayState = 'static';
 					}
-				}
+
+					// Mark everything not curent as static
+					for(var i = 0; i < _attributeHistory.length - 1; i++){
+						_attributeHistory[i].displayState = 'static';
+					}
+
+					// Clear unnessesary history elements
+					for(var i = 0; i < _attributeHistory.length; i++){
+
+						// Chop off the last two characters "[]"
+						var attributeName = _attributeHistory[i].name;
+
+						// If the history element isn't in the form it means nothing is selected for
+						// that attribute any longer
+						if(!formObject[attributeName]){
+							_attributeHistory.splice(i, 1);
+						}
+					}
+
+				})
 			},
 
 			loadCurrentState : function(){

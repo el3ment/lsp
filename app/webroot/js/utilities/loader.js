@@ -4,7 +4,8 @@
 	window.LSP.utilities = window.LSP.utilities || {};
 
 	var CDN = 'https://d2bghjaa5qmp6f.cloudfront.net';
-	var VERSION = document.getElementById('currentScriptVersion').getAttribute('data-version');
+	var VERSION = document.getElementById('currentScriptVersion');
+	VERSION = VERSION ? VERSION.getAttribute('data-version') : "";
 
 	requirejs.config({
 		baseUrl: CDN + '/min/js',
@@ -95,7 +96,6 @@
 		validation : {
 			element : '*[class*="validation-"]',
 			js : ['plugins/validation'],
-			css : ['components/validation.css'],
 			priority : 'secondary'},
 		zoom : {
 			element : '#zoom-mainImage',

@@ -1,6 +1,6 @@
 (function(){
 	
-define(['utilities/global','controllers/application'], function(){
+define(['utilities/global','controllers/application', 'plugins/flyout'], function(){
 
 	var _util = window.LSP.utilities;
 	
@@ -27,12 +27,11 @@ define(['utilities/global','controllers/application'], function(){
 				},
 				application : {
 					onReady : function(e, data){
+
+						_app.controllers.flyout.openFlyout(true);
+
 						var mainSlider = $('#mainSlider');
 						if(mainSlider.length){
-							
-							require(['plugins/flyout'], function(){
-								_app.controllers.flyout.openFlyout(true);
-							});
 
 							require(['vendors/touchcarousel/touchcarousel'], function(){
 								$('#mainSlider').touchCarousel({
@@ -75,6 +74,7 @@ define(['utilities/global','controllers/application'], function(){
 			assets : {},
 			
 			closePermanentFlyout : function(){
+				alert('close perm');
 				_remainOpen = false;
 				_app.controllers.flyout.closeFlyout(true);
 			}

@@ -261,6 +261,7 @@ define(['jquery'], function(){
 			// Registers a controller/model/asset, and releases the initialization
 			// deferrment
 			register : function(type, name, object){
+
 				switch(type){
 					
 				case 'model' :

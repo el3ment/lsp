@@ -264,7 +264,7 @@ window.searchWishlist = function searchWishlist(config){
 				application : {
 					onReady : function(e, data){
 
-						if(LSP.config.wishlist){
+						if((LSP.config || {}).wishlist){
 							myWishlist(LSP.config.wishlist.myWishlistSettings);
 						}
 						
