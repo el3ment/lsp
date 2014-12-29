@@ -3,16 +3,9 @@
 	window.LSP = window.LSP || {};
 	window.LSP.utilities = window.LSP.utilities || {};
 
-	var CDN = 'https://d2bghjaa5qmp6f.cloudfront.net';
-	var VERSION = document.getElementById('currentScriptVersion');
-	VERSION = VERSION ? VERSION.getAttribute('data-version') : "";
 
-	requirejs.config({
-		baseUrl: CDN + '/min/js',
-		paths : {
-			jquery : 'vendors/jquery/jquery-1.9.1'
-		},
-		urlArgs: 'v=' + VERSION
+	require.config({
+	    baseUrl: 'https://d2bghjaa5qmp6f.cloudfront.net/js',
 	});
 
 	var loadMap = {
@@ -23,7 +16,7 @@
 			priority : 'critical'},
 		netsuite : {
 			element : '#handle_loginMainPortlet, #handle_cartMainPortlet',
-			js : ['controllers/netsuite'],
+			js : ['controllers/netsuite', 'vendors/netsuite/interface'],
 			css : ['ns-checkout.css'],
 			priority : 'critical'
 		},
@@ -62,6 +55,12 @@
 			js : ['controllers/reviews'],
 			css : ['components/reviews.css'],
 			priority : 'secondary'
+		},
+		reviews : {
+			element : '.page-trackOrder',
+			js : ['controllers/shipping'],
+			css : ['pages/shipping.css'],
+			priority : 'critical'
 		},
 		badges : {
 			element : '*[data-badge]', 
@@ -106,7 +105,7 @@
 			element : '*[class*="bsa-"], .productAd',
 			js : ['plugins/ads'],
 			css : ['components/ads.css'],
-			priority : 'critical'},
+			priority : 'secondary'},
 		category : {
 			element : '.page-category',
 			js : ['controllers/category'],
@@ -180,6 +179,8 @@
 			for(var i = 0; i < stylesheetArray.length; i++){
 
 				var url = CDN + '/min/css/' + stylesheetArray[i] + '?v=' + VERSION;
+				
+				console.log('loaded ' + url);
 
 				if($('link[href*="'+url+'"]').length === 0){
 					if (document.createStyleSheet){ // For IE8

@@ -74,7 +74,6 @@ define(['utilities/global','controllers/application', 'plugins/flyout'], functio
 			assets : {},
 			
 			closePermanentFlyout : function(){
-				alert('close perm');
 				_remainOpen = false;
 				_app.controllers.flyout.closeFlyout(true);
 			}

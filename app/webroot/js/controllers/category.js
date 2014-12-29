@@ -17,21 +17,23 @@ define(['utilities/global', 'controllers/application'], function(){
 				},
 				category : {
 					onAddMultipleItemsToCart : function(e, data){
-						var formElement = $('form#categoryForm')[0];
-						var form = _util.formToObject(formElement, null, true);
-						var multiString = "";
-						$.each(form.items, function(index, value){
-							if(value.include === 'true'){
-								multiString += value.id + ',' + value.qty + ';';
+						require(['vendors/form2js/form2js'], function(){
+							var formElement = $('form#categoryForm')[0];
+							var form = _util.formToObject(formElement, null, true);
+							var multiString = "";
+							$.each(form.items, function(index, value){
+								if(value.include === 'true'){
+									multiString += value.id + ',' + value.qty + ';';
+								}
+							})
+							
+							if(multiString.length > 2){
+								multiString =  multiString.substring(0, multiString.length - 1);
+								$('input[name="multi"]', formElement).attr('value', multiString);
+								if(_app.controllers.validation.isValidForm(formElement))
+									formElement.submit();
 							}
-						})
-						
-						if(multiString.length > 2){
-							multiString =  multiString.substring(0, multiString.length - 1);
-							$('input[name="multi"]', formElement).attr('value', multiString);
-							if(_app.controllers.validation.isValidForm(formElement))
-								formElement.submit();
-						}
+						});
 					},
 					onDisableInputs : function(e, data){
 						if(data.selector[0].checked)

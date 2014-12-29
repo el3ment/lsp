@@ -13,12 +13,12 @@ define(['utilities/global', 'controllers/application', 'models/api'], function()
 	return $.extend(_this, {
 			_url : function(controller, payload){
 				var url = 'https://forms.netsuite.com/app/site/hosting/scriptlet.nl';
-				url = (payload.method.match('getUPS') ? 'http://static.lonestarpercussion.com/shipping/' + payload.method : url);
+				url = (payload.method.match('getUPS') ? 'https://d2bghjaa5qmp6f.cloudfront.net/shipping/' + payload.method : url);
 				
 				return url;
 			},
 			_payload : function(controller, payload){
-				return $.extend(payload, {
+				return $.extend(payload.data, {
 					method : payload.method,
 					deploy : '1',
 					script : '25',
@@ -27,7 +27,8 @@ define(['utilities/global', 'controllers/application', 'models/api'], function()
 				});
 			},
 			request : function(controller, eventName, method, data){
-				return this._request('GET', 'jsonp', controller, eventName, method, data);
+				return this._request('GET', 'jsonp', controller, eventName, {data : data, method : method});
+
 			}
 		});
 

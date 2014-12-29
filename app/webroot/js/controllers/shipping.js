@@ -1,13 +1,13 @@
 (function(){
-	
-define(['utilities/global', 'controllers/application'], function(){
+
+define(['utilities/global', 'models/netsuite', 'controllers/application'], function(){
 
 	var _util = window.LSP.utilities;
 	
 	var shipping = (function(){
 		var _this = {};
 		var _app = window.LSP;
-		var _api = _app.models.api;
+		var _api = _app.models.netsuite;
 		var _settings = {
 			bodyNoTrackingNumbersFoundClass : 'shipping-noTrackingNumbersFound',
 			trackingNumberSelector : '.testOnly-trackingNumbers'
@@ -18,62 +18,122 @@ define(['utilities/global', 'controllers/application'], function(){
 			events : {
 				application : {
 					onAttachEvents : function(e, data){
-						$('form#shipping-inputForm').bind('submit', function(e){
+						$('#search-orders-form', data.selector).bind('submit', function(e){
+							_this.handleSubmit({
+								search : $('.page-trackOrder input[name="search"]').val() || ''
+							});
 							e.preventDefault();
 							return false;
-						}).bind('afterValidation', function(e){
-							_this.submit(_util.formToObject(this, null, false));
 						});
 					}
 				}
 			},
 			assets : {},
-			submit : function(formObject){
+			handleSubmit : function(formObject){
 				if(formObject.search.substr(0, 2).toUpperCase() === '1Z'){
 					_this.redirectToUPS(formObject.search);
 				}else{
 					// Probably a Sales Order
-					_this.clearTrackingNumbers();
-					$.when(_this.requestTrackingNumber(formObject.search, formObject.emailAddress))
+					//_this.clearTrackingNumbers();
+					$('#responseTable').addClass('loading');
+					$('#responseTable table').hide();
+					$.when(_this.requestTrackingNumber(formObject.search))
 					.done(function(response){
-						_this.getTrackingData(((response.response.data || {}).trackingnumbers || '').toUpperCase());
+						_this.renderTrackingData(_this.parseAPIResponse(response.response.data));
+						//_this.getTrackingData(((response.response.data || {}).trackingnumbers || '').toUpperCase());
+					}).fail(function(response){
+						$('#responseTable').html($('#templates-trackOrder-error').html());
+					}).always(function(){
+						$('#responseTable').removeClass('loading');
 					});
 				}
 			},
-			
-			getTrackingData : function(trackingNumbers){
-				if(trackingNumbers.length !== 0){
-					var trackingNumbersArray = trackingNumbers.split(' ');
-					for(var i = 0; i < trackingNumbersArray.length; i++){
-						$.when(_this.requestTrackingData(trackingNumbersArray[i]))
-						.done(function(response){
-							_this.displayTrackingData(response.response.data);
-						}).fail(function(response){
-							$('body').addClass(_settings.bodyNoTrackingNumbersFoundClass);
-						});
-					}
-				}else{
-					$('body').addClass(_settings.bodyNoTrackingNumbersFoundClass);
+
+			renderTrackingData : function(renderObject){
+				var html = _util.parseMicroTemplate('templates-trackingResponse', renderObject);
+				$('#responseTable').html(html);
+			},
+
+			parseAPIResponse : function(rawResponse){
+
+				var trackingNumbersArray = rawResponse.trackingnumbers.split('<BR>');
+				var parsedResponse = [];
+
+				for(var i = 0; i < trackingNumbersArray.length; i++){
+					
+					var carrier = _this.getCarrierFromTrackingNumber(trackingNumbersArray[i]);
+
+					parsedResponse.push({
+						orderId : rawResponse.internalid.value,
+						orderDate : rawResponse.trandate,
+						orderNumber : rawResponse.number,
+						orderEmail : rawResponse.email,
+						trackingNumber : trackingNumbersArray[i],
+						trackingUrl : (carrier == 'ups' ? 
+							'http://wwwapps.ups.com/ietracking/tracking.cgi?tracknum=' +  trackingNumbersArray[i] :
+							'https://tools.usps.com/go/TrackConfirmAction.action?tLabels=' + trackingNumbersArray[i]), 
+						carrier : carrier
+					});
 				}
+				
+				return parsedResponse;
+			
+			},
+
+			getCarrierFromTrackingNumber : function(trackingNumber){
+
+				if(trackingNumber.substr(0, 2).toUpperCase() == '1Z')
+					return 'ups';
+				else
+					return 'usps';
+
 			},
 			
-			clearTrackingNumbers : function(){
-				$(_settings.trackingNumberSelector).html('');
-				$('body').removeClass(_settings.bodyNoTrackingNumbersFoundClass);
+			// getTrackingData : function(trackingNumbers){
+			// 	if(trackingNumbers.length !== 0){
+
+
+			// 		var trackingNumbersArray = trackingNumbers.split(' ');
+			// 		for(var i = 0; i < trackingNumbersArray.length; i++){
+
+
+			// 			if(_this.isUPSTrackingNumber(trackingNumbersArray[i]))
+			// 				// handle ups
+			// 			if(_this.isUSPSTrackingNumber(trackingNumbersArray[i]))
+			// 				// handle usps
+
+			// 			$.when(_this.requestUPSTrackingData(trackingNumbersArray[i]))
+			// 			.done(function(response){
+			// 				_this.displayTrackingData(response.response.data);
+			// 			}).fail(function(response){
+			// 				$('body').addClass(_settings.bodyNoTrackingNumbersFoundClass);
+			// 			});
+			// 		}
+
+
+
+			// 	}else{
+			// 		$('body').addClass(_settings.bodyNoTrackingNumbersFoundClass);
+			// 	}
+			// },
+			
+			// clearTrackingNumbers : function(){
+			// 	$(_settings.trackingNumberSelector).html('');
+			// 	$('body').removeClass(_settings.bodyNoTrackingNumbersFoundClass);
+			// },
+			
+			// displayTrackingData : function(trackingData){
+			// 	console.log(trackingData);
+			// 	$(_settings.trackingNumberSelector).append(JSON.stringify(trackingData));
+			// },
+			
+			requestTrackingNumber : function(search){
+				return _api.request(_this, 'getTrackingNumber', 'getTrackingNumber', {search : $.trim(search)});
 			},
 			
-			displayTrackingData : function(trackingData){
-				console.log(trackingData);
-				$(_settings.trackingNumberSelector).append(JSON.stringify(trackingData));
-			},
-			
-			requestTrackingNumber : function(salesOrderNumber, emailAddress){
-				return _api.request(_this, 'getTrackingNumber', 'getTrackingNumber', {salesOrderNumber : salesOrderNumber.replace(/[^0-9]+/, ''), emailAddress : $.trim(emailAddress)});
-			},
-			
-			requestTrackingData : function(trackingNumber){
-				return _api.request(_this, 'getUPSTrackingData', 'getUPSTrackingData', {trackingNumber : trackingNumber});
-			}
+			// requestUPSTrackingData : function(trackingNumber){
+			// 	return _api.request(_this, 'getUPSTrackingData', 'getUPSTrackingData', {trackingNumber : trackingNumber});
+			// }
 		};
 
 		return _this;

@@ -48,7 +48,15 @@ class ShippingController extends Controller {
 		}
 		
 		$this->_CORSHeaders();
-		echo json_encode($returnObject);
+		
+		$encoded = json_encode($returnObject);
+
+		if($_REQUEST['callback'])
+			$return = $_REQUEST['callback'] . '(' . $encoded . ')';
+		else
+			$return = $encoded;
+
+		echo $return;
 		die();
 	}
     

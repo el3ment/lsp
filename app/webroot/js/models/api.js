@@ -18,10 +18,10 @@ define(['utilities/global', 'controllers/application'], function(){
 		
 		_timeout : 15000,
 
-		_url : function(payload){
+		_url : function(controller, payload){
 			return '';
 		},
-		_payload : function(payload){
+		_payload : function(controller, payload){
 			return payload;
 		},
 		_isSuccess : function(responseData){

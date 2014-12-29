@@ -45,6 +45,9 @@ define(['jquery', 'utilities/global', 'controllers/application', 'plugins/reveal
 						if(_lsp.controllers.application.getContext() !== 'phone'){
 							_this.attachMenu();
 						}
+						if(document.location.href.indexOf('netsuite') > 0){
+							_this.closeFlyout(true);
+						}
 					}
 				}
 			},

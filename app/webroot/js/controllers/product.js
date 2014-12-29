@@ -158,7 +158,12 @@ define(['utilities/global', 'controllers/application', 'models/easyask', 'vendor
 				
 			},
 
+
+
+
 			updateMatrixLists : function(form, select){
+
+				debugger;
 
 				var entry = select.parents('.entry');
 				var easyAskMatrixData = _api.parseMatrixChildren($('div[data-name="summaryString"]', entry).data('value'));
@@ -257,7 +262,7 @@ define(['utilities/global', 'controllers/application', 'models/easyask', 'vendor
 						img.attr('src',  productData.data.imageUrl + '.' + size + 'x' + size);
 
 						$('.productAvailability', entry).html(productData.data.stockMessage);
-						$('*[data-stockmessage]', entry.parent()).attr('data-stockmessage', productData.data.stockMessage);
+						$(entry).attr('data-stockmessage', productData.data.stockMessage);
 						
 						_this.attachZoom(_app.controllers.application.getContext());
 

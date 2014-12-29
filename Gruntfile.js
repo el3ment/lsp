@@ -284,6 +284,7 @@ module.exports = function(grunt) {
 
 	// Default task(s).
 	grunt.registerTask('default', ['clean', 'uglify', 'copy', 'sass', 'imagemin']);
+	grunt.registerTask('js', ['uglify']);
 	grunt.registerTask('webdrivercss', ['webdriver']);
 	grunt.registerTask('phantomcss', ['casperjs']);
 	grunt.registerTask('docs', ['docco']);

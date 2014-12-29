@@ -227,7 +227,8 @@ tr[height="25"]{ height: 0; }
 	}
 
 	#handle_cartMainPortlet > td > table,
-	html[data-path*="cart"] .page-generic > table{
+	html[data-title*="Cart"] .page-generic > table,
+	#handle_cartMainPortlet{
 		width: 100% !important; // overrides the code on "Panel Widths" near line 1998
 	}
 

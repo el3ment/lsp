@@ -390,9 +390,12 @@
 *[data-stockmessage*="Unavailable"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="Out of Stock"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="In Stock Soon"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="Special Order"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-stockmessage*="On Order"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="Out of Stock"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="In Stock Soon"],
 *[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="On Order"],
+*[data-outofstockbehavior="Disallow back orders but display out-of-stock message"][data-itemtype="Kit"][data-netsuiteoutofstockmessage*="Special Order"],
 .discontinued{
 	
 	.showIfDisallowBackordersAndOutOfStock{
