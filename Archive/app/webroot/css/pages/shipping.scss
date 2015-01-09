@@ -1,0 +1,78 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+.page-trackOrder{
+
+	padding-bottom: 30px;
+
+	// The top paragraphs and image, and search container -- all the stuff above the results table
+	.introduction{
+		margin: auto;
+		float: none;
+		width: 700px;
+
+		@media (max-width: 767px){
+			width: 100%;
+		}
+
+	}
+
+	.loading{
+		min-height: 75px;
+		color: $grey;
+		padding-top: 10px;
+
+		&:before{
+			top: 60px;
+		}
+	}
+
+	// The search input
+	.search{
+		float: left;
+		width: 100%;
+		position: relative;
+		margin-top: 30px;
+
+		@media (max-width: 767px){
+			margin-left: 0;
+			width: 100%;
+			position: relative;
+
+		}
+
+
+		.b1{
+			position: absolute;
+			top: 1px;
+			right: 0;
+		}
+
+		@include clearfix();
+	}
+
+	@media (max-width: 767px){
+		tr{
+
+			float: left;
+			width: 100%;
+			position: relative;
+		}
+	}
+
+	.error{
+		text-align: center;
+	}
+
+	#responseTable{
+		float: left;
+		clear: both;
+		margin-top: 30px;
+		width: 100%;
+		h2{
+			margin-bottom: 15px;
+		}
+	}
+
+}
+

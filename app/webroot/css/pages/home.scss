@@ -60,6 +60,8 @@
 
 .page-home{
 
+	display: block;
+
 	.sliderContainer{
 		width: 100%;
 
@@ -72,6 +74,11 @@
 
 			@include box-shadow-multiple(0 3px 6px -3px $grey inset, 0 -3px 6px -3px $grey inset);
 		}
+	}
+
+	// Ads
+	.row + .row-fluid{
+		margin-top: 45px !important;
 	}
 
 	#mainSlider{
@@ -100,7 +107,8 @@
 
 			.banner {
 				position: absolute;
-				max-width: 100%;
+				max-width: 40%;
+				top: 10%;
 				z-index: 1;
 			}
 
@@ -168,7 +176,7 @@
 			.description {
 				font-size: 1.25em;
 				line-height: 1.5em;
-				margin: 1em 0;
+				margin: 1em 0 0;
 			}
 
 			.list li {
@@ -288,6 +296,7 @@
 				.banner {
 					bottom: 15px;
 					max-width: 50%;
+					top: initial;
 				}
 				.content {
 					float: none;
@@ -334,7 +343,8 @@
 					padding-top: 31px;
 				}
 				.banner {
-					max-width: 50%;
+					max-width: 38%;
+					top: 17%;
 				}
 			}
 			.ad .b2 {
@@ -354,12 +364,15 @@
 				width: 610px
 			}
 			.ad .banner {
-				max-width: 45%;
+				max-width: 40%;
+				top: 19%;
 			}
 			.ad.slide-banner-right .banner {
 				right: 0;
 			}
 		}
+
+
 
 		@media (max-width: 650px){
 			&, .ad {
@@ -398,6 +411,7 @@
 					float: right;
 					top: 20px;
 					right: 20px;
+					margin-top: 0px;
 				}
 				.slide-content-title img {
 					margin-top: 0px;
@@ -406,7 +420,9 @@
 					display: none;
 				}
 				.b2 {
-					margin-top: 0;
+					margin-top: 0px;
+					position: relative;
+					top: 5px;
 				}
 				.content{
 					width: 100%;
@@ -462,6 +478,7 @@
 				.content {
 					float: none;
 					width: 100%;
+					margin-top: -15px;
 				}
 				.features {
 					display: none;
@@ -524,7 +541,7 @@
 			display: block;
 			width: 100%;
 			margin-left: 0;
-			margin-bottom: 40px;
+			margin-bottom: 50px;
 		}
 	}
 

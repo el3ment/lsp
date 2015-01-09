@@ -388,17 +388,17 @@
     display: none !important;
   }
 }
-.visible-print {
-  display: none !important;
-}
-@media print {
-  .visible-print {
-    display: inherit !important;
-  }
-  .hidden-print {
-    display: none !important;
-  }
-}
+// .visible-print {
+//   display: none !important;
+// }
+// @media print {
+//   .visible-print {
+//     display: inherit !important;
+//   }
+//   .hidden-print {
+//     display: none !important;
+//   }
+// }
 @media (max-width: 767px) {
   body {
     padding-left: 20px;

@@ -1,0 +1,317 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+/* Checkout */
+
+html div.page-checkout{
+	
+	margin-bottom: px(50px);
+
+
+	
+	/* The checkout process is divided into three "pages", the bulk of the content happening on the second "page"
+	 * Page 1 - Login... contains two panels with guest checkout or login credentials
+	 * Page 2 - Process... contains the giant form, order summary, etc for checkout
+	 *          It's important to realize that the cart summary, and process container are siblings in the HTML right now
+	 * Page 3 - Complete... contains the copy of the cart, a friendly graphic, etc
+	 */
+	
+	.login{  /* Page 1 */
+		
+		.panel{
+			
+			height: px(250px);
+			
+			&.guest{
+				
+				text-align: center;
+				p{ margin-top: 50px;}
+				h2{ text-align: left; }
+			}
+			&.returning{
+				
+				fieldset{
+					
+					width: px($emailInputLength);
+					display: block;
+					margin: px(2 * $paddingUnit) auto;
+					
+					.field{ margin-bottom: px($paddingUnit); }
+					
+					input{
+						width: px($emailInputLength - (4 * $paddingUnit));
+					}
+					.b1{
+						float: right;
+					}
+				}
+			}
+		}
+	}
+	
+	.process{ /* Page 2 */
+		$bottomPanelPadding : 75px;
+		
+		@include border-radius($borderRadius);
+		//width: px($pageWidth - $summaryWidth - (4 * $paddingUnit));
+		
+		//float: left;
+
+		.b1{ float: right; }
+		.notice{ float: left; }
+		
+		.panel{
+			//width: px(520px);
+			width: 100%;
+			&.engaged{
+				margin-bottom: px($bottomPanelPadding);
+			}
+		}
+		
+		fieldset{
+			border-bottom: 1px solid $lightGrey; 
+			margin-bottom: px(15px);
+			padding-bottom: px(10px);
+		}
+		fieldset:last-of-type{
+			border-bottom: 0;
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+		.proceed{
+			position: absolute;
+			width: 100%;
+			margin-left:-px($paddingUnit);
+			bottom: px(-80px);
+			height: px(70px);
+			right: px(-5px);
+			.notice{
+				width: 45%;
+			}
+		}
+		.shipping {
+			
+			.shippingMethod{
+				label{ }
+				.details{ }
+				.cost{ font-weight: bold; }
+			}
+		}
+		
+		/* Edit links */
+		.b5[data-action="saveShipping"],
+		.b5[data-action="saveBilling"], 
+		.b5[data-action="editShipping"],
+		.b5[data-action="editBilling"]{ 
+			position: absolute;
+			top: px(10px);
+			right: px(10px);
+		}
+		
+		.billing{
+			.payment ul{
+				background-color: $superLightGrey;
+				float: left;
+			}
+			.secureBlock{
+				position:relative; /* To position the  norton security */
+			}
+			.creditCardCVS{
+				input{
+					width: px(50px);
+					float:left;
+				}
+				*[class*='image-']{
+					float:left;
+					margin-left: px(15px);
+					margin-top: -1em; /* Intentionally 1em */
+				}
+			}
+			.image-nortonSecurity{
+				position: absolute;
+				top: px(15px);
+				right: px(20px);
+			}
+		}
+		.disengaged{
+			
+			//float: left;
+			margin-bottom: px(20px);
+			
+			label{ color: $grey; font-weight: normal; }
+			
+			h2{
+				padding-left: 1.2em;
+				position: relative;
+			}
+			h2:before{
+				content: ' ';
+				display: block;
+				overflow: hidden;
+				position: absolute;
+				top: 50%;
+				margin-top: -15px;
+				left: 0;
+				width: 1em;
+				height: 1em;
+				@include lsp-sprite-background();
+				background-position: -250px -350px;
+			}
+			
+			li{
+				float: left;
+				margin-bottom: px(20px);
+				width: px(250px);
+			}
+			
+			.value{
+				
+				font-weight: bold;
+				
+				.details{
+					font-weight: normal;
+					display: block;
+					float: left;
+					clear: both;
+				}
+			}
+			
+			.value.city, .value.state, .value.creditCardExpirationMonth{ 
+				margin-right: px(5px);
+				float: left;
+			}
+			.value.state:after{ content: ','; }
+			.value.phone{ margin-top: px(20px); }
+		}   
+		#checkout-insertPromoCode, #checkout-insertGiftCard{ 
+			
+			clear: both;
+			width: px(300px);
+			margin: px(10px) px(20px);
+		   
+		   label{ display: none; }
+			input{ float: left; width: px(150px); }
+			a{ 
+				clear: both;
+				display: inline-block;
+			}
+		}
+	}
+	
+	
+	.summary{ /* The cart summary */
+		
+		border: 0;
+		//width: px(380px);
+		//margin-left: px(20px);
+		//float: right;
+		
+		.b1{
+			float: right;
+			margin-bottom: px(20px);
+			@include clearfix();
+		}
+		
+		.cart{
+			/* width: 100%; */
+			padding: 0;
+			
+		}
+		table{
+			width: 100%;
+			td{
+				width: 100%;
+			}
+		}
+		thead{
+			td{ padding: px(10px) 0 0 px(10px); }
+		}
+		
+		tbody{
+			
+			td{ 
+				width: 100%;
+				padding: px(10px);
+				border-bottom: 1px solid $lightGrey;
+				vertical-align: top;
+			}
+			
+			tr:first-child td{ padding-top: 0px; }
+		  
+			.productAvailability{ 
+				margin-left: px(20px);
+				float: left;
+			}
+			
+			.quantity{ 
+				
+				float: left;
+				
+				.data{ font-weight:bold; }
+				.productQuantity{
+					font-weight: bold;
+				}
+			}
+			
+			.properties{ float: left; }
+			
+			.quantity{
+				.scroller{ display: block; }
+			}
+			
+			.productAvailability, .quantity{ margin-top: px(5px); } /* space between detail groups */
+			
+			.extendedPrice{
+				
+				text-align: right;
+				
+				.productExtendedPrice{
+					font-weight: bold;    
+				}
+			}
+		}
+		tfoot{
+			
+			td{
+				padding: px(10px) px(10px) 0 px(10px);
+				text-align: right;
+			}
+			
+			.taxTotal td, .orderTotal td{
+				padding-bottom: px(10px);
+			}
+			
+			label{ 
+				color: $grey;
+				font-weight: normal;
+			}
+			
+			.value{ font-weight: bold;}
+			
+			.merchandiseTotal{
+				label{}
+				.value{}
+			}
+			
+			.shippingTotal{
+				label{ }
+				.value{  }
+			}
+			
+			.taxTotal{
+				label{}
+				.value{}
+			}
+			
+			.orderTotal{
+				
+				background-color: $superLightGrey;
+				label{ 
+					font-weight: bold;
+				}
+				td{ padding-top: px(10px); }
+				.value{}
+			}
+		}
+	}
+}

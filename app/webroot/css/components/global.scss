@@ -4,14 +4,52 @@
 /* Fonts */
 @font-face {
   font-family: "League Gothic";
-  src: url('/files/leaguegothic-regular-webfont.eot');
-  src: url('/files/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
-	   url('/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
-	   url('/files/leaguegothic-regular-webfont.woff') format('woff'),
-	   url('/files/leaguegothic-regular-webfont.ttf') format('truetype');
+  src: url('//d2bghjaa5qmp6f.cloudfront.net/files/leaguegothic-regular-webfont.eot');
+  src: url('//d2bghjaa5qmp6f.cloudfront.net/files/leaguegothic-regular-webfont.eot?#iefix') format('embedded-opentype'),
+	   url('//d2bghjaa5qmp6f.cloudfront.net/files/leaguegothic-regular-webfont.svg#league_gothicregular') format('svg'),
+	   url('//d2bghjaa5qmp6f.cloudfront.net/files/leaguegothic-regular-webfont.woff') format('woff'),
+	   url('//d2bghjaa5qmp6f.cloudfront.net/files/leaguegothic-regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Regular-webfont.eot');
+    src: url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Regular-webfont.woff') format('woff'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-ExtraBold-webfont.eot');
+    src: url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-ExtraBold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-ExtraBold-webfont.woff') format('woff'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-ExtraBold-webfont.ttf') format('truetype'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-ExtraBold-webfont.svg#open_sansextrabold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Semibold-webfont.eot');
+    src: url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Semibold-webfont.woff') format('woff'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('//d2bghjaa5qmp6f.cloudfront.net/files/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-weight: 600;
+}
+
+
 
 html{
 	width: 100%;
@@ -211,42 +249,6 @@ ol.list{
 }
 
 
-table.zebra{
-	
-	width: 100%;
-	margin-bottom: 20px;
-
-	td{ padding: 10px; }
-
-	tr:nth-child(2n),
-	tr:first-child + tr,
-	tr:first-child + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
-	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
-		background-color: $superLightGrey;
-	}
-
-	thead td{
-		color: $grey;
-		border: 1px solid $lightGrey;
-		border-width: 1px 0 1px 1px;
-		padding: 10px;
-		&:first-child{
-			border-left-width: 0;
-		}
-	}
-
-	.numeric{
-		text-align: right;
-	}
-
-}
-
 .withChevron{
 
 	outline: 1px solid red;
@@ -267,21 +269,6 @@ table.zebra{
 	}
 
 }
-
-
-/* Highlight on Hover 
-.highlightOnHover{
-	
-	border:1px solid transparent;
-	
-	&:hover{
-		@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
-		border: 1px solid $darkYellow;
-	}
-}
-*/
-
-@import "panel.scss";
 
 /* Common Properties */
 /* Details are subtext */
@@ -308,47 +295,6 @@ table.zebra{
 	color: $white;
 }
 
-@import "addToCart";
-
-/* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
- * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
-.notice{ 
-	
-	color: $black;
-	font-weight: bold;
-	position: relative;
-	padding-left: px(16 + 5px);
-	font-size: 13px;
-
-	.details{
-		font-weight: normal;
-		display: block;
-		clear: both;
-	}
-
-	&:before{
-		@include lsp-sprite-background();
-		background-position: -121px -325px;
-		content: ' ';
-		display: block;
-		position: absolute;
-		top: px(2px);
-		left: 0;
-		width: px(19px);
-		height: px(19px);
-	}
-
-	a{
-		color: black;
-	}
-
-	.details{
-		a{
-			color: $grey;
-		}
-	}
-}
-
 /* Temporary hiding of compare functionality */
 
 .compare{
@@ -361,26 +307,6 @@ table.zebra{
 	float: none;
 	margin: 20px auto;
 }
-
-
-/* Related items are the things-you-might need, hand selected products seen on product detail pages 
- * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page
- * 
- * There is a little fancy-css happening which changes the look of the list based on how many items are listed */
-@import "relatedItems.scss";
-
-@import "dynamicSuggestions.scss";
-
-
-/* Definitions are marked with the attribute "data-def" - any text with this attribute
- * will be populated with the definition data, and get a little lightning bolt icon */
-@import "definitions.scss";
-
-@import "badges.scss";
-
-@import "reveal.scss";
-
-
 
 /* Useful when showing/hiding things in javascript */
 .hide{
@@ -408,8 +334,8 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 }
 
 
-@import "refinements.scss";
-@import "clearable.scss";
+//@import "refinements.scss";
+//@import "clearable.scss";
 
 
 
@@ -434,47 +360,13 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 
 
 // Single line email input
-.newsletter{
-	
-	.email{
-		
-		position: relative;
-		
-		input{
-			font-size: px($largeInputFontSize);
-			padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
-			line-height: 22px;
-		}
-		
-		.b1, .b3{
-			position: absolute;
-			right: px(-3px);
-			top: px(0);
-			line-height: px(17px);
-		}
-	}
-}
+
 
 .forward{
 	float:right;
 }
 
-.boxlabel{
-    margin: 5px 0;                
-    background-color: lightgrey;
-    padding: 5px;
-    background-color: #f5f4f0; 
-    float: left;
-    border-radius: 5px;
-    color: #847e77;
 
-    &[class*="icon-"]{
-    	padding:  5px 5px 5px 35px;
-    	&:after{
-    		margin-left: 5px;
-    	}
-    }
-}
 
 
 // In the event that the page is going to change contexts, a script in the head
@@ -532,5 +424,38 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 
 // Used on other elements that need to be faded, but not have the loading circle
 .loading.secondary:before{
+	display: none;
+}
+
+
+
+// Default Post-Load Components
+.departmentDropdown,
+.reveal-closed,
+.wishlist-messages,
+.footer,
+.productAd,
+*[class*="bsa-"],
+.reviews,
+.relatedItems,
+.notice,
+.newsletter,
+.dynamicItemSuggestions,
+.definitions,
+.clearableContainer .clearContents:before,
+.byline{
+	display: none;
+}
+
+
+
+// Default pages
+// This blanks out the page until the async css finishes loading
+// which "turns the page on" for rendering. It allows us to speed up
+// font downloads and render the header much quicker on cached pages
+.page-home,
+.page-productDetail,
+.page-category,
+.page-school-category{
 	display: none;
 }

@@ -1,0 +1,78 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+*[data-def][data-definitions-title]{
+	margin-right: 0;
+	color: black;
+	position: relative;
+	padding-right: px(21px);
+	
+	dl{ display: none; }
+
+	@media (min-width: 767px){
+		
+		position: relative;
+		display:inline-block;
+	
+		&:hover:before,
+		&:active:before{
+			content:' ';
+			background-color: rgba(0,0,0,0.0001);
+			width: 120%;
+			height: 100px;
+			position: absolute;
+			right: 0;
+			top: 0;
+			display: block;
+		}
+		dl{
+			display: none; 
+			z-index: 99;
+			position: absolute;
+			left: px(-250 - 8px);
+			top: px(-4px);
+			width: px(250px);
+			border-left: px($paddingUnit) solid $yellow;
+			
+			@include panel-arrow(6px, 'right', $white, 20px);
+			
+			img{
+				float: left;
+				margin-right: 10px;
+			}
+
+			.details{
+				display: block;
+				margin: px($paddingUnit) 0;
+				float:right;
+			}
+		}
+		&:after{
+			content: ' ';
+			width: px(16px);
+			height: px(16px);
+			display:inline-block;
+			margin: 0 px(2px) 0 px(3px);
+			position:absolute;
+			right: 0;
+			top: px(4px);
+			
+			background-color: $lightGrey;
+			@include lsp-sprite-background();
+			background-position: -6px -410px;
+			
+			@include border-radius(px($borderRadius));
+
+		}
+		&:hover:after,
+		&:active:after{
+			background-color:$yellow;
+		}
+		&:hover,
+		&:active{
+			dl{
+				display:block;
+			}
+		}
+	}
+}

@@ -3,6 +3,9 @@
 
 /* Product Detail Page */
 .page-productDetail{
+	
+	display: block;
+
 	h1{
 		position: relative;
 		top: 3px;
@@ -92,7 +95,17 @@
 				top:8px;
 				@include lsp-sprite-background();
 				background-position: -254px -223px;
-			}	
+
+				@media (max-width: 500px){
+					//display: none;
+					//outline: 1px solid red;
+				}
+			}
+
+		@media (max-width: 500px){
+			top: 0px;
+			//outline: 1px solid blue;
+		}
 	}
 
 	.wishlist-messages{
@@ -361,6 +374,9 @@
 }
 
 .specifications{
+
+	width: 100%;
+
 	tr td{
 		padding: 2px 5px;
 		font-size: 13px;

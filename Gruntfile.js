@@ -86,18 +86,30 @@ module.exports = function(grunt) {
 			}
 		},
 
-		// concat: {
-		//   options: {
-		//  // define a string to put between each file in the concatenated output
-		//      separator: ';'
-		//  },
-		//  dist: {
-		//      // the files to concatenate
-		//      src: ['app/webroot/min/js/**/*.js'],
-		//      // the location of the resulting JS file
-		//      dest: 'app/webroot/min/complete.js'
-		//    }
-		// }
+		concat: {
+			options: {
+				// define a string to put between each file in the concatenated output
+			    separator: ';'
+			},
+			core: {
+				 // the files to concatenate
+				 src: ['app/webroot/min/js/utilities/loader.js', 'app/webroot/min/js/utilities/global.js', 'app/webroot/min/js/controllers/application.js'],
+				 // the location of the resulting JS file
+				 dest: 'app/webroot/min/js/combined/application.js'
+			},
+			search: {
+				 // the files to concatenate
+				 src: ['app/webroot/min/js/models/api.js','app/webroot/min/js/models/easyask.js','app/webroot/min/js/plugins/search.js'],
+				 // the location of the resulting JS file
+				 dest: 'app/webroot/min/js/combined/search.js'
+			},
+			netsuite: {
+				 // the files to concatenate
+				 src: ['app/webroot/min/js/controllers/netsuite.js','app/webroot/min/js/controllers/checkout.js','app/webroot/min/js/vendors/netsuite/interface.js'],
+				 // the location of the resulting JS file
+				 dest: 'app/webroot/min/js/combined/netsuite.js'
+			}
+		},
 
 		// Watch looks at files and runs scripts when those files have been modified
 		watch: {
@@ -268,7 +280,24 @@ module.exports = function(grunt) {
 		    // dynamic: {                         // Another target
 
 		    // }
-		  }
+		  },
+		  requirejs: {
+			  compile: {
+			    options: {
+			      paths:{
+			      	'jquery' : 'vendors/jquery/jquery-1.9.1'
+			      },
+			      baseUrl: "app/webroot/js",
+			      //mainConfigFile: "path/to/config.js",
+			      //name: "path/to/almond", // assumes a production build using almond
+			      
+				  name: 'controllers/application', 
+			      //exclude: ['jquery'],
+
+			      out: "app/webroot/min/js/combined/application.js",
+			    } 
+			  }
+			}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -281,10 +310,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean', 'uglify', 'copy', 'sass', 'imagemin']);
-	grunt.registerTask('js', ['uglify']);
+	grunt.registerTask('default', ['clean', 'uglify', 'requirejs', 'copy', /*'concat'*/, 'sass', 'imagemin']);
+	grunt.registerTask('js', ['uglify', 'copy', 'concat']);
 	grunt.registerTask('webdrivercss', ['webdriver']);
 	grunt.registerTask('phantomcss', ['casperjs']);
 	grunt.registerTask('docs', ['docco']);

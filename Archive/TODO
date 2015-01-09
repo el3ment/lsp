@@ -1,0 +1,20 @@
+<link href="https:<ASSET_DOMAIN>/compress/css/css/ns-checkout.scss,/checkout<VERSION>.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<ASSET_DOMAIN>/compress/js/js/controllers/ns-checkout.js,/checkout<VERSION>.js" defer></script>
+<script type='text/javascript/defer'>
+$(function(){ if(LSP && LSP.controllers && LSP.controllers.checkout){ LSP.controllers.checkout.setPage('cart');} });
+</script>
+<script type="text/javascript">
+var dataLayer = dataLayer || [];
+dataLayer.push({pageType : "cart"});
+</script>
+
+
+
+
+<link href="https:<ASSET_DOMAIN>/compress/css/css/ns-checkout.scss,/checkout<VERSION>.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="<ASSET_DOMAIN>/js/vendors/netsuite/interface.js" defer></script>
+<script type="text/javascript" src="<ASSET_DOMAIN>/compress/js/js/controllers/ns-checkout.js,/checkout<VERSION>.js" defer></script>
+
+
+
+<script type="text/javascript" src='<ASSET_DOMAIN>/compress/js/js/controllers/home.js,<VERSION>'></script>

@@ -1,0 +1,25 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+.newsletter{
+
+	display: block;
+	
+	.email{
+		
+		position: relative;
+		
+		input{
+			font-size: px($largeInputFontSize);
+			padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+			line-height: 22px;
+		}
+		
+		.b1, .b3{
+			position: absolute;
+			right: px(-3px);
+			top: px(0);
+			line-height: px(17px);
+		}
+	}
+}

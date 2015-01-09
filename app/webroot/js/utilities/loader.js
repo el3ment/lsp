@@ -3,20 +3,24 @@
 	window.LSP = window.LSP || {};
 	window.LSP.utilities = window.LSP.utilities || {};
 
-
-	require.config({
-	    baseUrl: 'https://d2bghjaa5qmp6f.cloudfront.net/js',
-	});
+	// require.config({
+	//     baseUrl: '//d2bghjaa5qmp6f.cloudfront.net/min/js',
+	// });
 
 	var loadMap = {
 		home : {
 			element : '.page-home',
 			js : ['controllers/home', 'plugins/flyout'],
-			//css : ['pages/home.css'],
+			css : ['pages/home.css'],
 			priority : 'critical'},
+		product : {
+			element : '.reviews',
+			css : ['components/reviews.css'],
+			priority : 'secondary'
+		},
 		netsuite : {
 			element : '#handle_loginMainPortlet, #handle_cartMainPortlet',
-			js : ['controllers/netsuite', 'vendors/netsuite/interface'],
+			js : ['controllers/netsuite', 'controllers/checkout', 'vendors/netsuite/interface'],
 			css : ['ns-checkout.css'],
 			priority : 'critical'
 		},
@@ -33,6 +37,7 @@
 			priority : 'critical'},
 		search : {
 			element : 'input[name="search"], a[href*="search"], *[data-action="destoryAndLoadCategory"]',
+			//minjs : ['combined/search'],
 			js : ['plugins/search', 'models/api', 'models/easyask'],
 			css : ['pages/search.css'],
 			priority : (document.location.href.indexOf('search') > 0 ? 'critical' : 'secondary')},
@@ -56,7 +61,7 @@
 			css : ['components/reviews.css'],
 			priority : 'secondary'
 		},
-		reviews : {
+		trackOrder : {
 			element : '.page-trackOrder',
 			js : ['controllers/shipping'],
 			css : ['pages/shipping.css'],
@@ -81,6 +86,7 @@
 		flyout : {
 			element : '.flyout',
 			js : ['plugins/flyout'],
+			css : ['components/flyout.css'],
 			priority : 'secondary'},
 		reveal : {
 			element : '*[data-reveal-children]',
@@ -124,13 +130,55 @@
 		touchcarousel : {
 			element : '.touchcarousel',
 			js : ['vendors/touchcarousel/touchcarousel'],
-			css : ['vendors/touch_carousel/touchcarousel.css']
+			css : ['vendors/touch_carousel/touchcarousel.css'],
+			priority : 'critical'
 		},
 		byline : {
 			element : '.byline',
-			css : ['components/byline.css']
-		}
+			css : ['combined/byline.css']
+		},
+		contact : {
+			element : '.block',
+			css : ['components/contact.css']
+		},
+		table : {
+			element : 'table.table',
+			css : ['components/table.css']
+		},
+		relatedItems : {
+			element : '.relatedItems',
+			css : ['components/relatedItems.css']
+		},
+		refinements : {
+			element : '.refinements',
+			css : ['components/refinements.css']
+		},
+		addToCart : {
+			element: '.addToCart',
+			css : ['components/addToCart.css']
+		},
+		zebraTable : {
+			element: 'table.zebra',
+			css : ['components/zebraTable.css']
+		},
+		validation : {
+			css : ['combined/belowFold.css']
+		},
+		notice : {
+			// .notice
+		},
+		panel : {
+
+		},
+		newsletter : {
+			css : ['combined/belowFold.css']
+		},
+		limitElements : {
+			css : ['combined/belowFold.css']
+		},
 	};
+
+	var IS_MINIFIED_SOURCE = require.toUrl('').indexOf('min') > 0;
 
 	window.LSP.utilities.loader = {
 		
@@ -146,6 +194,9 @@
 					var e = loadMap[component];
 
 					if($(e.element, element).length > 0 || e.always){
+						if(e.js && e.minjs)
+							e.js = (IS_MINIFIED_SOURCE ? e.minjs : e.js);
+
 						if(e.js){
 							jsDependencies[e.priority] = jsDependencies[e.priority] || [];
 							jsDependencies[e.priority] = jsDependencies[e.priority].concat(e.js);
@@ -165,15 +216,21 @@
 			}
 		},
 		loadJS : function(priorityObject, callback){
-			require(priorityObject.critical || [], function a(){
-				console.log('Loaded Primary:', priorityObject.primary);
-				$(function(){
-					require(priorityObject.secondary || [], function b(){
+			require(priorityObject.critical || [], function a(priorityObject){
+				
+				return function(){
+					console.log('Primary loaded', priorityObject);
+
+					$(function loadSecondaryJS(){
+							
 						console.log('Loaded Secondary:', priorityObject.secondary);
-						(callback || function(){})();
+						
+						require(priorityObject.secondary || [], function b(){
+							(callback || function(){})();
+						});
 					});
-				});
-			});
+				}
+			}(priorityObject));		
 		},
 		loadCSS : function(stylesheetArray){
 			for(var i = 0; i < stylesheetArray.length; i++){
@@ -186,7 +243,7 @@
 					if (document.createStyleSheet){ // For IE8
 						document.createStyleSheet(url);
 					}else{
-						$('<link rel="stylesheet" type="text/css" href="' + url + '" />').prependTo('head'); 
+						$('<link rel="stylesheet" type="text/css" href="' + url + '" />').appendTo('head'); 
 					}
 				}
 
@@ -194,8 +251,8 @@
 			}
 		}
 	};
-
-	window.LSP.utilities.loader.loadJS({critical : ['jquery', 'utilities/global', 'controllers/application']});
-	//window.LSP.utilities.loader.loadCSS('components.css')
+	
+	window.LSP.utilities.loader.loadCSS(['combined/belowFold.css']);
+	
 
 }());

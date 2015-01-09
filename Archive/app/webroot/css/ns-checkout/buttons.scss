@@ -1,0 +1,128 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+.continueShopping{
+	margin-bottom: 10px;
+	display: block;	
+}
+
+// Basic Button Styling (Yellow)
+#tbl_register, #tbl_cancel, #tbl_submitter, #tbl_applygift, #tbl_applycoupon, #tbl_recalc,
+#tbl_checkout, #tbl_removecoupon, #tbl_cleargift, #tbl_fauxsubmit, #tbl_goback, #tbl_continue{
+	@include gradient($lightYellow, $darkYellow);
+	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
+
+	cursor: pointer;
+
+	border : 1px solid $brownYellow;
+	border-radius : px($borderRadius);
+	color : black;
+	text-shadow : 0 1px $saturatedHighlightYellow;
+	font-family : 'Open Sans', sans-serif;
+	font-size : px(14px);
+	font-weight : 800;
+	text-transform : uppercase;
+	text-decoration: none;
+	text-align : center;
+	line-height: 1.3em;
+	display: inline-block;
+	margin : 0 px($paddingUnit);
+	z-index: 99;
+	position: absolute;
+	right: 0;
+	bottom: -50px;
+
+	input{
+		text-transform: uppercase;
+		display: inline-block;
+		border: 0;
+		background-color: transparent;
+		background-image: url('data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+		padding : px(10px, 14px) px(14px, 14px);
+		z-index: 101;
+		position: relative;
+		cursor: pointer;
+		position: relative; 
+		margin: 0;
+		text-shadow : 0 1px $saturatedHighlightYellow;
+
+		&[disabled]{
+			background-color: white;
+			width: 100%;
+			height: 100%;
+			display: block;
+			@include opacity(.6);
+			outline: 1px solid white;
+		}
+	}
+
+	&:hover, &.active{
+		@include gradient($hoverLightYellow, $darkYellow);
+	}
+
+}
+
+
+// Grey Button styling
+ #tbl_applygift, #tbl_applycoupon, #tbl_recalc, #tbl_removecoupon, #tbl_cleargift{
+	@include gradient($buttonLightGrey, $buttonDarkGrey); 
+	@include box-shadow-multiple(0 0 px(2px) 0 $highlightGrey inset);
+	text-shadow : 0 1px $saturatedHighlightGrey;
+	input{
+		text-shadow: 0 1px $saturatedHighlightGrey;
+	}
+	border : 1px solid $darkGrey;
+	position: static; // Back out of global absolute position from line 118
+}
+
+// Linky button
+#tbl_change{
+	overflow : visible; /* Shrinkwrap the text in IE7- */
+	margin : 0 10px 0 0;
+	padding : 0 !important;
+	border : 0;
+	color : $grey;
+	background : transparent !important;
+	font : inherit; /* Inherit font settings (doesn’t work in IE7-) */
+	line-height : normal; /* Override line-height to avoid spacing issues */
+	text-decoration : underline; /* Make it look linky */
+	cursor : pointer; /* Buttons don’t make the cursor change in all browsers */
+	input{ cursor: pointer; }
+	-moz-user-select: text; /* Make button text selectable in Gecko */
+	input{
+		background-color: transparent;
+		padding: 0;
+		border: 0;
+		color: $grey;
+		margin: 0;
+		@include border-radius(0);
+		font-weight: normal;
+	}
+}
+
+#tbl_goback{
+	position: static;
+}
+
+
+// Padlock for checkout
+#tbl_checkout{
+	input{ padding-left:35px; }
+	&:before{
+		content: ' ';
+		@include lsp-sprite-background();
+		background-position: -146px -318px;
+		display: block;
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		top: 50%;
+		margin-top: -16px;
+		left: 0;
+		float: left;
+	}
+}
+
+.table-action{
+	float:right;
+}

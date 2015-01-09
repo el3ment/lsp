@@ -1,6 +1,7 @@
 @import "../utilities/settings";
 @import "../utilities/functions";
 
+// Default Icon
 *[class*="icon-"], .hasIcon{
 
 	position: relative;
@@ -9,7 +10,7 @@
 		content: ' ';
 		display: block;
 		@include lsp-sprite-background();
-		background-position: 0 0;
+		//background-position: 0 0;
 		position: absolute;
 		top: 50%;
 		left: 2px;
@@ -46,6 +47,7 @@
 		margin-top: -8px;
 	}
 }
+
 *[class*="icon-64-"]{
 	
 	content: '  ';

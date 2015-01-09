@@ -1,0 +1,526 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+/* Fonts */
+
+html{
+	width: 100%;
+	font-size: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+
+	overflow-y: auto;
+	overflow-x: hidden;
+	zoom: 100%;
+}
+
+// Our page-level containers tend to use this pattern of being both a row, and a span12 container
+.row.span12{
+	margin-left: 0;
+}
+
+body{
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	color: black;
+	font-size: 14px;
+	line-height: px(22px);
+	overflow-y: auto;
+	overflow-x: hidden;
+	zoom: 100%;
+	padding: 0;
+	
+	@include box-sizing();
+
+
+	// //background-color: red;
+	// @media (min-width: 1200px){
+	// //	background-color: green;
+	// }
+	// @media (max-width: 979px) and (min-width: 768px){
+	// //	background-color: purple;
+	// }
+}
+
+/* Content Container */
+div[class|="page"]{
+	
+	float: none;
+	margin: auto;
+	min-height: 100%;
+
+	// Add some extra padding on the outside of the
+	// panel border
+	@media (max-width: 767px){
+		border: 20px solid transparent;
+		border-width: 0 10px;
+		@include box-sizing();
+		
+	}
+}
+
+// div[class|="page"],
+// .header,
+// .footer{
+// 	//margin: auto;
+// 	//max-width: px(940px);
+// 	//clear: both;
+// 	float: none;
+// 	margin: auto;
+
+// 	margin-bottom: 20px;
+// }
+
+// div[class|="page"],
+// .header,
+// .footer{
+// 	//margin: auto;
+// 	//max-width: px(940px);
+// 	//clear: both;
+// 	float: none;
+// 	margin: auto;
+// 	margin-bottom: 20px;
+// }
+
+/* Page Title */
+h1, .h1, h2, .h2{
+	//margin-top: px($paddingUnit);
+	line-height: 43px;
+	font-size: 2.9em;
+	font-family: "League Gothic", sans-serif;
+	text-transform: uppercase;
+	color: $black; 
+	-webkit-font-smoothing: antialiased;
+	margin-top:10px;
+}
+
+/* Section Headings */
+h2, .h2{ font-size: px($h2FontSize); line-height: 28px; }
+
+/* Captialized, Bigger, Bold */
+h3, .h3, h4, .h4{ 
+	//margin-top:2px;
+	font-size: 14px; 
+	text-transform:uppercase;
+	font-weight: bold;
+	//margin-top: -5px;
+	line-height: 18px;
+	margin-bottom: 2px;
+}
+
+/* Captialized, Bold */
+h4, .h4{ text-transform: none; }
+
+/* Lowercase, Bold */
+h5, .h5{ font-weight: bold; }
+
+/* Text */
+h6, .h6{ color: $grey; font-size: 13px; }
+
+/* Links */
+a, .b5{
+	color: $grey;
+	&:hover{ text-decoration: none; }
+	&:active{
+		background-color: transparent;
+		text-decoration: underline;
+	}
+}
+
+// Special category-style links that add a > when you hover
+a.category, .flyout .link a{
+	color: black;
+	text-decoration: none;
+	position: relative;
+	padding-left: 10px;
+
+	&:hover{
+
+		text-decoration: underline;
+
+		&:before{
+			content: '›';
+			display: block;
+			position: absolute;
+			left: 0px;
+			color: $grey;
+			text-decoration: none;
+			display: none\9;
+		}
+	}
+}
+
+p{
+	margin-bottom: px(4 * $paddingUnit + 3);
+	&:last-of-type{
+		margin-bottom: 10px;
+	}
+}
+
+em{
+	font-style: italic;
+}
+
+/* Normally the UL and LI tags are style-less - but in product descriptions we want them to have the bullets */
+.productDescription ul{
+	margin: px($paddingUnit) 0 px($paddingUnit) px(3 * $paddingUnit);
+}
+ul.list li,
+.productDescription ul li{
+	//padding-left: 5px;
+	list-style: square inside;
+	line-height:18px;
+	text-indent: -15px;
+	margin-left: 18px;
+	margin-bottom: 3px;
+	&.h3{
+		list-style: none;
+		padding-left: 15px;
+	}
+	&.title{
+		list-style: none;
+		margin-left: 10px;
+		font-weight: bold;
+	}
+}
+
+ol.list{
+
+	margin-left: 18px;
+	margin-bottom: 10px;
+	
+	li{
+
+		list-style: decimal;
+		margin-left: 18px;
+
+		&.header{
+			list-style: none;
+		}
+	}
+}
+
+
+table.zebra{
+	
+	width: 100%;
+	margin-bottom: 20px;
+
+	td{ padding: 10px; }
+
+	tr:nth-child(2n),
+	tr:first-child + tr,
+	tr:first-child + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+		background-color: $superLightGrey;
+	}
+
+	thead td{
+		color: $grey;
+		border: 1px solid $lightGrey;
+		border-width: 1px 0 1px 1px;
+		padding: 10px;
+		&:first-child{
+			border-left-width: 0;
+		}
+	}
+
+	.numeric{
+		text-align: right;
+	}
+
+}
+
+.withChevron{
+
+	outline: 1px solid red;
+
+	a{
+		position: relative;
+
+		&:before, &:hover:before{
+			color: $grey;
+			content : '›';
+			margin-bottom:1px;
+			position: absolute;
+			top: 50%;
+			margin-top: -11px;
+			left: -10px;
+			text-decoration: none;
+		}
+	}
+
+}
+
+
+/* Highlight on Hover 
+.highlightOnHover{
+	
+	border:1px solid transparent;
+	
+	&:hover{
+		@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+		border: 1px solid $darkYellow;
+	}
+}
+*/
+
+@import "panel.scss";
+
+/* Common Properties */
+/* Details are subtext */
+.details{ 
+	color: $grey; font-size: 13px; line-height: 18px;
+	strong{ color: black; }
+}
+
+/* This is the in-stock, out-of-stock little status block used in cart, product detail page, and search results */
+.productAvailability .status,
+.relatedItems .currentItem:after{
+	font-size: px(12px);
+	font-weight: 800;
+	text-transform: uppercase;
+	@include border-radius(px(5px));
+	padding: px(3px) px($paddingUnit);
+}
+.productAvailability[data-method="seperately"] .status{
+	background-color: $superLightGrey;
+	color: $grey;
+}
+.productAvailability[data-method="today"] .status{
+	background-color: $grey;
+	color: $white;
+}
+
+@import "addToCart";
+
+/* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
+ * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
+.notice{ 
+	
+	color: $black;
+	font-weight: bold;
+	position: relative;
+	padding-left: px(16 + 5px);
+	font-size: 13px;
+
+	.details{
+		font-weight: normal;
+		display: block;
+		clear: both;
+	}
+
+	&:before{
+		@include lsp-sprite-background();
+		background-position: -121px -325px;
+		content: ' ';
+		display: block;
+		position: absolute;
+		top: px(2px);
+		left: 0;
+		width: px(19px);
+		height: px(19px);
+	}
+
+	a{
+		color: black;
+	}
+
+	.details{
+		a{
+			color: $grey;
+		}
+	}
+}
+
+/* Temporary hiding of compare functionality */
+
+.compare{
+	display: none !important;
+}
+
+.centered{
+	text-align: center;
+	margin: auto;
+	float: none;
+	margin: 20px auto;
+}
+
+
+/* Related items are the things-you-might need, hand selected products seen on product detail pages 
+ * it's also seen in the cart, which is why it's here and not exclusively on the product-detail page
+ * 
+ * There is a little fancy-css happening which changes the look of the list based on how many items are listed */
+@import "relatedItems.scss";
+
+@import "dynamicSuggestions.scss";
+
+
+/* Definitions are marked with the attribute "data-def" - any text with this attribute
+ * will be populated with the definition data, and get a little lightning bolt icon */
+@import "definitions.scss";
+
+@import "badges.scss";
+
+@import "reveal.scss";
+
+
+
+/* Useful when showing/hiding things in javascript */
+.hide{
+	display: none;
+}
+
+
+.hideIfLoggedIn{
+	display: none !important;
+}
+// Hide/Show elements if logged in
+// If it's an error, it means they are not logged in so hide the "Hi Robert!" link 
+li[data-uid*="Error processing dynamic tag"].showIfLoggedIn,
+li[data-uid*="Error processing dynamic tag"] ~ .showIfLoggedIn{
+	display: none !important;
+}
+
+li[data-uid*="Error processing dynamic tag"].hideIfLoggedIn,
+li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
+	display: block !important;
+}
+
+@media (max-width: 400px){
+	.hidden-iphone{ display: none !important; }
+}
+
+
+@import "refinements.scss";
+@import "clearable.scss";
+
+
+
+// I feel like these styles should be enough for widescreen desktops.
+// .hidden-desktopwide should always inherit, except for min-width >= 1200px
+.hidden-desktopwide {
+  display: inherit !important;
+}
+// .visible-desktopwide should always be hidden, except for min-width >= 1200px.
+.visible-desktopwide {
+  display: none !important;
+}
+
+@media (min-width: 1200px) {
+	.hidden-desktopwide {
+	 	display: none !important;
+	 }
+	 .visible-desktopwide {
+	 	display: inherit !important;
+	 }
+}
+
+
+// Single line email input
+.newsletter{
+	
+	.email{
+		
+		position: relative;
+		
+		input{
+			font-size: px($largeInputFontSize);
+			padding : px($paddingUnit * 2 + 1, $largeInputFontSize) px($inputPadding+2, $largeInputFontSize);
+			line-height: 22px;
+		}
+		
+		.b1, .b3{
+			position: absolute;
+			right: px(-3px);
+			top: px(0);
+			line-height: px(17px);
+		}
+	}
+}
+
+.forward{
+	float:right;
+}
+
+.boxlabel{
+    margin: 5px 0;                
+    background-color: lightgrey;
+    padding: 5px;
+    background-color: #f5f4f0; 
+    display: inline-block;
+    border-radius: 5px;
+    color: #847e77;
+
+    &[class*="icon-"]{
+    	padding:  5px 5px 5px 35px;
+    	&:after{
+    		margin-left: 5px;
+    	}
+    }
+}
+
+
+// In the event that the page is going to change contexts, a script in the head
+// will add search-loading to the HTML element (the only parent avaliable) so we
+// can hide the default display elements
+// for example : visit a category page with a search keyword and the categories will be hidden
+// and the search result, when it finishes, will populate the page
+.search-loading{
+	.breadcrumbs{
+		display: none;
+	}
+	.page-generic table ~ *{
+		visibility: hidden;
+	}
+}
+
+.loading, 
+.search-loading .page-generic,
+.search-loading .page-search{
+
+	position: relative;
+	min-height: 800px;
+
+	> div, > fieldset, > li, .controls{
+		@include opacity(.25);
+		visibility: hidden\9 !important; // something is wierd here, ie8 wasn't making them all transparent even if the property was applied
+	}
+	
+	&:before{
+		content: ' ';
+		display: block;
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		left: 50%;
+		top: 100px;
+		margin-left: -16px;
+		background-image: url(/min/img/loading.gif);
+		z-index: 99;
+		@include box-sizing();
+	}
+}
+
+// .search-loading .page-generic div[class*="page-"]{
+// 	display: none;
+// }
+
+.page-generic .loading.small{
+	min-height: 0;
+	color: white;
+	&:before{
+		top: 3px;
+	}
+}
+
+// Used on other elements that need to be faded, but not have the loading circle
+.loading.secondary:before{
+	display: none;
+}

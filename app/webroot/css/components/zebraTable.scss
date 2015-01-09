@@ -1,0 +1,39 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+
+table.zebra{
+	
+	width: 100%;
+	margin-bottom: 20px;
+
+	td{ padding: 10px; }
+
+	tr:nth-child(2n),
+	tr:first-child + tr,
+	tr:first-child + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr,
+	tr:first-child + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr + tr{
+		background-color: $superLightGrey;
+	}
+
+	thead td{
+		color: $grey;
+		border: 1px solid $lightGrey;
+		border-width: 1px 0 1px 1px;
+		padding: 10px;
+		&:first-child{
+			border-left-width: 0;
+		}
+	}
+
+	.numeric{
+		text-align: right;
+	}
+
+}

@@ -1,0 +1,67 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+*[class*="image-"]{
+    @include lsp-sprite-background();
+    display: block;
+	background-position: 0px 0px;
+    text-indent: -$hideDistance;
+    overflow: hidden;
+}
+
+div[class*="image-badge"]{
+	background-image: url(/img/lsp-master-badges.jpg);
+}
+
+// This started life as a circle logo then became defaulted to a horizontal logo and changes to the circle
+// one when there is enough room via header.scss
+.image-logoCircle{
+	//background-position: -334px -738px; // circle
+	background-position: -241px -885px;
+	width: 177px;
+	height: 65px;
+}
+.image-logoRect{
+	background-position: -156px 6px;
+    width: 241px;
+    height: 115px;
+}
+.image-mcafee{
+	background-position: -61px -431px;
+    width: 120px;
+    height: 50px;
+}
+.image-creditCards{
+	background-position: -200px -431px;
+    width: 170px;
+    height: 28px;
+}
+.image-creditCardCSV-visa{
+	width: 190px;
+	height: 115px;
+}
+.image-creditCardCSV-amex{
+	width: 190px;
+	height: 115px;
+}
+.image-nortonSecurity{
+	background-position: -279px -266px;
+	width: 140px;
+	height: 75px;
+}
+.image-badge-wishList{
+	background-position: 0 0;
+	height: 200px;
+	width: 320px;
+}
+.image-badge-trackOrder{
+	background-position: 0 -450px;
+	height: 200px;
+	width: 320px;
+}
+
+.image-badge-orderComplete{
+	background-position: 0 -200px;
+	height: 244px;
+	width: 348px;
+}

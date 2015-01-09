@@ -119,54 +119,9 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 	margin-left: px(10px);
 }
 
-/* Validation Plugin */
-// .validation-required,
-// .validation-alphaOnly,
-// .validation-numericOnly,
-// .validation-alphaNumeric,
-// .validation-emailAddress,
-// .validation-creditCardNumber{
-// 	//border: 1px solid blue;
-// }
-
-.validation-container{
-
-	&[data-validation-invalidTypes]{
-		
-		position: relative;
-		
-		input, textarea, select{
-			background-color: #ffe0e0 !important;
-			&:focus{
-				@include box-shadow-multiple(0 0 px(3px, $inputFontSize) 0 #bb0000);
-				border-color: #bb0000;
-			}
-		}
-
-		&:after{
-			display: block;
-			content: 'Required';
-			font-size: 12px;
-			font-style: italic;
-			color: #bb0000;
-		}
-	}
-
-	&[data-validation-invalidTypes*="overGiftCardAmount"]{
-		&:after{
-			content: 'Any value between $1 and $1000';
-		}
-	}
-	
-}
-
-// .validation-valid{
-// 	//border: 1px solid green;
-// }
-
 /* Button Styling */
 /* Yellow, Uppercase */ 
-.b1, .b2, .b3, .b4, .yellowButton, .greyButton{ 
+.b1, .b2, .b3, .b4, .yellowButton, .greyButton, .touchcarousel .arrow-holder{ 
 	
 	@include box-shadow-multiple(0 1px 1px 0 #fdf8a6 inset, 0 -1px 1px 0 #fdf8a6 inset);
 	@include box-sizing();
@@ -306,7 +261,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 		@include box-shadow-multiple(0 -1px 0 #fdf8a6 inset, 0 -1px 0 rgba(255, 255, 255, .2) inset, 0 1px 0 #393128 inset);	
 	}
 }
-.button-circle{ // Arrow-holder is for touch-carousel
+.button-circle, .touchcarousel .arrow-holder{ // Arrow-holder is for touch-carousel
 	
 	@include border-radius(px(32px));
 	
@@ -323,43 +278,4 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 // slightly more semantic breakup of the text on a button
 button label{
 	cursor: pointer;
-}
-
-
-.touchcarousel .arrow-holder{
-
-	@extend .greyButton;
-	@extend .button-circle;
-
-	position: absolute;
-	top: 50%;
-	left: -21px;
-	margin-top: -16px;
-
-	&.disabled{
-		display: none;
-	}
-	&:hover{
-		@include gradient($hoverLightYellow, $darkYellow);
-	}
-	&.left:after,
-	&.right:after{
-		content: ' ';
-		display: block;
-		@include lsp-sprite-background();
-		background-position: -82px -256px;
-		position: absolute;
-		top: 50%;
-		left: 3px;
-		margin-top: -12px;
-		height: 24px;
-		width: 24px;
-	}
-	&.right{
-		right: -21px;
-		left: inherit;
-		&:after{
-			background-position: -117px -256px;
-		}
-	}
 }

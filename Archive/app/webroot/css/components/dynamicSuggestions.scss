@@ -1,0 +1,84 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+/* Dynamic Item Suggestions are the horizontal lists of items that are populated by easyask and list products
+ * like "People who bought this also bought" or "Similar items" */
+.dynamicItemSuggestions{
+
+	//height: 340px;
+	position: relative;
+
+	.well{
+		height: 280px;
+		width: 100%;
+		overflow:hidden;
+		border-top: 1px solid $lightGrey;
+		border-bottom: 3px solid $lightGrey;
+	}
+	
+	.itemList{
+	
+		margin-bottom: 0;
+		padding-bottom: 0;
+		//border: 1px solid $lightGrey;
+		//border-width: 1px 0 3px 0;
+		width: 5000px;
+		
+		position:relative;
+		left:-200px; // This is the property to animate
+	
+		.productScope{
+		
+			border: 1px solid $lightGrey;
+			border-bottom-width: 0;
+			border-top-width: 0;
+			border-right-color: transparent;
+			float: left;
+			width: 180px;
+			height: 280px;
+			position: relative;
+			display: block;
+			padding-bottom: px(2 * $paddingUnit);
+		
+			a{
+				width: 100%;
+				height: 100%;
+				display: block;
+				text-decoration: none;
+			}
+		
+			&:nth-child(1){
+				border-left-color: transparent;
+			}
+			&:last-child{
+				border-right-color: transparent;
+			}
+			img{ margin: px($paddingUnit + 2);}
+		
+			.productPrice{ 
+				font-weight: bold;
+				padding-left: px($paddingUnit + 4); /* The $ makes the price look unaligned */
+				text-decoration: none;
+				color: $black;
+			}
+			.productName{ 
+				display: block; 
+				padding: 0 px($paddingUnit + 2);
+				color: $black;
+			}
+			&:hover{
+				@include box-shadow-multiple(0 0 px(5px) 0 $darkYellow);
+				border: 1px solid $darkYellow;
+				border-bottom-width: 0;
+				border-top-width: 0;
+				& + .productScope{
+					border-left-width: 0;
+					margin-left: 1px;
+				}
+			}
+		}
+	
+		@include clearfix;
+	
+	}
+}

@@ -1,0 +1,41 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+/* The notice has the little exclamation point icon to the left, is bold, with grey details... there is a specific html structure
+ * to use with notices <span class='notice'>Main Text<span class='details'>Subtext</span></span> */
+.notice{ 
+	
+	color: $black;
+	font-weight: bold;
+	position: relative;
+	padding-left: px(16 + 5px);
+	font-size: 13px;
+	display: block;
+	.details{
+		font-weight: normal;
+		display: block;
+		clear: both;
+	}
+
+	&:before{
+		@include lsp-sprite-background();
+		background-position: -121px -325px;
+		content: ' ';
+		display: block;
+		position: absolute;
+		top: px(2px);
+		left: 0;
+		width: px(19px);
+		height: px(19px);
+	}
+
+	a{
+		color: black;
+	}
+
+	.details{
+		a{
+			color: $grey;
+		}
+	}
+}

@@ -1,16 +1,22 @@
 // CSS needed to style a non-functioning, but first-load version of the website
 @import "utilities/settings";
 @import "utilities/functions";
-@import "utilities/reset";
-@import "utilities/grid";
 
+
+/* Global */
 @import "components/global";
-@import "components/limitElements";
+
+/* Limit Elements */
+//@import "components/limitElements";
+
+/* Images */
 @import "components/images";
+
+/* Form */
 @import "components/form";
-@import "components/table";
+
+/* Icons */
 @import "components/icons";
+
+/* Header */
 @import "components/header";
-@import "components/flyout";
-@import "components/contact";
-@import "components/footer";

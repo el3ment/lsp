@@ -1,0 +1,212 @@
+/* This function wraps almost every size definition in the css
+	 so it can be used to convert px to em if desired, across site 
+	 Originally it was intented to make the move to mobile easier,
+	 but I decided against that later, and thus it just returns the pixel input
+	 Any time there is a change in font size for a containing element, $context needs
+	 to be added on the method calls every once and awhile */
+	 
+@function px($target, $context : 13) {
+	//@if unit($target) == 'px'{
+	//    @return (1 / $context)*($target / 1px) * 1em;
+	//}
+	@return $target;
+}
+
+/* This was intended to build a grid system without classes */
+@function columns($columnCount){
+		@return ($columnCount * $columnWidth) + (($columnCount - 1) * $gutterWidth);
+}
+
+
+@mixin box-shadow-multiple($params...){
+	-webkit-box-shadow: #{$params};
+	-moz-box-shadow: #{$params};
+	box-shadow: #{$params};
+}
+
+@mixin border-radius($size...){
+	border-radius: #{$size};
+}
+
+@mixin box-sizing($method : border-box){
+	-webkit-box-sizing: $method; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: $method;    /* Firefox, other Gecko */
+	box-sizing: $method;	
+}
+
+
+@mixin clearfix(){
+		zoom: 1; /* Sigh... This is to clearfix for IE7 */
+		&:after{
+				display: block;
+				clear: both;
+				content: ' ';
+		}
+}
+
+@mixin transition($property){
+	-moz-transition:$property;
+		-webkit-transition:$property;
+		-o-transition:$property;
+		transition:$property;
+}
+
+
+/*  This adds a little arrow-flag to the top, left, right, or bottom of a container... you'll see it used in the
+		definition popup, and the notice on the checkout */
+		
+@mixin panel-arrow($size, $direction, $panelColor, $position : 50%, $borderWidth : 0){
+		&:after, &:before{
+				content: " "; 
+				display: block; 
+				width: 0; 
+				height: 0;
+				position: absolute;
+				z-index: 2;
+				border: px($size) inset transparent;
+				
+				@if $direction == 'left'{
+						border-right: px($size) solid $panelColor; /*findme*/
+						left: px(-($size * 2 - 1 + $borderWidth));
+						margin-top: px(-($size));
+						top: $position;
+				}@else if $direction == 'top'{
+						border-bottom: px($size) solid $panelColor; 
+						left: $position;
+						margin-left: px(-($size));
+						top: px($top + 1);
+				}@else if $direction == 'right'{
+						border-left: px($size) solid $panelColor;
+						top: $position;
+						margin-top: px(-($size * 2));
+						right: px((-($size * 2 + $borderWidth) + 1));
+				}@else if $direction == 'bottom'{
+						border-top: px($size) solid red; 
+						left: $position;
+						bottom: px(-(($size * 2 + $borderWidth) - 1));
+				}
+				
+		}
+		&:before{
+				z-index: 1; 
+								
+				@if $direction == 'left'{
+						border-right: px($size) solid $lightGrey;
+						left: px(-($size * 2 + $borderWidth));
+				}@else if $direction == 'top'{
+						border-bottom: px($size) solid $lightGrey; 
+						top: px(-$size * 2);
+				}@else if $direction == 'right'{
+						border-left: px($size) solid $lightGrey;
+						right: px(-$size * 2);
+				}@else if $direction == 'bottom'{
+						border-top: px($size) solid $lightGrey; 
+						bottom: px(-$size * 2);
+				}
+		}
+}
+
+@mixin opacity($value){
+		filter: alpha(opacity=#{$value * 100});
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$value * 100})";
+		opacity: $value;
+}
+
+@mixin rotate($degrees) {
+	-webkit-transform: rotate(#{$degrees}deg);
+	-moz-transform: rotate(#{$degrees}deg);
+	-ms-transform: rotate(#{$degrees}deg);
+	-o-transform: rotate(#{$degrees}deg);
+	transform: rotate(#{$degrees}deg);
+
+	filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+	zoom: 1;
+ }
+
+
+ @mixin lsp-sprite-background(){
+	background-image: url(/min/img/lsp-master-sprite-old.png);
+ }
+ 
+ /* These are convience methods to make cross-browser implementations of common
+		CSS3 properties easier */
+
+ @mixin gradient($from, $to){
+ 	
+ 	background-color: $from;
+
+	@include lsp-sprite-background();
+
+	@if $from == $lightYellow{
+		background-position: 0 -527px;
+	}@else if $from == $darkYellow{ // click
+		background-position: -198px -527px;
+	}@else if $from == $hoverLightYellow{ // hover
+		background-position: 0 -682px;
+	}@else if $from == $buttonLightGrey{
+		background-position: 0 -632px;
+	}@else if $from == $buttonDarkGrey{ // click
+		background-position: -198px -629px;
+	}@else if $from == "b3hover"{
+		background-position: -199px -684px;
+	}@else if $from == $brown{
+		background-position: 0 -579px;
+	}@else if $from == $darkBrown{ // click
+		background-position: -133px -579px;
+	}@else if $from == #574c41{ // hover
+		background-position: -200px -472px;
+	}@else{
+		background : $from; /* Old browsers */
+			background : -moz-linear-gradient(top, $from 0%, $to 100%); /* FF3.6+ */
+			background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to)); /* Chrome,Safari4+ */
+			background : -webkit-linear-gradient(top, $from 0%,$to 100%); /* Chrome10+,Safari5.1+ */
+			background : -o-linear-gradient(top, $from 0%,$to 100%); /* Opera 11.10+ */
+			background : -ms-linear-gradient(top, $from 0%,$to 100%); /* IE10+ */
+			background : linear-gradient(to bottom, $from 0%,$to 100%); /* W3C */
+			filter:  progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}'); /* IE6,IE7 */
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$from}', EndColorStr='#{$to}')"; /* IE8 */
+	}
+ }
+
+
+ @mixin prevent-word-breakouts(){
+		 -ms-word-break: break-all;
+				 word-break: break-all;
+				 word-break: break-word;
+		 -webkit-hyphens: auto;
+				-moz-hyphens: auto;
+						 hyphens: auto;
+ }
+
+// sass
+@mixin rotate($degrees) {
+	 -moz-transform: rotate($degrees);  
+		 -o-transform: rotate($degrees);  
+-webkit-transform: rotate($degrees);
+					 filter:  progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+			 -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+						 zoom: 1;
+}
+
+
+@mixin breakpoint($point) {
+  @if $point == superwide {
+    @media (min-width: 1200px) { @content; }
+  }
+  @else if $point == desktop {
+    @media (min-width: 980px) and (max-width: 1200px) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: 768px) and (max-width: 979px) { @content; }
+  }
+  @else if $point == tablet-and-up {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $point == tablet-and-below {
+    @media (max-width: 979px) { @content; }
+  }
+  @else if $point == phone {
+    @media (max-width: 767px)  { @content; }
+  }
+}

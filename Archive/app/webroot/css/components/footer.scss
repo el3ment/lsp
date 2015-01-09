@@ -1,0 +1,305 @@
+@import "../utilities/settings";
+@import "../utilities/functions";
+
+$headerBackgroundColor : #17100a;
+
+/* Footer */
+.footer{
+	
+	$_bottomPadding : 20px;
+	
+	//margin: auto;
+	color: #b7aca4; /* Light brown */
+	
+	.rowContent{
+		margin: auto;
+		float: none;
+	}
+	
+	.banner{
+	   
+		/* The banner contains the picture and testimonial quote, as well as the mcafee and credit card security icons */
+		
+		background-color: #f5f4f0;
+		position: relative;
+		padding: px($_bottomPadding) 0;
+		float:left;
+		width: 100%;
+		min-height: 70px;
+		/* overflow: hidden; /* Stylistic decision */
+		margin-top: px(80px); /* 20px + 10 for the top of the profile image + extra*/
+		
+		
+		@media (max-width: 767px){
+			min-height:100px;
+			border: 20px solid transparent;
+			border-width: 0 20px;
+			@include box-sizing();
+	
+		}
+		
+		.profile{
+			position: absolute;
+			height: px(140px);
+			width: px(140px);
+			top: px(-20px); 
+			@media (max-width: 767px) {
+				height: px(110px);
+				width: px(110px);
+				top: -3px;
+			}
+		   
+			.profileImage{ 
+				width: 100%;
+				height: 100%;
+				@include border-radius(px(150px));
+				//background-image: url("/resize/images/we-speak-drum-staff.png");
+				@media (max-width: 767px) {
+					background-position: -10px -15px;
+				}
+			}
+		}
+		.content{
+			font-size: px(14px);
+			font-style: italic;
+			color: $darkGrey;
+			
+			
+			margin-left: px(160px, 16px);
+			
+			@media (max-width: 767px) {
+				margin-left:130px;
+			}
+			
+			overflow: hidden;
+			//width: px(460px, 16px);
+			line-height: 1.4em;
+			margin-right: px(2 * $paddingUnit);
+			
+			strong{
+				color: black;
+			}
+		}
+		.security{
+			
+			margin: px(20px) 0 0 px(20px);
+			float:right;
+			
+			@media (max-width: 979px) and (min-width: 768px){
+				margin-top: 0px;
+			}
+			
+			li{
+				float: right;
+				margin-left: px(10px);
+				@media (max-width: 979px) and (min-width: 768px){
+					clear:both;
+					margin-top: 20px;
+					&.image-creditCards{
+						margin-top:5px;
+					}
+					.image-mcafee{
+						margin-right: 20px;
+						margin-bottom: 0;
+					}
+				}
+			}
+			
+			.image-mcafee{
+				position:relative;
+				top:-10px;
+			}
+			
+			
+		}
+	}
+	
+	.well{
+	   
+		/* The space below the banner */
+		width: 100%;
+		float: left;
+		background-color: $headerBackgroundColor;
+		background: url("/min/img/background-drummer.jpg")  bottom center no-repeat fixed, url("/min/img/dark_pattern.jpg") bottom center fixed;
+		
+		background-attachment: fixed;
+		//background-repeat: no-repeat;
+		background-position: bottom center;
+		
+		background: url("/min/img/dark_pattern.jpg") bottom center fixed\9; // Fallback
+		
+		background-color: $headerBackgroundColor;
+		padding-top: 20px;
+		clear: both;
+		
+		@media (min-width: 768px) and (max-width: 979px) {
+			.span2{
+				width: 146px;
+			}
+			.span4{
+				width: 724px;
+				@include box-sizing();
+
+				margin-left: 0;
+			}
+		}
+
+		@media(max-width: 979px){
+       		.sitemap-lists{
+       			padding: 0 0 0 10%;
+       			float: left;
+       		}
+		}
+
+		@media(max-width: 767px){
+			.sitemap-lists{
+				padding-left: 0;
+				margin-left: 48px;
+			}
+		}
+
+		h2, strong, em{
+			color: white;
+		}
+		h2, .h2{ /* h2 tags title each column of links */
+			@media(max-width: 979px){
+				font-family: 'Open Sans', Sans-serif;
+				font-size: 14px;
+			}
+
+		}
+
+		// Title above Email Newsletter signup
+		h3{
+			font-weight: normal;
+			margin: 3px 0 5px;
+		}
+
+		li{
+			font-size: 13px;
+			@media (max-width: 979px){
+				font-size: 14px;
+			}
+		}
+		a{	
+			text-decoration: none;
+			position:relative;
+			&:hover{
+				color: $yellow;
+			}
+		}
+
+		// Link columns
+		li.span2{
+			margin-top: 10px;
+			@media (max-width: 768px){
+				margin-left: 35px;
+				margin-top: 0;
+			}
+		}
+		
+		.sitemap-lists a:hover:before{
+			content:'  ';
+			display:block;
+			width:24px;
+			height:24px;
+			position:absolute;
+			top:-2px;
+			left:-30px;
+			@include lsp-sprite-background();
+			background-position: -5px -220px;
+		}
+		.sitemap-lists a[class*="icon-"]:hover:before{
+			display:none;
+		}
+		
+		.utilities{
+			margin-bottom: 20px;
+		}
+		
+		.utilities a{
+			text-transform: none;
+		}
+		
+		.first{
+			margin-left: 0;
+		}
+		
+		.static{
+		   
+			/* The static block contains the newsletter sign up and company hours */
+			margin-bottom: px(2 * $paddingUnit);
+			
+			@media (max-width: 979px){
+				padding: 0 5%;
+			}
+			
+			a { 
+				color: inherit; /* Light brown */
+				&:hover{
+					color: $yellow;
+				}
+			}
+			
+		}
+
+		@media (min-width: 767px) and (max-width: 979px){
+			.static .block{
+				float: left;
+				width: 46%;
+				padding: 5px;
+				margin-left: 3%;
+				&.contact{
+					margin-left: 5px;
+				}
+			}
+		}
+		
+		.static .links{
+			background-color: transparent;
+			padding-top: 0;
+			@include box-shadow-multiple(none); /* Intentionally 1px */
+		}
+
+		.logo{
+		  
+			clear: both;
+			margin: auto;
+			text-align:center; /* It's just an img */
+			margin-top: px(40px);
+			float:left;
+			width: 100%;
+			*[class*='image']{
+				margin: auto;   
+			}
+		}
+		
+		.copyright{
+			color: #493d35;
+			font-size: 13px;
+			margin: px(40px) 0;
+			clear: both;
+			text-align: center;
+			float: left;
+			width: 100%;
+		}
+
+		.block{
+		margin-top: 20px;
+			background-color: #1f150d;
+			@include box-shadow-multiple(0 -1px 1px #352416, 0 0 1px 1px #18120d); /* Intentionally 1px */
+			//border: 1px solid #120C07\9;
+			//border-width: 0 1px 1px;
+		}
+
+	}
+}
+
+
+@-moz-document url-prefix(){
+	.footer .h2{
+		font-weight: normal;
+	}
+}
+
+

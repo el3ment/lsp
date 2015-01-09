@@ -1,41 +1,9 @@
 @import "../utilities/settings";
 @import "../utilities/functions";
 
-.aggregateReviews{
-	position: relative;
-	width: px(180px);
-	@include lsp-sprite-background();
-	background-position: -3px -384px;
-	display: inline-block;
-	margin-top: 5px;
-	overflow: hidden;
-	height: 20px;
-	text-align:left;
-	.reviewAggregateRating{ 
-		@include lsp-sprite-background();
-		background-position: -3px -354px;
-		display: inline-block;
-		text-indent: $hideDistance;
-		overflow: hidden;
-	}
-	.reviewAggregateRating[data-reviews-aggregateRating]{ width: px(0px);}
-	.reviewAggregateRating[data-reviews-aggregateRating="1"]{ width: px(20px);}
-	.reviewAggregateRating[data-reviews-aggregateRating="2"]{ width: px(40px);}
-	.reviewAggregateRating[data-reviews-aggregateRating="3"]{ width: px(60px);}
-	.reviewAggregateRating[data-reviews-aggregateRating="4"]{ width: px(80px);}
-	.reviewAggregateRating[data-reviews-aggregateRating="5"]{ width: px(100px);}
-	a{
-		position: absolute;
-		left: 100px;
-	}
-	.reviewCountLabel{
-		left: 100px; // Positioning in firefox
-		&:before{ content: '('; }
-		&:after{ content: ')'; }
-	}
-}
-
 .page-generic .reviews{
+
+	display: block;
 
 	// Temporary until we write the functionality for this
 	.reviewInteractionCount, .actions{ display: none !important;  }

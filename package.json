@@ -37,6 +37,8 @@
   },
   "homepage": "https://github.com/el3ment/lsp",
   "devDependencies": {
-    "grunt-contrib-imagemin": "^0.9.2"
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-imagemin": "^0.9.2",
+    "grunt-contrib-requirejs": "^0.4.4"
   }
 }

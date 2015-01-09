@@ -1,6 +1,6 @@
 (function(){
 
-define(['jquery', 'utilities/global'], function(){
+define(['jquery', 'utilities/loader', 'utilities/global'], function applicationController(){
 
 	var _util = window.LSP.utilities;
 	
@@ -47,69 +47,87 @@ define(['jquery', 'utilities/global'], function(){
 						// This is a helper event attacher, it looks for all
 						// buttons, and if they have data-controller, and data-action
 						// attributes, will call the appropriate event.
-						$('*[data-action]:not([data-action-handled])', data.selector).each(function(){
+						$('*[data-action]:not([data-action-handled])', data.selector).each(function(index, element){
 							
-							var elements = $(this);
+							element = $(element);
 							
-							elements.each(function(index, element){
-								
-								element = $(element);
-								
-								var controller = element.data('controller');
-								if(!controller){
-									// find the first parent with data-controller
-									// this allows a type of inheritance
-									controller = element.parents('*[data-controller]:first').data('controller');
-								}
-								var action = element.data('action');
-								var asset = element.data('asset');
-								var preventDefault = false;
-								var eventType;
-								
-								if(element.is('input[type="radio"], input[type="checkbox"], input[type="text"], select')){
-									eventType = 'change';
-								}else if(element.is('form')){
+							var action = element.data('action');
+							var asset = element.data('asset');
+							var controller = element.data('controller');
+							var preventDefault = false;
+							var eventType;
+
+							if(!controller){
+								// find the first parent with data-controller
+								// this allows a type of inheritance
+								console.log('Loading parentals');
+								controller = element.parents('*[data-controller]:first').data('controller');
+							}
+							
+							switch($(element)[0].nodeName.toUpperCase()){
+								case "FORM":
 									eventType = 'submit';
 									preventDefault = true;
-								}else{
-									//if('ontouchstart' in document.documentElement){
-										eventType = 'touchstart';
-									//}else{
-										eventType = 'click';
-									//}
-									if(element.is('button, submit')){
-										preventDefault = true;
+									break;
+								
+								case "INPUT":
+								case "SELECT":
+									eventType = 'change';
+								break;
+
+								case "BUTTON":
+									preventDefault = true;
+									eventType = 'click';
+									break;
+								
+								default:
+									eventType = 'click'
+								break;
+							}
+
+						// 	if(element.is('input[type="radio"], input[type="checkbox"], input[type="text"], select')){
+						// 		eventType = 'change';
+						// 	}else if(element.is('form')){
+						// 		eventType = 'submit';
+						// 		preventDefault = true;
+						// 	}else{
+						// 		//if('ontouchstart' in document.documentElement){
+						// 			eventType = 'touchstart';
+						// 		//}else{
+						// 			eventType = 'click';
+						// 		//}
+						// 		if(element.is('button, submit')){
+						// 			preventDefault = true;
+						// 		}
+						// 	}
+							
+
+							if(controller && action && !asset){
+								element.on(eventType, {preventDefault : preventDefault}, function(e){
+
+									console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
+
+									$(_app.controllers[controller]).
+										triggerHandler(_util.camelCase('on-' + action),
+											{selector : element, originalEvent : e});
+									if(e.data.preventDefault){
+										e.preventDefault();
 									}
-								}
-								
+								});//.attr('data-action-handled', true);
+							
+							}else if(controller && action && asset){
+								element.on(eventType, {preventDefault : preventDefault}, function(e){
 
-								if(controller && action && !asset){
-									element.bind(eventType, {preventDefault : preventDefault}, function(e){
+									console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
 
-										console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
-
-										$(_app.controllers[controller]).
-											triggerHandler(_util.camelCase('on-' + action),
-												{selector : element, originalEvent : e});
-										if(e.data.preventDefault){
-											e.preventDefault();
-										}
-									}).attr('data-action-handled', true);
-								
-								}else if(controller && action && asset){
-									element.bind(eventType, {preventDefault : preventDefault}, function(e){
-
-										console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
-
-										$(_app.controllers[controller].assets[asset]).
-											triggerHandler(_util.camelCase('on-' + action),
-												{selector : element, originalEvent : e});
-										if(e.data.preventDefault){
-											e.preventDefault();
-										}
-									}).attr('data-action-handled', true);
-								}
-							});
+									$(_app.controllers[controller].assets[asset]).
+										triggerHandler(_util.camelCase('on-' + action),
+											{selector : element, originalEvent : e});
+									if(e.data.preventDefault){
+										e.preventDefault();
+									}
+								});//.attr('data-action-handled', true);
+							}
 						});
 
 						require(['vendors/unveil/unveil-min'], function(data){
@@ -421,7 +439,7 @@ define(['jquery', 'utilities/global'], function(){
 
 				console.log('Initializing Controller', specificController);
 				
-				//console.time('Initializing Events for ' + specificController.name);
+				console.time('Initializing Events for ' + specificController.name);
 				
 				var controller, subController, event, asset, controllerObj, subControllerObj;
 				
@@ -456,26 +474,29 @@ define(['jquery', 'utilities/global'], function(){
 					}
 
 					// If the onReady events have already fired, then force this controller along individually
-					if(specificController === controllerObj){
-						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onReady){
-							controllerObj.events.application.onReady({}, _this._createGlobalEventObject());
-						}
-						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onAfterReady){
-							controllerObj.events.application.onAfterReady({}, _this._createGlobalEventObject());
-						}
-						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onAttachEvents){
-							controllerObj.events.application.onAttachEvents({}, $.extend({selector : $('html')}, _this._createGlobalEventObject()));
-						}
-						if(_isReadyFired && ((controllerObj.events || {}).application || {}).onResize){
-							_this.events.application.onResize({}, {controller : controllerObj});
-						}
+					if(specificController === controllerObj && _isReadyFired){
+
+						setTimeout(function manuallyInitializeControllerPostReady(){
+							if(((controllerObj.events || {}).application || {}).onReady){
+								controllerObj.events.application.onReady({}, _this._createGlobalEventObject());
+							}
+							if(((controllerObj.events || {}).application || {}).onAfterReady){
+								controllerObj.events.application.onAfterReady({}, _this._createGlobalEventObject());
+							}
+							if(((controllerObj.events || {}).application || {}).onAttachEvents){
+								controllerObj.events.application.onAttachEvents({}, $.extend({selector : $('html')}, _this._createGlobalEventObject()));
+							}
+							if(((controllerObj.events || {}).application || {}).onResize){
+								_this.events.application.onResize({}, {controller : controllerObj});
+							}
+						}, 100);
 					}
 
 					// // need to test this, if a controller loads after onready he needs to get onreszie fired too
 				}
 
 				$(specificController).triggerHandler('onInit');
-				//console.timeEnd('Initializing Events for ' + specificController.name);
+				console.timeEnd('Initializing Events for ' + specificController.name);
 				
 			}
 
