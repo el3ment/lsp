@@ -291,10 +291,11 @@ module.exports = function(grunt) {
 			      //mainConfigFile: "path/to/config.js",
 			      //name: "path/to/almond", // assumes a production build using almond
 			      
-				  name: 'controllers/application', 
+				  //name: 'controllers/application', 
 			      //exclude: ['jquery'],
-
-			      out: "app/webroot/min/js/combined/application.js",
+			      dir: 'reqjsout',
+			      findNestedDependencies: true,
+			      //out: "app/webroot/min/js/combined/application.js",
 			    } 
 			  }
 			}
