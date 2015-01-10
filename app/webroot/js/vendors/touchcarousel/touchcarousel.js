@@ -1,6 +1,6 @@
 (function(){
 
-define([], function(){
+define(['jquery'], function(){
 
 /*
  * TouchCarousel  v1.1

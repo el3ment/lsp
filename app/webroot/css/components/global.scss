@@ -385,10 +385,13 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 
 .loading, 
 .search-loading .page-generic,
-.search-loading .page-search{
+.search-loading .page-search,
+#handle_cartMainPortlet,
+#handle_loginMainPortlet{
 
 	position: relative;
-	min-height: 800px;
+	min-height: 400px;
+	display: block;
 
 	> div, > fieldset, > li, .controls{
 		@include opacity(.25);
@@ -414,6 +417,10 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 // 	display: none;
 // }
 
+.page-generic > table{
+	width: 100%;
+}
+
 .page-generic .loading.small{
 	min-height: 0;
 	color: white;
@@ -432,7 +439,7 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 // Default Post-Load Components
 .departmentDropdown,
 .reveal-closed,
-.wishlist-messages,
+.wishlist-messages > div,
 .footer,
 .productAd,
 *[class*="bsa-"],
@@ -443,7 +450,8 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 .dynamicItemSuggestions,
 .definitions,
 .clearableContainer .clearContents:before,
-.byline{
+.byline,
+.panel{
 	display: none;
 }
 
@@ -456,6 +464,8 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 .page-home,
 .page-productDetail,
 .page-category,
-.page-school-category{
+.page-school-category,
+.page-search > div,
+#handle_cartMainPortlet > td{
 	display: none;
 }

@@ -41,20 +41,20 @@ module.exports = function(grunt) {
 		},
 
 		// Uglify is a minifier for javascript
-		uglify: {
-			options : {
-				report : 'gzip',
-				mangle : true,
-			},
-			dist: {
-				files: [{
-					expand: true,
-					cwd: 'app/webroot/js',
-					src: ['**/*.js', '!vendors/netsuite/**/*'], //'!vendors/**/*'],
-					dest: 'app/webroot/min/js'
-				}]
-			}
-		},
+		// uglify: {
+		// 	options : {
+		// 		report : 'gzip',
+		// 		mangle : true,
+		// 	},
+		// 	dist: {
+		// 		files: [{
+		// 			expand: true,
+		// 			cwd: 'app/webroot/js',
+		// 			src: ['**/*.js', '!vendors/netsuite/**/*'], //'!vendors/**/*'],
+		// 			dest: 'app/webroot/min/js'
+		// 		}]
+		// 	}
+		// },
 
 		// SASS runs the SASS pre-processor on the sass files we use
 		sass: { // Task
@@ -91,24 +91,28 @@ module.exports = function(grunt) {
 				// define a string to put between each file in the concatenated output
 			    separator: ';'
 			},
-			core: {
-				 // the files to concatenate
-				 src: ['app/webroot/min/js/utilities/loader.js', 'app/webroot/min/js/utilities/global.js', 'app/webroot/min/js/controllers/application.js'],
-				 // the location of the resulting JS file
-				 dest: 'app/webroot/min/js/combined/application.js'
+			vendor: {
+				src: ['app/webroot/min/js/vendors/jquery/jquery-1.9.1.js','app/webroot/min/js/vendors/require/require.js'],
+				dest: 'app/webroot/min/js/combined/jquery-requirejs.js'
 			},
-			search: {
-				 // the files to concatenate
-				 src: ['app/webroot/min/js/models/api.js','app/webroot/min/js/models/easyask.js','app/webroot/min/js/plugins/search.js'],
-				 // the location of the resulting JS file
-				 dest: 'app/webroot/min/js/combined/search.js'
-			},
-			netsuite: {
-				 // the files to concatenate
-				 src: ['app/webroot/min/js/controllers/netsuite.js','app/webroot/min/js/controllers/checkout.js','app/webroot/min/js/vendors/netsuite/interface.js'],
-				 // the location of the resulting JS file
-				 dest: 'app/webroot/min/js/combined/netsuite.js'
-			}
+			// core: {
+			// 	 // the files to concatenate
+			// 	 src: ['app/webroot/min/js/utilities/loader.js', 'app/webroot/min/js/utilities/global.js', 'app/webroot/min/js/controllers/application.js'],
+			// 	 // the location of the resulting JS file
+			// 	 dest: 'app/webroot/min/js/combined/application.js'
+			// },
+			// search: {
+			// 	 // the files to concatenate
+			// 	 src: ['app/webroot/min/js/models/api.js','app/webroot/min/js/models/easyask.js','app/webroot/min/js/plugins/search.js'],
+			// 	 // the location of the resulting JS file
+			// 	 dest: 'app/webroot/min/js/combined/search.js'
+			// },
+			// netsuite: {
+			// 	 // the files to concatenate
+			// 	 src: ['app/webroot/min/js/controllers/netsuite.js','app/webroot/min/js/controllers/checkout.js','app/webroot/min/js/vendors/netsuite/interface.js'],
+			// 	 // the location of the resulting JS file
+			// 	 dest: 'app/webroot/min/js/combined/netsuite.js'
+			// }
 		},
 
 		// Watch looks at files and runs scripts when those files have been modified
@@ -253,16 +257,16 @@ module.exports = function(grunt) {
 			}
 		},
 
-		copy: {
-		  main: {
-		    files: [
-		      // includes files within path
-		      {expand: true, cwd: 'app/webroot/js/vendors/netsuite', src: ['**'], dest: 'app/webroot/min/js/vendors/netsuite'},
-		      {expand: true, cwd: 'app/webroot/css/vendors', src: ['**'], dest: 'app/webroot/min/css/vendors/'}],
-		      //{src: ['app/webroot/js/vendors/**'], dest: 'dest/'}],
-		      //{src: ['app/webroot/js/vendors/*'], dest: 'app/webroot/min/js/vendors/'}]
-		  }
-		},
+		// copy: {
+		//   main: {
+		//     files: [
+		//       // includes files within path
+		//       {expand: true, cwd: 'app/webroot/js/vendors/netsuite', src: ['**'], dest: 'app/webroot/min/js/vendors/netsuite'},
+		//       {expand: true, cwd: 'app/webroot/css/vendors', src: ['**'], dest: 'app/webroot/min/css/vendors/'}],
+		//       //{src: ['app/webroot/js/vendors/**'], dest: 'dest/'}],
+		//       //{src: ['app/webroot/js/vendors/*'], dest: 'app/webroot/min/js/vendors/'}]
+		//   }
+		// },
 		  imagemin: {                          // Task
 		    static: {                          // Target
 		      // options: {                       // Target options
@@ -292,10 +296,36 @@ module.exports = function(grunt) {
 			      //name: "path/to/almond", // assumes a production build using almond
 			      
 				  //name: 'controllers/application', 
-			      //exclude: ['jquery'],
-			      dir: 'reqjsout',
+			      dir: 'app/webroot/min/js',
 			      findNestedDependencies: true,
 			      //out: "app/webroot/min/js/combined/application.js",
+			      modules : [
+			      	{
+			      		name : 'combined/core',
+			      		exclude: ['jquery']
+			      	},
+			      	{
+			      		name : 'controllers/product',
+			      		exclude: ['jquery', 'controllers/application', 'utilities/global'],
+			      		include: ['plugins/reviews']
+			      	},
+			      	{
+			      		name : 'plugins/suggestions',
+			      		exclude: ['jquery', 'controllers/application', 'utilities/global']
+			      	},
+			      	{
+			      		name : 'controllers/netsuite',
+			      		exclude: ['jquery', 'controllers/application', 'utilities/global']
+			      	},
+			      	{
+			      		name : 'controllers/shipping',
+			      		exclude: ['jquery', 'controllers/application', 'utilities/global']
+			      	},
+			      	{
+			      		name : 'controllers/home',
+			      		exclude: ['jquery', 'controllers/application', 'utilities/global', 'plugins/flyout']
+			      	},
+			      ]
 			    } 
 			  }
 			}
@@ -315,8 +345,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	// Default task(s).
-	grunt.registerTask('default', ['clean', 'uglify', 'requirejs', 'copy', /*'concat'*/, 'sass', 'imagemin']);
-	grunt.registerTask('js', ['uglify', 'copy', 'concat']);
+	grunt.registerTask('default', ['clean', /*'uglify',*/ 'requirejs', /*'copy',*/ 'concat', 'sass', 'imagemin']);
+	grunt.registerTask('js', ['requirejs']);
 	grunt.registerTask('webdrivercss', ['webdriver']);
 	grunt.registerTask('phantomcss', ['casperjs']);
 	grunt.registerTask('docs', ['docco']);

@@ -7,6 +7,10 @@ $_topOfPrice : 325px;
 
 .page-search{
 
+	> div{
+		display: block;
+	}
+
 	*[class*="bsa-"]{
 		display: none !important;
 	}

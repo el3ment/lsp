@@ -175,7 +175,7 @@ input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input
 } 
 
 /* Grey, Caps */
-.b3, .b4, .greyButton{ 
+.b3, .b4, .greyButton, .touchcarousel .arrow-holder{ 
 	&, &:active{ 
 		@include gradient($buttonLightGrey, $buttonDarkGrey);
 	}

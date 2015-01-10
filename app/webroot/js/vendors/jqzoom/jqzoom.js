@@ -18,6 +18,9 @@
  *
  * Date: 03 May 2011 22:16:00
  */
+
+define(['jquery'], function(){
+
 (function ($) {
 	//GLOBAL VARIABLES
 	var isIE6 = ($.browser && $.browser.msie && $.browser.version < 7);
@@ -762,3 +765,5 @@
 		}
 	};
 })(jQuery);
+
+});

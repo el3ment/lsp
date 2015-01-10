@@ -1,6 +1,6 @@
 (function(){
 
-define(['jquery', 'utilities/global', 'controllers/application', 'plugins/reveal', 'vendors/menu-aim/menu-aim'], function(){
+define(['utilities/global', 'controllers/application', 'plugins/reveal', 'vendors/menu-aim/menu-aim'], function(){
 
 	var _util = window.LSP.utilities;
 

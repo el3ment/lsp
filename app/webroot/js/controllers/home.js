@@ -27,7 +27,9 @@ define(['utilities/global','controllers/application', 'plugins/flyout'], functio
 				},
 				application : {
 					onReady : function(e, data){
-
+						
+						console.time('onReady : Home');
+						
 						_app.controllers.flyout.openFlyout(true);
 
 						var mainSlider = $('#mainSlider');
@@ -63,6 +65,8 @@ define(['utilities/global','controllers/application', 'plugins/flyout'], functio
 							if(window.performance)
 								console.log('Home Page Load : ' + ((new Date().getTime()) - window.performance.timing.requestStart)/1000 + "sec");
 						}
+
+						console.timeEnd('onReady : Home');
 
 					},
 					onInit : function(e, data){

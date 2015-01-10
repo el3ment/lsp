@@ -72,7 +72,7 @@
 
 (function(){
 
-define([], function(){
+define(['jquery'], function(){
 
 (function($) {
 

@@ -1,1 +1,11 @@
-!function(a,b,c){function d(a){return a}function e(a){return decodeURIComponent(a.replace(f," "))}var f=/\+/g,g=a.cookie=function(f,h,i){if(h!==c){if(i=a.extend({},g.defaults,i),null===h&&(i.expires=-1),"number"==typeof i.expires){var j=i.expires,k=i.expires=new Date;k.setDate(k.getDate()+j)}return h=g.json?JSON.stringify(h):String(h),b.cookie=[encodeURIComponent(f),"=",g.raw?h:encodeURIComponent(h),i.expires?"; expires="+i.expires.toUTCString():"",i.path?"; path="+i.path:"",i.domain?"; domain="+i.domain:"",i.secure?"; secure":""].join("")}for(var l,m=g.raw?d:e,n=b.cookie.split("; "),o=0;l=n[o]&&n[o].split("=");o++)if(m(l.shift())===f){var p=m(l.join("="));return g.json?JSON.parse(p):p}return null};g.defaults={},a.removeCookie=function(b,c){return null!==a.cookie(b)?(a.cookie(b,null,c),!0):!1}}(jQuery,document);
+/*!
+ * jQuery Cookie Plugin v1.2
+ * https://github.com/carhartl/jquery-cookie
+ *
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.opensource.org/licenses/GPL-2.0
+ */
+
+(function(e,t,n){function i(e){return e}function s(e){return decodeURIComponent(e.replace(r," "))}var r=/\+/g,o=e.cookie=function(r,u,a){if(u!==n){a=e.extend({},o.defaults,a),u===null&&(a.expires=-1);if(typeof a.expires=="number"){var f=a.expires,l=a.expires=new Date;l.setDate(l.getDate()+f)}return u=o.json?JSON.stringify(u):String(u),t.cookie=[encodeURIComponent(r),"=",o.raw?u:encodeURIComponent(u),a.expires?"; expires="+a.expires.toUTCString():"",a.path?"; path="+a.path:"",a.domain?"; domain="+a.domain:"",a.secure?"; secure":""].join("")}var c=o.raw?i:s,h=t.cookie.split("; ");for(var p=0,d;d=h[p]&&h[p].split("=");p++)if(c(d.shift())===r){var v=c(d.join("="));return o.json?JSON.parse(v):v}return null};o.defaults={},e.removeCookie=function(t,n){return e.cookie(t)!==null?(e.cookie(t,null,n),!0):!1}})(jQuery,document);

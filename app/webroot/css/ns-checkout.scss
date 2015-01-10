@@ -62,6 +62,25 @@
 		}
 	}
 }
+
+
+// Unhide the block
+#handle_cartMainPortlet,
+#handle_loginMainPortlet{
+
+	min-height: 100px;
+	
+	> td{
+		display: block;
+	}
+
+	// Hide the loading icon
+	&:before{
+		display: none;
+	}
+}
+
+
 // Crappy Netsuite Hack for their Error pages
 #div__body{
 	

@@ -27,19 +27,21 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 					},
 
 					onResize : function(e, data){
-						var targetController = (data.controller ? data.controller : _this);
+						var targetController = $(data.controller ? data.controller : _this);
 						var oldContext = _context;
 						var newContext = _this.getContext();
 
 						if(newContext !== oldContext){
 							console.log('Leaving ' + oldContext + ' entering ' + newContext);
 							
-							$(targetController).triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
-							$(targetController).triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
-							$(targetController).triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
+							targetController.triggerHandler('onContextChange', {context : newContext, previousContext : oldContext});
+							targetController.triggerHandler(_util.camelCase('onContextChangeLeave-' + oldContext), {context : newContext, previousContext : oldContext});
+							targetController.triggerHandler(_util.camelCase('onContextChangeEnter-' + newContext), {context : newContext, previousContext : oldContext});
 						}
 					},
 					onAttachEvents : function(e, data){
+
+						console.time('attachEvent : Application');
 
 						// Ask the loader to load any new plugins or controllers if required
 						_util.loader.load(data.selector);
@@ -47,24 +49,33 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 						// This is a helper event attacher, it looks for all
 						// buttons, and if they have data-controller, and data-action
 						// attributes, will call the appropriate event.
-						$('*[data-action]:not([data-action-handled])', data.selector).each(function(index, element){
-							
-							element = $(element);
-							
-							var action = element.data('action');
-							var asset = element.data('asset');
-							var controller = element.data('controller');
+						var elements = [];
+
+						
+							elements = $('*[data-action]', data.selector);
+						
+						
+						for(var i = 0; i < elements.length; i++){
+
+							element = $(elements[i]);
+
+							var action = element[0].getAttribute('data-action');
+							//var asset = element[0].getAttribute('data-asset');
+							var controller = element[0].getAttribute('data-controller');
 							var preventDefault = false;
 							var eventType;
+
+							// if(asset)
+							// 	console.log('Warning :: Assets are unused');
 
 							if(!controller){
 								// find the first parent with data-controller
 								// this allows a type of inheritance
-								console.log('Loading parentals');
+								console.log('Warning :: Loading Parentals - This element needs a data-controller attribute', element);
 								controller = element.parents('*[data-controller]:first').data('controller');
 							}
 							
-							switch($(element)[0].nodeName.toUpperCase()){
+							switch(element[0].nodeName.toUpperCase()){
 								case "FORM":
 									eventType = 'submit';
 									preventDefault = true;
@@ -82,59 +93,50 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 								
 								default:
 									eventType = 'click'
-								break;
+									break;
 							}
 
-						// 	if(element.is('input[type="radio"], input[type="checkbox"], input[type="text"], select')){
-						// 		eventType = 'change';
-						// 	}else if(element.is('form')){
-						// 		eventType = 'submit';
-						// 		preventDefault = true;
-						// 	}else{
-						// 		//if('ontouchstart' in document.documentElement){
-						// 			eventType = 'touchstart';
-						// 		//}else{
-						// 			eventType = 'click';
-						// 		//}
-						// 		if(element.is('button, submit')){
-						// 			preventDefault = true;
-						// 		}
-						// 	}
-							
+							if(controller && action /*&& !asset*/){
+								
 
-							if(controller && action && !asset){
-								element.on(eventType, {preventDefault : preventDefault}, function(e){
+								element.on(eventType, {preventDefault : preventDefault, controller : controller, action : action, element : element}, function(e){
 
-									console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
+									console.log('Event : ' + e.data.controller + '.events.' + _util.camelCase('on-' + e.data.action) + ' fired.');
 
-									$(_app.controllers[controller]).
-										triggerHandler(_util.camelCase('on-' + action),
-											{selector : element, originalEvent : e});
+									$(_app.controllers[e.data.controller]).
+										triggerHandler(_util.camelCase('on-' + e.data.action),
+											{selector : e.data.element, originalEvent : e});
 									if(e.data.preventDefault){
 										e.preventDefault();
 									}
 								});//.attr('data-action-handled', true);
 							
-							}else if(controller && action && asset){
-								element.on(eventType, {preventDefault : preventDefault}, function(e){
-
-									console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
-
-									$(_app.controllers[controller].assets[asset]).
-										triggerHandler(_util.camelCase('on-' + action),
-											{selector : element, originalEvent : e});
-									if(e.data.preventDefault){
-										e.preventDefault();
-									}
-								});//.attr('data-action-handled', true);
 							}
-						});
 
+							// else if(controller && action && asset){
+							// 	element.on(eventType, {preventDefault : preventDefault}, function(e){
+
+							// 		console.log('Event : ' + controller + '.events.' + _util.camelCase('on-' + action) + ' fired.');
+
+							// 		$(_app.controllers[controller].assets[asset]).
+							// 			triggerHandler(_util.camelCase('on-' + action),
+							// 				{selector : element, originalEvent : e});
+							// 		if(e.data.preventDefault){
+							// 			e.preventDefault();
+							// 		}
+							// 	});//.attr('data-action-handled', true);
+							// }
+
+						}					
+							
 						require(['vendors/unveil/unveil-min'], function(data){
 							return function(){ 
 								$('*[data-src]:not([data-lazy-handled])', data.selector).attr('data-lazy-handled', true).unveil(200);
 							};
 						}(data));
+
+						console.timeEnd('attachEvent : Application');
+							
 					},
 
 					onReady : function(e, data){
@@ -424,11 +426,11 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 					// Defer parsing until the next avaliable moment - this allows the onLoad event to finish firing
 					//setTimeout(function(){
 					//	return function(){
-							//console.time('Application onRezie, onReady, onAfterReady');
+							console.time('Application onRezie, onReady, onAfterReady');
 							$(_this).triggerHandler('onResize', eventData);
 							$(_this).triggerHandler('onReady', eventData);
 							$(_this).triggerHandler('onAfterReady', eventData);
-							//console.timeEnd('Application onRezie, onReady, onAfterReady');
+							console.timeEnd('Application onRezie, onReady, onAfterReady');
 							
 					//	};
 					//}(eventData), 1);
