@@ -111,14 +111,14 @@ define(['utilities/global', 'controllers/application', 'models/easyask', 'vendor
 				if($.jqzoom){
 					_this.detachZoom();
 					var zoomAsset = $('a[data-asset="mouseoverZoom"]');
-					if(zoomAsset.is(':not([href*="no-image"])') && context !== 'phone'){
+					if(zoomAsset.is(':not([href*="no-image"])') /*&& context !== 'phone' */){
 						zoomAsset
 							.jqzoom({
 								zoomWidth: $('.addToCart').width(),
 								zoomHeight: 480,
 								position: 'right',
 								preloadImages: (context !== 'phone' ? true : false),
-								xOffset : (context === 'phone' ? 1000 : parseInt($('.information.span6').css('margin-left'), 10)),
+								xOffset : (context === 'phone' ? 1000 : -9999),
 								yOffset : -20,
 								zoomType: 'standard',
 								showEffect: 'fadein',

@@ -77,29 +77,29 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 							
 							switch(element[0].nodeName.toUpperCase()){
 								case "FORM":
-									eventType = 'submit';
+									eventType = 'submit.lsp.global';
 									preventDefault = true;
 									break;
 								
 								case "INPUT":
 								case "SELECT":
-									eventType = 'change';
+									eventType = 'change.lsp.global';
 								break;
 
 								case "BUTTON":
 									preventDefault = true;
-									eventType = 'click';
+									eventType = 'click.lsp.global';
 									break;
 								
 								default:
-									eventType = 'click'
+									eventType = 'click.lsp.global'
 									break;
 							}
 
 							if(controller && action /*&& !asset*/){
 								
 
-								element.on(eventType, {preventDefault : preventDefault, controller : controller, action : action, element : element}, function(e){
+								element.off(eventType).on(eventType, {preventDefault : preventDefault, controller : controller, action : action, element : element}, function(e){
 
 									console.log('Event : ' + e.data.controller + '.events.' + _util.camelCase('on-' + e.data.action) + ' fired.');
 
@@ -366,6 +366,8 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 			initializeGlobalEvents : function(){
 				var eventData = _this._createGlobalEventObject();
 
+				console.log('initializeGlobalEvents Fired');
+
 				$(window).resize(
 					// We don't want to fire the onResize event every few miliseconds
 					// so we use a timer - the function helps keep scope.
@@ -416,7 +418,7 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 				});
 
 				// Fire the onReady and onResize events to initialize anything that relies on them
-				$(document).ready(function(e){
+				$(document).ready(function globalApplicationOnReady(e){
 
 					eventData.error = e;
 					
@@ -425,16 +427,17 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 					
 					// Defer parsing until the next avaliable moment - this allows the onLoad event to finish firing
 					//setTimeout(function(){
-					//	return function(){
+						//return function(){
 							console.time('Application onRezie, onReady, onAfterReady');
 							$(_this).triggerHandler('onResize', eventData);
 							$(_this).triggerHandler('onReady', eventData);
 							$(_this).triggerHandler('onAfterReady', eventData);
 							console.timeEnd('Application onRezie, onReady, onAfterReady');
 							
-					//	};
+						//};
 					//}(eventData), 1);
 				});
+
 			},
 
 			init : function(specificController){
@@ -463,10 +466,10 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 								$(subControllerObj)
 									.bind(event, function(controllerObj, subController, event){
 										// extra closure to give access to controllerObj, subController, and event objects
-										return function(a, b, c, d){
-											//console.time("-" + controllerObj.name + ".events." + subController + "." + event);
+										return function fireControllerEvent(a, b, c, d){
+											console.time("-" + controllerObj.name + ".events." + subController + "." + event);
 											controllerObj.events[subController][event](a, b, c, d);
-											//console.timeEnd("-" + controllerObj.name + ".events." + subController + "." + event);
+											console.timeEnd("-" + controllerObj.name + ".events." + subController + "." + event);
 										};
 									}(controllerObj, subController, event));
 							}
@@ -478,7 +481,7 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 					// If the onReady events have already fired, then force this controller along individually
 					if(specificController === controllerObj && _isReadyFired){
 
-						setTimeout(function manuallyInitializeControllerPostReady(){
+						//setTimeout(function manuallyInitializeControllerPostReady(){
 							if(((controllerObj.events || {}).application || {}).onReady){
 								controllerObj.events.application.onReady({}, _this._createGlobalEventObject());
 							}
@@ -491,7 +494,7 @@ define(['jquery', 'utilities/loader', 'utilities/global'], function applicationC
 							if(((controllerObj.events || {}).application || {}).onResize){
 								_this.events.application.onResize({}, {controller : controllerObj});
 							}
-						}, 100);
+						//}, 1);
 					}
 
 					// // need to test this, if a controller loads after onready he needs to get onreszie fired too

@@ -4,6 +4,7 @@
 .page-wishlist{
 
 	padding-bottom: 30px;
+	display: block;
 
 	// The top paragraphs and image, and search container -- all the stuff above the results table
 	.introduction{
@@ -149,6 +150,8 @@
 
 	.addToCart{
 		min-width: 200px;
+		display: table-cell;
+
 		@media (max-width: 767px){
 			margin-top: 10px;
 		}
@@ -246,6 +249,10 @@
 
 }
 
+.wishlist-messages{
+	clear: both;
+	text-align: left;
+}
 .wishlist-messages > div,
 #isPrivate-saveMessage,
 .wish-text-saved{

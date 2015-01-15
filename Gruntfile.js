@@ -294,7 +294,7 @@ module.exports = function(grunt) {
 			      baseUrl: "app/webroot/js",
 			      //mainConfigFile: "path/to/config.js",
 			      //name: "path/to/almond", // assumes a production build using almond
-			      
+			      //optimize: 'none',
 				  //name: 'controllers/application', 
 			      dir: 'app/webroot/min/js',
 			      findNestedDependencies: true,

@@ -22,24 +22,31 @@ define(['utilities/global', 'controllers/application', 'vendors/touchcarousel/to
 					//},
 					onAttachEvents : function(e, data){
 
-						$('.dynamicItemSuggestions .touchcarousel', data.selector).touchCarousel({
-							
-							// This is a custom patch for Lone Star Percussion
-							// It assumes uniform width of items, and calculates
-							// how many items per page automatically. This solves
-							// the responsive design problem of hardcoding too many
-							// items per page
-							_calculatePageWidth: true,
-							
-							pagingNav: true,
-							pagingNavControls: false,
-							scrollbar: false,
-							scrollToLast: true,
-							loopItems: false,
+						// dynamicSuggestions are often below the fold -- this gives rendering to the browser
+						// and ensures more critical page components get loaded first
+						// I choose 800 because validation component was 1000
+						setTimeout(function(){
 
-							// Testing this out
-							useWebkit3d : true
-						});
+							$('.dynamicItemSuggestions .touchcarousel', data.selector).touchCarousel({
+								
+								// This is a custom patch for Lone Star Percussion
+								// It assumes uniform width of items, and calculates
+								// how many items per page automatically. This solves
+								// the responsive design problem of hardcoding too many
+								// items per page
+								_calculatePageWidth: true,
+								
+								pagingNav: true,
+								pagingNavControls: false,
+								scrollbar: false,
+								scrollToLast: true,
+								loopItems: false,
+
+								// Testing this out
+								useWebkit3d : true
+							});
+
+						}, 800)
 					}
 				}
 			},

@@ -23,6 +23,11 @@
 	}
 }
 
+// Default the flyout open on home page
+html[data-path*=".com/-END"] .departmentDropdown{
+	display: block;
+}
+
 @media (max-width: 767px) {
 
 	html[data-title*="Drumsticks"][data-title*="Drum Heads"]{
@@ -258,6 +263,7 @@
 		}
 
 		@media (min-width: 980px) and (max-width: 1199px){
+			
 			.ad{
 				.slide-content-title {
 					padding-top: 31px;
@@ -277,11 +283,12 @@
 				}
 
 				.b2 {
-					margin: 15px 35px 0 0;
+					margin: 5px 35px 0 0;
 				}
 			}
 		}
 		@media (min-width: 768px) and (max-width: 979px) {
+		
 			&, .ad{
 				width: 475px;
 			}	
@@ -349,7 +356,7 @@
 			}
 			.ad .b2 {
 				margin-right: 35px;
-				margin-top: 15px;
+				margin-top: 5px;
 			}
 			.arrow-holder .right {
 				right: -15px;
@@ -600,7 +607,12 @@
 // some of the features are scattered in form.scss and icons.scss
 
 .tc-paging-container {	
-	margin-top: -22px;
+	margin-top: 0px !important;
+
+	@media (max-width: 767px){
+		margin-top: -15px;
+	}
+
 }
 .tc-paging-item{
 	width: 24px;

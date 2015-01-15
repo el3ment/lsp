@@ -931,6 +931,14 @@ tr#carttableheader ~ tr#ordersummary_estship, tr#carttableheader ~ tr#ordersumma
 	}
 }
 
+html[data-title*="Checkout"] #handle_loginMainPortlet{
+	width: 800px !important;
+
+	@media (max-width: 979px){
+		width: 100% !important;
+	}
+}
+
 html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 .nscheckout-guestOrLogin #handle_loginMainPortlet > td > table{
 	width: 800px !important;
@@ -955,7 +963,7 @@ html[data-title*="Checkout"] #handle_loginMainPortlet > td > table,
 		width: 50% - $fluidGutterPercentage / 2;
 	}
 
-		> tbody{
+	> tbody{
 		// New Customers
 
 		> tr:first-child{

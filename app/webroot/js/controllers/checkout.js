@@ -123,6 +123,10 @@ define(['utilities/global', 'controllers/application'], function(){
 						
 						$('html').attr('data-path', 'http://www.lonestarpercussion.com/cart');
 
+						// Prepare the CSS files for https
+						//googleAsyncCSSLoader('https:' + CDN + '/min/css/platform.css?v=' + VERSION);
+						//googleAsyncCSSLoader('https:' + CDN + '/min/css/core.css?v=' + VERSION);
+
 					},
 					onEnterSignup : function(e, data){
 

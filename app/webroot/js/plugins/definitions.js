@@ -25,6 +25,7 @@ define(['utilities/global', 'controllers/application'], function(){
 				},
 				application : {
 					onAttachEvents : function(e, data){
+						
 						// Make our list of slugs to request
 						var slugs = [];
 						$(_settings.sluglessSelector, data.selector).each(function(index, element){

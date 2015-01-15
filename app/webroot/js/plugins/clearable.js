@@ -33,14 +33,14 @@ define(['utilities/global', 'controllers/application'], function(){
 				},
 				application : {
 					onAttachEvents : function(e, data){
-						//setTimeout(function(){
+						setTimeout(function(){
 							$('.clearable:not([data-isclearablehandled])', data.selector).each(function(i, element){ _this.attach(element); });
 							$('input[type="text"], input[type="number"], input[type="tel"]', data.selector)
 								.off('focusable')
 								.on('click.lsp.focusable', function(e){
 								$(_this).triggerHandler('onSelectedInput', {selector : $(this)});
 							}).change();
-						//}, 200);
+						}, 200);
 					}
 				}
 			},
@@ -51,17 +51,17 @@ define(['utilities/global', 'controllers/application'], function(){
 					.on('click.lsp.clearable', _lsp.controllers.application.createHandlerBridge(_this, 'clear', {targetInput : element}));
 				
 				$(element)
-					.off('.clearable')
+					.off('clearable')
 					.on('keyup.lsp.clearable change.lsp.clearable', _lsp.controllers.application.createHandlerBridge(_this, 'showHideButton', {targetInput : element}))
 					.wrap('<div class="clearableContainer" />')
 					.after(button)
 					.attr('data-isclearablehandled', true);
 
-				_lsp.controllers.application.attachEvents(element);
+				//_lsp.controllers.application.attachEvents(element);
 			},
-			makeElement : function(index, elementString){
-				return '<div class="badges-badge badge-'+$(this).data('badge')+'">'+ $(this).data('badge') +'</div>';
-			}
+			// makeElement : function(index, elementString){
+			// 	return '<div class="badges-badge badge-'+$(this).data('badge')+'">'+ $(this).data('badge') +'</div>';
+			// }
 		};
 
 		return _this;

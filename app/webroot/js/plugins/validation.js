@@ -44,30 +44,37 @@ define(['utilities/global', 'controllers/application'], function(){
 				application : {
 					onAttachEvents : function(e, data){
 			 
-						$(_settings.validationInputs, data.selector).each(function(index, element){
-							$(element).off('validation').on('keyup.lsp.validation', function(e){
-								if(e.which !== 9 && e.which !== 16 && e.which !== 13){
-									_this.validate(element);
-								}
-								return true;
-							});
-							//_this.validate(element); // Not sure if we want to validate on page load or not yet.
-						});
-						
-						$('form', data.selector).off('validation').on('submit.lsp.validation', function(e){
-							
-							var isValid = _this.validateForm($(this));
-							
-							if(!isValid){
-								e.preventDefault();
-								return false;
+			 			// Wait a second to initialize validation -- it will never be used right away
+			 			// and waiting ensures other critical page components can load first
+			 			//setTimeout(function(){
+
+							$(_settings.validationInputs, data.selector).each(function(index, element){
+									$(element).off('validation').on('keyup.lsp.validation', function(e){
+										if(e.which !== 9 && e.which !== 16 && e.which !== 13){
+											_this.validate(element);
+										}
+										return true;
+									});
+									//_this.validate(element); // Not sure if we want to validate on page load or not yet.
+								});
+								
+								$('form', data.selector).off('validation').on('submit.lsp.validation', function(e){
+									
+									var isValid = _this.validateForm($(this));
+									
+									if(!isValid){
+										e.preventDefault();
+										return false;
+									}
+									
+									$(this).triggerHandler('afterValidation');
+									return true;
+								
+								});
 							}
-							
-							$(this).triggerHandler('afterValidation');
-							return true;
+
+			 			//}, 1000)
 						
-						});
-					}
 				}
 			},
 			assets : {},

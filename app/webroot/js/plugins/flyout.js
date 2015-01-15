@@ -57,7 +57,7 @@ define(['utilities/global', 'controllers/application', 'plugins/reveal', 'vendor
 			attachMenu : function(){
 
 				// Release to the browser
-				setTimeout(function(){
+				//setTimeout(function(){
 
 					var _holdOpenFlyoutTimeout; // When the menu is holdOpen
 												// we need to wait to activate a row
@@ -140,7 +140,7 @@ define(['utilities/global', 'controllers/application', 'plugins/reveal', 'vendor
 
 					// Trigger Event
 					$(this).triggerHandler('onAfterAttach', {selector : _flyout});
-				}, 0);
+				//}, 0);
 			},
 
 			detachMenu : function(){

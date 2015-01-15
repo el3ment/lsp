@@ -451,7 +451,9 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 .definitions,
 .clearableContainer .clearContents:before,
 .byline,
-.panel{
+.panel,
+.categories,
+.block{
 	display: none;
 }
 
@@ -466,6 +468,8 @@ li[data-uid*="Error processing dynamic tag"] ~ .hideIfLoggedIn{
 .page-category,
 .page-school-category,
 .page-search > div,
-#handle_cartMainPortlet > td{
+#handle_cartMainPortlet > td,
+#handle_loginMainPortlet > td,
+.page-wishlist{
 	display: none;
 }
