@@ -96,16 +96,31 @@ label{
 input[type="checkbox"], input[type="checkbox"]~label, input[type="radio"], input[type="radio"]~label{ float: left; font-weight: normal;}
 
 .field{
-	margin-bottom: px(10px);
+	//margin-bottom: px(10px);
 	display: block;
 	clear:left;
 	float:left; /* Otherwise our radio element fields lose layout */
+	width: 100%;
 	.label{
 		text-align: right;
 		padding-right: 10px;
 		vertical-align: top;
 		padding-top: 5px;
+		float: left;
+		width: 170px;
+		padding-left: 3px;
+		@media (max-width: 767px){
+			text-align:left;
+			float: none;
+			margin-bottom:5px;
+		}
 	}
+	.input{
+		overflow:hidden;
+		display:block;
+		padding: 5px 3px;
+	}
+
 }
 .formButton{
 	text-align: right;

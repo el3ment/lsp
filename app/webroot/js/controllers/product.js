@@ -118,13 +118,14 @@ define(['utilities/global', 'controllers/application', 'models/easyask', 'vendor
 								zoomHeight: 480,
 								position: 'right',
 								preloadImages: (context !== 'phone' ? true : false),
-								xOffset : (context === 'phone' ? 1000 : -9999),
+								xOffset : (context !== 'phone' ? 20 : -9999),
 								yOffset : -20,
 								zoomType: 'standard',
 								showEffect: 'fadein',
 								fadeinSpeed: 'fast',
 								delay : 100
 							});
+
 
 						// Reattach unveil handlers for thumbnails
 						require(['vendors/unveil/unveil-min'], function(data){

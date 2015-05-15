@@ -20,7 +20,8 @@ define(['utilities/global', 'models/netsuite', 'controllers/application'], funct
 					onAttachEvents : function(e, data){
 						$('#search-orders-form', data.selector).bind('submit', function(e){
 							_this.handleSubmit({
-								search : $('.page-trackOrder input[name="search"]').val() || ''
+								orderNumber : $('.page-trackOrder input[name="orderNumber"]').val() || '',
+								billingZip : $('.page-trackOrder input[name="billingZip"]').val() || ''
 							});
 							e.preventDefault();
 							return false;
@@ -30,14 +31,14 @@ define(['utilities/global', 'models/netsuite', 'controllers/application'], funct
 			},
 			assets : {},
 			handleSubmit : function(formObject){
-				if(formObject.search.substr(0, 2).toUpperCase() === '1Z'){
-					_this.redirectToUPS(formObject.search);
-				}else{
+				// if(formObject.search.substr(0, 2).toUpperCase() === '1Z'){
+				// 	_this.redirectToUPS(formObject.search);
+				// }else{
 					// Probably a Sales Order
 					//_this.clearTrackingNumbers();
 					$('#responseTable').addClass('loading');
 					$('#responseTable table').hide();
-					$.when(_this.requestTrackingNumber(formObject.search))
+					$.when(_this.requestTrackingNumber(formObject.orderNumber, formObject.billingZip))
 					.done(function(response){
 						_this.renderTrackingData(_this.parseAPIResponse(response.response.data));
 						//_this.getTrackingData(((response.response.data || {}).trackingnumbers || '').toUpperCase());
@@ -46,7 +47,7 @@ define(['utilities/global', 'models/netsuite', 'controllers/application'], funct
 					}).always(function(){
 						$('#responseTable').removeClass('loading');
 					});
-				}
+				//}
 			},
 
 			renderTrackingData : function(renderObject){
@@ -127,8 +128,8 @@ define(['utilities/global', 'models/netsuite', 'controllers/application'], funct
 			// 	$(_settings.trackingNumberSelector).append(JSON.stringify(trackingData));
 			// },
 			
-			requestTrackingNumber : function(search){
-				return _api.request(_this, 'getTrackingNumber', 'getTrackingNumber', {search : $.trim(search)});
+			requestTrackingNumber : function(number, zip){
+				return _api.request(_this, 'getTrackingNumber', 'getTrackingNumber', {orderNumber : $.trim(number), billingZip : $.trim(zip)});
 			},
 			
 			// requestUPSTrackingData : function(trackingNumber){
